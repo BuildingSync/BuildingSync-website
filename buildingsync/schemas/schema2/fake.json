@@ -1,0 +1,12 @@
+{
+  "data": [
+    {
+      "key": "valueA",
+      "key2": "valueB"
+    },
+    {
+      "key": "value1",
+      "key2": "value2"
+    }
+  ]
+}

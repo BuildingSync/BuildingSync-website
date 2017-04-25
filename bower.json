@@ -1,0 +1,22 @@
+{
+  "name": "buildingsynctool",
+  "authors": [
+    "Edwin Lee <leeed2001@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "buildingsync/static/vendors/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-route": "^1.6.4",
+    "angular-ui-grid": "^4.0.4"
+  }
+}
