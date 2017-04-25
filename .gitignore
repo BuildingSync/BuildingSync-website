@@ -67,3 +67,6 @@ docs/_build/
 .venv
 venv/
 ENV/
+
+# bower
+buildingsync/static/vendors/bower_components/

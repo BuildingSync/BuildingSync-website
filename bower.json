@@ -18,5 +18,8 @@
   "dependencies": {
     "angular-route": "^1.6.4",
     "angular-ui-grid": "^4.0.4"
+  },
+  "resolutions": {
+    "angular": "^1.6.4"
   }
 }
