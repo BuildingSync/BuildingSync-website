@@ -7,7 +7,7 @@ app.config(function ($routeProvider) {
             controller: "MainCtrl",
             resolve: {
                 data: function ($http) {
-                    return $http.get('/bs/get_schema').then(function (response) {
+                    return $http.get('/bs/get_schema/').then(function (response) {
                         return response.data.data;
                     });
                 }
