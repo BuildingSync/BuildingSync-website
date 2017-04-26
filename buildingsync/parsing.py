@@ -7,10 +7,6 @@ def get_uc_items_from_list(list):
     return sorted([x for x in list if x[0].isupper()])
 
 
-def prune_type_from_class_name(classname):
-    return classname[0:-4]
-
-
 def get_node(classname, current_path='', current_level=0):
     # update the current path string for this level
     if current_level > 0:
@@ -19,20 +15,8 @@ def get_node(classname, current_path='', current_level=0):
     if classname not in GDSClassesMapping:
         # if not classname.endswith("Type"):
         return {"name": current_path, "$$treeLevel": current_level, "required": False, "optional": False, "auditor": False, "energymodeler": False}
-    this_class = None
-    try:
-        class_key = classname
-        this_class = GDSClassesMapping[class_key]
-    except KeyError:
-        pass
-    if not this_class:
-        try:
-            class_key = prune_type_from_class_name(classname)
-            this_class = GDSClassesMapping[class_key]
-        except:
-            return None
-    if not this_class:
-        return None
+    class_key = classname
+    this_class = GDSClassesMapping[class_key]
     class_instance = this_class()
     all_keys = class_instance.__dict__.keys()
     uc_keys = get_uc_items_from_list(all_keys)
