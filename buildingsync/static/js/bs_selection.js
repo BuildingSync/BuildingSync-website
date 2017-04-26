@@ -1,24 +1,37 @@
-var app = angular.module('BsSelection', ['ui.grid', 'ui.grid.grouping', 'ngRoute']);
+var app = angular.module('BsSelection', ['ui.grid', 'ui.grid.grouping', 'ui.router'], ['$interpolateProvider', function ($interpolateProvider) {
+    $interpolateProvider.startSymbol('{$');
+    $interpolateProvider.endSymbol('$}');
+}]);
 
-app.config(function ($routeProvider) {
-    $routeProvider
-        .when("/", {
-            template: '<div id="grid1" ui-grid="gridOptions" ui-grid-grouping ui-grid-selection class="grid"></div>',
-            controller: "BsController",
-            resolve: {
-                data: function ($http) {
-                    return $http.get('/bs/get_schema').then(function (response) {
-                        return response.data.data;
-                    });
+app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
+    function ($stateProvider, $urlRouterProvider, $locationProvider) {
+
+        $locationProvider.hashPrefix('');
+        $urlRouterProvider.otherwise('/');
+
+        $stateProvider
+            .state('main', {
+                url: '/',
+                templateUrl: '/static/partials/view.html',
+                controller: 'BsController',
+                resolve: {
+                    schemaData: function ($http) {
+                        return $http.get('/bs/get_schema').then(function (response) {
+                            return response.data.data;
+                        });
+                    }
                 }
-            }
-        });
-});
+            });
+    }]);
 
-app.controller('BsController', ['$scope', '$http', '$interval', 'uiGridGroupingConstants', 'data', function ($scope, $http, $interval, uiGridGroupingConstants, data) {
+app.controller('BsController', ['$scope', '$http', '$interval', 'uiGridGroupingConstants', 'schemaData', function ($scope, $http, $interval, uiGridGroupingConstants, schemaData) {
     var get_schema_url = $scope.get_schema_url;  // TODO: Can I get a scope variable to the router?
-    $scope.schemaData = data;
-    $scope.useCases = [{id: 1, nickname: 'my use case', show: true}, {id: 2, nickname: 'my other use case', show: true}];
+    $scope.schemaData = schemaData;
+    $scope.useCases = [{id: 1, nickname: 'my use case', show: true}, {
+        id: 2,
+        nickname: 'my other use case',
+        show: true
+    }];
     $scope.gridOptions = {
         treeRowHeaderAlwaysVisible: false,
         showTreeExpandNoChildren: false,

@@ -5,7 +5,7 @@ from .parsing import get_node
 
 
 def index(request):
-    return render(request, 'buildingsync/index.html')
+    return render(request, 'buildingsync/base.html')
 
 
 def get_schema(request):

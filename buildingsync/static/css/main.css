@@ -1,3 +1,7 @@
+body {
+    font-family: Ubuntu, sans-serif;
+}
+
 .grid {
     height: 600px;
 }
