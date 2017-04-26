@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 import json
+from buildingsync.models import UseCase
 
 
 class TestIndexView(TestCase):
@@ -32,7 +33,7 @@ class TestGetSchemaView(TestCase):
         self.assertEqual(resp.status_code, 200)
         try:
             json.loads(resp.content)
-        except:
+        except:  # pragma: no cover
             self.fail('Response from get_schema was not proper json')
 
 
@@ -46,9 +47,10 @@ class TestGetUseCaseView(TestCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_view_response_is_json(self):
+        UseCase.objects.create(nickname="my use case", show=True)
         resp = self.client.get(reverse('buildingsync:get_use_cases'))
         self.assertEqual(resp.status_code, 200)
         try:
             json.loads(resp.content)
-        except:
+        except:  # pragma: no cover
             self.fail('Response from get_use_cases was not proper json')
