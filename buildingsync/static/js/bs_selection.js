@@ -19,19 +19,24 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                         return $http.get('/bs/get_schema').then(function (response) {
                             return response.data.data;
                         });
+                    },
+                    useCaseData: function($http) {
+                        return $http.get('/bs/get_use_cases').then(function (response) {
+                            return response.data.data;
+                        })
                     }
                 }
             });
     }]);
 
-app.controller('BsController', ['$scope', '$http', '$interval', 'uiGridGroupingConstants', 'schemaData', function ($scope, $http, $interval, uiGridGroupingConstants, schemaData) {
-    var get_schema_url = $scope.get_schema_url;  // TODO: Can I get a scope variable to the router?
+app.controller('BsController', ['$scope', '$http', '$interval', 'uiGridGroupingConstants', 'schemaData', 'useCaseData', function ($scope, $http, $interval, uiGridGroupingConstants, schemaData, useCaseData) {
     $scope.schemaData = schemaData;
-    $scope.useCases = [{id: 1, nickname: 'my use case', show: true}, {
-        id: 2,
-        nickname: 'my other use case',
-        show: true
-    }];
+    $scope.useCases = useCaseData;
+    // $scope.useCases = [{id: 1, nickname: 'my use case', show: true}, {
+    //     id: 2,
+    //     nickname: 'my other use case',
+    //     show: true
+    // }];
     $scope.gridOptions = {
         treeRowHeaderAlwaysVisible: false,
         showTreeExpandNoChildren: false,

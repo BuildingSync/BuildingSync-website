@@ -26,7 +26,7 @@
                 <span class="icon-bar"></span>
             </button>
             <div class="navbar-header">
-                <a href="https://buildingsync.net" class="pull-left"><img src="{% static 'images/main_logo.png' %}"
+                <a href="/" class="pull-left"><img src="{% static 'images/main_logo.png' %}"
                                                                         style="height:50px;"></a>
             </div>
         </div>
@@ -39,7 +39,8 @@
     </div>
 </nav>
 
-<ui-view></ui-view>
+{% block content %}
+{% endblock %}
 
 </body>
 
