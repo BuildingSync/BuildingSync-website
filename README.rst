@@ -16,8 +16,8 @@ Code Coverage |covimage|_
 After testing is complete, the code coverage status for those tests are tracked on
 `Coveralls <https://coveralls.io/github/myoldmopar/bs-tool?branch=master>`__.
 
-.. |tstimage| image:: https://travis-ci.org/myoldmopar/bs-tool.svg?branch=master
-.. _tstimage: https://travis-ci.org/myoldmopar/bs-tool
+.. |tstimage| image:: https://travis-ci.org/Myoldmopar/bs-tool.svg?branch=master
+.. _tstimage: https://travis-ci.org/Myoldmopar/bs-tool
 
-.. |covimage| image:: https://coveralls.io/repos/github/myoldmopar/bs-tool/badge.svg?branch=master
-.. _covimage: https://coveralls.io/github/myoldmopar/bs-tool?branch=master
+.. |covimage| image:: https://coveralls.io/repos/github/Myoldmopar/bs-tool/badge.svg?branch=master
+.. _covimage: https://coveralls.io/github/Myoldmopar/bs-tool?branch=master
