@@ -31,7 +31,7 @@ class TestGetSchemaView(TestCase):
         resp = self.client.get(reverse('buildingsync:get_schema'))
         self.assertEqual(resp.status_code, 200)
         try:
-            content = json.loads(resp.content)
+            json.loads(resp.content)
         except:
             self.fail('Response from get_schema was not proper json')
 
@@ -49,6 +49,6 @@ class TestGetUseCaseView(TestCase):
         resp = self.client.get(reverse('buildingsync:get_use_cases'))
         self.assertEqual(resp.status_code, 200)
         try:
-            content = json.loads(resp.content)
+            json.loads(resp.content)
         except:
             self.fail('Response from get_use_cases was not proper json')
