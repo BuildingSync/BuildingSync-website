@@ -7,10 +7,6 @@ def get_uc_items_from_list(list):
     return sorted([x for x in list if x[0].isupper()])
 
 
-def prune_type_from_class_name(classname):
-    return classname[0:-4]
-
-
 def get_node(classname, current_path='', current_level=0):
     # update the current path string for this level
     if current_level > 0:
