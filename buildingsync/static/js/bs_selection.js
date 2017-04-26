@@ -21,8 +21,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                         });
                     },
                     useCaseData: function($http) {
-                        return $http.get('/bs/get_use_cases').then(function (response) {
-                            return response.data.data;
+                        return $http.get('/bs/use_cases/').then(function (response) {
+                            return response.data;
                         })
                     }
                 }

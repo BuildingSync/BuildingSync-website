@@ -1,8 +1,10 @@
 from django.http import JsonResponse
 from django.shortcuts import render
+from rest_framework.views import APIView
 
 from .models import UseCase
 from .parsing import get_node
+from .serializers import UseCaseSerializer
 
 
 def index(request):
@@ -14,8 +16,11 @@ def get_schema(request):
     return JsonResponse({"data": schema_entries})
 
 
-def get_use_cases(request):
-    all_use_cases = []
-    for uc in UseCase.objects.all():
-        all_use_cases.append({'id': uc.pk, 'nickname': uc.nickname, 'show': uc.show})
-    return JsonResponse({"data": all_use_cases})
+class UseCaseView(APIView):
+    """
+    List use cases
+    """
+    def get(self, request, format=None):
+        use_cases = UseCase.objects.all()
+        serializer = UseCaseSerializer(use_cases, many=True)
+        return JsonResponse(serializer.data, safe=False)
