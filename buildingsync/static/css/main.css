@@ -1,8 +1,21 @@
-/*.grid {*/
-  /*width: 500px;*/
-  /*height: 250px;*/
-/*}*/
+body {
+    font-family: Ubuntu, sans-serif;
+}
+
+.grid {
+    height: 600px;
+}
 
 .navbar {
     border-radius: 0;
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .5);
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }

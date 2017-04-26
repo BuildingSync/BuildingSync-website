@@ -36,7 +36,7 @@ def get_node(classname, current_path='', current_level=0):
     class_instance = this_class()
     all_keys = class_instance.__dict__.keys()
     uc_keys = get_uc_items_from_list(all_keys)
-    current_return = []
+    current_return = [{"name": current_path, "$$treeLevel": current_level, "required": False, "optional": False, "auditor": False, "energymodeler": False}]
     for uc_key in uc_keys:
         these_objects = get_node(uc_key, current_path, current_level + 1)
         if these_objects:

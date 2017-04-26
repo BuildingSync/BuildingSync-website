@@ -1,41 +1,5 @@
-{% extends 'buildingsync/base.html' %}
+{% extends 'buildingsynctool/base.html' %}
 
-{% block additional_js_in_head %}
-    {% load static %}
-    <script src="{% static 'js/app.js' %}"></script>
-{% endblock %}
-
-{% block additional_js_in_body %}
-<script type="text/ng-template" id="grid-view.html">
-    <div id="grid1" ui-grid="gridOptions" ui-grid-grouping ui-grid-selection class="grid"></div>
-</script>
-{% endblock %}
-
-{% block main_body %}
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="col-md-10">
-            <h1>Overview</h1>
-            <p>
-                This tool is used to take the entire relevant portion of the BuildingSync schema, currently at <a
-                    href="https://github.com/BuildingSync/schema/releases/tag/v2.0.0-legacy">Version 2.0.0</a>, and
-                allow down-selection of the attributes for a given specific use case.
-            </p>
-            <h1>Status</h1>
-            <p>
-                This app is currently in development with some known issues including:
-            </p>
-            <ul class="list-group">
-                <li class="list-group-item">Parsing of Schema coming back with bad tree leveling</li>
-                <li class="list-group-item">Need to add export/import of specific use case</li>
-                <li class="list-group-item">Potentially drop this inside SEED</li>
-            </ul>
-        </div>
-    </div>
-    <div class="row-fluid">
-        <div class="col-md-12">
-            <ng-view></ng-view>
-        </div>
-    </div>
-</div>
+{% block content %}
+<ui-view></ui-view>
 {% endblock %}
