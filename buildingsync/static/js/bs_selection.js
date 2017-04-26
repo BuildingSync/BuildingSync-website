@@ -1,13 +1,13 @@
-var app = angular.module('app', ['ngAnimate', 'ngTouch', 'ui.grid', 'ui.grid.grouping', 'ngRoute']);
+var app = angular.module('BsSelection', ['ui.grid', 'ui.grid.grouping', 'ngRoute']);
 
 app.config(function ($routeProvider) {
     $routeProvider
         .when("/", {
-            templateUrl: "grid-view.html",
-            controller: "MainCtrl",
+            template: '<div id="grid1" ui-grid="gridOptions" ui-grid-grouping ui-grid-selection class="grid"></div>',
+            controller: "BsController",
             resolve: {
                 data: function ($http) {
-                    return $http.get('/bs/get_schema/').then(function (response) {
+                    return $http.get('/bs/get_schema').then(function (response) {
                         return response.data.data;
                     });
                 }
@@ -15,9 +15,10 @@ app.config(function ($routeProvider) {
         });
 });
 
-app.controller('MainCtrl', ['$scope', '$http', '$interval', 'uiGridGroupingConstants', 'data', function ($scope, $http, $interval, uiGridGroupingConstants, data) {
+app.controller('BsController', ['$scope', '$http', '$interval', 'uiGridGroupingConstants', 'data', function ($scope, $http, $interval, uiGridGroupingConstants, data) {
+    var get_schema_url = $scope.get_schema_url;  // TODO: Can I get a scope variable to the router?
     $scope.schemaData = data;
-    console.log(data);
+    $scope.useCases = [{id: 1, nickname: 'my use case', show: true}, {id: 2, nickname: 'my other use case', show: true}];
     $scope.gridOptions = {
         treeRowHeaderAlwaysVisible: false,
         showTreeExpandNoChildren: false,
