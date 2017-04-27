@@ -14,4 +14,4 @@ class TestIndexView(TestCase):
     def test_view_uses_correct_template(self):
         resp = self.client.get(reverse('index'))
         self.assertEqual(resp.status_code, 200)
-        self.assertTemplateUsed(resp, 'buildingsynctool/index.html')
+        self.assertTemplateUsed(resp, 'main/index.html')
