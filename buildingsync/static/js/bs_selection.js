@@ -16,17 +16,17 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 controller: 'BsController',
                 resolve: {
                     schemaData: function ($http) {
-                        return $http.get('/bs/schemas/').then(function (response) {
+                        return $http.get('/bs/api/schemas/').then(function (response) {
                             return response.data;
                         });
                     },
                     useCaseData: function ($http) {
-                        return $http.get('/bs/use_cases/').then(function (response) {
+                        return $http.get('/bs/api/use_cases/').then(function (response) {
                             return response.data;
                         })
                     },
                     attributesData: function ($http) {
-                        return $http.get('/bs/attributes/').then(function (response) {
+                        return $http.get('/bs/api/attributes/').then(function (response) {
                             return response.data;
                         })
                     }

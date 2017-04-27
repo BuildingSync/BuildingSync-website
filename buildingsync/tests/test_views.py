@@ -21,7 +21,7 @@ class TestIndexView(TestCase):
 
 class TestGetSchemaView(TestCase):
     def test_view_url_exists_at_desired_location(self):
-        resp = self.client.get('/bs/schemas/')
+        resp = self.client.get('/bs/api/schemas/')
         self.assertEqual(resp.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
@@ -39,7 +39,7 @@ class TestGetSchemaView(TestCase):
 
 class TestAttributesView(TestCase):
     def test_view_url_exists_at_desired_location(self):
-        resp = self.client.get('/bs/attributes/')
+        resp = self.client.get('/bs/api/attributes/')
         self.assertEqual(resp.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
@@ -57,7 +57,7 @@ class TestAttributesView(TestCase):
 
 class TestGetUseCaseView(TestCase):
     def test_view_url_exists_at_desired_location(self):
-        resp = self.client.get('/bs/use_cases/')
+        resp = self.client.get('/bs/api/use_cases/')
         self.assertEqual(resp.status_code, 200)
 
     def test_view_url_accessible_by_name(self):

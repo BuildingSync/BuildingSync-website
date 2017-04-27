@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from .views import index, UseCaseViewSet, SchemaViewSet, BuildingSyncAttributeViewSet
 from rest_framework_swagger.views import get_swagger_view
 from rest_framework import routers
@@ -14,4 +14,5 @@ app_name = 'buildingsync'
 urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^swagger/$', swagger_view, name='swagger'),
-] + api_router.urls
+    url(r'api/', include(api_router.urls)),
+]
