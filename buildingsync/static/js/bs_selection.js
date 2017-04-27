@@ -38,13 +38,8 @@ app.controller('BsController', ['$scope', '$http', '$interval', 'uiGridGroupingC
     $scope.schemaData = schemaData;
     $scope.useCases = useCaseData;
     $scope.attributesData = attributesData;
-    // need to convert the attributes because of the $$treeLevel key;  # TODO: Figure out how to serialize to a different key name in Django and now transformation will be necessary
-    $scope.gridData = [];
     angular.forEach(attributesData, function (value, key) {
-        $scope.gridData.push({
-            name: value.name,
-            $$treeLevel: value.tree_level
-        })
+        value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allow as a Django db model field, convert here
     });
     $scope.columnDefs = [
         {
@@ -71,7 +66,7 @@ app.controller('BsController', ['$scope', '$http', '$interval', 'uiGridGroupingC
         onRegisterApi: function (gridApi) {
             $scope.gridApi = gridApi;
         },
-        data: 'gridData'
+        data: 'attributesData'
     };
     $scope.addBlankUseCase = function () {
         alert("OK EHELKJE");
