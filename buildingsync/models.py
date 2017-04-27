@@ -13,5 +13,7 @@ class Schema(models.Model):
 
 
 class BuildingSyncAttribute(models.Model):
+    name = models.CharField(max_length=250)
     schema = models.ForeignKey(Schema, related_name="schema")
     use_cases = models.ManyToManyField(UseCase)
+    tree_level = models.IntegerField()
