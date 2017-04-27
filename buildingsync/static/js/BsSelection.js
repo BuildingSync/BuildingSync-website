@@ -15,7 +15,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 templateUrl: '/static/partials/view.html',
                 controller: 'BsController',
                 resolve: {
-                    schemaData: function ($http) {
+                    schemas: function ($http) {
                         return $http.get('/bs/api/schemas/').then(function (response) {
                             return response.data;
                         });
@@ -34,8 +34,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             });
     }]);
 
-app.controller('BsController', ['$scope', '$http', '$interval', 'uiGridGroupingConstants', 'schemaData', 'useCaseData', 'attributesData', function ($scope, $http, $interval, uiGridGroupingConstants, schemaData, useCaseData, attributesData) {
-    $scope.schemaData = schemaData;
+app.controller('BsController', ['$scope', '$http', '$interval', 'uiGridGroupingConstants', 'schemas', 'useCaseData', 'attributesData', function ($scope, $http, $interval, uiGridGroupingConstants, schemas, useCaseData, attributesData) {
+    $scope.schemas = schemas;
+    var one_schema = _.find(schemas, {version: 2});
+    $scope.schema_nickname = one_schema.name;
     $scope.useCases = useCaseData;
     $scope.attributesData = attributesData;
     angular.forEach(attributesData, function (value, key) {

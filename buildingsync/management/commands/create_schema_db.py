@@ -9,20 +9,22 @@ from django.core.management.base import BaseCommand
 # Step 2: create the Python representation of the schema:
 #   $ generateds -o structure.py --use-getter-setter=none BuildingSync_2_0.xsd
 
-# Step 3: import that structure.py file's class map
-from buildingsync.schemas.schema2.structure import GDSClassesMapping as schema_map
-
-# Step 4: import the appropriate database models
+# Step 3: import the appropriate database models
 from buildingsync.models import Schema, BuildingSyncAttribute
 
+# Step 4: import that structure.py file's class map and set some parameters
+from buildingsync.schemas.schema2.structure import GDSClassesMapping as schema_map
+SCHEMA_NAME = "BuildingSync, Version 2.0.0"
+SCHEMA_VERSION = 2
 
-# Steps 5-* exist within the handle method in the command class instance
+
+# Steps 5+ exist within the handle method in the command class instance
 class Command(BaseCommand):
     help = 'Sets up a new schema'
 
     def handle(self, *args, **options):
         # Step 5: create a schema to work with
-        s = Schema(name="NewSchema")
+        s = Schema(name=SCHEMA_NAME, version=SCHEMA_VERSION)
         s.save()
 
         # Step 6: call the parsing function to create a list of attributes based on a root node string

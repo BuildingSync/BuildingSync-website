@@ -10,6 +10,7 @@ class UseCase(models.Model):
 
 class Schema(models.Model):
     name = models.CharField(max_length=100, default="2.0.0")
+    version = models.IntegerField()  # it may not be integer, but that's what I'm doing for now
 
 
 class BuildingSyncAttribute(models.Model):
