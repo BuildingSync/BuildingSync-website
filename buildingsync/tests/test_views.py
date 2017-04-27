@@ -25,11 +25,11 @@ class TestGetSchemaView(TestCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
-        resp = self.client.get(reverse('buildingsync:get_schemas'))
+        resp = self.client.get(reverse('buildingsync:schemas-list'))
         self.assertEqual(resp.status_code, 200)
 
     def test_view_response_is_json(self):
-        resp = self.client.get(reverse('buildingsync:get_schemas'))
+        resp = self.client.get(reverse('buildingsync:schemas-list'))
         self.assertEqual(resp.status_code, 200)
         try:
             json.loads(resp.content)
@@ -43,12 +43,12 @@ class TestGetUseCaseView(TestCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
-        resp = self.client.get(reverse('buildingsync:get_use_cases'))
+        resp = self.client.get(reverse('buildingsync:use_cases-list'))
         self.assertEqual(resp.status_code, 200)
 
     def test_view_response_is_json(self):
         UseCase.objects.create(nickname="my use case", show=True)
-        resp = self.client.get(reverse('buildingsync:get_use_cases'))
+        resp = self.client.get(reverse('buildingsync:use_cases-list'))
         self.assertEqual(resp.status_code, 200)
         try:
             json.loads(resp.content)
