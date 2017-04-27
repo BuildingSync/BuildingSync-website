@@ -18,3 +18,4 @@ class BuildingSyncAttribute(models.Model):
     schema = models.ForeignKey(Schema, related_name="schema")
     use_cases = models.ManyToManyField(UseCase)
     tree_level = models.IntegerField()
+    index = models.IntegerField(verbose_name="For a given schema, this is the index in the linear tree list", default=0)

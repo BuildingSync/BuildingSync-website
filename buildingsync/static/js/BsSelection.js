@@ -35,11 +35,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     }]);
 
 app.controller('BsController', ['$scope', '$http', '$interval', 'uiGridGroupingConstants', 'schemas', 'useCaseData', 'attributesData', function ($scope, $http, $interval, uiGridGroupingConstants, schemas, useCaseData, attributesData) {
-    $scope.schemas = schemas;
     var one_schema = _.find(schemas, {version: 2});
     $scope.schema_nickname = one_schema.name;
     $scope.useCases = useCaseData;
     $scope.attributesData = attributesData;
+    console.log(attributesData.length);
+    var matching_attributes = _.filter(attributesData, {schema: one_schema.pk});
+    console.log(matching_attributes.length);
     angular.forEach(attributesData, function (value, key) {
         value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allow as a Django db model field, convert here
     });

@@ -11,7 +11,7 @@ class UseCaseSerializer(serializers.ModelSerializer):
 class SchemaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Schema
-        fields = ('name', 'version')
+        fields = ('name', 'version', 'pk')
 
 
 class BuildingSyncAttributeSerializer(serializers.ModelSerializer):
