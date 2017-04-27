@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <h1>Overview</h1>
             <p>
                 This tool is used to take the entire relevant portion of the BuildingSync schema, currently at <a
@@ -10,7 +10,8 @@
         </div>
     </div>
     <div class="row-fluid">
-        <div class="col-md-6">
+        <div class="col-md-12">
+            <hr>
             <h1>Use Cases</h1>
             <table class="table table-striped">
                 <tr>
@@ -26,10 +27,20 @@
                     <td><a href="#">Copy</a> | <a href="#">Delete</a></td>
                 </tr>
             </table>
+            <form class="form-group row" ng-submit="addBlankUseCase()">
+                <div class="col-md-4">
+                    <input type="text" class="form-control" ng-model="useCaseName" size="50"
+                           placeholder="New Use Case Name">
+                </div>
+                <div class="col-md-4">
+                    <input class="btn btn-primary" type="submit" value="Add New">
+                </div>
+            </form>
         </div>
     </div>
     <div class="row-fluid">
         <div class="col-md-12">
+            <hr>
             <h1>Schema Listing</h1>
             <div id="grid1" ui-grid="gridOptions" ui-grid-grouping ui-grid-selection class="grid"></div>
         </div>

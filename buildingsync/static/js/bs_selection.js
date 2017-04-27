@@ -73,4 +73,7 @@ app.controller('BsController', ['$scope', '$http', '$interval', 'uiGridGroupingC
         },
         data: 'gridData'
     };
+    $scope.addBlankUseCase = function () {
+        alert("OK EHELKJE");
+    };
 }]);
