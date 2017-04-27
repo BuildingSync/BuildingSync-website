@@ -9,31 +9,44 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         $httpProvider.defaults.xsrfCookieName = 'csrftoken';
         $locationProvider.hashPrefix('');
         $urlRouterProvider.otherwise('/');
-        $stateProvider
-            .state('main', {
-                url: '/',
-                templateUrl: '/static/partials/view.html',
-                controller: 'BsController',
-                resolve: {
-                    schemas: function ($http) {
-                        return $http.get('/bs/api/schemas/').then(function (response) {
-                            return response.data;
-                        });
-                    },
-                    useCaseData: function ($http) {
-                        return $http.get('/bs/api/use_cases/').then(function (response) {
-                            return response.data;
-                        })
-                    },
-                    attributesData: function ($http) {
-                        return $http.get('/bs/api/attributes/').then(function (response) {
-                            return response.data;
-                        })
-                    }
+        $stateProvider.state('main', {
+            url: '/',
+            templateUrl: '/static/partials/view.html',
+            controller: 'BsController',
+            resolve: {
+                schemas: function (SchemaService) {
+                    return SchemaService.getSchemas();
+                },
+                useCases: function (UseCaseService) {
+                    return UseCaseService.getUseCases();
+                },
+                attributes: function (AttributeService) {
+                    return AttributeService.getAttributes();
                 }
-            });
+            }
+        });
     }
 ]);
+
+app.factory("SchemaService", ['$http', function ($http) {
+    const service = {};
+    service.getSchemas = function () {
+        return $http.get('/bs/api/schemas/').then(function (response) {
+            return response.data;
+        });
+    };
+    return service;
+}]);
+
+app.factory("AttributeService", ['$http', function ($http) {
+    const service = {};
+    service.getAttributes = function () {
+        return $http.get('/bs/api/attributes/').then(function (response) {
+            return response.data;
+        });
+    };
+    return service;
+}]);
 
 app.factory("UseCaseService", ['$http', function ($http) {
     const service = {};
@@ -45,26 +58,34 @@ app.factory("UseCaseService", ['$http', function ($http) {
             };
         });
     };
-    service.deleteUseCase = function (obj, pk) {
-        return $http.delete("/bs/api/use_cases/pk", obj).then(function (data) {
-            return {
-                complete: true,
-                data: data
-            };
+    service.deleteUseCase = function (pk) {
+        return $http.delete("/bs/api/use_cases/" + pk + "/").then(function () {
+        });
+    };
+    service.getUseCases = function () {
+        return $http.get('/bs/api/use_cases/').then(function (response) {
+            return response.data;
         });
     };
     return service;
 }]);
 
 app.controller('BsController',
-    ['$scope', '$http', '$interval', 'uiGridGroupingConstants', 'schemas', 'useCaseData', 'attributesData', 'UseCaseService',
-        function ($scope, $http, $interval, uiGridGroupingConstants, schemas, useCaseData, attributesData, UseCaseService) {
+    [
+        '$scope',
+        '$http',
+        '$interval',
+        'uiGridGroupingConstants',
+        'schemas',
+        'useCases',
+        'attributes',
+        'UseCaseService',
+        function ($scope, $http, $interval, uiGridGroupingConstants, schemas, useCases, attributes, UseCaseService) {
             var one_schema = _.find(schemas, {version: 2});
             $scope.schema_nickname = one_schema.name;
-            $scope.useCases = useCaseData;
-            $scope.attributesData = attributesData;
-            $scope.matching_attributes = _.filter(attributesData, {schema: one_schema.pk});
-            console.log($scope.matching_attributes.length);
+            $scope.useCases = useCases;
+            $scope.attributesData = attributes;
+            $scope.matching_attributes = _.filter(attributes, {schema: one_schema.pk});
             angular.forEach($scope.matching_attributes, function (value, key) {
                 value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allowed as a Django db model field, convert here
             });
@@ -75,7 +96,7 @@ app.controller('BsController',
                     width: '50%'
                 }
             ];
-            angular.forEach(useCaseData, function (value, key) {
+            angular.forEach(useCases, function (value, key) {
                 $scope.columnDefs.push({
                     name: value.nickname,
                     displayName: value.nickname,
@@ -97,6 +118,13 @@ app.controller('BsController',
             };
             $scope.addBlankUseCase = function () {
                 UseCaseService.postUseCase({name: $scope.useCaseName});
+            };
+            $scope.deleteUseCase = function (x) {
+                UseCaseService.deleteUseCase(x.id).then(UseCaseService.getUseCases).then(function (useCases) {
+                    console.log($scope.useCases, useCases);
+                    $scope.useCases = useCases;
+
+                });
             };
         }
     ]
