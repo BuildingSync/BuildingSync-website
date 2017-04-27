@@ -21,15 +21,15 @@ class TestIndexView(TestCase):
 
 class TestGetSchemaView(TestCase):
     def test_view_url_exists_at_desired_location(self):
-        resp = self.client.get('/bs/get_schema/')
+        resp = self.client.get('/bs/schemas/')
         self.assertEqual(resp.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
-        resp = self.client.get(reverse('buildingsync:get_schema'))
+        resp = self.client.get(reverse('buildingsync:schemas-list'))
         self.assertEqual(resp.status_code, 200)
 
     def test_view_response_is_json(self):
-        resp = self.client.get(reverse('buildingsync:get_schema'))
+        resp = self.client.get(reverse('buildingsync:schemas-list'))
         self.assertEqual(resp.status_code, 200)
         try:
             json.loads(resp.content)
@@ -37,18 +37,36 @@ class TestGetSchemaView(TestCase):
             self.fail('Response from get_schema was not proper json')
 
 
-class TestGetUseCaseView(TestCase):
+class TestAttributesView(TestCase):
     def test_view_url_exists_at_desired_location(self):
-        resp = self.client.get('/bs/get_use_cases/')
+        resp = self.client.get('/bs/attributes/')
         self.assertEqual(resp.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
-        resp = self.client.get(reverse('buildingsync:get_use_cases'))
+        resp = self.client.get(reverse('buildingsync:attributes-list'))
+        self.assertEqual(resp.status_code, 200)
+
+    def test_view_response_is_json(self):
+        resp = self.client.get(reverse('buildingsync:attributes-list'))
+        self.assertEqual(resp.status_code, 200)
+        try:
+            json.loads(resp.content)
+        except:  # pragma: no cover
+            self.fail('Response from get_attributes was not proper json')
+
+
+class TestGetUseCaseView(TestCase):
+    def test_view_url_exists_at_desired_location(self):
+        resp = self.client.get('/bs/use_cases/')
+        self.assertEqual(resp.status_code, 200)
+
+    def test_view_url_accessible_by_name(self):
+        resp = self.client.get(reverse('buildingsync:use_cases-list'))
         self.assertEqual(resp.status_code, 200)
 
     def test_view_response_is_json(self):
         UseCase.objects.create(nickname="my use case", show=True)
-        resp = self.client.get(reverse('buildingsync:get_use_cases'))
+        resp = self.client.get(reverse('buildingsync:use_cases-list'))
         self.assertEqual(resp.status_code, 200)
         try:
             json.loads(resp.content)

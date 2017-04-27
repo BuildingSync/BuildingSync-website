@@ -1,21 +1,24 @@
-from django.http import JsonResponse
 from django.shortcuts import render
+from rest_framework import viewsets
 
-from .models import UseCase
-from .parsing import get_node
+from .models import UseCase, Schema, BuildingSyncAttribute
+from .serializers import UseCaseSerializer, SchemaSerializer, BuildingSyncAttributeSerializer
 
 
 def index(request):
     return render(request, 'buildingsync/index.html')
 
 
-def get_schema(request):
-    schema_entries = get_node(classname='Site')
-    return JsonResponse({"data": schema_entries})
+class SchemaViewSet(viewsets.ModelViewSet):
+    queryset = Schema.objects.all()
+    serializer_class = SchemaSerializer
 
 
-def get_use_cases(request):
-    all_use_cases = []
-    for uc in UseCase.objects.all():
-        all_use_cases.append({'id': uc.pk, 'nickname': uc.nickname, 'show': uc.show})
-    return JsonResponse({"data": all_use_cases})
+class UseCaseViewSet(viewsets.ModelViewSet):
+    queryset = UseCase.objects.all()
+    serializer_class = UseCaseSerializer
+
+
+class BuildingSyncAttributeViewSet(viewsets.ModelViewSet):
+    queryset = BuildingSyncAttribute.objects.all()
+    serializer_class = BuildingSyncAttributeSerializer
