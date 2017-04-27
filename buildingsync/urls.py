@@ -8,7 +8,7 @@ api_router.register(r'schemas', SchemaViewSet, base_name='schemas')
 api_router.register(r'use_cases', UseCaseViewSet, base_name='use_cases')
 api_router.register(r'attributes', BuildingSyncAttributeViewSet, base_name='attributes')
 
-swagger_view = get_swagger_view(title='BS API')
+swagger_view = get_swagger_view(title='BuildingSync DownSelection API')
 
 app_name = 'buildingsync'
 urlpatterns = [
