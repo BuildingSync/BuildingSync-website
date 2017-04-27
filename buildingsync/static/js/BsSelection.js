@@ -5,10 +5,8 @@ var app = angular.module('BsSelection', ['ui.grid', 'ui.grid.grouping', 'ui.rout
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     function ($stateProvider, $urlRouterProvider, $locationProvider) {
-
         $locationProvider.hashPrefix('');
         $urlRouterProvider.otherwise('/');
-
         $stateProvider
             .state('main', {
                 url: '/',
@@ -81,7 +79,7 @@ app.controller('BsController',
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;
                 },
-                data: 'attributesData'
+                data: 'matching_attributes'
             };
             $scope.addBlankUseCase = function () {
                 alert("OK EHELKJE");

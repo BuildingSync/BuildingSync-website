@@ -23,7 +23,7 @@
                 <tr ng-repeat="x in useCases">
                     <td>{$ x.id $}</td>
                     <td>{$ x.nickname $}</td>
-                    <td><input type="checkbox"/></td>
+                    <td><input type="checkbox" ng-checked="x.show"/></td>
                     <td><a href="#">Copy</a> | <a href="#">Delete</a></td>
                 </tr>
             </table>
