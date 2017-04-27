@@ -1,10 +1,12 @@
-var app = angular.module('BsSelection', ['ui.grid', 'ui.grid.grouping', 'ui.router'], ['$interpolateProvider', function ($interpolateProvider) {
+var app = angular.module('BsSelection', ['ui.grid', 'ui.grid.grouping', 'ui.router', 'ngCookies'], ['$interpolateProvider', function ($interpolateProvider) {
     $interpolateProvider.startSymbol('{$');
     $interpolateProvider.endSymbol('$}');
 }]);
 
-app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
-    function ($stateProvider, $urlRouterProvider, $locationProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider',
+    function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+        $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+        $httpProvider.defaults.xsrfCookieName = 'csrftoken';
         $locationProvider.hashPrefix('');
         $urlRouterProvider.otherwise('/');
         $stateProvider
@@ -30,29 +32,41 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     }
                 }
             });
-    }]);
+    }
+]);
 
-app.service("UseCaseService", function ($http) {
-    this.postNewUseCase = function (obj) {
-        return $http.post("/bs/use_cases/", obj).then(function (data) {
+app.factory("UseCaseService", ['$http', function ($http) {
+    const service = {};
+    service.postUseCase = function (obj) {
+        return $http.post("/bs/api/use_cases/", obj).then(function (data) {
             return {
                 complete: true,
                 data: data
             };
         });
-    }
-});
+    };
+    service.deleteUseCase = function (obj, pk) {
+        return $http.delete("/bs/api/use_cases/pk", obj).then(function (data) {
+            return {
+                complete: true,
+                data: data
+            };
+        });
+    };
+    return service;
+}]);
 
 app.controller('BsController',
-    ['$scope', '$http', '$interval', 'uiGridGroupingConstants', 'schemas', 'useCaseData', 'attributesData',
-        function ($scope, $http, $interval, uiGridGroupingConstants, schemas, useCaseData, attributesData) {
+    ['$scope', '$http', '$interval', 'uiGridGroupingConstants', 'schemas', 'useCaseData', 'attributesData', 'UseCaseService',
+        function ($scope, $http, $interval, uiGridGroupingConstants, schemas, useCaseData, attributesData, UseCaseService) {
             var one_schema = _.find(schemas, {version: 2});
             $scope.schema_nickname = one_schema.name;
             $scope.useCases = useCaseData;
             $scope.attributesData = attributesData;
-            var matching_attributes = _.filter(attributesData, {schema: one_schema.pk});
-            angular.forEach(attributesData, function (value, key) {
-                value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allow as a Django db model field, convert here
+            $scope.matching_attributes = _.filter(attributesData, {schema: one_schema.pk});
+            console.log($scope.matching_attributes.length);
+            angular.forEach($scope.matching_attributes, function (value, key) {
+                value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allowed as a Django db model field, convert here
             });
             $scope.columnDefs = [
                 {
@@ -82,7 +96,7 @@ app.controller('BsController',
                 data: 'matching_attributes'
             };
             $scope.addBlankUseCase = function () {
-                alert("OK EHELKJE");
+                UseCaseService.postUseCase({name: $scope.useCaseName});
             };
         }
     ]
