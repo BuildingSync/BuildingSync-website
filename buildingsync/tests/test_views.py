@@ -39,7 +39,7 @@ class TestGetSchemaView(TestCase):
 
 class TestGetUseCaseView(TestCase):
     def test_view_url_exists_at_desired_location(self):
-        resp = self.client.get('/bs/get_use_cases/')
+        resp = self.client.get('/bs/use_cases/')
         self.assertEqual(resp.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
