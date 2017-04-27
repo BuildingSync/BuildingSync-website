@@ -25,7 +25,7 @@
                     <td>{$ x.nickname $}</td>
                     <td><input type="checkbox" ng-checked="x.show"/></td>
                     <td>
-
+                        <button class="btn btn-success" ng-click="copyUseCase(x)">Copy</button>
                         <button class="btn btn-danger" ng-click="deleteUseCase(x)">Delete</button>
                     </td>
                 </tr>

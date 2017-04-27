@@ -117,15 +117,21 @@ app.controller('BsController',
                 data: 'matching_attributes'
             };
             $scope.addBlankUseCase = function () {
-                UseCaseService.postUseCase({name: $scope.useCaseName});
+                UseCaseService.postUseCase({nickname: $scope.useCaseName}).then(UseCaseService.getUseCases).then(function(useCases) {
+                    $scope.useCases = useCases;
+                });
             };
             $scope.deleteUseCase = function (x) {
                 UseCaseService.deleteUseCase(x.id).then(UseCaseService.getUseCases).then(function (useCases) {
-                    console.log($scope.useCases, useCases);
                     $scope.useCases = useCases;
 
                 });
             };
+            $scope.copyUseCase = function (x) {
+                UseCaseService.postUseCase({nickname: x.nickname}).then(UseCaseService.getUseCases).then(function(useCases) {
+                    $scope.useCases = useCases;
+                })
+            }
         }
     ]
 );
