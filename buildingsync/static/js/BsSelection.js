@@ -34,45 +34,58 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             });
     }]);
 
-app.controller('BsController', ['$scope', '$http', '$interval', 'uiGridGroupingConstants', 'schemas', 'useCaseData', 'attributesData', function ($scope, $http, $interval, uiGridGroupingConstants, schemas, useCaseData, attributesData) {
-    var one_schema = _.find(schemas, {version: 2});
-    $scope.schema_nickname = one_schema.name;
-    $scope.useCases = useCaseData;
-    $scope.attributesData = attributesData;
-    console.log(attributesData.length);
-    var matching_attributes = _.filter(attributesData, {schema: one_schema.pk});
-    console.log(matching_attributes.length);
-    angular.forEach(attributesData, function (value, key) {
-        value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allow as a Django db model field, convert here
-    });
-    $scope.columnDefs = [
-        {
-            name: 'name',
-            displayName: 'BuildingSync Attribute',
-            width: '50%'
-        }
-    ];
-    angular.forEach(useCaseData, function (value, key) {
-        $scope.columnDefs.push({
-            name: value.nickname,
-            displayName: value.nickname,
-            type: 'boolean',
-            cellTemplate: '<input type="checkbox">',
-            visible: value.show
+app.service("UseCaseService", function ($http) {
+    this.postNewUseCase = function (obj) {
+        return $http.post("/bs/use_cases/", obj).then(function (data) {
+            return {
+                complete: true,
+                data: data
+            };
         });
-    });
-    $scope.gridOptions = {
-        treeRowHeaderAlwaysVisible: false,
-        showTreeExpandNoChildren: false,
-        enableRowSelection: false,
-        enableRowHeaderSelection: true,
-        columnDefs: $scope.columnDefs,
-        onRegisterApi: function (gridApi) {
-            $scope.gridApi = gridApi;
-        },
-        data: 'attributesData'
-    };
-    $scope.addBlankUseCase = function () {
-        alert("OK EHELKJE");
-    };
-}]);
+    }
+});
+
+app.controller('BsController',
+    ['$scope', '$http', '$interval', 'uiGridGroupingConstants', 'schemas', 'useCaseData', 'attributesData',
+        function ($scope, $http, $interval, uiGridGroupingConstants, schemas, useCaseData, attributesData) {
+            var one_schema = _.find(schemas, {version: 2});
+            $scope.schema_nickname = one_schema.name;
+            $scope.useCases = useCaseData;
+            $scope.attributesData = attributesData;
+            var matching_attributes = _.filter(attributesData, {schema: one_schema.pk});
+            angular.forEach(attributesData, function (value, key) {
+                value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allow as a Django db model field, convert here
+            });
+            $scope.columnDefs = [
+                {
+                    name: 'name',
+                    displayName: 'BuildingSync Attribute',
+                    width: '50%'
+                }
+            ];
+            angular.forEach(useCaseData, function (value, key) {
+                $scope.columnDefs.push({
+                    name: value.nickname,
+                    displayName: value.nickname,
+                    type: 'boolean',
+                    cellTemplate: '<input type="checkbox">',
+                    visible: value.show
+                });
+            });
+            $scope.gridOptions = {
+                treeRowHeaderAlwaysVisible: false,
+                showTreeExpandNoChildren: false,
+                enableRowSelection: false,
+                enableRowHeaderSelection: true,
+                columnDefs: $scope.columnDefs,
+                onRegisterApi: function (gridApi) {
+                    $scope.gridApi = gridApi;
+                },
+                data: 'attributesData'
+            };
+            $scope.addBlankUseCase = function () {
+                alert("OK EHELKJE");
+            };
+        }
+    ]
+);
