@@ -67,6 +67,11 @@ app.factory("UseCaseService", ['$http', function ($http) {
             return response.data;
         });
     };
+    service.updateUseCase = function (pk, obj) {
+        return $http.put('/bs/api/use_cases/' + pk + '/', obj).then(function (response) {
+            return response.data;
+        })
+    };
     return service;
 }]);
 
@@ -86,52 +91,65 @@ app.controller('BsController',
             $scope.useCases = useCases;
             $scope.attributesData = attributes;
             $scope.matching_attributes = _.filter(attributes, {schema: one_schema.pk});
-            angular.forEach($scope.matching_attributes, function (value, key) {
+            angular.forEach($scope.matching_attributes, function (value) {
                 value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allowed as a Django db model field, convert here
-            });
-            $scope.columnDefs = [
-                {
-                    name: 'name',
-                    displayName: 'BuildingSync Attribute',
-                    width: '50%'
-                }
-            ];
-            angular.forEach(useCases, function (value, key) {
-                $scope.columnDefs.push({
-                    name: value.nickname,
-                    displayName: value.nickname,
-                    type: 'boolean',
-                    cellTemplate: '<input type="checkbox">',
-                    visible: value.show
-                });
             });
             $scope.gridOptions = {
                 treeRowHeaderAlwaysVisible: false,
                 showTreeExpandNoChildren: false,
                 enableRowSelection: false,
                 enableRowHeaderSelection: true,
-                columnDefs: $scope.columnDefs,
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;
                 },
                 data: 'matching_attributes'
             };
-            $scope.addBlankUseCase = function () {
-                UseCaseService.postUseCase({nickname: $scope.useCaseName}).then(UseCaseService.getUseCases).then(function(useCases) {
-                    $scope.useCases = useCases;
+            $scope.gridOptions.columnDefs = [
+                {
+                    name: 'name',
+                    displayName: 'BuildingSync Attribute',
+                    width: '50%'
+                }
+            ];
+            angular.forEach(useCases, function (use_case) {
+                $scope.gridOptions.columnDefs.push({
+                    name: use_case.nickname,
+                    displayName: use_case.nickname,
+                    type: 'boolean',
+                    cellTemplate: '<input type="checkbox">',
+                    visible: use_case.show,
+                    use_case_id: use_case.id
                 });
+            });
+            $scope.addBlankUseCase = function () {
+                UseCaseService.postUseCase({nickname: $scope.useCaseName})
+                    .then(UseCaseService.getUseCases)
+                    .then(function (useCases) {
+                        $scope.useCases = useCases;
+                    })
             };
             $scope.deleteUseCase = function (x) {
-                UseCaseService.deleteUseCase(x.id).then(UseCaseService.getUseCases).then(function (useCases) {
-                    $scope.useCases = useCases;
-
-                });
+                UseCaseService.deleteUseCase(x.id)
+                    .then(UseCaseService.getUseCases)
+                    .then(function (useCases) {
+                        $scope.useCases = useCases;
+                    })
             };
             $scope.copyUseCase = function (x) {
-                UseCaseService.postUseCase({nickname: x.nickname}).then(UseCaseService.getUseCases).then(function(useCases) {
-                    $scope.useCases = useCases;
-                })
-            }
+                UseCaseService.postUseCase({nickname: x.nickname})
+                    .then(UseCaseService.getUseCases)
+                    .then(function (useCases) {
+                        $scope.useCases = useCases;
+                    })
+            };
+            $scope.updateSelection = function (useCase) {
+                var id_to_update = useCase.id;  // store this here momentarily instead of passing it through the chain
+                UseCaseService.updateUseCase(useCase.id, {show: useCase.show})
+                    .then(function (useCase) {
+                        var column_to_update = _.find($scope.gridOptions.columnDefs, {use_case_id: id_to_update});
+                        column_to_update.visible = useCase.show;
+                    });
+            };
         }
     ]
 );
