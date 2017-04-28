@@ -80,12 +80,13 @@ app.controller('BsController',
         '$scope',
         '$http',
         '$interval',
+        'uiGridConstants',
         'uiGridGroupingConstants',
         'schemas',
         'useCases',
         'attributes',
         'UseCaseService',
-        function ($scope, $http, $interval, uiGridGroupingConstants, schemas, useCases, attributes, UseCaseService) {
+        function ($scope, $http, $interval, uiGridConstants, uiGridGroupingConstants, schemas, useCases, attributes, UseCaseService) {
             var one_schema = _.find(schemas, {version: 2});
             $scope.schema_nickname = one_schema.name;
             $scope.useCases = useCases;
@@ -93,6 +94,23 @@ app.controller('BsController',
             $scope.matching_attributes = _.filter(attributes, {schema: one_schema.pk});
             angular.forEach($scope.matching_attributes, function (value) {
                 value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allowed as a Django db model field, convert here
+            });
+            $scope.columns = [
+                {
+                    name: 'name',
+                    displayName: 'BuildingSync Attribute',
+                    width: '50%'
+                }
+            ];
+            angular.forEach(useCases, function (use_case) {
+                $scope.columns.push({
+                    name: use_case.nickname,
+                    displayName: use_case.nickname,
+                    type: 'boolean',
+                    cellTemplate: '<input type="checkbox">',
+                    visible: use_case.show,
+                    use_case_id: use_case.id
+                });
             });
             $scope.gridOptions = {
                 treeRowHeaderAlwaysVisible: false,
@@ -102,25 +120,9 @@ app.controller('BsController',
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;
                 },
-                data: 'matching_attributes'
+                data: 'matching_attributes',
+                columnDefs: $scope.columns
             };
-            $scope.gridOptions.columnDefs = [
-                {
-                    name: 'name',
-                    displayName: 'BuildingSync Attribute',
-                    width: '50%'
-                }
-            ];
-            angular.forEach(useCases, function (use_case) {
-                $scope.gridOptions.columnDefs.push({
-                    name: use_case.nickname,
-                    displayName: use_case.nickname,
-                    type: 'boolean',
-                    cellTemplate: '<input type="checkbox">',
-                    visible: use_case.show,
-                    use_case_id: use_case.id
-                });
-            });
             $scope.addBlankUseCase = function () {
                 UseCaseService.postUseCase({nickname: $scope.useCaseName})
                     .then(UseCaseService.getUseCases)
@@ -143,12 +145,20 @@ app.controller('BsController',
                     })
             };
             $scope.updateSelection = function (useCase) {
-                var id_to_update = useCase.id;  // store this here momentarily instead of passing it through the chain
-                UseCaseService.updateUseCase(useCase.id, {show: useCase.show})
-                    .then(function (useCase) {
-                        var column_to_update = _.find($scope.gridOptions.columnDefs, {use_case_id: id_to_update});
-                        column_to_update.visible = useCase.show;
-                    });
+                console.log("Yep, I'm in here");
+                $scope.columns[1].visible = !$scope.columns[1].visible;
+                console.log("Ive set the visible state");
+                $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+                console.log("OK");
+                console.log($scope.columns);
+                // var id_to_update = useCase.id;  // store this here momentarily instead of passing it through the chain
+                // UseCaseService.updateUseCase(useCase.id, {show: useCase.show})
+                //     .then(function (useCase) {
+                //         // var column_to_update = _.find($scope.columns, {use_case_id: id_to_update});
+                //         // column_to_update.visible = useCase.show;
+                //         $scope.columns[1].visible = useCase.show;
+                //         $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+                //     });
             };
         }
     ]
