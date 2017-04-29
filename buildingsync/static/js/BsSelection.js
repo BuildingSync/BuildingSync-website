@@ -205,10 +205,3 @@ app.controller('BsController',
         }
     ]
 );
-
-// Deal with mutable variable warning inside $scope.copyUseCase()
-// Don't allow duplicate column names
-// Error handle every API call
-// Confirmation before deleting use case
-// Add deploy instructions (virtualenv, pip, bower, migrate, create_schema)
-// Error handle for no schema
