@@ -145,20 +145,13 @@ app.controller('BsController',
                     })
             };
             $scope.updateSelection = function (useCase) {
-                console.log("Yep, I'm in here");
-                $scope.columns[1].visible = !$scope.columns[1].visible;
-                console.log("Ive set the visible state");
-                $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
-                console.log("OK");
-                console.log($scope.columns);
-                // var id_to_update = useCase.id;  // store this here momentarily instead of passing it through the chain
-                // UseCaseService.updateUseCase(useCase.id, {show: useCase.show})
-                //     .then(function (useCase) {
-                //         // var column_to_update = _.find($scope.columns, {use_case_id: id_to_update});
-                //         // column_to_update.visible = useCase.show;
-                //         $scope.columns[1].visible = useCase.show;
-                //         $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
-                //     });
+                var id_to_update = useCase.id;  // store this here momentarily instead of passing it through the chain
+                UseCaseService.updateUseCase(useCase.id, {show: useCase.show})
+                    .then(function (useCase) {
+                        var column_to_update = _.find($scope.columns, {use_case_id: id_to_update});
+                        column_to_update.visible = useCase.show;
+                        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+                    });
             };
         }
     ]
