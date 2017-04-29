@@ -1,78 +1,207 @@
-var app = angular.module('BsSelection', ['ui.grid', 'ui.grid.grouping', 'ui.router'], ['$interpolateProvider', function ($interpolateProvider) {
+var app = angular.module('BsSelection', ['ui.grid', 'ui.grid.grouping', 'ui.router', 'ngCookies'], ['$interpolateProvider', function($interpolateProvider) {
     $interpolateProvider.startSymbol('{$');
     $interpolateProvider.endSymbol('$}');
 }]);
 
-app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
-    function ($stateProvider, $urlRouterProvider, $locationProvider) {
-
+app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider',
+    function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+        $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+        $httpProvider.defaults.xsrfCookieName = 'csrftoken';
         $locationProvider.hashPrefix('');
         $urlRouterProvider.otherwise('/');
+        $stateProvider.state('main', {
+            url: '/',
+            templateUrl: '/static/partials/view.html',
+            controller: 'BsController',
+            resolve: {
+                schemas: function(SchemaService) {
+                    return SchemaService.getSchemas();
+                },
+                useCases: function(UseCaseService) {
+                    return UseCaseService.getUseCases();
+                },
+                attributes: function(AttributeService) {
+                    return AttributeService.getAttributes();
+                }
+            }
+        });
+    }
+]);
 
-        $stateProvider
-            .state('main', {
-                url: '/',
-                templateUrl: '/static/partials/view.html',
-                controller: 'BsController',
-                resolve: {
-                    schemas: function ($http) {
-                        return $http.get('/bs/api/schemas/').then(function (response) {
-                            return response.data;
+app.factory("SchemaService", ['$http', function($http) {
+    const service = {};
+    service.getSchemas = function() {
+        return $http.get('/bs/api/schemas/').then(function(response) {
+            return response.data;
+        });
+    };
+    return service;
+}]);
+
+app.factory("AttributeService", ['$http', function($http) {
+    const service = {};
+    service.getAttributes = function() {
+        return $http.get('/bs/api/attributes/').then(function(response) {
+            return response.data;
+        });
+    };
+    return service;
+}]);
+
+app.factory("UseCaseService", ['$http', function($http) {
+    const service = {};
+    service.postUseCase = function(obj) {
+        return $http.post("/bs/api/use_cases/", obj).then(function(data) {
+            return {
+                complete: true,
+                data: data
+            };
+        });
+    };
+    service.deleteUseCase = function(pk) {
+        return $http.delete("/bs/api/use_cases/" + pk + "/").then(function() {
+        });
+    };
+    service.getUseCases = function() {
+        return $http.get('/bs/api/use_cases/').then(function(response) {
+            return response.data;
+        });
+    };
+    service.updateUseCase = function(pk, obj) {
+        return $http.put('/bs/api/use_cases/' + pk + '/', obj).then(function(response) {
+            return response.data;
+        })
+    };
+    return service;
+}]);
+
+app.controller('BsController',
+    [
+        '$scope',
+        '$http',
+        '$interval',
+        'uiGridConstants',
+        'uiGridGroupingConstants',
+        'schemas',
+        'useCases',
+        'attributes',
+        'UseCaseService',
+        function($scope, $http, $interval, uiGridConstants, uiGridGroupingConstants, schemas, useCases, attributes, UseCaseService) {
+            var one_schema = _.find(schemas, {version: 2});
+            $scope.schema_nickname = one_schema.name;
+            $scope.useCases = useCases;
+            $scope.attributesData = attributes;
+            $scope.matching_attributes = _.filter(attributes, {schema: one_schema.pk});
+            angular.forEach($scope.matching_attributes, function(value) {
+                value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allowed as a Django db model field, convert here
+            });
+            $scope.rebuild_columns = function() {
+                console.log("rebuilding columns");
+                $scope.columns = null;
+                $scope.columns = [
+                    {
+                        name: 'name',
+                        displayName: 'BuildingSync Attribute',
+                        width: '40%'
+                    }
+                ];
+                angular.forEach(useCases, function(use_case) {
+                    $scope.columns.push({
+                        name: use_case.nickname,
+                        type: 'boolean',
+                        cellTemplate: '<input type="checkbox">',
+                        visible: use_case.show,
+                        use_case_id: use_case.id
+                    });
+                });
+            };
+            $scope.rebuild_columns();
+            $scope.gridOptions = {
+                treeRowHeaderAlwaysVisible: false,
+                showTreeExpandNoChildren: false,
+                enableRowSelection: false,
+                enableRowHeaderSelection: true,
+                onRegisterApi: function(gridApi) {
+                    $scope.gridApi = gridApi;
+                },
+                data: 'matching_attributes',
+                columnDefs: $scope.columns
+            };
+            $scope.addBlankUseCase = function() {
+                var newUseCaseID = null;
+                UseCaseService.postUseCase({nickname: $scope.useCaseName})
+                    .then(function(newUseCase) {
+                        newUseCaseID = newUseCase.id;
+                    })
+                    .then(UseCaseService.getUseCases)
+                    .then(function(useCases) {
+                        $scope.useCases = useCases;
+                    })
+                    .then(function() {
+                        $scope.columns.push({
+                            name: $scope.useCaseName,
+                            type: 'boolean',
+                            cellTemplate: '<input type="checkbox">',
+                            visible: true,
+                            use_case_id: newUseCaseID
                         });
-                    },
-                    useCaseData: function ($http) {
-                        return $http.get('/bs/api/use_cases/').then(function (response) {
-                            return response.data;
-                        })
-                    },
-                    attributesData: function ($http) {
-                        return $http.get('/bs/api/attributes/').then(function (response) {
-                            return response.data;
-                        })
+                        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+                    });
+            };
+            $scope.deleteUseCase = function(x) {
+                var deletedUseCaseID = x.id;
+                UseCaseService.deleteUseCase(deletedUseCaseID)
+                    .then(UseCaseService.getUseCases)
+                    .then(function(useCases) {
+                        $scope.useCases = useCases;
+                    })
+                    .then(function() {
+                        var deleted_index = $scope.columns.findIndex(function(element) {
+                            return element.use_case_id == deletedUseCaseID;
+                        });
+                        $scope.columns.splice(deleted_index, 1);
+                        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+                    });
+            };
+            $scope.copyUseCase = function(originalUseCase) {
+                var newUseCaseName = null;
+                for (var i = 2; i < 10; i++) {
+                    newUseCaseName = originalUseCase.nickname + i;
+                    var indexOfThis = $scope.columns.findIndex(function(element) {
+                        return element.name == newUseCaseName;
+                    });
+                    if (indexOfThis == -1) {
+                        break;
                     }
                 }
-            });
-    }]);
-
-app.controller('BsController', ['$scope', '$http', '$interval', 'uiGridGroupingConstants', 'schemas', 'useCaseData', 'attributesData', function ($scope, $http, $interval, uiGridGroupingConstants, schemas, useCaseData, attributesData) {
-    var one_schema = _.find(schemas, {version: 2});
-    $scope.schema_nickname = one_schema.name;
-    $scope.useCases = useCaseData;
-    $scope.attributesData = attributesData;
-    console.log(attributesData.length);
-    var matching_attributes = _.filter(attributesData, {schema: one_schema.pk});
-    console.log(matching_attributes.length);
-    angular.forEach(attributesData, function (value, key) {
-        value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allow as a Django db model field, convert here
-    });
-    $scope.columnDefs = [
-        {
-            name: 'name',
-            displayName: 'BuildingSync Attribute',
-            width: '50%'
+                UseCaseService.postUseCase({nickname: newUseCaseName})
+                    .then(function(newUseCase) {
+                        newUseCaseID = newUseCase.id;
+                    })
+                    .then(UseCaseService.getUseCases)
+                    .then(function(useCases) {
+                        $scope.useCases = useCases;
+                    })
+                    .then(function() {
+                        $scope.columns.push({
+                            name: newUseCaseName,
+                            type: 'boolean',
+                            cellTemplate: '<input type="checkbox">',
+                            visible: true,
+                            use_case_id: newUseCaseID
+                        });
+                        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+                    });
+            };
+            $scope.updateSelection = function(useCase) {
+                var id_to_update = useCase.id;  // store this here momentarily instead of passing it through the chain
+                UseCaseService.updateUseCase(useCase.id, {show: useCase.show})
+                    .then(function(useCase) {
+                        var column_to_update = _.find($scope.columns, {use_case_id: id_to_update});
+                        column_to_update.visible = useCase.show;
+                        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+                    });
+            };
         }
-    ];
-    angular.forEach(useCaseData, function (value, key) {
-        $scope.columnDefs.push({
-            name: value.nickname,
-            displayName: value.nickname,
-            type: 'boolean',
-            cellTemplate: '<input type="checkbox">',
-            visible: value.show
-        });
-    });
-    $scope.gridOptions = {
-        treeRowHeaderAlwaysVisible: false,
-        showTreeExpandNoChildren: false,
-        enableRowSelection: false,
-        enableRowHeaderSelection: true,
-        columnDefs: $scope.columnDefs,
-        onRegisterApi: function (gridApi) {
-            $scope.gridApi = gridApi;
-        },
-        data: 'attributesData'
-    };
-    $scope.addBlankUseCase = function () {
-        alert("OK EHELKJE");
-    };
-}]);
+    ]
+);

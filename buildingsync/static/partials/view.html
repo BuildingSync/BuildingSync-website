@@ -23,8 +23,11 @@
                 <tr ng-repeat="x in useCases">
                     <td>{$ x.id $}</td>
                     <td>{$ x.nickname $}</td>
-                    <td><input type="checkbox"/></td>
-                    <td><a href="#">Copy</a> | <a href="#">Delete</a></td>
+                    <td><input type="checkbox" ng-model="x.show" ng-checked="x.show" ng-change="updateSelection(x)"/></td>
+                    <td>
+                        <button class="btn btn-success" ng-click="copyUseCase(x)">Copy</button>
+                        <button class="btn btn-danger" ng-click="deleteUseCase(x)">Delete</button>
+                    </td>
                 </tr>
             </table>
             <form class="form-group row" ng-submit="addBlankUseCase()">
