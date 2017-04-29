@@ -149,6 +149,7 @@ app.controller('BsController',
                     });
             };
             $scope.deleteUseCase = function(x) {
+                if (!confirm("Delete the Use Case?")) {return;}
                 var deletedUseCaseID = x.id;
                 UseCaseService.deleteUseCase(deletedUseCaseID)
                     .then(UseCaseService.getUseCases)
