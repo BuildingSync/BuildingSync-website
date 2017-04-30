@@ -5,7 +5,7 @@ from buildingsync.models import UseCase, Schema, BuildingSyncAttribute
 class UseCaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = UseCase
-        fields = ('id', 'nickname', 'show')
+        fields = ('id', 'nickname', 'show', 'owner')
 
 
 class SchemaSerializer(serializers.ModelSerializer):
