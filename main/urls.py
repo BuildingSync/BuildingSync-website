@@ -20,5 +20,6 @@ from main.views import index
 urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^admin/', admin.site.urls),
-    url(r'^bs/', include('buildingsync.urls', namespace='buildingsync'))
+    url(r'^bs/', include('buildingsync.urls', namespace='buildingsync')),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
 ]
