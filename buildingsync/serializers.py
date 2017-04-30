@@ -5,16 +5,16 @@ from buildingsync.models import UseCase, Schema, BuildingSyncAttribute
 class UseCaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = UseCase
-        fields = ('id', 'nickname', 'show', 'owner')
+        fields = '__all__'
 
 
 class SchemaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Schema
-        fields = ('name', 'version', 'pk')
+        fields = '__all__'
 
 
 class BuildingSyncAttributeSerializer(serializers.ModelSerializer):
     class Meta:
         model = BuildingSyncAttribute
-        fields = ('name', 'schema', 'tree_level', 'use_cases')
+        fields = '__all__'
