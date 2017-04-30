@@ -3,7 +3,6 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import status
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import UseCase, Schema, BuildingSyncAttribute
 from .serializers import UseCaseSerializer, SchemaSerializer, BuildingSyncAttributeSerializer

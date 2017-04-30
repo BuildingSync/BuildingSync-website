@@ -102,7 +102,7 @@ app.controller('BsController',
             $scope.schema_nickname = one_schema.name;
             $scope.useCases = useCases;
             $scope.attributesData = attributes;
-            $scope.matching_attributes = _.filter(attributes, {schema: one_schema.pk});
+            $scope.matching_attributes = _.filter(attributes, {schema: one_schema.id});
             angular.forEach($scope.matching_attributes, function (value) {
                 value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allowed as a Django db model field, convert here
             });
