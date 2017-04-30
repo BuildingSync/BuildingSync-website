@@ -1,7 +1,9 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from rest_framework import viewsets
+from rest_framework import status
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import UseCase, Schema, BuildingSyncAttribute
 from .serializers import UseCaseSerializer, SchemaSerializer, BuildingSyncAttributeSerializer
@@ -12,9 +14,16 @@ def index(request):
     return render(request, 'buildingsync/index.html')
 
 
-@login_required
-def get_current_user_id(request):
-    return JsonResponse({'id': request.user.id})
+class CurrentUserViewSet(viewsets.ViewSet):
+    """
+    Get current user information
+    """
+    def list(self, request):
+        if request.user.is_authenticated():
+            return JsonResponse({'id': request.user.id})
+        else:
+            return JsonResponse({'status': 'anonymous user called get_current_user_id'},
+                                status=status.HTTP_403_FORBIDDEN)
 
 
 class SchemaViewSet(viewsets.ModelViewSet):

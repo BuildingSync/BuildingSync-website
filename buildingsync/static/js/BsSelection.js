@@ -78,7 +78,7 @@ app.factory("UseCaseService", ['$http', function ($http) {
 app.factory("UserService", ['$http', function ($http) {
     const service = {};
     service.getCurrentUserId = function () {
-        return $http.get('/bs/get_current_user_id/').then(function (response) {
+        return $http.get('/bs/api/current_user_id/').then(function (response) {
             return response.data;
         })
     };
