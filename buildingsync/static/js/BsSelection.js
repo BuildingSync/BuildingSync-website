@@ -64,7 +64,7 @@ app.factory("UseCaseService", ['$http', function ($http) {
     };
     service.getUseCases = function () {
         return $http.get('/bs/api/use_cases/').then(function (response) {
-            return response.data.data;
+            return response.data;
         });
     };
     service.updateUseCase = function (pk, obj) {
