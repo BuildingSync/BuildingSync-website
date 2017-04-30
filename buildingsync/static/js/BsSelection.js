@@ -190,23 +190,26 @@ app.controller('BsController',
                         break;
                     }
                 }
-                UseCaseService.postUseCase({nickname: newUseCaseName})
-                    .then(function (newUseCase) {
-                        newUseCaseID = newUseCase.id;
-                    })
-                    .then(UseCaseService.getUseCases)
-                    .then(function (useCases) {
-                        $scope.useCases = useCases;
-                    })
-                    .then(function () {
-                        $scope.columns.push({
-                            name: newUseCaseName,
-                            type: 'boolean',
-                            cellTemplate: '<input type="checkbox">',
-                            visible: true,
-                            use_case_id: newUseCaseID
-                        });
-                        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+                UserService.getCurrentUserId()
+                    .then(function (u_id) {
+                        UseCaseService.postUseCase({owner: u_id.id, nickname: newUseCaseName})
+                            .then(function (newUseCase) {
+                                newUseCaseID = newUseCase.id;
+                            })
+                            .then(UseCaseService.getUseCases)
+                            .then(function (useCases) {
+                                $scope.useCases = useCases;
+                            })
+                            .then(function () {
+                                $scope.columns.push({
+                                    name: newUseCaseName,
+                                    type: 'boolean',
+                                    cellTemplate: '<input type="checkbox">',
+                                    visible: true,
+                                    use_case_id: newUseCaseID
+                                });
+                                $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+                            });
                     });
             };
             $scope.updateSelection = function (useCase) {
