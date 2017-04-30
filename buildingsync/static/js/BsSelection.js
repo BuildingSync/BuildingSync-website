@@ -194,7 +194,7 @@ app.controller('BsController',
                     .then(function (u_id) {
                         UseCaseService.postUseCase({owner: u_id.id, nickname: newUseCaseName})
                             .then(function (newUseCase) {
-                                newUseCaseID = newUseCase.id;
+                                newUseCaseID = newUseCase.data.data.id;
                             })
                             .then(UseCaseService.getUseCases)
                             .then(function (useCases) {
