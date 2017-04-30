@@ -26,7 +26,10 @@ class UseCaseViewSet(viewsets.ModelViewSet):
     serializer_class = UseCaseSerializer
 
     def get_queryset(self):
-        return UseCase.objects.filter(owner=self.request.user)
+        if self.request.user.is_authenticated():
+            return UseCase.objects.filter(owner=self.request.user)
+        else:
+            return None  # would prefer to return a 403, but this is OK for now...what about when I POST anonymously?
 
 
 class BuildingSyncAttributeViewSet(viewsets.ModelViewSet):
