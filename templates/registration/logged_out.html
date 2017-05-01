@@ -1,7 +1,14 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-<p>Logged out!</p>  
-
-<a href="{% url 'login'%}">Click here to login again.</a>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="col-md-12">
+                <div class="alert alert-info">
+                    Logged out!
+                </div>
+                <a href="{% url 'login'%}">Click here to login again.</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

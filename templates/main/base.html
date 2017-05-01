@@ -43,10 +43,10 @@
                 {% if user.is_authenticated %}
                     <li><a href="#"><span
                             class="glyphicon glyphicon-user"></span> User: {{ user.get_username }}</a></li>
-                    <li><a href="{% url 'logout' %}?next={{ request.path }}"><span
+                    <li><a href="{% url 'logout' %}?next=/"><span
                             class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                 {% else %}
-                    <li><a href="{% url 'login' %}?next={{ request.path }}"><span
+                    <li><a href="{% url 'login' %}"><span
                             class="glyphicon glyphicon-log-in"></span>
                         Login</a></li>
                 {% endif %}
@@ -60,10 +60,8 @@
         <div class="col-md-2">
             <h3>Information</h3>
             <div id="outline" class="list-group">
-                <a class="list-group-item" href="{% url 'index' %}"><span class="glyphicon glyphicon-home"></span> Home
-                    Page</a>
                 <a class="list-group-item" href="{% url 'buildingsync:index' %}"><span
-                        class="glyphicon glyphicon-th-list"></span> Down Selection Page</a>
+                        class="glyphicon glyphicon-home"></span> Home Page</a>
                 <a class="list-group-item" href="{% url 'buildingsync:swagger' %}"><span
                         class="glyphicon glyphicon-book"></span> Swagger API Docs</a>
             </div>
