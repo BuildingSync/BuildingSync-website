@@ -35,7 +35,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
 app.factory("SchemaService", ['$http', function ($http) {
     const service = {};
     service.getSchemas = function () {
-        return $http.get('/bs/api/schemas/').then(function (response) {
+        return $http.get('/api/schemas/').then(function (response) {
             return response.data;
         });
     };
@@ -45,7 +45,7 @@ app.factory("SchemaService", ['$http', function ($http) {
 app.factory("AttributeService", ['$http', function ($http) {
     const service = {};
     service.getAttributes = function () {
-        return $http.get('/bs/api/attributes/').then(function (response) {
+        return $http.get('/api/attributes/').then(function (response) {
             return response.data;
         });
     };
@@ -55,7 +55,7 @@ app.factory("AttributeService", ['$http', function ($http) {
 app.factory("UseCaseService", ['$http', function ($http) {
     const service = {};
     service.postUseCase = function (obj) {
-        return $http.post("/bs/api/use_cases/", obj).then(function (data) {
+        return $http.post("/api/use_cases/", obj).then(function (data) {
             return {
                 complete: true,
                 data: data
@@ -63,16 +63,16 @@ app.factory("UseCaseService", ['$http', function ($http) {
         });
     };
     service.deleteUseCase = function (pk) {
-        return $http.delete("/bs/api/use_cases/" + pk + "/").then(function () {
+        return $http.delete("/api/use_cases/" + pk + "/").then(function () {
         });
     };
     service.getUseCases = function () {
-        return $http.get('/bs/api/use_cases/').then(function (response) {
+        return $http.get('/api/use_cases/').then(function (response) {
             return response.data;
         });
     };
     service.updateUseCase = function (pk, obj) {
-        return $http.put('/bs/api/use_cases/' + pk + '/', obj).then(function (response) {
+        return $http.put('/api/use_cases/' + pk + '/', obj).then(function (response) {
             return response.data;
         })
     };
@@ -82,7 +82,7 @@ app.factory("UseCaseService", ['$http', function ($http) {
 app.factory("UserService", ['$http', function ($http) {
     const service = {};
     service.getCurrentUserId = function () {
-        return $http.get('/bs/api/current_user_id/').then(function (response) {
+        return $http.get('/api/current_user_id/').then(function (response) {
             return response.data;
         })
     };
