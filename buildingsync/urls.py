@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from .views import index, CurrentUserViewSet, UseCaseViewSet, SchemaViewSet, BuildingSyncAttributeViewSet
+from .views import IndexView, CurrentUserViewSet, UseCaseViewSet, SchemaViewSet, BuildingSyncAttributeViewSet
 from rest_framework_swagger.views import get_swagger_view
 from rest_framework import routers
 
@@ -14,7 +14,7 @@ swagger_view = get_swagger_view(title='BuildingSync DownSelection API')
 
 app_name = 'buildingsync'
 urlpatterns = [
-    url(r'^$', index, name='index'),
+    url(r'^$', IndexView.as_view(), name='index'),
     url(r'^swagger/', swagger_view, name='swagger'),
     url(r'api/', include(api_router.urls)),
 ]

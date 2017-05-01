@@ -1,22 +1,22 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
-from django.shortcuts import render
-from rest_framework import viewsets
+from django.views.generic import TemplateView
 from rest_framework import status
-from django.contrib.auth.decorators import login_required
+from rest_framework import viewsets
 
 from .models import UseCase, Schema, BuildingSyncAttribute
 from .serializers import UseCaseSerializer, SchemaSerializer, BuildingSyncAttributeSerializer
 
 
-@login_required
-def index(request):
-    return render(request, 'buildingsync/index.html')
+class IndexView(LoginRequiredMixin, TemplateView):
+    template_name = 'buildingsync/index.html'
 
 
 class CurrentUserViewSet(viewsets.ViewSet):
     """
     Get current user information
     """
+
     def list(self, request):
         if request.user.is_authenticated():
             return JsonResponse({'id': request.user.id})

@@ -1,7 +1,11 @@
-var app = angular.module('BsSelection', ['ui.grid', 'ui.grid.grouping', 'ui.router', 'ngCookies'], ['$interpolateProvider', function ($interpolateProvider) {
-    $interpolateProvider.startSymbol('{$');
-    $interpolateProvider.endSymbol('$}');
-}]);
+var app = angular.module(
+    'BsSelection',
+    ['ui.grid', 'ui.grid.grouping', 'ui.router', 'ngCookies'],
+    ['$interpolateProvider', function ($interpolateProvider) {
+        $interpolateProvider.startSymbol('{$');
+        $interpolateProvider.endSymbol('$}');
+    }]
+);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider',
     function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
@@ -180,16 +184,7 @@ app.controller('BsController',
                     });
             };
             $scope.copyUseCase = function (originalUseCase) {
-                var newUseCaseName = null;
-                for (var i = 2; i < 10; i++) {
-                    newUseCaseName = originalUseCase.nickname + i;
-                    var indexOfThis = $scope.columns.findIndex(function (element) {
-                        return element.name == newUseCaseName;
-                    });
-                    if (indexOfThis == -1) {
-                        break;
-                    }
-                }
+                var newUseCaseName = _.uniqueId(originalUseCase.nickname + '_');
                 UserService.getCurrentUserId()
                     .then(function (u_id) {
                         UseCaseService.postUseCase({owner: u_id.id, nickname: newUseCaseName})
@@ -220,6 +215,33 @@ app.controller('BsController',
                         column_to_update.visible = useCase.show;
                         $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
                     });
+            };
+            $scope.renameUseCase = function (useCase) {
+                var id_to_update = useCase.id;  // store this here momentarily instead of passing it through the chain
+                var newName = prompt("Enter a new use case name", "Use Case Name");
+                if (newName != null && newName != "") {
+                    UseCaseService.updateUseCase(useCase.id, {nickname: newName})
+                        .then(UseCaseService.getUseCases)
+                        .then(function (useCases) {
+                            $scope.useCases = useCases;
+                        })
+                        .then(function () {
+                            var column_to_update = _.find($scope.columns, {use_case_id: id_to_update});
+                            var column_id = _.indexOf($scope.columns, column_to_update);
+                            var new_column_to_update = angular.copy(column_to_update);
+                            new_column_to_update.name = newName;
+                            $scope.columns.splice(column_id, 1, new_column_to_update);
+                        });
+                }
+            };
+            $scope.exportUseCase = function (useCase) {
+                var thisUseCase = angular.copy(useCase);
+                delete thisUseCase.id;
+                delete thisUseCase.show;
+                delete thisUseCase.owner;
+                delete thisUseCase.$$hashKey;
+                var blob = new Blob([JSON.stringify(thisUseCase, null, 2)], {type: "text/json;charset=utf-8"});
+                saveAs(blob, useCase.nickname + ".json");
             };
         }
     ]
