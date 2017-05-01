@@ -24,8 +24,7 @@
     "bootstrap": "^3.3.7",
     "lodash": "^4.17.4",
     "angular-cookies": "^1.6.4",
-    "file-saver": "filesaver#^1.3.3",
-    "blob": "*"
+    "file-saver": "filesaver#^1.3.3"
   },
   "resolutions": {
     "angular": "^1.6.4"

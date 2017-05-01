@@ -71,11 +71,6 @@ app.factory("UseCaseService", ['$http', function ($http) {
             return response.data;
         });
     };
-    service.getUseCaseExportData = function (pk) {
-        return $http.get('/bs/api/use_cases/' + pk + '/export/').then(function (response) {
-            return response.data;
-        })
-    };
     service.updateUseCase = function (pk, obj) {
         return $http.put('/bs/api/use_cases/' + pk + '/', obj).then(function (response) {
             return response.data;
@@ -240,8 +235,13 @@ app.controller('BsController',
                 }
             };
             $scope.exportUseCase = function (useCase) {
-                var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
-                saveAs(blob, "hello world.txt");
+                var thisUseCase = angular.copy(useCase);
+                delete thisUseCase.id;
+                delete thisUseCase.show;
+                delete thisUseCase.owner;
+                delete thisUseCase.$$hashKey;
+                var blob = new Blob([JSON.stringify(thisUseCase, null, 2)], {type: "text/json;charset=utf-8"});
+                saveAs(blob, useCase.nickname + ".json");
             };
         }
     ]
