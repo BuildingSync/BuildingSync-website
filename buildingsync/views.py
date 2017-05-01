@@ -39,6 +39,9 @@ class UseCaseViewSet(viewsets.ModelViewSet):
         else:
             return None  # would prefer to return a 403, but this is OK for now...what about when I POST anonymously?
 
+    # def update(self, request, *args, **kwargs):
+    #     pass
+
 
 class BuildingSyncAttributeViewSet(viewsets.ModelViewSet):
     queryset = BuildingSyncAttribute.objects.all()
