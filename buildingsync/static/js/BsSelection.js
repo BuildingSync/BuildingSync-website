@@ -1,7 +1,11 @@
-var app = angular.module('BsSelection', ['ui.grid', 'ui.grid.grouping', 'ui.router', 'ngCookies'], ['$interpolateProvider', function ($interpolateProvider) {
-    $interpolateProvider.startSymbol('{$');
-    $interpolateProvider.endSymbol('$}');
-}]);
+var app = angular.module(
+    'BsSelection',
+    ['ui.grid', 'ui.grid.grouping', 'ui.router', 'ngCookies'],
+    ['$interpolateProvider', function ($interpolateProvider) {
+        $interpolateProvider.startSymbol('{$');
+        $interpolateProvider.endSymbol('$}');
+    }]
+);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider',
     function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
@@ -67,11 +71,11 @@ app.factory("UseCaseService", ['$http', function ($http) {
             return response.data;
         });
     };
-    // service.getUseCaseExportData = function (pk) {
-    //     return $http.get('/bs/api/use_cases/' + pk + '/export/').then(function (response ) {
-    //         return response.data;
-    //     })
-    // };
+    service.getUseCaseExportData = function (pk) {
+        return $http.get('/bs/api/use_cases/' + pk + '/export/').then(function (response) {
+            return response.data;
+        })
+    };
     service.updateUseCase = function (pk, obj) {
         return $http.put('/bs/api/use_cases/' + pk + '/', obj).then(function (response) {
             return response.data;
@@ -185,16 +189,7 @@ app.controller('BsController',
                     });
             };
             $scope.copyUseCase = function (originalUseCase) {
-                var newUseCaseName = null;
-                for (var i = 2; i < 10; i++) {
-                    newUseCaseName = originalUseCase.nickname + i;
-                    var indexOfThis = $scope.columns.findIndex(function (element) {
-                        return element.name == newUseCaseName;
-                    });
-                    if (indexOfThis == -1) {
-                        break;
-                    }
-                }
+                var newUseCaseName = _.uniqueId(originalUseCase.nickname + '_');
                 UserService.getCurrentUserId()
                     .then(function (u_id) {
                         UseCaseService.postUseCase({owner: u_id.id, nickname: newUseCaseName})
@@ -230,26 +225,23 @@ app.controller('BsController',
                 var id_to_update = useCase.id;  // store this here momentarily instead of passing it through the chain
                 var newName = prompt("Enter a new use case name", "Use Case Name");
                 if (newName != null && newName != "") {
-                    // console.log("Got a newname: " + newName);
                     UseCaseService.updateUseCase(useCase.id, {nickname: newName})
-                        // .then(function (useCase) {
-                        //     console.log("Use case updated!", useCase);
-                        // })
                         .then(UseCaseService.getUseCases)
                         .then(function (useCases) {
                             $scope.useCases = useCases;
                         })
                         .then(function () {
                             var column_to_update = _.find($scope.columns, {use_case_id: id_to_update});
-                            column_to_update.name = newName;
-                            $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN); // also tried .ALL
-                            //$scope.columns.push({
-                            //    name: '|#*#|',
-                            //    cellTemplate: '<input type="checkbox">'
-                            //});
-                            //$scope.columns.splice(-1);
+                            var column_id = _.indexOf($scope.columns, column_to_update);
+                            var new_column_to_update = angular.copy(column_to_update);
+                            new_column_to_update.name = newName;
+                            $scope.columns.splice(column_id, 1, new_column_to_update);
                         });
                 }
+            };
+            $scope.exportUseCase = function (useCase) {
+                var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
+                saveAs(blob, "hello world.txt");
             };
         }
     ]

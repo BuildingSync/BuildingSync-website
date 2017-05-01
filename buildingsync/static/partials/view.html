@@ -26,7 +26,8 @@
                     <td><input type="checkbox" ng-model="x.show" ng-checked="x.show" ng-change="updateSelection(x)"/></td>
                     <td>
                         <button class="btn btn-success" ng-click="copyUseCase(x)">Copy</button>
-                        <button class="btn btn-success" ng-click="renameUseCase(x)" disabled>Rename</button>
+                        <button class="btn btn-success" ng-click="renameUseCase(x)">Rename</button>
+                        <button class="btn btn-success" ng-click="exportUseCase(x)">Export</button>
                         <button class="btn btn-danger" ng-click="deleteUseCase(x)">Delete</button>
                     </td>
                 </tr>

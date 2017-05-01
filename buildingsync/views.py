@@ -1,22 +1,24 @@
-from django.http import JsonResponse
-from django.shortcuts import render
-from rest_framework import viewsets
+import tempfile, os
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse, HttpResponse
+from django.views.generic import TemplateView
 from rest_framework import status
-from django.contrib.auth.decorators import login_required
+from rest_framework import viewsets
+from rest_framework.decorators import detail_route, list_route
 
 from .models import UseCase, Schema, BuildingSyncAttribute
 from .serializers import UseCaseSerializer, SchemaSerializer, BuildingSyncAttributeSerializer
 
 
-@login_required
-def index(request):
-    return render(request, 'buildingsync/index.html')
+class IndexView(LoginRequiredMixin, TemplateView):
+    template_name = 'buildingsync/index.html'
 
 
 class CurrentUserViewSet(viewsets.ViewSet):
     """
     Get current user information
     """
+
     def list(self, request):
         if request.user.is_authenticated():
             return JsonResponse({'id': request.user.id})
@@ -39,8 +41,26 @@ class UseCaseViewSet(viewsets.ModelViewSet):
         else:
             return None  # would prefer to return a 403, but this is OK for now...what about when I POST anonymously?
 
-    # def update(self, request, *args, **kwargs):
-    #     pass
+    @detail_route(methods=['GET'])
+    def export(self, request, pk):
+        # retrieve it if it exists and belongs to this user
+        try:
+            uc = UseCase.objects.filter(pk=pk, owner=self.request.user)
+        except:
+            return None
+        return JsonResponse({'hello': 'world'})
+
+    @list_route(methods=['GET'])
+    def send_file(self, request):
+        """
+        Send a file through Django without loading the whole file into
+        memory at once. The FileWrapper will turn the file object into an
+        iterator for chunks of 8KB.
+        """
+        filename = '/tmp/test' # Select your file here.
+        response = HttpResponse(file(filename), content_type='text/plain')
+        response['Content-Length'] = os.path.getsize(filename)
+        return response
 
 
 class BuildingSyncAttributeViewSet(viewsets.ModelViewSet):
