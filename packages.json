@@ -1,0 +1,12 @@
+{
+  "name": "BS-Tool",
+  "version": "1.0.0",
+  "description": "BuildingSync Down Selection Tool",
+  "devDependencies": {
+    "bower": "~1.8.0"
+  },
+  "scripts": {
+    "bower": "./node_modules/.bin/bower",
+    "postinstall": "./node_modules/.bin/bower install"
+  }
+}
