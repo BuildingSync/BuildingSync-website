@@ -8,5 +8,8 @@
   "scripts": {
     "bower": "./node_modules/.bin/bower",
     "postinstall": "./node_modules/.bin/bower install"
+  },
+  "engines": {
+    "node": ">=0.10.0"
   }
 }
