@@ -1,4 +1,4 @@
-Django==1.9.5
+Django>=1.11
 dj-database-url==0.2.1
 coveralls==1.1
 coverage==4.2

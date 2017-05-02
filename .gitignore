@@ -28,7 +28,10 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# deployment things
 node_modules
+staticfiles
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
