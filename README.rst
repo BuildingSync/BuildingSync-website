@@ -33,7 +33,7 @@ Deployed on `Heroku <https://buildingsynctool.herokuapps.com>`__.  Here are some
 
 - Clone this repo to a local directory: ``git clone https://github.com/Myoldmopar/bs-tool``.
 
-- If you are operating in a virtual environment, then make a new one of those: ``mkvirtualenv bstool``; it should automatically do a ``workon bstool`` for you, so you are good to continue.
+- If you intend on operating in a virtual environment, then make a new one: ``mkvirtualenv bstool``; it should automatically do an equivalent of ``workon bstool`` for you, so you are good to continue.
 
 - From the repo root, install some dependencies:
 
