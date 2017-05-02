@@ -39,6 +39,11 @@ app.factory("SchemaService", ['$http', function ($http) {
             return response.data;
         });
     };
+    service.initSchema = function () {
+        return $http.get('/api/schemas/initialize_schema').then(function (response) {
+            return response.data.schema;
+        })
+    };
     return service;
 }]);
 
@@ -101,13 +106,16 @@ app.controller('BsController',
         'attributes',
         'UseCaseService',
         'UserService',
-        function ($scope, $http, $interval, uiGridConstants, uiGridGroupingConstants, schemas, useCases, attributes, UseCaseService, UserService) {
+        'SchemaService',
+        function ($scope, $http, $interval, uiGridConstants, uiGridGroupingConstants, schemas, useCases, attributes, UseCaseService, UserService, SchemaService) {
             var one_schema = undefined;
+            $scope.schema_missing = false;
             if (schemas !== undefined && schemas.length != 0) {
                 one_schema = _.find(schemas, {version: 2});
             }
             if (one_schema === undefined) {
-                one_schema = {name: "*No Schema Defined*", id: 1}
+                one_schema = {name: "*No Schema Defined*", id: 1};
+                $scope.schema_missing = true;
             }
             $scope.schema_nickname = one_schema.name;
             $scope.useCases = useCases;
@@ -249,12 +257,14 @@ app.controller('BsController',
                 var blob = new Blob([JSON.stringify(thisUseCase, null, 2)], {type: "text/json;charset=utf-8"});
                 saveAs(blob, useCase.nickname + ".json");
             };
+            $scope.addMissingSchema = function () {
+                SchemaService.initSchema()
+                    .then(function (schema) {
+                        $scope.schema_missing = false;
+                        $scope.schema_nickname = schema.name + " ***Please refresh page***";
+                        console.log(schema);
+                    })
+            }
         }
     ]
 );
-// I have a service that can call the /api/schemas endpoint
-// In my routeProvider, I set up a resolve called "schemas" that calls that endpoint
-// In my controller, I pass in a ?dependency? to that resolution, so that I can use that data in the controller
-// In the controller, I mine the result of that data and pick out a single schema and assign it to a scope variable
-// In my html I point to that scope variable
-// Where is the right place to error handle?

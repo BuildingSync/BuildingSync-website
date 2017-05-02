@@ -47,6 +47,7 @@
         <div class="col-md-12">
             <hr>
             <h1>Schema "{$ schema_nickname $}"</h1>
+            <button class="btn btn-warning" ng-show="schema_missing" ng-click="addMissingSchema()">Initialize Schema</button>
             <div id="grid1" ui-grid="gridOptions" ui-grid-grouping ui-grid-selection class="grid"></div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 BuildingSync Tool
 =================
 
-This repo is the Django-backed, Angular-fronted website for my BuildingSync to SEED tool work.  The
+This repo is the Django-backed, Angular-fronted website for my BuildingSync to SEED tool work.
 
 Testing |tstimage|_
 -------------------

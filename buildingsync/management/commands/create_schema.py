@@ -62,3 +62,6 @@ class Command(BaseCommand):
         for se in schema_entries:
             b = BuildingSyncAttribute(name=se['name'], tree_level=se['$$treeLevel'], index=se['index'], schema=s)
             b.save()
+
+        # for kicks, if anyone else calls this, just return the schema
+        return s
