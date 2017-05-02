@@ -27,7 +27,7 @@ Deployment Instructions
 
 Deployed on `Heroku <https://buildingsynctool.herokuapps.com>`__.  Here are some getting started steps:
 
-- You'll need some very typical dependencies: Git, Python 2.7, Node
+- You'll need some very typical dependencies: ``Git``, ``Python 2.7``, ``Node`` (``brew`` on Mac, ``apt-get`` on Linux)
 
 - Clone this repo to a local directory: ``git clone https://github.com/Myoldmopar/bs-tool``.
 
@@ -35,7 +35,7 @@ Deployed on `Heroku <https://buildingsynctool.herokuapps.com>`__.  Here are some
 
 - From the repo root, install some dependencies:
 
-  - ``pip install -r requirements.txt``  -- This will install all the Python dependencies, including Django.
+  - ``pip install -r requirements.txt``  -- This will install all the Python dependencies, including Django.  The ``requirements.txt`` file defines the packages and versions to install.  Assuming you are working in a virtual environment, the packages are installed into that virtual environment package tree.
   - ``npm install``  -- This will install the "Node" dependencies, which is really only Bower.  It reads the dependencies from the package.json file at the root of the repo, and installs dependencies into a ``node_modules/`` folder in your working directory.
   - ``bower install``  -- This will install all the Bower dependencies, which are quite a few JavaScript/CSS libraries.  It reads the dependencies from the ``bower.json`` file at the root of the repo, and installs dependencies into the ``buildingsync/static/vendors`` directory, as declared in the ``.bowerrc`` file.  Note: You don't actually have to run this because npm has a post install command to run ``bower install``.
 
