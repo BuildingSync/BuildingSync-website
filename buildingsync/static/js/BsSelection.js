@@ -107,23 +107,32 @@ app.controller('BsController',
         'UseCaseService',
         'UserService',
         'SchemaService',
-        function ($scope, $http, $interval, uiGridConstants, uiGridGroupingConstants, schemas, useCases, attributes, UseCaseService, UserService, SchemaService) {
-            var one_schema = undefined;
-            $scope.schema_missing = false;
-            if (schemas !== undefined && schemas.length != 0) {
-                one_schema = _.find(schemas, {version: 2});
-            }
-            if (one_schema === undefined) {
-                one_schema = {name: "*No Schema Defined*", id: 1};
-                $scope.schema_missing = true;
-            }
-            $scope.schema_nickname = one_schema.name;
-            $scope.useCases = useCases;
-            $scope.attributesData = attributes;
-            $scope.matching_attributes = _.filter(attributes, {schema: one_schema.id});
-            angular.forEach($scope.matching_attributes, function (value) {
-                value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allowed as a Django db model field, convert here
-            });
+        'AttributeService',
+        function ($scope, $http, $interval, uiGridConstants, uiGridGroupingConstants, schemas, useCases, attributes, UseCaseService, UserService, SchemaService, AttributeService) {
+            $scope.rebuildSchemas = function (schemas) {
+                $scope.one_schema = undefined;
+                $scope.schema_missing = false;
+                if (schemas !== undefined && schemas.length != 0) {
+                    $scope.one_schema = _.find(schemas, {version: 2});
+                }
+                if ($scope.one_schema === undefined) {
+                    $scope.one_schema = {name: "*No Schema Defined*", id: 1};
+                    $scope.schema_missing = true;
+                }
+                console.log("Got one_schema: ", $scope.one_schema);
+                $scope.schema_nickname = $scope.one_schema.name;
+                $scope.useCases = useCases;
+            };
+            $scope.rebuildSchemas(schemas);
+            $scope.rebuildAttributes = function (attributes) {
+                console.log("All attributes: ", attributes);
+                $scope.matching_attributes = _.filter(attributes, {schema: $scope.one_schema.id});
+                console.log("Matching attrs", $scope.matching_attributes);
+                angular.forEach($scope.matching_attributes, function (value) {
+                    value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allowed as a Django db model field, convert here
+                });
+            };
+            $scope.rebuildAttributes(attributes);
             $scope.rebuild_columns = function () {
                 $scope.columns = null;
                 $scope.columns = [
@@ -259,10 +268,13 @@ app.controller('BsController',
             };
             $scope.addMissingSchema = function () {
                 SchemaService.initSchema()
-                    .then(function (schema) {
-                        $scope.schema_missing = false;
-                        $scope.schema_nickname = schema.name + " ***Please refresh page***";
-                        console.log(schema);
+                    .then(SchemaService.getSchemas)
+                    .then(function (schemas) {
+                        $scope.rebuildSchemas(schemas);
+                    })
+                    .then(AttributeService.getAttributes)
+                    .then(function (attributes) {
+                        $scope.rebuildAttributes(attributes);
                     })
             }
         }

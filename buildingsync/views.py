@@ -5,7 +5,7 @@ from rest_framework import decorators
 from rest_framework import status
 from rest_framework import viewsets
 
-from buildingsync.management.commands.create_schema import Command as HandleInit
+from buildingsync.workers import reset_schema
 from .models import UseCase, Schema, BuildingSyncAttribute
 from .serializers import UseCaseSerializer, SchemaSerializer, BuildingSyncAttributeSerializer
 
@@ -34,7 +34,7 @@ class SchemaViewSet(viewsets.ModelViewSet):
     @decorators.list_route(methods=['GET'])
     def initialize_schema(self, request):
         try:
-            s = HandleInit().handle()
+            s = reset_schema()
             serializer = SchemaSerializer(s)
             s_data = serializer.data
         except Exception:
