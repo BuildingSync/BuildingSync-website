@@ -6,7 +6,7 @@ This repo holds the Django-backed, Angular-fronted website for my BuildingSync t
 Testing |tstimage|_
 -------------------
 
-The source is tested using the Django's test framework (based on unittest). To find and execute all
+The source is tested using Django's test framework (based on unittest). To find and execute all
 the unit tests, just execute ``python manage.py test``. The tests are automatically executed by `Travis
 CI <https://travis-ci.org/myoldmopar/bs-tool>`__.
 
