@@ -119,15 +119,12 @@ app.controller('BsController',
                     $scope.one_schema = {name: "*No Schema Defined*", id: 1};
                     $scope.schema_missing = true;
                 }
-                console.log("Got one_schema: ", $scope.one_schema);
                 $scope.schema_nickname = $scope.one_schema.name;
                 $scope.useCases = useCases;
             };
             $scope.rebuildSchemas(schemas);
             $scope.rebuildAttributes = function (attributes) {
-                console.log("All attributes: ", attributes);
                 $scope.matching_attributes = _.filter(attributes, {schema: $scope.one_schema.id});
-                console.log("Matching attrs", $scope.matching_attributes);
                 angular.forEach($scope.matching_attributes, function (value) {
                     value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allowed as a Django db model field, convert here
                 });
