@@ -102,7 +102,13 @@ app.controller('BsController',
         'UseCaseService',
         'UserService',
         function ($scope, $http, $interval, uiGridConstants, uiGridGroupingConstants, schemas, useCases, attributes, UseCaseService, UserService) {
-            var one_schema = _.find(schemas, {version: 2});
+            var one_schema = undefined;
+            if (schemas !== undefined && schemas.length != 0) {
+                one_schema = _.find(schemas, {version: 2});
+            }
+            if (one_schema === undefined) {
+                one_schema = {name: "*No Schema Defined*", id: 1}
+            }
             $scope.schema_nickname = one_schema.name;
             $scope.useCases = useCases;
             $scope.attributesData = attributes;
@@ -246,3 +252,9 @@ app.controller('BsController',
         }
     ]
 );
+// I have a service that can call the /api/schemas endpoint
+// In my routeProvider, I set up a resolve called "schemas" that calls that endpoint
+// In my controller, I pass in a ?dependency? to that resolution, so that I can use that data in the controller
+// In the controller, I mine the result of that data and pick out a single schema and assign it to a scope variable
+// In my html I point to that scope variable
+// Where is the right place to error handle?
