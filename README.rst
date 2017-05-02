@@ -27,7 +27,9 @@ Deployment Instructions
 
 Deployed on `Heroku <https://buildingsynctool.herokuapps.com>`__.  Here are some getting started steps:
 
-- You'll need some very typical dependencies: ``Git``, ``Python 2.7``, ``Node`` (``brew`` on Mac, ``apt-get`` on Linux)
+- You'll need some very typical dependencies: ``Git``, ``Python 2.7``, ``Node``
+
+  - For Node: ``brew`` on Mac, ``apt-get`` on Linux
 
 - Clone this repo to a local directory: ``git clone https://github.com/Myoldmopar/bs-tool``.
 
