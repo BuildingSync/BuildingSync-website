@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls, name='admin'),
     url(r'^', include('buildingsync.urls', namespace='buildingsync')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
+    url(r'^other/', include('other.urls', namespace='other')),
 ]

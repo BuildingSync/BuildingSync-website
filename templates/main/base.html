@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="BsSelection" ng-strict-di>
+
+{# each app should have their own open tag#}
+{% block htmlopen %}
+{#<html lang="en" ng-app="BsSelection" ng-strict-di>#}
+{% endblock %}
+
 <head>
     <title>Building Sync Table</title>
     {% load static %}
@@ -17,6 +22,7 @@
     <script src="{% static 'vendors/bower_components/lodash/lodash.js' %}"></script>
     <script src="{% static 'vendors/bower_components/file-saver/FileSaver.min.js' %}"></script>
     <script src="{% static 'js/BsSelection.js' %}"></script>
+    <script src="{% static 'js/OtherApp.js' %}"></script>
 </head>
 
 <body>
