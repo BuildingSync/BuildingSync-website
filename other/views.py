@@ -42,9 +42,9 @@ def process_object(request):
     original_tokens = no_semicolon_contents.split(',')
     num_indep_vars = int(original_tokens[29])
     if num_indep_vars != 2:
-        return JsonResponse({'status':'error: this function currently only does 2 indep var objects'})
+        return JsonResponse({'status': 'error: this function currently only does 2 indep var objects'})
     num_tokens = len(original_tokens)
-    num_rows = (num_tokens - 30)/(num_indep_vars + 1)
+    num_rows = (num_tokens - 30) / (num_indep_vars + 1)
     data_rows = []
     row_counter = 29
     for data_row in range(num_rows):
