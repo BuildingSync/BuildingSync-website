@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <h1>OS:Table:MultiVariableLookup cleanup</h1>
+            <p>
+                This will take a 2-independent-variable multi-variable table OpenStudio object, and reproduce it so that only the fully filled columns of data are reported.  This allows it to be used with linear interpolation input option.
+            </p>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <hr>
+            <h2>Input Table:MultiVariableLookup object here</h2>
+            <textarea ng-model="inputData" rows=20 cols=70 placeholder="Paste in an OS:TableMultiVariableLookup object here"></textarea>
+            <h2>Process the object by clicking this button</h2>
+            <form class="form-group row" ng-submit="processObject(inputData)">
+                <div class="col-md-4">
+                    <input class="btn btn-primary" type="submit" value="Process">
+                </div>
+            </form>
+            <h2>Output object and log</h2>
+            <textarea rows=20 cols=35 placeholder="Output will go here" ng-model="outputData"></textarea>
+            <textarea rows=20 cols=35 placeholder="Logged results will go here" ng-model="logData"></textarea>
+        </div>
+    </div>
+</div>

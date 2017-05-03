@@ -1,9 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.views.generic import TemplateView
+from rest_framework import decorators
 from rest_framework import status
 from rest_framework import viewsets
 
+from buildingsync.workers import reset_schema
 from .models import UseCase, Schema, BuildingSyncAttribute
 from .serializers import UseCaseSerializer, SchemaSerializer, BuildingSyncAttributeSerializer
 
@@ -28,6 +30,16 @@ class CurrentUserViewSet(viewsets.ViewSet):
 class SchemaViewSet(viewsets.ModelViewSet):
     queryset = Schema.objects.all()
     serializer_class = SchemaSerializer
+
+    @decorators.list_route(methods=['GET'])
+    def initialize_schema(self, request):
+        try:
+            s = reset_schema()
+            serializer = SchemaSerializer(s)
+            s_data = serializer.data
+        except Exception:
+            return JsonResponse({'status': 'failure'})
+        return JsonResponse({'status': 'success', 'schema': s_data})
 
 
 class UseCaseViewSet(viewsets.ModelViewSet):
