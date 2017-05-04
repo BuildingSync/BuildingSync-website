@@ -33,7 +33,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
 ]);
 
 app.run(['$rootScope',
-    function($rootScope) {
+    function ($rootScope) {
         $rootScope._ = window._;
     }
 ]);
@@ -152,6 +152,11 @@ app.controller('BsController',
             $scope.rebuild_columns = function () {
                 $scope.columns = null;
                 $scope.columns = [
+                    {
+                        name: 'id',
+                        displayName: 'ID',
+                        width: '7%'
+                    },
                     {
                         name: 'name',
                         displayName: 'BuildingSync Attribute',
@@ -305,7 +310,7 @@ app.controller('BsController',
                     })
             };
             $scope.updateAttributeCheck = function () {
-              console.log("Made it!");
+                console.log("Made it!");
             };
         }
     ]
