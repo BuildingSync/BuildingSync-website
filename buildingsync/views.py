@@ -55,3 +55,22 @@ class UseCaseViewSet(viewsets.ModelViewSet):
 class BuildingSyncAttributeViewSet(viewsets.ModelViewSet):
     queryset = BuildingSyncAttribute.objects.all()
     serializer_class = BuildingSyncAttributeSerializer
+
+    @decorators.detail_route(methods=['PUT'])
+    def remove_use_case(self, request, pk):
+        use_case_num = request.data['use_case_num']
+        this_attribute = BuildingSyncAttribute.objects.get(pk=pk)
+        if any([uc.id == use_case_num for uc in this_attribute.use_cases.all()]):
+            this_attribute.use_cases.remove(use_case_num)
+        else:
+            pass  # error
+
+    @decorators.detail_route(methods=['PUT'])
+    def add_use_case(self, request, pk):
+        use_case_num = request.data['use_case_num']
+        this_attribute = BuildingSyncAttribute.objects.get(pk=pk)
+        this_use_case = UseCase.objects.get(pk=use_case_num)
+        if any([uc.id == use_case_num for uc in this_attribute.use_cases.all()]):
+            pass  # error
+        else:
+            this_attribute.use_cases.add(this_use_case)

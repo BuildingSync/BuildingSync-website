@@ -32,6 +32,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     }
 ]);
 
+app.run(['$rootScope',
+    function($rootScope) {
+        $rootScope._ = window._;
+    }
+]);
+
 app.factory("SchemaService", ['$http', function ($http) {
     const service = {};
     service.getSchemas = function () {
@@ -53,6 +59,18 @@ app.factory("AttributeService", ['$http', function ($http) {
         return $http.get('/api/attributes/').then(function (response) {
             return response.data;
         });
+    };
+    service.addUseCaseNum = function (row_pk, use_case_num) {
+        return $http.put('/api/attributes/' + row_pk + '/add_use_case/', {use_case_num: use_case_num})
+            .then(function (response) {
+                return response.data;
+            })
+    };
+    service.removeUseCaseNum = function (row_pk, use_case_num) {
+        return $http.put('/api/attributes/' + row_pk + '/remove_use_case/', {use_case_num: use_case_num})
+            .then(function (response) {
+                return response.data;
+            })
     };
     return service;
 }]);
@@ -125,6 +143,7 @@ app.controller('BsController',
             $scope.rebuildSchemas(schemas);
             $scope.rebuildAttributes = function (attributes) {
                 $scope.matching_attributes = _.filter(attributes, {schema: $scope.one_schema.id});
+                console.log($scope.matching_attributes);
                 angular.forEach($scope.matching_attributes, function (value) {
                     value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allowed as a Django db model field, convert here
                 });
@@ -143,11 +162,22 @@ app.controller('BsController',
                     $scope.columns.push({
                         name: use_case.nickname,
                         type: 'boolean',
-                        cellTemplate: '<input type="checkbox">',
+                        cellTemplate: '<div ng-click="grid.appScope.toggleAttribute(row.entity, col.colDef.use_case_id)"><input type="checkbox" ng-checked="row.entity.use_cases.indexOf(col.colDef.use_case_id) !== -1" class="no-click"></div>',
                         visible: use_case.show,
                         use_case_id: use_case.id
                     });
                 });
+            };
+            $scope.toggleAttribute = function (row_entity, use_case_num) {
+                if (_.includes(row_entity.use_cases, use_case_num)) {
+                    console.log("Updating attribute for row with name " + row_entity.name + ", and pk = " + row_entity.id);
+                    AttributeService.removeUseCaseNum(row_entity.id, use_case_num);
+                    _.pull(row_entity.use_cases, use_case_num);
+                } else {
+                    console.log("Updating attribute for row with name " + row_entity.name + ", and pk = " + row_entity.id);
+                    AttributeService.addUseCaseNum(row_entity.id, use_case_num);
+                    row_entity.use_cases.push(use_case_num);
+                }
             };
             $scope.rebuild_columns();
             $scope.gridOptions = {
@@ -273,7 +303,10 @@ app.controller('BsController',
                     .then(function (attributes) {
                         $scope.rebuildAttributes(attributes);
                     })
-            }
+            };
+            $scope.updateAttributeCheck = function () {
+              console.log("Made it!");
+            };
         }
     ]
 );
