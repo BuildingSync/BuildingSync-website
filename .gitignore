@@ -30,8 +30,12 @@ wheels/
 *.egg
 
 # deployment things
+# this is where npm drops packages
 node_modules
+# this is where collectstatic drops files
 staticfiles
+# this is where bower puts static files
+static
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
