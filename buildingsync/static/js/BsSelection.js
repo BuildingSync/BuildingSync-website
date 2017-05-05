@@ -127,6 +127,7 @@ app.controller('BsController',
         'SchemaService',
         'AttributeService',
         function ($scope, $http, $interval, uiGridConstants, uiGridGroupingConstants, schemas, useCases, attributes, UseCaseService, UserService, SchemaService, AttributeService) {
+            $scope.useCaseName = '';
             $scope.rebuildSchemas = function (schemas) {
                 $scope.one_schema = undefined;
                 $scope.schema_missing = false;
@@ -240,6 +241,7 @@ app.controller('BsController',
             };
             $scope.copyUseCase = function (originalUseCase) {
                 var newUseCaseName = _.uniqueId(originalUseCase.nickname + '_');
+                var newUseCaseID = '';
                 UserService.getCurrentUserId()
                     .then(function (u_id) {
                         UseCaseService.postUseCase({owner: u_id.id, nickname: newUseCaseName})
