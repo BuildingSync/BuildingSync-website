@@ -25,7 +25,7 @@ After testing is complete, the code coverage status for those tests are tracked 
 Deployment Instructions
 -----------------------
 
-Deployed on `Heroku <https://buildingsynctool.herokuapps.com>`__.  Here are some getting started steps:
+Deployed on `Heroku <https://buildingsynctool.herokuapp.com>`__.  Here are some getting started steps:
 
 - You'll need some very typical dependencies: ``Git``, ``Python 2.7``, ``Node``
 
