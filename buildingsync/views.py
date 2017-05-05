@@ -1,5 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from rest_framework import decorators
 from rest_framework import status
@@ -31,13 +33,14 @@ class SchemaViewSet(viewsets.ModelViewSet):
     queryset = Schema.objects.all()
     serializer_class = SchemaSerializer
 
+    @method_decorator(login_required)
     @decorators.list_route(methods=['GET'])
     def initialize_schema(self, request):
         try:
             s = reset_schema()
             serializer = SchemaSerializer(s)
             s_data = serializer.data
-        except Exception:
+        except Exception:  # pragma no cover
             return JsonResponse({'status': 'failure'})
         return JsonResponse({'status': 'success', 'schema': s_data})
 
@@ -60,17 +63,19 @@ class BuildingSyncAttributeViewSet(viewsets.ModelViewSet):
     def remove_use_case(self, request, pk):
         use_case_num = request.data['use_case_num']
         this_attribute = BuildingSyncAttribute.objects.get(pk=pk)
-        if any([uc.id == use_case_num for uc in this_attribute.use_cases.all()]):
+        if any([str(uc.id) == use_case_num for uc in this_attribute.use_cases.all()]):
             this_attribute.use_cases.remove(use_case_num)
+            return JsonResponse({'status': 'success'})
         else:
-            pass  # error
+            return JsonResponse({'status': 'error'}, status=status.HTTP_400_BAD_REQUEST)
 
     @decorators.detail_route(methods=['PUT'])
     def add_use_case(self, request, pk):
         use_case_num = request.data['use_case_num']
         this_attribute = BuildingSyncAttribute.objects.get(pk=pk)
         this_use_case = UseCase.objects.get(pk=use_case_num)
-        if any([uc.id == use_case_num for uc in this_attribute.use_cases.all()]):
-            pass  # error
+        if any([str(uc.id) == use_case_num for uc in this_attribute.use_cases.all()]):
+            return JsonResponse({'status': 'error'}, status=status.HTTP_400_BAD_REQUEST)
         else:
             this_attribute.use_cases.add(this_use_case)
+            return JsonResponse({'status': 'success'})

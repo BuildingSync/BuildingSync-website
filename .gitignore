@@ -35,7 +35,7 @@ node_modules
 # this is where collectstatic drops files
 staticfiles
 # this is where bower puts static files
-static
+/static
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
