@@ -127,6 +127,8 @@ app.controller('BsController',
         'SchemaService',
         'AttributeService',
         function ($scope, $http, $interval, uiGridConstants, uiGridGroupingConstants, schemas, useCases, attributes, UseCaseService, UserService, SchemaService, AttributeService) {
+
+            // scope functions are defined here first, with the actual initialization done at the bottom of this function
             $scope.rebuildSchemas = function (schemas) {
                 $scope.one_schema = undefined;
                 $scope.schema_missing = false;
@@ -140,7 +142,6 @@ app.controller('BsController',
                 $scope.schema_nickname = $scope.one_schema.name;
                 $scope.useCases = useCases;
             };
-            $scope.rebuildSchemas(schemas);
             $scope.rebuildAttributes = function (attributes) {
                 $scope.matching_attributes = _.filter(attributes, {schema: $scope.one_schema.id});
                 console.log($scope.matching_attributes);
@@ -148,7 +149,6 @@ app.controller('BsController',
                     value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allowed as a Django db model field, convert here
                 });
             };
-            $scope.rebuildAttributes(attributes);
             $scope.rebuild_columns = function () {
                 $scope.columns = null;
                 $scope.columns = [
@@ -184,18 +184,6 @@ app.controller('BsController',
                     row_entity.use_cases.push(use_case_num);
                 }
             };
-            $scope.rebuild_columns();
-            $scope.gridOptions = {
-                treeRowHeaderAlwaysVisible: false,
-                showTreeExpandNoChildren: false,
-                enableRowSelection: false,
-                enableRowHeaderSelection: true,
-                onRegisterApi: function (gridApi) {
-                    $scope.gridApi = gridApi;
-                },
-                data: 'matching_attributes',
-                columnDefs: $scope.columns
-            };
             $scope.addBlankUseCase = function () {
                 var newUseCaseID = null;
                 UserService.getCurrentUserId()
@@ -212,7 +200,7 @@ app.controller('BsController',
                                 $scope.columns.push({
                                     name: $scope.useCaseName,
                                     type: 'boolean',
-                                    cellTemplate: '<input type="checkbox">',
+                                    cellTemplate: '<div ng-click="grid.appScope.toggleAttribute(row.entity, col.colDef.use_case_id)"><input type="checkbox" ng-checked="row.entity.use_cases.indexOf(col.colDef.use_case_id) !== -1" class="no-click"></div>',
                                     visible: true,
                                     use_case_id: newUseCaseID
                                 });
@@ -240,6 +228,7 @@ app.controller('BsController',
             };
             $scope.copyUseCase = function (originalUseCase) {
                 var newUseCaseName = _.uniqueId(originalUseCase.nickname + '_');
+                var newUseCaseID = '';
                 UserService.getCurrentUserId()
                     .then(function (u_id) {
                         UseCaseService.postUseCase({owner: u_id.id, nickname: newUseCaseName})
@@ -254,7 +243,7 @@ app.controller('BsController',
                                 $scope.columns.push({
                                     name: newUseCaseName,
                                     type: 'boolean',
-                                    cellTemplate: '<input type="checkbox">',
+                                    cellTemplate: '<div ng-click="grid.appScope.toggleAttribute(row.entity, col.colDef.use_case_id)"><input type="checkbox" ng-checked="row.entity.use_cases.indexOf(col.colDef.use_case_id) !== -1" class="no-click"></div>',
                                     visible: true,
                                     use_case_id: newUseCaseID
                                 });
@@ -309,9 +298,24 @@ app.controller('BsController',
                         $scope.rebuildAttributes(attributes);
                     })
             };
-            $scope.updateAttributeCheck = function () {
-                console.log("Made it!");
+
+            // Now we actually run the initialization process
+            $scope.useCaseName = '';
+            $scope.rebuildSchemas(schemas);
+            $scope.rebuildAttributes(attributes);
+            $scope.rebuild_columns();
+            $scope.gridOptions = {
+                treeRowHeaderAlwaysVisible: false,
+                showTreeExpandNoChildren: false,
+                enableRowSelection: false,
+                enableRowHeaderSelection: true,
+                onRegisterApi: function (gridApi) {
+                    $scope.gridApi = gridApi;
+                },
+                data: 'matching_attributes',
+                columnDefs: $scope.columns
             };
+
         }
     ]
 );
