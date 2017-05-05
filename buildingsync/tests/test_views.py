@@ -62,6 +62,22 @@ class TestGetSchemaView(TestCase):
             self.fail('Response from get_schema was not proper json')
 
 
+class TestGenerateSchemaViewAnonymous(TestCase):
+    def test_generate_schema(self):
+        resp = self.client.get('/api/schemas/initialize_schema/')
+        self.assertEqual(resp.status_code, 302)
+
+
+class TestGenerateSchemaView(TestCase):
+    def setUp(self):
+        User.objects.create_user(username='username', password='password')
+        self.client.login(username='username', password='password')
+
+    def test_view_url_exists_at_desired_location(self):
+        resp = self.client.get('/api/schemas/initialize_schema/')
+        self.assertEqual(resp.status_code, 200)
+
+
 class TestAttributesViewsAnonymous(TestCase):
     def test_get_attributes_view(self):
         resp = self.client.get('/api/attributes/')

@@ -1,5 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from rest_framework import decorators
 from rest_framework import status
@@ -31,13 +33,14 @@ class SchemaViewSet(viewsets.ModelViewSet):
     queryset = Schema.objects.all()
     serializer_class = SchemaSerializer
 
+    @method_decorator(login_required)
     @decorators.list_route(methods=['GET'])
     def initialize_schema(self, request):
         try:
             s = reset_schema()
             serializer = SchemaSerializer(s)
             s_data = serializer.data
-        except Exception:
+        except Exception:  # pragma no cover
             return JsonResponse({'status': 'failure'})
         return JsonResponse({'status': 'success', 'schema': s_data})
 
