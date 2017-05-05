@@ -213,7 +213,7 @@ app.controller('BsController',
                                 $scope.columns.push({
                                     name: $scope.useCaseName,
                                     type: 'boolean',
-                                    cellTemplate: '<input type="checkbox">',
+                                    cellTemplate: '<div ng-click="grid.appScope.toggleAttribute(row.entity, col.colDef.use_case_id)"><input type="checkbox" ng-checked="row.entity.use_cases.indexOf(col.colDef.use_case_id) !== -1" class="no-click"></div>',
                                     visible: true,
                                     use_case_id: newUseCaseID
                                 });
@@ -256,7 +256,7 @@ app.controller('BsController',
                                 $scope.columns.push({
                                     name: newUseCaseName,
                                     type: 'boolean',
-                                    cellTemplate: '<input type="checkbox">',
+                                    cellTemplate: '<div ng-click="grid.appScope.toggleAttribute(row.entity, col.colDef.use_case_id)"><input type="checkbox" ng-checked="row.entity.use_cases.indexOf(col.colDef.use_case_id) !== -1" class="no-click"></div>',
                                     visible: true,
                                     use_case_id: newUseCaseID
                                 });
@@ -310,9 +310,6 @@ app.controller('BsController',
                     .then(function (attributes) {
                         $scope.rebuildAttributes(attributes);
                     })
-            };
-            $scope.updateAttributeCheck = function () {
-                console.log("Made it!");
             };
         }
     ]
