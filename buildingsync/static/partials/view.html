@@ -28,17 +28,13 @@
                         <input type="checkbox" ng-model="x.show" ng-checked="x.show" ng-change="updateSelection(x)"/>
                     </td>
                     <td>
-                        <button class="btn btn-success" id="importUseCase">Import</button>
-                        <input type="file" id="importUseCaseInput" on-read-file="importUseCase($fileContent)"/>
                         <button class="btn btn-success" ng-click="exportUseCase(x)">Export</button>
-                        <script>
-                            $("#importUseCase").onclick = function () { console.log("HERE"); $("#importUseCaseInput").click(); };
-                        </script>
+                        <button class="btn btn-danger" ng-click="deleteUseCase(x)">Delete</button>
                     </td>
                     <td>
                         <button class="btn btn-success" ng-click="copyUseCase(x)">Copy</button>
                         <button class="btn btn-success" ng-click="renameUseCase(x)">Rename</button>
-                        <button class="btn btn-danger" ng-click="deleteUseCase(x)">Delete</button>
+
                     </td>
                 </tr>
             </table>
@@ -49,6 +45,12 @@
                 </div>
                 <div class="col-md-4">
                     <input class="btn btn-primary" type="submit" value="Add New">
+                </div>
+            </form>
+            <form class="form-group row">
+                <div class="col-md-4">
+                    <input class="ng-hide" ng-model="filePath" on-read-file="importUseCase($fileContent)" id="input-file-id" type="file" />
+                    <label for="input-file-id" class="btn btn-primary">Import File</label>
                 </div>
             </form>
         </div>

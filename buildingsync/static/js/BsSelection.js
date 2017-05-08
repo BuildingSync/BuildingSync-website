@@ -312,15 +312,42 @@ app.controller('BsController',
                         saveAs(blob, useCase.nickname + ".bstool");
                     });
             };
-            $scope.importUseCase = function ($filecontent) {
-                object = console.log(JSON.parse($filecontent));  // TODO: Error handle
-                // check if the name is already used, if so generate a new ID
-                // then POST it to the API
-                // then follow the pattern in copyUseCase as needed to add the column
-                // UseCaseService.importUseCase(object)
-                //    .then
-
-
+            $scope.importUseCase = function ($fileContent) {
+                var new_use_case = JSON.parse($fileContent);  // TODO: Error handle
+                var new_object_name = new_use_case.nickname;
+                var temp_object_name = "";
+                UseCaseService.getUseCases()
+                    .then(function (current_use_cases) {
+                        var found_name_index = _.findIndex(current_use_cases, function(useCase) { return useCase.nickname == new_object_name });
+                        temp_object_name = "";
+                        while (found_name_index >= 0) {
+                            temp_object_name = _.uniqueId(new_object_name + '_');
+                            found_name_index = _.findIndex(current_use_cases, function(useCase) { return useCase.nickname == temp_object_name });
+                        }
+                        new_object_name = temp_object_name;
+                        var newUseCaseID = '';
+                        UserService.getCurrentUserId()
+                            .then(function (u_id) {
+                                UseCaseService.postUseCase({owner: u_id.id, nickname: new_object_name})
+                                    .then(function (newUseCase) {
+                                        newUseCaseID = newUseCase.data.data.id;
+                                    })
+                                    .then(UseCaseService.getUseCases)
+                                    .then(function (useCases) {
+                                        $scope.useCases = useCases;
+                                    })
+                                    .then(function () {
+                                        $scope.columns.push({
+                                            name: new_object_name,
+                                            type: 'boolean',
+                                            cellTemplate: '<div ng-click="grid.appScope.toggleAttribute(row.entity, col.colDef.use_case_id)"><input type="checkbox" ng-checked="row.entity.use_cases.indexOf(col.colDef.use_case_id) !== -1" class="no-click"></div>',
+                                            visible: true,
+                                            use_case_id: newUseCaseID
+                                        });
+                                        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+                                    });
+                            });
+                })
             };
             $scope.addMissingSchema = function () {
                 SchemaService.initSchema()
