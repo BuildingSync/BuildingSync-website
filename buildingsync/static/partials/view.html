@@ -19,15 +19,25 @@
                     <th>Use Case Nickname</th>
                     <th>Show/Hide this Use Case</th>
                     <th>Actions</th>
+                    <th>Edit</th>
                 </tr>
                 <tr ng-repeat="x in useCases">
                     <td>{$ x.id $}</td>
                     <td>{$ x.nickname $}</td>
-                    <td><input type="checkbox" ng-model="x.show" ng-checked="x.show" ng-change="updateSelection(x)"/></td>
+                    <td>
+                        <input type="checkbox" ng-model="x.show" ng-checked="x.show" ng-change="updateSelection(x)"/>
+                    </td>
+                    <td>
+                        <button class="btn btn-success" id="importUseCase">Import</button>
+                        <input type="file" id="importUseCaseInput" on-read-file="importUseCase($fileContent)"/>
+                        <button class="btn btn-success" ng-click="exportUseCase(x)">Export</button>
+                        <script>
+                            $("#importUseCase").onclick = function () { console.log("HERE"); $("#importUseCaseInput").click(); };
+                        </script>
+                    </td>
                     <td>
                         <button class="btn btn-success" ng-click="copyUseCase(x)">Copy</button>
                         <button class="btn btn-success" ng-click="renameUseCase(x)">Rename</button>
-                        <button class="btn btn-success" ng-click="exportUseCase(x)">Export</button>
                         <button class="btn btn-danger" ng-click="deleteUseCase(x)">Delete</button>
                     </td>
                 </tr>
@@ -47,7 +57,11 @@
         <div class="col-md-12">
             <hr>
             <h1>Schema "{$ schema_nickname $}"</h1>
-            <div><button class="btn btn-warning" ng-show="schema_missing" ng-click="addMissingSchema()">Initialize Schema</button></div>
+            <div>
+                <button class="btn btn-warning" ng-show="schema_missing" ng-click="addMissingSchema()">Initialize
+                    Schema
+                </button>
+            </div>
             <div id="grid1" ui-grid="gridOptions" ui-grid-grouping ui-grid-selection class="grid"></div>
         </div>
     </div>

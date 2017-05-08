@@ -38,6 +38,28 @@ app.run(['$rootScope',
     }
 ]);
 
+app.directive('onReadFile', ['$parse', function ($parse) {
+	return {
+		restrict: 'A',
+		scope: false,
+		link: function(scope, element, attrs) {
+            var fn = $parse(attrs.onReadFile);
+
+			element.on('change', function(onChangeEvent) {
+				var reader = new FileReader();
+
+				reader.onload = function(onLoadEvent) {
+					scope.$apply(function() {
+						fn(scope, {$fileContent:onLoadEvent.target.result});
+					});
+				};
+
+				reader.readAsText((onChangeEvent.srcElement || onChangeEvent.target).files[0]);
+			});
+		}
+	};
+}]);
+
 app.factory("SchemaService", ['$http', function ($http) {
     const service = {};
     service.getSchemas = function () {
@@ -287,14 +309,17 @@ app.controller('BsController',
                 UseCaseService.exportUseCase(useCase.id)
                     .then(function (response) {
                         var blob = new Blob([JSON.stringify(response)], {type: "text/json;charset=utf-8"});
-                        saveAs(blob, useCase.nickname + ".json");
+                        saveAs(blob, useCase.nickname + ".bstool");
                     });
-                //var thisUseCase = angular.copy(useCase);
-                //
-                // delete thisUseCase.id;
-                // delete thisUseCase.show;
-                // delete thisUseCase.owner;
-                // delete thisUseCase.$$hashKey;
+            };
+            $scope.importUseCase = function ($filecontent) {
+                object = console.log(JSON.parse($filecontent));  // TODO: Error handle
+                // check if the name is already used, if so generate a new ID
+                // then POST it to the API
+                // then follow the pattern in copyUseCase as needed to add the column
+                // UseCaseService.importUseCase(object)
+                //    .then
+
 
             };
             $scope.addMissingSchema = function () {
