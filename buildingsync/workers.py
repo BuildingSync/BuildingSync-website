@@ -1,4 +1,3 @@
-
 # Step 1: Install Schema Processor:
 #   $ pip install generateds
 
@@ -10,6 +9,7 @@ from buildingsync.models import Schema, BuildingSyncAttribute
 
 # Step 4: import that structure.py file's class map and set some parameters
 from buildingsync.schemas.schema2.structure import GDSClassesMapping as schema_map
+
 SCHEMA_NAME = "BuildingSync, Version 2.0.0"
 SCHEMA_VERSION = 2
 

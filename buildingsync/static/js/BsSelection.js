@@ -39,25 +39,25 @@ app.run(['$rootScope',
 ]);
 
 app.directive('onReadFile', ['$parse', function ($parse) {
-	return {
-		restrict: 'A',
-		scope: false,
-		link: function(scope, element, attrs) {
+    return {
+        restrict: 'A',
+        scope: false,
+        link: function (scope, element, attrs) {
             var fn = $parse(attrs.onReadFile);
 
-			element.on('change', function(onChangeEvent) {
-				var reader = new FileReader();
+            element.on('change', function (onChangeEvent) {
+                var reader = new FileReader();
 
-				reader.onload = function(onLoadEvent) {
-					scope.$apply(function() {
-						fn(scope, {$fileContent:onLoadEvent.target.result});
-					});
-				};
+                reader.onload = function (onLoadEvent) {
+                    scope.$apply(function () {
+                        fn(scope, {$fileContent: onLoadEvent.target.result});
+                    });
+                };
 
-				reader.readAsText((onChangeEvent.srcElement || onChangeEvent.target).files[0]);
-			});
-		}
-	};
+                reader.readAsText((onChangeEvent.srcElement || onChangeEvent.target).files[0]);
+            });
+        }
+    };
 }]);
 
 app.factory("SchemaService", ['$http', function ($http) {
@@ -318,11 +318,15 @@ app.controller('BsController',
                 var temp_object_name = "";
                 UseCaseService.getUseCases()
                     .then(function (current_use_cases) {
-                        var found_name_index = _.findIndex(current_use_cases, function(useCase) { return useCase.nickname == new_object_name });
+                        var found_name_index = _.findIndex(current_use_cases, function (useCase) {
+                            return useCase.nickname == new_object_name
+                        });
                         temp_object_name = "";
                         while (found_name_index >= 0) {
                             temp_object_name = _.uniqueId(new_object_name + '_');
-                            found_name_index = _.findIndex(current_use_cases, function(useCase) { return useCase.nickname == temp_object_name });
+                            found_name_index = _.findIndex(current_use_cases, function (useCase) {
+                                return useCase.nickname == temp_object_name
+                            });
                         }
                         new_object_name = temp_object_name;
                         var newUseCaseID = '';
@@ -347,7 +351,7 @@ app.controller('BsController',
                                         $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
                                     });
                             });
-                })
+                    })
             };
             $scope.addMissingSchema = function () {
                 SchemaService.initSchema()
