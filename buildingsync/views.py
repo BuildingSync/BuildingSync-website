@@ -54,6 +54,20 @@ class UseCaseViewSet(viewsets.ModelViewSet):
         else:
             return None  # would prefer to return a 403, but this is OK for now...what about when I POST anonymously?
 
+    @decorators.detail_route(methods=['GET'])
+    def export(self, request, pk=None):
+        u = UseCase.objects.get(pk=pk)
+        serializer = UseCaseSerializer(u)
+        data_object = serializer.data
+        del data_object['id']
+        del data_object['owner']
+        all_attributes = u.buildingsyncattribute_set.all()
+        attributes = []
+        for attr in all_attributes:
+            attributes.append({'name': attr.name, 'id': attr.id})
+        data_object['attributes'] = attributes
+        return JsonResponse(data_object)
+
 
 class BuildingSyncAttributeViewSet(viewsets.ModelViewSet):
     queryset = BuildingSyncAttribute.objects.all()

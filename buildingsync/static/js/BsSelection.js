@@ -99,6 +99,11 @@ app.factory("UseCaseService", ['$http', function ($http) {
             return response.data;
         })
     };
+    service.exportUseCase = function (pk) {
+        return $http.get('/api/use_cases/' + pk + '/export/').then(function (response) {
+            return response.data;
+        })
+    };
     return service;
 }]);
 
@@ -279,13 +284,18 @@ app.controller('BsController',
                 }
             };
             $scope.exportUseCase = function (useCase) {
-                var thisUseCase = angular.copy(useCase);
-                delete thisUseCase.id;
-                delete thisUseCase.show;
-                delete thisUseCase.owner;
-                delete thisUseCase.$$hashKey;
-                var blob = new Blob([JSON.stringify(thisUseCase, null, 2)], {type: "text/json;charset=utf-8"});
-                saveAs(blob, useCase.nickname + ".json");
+                UseCaseService.exportUseCase(useCase.id)
+                    .then(function (response) {
+                        var blob = new Blob([JSON.stringify(response)], {type: "text/json;charset=utf-8"});
+                        saveAs(blob, useCase.nickname + ".json");
+                    });
+                //var thisUseCase = angular.copy(useCase);
+                //
+                // delete thisUseCase.id;
+                // delete thisUseCase.show;
+                // delete thisUseCase.owner;
+                // delete thisUseCase.$$hashKey;
+
             };
             $scope.addMissingSchema = function () {
                 SchemaService.initSchema()
