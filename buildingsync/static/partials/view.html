@@ -19,16 +19,22 @@
                     <th>Use Case Nickname</th>
                     <th>Show/Hide this Use Case</th>
                     <th>Actions</th>
+                    <th>Edit</th>
                 </tr>
                 <tr ng-repeat="x in useCases">
                     <td>{$ x.id $}</td>
                     <td>{$ x.nickname $}</td>
-                    <td><input type="checkbox" ng-model="x.show" ng-checked="x.show" ng-change="updateSelection(x)"/></td>
+                    <td>
+                        <input type="checkbox" ng-model="x.show" ng-checked="x.show" ng-change="updateSelection(x)"/>
+                    </td>
+                    <td>
+                        <button class="btn btn-success" ng-click="exportUseCase(x)">Export</button>
+                        <button class="btn btn-danger" ng-click="deleteUseCase(x)">Delete</button>
+                    </td>
                     <td>
                         <button class="btn btn-success" ng-click="copyUseCase(x)">Copy</button>
                         <button class="btn btn-success" ng-click="renameUseCase(x)">Rename</button>
-                        <button class="btn btn-success" ng-click="exportUseCase(x)">Export</button>
-                        <button class="btn btn-danger" ng-click="deleteUseCase(x)">Delete</button>
+
                     </td>
                 </tr>
             </table>
@@ -41,13 +47,24 @@
                     <input class="btn btn-primary" type="submit" value="Add New">
                 </div>
             </form>
+            <form class="form-group row">
+                <div class="col-md-4">
+                    <input class="ng-hide" ng-model="filePath" on-read-file="importUseCase($fileContent)"
+                           id="input-file-id" type="file"/>
+                    <label for="input-file-id" class="btn btn-primary">Import File</label>
+                </div>
+            </form>
         </div>
     </div>
     <div class="row-fluid">
         <div class="col-md-12">
             <hr>
             <h1>Schema "{$ schema_nickname $}"</h1>
-            <div><button class="btn btn-warning" ng-show="schema_missing" ng-click="addMissingSchema()">Initialize Schema</button></div>
+            <div>
+                <button class="btn btn-warning" ng-show="schema_missing" ng-click="addMissingSchema()">Initialize
+                    Schema
+                </button>
+            </div>
             <div id="grid1" ui-grid="gridOptions" ui-grid-grouping ui-grid-selection class="grid"></div>
         </div>
     </div>

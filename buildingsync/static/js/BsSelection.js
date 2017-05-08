@@ -38,6 +38,28 @@ app.run(['$rootScope',
     }
 ]);
 
+app.directive('onReadFile', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        scope: false,
+        link: function (scope, element, attrs) {
+            var fn = $parse(attrs.onReadFile);
+
+            element.on('change', function (onChangeEvent) {
+                var reader = new FileReader();
+
+                reader.onload = function (onLoadEvent) {
+                    scope.$apply(function () {
+                        fn(scope, {$fileContent: onLoadEvent.target.result});
+                    });
+                };
+
+                reader.readAsText((onChangeEvent.srcElement || onChangeEvent.target).files[0]);
+            });
+        }
+    };
+}]);
+
 app.factory("SchemaService", ['$http', function ($http) {
     const service = {};
     service.getSchemas = function () {
@@ -96,6 +118,11 @@ app.factory("UseCaseService", ['$http', function ($http) {
     };
     service.updateUseCase = function (pk, obj) {
         return $http.put('/api/use_cases/' + pk + '/', obj).then(function (response) {
+            return response.data;
+        })
+    };
+    service.exportUseCase = function (pk) {
+        return $http.get('/api/use_cases/' + pk + '/export/').then(function (response) {
             return response.data;
         })
     };
@@ -279,13 +306,52 @@ app.controller('BsController',
                 }
             };
             $scope.exportUseCase = function (useCase) {
-                var thisUseCase = angular.copy(useCase);
-                delete thisUseCase.id;
-                delete thisUseCase.show;
-                delete thisUseCase.owner;
-                delete thisUseCase.$$hashKey;
-                var blob = new Blob([JSON.stringify(thisUseCase, null, 2)], {type: "text/json;charset=utf-8"});
-                saveAs(blob, useCase.nickname + ".json");
+                UseCaseService.exportUseCase(useCase.id)
+                    .then(function (response) {
+                        var blob = new Blob([JSON.stringify(response)], {type: "text/json;charset=utf-8"});
+                        saveAs(blob, useCase.nickname + ".bstool");
+                    });
+            };
+            $scope.importUseCase = function ($fileContent) {
+                var new_use_case = JSON.parse($fileContent);  // TODO: Error handle
+                var new_object_name = new_use_case.nickname;
+                var temp_object_name = "";
+                UseCaseService.getUseCases()
+                    .then(function (current_use_cases) {
+                        var found_name_index = _.findIndex(current_use_cases, function (useCase) {
+                            return useCase.nickname == new_object_name
+                        });
+                        temp_object_name = "";
+                        while (found_name_index >= 0) {
+                            temp_object_name = _.uniqueId(new_object_name + '_');
+                            found_name_index = _.findIndex(current_use_cases, function (useCase) {
+                                return useCase.nickname == temp_object_name
+                            });
+                        }
+                        new_object_name = temp_object_name;
+                        var newUseCaseID = '';
+                        UserService.getCurrentUserId()
+                            .then(function (u_id) {
+                                UseCaseService.postUseCase({owner: u_id.id, nickname: new_object_name})
+                                    .then(function (newUseCase) {
+                                        newUseCaseID = newUseCase.data.data.id;
+                                    })
+                                    .then(UseCaseService.getUseCases)
+                                    .then(function (useCases) {
+                                        $scope.useCases = useCases;
+                                    })
+                                    .then(function () {
+                                        $scope.columns.push({
+                                            name: new_object_name,
+                                            type: 'boolean',
+                                            cellTemplate: '<div ng-click="grid.appScope.toggleAttribute(row.entity, col.colDef.use_case_id)"><input type="checkbox" ng-checked="row.entity.use_cases.indexOf(col.colDef.use_case_id) !== -1" class="no-click"></div>',
+                                            visible: true,
+                                            use_case_id: newUseCaseID
+                                        });
+                                        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+                                    });
+                            });
+                    })
             };
             $scope.addMissingSchema = function () {
                 SchemaService.initSchema()

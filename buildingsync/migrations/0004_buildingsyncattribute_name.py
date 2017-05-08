@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('buildingsync', '0003_buildingsyncattribute'),
     ]
