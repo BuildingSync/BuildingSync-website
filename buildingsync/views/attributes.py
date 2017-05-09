@@ -14,7 +14,7 @@ class BuildingSyncAttributeViewSet(viewsets.ModelViewSet):
     @decorators.detail_route(methods=['PUT'])
     def remove_use_case(self, request, pk):
         use_case_num = request.data['use_case_num']  # TODO: validate existence, integer
-        required = True if request.data['required'] == 'True' else False
+        required = True if str(request.data['required']) == 'True' else False
         this_attribute = BuildingSyncAttribute.objects.get(pk=pk)
         if required:
             use_case_ids = [str(uc.id) for uc in this_attribute.required_use_cases.all()]
@@ -32,14 +32,14 @@ class BuildingSyncAttributeViewSet(viewsets.ModelViewSet):
     @decorators.detail_route(methods=['PUT'])
     def add_use_case(self, request, pk):
         use_case_num = request.data['use_case_num']  # TODO: validate existence, integer
-        required = True if request.data['required'] == 'True' else False
+        required = True if str(request.data['required']) == 'True' else False
         this_attribute = BuildingSyncAttribute.objects.get(pk=pk)
         if required:
             use_case_ids = [str(uc.id) for uc in this_attribute.required_use_cases.all()]
         else:
             use_case_ids = [str(uc.id) for uc in this_attribute.optional_use_cases.all()]
         this_use_case = UseCase.objects.get(pk=use_case_num)
-        if any([id_num == str(use_case_num) for id_num in use_case_ids]):
+        if str(use_case_num) in use_case_ids:
             return JsonResponse({'status': 'error'}, status=status.HTTP_400_BAD_REQUEST)
         else:
             if required:

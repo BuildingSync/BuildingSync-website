@@ -182,7 +182,6 @@ app.controller('BsController',
             };
             $scope.rebuildAttributes = function (attributes) {
                 $scope.matching_attributes = _.filter(attributes, {schema: $scope.one_schema.id});
-                console.log($scope.matching_attributes);
                 angular.forEach($scope.matching_attributes, function (value) {
                     value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allowed as a Django db model field, convert here
                 });
@@ -214,21 +213,17 @@ app.controller('BsController',
             $scope.toggleAttribute = function (row_entity, use_case_num, required) {
                 if (required) {
                     if (_.includes(row_entity.required_use_cases, use_case_num)) {
-                        console.log("Updating required  attribute for row with name " + row_entity.name + ", and pk = " + row_entity.id);
                         AttributeService.removeUseCaseNum(row_entity.id, use_case_num, required);
                         _.pull(row_entity.required_use_cases, use_case_num);
                     } else {
-                        console.log("Updating required attribute for row with name " + row_entity.name + ", and pk = " + row_entity.id);
                         AttributeService.addUseCaseNum(row_entity.id, use_case_num, required);
                         row_entity.required_use_cases.push(use_case_num);
                     }
                 } else {
                     if (_.includes(row_entity.optional_use_cases, use_case_num)) {
-                        console.log("Updating optional attribute for row with name " + row_entity.name + ", and pk = " + row_entity.id);
                         AttributeService.removeUseCaseNum(row_entity.id, use_case_num, required);
                         _.pull(row_entity.optional_use_cases, use_case_num);
                     } else {
-                        console.log("Updating optional attribute for row with name " + row_entity.name + ", and pk = " + row_entity.id);
                         AttributeService.addUseCaseNum(row_entity.id, use_case_num, required);
                         row_entity.optional_use_cases.push(use_case_num);
                     }
