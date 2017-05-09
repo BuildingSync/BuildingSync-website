@@ -38,22 +38,27 @@
                     </td>
                 </tr>
             </table>
-            <form class="form-group row" ng-submit="addBlankUseCase()">
-                <div class="col-md-4">
-                    <input type="text" class="form-control" ng-model="useCaseName" size="50"
-                           placeholder="New Use Case Name">
-                </div>
-                <div class="col-md-4">
-                    <input class="btn btn-primary" type="submit" value="Add New">
-                </div>
-            </form>
-            <form class="form-group row">
-                <div class="col-md-4">
-                    <input class="ng-hide" ng-model="filePath" on-read-file="importUseCase($fileContent)"
-                           id="input-file-id" type="file"/>
-                    <label for="input-file-id" class="btn btn-primary">Import File</label>
-                </div>
-            </form>
+            <div class="col-md-7">
+                <form class="form-group row" ng-submit="addBlankUseCase()">
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="useCaseName" size="50"
+                               placeholder="New Use Case Name">
+                    </div>
+                    <div class="col-md-4">
+                        <input class="btn btn-primary" type="submit" value="Add New Use Case">
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-5">
+                <form class="form-group row">
+                    <div style="text-align:center;">
+                        <input class="ng-hide" ng-model="filePath" on-read-file="importUseCase($fileContent)"
+                               id="input-file-id" type="file"/>
+                        <label for="input-file-id" class="btn btn-primary" style="float:center">Import Use Case From
+                            File</label>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <div class="row-fluid">
@@ -65,6 +70,36 @@
                     Schema
                 </button>
             </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <div class="col-md-7">
+                <p>
+                    The checkbox cells in the schema grid below include two checkboxes: R (required) and O (optional).
+                <ul class="list-group">
+                    <li class="list-group-item">Optional indicates the attribute may be interpreted for this use case,
+                        but not necessary.
+                    </li>
+                    <li class="list-group-item">Required means an instance file is invalid if it does not contain this
+                        attribute.
+                    </li>
+                </ul>
+                </p>
+            </div>
+            <div class="col-md-5">
+                <img src="static/images/required_optional.png" width="100%"
+                     style="border:1px solid #ddd;border-radius: 4px;"/>
+                <ul class="list-group">
+                    <li class="list-group-item">In this example, #1 requires this attribute, #2
+                        can include it optionally, and #3 does not include this attribute at all.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-md-12">
             <div id="grid1" ui-grid="gridOptions" ui-grid-grouping ui-grid-selection class="grid"></div>
         </div>
     </div>
