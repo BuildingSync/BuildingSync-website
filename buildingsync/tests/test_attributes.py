@@ -41,8 +41,10 @@ class TestAddRemoveUseCaseToAttribute(TestCase):
         self.u = User.objects.create_user(username='han', password='solo')
         self.use_case_a = UseCase.objects.create(owner=self.u, nickname="Millennium Falcon", show=True)
         self.use_case_b = UseCase.objects.create(owner=self.u, nickname="X-Wing", show=True)
-        self.obj_a = urlencode({'use_case_num': self.use_case_a.pk})
-        self.obj_b = urlencode({'use_case_num': self.use_case_b.pk})
+        self.obj_a_req = urlencode({'use_case_num': self.use_case_a.pk, 'required': True})
+        self.obj_b_req = urlencode({'use_case_num': self.use_case_b.pk, 'required': True})
+        self.obj_a_opt = urlencode({'use_case_num': self.use_case_a.pk, 'required': False})
+        self.obj_b_opt = urlencode({'use_case_num': self.use_case_b.pk, 'required': False})
         self.schema = Schema.objects.create(
             name="TestSchema", version=2
         )
@@ -53,36 +55,70 @@ class TestAddRemoveUseCaseToAttribute(TestCase):
         self.add_path = '/api/attributes/%s/add_use_case/'
         self.remove_path = '/api/attributes/%s/remove_use_case/'
 
-    def test_adding_and_removing(self):
+    def test_required(self):
         # verify the initial state
-        self.assertEqual(0, len(self.attribute.use_cases.all()))
+        self.assertEqual(0, len(self.attribute.required_use_cases.all()))
         # fail to remove one, the state is empty anyway
-        response = self.client.put(self.remove_path % self.attribute.pk, self.obj_a,
+        response = self.client.put(self.remove_path % self.attribute.pk, self.obj_a_req,
                                    content_type='application/x-www-form-urlencoded')
         self.assertEqual(400, response.status_code)
-        self.assertEqual(0, len(self.attribute.use_cases.all()))
+        self.assertEqual(0, len(self.attribute.required_use_cases.all()))
         # successfully add one
-        response = self.client.put(self.add_path % self.attribute.pk, self.obj_a,
+        response = self.client.put(self.add_path % self.attribute.pk, self.obj_a_req,
                                    content_type='application/x-www-form-urlencoded')
         self.assertEqual(200, response.status_code)
-        self.assertEqual(1, len(self.attribute.use_cases.all()))
+        self.assertEqual(1, len(self.attribute.required_use_cases.all()))
         # fail to remove a different one
-        response = self.client.put(self.remove_path % self.attribute.pk, self.obj_b,
+        response = self.client.put(self.remove_path % self.attribute.pk, self.obj_b_req,
                                    content_type='application/x-www-form-urlencoded')
         self.assertEqual(400, response.status_code)
-        self.assertEqual(1, len(self.attribute.use_cases.all()))
+        self.assertEqual(1, len(self.attribute.required_use_cases.all()))
         # successfully add a second one
-        response = self.client.put(self.add_path % self.attribute.pk, self.obj_b,
+        response = self.client.put(self.add_path % self.attribute.pk, self.obj_b_req,
                                    content_type='application/x-www-form-urlencoded')
         self.assertEqual(200, response.status_code)
-        self.assertEqual(2, len(self.attribute.use_cases.all()))
+        self.assertEqual(2, len(self.attribute.required_use_cases.all()))
         # what about adding a duplicate...it fails as I'd expect
-        response = self.client.put(self.add_path % self.attribute.pk, self.obj_b,
+        response = self.client.put(self.add_path % self.attribute.pk, self.obj_b_req,
                                    content_type='application/x-www-form-urlencoded')
         self.assertEqual(400, response.status_code)
-        self.assertEqual(2, len(self.attribute.use_cases.all()))
+        self.assertEqual(2, len(self.attribute.required_use_cases.all()))
         # successfully remove one
-        response = self.client.put(self.remove_path % self.attribute.pk, self.obj_b,
+        response = self.client.put(self.remove_path % self.attribute.pk, self.obj_b_req,
                                    content_type='application/x-www-form-urlencoded')
         self.assertEqual(200, response.status_code)
-        self.assertEqual(1, len(self.attribute.use_cases.all()))
+        self.assertEqual(1, len(self.attribute.required_use_cases.all()))
+
+    def test_optional(self):
+        # verify the initial state
+        self.assertEqual(0, len(self.attribute.optional_use_cases.all()))
+        # fail to remove one, the state is empty anyway
+        response = self.client.put(self.remove_path % self.attribute.pk, self.obj_a_opt,
+                                   content_type='application/x-www-form-urlencoded')
+        self.assertEqual(400, response.status_code)
+        self.assertEqual(0, len(self.attribute.optional_use_cases.all()))
+        # successfully add one
+        response = self.client.put(self.add_path % self.attribute.pk, self.obj_a_opt,
+                                   content_type='application/x-www-form-urlencoded')
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(1, len(self.attribute.optional_use_cases.all()))
+        # fail to remove a different one
+        response = self.client.put(self.remove_path % self.attribute.pk, self.obj_b_opt,
+                                   content_type='application/x-www-form-urlencoded')
+        self.assertEqual(400, response.status_code)
+        self.assertEqual(1, len(self.attribute.optional_use_cases.all()))
+        # successfully add a second one
+        response = self.client.put(self.add_path % self.attribute.pk, self.obj_b_opt,
+                                   content_type='application/x-www-form-urlencoded')
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(2, len(self.attribute.optional_use_cases.all()))
+        # what about adding a duplicate...it fails as I'd expect
+        response = self.client.put(self.add_path % self.attribute.pk, self.obj_b_opt,
+                                   content_type='application/x-www-form-urlencoded')
+        self.assertEqual(400, response.status_code)
+        self.assertEqual(2, len(self.attribute.optional_use_cases.all()))
+        # successfully remove one
+        response = self.client.put(self.remove_path % self.attribute.pk, self.obj_b_opt,
+                                   content_type='application/x-www-form-urlencoded')
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(1, len(self.attribute.optional_use_cases.all()))

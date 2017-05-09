@@ -82,14 +82,20 @@ app.factory("AttributeService", ['$http', function ($http) {
             return response.data;
         });
     };
-    service.addUseCaseNum = function (row_pk, use_case_num) {
-        return $http.put('/api/attributes/' + row_pk + '/add_use_case/', {use_case_num: use_case_num})
+    service.addUseCaseNum = function (row_pk, use_case_num, required) {
+        return $http.put('/api/attributes/' + row_pk + '/add_use_case/', {
+            use_case_num: use_case_num,
+            required: required
+        })
             .then(function (response) {
                 return response.data;
             })
     };
-    service.removeUseCaseNum = function (row_pk, use_case_num) {
-        return $http.put('/api/attributes/' + row_pk + '/remove_use_case/', {use_case_num: use_case_num})
+    service.removeUseCaseNum = function (row_pk, use_case_num, required) {
+        return $http.put('/api/attributes/' + row_pk + '/remove_use_case/', {
+            use_case_num: use_case_num,
+            required: required
+        })
             .then(function (response) {
                 return response.data;
             })
@@ -123,6 +129,11 @@ app.factory("UseCaseService", ['$http', function ($http) {
     };
     service.exportUseCase = function (pk) {
         return $http.get('/api/use_cases/' + pk + '/export/').then(function (response) {
+            return response.data;
+        })
+    };
+    service.importUseCase = function (pk) {
+        return $http.put('/api/use_cases/' + pk + '/import/').then(function (response) {
             return response.data;
         })
     };
@@ -194,21 +205,33 @@ app.controller('BsController',
                     $scope.columns.push({
                         name: use_case.nickname,
                         type: 'boolean',
-                        cellTemplate: '<div ng-click="grid.appScope.toggleAttribute(row.entity, col.colDef.use_case_id)"><input type="checkbox" ng-checked="row.entity.use_cases.indexOf(col.colDef.use_case_id) !== -1" class="no-click"></div>',
+                        cellTemplate: 'static/partials/checkboxTemplate.html',
                         visible: use_case.show,
                         use_case_id: use_case.id
                     });
                 });
             };
-            $scope.toggleAttribute = function (row_entity, use_case_num) {
-                if (_.includes(row_entity.use_cases, use_case_num)) {
-                    console.log("Updating attribute for row with name " + row_entity.name + ", and pk = " + row_entity.id);
-                    AttributeService.removeUseCaseNum(row_entity.id, use_case_num);
-                    _.pull(row_entity.use_cases, use_case_num);
+            $scope.toggleAttribute = function (row_entity, use_case_num, required) {
+                if (required) {
+                    if (_.includes(row_entity.required_use_cases, use_case_num)) {
+                        console.log("Updating required  attribute for row with name " + row_entity.name + ", and pk = " + row_entity.id);
+                        AttributeService.removeUseCaseNum(row_entity.id, use_case_num, required);
+                        _.pull(row_entity.required_use_cases, use_case_num);
+                    } else {
+                        console.log("Updating required attribute for row with name " + row_entity.name + ", and pk = " + row_entity.id);
+                        AttributeService.addUseCaseNum(row_entity.id, use_case_num, required);
+                        row_entity.required_use_cases.push(use_case_num);
+                    }
                 } else {
-                    console.log("Updating attribute for row with name " + row_entity.name + ", and pk = " + row_entity.id);
-                    AttributeService.addUseCaseNum(row_entity.id, use_case_num);
-                    row_entity.use_cases.push(use_case_num);
+                    if (_.includes(row_entity.optional_use_cases, use_case_num)) {
+                        console.log("Updating optional attribute for row with name " + row_entity.name + ", and pk = " + row_entity.id);
+                        AttributeService.removeUseCaseNum(row_entity.id, use_case_num, required);
+                        _.pull(row_entity.optional_use_cases, use_case_num);
+                    } else {
+                        console.log("Updating optional attribute for row with name " + row_entity.name + ", and pk = " + row_entity.id);
+                        AttributeService.addUseCaseNum(row_entity.id, use_case_num, required);
+                        row_entity.optional_use_cases.push(use_case_num);
+                    }
                 }
             };
             $scope.addBlankUseCase = function () {
@@ -227,7 +250,7 @@ app.controller('BsController',
                                 $scope.columns.push({
                                     name: $scope.useCaseName,
                                     type: 'boolean',
-                                    cellTemplate: '<div ng-click="grid.appScope.toggleAttribute(row.entity, col.colDef.use_case_id)"><input type="checkbox" ng-checked="row.entity.use_cases.indexOf(col.colDef.use_case_id) !== -1" class="no-click"></div>',
+                                    cellTemplate: 'static/partials/checkboxTemplate.html',
                                     visible: true,
                                     use_case_id: newUseCaseID
                                 });
@@ -270,7 +293,7 @@ app.controller('BsController',
                                 $scope.columns.push({
                                     name: newUseCaseName,
                                     type: 'boolean',
-                                    cellTemplate: '<div ng-click="grid.appScope.toggleAttribute(row.entity, col.colDef.use_case_id)"><input type="checkbox" ng-checked="row.entity.use_cases.indexOf(col.colDef.use_case_id) !== -1" class="no-click"></div>',
+                                    cellTemplate: 'static/partials/checkboxTemplate.html',
                                     visible: true,
                                     use_case_id: newUseCaseID
                                 });
@@ -328,28 +351,25 @@ app.controller('BsController',
                                 return useCase.nickname == temp_object_name
                             });
                         }
-                        new_object_name = temp_object_name;
+                        new_use_case.nickname = temp_object_name;
                         var newUseCaseID = '';
-                        UserService.getCurrentUserId()
-                            .then(function (u_id) {
-                                UseCaseService.postUseCase({owner: u_id.id, nickname: new_object_name})
-                                    .then(function (newUseCase) {
-                                        newUseCaseID = newUseCase.data.data.id;
-                                    })
-                                    .then(UseCaseService.getUseCases)
-                                    .then(function (useCases) {
-                                        $scope.useCases = useCases;
-                                    })
-                                    .then(function () {
-                                        $scope.columns.push({
-                                            name: new_object_name,
-                                            type: 'boolean',
-                                            cellTemplate: '<div ng-click="grid.appScope.toggleAttribute(row.entity, col.colDef.use_case_id)"><input type="checkbox" ng-checked="row.entity.use_cases.indexOf(col.colDef.use_case_id) !== -1" class="no-click"></div>',
-                                            visible: true,
-                                            use_case_id: newUseCaseID
-                                        });
-                                        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
-                                    });
+                        UseCaseService.importUseCase(new_use_case)
+                            .then(function (newUseCase) {
+                                newUseCaseID = newUseCase.data.data.id;
+                            })
+                            .then(UseCaseService.getUseCases)
+                            .then(function (useCases) {
+                                $scope.useCases = useCases;
+                            })
+                            .then(function () {
+                                $scope.columns.push({
+                                    name: new_object_name,
+                                    type: 'boolean',
+                                    cellTemplate: 'static/partials/checkboxTemplate.html',
+                                    visible: true,
+                                    use_case_id: newUseCaseID
+                                });
+                                $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
                             });
                     })
             };

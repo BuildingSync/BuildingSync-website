@@ -49,7 +49,7 @@ class TestUseCaseExport(TestCase):
         for i in range(10):
             b = BuildingSyncAttribute.objects.create(name="Attr%s" % i, schema=self.schema, tree_level=1, index=i)
             if i % 2 == 0:
-                b.use_cases.add(self.use_case)
+                b.required_use_cases.add(self.use_case)
 
     def test_export(self):
         resp = self.client.get('/api/use_cases/%s/export/' % self.use_case.id)
