@@ -14,7 +14,7 @@ class BuildingSyncAttributeViewSet(viewsets.ModelViewSet):
     @decorators.detail_route(methods=['PUT'])
     def remove_use_case(self, request, pk):
         use_case_num = request.data['use_case_num']  # TODO: validate existence, integer
-        required = request.data['required']  # TODO: validate existence, true/false
+        required = True if request.data['required'] == 'True' else False
         this_attribute = BuildingSyncAttribute.objects.get(pk=pk)
         if required:
             use_case_ids = [str(uc.id) for uc in this_attribute.required_use_cases.all()]
@@ -32,7 +32,7 @@ class BuildingSyncAttributeViewSet(viewsets.ModelViewSet):
     @decorators.detail_route(methods=['PUT'])
     def add_use_case(self, request, pk):
         use_case_num = request.data['use_case_num']  # TODO: validate existence, integer
-        required = request.data['required']  # TODO: validate existence, true/false
+        required = True if request.data['required'] == 'True' else False
         this_attribute = BuildingSyncAttribute.objects.get(pk=pk)
         if required:
             use_case_ids = [str(uc.id) for uc in this_attribute.required_use_cases.all()]
