@@ -15,16 +15,16 @@ class UseCaseViewSet(viewsets.ModelViewSet):
         else:
             return None  # would prefer to return a 403, but this is OK for now...what about when I POST anonymously?
 
-    @decorators.detail_route(methods=['POST'], url_path="import")
+    @decorators.list_route(methods=['POST'], url_path="import")
     def import_use_case(self, request):
         u = UseCase.objects.create(owner=request.user, nickname=request.data['nickname'], show=request.data['show'])
         all_attributes = request.data['attributes']
         required_attributes = all_attributes['required']
         for req_attr in required_attributes:
-            u.required_use_cases.objects.add(req_attr['id'])
+            u.required_use_cases.add(req_attr['id'])
         optional_attributes = all_attributes['optional']
         for opt_attr in optional_attributes:
-            u.optional_use_cases.objects.add(opt_attr['id'])
+            u.optional_use_cases.add(opt_attr['id'])
         u.save()
         serializer = UseCaseSerializer(u)
         return JsonResponse(serializer.data)

@@ -132,8 +132,8 @@ app.factory("UseCaseService", ['$http', function ($http) {
             return response.data;
         })
     };
-    service.importUseCase = function (pk) {
-        return $http.put('/api/use_cases/' + pk + '/import/').then(function (response) {
+    service.importUseCase = function (use_case_object) {
+        return $http.post('/api/use_cases/import/', use_case_object).then(function (response) {
             return response.data;
         })
     };
@@ -337,25 +337,28 @@ app.controller('BsController',
             };
             $scope.importUseCase = function ($fileContent) {
                 var new_use_case = JSON.parse($fileContent);  // TODO: Error handle
-                var new_object_name = new_use_case.nickname;
+                var new_name_we_want = new_use_case.nickname;
                 var temp_object_name = "";
                 UseCaseService.getUseCases()
                     .then(function (current_use_cases) {
                         var found_name_index = _.findIndex(current_use_cases, function (useCase) {
-                            return useCase.nickname == new_object_name
+                            return useCase.nickname == new_name_we_want
                         });
-                        temp_object_name = "";
-                        while (found_name_index >= 0) {
-                            temp_object_name = _.uniqueId(new_object_name + '_');
-                            found_name_index = _.findIndex(current_use_cases, function (useCase) {
-                                return useCase.nickname == temp_object_name
-                            });
+                        if (found_name_index == -1) {
+                            temp_object_name = new_name_we_want;
+                        } else {
+                            while (found_name_index >= 0) {
+                                temp_object_name = _.uniqueId(new_name_we_want + '_');
+                                found_name_index = _.findIndex(current_use_cases, function (useCase) {
+                                    return useCase.nickname == temp_object_name
+                                });
+                            }
                         }
                         new_use_case.nickname = temp_object_name;
                         var newUseCaseID = '';
                         UseCaseService.importUseCase(new_use_case)
                             .then(function (newUseCase) {
-                                newUseCaseID = newUseCase.data.data.id;
+                                newUseCaseID = newUseCase.id;
                             })
                             .then(UseCaseService.getUseCases)
                             .then(function (useCases) {
@@ -363,14 +366,19 @@ app.controller('BsController',
                             })
                             .then(function () {
                                 $scope.columns.push({
-                                    name: new_object_name,
+                                    name: temp_object_name,
                                     type: 'boolean',
                                     cellTemplate: 'static/partials/checkboxTemplate.html',
                                     visible: true,
                                     use_case_id: newUseCaseID
                                 });
                                 $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
-                            });
+                            })
+                            .then(AttributeService.getAttributes)
+                            .then(function (attributes) {
+                                $scope.rebuildAttributes(attributes);
+                                $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
+                            })
                     })
             };
             $scope.addMissingSchema = function () {
