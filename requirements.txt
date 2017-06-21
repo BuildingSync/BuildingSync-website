@@ -9,3 +9,4 @@ whitenoise==3.2.2
 psycopg2==2.6.1
 gunicorn==19.6.0
 xmlschema==0.9.9
+tox==2.7.0

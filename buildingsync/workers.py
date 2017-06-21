@@ -8,7 +8,7 @@ current_index = 0
 schema_entries = []
 
 
-def get_node(root_element, root_path):
+def get_node(root_element, root_path, current_tree_level):
     """TODO: Change this function to return the current index, and current entries list, so that we remove globals"""
     global schema_entries, current_index
     current_index += 1
@@ -16,10 +16,10 @@ def get_node(root_element, root_path):
         if 'name' in child.attrib:
             this_child_name = child.attrib['name']
             this_child_path = root_path + "." + this_child_name
-            schema_entries.append({'$$treeLevel': 1, 'name': this_child_name, 'index': current_index, 'path': this_child_path})
+            schema_entries.append({'$$treeLevel': current_tree_level, 'name': this_child_name, 'index': current_index, 'path': this_child_path})
         else:
-            this_child_path = root_path + '.' + 'unnamed'
-        get_node(child, this_child_path)
+            this_child_path = root_path  # + '.' + 'unnamed'
+        get_node(child, this_child_path, current_tree_level + 1)
 
 
 def reset_schema():
@@ -36,7 +36,7 @@ def reset_schema():
     # parse the schema itself to get all entries
     my_schema = xmlschema.XMLSchema('buildingsync/schemas/schema2/BuildingSync_2_0.xsd')
     root_element = my_schema.root
-    get_node(root_element, "root")
+    get_node(root_element, "root", 1)
 
     # Create database entries for each schema entry
     for se in schema_entries:
