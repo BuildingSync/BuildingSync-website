@@ -11,4 +11,4 @@ class TestResetSchema(TestCase):
         self.assertEqual(resp.id, 1)
         self.assertEqual(resp.version, 2)
         self.assertEqual(len(Schema.objects.all()), 1)
-        self.assertEqual(len(BuildingSyncAttribute.objects.all()), 223)  # TODO: This is wrong :)
+        self.assertEqual(len(BuildingSyncAttribute.objects.all()), 497)  # TODO: This is wrong :)

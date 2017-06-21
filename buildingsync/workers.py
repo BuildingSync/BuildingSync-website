@@ -19,20 +19,20 @@ def reset_schema():
     my_schema = xmlschema.XMLSchema('buildingsync/schemas/schema2/BuildingSync_2_0.xsd')
     root_element = my_schema.root
     index = 1
-    root_path = 'root'
-    schema_entries = [{'$$treeLevel': 0, 'name': 'root', 'index': index, 'path': root_path}]
+    #  root_path = 'root'
+    schema_entries = []  # {'$$treeLevel': 0, 'name': 'root', 'index': index, 'path': root_path}]
     # yes, I know, this is going to be a recursive call, I just wanted to lay out a few steps deep to make sure I see the recursion properly
     for child in root_element._children:
         index += 1
         this_child_name = child.attrib['name']
-        this_child_path = root_path + "." + this_child_name
-        schema_entries.append({'$$treeLevel': 1, 'name': "-   " + this_child_name, 'index': index, 'path': this_child_path})
+        this_child_path = this_child_name
+        schema_entries.append({'$$treeLevel': 1, 'name': this_child_name, 'index': index, 'path': this_child_path})
         for grandchild in child._children:
             index += 1
             if 'name' in grandchild.attrib:
                 this_grandchild_name = grandchild.attrib['name']
                 this_grandchild_path = this_child_path + "." + this_grandchild_name
-                schema_entries.append({'$$treeLevel': 2, 'name': "-   -   " + this_grandchild_name, 'index': index, 'path': this_grandchild_path})
+                schema_entries.append({'$$treeLevel': 2, 'name': "-   " + this_grandchild_name, 'index': index, 'path': this_grandchild_path})
             else:
                 this_grandchild_path = this_child_path + "." + "unnamed"
             for greatgrandchild in grandchild._children:
@@ -41,7 +41,7 @@ def reset_schema():
                     this_greatgrandchild_name = greatgrandchild.attrib['name']
                     this_greatgrandchild_path = this_grandchild_path + "." + this_greatgrandchild_name
                     schema_entries.append(
-                        {'$$treeLevel': 2, 'name': "-   -   -   " + this_greatgrandchild_name, 'index': index,
+                        {'$$treeLevel': 2, 'name': "-   -   " + this_greatgrandchild_name, 'index': index,
                          'path': this_greatgrandchild_path})
 
     # Create database entries for each schema entry

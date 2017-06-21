@@ -20,6 +20,6 @@ class SchemaViewSet(viewsets.ModelViewSet):
             s = reset_schema()
             serializer = SchemaSerializer(s)
             s_data = serializer.data
-        except Exception as e:  # pragma no cover
+        except Exception:  # pragma no cover
             return JsonResponse({'status': 'failure'})
         return JsonResponse({'status': 'success', 'schema': s_data})
