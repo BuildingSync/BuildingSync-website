@@ -15,10 +15,14 @@ def get_node(root_element, root_path, current_tree_level):
     for child in root_element:
         if 'name' in child.attrib:
             this_child_name = child.attrib['name']
+            this_child_type = 'type_unknown'
+            if 'type' in child.attrib:
+                this_child_type = child.attrib['type']
             this_child_path = root_path + "." + this_child_name
-            schema_entries.append({'$$treeLevel': current_tree_level, 'name': this_child_name, 'index': current_index, 'path': this_child_path})
+            schema_entries.append({'$$treeLevel': current_tree_level, 'name': this_child_name, 'index': current_index,
+                                   'path': this_child_path + ' {' + this_child_type + '}', 'type': this_child_type})
         else:
-            this_child_path = root_path  # + '.' + 'unnamed'
+            this_child_path = root_path  # then we have some weird list/sequence/something
         get_node(child, this_child_path, current_tree_level + 1)
 
 
@@ -34,7 +38,7 @@ def reset_schema():
     s.save()
 
     # parse the schema itself to get all entries
-    my_schema = xmlschema.XMLSchema('buildingsync/schemas/schema2/BuildingSync_2_0.xsd')
+    my_schema = xmlschema.XMLSchema('buildingsync/schemas/BuildingSync_2_0.xsd')
     root_element = my_schema.root
     get_node(root_element, "root", 1)
 
