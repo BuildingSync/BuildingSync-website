@@ -394,6 +394,38 @@ class BuildingSyncSchemaProcessor(object):
                 num_added += this_num_added
                 return_rows.extend(new_rows)
             return num_added, return_rows
+        elif type(parent_element) is AnnotationElement:
+            current_index += 1
+            num_added += 1
+            if parent_element.documentation:
+                if len(parent_element.documentation) > 40:
+                    doc_to_show = parent_element.documentation[:37] + '...'
+                else:
+                    doc_to_show = parent_element.documentation
+            else:
+                doc_to_show = "**no documentation element**"
+            return_rows.append({'name': 'ANNOTATION: Doc=\"%s\"' % doc_to_show, 'path': 'SOMETHING', '$$treeLevel': current_tree_level, 'index': current_index})
+            return num_added, return_rows
+        elif type(parent_element) is SimpleTypeElement:
+            for elem in parent_element.restrictions:
+                current_index += 1
+                num_added += 1
+                return_rows.append({'name': 'RESTRICTION', 'path': 'SOMETHING', '$$treeLevel': current_tree_level,
+                                    'index': current_index})
+                this_num_added, new_rows = self.walk_single_element(elem, "", current_tree_level + 1, current_index)
+                current_index += this_num_added
+                num_added += this_num_added
+                return_rows.extend(new_rows)
+            return num_added, return_rows
+        elif type(parent_element) is RestrictionElement:
+            for elem in parent_element.enumerations:
+                current_index += 1
+                num_added += 1
+                return_rows.append({'name': 'Enumeration: ' + elem, 'path': 'SOMETHING', '$$treeLevel': current_tree_level,
+                                    'index': current_index})
+            return num_added, return_rows
+        else:
+            raise Exception("Need to implement walking for type: " + str(type(parent_element)))
         # for child in parent_element:
         #     if 'name' in child.attrib:
         #         this_child_name = child.attrib['name']
@@ -406,7 +438,6 @@ class BuildingSyncSchemaProcessor(object):
         #     else:
         #         this_child_path = root_path  # then we have some weird list/sequence/something
         #     get_node(child, this_child_path, current_tree_level + 1)
-        return num_added, return_rows
 
 
 def reset_schema():
