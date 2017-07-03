@@ -37,6 +37,8 @@ class NamedElement(BuildingSyncSchemaElement):
         self.simple_types = []
         self.name = ""
         self.type = None
+        self.max_occurs = None
+        self.min_occurs = None
 
 
 class AnnotationElement(BuildingSyncSchemaElement):
@@ -78,6 +80,7 @@ class ExtensionElement(BuildingSyncSchemaElement):
     def __init__(self):
         super(ExtensionElement, self).__init__()
         self.attributes = []
+        self.base_type = None
 
 
 class SimpleTypeElement(BuildingSyncSchemaElement):
@@ -166,6 +169,10 @@ class BuildingSyncSchemaProcessor(object):
         named_element.name = parent_object.attrib['name']
         if 'type' in parent_object.attrib:
             named_element.type = parent_object.attrib['type']
+        if 'minOccurs' in parent_object.attrib:
+            named_element.min_occurs = parent_object.attrib['minOccurs']
+        if 'maxOccurs' in parent_object.attrib:
+            named_element.max_occurs = parent_object.attrib['maxOccurs']
         for child in parent_object.getchildren():
             if child.tag.endswith('annotation'):
                 named_element.annotations.append(self._read_annotation(child))
@@ -242,6 +249,8 @@ class BuildingSyncSchemaProcessor(object):
 
     def _read_extension(self, parent_object):
         this_extension = ExtensionElement()
+        if 'base' in parent_object.attrib:
+            this_extension.base_type = parent_object.attrib['base']
         for child in parent_object.getchildren():
             if child.tag.endswith('attribute'):
                 this_extension.attributes.append(self._read_attribute(child))
@@ -281,9 +290,8 @@ class BuildingSyncSchemaProcessor(object):
                 raise Exception("Invalid tag type in _read_choice: " + child.tag)
         return this_choice
 
-    def generate_data_rows(self):
-        _, full_schema_rows = self.walk_single_element(self.full_schema, "root", 1, 0)
-        return full_schema_rows
+    def walk_root_element(self):
+        return self._walk_schema(self.full_schema, "root", 1, 0)
 
     def _walk_schema(self, parent_element, root_path, current_tree_level, current_index):
         return_rows = []
@@ -319,7 +327,7 @@ class BuildingSyncSchemaProcessor(object):
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
-        return num_added, return_rows
+        return return_rows
 
     def _walk_named_element(self, parent_element, root_path, current_tree_level, current_index):
         return_rows = []
@@ -373,17 +381,6 @@ class BuildingSyncSchemaProcessor(object):
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
-        # for elem in parent_element.attributes:
-        #     current_index += 1
-        #     num_added += 1
-        #     return_rows.append(
-        #         {'name': 'ATTRIBUTE', 'path': root_path + '.' + 'Attribute', '$$treeLevel': current_tree_level,
-        #          'index': current_index})
-        #     this_num_added, new_rows = self.walk_single_element(elem, root_path + '.' + 'Attribute',
-        #                                                         current_tree_level + 1, current_index)
-        #     current_index += this_num_added
-        #     num_added += this_num_added
-        #     return_rows.extend(new_rows)
         return num_added, return_rows
 
     def _walk_complex_element(self, parent_element, root_path, current_tree_level, current_index):
@@ -479,37 +476,6 @@ class BuildingSyncSchemaProcessor(object):
                                 'index': current_index})
         return num_added, return_rows
 
-    def walk_single_element(self, parent_element, root_path, current_tree_level, current_index):
-        num_added = 0
-        return_rows = []
-        if type(parent_element) is BuildingSyncSchemaRoot:
-            num_added, return_rows = self._walk_schema(parent_element, root_path, current_tree_level, current_index)
-        elif type(parent_element) is NamedElement:
-            num_added, return_rows = self._walk_named_element(parent_element, root_path, current_tree_level, current_index)
-        elif type(parent_element) is ReferenceElement:
-            num_added, return_rows = self._walk_reference_element(parent_element, root_path, current_tree_level,
-                                                              current_index)
-        elif type(parent_element) is ComplexTypeElement:
-            num_added, return_rows = self._walk_complex_element(parent_element, root_path, current_tree_level,
-                                                                  current_index)
-        elif type(parent_element) is SequenceElement:
-            num_added, return_rows = self._walk_sequence_element(parent_element, root_path, current_tree_level,
-                                                                current_index)
-        elif type(parent_element) is AnnotationElement:
-            num_added, return_rows = self._walk_annotation_element(parent_element, root_path, current_tree_level,
-                                                                 current_index)
-        elif type(parent_element) is SimpleTypeElement:
-            num_added, return_rows = self._walk_simple_type_element(parent_element, root_path, current_tree_level,
-                                                                   current_index)
-        elif type(parent_element) is RestrictionElement:
-            num_added, return_rows = self._walk_restriction_element(parent_element, root_path, current_tree_level,
-                                                                    current_index)
-        elif type(parent_element) is AttributeElement:
-            print("HEY")
-        else:
-            raise Exception("Need to implement walking for type: " + str(type(parent_element)))
-        return num_added, return_rows
-
 
 def reset_schema():
     # Delete any previous schemas (and attributes??)
@@ -526,7 +492,7 @@ def reset_schema():
     # get_node(root_element, "root", 1)
 
     bs_processor = BuildingSyncSchemaProcessor(my_schema)
-    schema_entries = bs_processor.generate_data_rows()
+    schema_entries = bs_processor.walk_root_element()
 
     # Create database entries for each schema entry
     for se in schema_entries:
