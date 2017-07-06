@@ -340,7 +340,7 @@ class BuildingSyncSchemaProcessor(object):
             #     {'name': 'ANNOTATION', 'path': root_path + '.' + 'Annotation', '$$treeLevel': current_tree_level,
             #      'index': current_index})
             this_num_added, new_rows = self._walk_annotation_element(elem, root_path + '.' + 'Annotation',
-                                                                     current_tree_level + 1, current_index)
+                                                                     current_tree_level, current_index)
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
@@ -378,7 +378,7 @@ class BuildingSyncSchemaProcessor(object):
             #     {'name': 'ANNOTATION', 'path': root_path + '.' + 'Annotation', '$$treeLevel': current_tree_level,
             #      'index': current_index})
             this_num_added, new_rows = self._walk_annotation_element(elem, root_path + '.' + 'Annotation',
-                                                                     current_tree_level + 1, current_index)
+                                                                     current_tree_level, current_index)
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
