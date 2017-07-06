@@ -113,6 +113,7 @@ class BuildingSyncSchemaProcessor(object):
         self.xml_schema_structure = xml_schema_instance
         self.type_definitions = []
         self.all_named_elements = []
+        self.all_complex_elements = []
         self.type_references = []
         self.named_complex_types = {}
         self.full_schema = self._read_schema(self.xml_schema_structure.root)
@@ -222,6 +223,7 @@ class BuildingSyncSchemaProcessor(object):
                 raise Exception("Invalid tag type in _read_complex_type: " + child.tag)
         if 'name' in parent_object.attrib:
             self.named_complex_types[parent_object.attrib['name']] = this_complex_type
+            self.all_complex_elements.append(this_complex_type)
         return this_complex_type
 
     def _read_sequence(self, parent_object):
@@ -400,6 +402,18 @@ class BuildingSyncSchemaProcessor(object):
             return_rows.extend(new_rows)
         return num_added, return_rows
 
+    def _find_referenced_element(self, original_ref_name):
+        looking_for_type_name = original_ref_name.split(':')[1]  # it starts with the namespace 'auc:'
+        for ne in self.all_named_elements:
+            if looking_for_type_name == ne.name:
+                return ne
+        if looking_for_type_name in self.named_complex_types:
+            return self.named_complex_types[looking_for_type_name]
+        # for ce in self.all_complex_elements:
+        #     if looking_for_type_name == ce.name:
+        #         return ce
+        return None
+
     def _walk_sequence_element(self, parent_element, root_path, current_tree_level, current_index):
         return_rows = []
         num_added = 0
@@ -408,8 +422,21 @@ class BuildingSyncSchemaProcessor(object):
             num_added += 1
             if elem.type:
                 return_rows.append(
-                    {'name': 'NAMED/TYPED: ' + elem.name + '/' + elem.type, 'path': root_path + '.' + elem.name,
+                    {'name': 'NAMED: %s {%s}' % (elem.name, elem.type), 'path': root_path + '.' + elem.name,
                      '$$treeLevel': current_tree_level, 'index': current_index})
+                instance = self._find_referenced_element(elem.type)
+                if instance:
+                    if isinstance(instance, NamedElement):
+                        this_num_added, new_rows = self._walk_named_element(instance, root_path + '.' + elem.type,
+                                                                            current_tree_level + 1, current_index)
+                    elif isinstance(instance, ComplexTypeElement):
+                        this_num_added, new_rows = self._walk_complex_element(instance, root_path + '.' + elem.type,
+                                                                              current_tree_level + 1, current_index)
+                    else:
+                        raise Exception("Couldn't grok the type of the searched reference element; type: %s" % elem.type)
+                    current_index += this_num_added
+                    num_added += this_num_added
+                    return_rows.extend(new_rows)
             else:
                 return_rows.append(
                     {'name': 'NAMED: ' + elem.name, 'path': root_path + '.' + elem.name,
@@ -433,20 +460,19 @@ class BuildingSyncSchemaProcessor(object):
             num_added += this_num_added
             return_rows.extend(new_rows)
 
-            # now actually find the referenced object
-            found = False
-            looking_for_type_name = elem.ref_type.split(':')[1]  # it starts with the namespace 'auc:'
-            for ne in self.all_named_elements:
-                if looking_for_type_name == ne.name:
-                    found = True
-                    this_num_added, new_rows = self._walk_named_element(ne, root_path + '.' + looking_for_type_name, current_tree_level + 1, current_index)
-                    current_index += this_num_added
-                    num_added += this_num_added
-                    return_rows.extend(new_rows)
-                    break
-
-            if not found:
-                raise Exception("Could not find a type! Trying to find reference with name \"%s\"" % elem.ref_type)
+            instance = self._find_referenced_element(elem.ref_type)
+            if instance:
+                if isinstance(instance, NamedElement):
+                    this_num_added, new_rows = self._walk_named_element(instance, root_path + '.' + elem.ref_type,
+                                                                        current_tree_level + 1, current_index)
+                elif isinstance(instance, ComplexTypeElement):
+                    this_num_added, new_rows = self._walk_complex_element(instance, root_path + '.' + elem.ref_type,
+                                                                          current_tree_level + 1, current_index)
+                else:
+                    raise Exception("Couldn't grok the type of the searched reference element; type: %s" % elem.ref_type)
+                current_index += this_num_added
+                num_added += this_num_added
+                return_rows.extend(new_rows)
 
         return num_added, return_rows
 
