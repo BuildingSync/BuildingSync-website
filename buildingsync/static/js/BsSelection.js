@@ -197,7 +197,7 @@ app.controller('BsController',
                     {
                         name: 'name',
                         displayName: 'BuildingSync Attribute',
-                        width: '40%'
+                        width: '60%'
                     }
                 ];
                 angular.forEach(useCases, function (use_case) {

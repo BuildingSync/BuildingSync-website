@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from buildingsync.workers import reset_schema
-from buildingsync.models import Schema, BuildingSyncAttribute
+from buildingsync.models import Schema  # , BuildingSyncAttribute
 
 
 class TestResetSchema(TestCase):

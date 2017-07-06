@@ -333,11 +333,12 @@ class BuildingSyncSchemaProcessor(object):
         return_rows = []
         num_added = 0
         for elem in parent_element.annotations:
-            current_index += 1
-            num_added += 1
-            return_rows.append(
-                {'name': 'ANNOTATION', 'path': root_path + '.' + 'Annotation', '$$treeLevel': current_tree_level,
-                 'index': current_index})
+            # Don't add the annotation element itself, just the documentation element; and eventually not even that
+            # current_index += 1
+            # num_added += 1
+            # return_rows.append(
+            #     {'name': 'ANNOTATION', 'path': root_path + '.' + 'Annotation', '$$treeLevel': current_tree_level,
+            #      'index': current_index})
             this_num_added, new_rows = self._walk_annotation_element(elem, root_path + '.' + 'Annotation',
                                                                      current_tree_level + 1, current_index)
             current_index += this_num_added
@@ -371,11 +372,11 @@ class BuildingSyncSchemaProcessor(object):
         return_rows = []
         num_added = 0
         for elem in parent_element.annotations:
-            current_index += 1
-            num_added += 1
-            return_rows.append(
-                {'name': 'ANNOTATION', 'path': root_path + '.' + 'Annotation', '$$treeLevel': current_tree_level,
-                 'index': current_index})
+            # current_index += 1
+            # num_added += 1
+            # return_rows.append(
+            #     {'name': 'ANNOTATION', 'path': root_path + '.' + 'Annotation', '$$treeLevel': current_tree_level,
+            #      'index': current_index})
             this_num_added, new_rows = self._walk_annotation_element(elem, root_path + '.' + 'Annotation',
                                                                      current_tree_level + 1, current_index)
             current_index += this_num_added
@@ -425,11 +426,28 @@ class BuildingSyncSchemaProcessor(object):
             return_rows.append({'name': 'REF: ' + elem.ref_type, 'path': root_path + '.' + elem.ref_type,
                                 '$$treeLevel': current_tree_level,
                                 'index': current_index})
+            # this will really just write the annotation, which we eventually don't want, but OK for now
             this_num_added, new_rows = self._walk_reference_element(elem, root_path + '.' + elem.ref_type,
                                                                     current_tree_level + 1, current_index)
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
+
+            # now actually find the referenced object
+            found = False
+            looking_for_type_name = elem.ref_type.split(':')[1]  # it starts with the namespace 'auc:'
+            for ne in self.all_named_elements:
+                if looking_for_type_name == ne.name:
+                    found = True
+                    this_num_added, new_rows = self._walk_named_element(ne, root_path + '.' + looking_for_type_name, current_tree_level + 1, current_index)
+                    current_index += this_num_added
+                    num_added += this_num_added
+                    return_rows.extend(new_rows)
+                    break
+
+            if not found:
+                raise Exception("Could not find a type! Trying to find reference with name \"%s\"" % elem.ref_type)
+
         return num_added, return_rows
 
     def _walk_annotation_element(self, parent_element, root_path, current_tree_level, current_index):
@@ -458,7 +476,7 @@ class BuildingSyncSchemaProcessor(object):
             return_rows.append(
                 {'name': 'RESTRICTION', 'path': root_path + '.' + 'Restriction', '$$treeLevel': current_tree_level,
                  'index': current_index})
-            this_num_added, new_rows = self._walk_restriction_element(elem, root_path + '.' + 'Documentation',
+            this_num_added, new_rows = self._walk_restriction_element(elem, root_path + '.' + 'Restriction',
                                                                       current_tree_level + 1, current_index)
             current_index += this_num_added
             num_added += this_num_added
@@ -471,7 +489,7 @@ class BuildingSyncSchemaProcessor(object):
         for elem in parent_element.enumerations:
             current_index += 1
             num_added += 1
-            return_rows.append({'name': 'Enumeration: ' + elem, 'path': root_path + '.' + 'Enumeration',
+            return_rows.append({'name': 'Enumeration: ' + elem, 'path': root_path + '.' + 'Enumeration' + ' {%s}' % elem,
                                 '$$treeLevel': current_tree_level,
                                 'index': current_index})
         return num_added, return_rows
@@ -496,7 +514,7 @@ def reset_schema():
 
     # Create database entries for each schema entry
     for se in schema_entries:
-        b = BuildingSyncAttribute(name=se['path'], tree_level=se['$$treeLevel'], index=se['index'], schema=s)
+        b = BuildingSyncAttribute(name=se['name'], tree_level=se['$$treeLevel'], index=se['index'], schema=s)
         b.save()
 
     # Return the schema
