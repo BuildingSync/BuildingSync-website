@@ -317,13 +317,13 @@ class BuildingSyncSchemaProcessor(object):
             num_added += this_num_added
             return_rows.extend(new_rows)
         for elem in parent_element.complex_types:
-            current_index += 1
-            num_added += 1
-            return_rows.append(
-                {'name': 'COMPLEXTYPE', 'path': root_path + '.' + 'ComplexType', '$$treeLevel': current_tree_level,
-                 'index': current_index})
+            # current_index += 1
+            # num_added += 1
+            # return_rows.append(
+            #     {'name': 'COMPLEXTYPE', 'path': root_path + '.' + 'ComplexType', '$$treeLevel': current_tree_level,
+            #      'index': current_index})
             this_num_added, new_rows = self._walk_complex_element(elem, root_path + '.' + 'ComplexType',
-                                                                  current_tree_level + 1, current_index)
+                                                                  current_tree_level, current_index)
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
@@ -345,13 +345,13 @@ class BuildingSyncSchemaProcessor(object):
             num_added += this_num_added
             return_rows.extend(new_rows)
         for elem in parent_element.complex_types:
-            current_index += 1
-            num_added += 1
-            return_rows.append(
-                {'name': 'COMPLEXTYPE', 'path': root_path + '.' + 'ComplexType', '$$treeLevel': current_tree_level,
-                 'index': current_index})
+            # current_index += 1
+            # num_added += 1
+            # return_rows.append(
+            #     {'name': 'COMPLEXTYPE', 'path': root_path + '.' + 'ComplexType', '$$treeLevel': current_tree_level,
+            #      'index': current_index})
             this_num_added, new_rows = self._walk_complex_element(elem, root_path + '.' + 'ComplexType',
-                                                                  current_tree_level + 1, current_index)
+                                                                  current_tree_level, current_index)
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
@@ -388,13 +388,13 @@ class BuildingSyncSchemaProcessor(object):
         return_rows = []
         num_added = 0
         for elem in parent_element.sequences:
-            current_index += 1
-            num_added += 1
-            return_rows.append(
-                {'name': 'SEQUENCE', 'path': root_path + '.' + 'Sequence', '$$treeLevel': current_tree_level,
-                 'index': current_index})
+            # current_index += 1
+            # num_added += 1
+            # return_rows.append(
+            #     {'name': 'SEQUENCE', 'path': root_path + '.' + 'Sequence', '$$treeLevel': current_tree_level,
+            #      'index': current_index})
             this_num_added, new_rows = self._walk_sequence_element(elem, root_path + '.' + 'Sequence',
-                                                                   current_tree_level + 1, current_index)
+                                                                   current_tree_level, current_index)
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
