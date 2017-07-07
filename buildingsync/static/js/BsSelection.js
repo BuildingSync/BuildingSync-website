@@ -1,6 +1,6 @@
 var app = angular.module(
     'BsSelection',
-    ['ui.grid', 'ui.grid.grouping', 'ui.router', 'ngCookies'],
+    ['ui.grid', 'ui.grid.grouping', 'ui.router', 'ngCookies', 'ui.bootstrap'],
     ['$interpolateProvider', function ($interpolateProvider) {
         $interpolateProvider.startSymbol('{$');
         $interpolateProvider.endSymbol('$}');
@@ -196,8 +196,10 @@ app.controller('BsController',
                     },
                     {
                         name: 'name',
+                        cellTemplate: 'static/partials/attributeTemplate.html',
                         displayName: 'BuildingSync Attribute',
-                        width: '60%'
+                        width: '60%',
+                        cellTooltip: true
                     }
                 ];
                 angular.forEach(useCases, function (use_case) {
@@ -402,7 +404,8 @@ app.controller('BsController',
                     $scope.gridApi = gridApi;
                 },
                 data: 'matching_attributes',
-                columnDefs: $scope.columns
+                columnDefs: $scope.columns,
+                enableSorting: false
             };
 
         }

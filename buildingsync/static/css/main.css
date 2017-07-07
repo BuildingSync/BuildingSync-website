@@ -23,3 +23,9 @@ body {
 .no-click {
     pointer-events: none;
 }
+
+.grid-tooltip {
+  overflow: visible;
+  z-index: 9999999;
+  float: left;
+}
