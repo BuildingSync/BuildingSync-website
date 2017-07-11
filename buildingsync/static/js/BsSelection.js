@@ -192,14 +192,16 @@ app.controller('BsController',
                     {
                         name: 'id',
                         displayName: 'ID',
-                        width: '7%'
+                        width: '7%',
+                        groupingShowAggregationMenu: false
                     },
                     {
                         name: 'name',
                         cellTemplate: 'static/partials/attributeTemplate.html',
                         displayName: 'BuildingSync Attribute',
                         width: '60%',
-                        cellTooltip: true
+                        cellTooltip: true,
+                        groupingShowAggregationMenu: false
                     }
                 ];
                 angular.forEach(useCases, function (use_case) {
@@ -208,7 +210,8 @@ app.controller('BsController',
                         type: 'boolean',
                         cellTemplate: 'static/partials/checkboxTemplate.html',
                         visible: use_case.show,
-                        use_case_id: use_case.id
+                        use_case_id: use_case.id,
+                        groupingShowAggregationMenu: false
                     });
                 });
             };

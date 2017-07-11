@@ -103,7 +103,6 @@ class ChoiceElement(BuildingSyncSchemaElement):
 
 
 class BuildingSyncSchemaProcessor(object):
-
     def __init__(self, xml_schema_instance):
         """
         Creates a new BuildingSync schema processor.  The schema has already been *parsed* by the XMLSchema library.
@@ -188,7 +187,8 @@ class BuildingSyncSchemaProcessor(object):
         self.all_named_elements.append(named_element)
         return named_element
 
-    def _read_annotation(self, parent_object):
+    @staticmethod
+    def _read_annotation(parent_object):
         annotation = AnnotationElement()
         for child in parent_object.getchildren():
             if child.tag.endswith('documentation'):
@@ -269,7 +269,8 @@ class BuildingSyncSchemaProcessor(object):
                 raise Exception("Invalid tag type in _read_simple_type: " + child.tag)
         return this_simple_content
 
-    def _read_restriction(self, parent_object):
+    @staticmethod
+    def _read_restriction(parent_object):
         this_restriction = RestrictionElement()
         for child in parent_object.getchildren():
             if child.tag.endswith('enumeration'):
@@ -293,110 +294,81 @@ class BuildingSyncSchemaProcessor(object):
         return this_choice
 
     def walk_root_element(self):
-        return self._walk_schema(self.full_schema, "root", 1, 0)
+        return self._walk_schema(self.full_schema, "root", 1, 0, "")
 
-    def _walk_schema(self, parent_element, root_path, current_tree_level, current_index):
+    def _walk_schema(self, parent_element, root_path, current_tree_level, current_index, prefix):
         return_rows = []
         num_added = 0
         for elem in parent_element.named_elements:
+            # named elements are tricky, since we walk it to find the documentation before actually adding it
+            # so: don't do the usual current_index, append, etc first; instead:
+            #  increment the current_index when we pass it into the walker function, since it will actually be one above
+            #  then increment the local current_index by one and add the current node
+            #  then add all the rows found during the walkabout
+            this_num_added, new_rows, potential_doc_string = self._walk_named_element(elem, root_path + '.' + elem.name,
+                                                                                      current_tree_level + 1,
+                                                                                      current_index + 1, prefix + "- ")
             current_index += 1
             num_added += 1
-            return_rows.append({'name': 'NAMED: ' + elem.name, 'path': root_path + '.' + elem.name,
+            if not potential_doc_string:
+                potential_doc_string = "*No Documentation Found*"
+            return_rows.append({'name': prefix + elem.name + ' {%s}' % potential_doc_string, 'path': root_path + '.' + elem.name,
                                 '$$treeLevel': current_tree_level, 'index': current_index})
-            this_num_added, new_rows = self._walk_named_element(elem, root_path + '.' + elem.name,
-                                                                current_tree_level + 1, current_index)
+
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
         for elem in parent_element.ref_elements:
             current_index += 1
             num_added += 1
-            return_rows.append({'name': 'REF: ' + elem.ref_type, 'path': root_path + '.' + elem.ref_type,
+            return_rows.append({'name': prefix + elem.ref_type + ' {REF}', 'path': root_path + '.' + elem.ref_type,
                                 '$$treeLevel': current_tree_level, 'index': current_index})
-            this_num_added, new_rows = self._walk_reference_element(elem, root_path + '.' + elem.ref_type,
-                                                                    current_tree_level + 1, current_index)
+            this_num_added, new_rows, potential_doc_string = self._walk_reference_element(elem)
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
         for elem in parent_element.complex_types:
-            # current_index += 1
-            # num_added += 1
-            # return_rows.append(
-            #     {'name': 'COMPLEXTYPE', 'path': root_path + '.' + 'ComplexType', '$$treeLevel': current_tree_level,
-            #      'index': current_index})
             this_num_added, new_rows = self._walk_complex_element(elem, root_path + '.' + 'ComplexType',
-                                                                  current_tree_level, current_index)
+                                                                  current_tree_level, current_index, prefix + "- ")
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
         return return_rows
 
-    def _walk_named_element(self, parent_element, root_path, current_tree_level, current_index):
+    def _walk_named_element(self, parent_element, root_path, current_tree_level, current_index, prefix):
         return_rows = []
         num_added = 0
+        potential_doc_string = None
         for elem in parent_element.annotations:
-            # Don't add the annotation element itself, just the documentation element; and eventually not even that
-            # current_index += 1
-            # num_added += 1
-            # return_rows.append(
-            #     {'name': 'ANNOTATION', 'path': root_path + '.' + 'Annotation', '$$treeLevel': current_tree_level,
-            #      'index': current_index})
-            this_num_added, new_rows = self._walk_annotation_element(elem, root_path + '.' + 'Annotation',
-                                                                     current_tree_level, current_index)
-            current_index += this_num_added
-            num_added += this_num_added
-            return_rows.extend(new_rows)
+            potential_doc_string = self._walk_annotation_element(elem)
         for elem in parent_element.complex_types:
-            # current_index += 1
-            # num_added += 1
-            # return_rows.append(
-            #     {'name': 'COMPLEXTYPE', 'path': root_path + '.' + 'ComplexType', '$$treeLevel': current_tree_level,
-            #      'index': current_index})
             this_num_added, new_rows = self._walk_complex_element(elem, root_path + '.' + 'ComplexType',
-                                                                  current_tree_level, current_index)
+                                                                  current_tree_level, current_index, prefix + "- ")
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
         for elem in parent_element.simple_types:
-            current_index += 1
-            num_added += 1
-            return_rows.append(
-                {'name': 'SIMPLETYPE', 'path': root_path + '.' + 'SimpleType', '$$treeLevel': current_tree_level,
-                 'index': current_index})
             this_num_added, new_rows = self._walk_simple_type_element(elem, root_path + '.' + 'SimpleType',
-                                                                      current_tree_level + 1, current_index)
+                                                                      current_tree_level, current_index, prefix + "- ")
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
-        return num_added, return_rows
+        return num_added, return_rows, potential_doc_string
 
-    def _walk_reference_element(self, parent_element, root_path, current_tree_level, current_index):
+    def _walk_reference_element(self, parent_element):
         return_rows = []
         num_added = 0
+        potential_doc_string = None
         for elem in parent_element.annotations:
-            # current_index += 1
-            # num_added += 1
-            # return_rows.append(
-            #     {'name': 'ANNOTATION', 'path': root_path + '.' + 'Annotation', '$$treeLevel': current_tree_level,
-            #      'index': current_index})
-            this_num_added, new_rows = self._walk_annotation_element(elem, root_path + '.' + 'Annotation',
-                                                                     current_tree_level, current_index)
-            current_index += this_num_added
-            num_added += this_num_added
-            return_rows.extend(new_rows)
-        return num_added, return_rows
+            potential_doc_string = self._walk_annotation_element(elem)
+        return num_added, return_rows, potential_doc_string
 
-    def _walk_complex_element(self, parent_element, root_path, current_tree_level, current_index):
+    def _walk_complex_element(self, parent_element, root_path, current_tree_level, current_index, prefix):
         return_rows = []
         num_added = 0
         for elem in parent_element.sequences:
-            # current_index += 1
-            # num_added += 1
-            # return_rows.append(
-            #     {'name': 'SEQUENCE', 'path': root_path + '.' + 'Sequence', '$$treeLevel': current_tree_level,
-            #      'index': current_index})
             this_num_added, new_rows = self._walk_sequence_element(elem, root_path + '.' + 'Sequence',
-                                                                   current_tree_level, current_index)
+                                                                   current_tree_level, current_index, prefix + "- ")
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
@@ -409,53 +381,62 @@ class BuildingSyncSchemaProcessor(object):
                 return ne
         if looking_for_type_name in self.named_complex_types:
             return self.named_complex_types[looking_for_type_name]
-        # for ce in self.all_complex_elements:
-        #     if looking_for_type_name == ce.name:
-        #         return ce
         return None
 
-    def _walk_sequence_element(self, parent_element, root_path, current_tree_level, current_index):
+    def _walk_sequence_element(self, parent_element, root_path, current_tree_level, current_index, prefix):
         return_rows = []
         num_added = 0
         for elem in parent_element.named_elements:
-            current_index += 1
-            num_added += 1
             if elem.type:
+                current_index += 1
+                num_added += 1
                 return_rows.append(
-                    {'name': 'NAMED: %s {%s}' % (elem.name, elem.type), 'path': root_path + '.' + elem.name,
+                    {'name': prefix + '%s {%s}' % (elem.name, elem.type), 'path': root_path + '.' + elem.name,
                      '$$treeLevel': current_tree_level, 'index': current_index})
                 instance = self._find_referenced_element(elem.type)
                 if instance:
                     if isinstance(instance, NamedElement):
-                        this_num_added, new_rows = self._walk_named_element(instance, root_path + '.' + elem.type,
-                                                                            current_tree_level + 1, current_index)
+                        this_num_added, new_rows, potential_doc_string = self._walk_named_element(
+                            instance,
+                            root_path + '.' + elem.type,
+                            current_tree_level + 1,
+                            current_index,
+                            prefix + "- ")
                     elif isinstance(instance, ComplexTypeElement):
                         this_num_added, new_rows = self._walk_complex_element(instance, root_path + '.' + elem.type,
-                                                                              current_tree_level + 1, current_index)
+                                                                              current_tree_level + 1, current_index,
+                                                                              prefix + "- ")
                     else:
-                        raise Exception("Couldn't grok the type of the searched reference element; type: %s" % elem.type)
+                        raise Exception(
+                            "Couldn't grok the type of the searched reference element; type: %s" % elem.type)
+
+
+
                     current_index += this_num_added
                     num_added += this_num_added
                     return_rows.extend(new_rows)
             else:
+                current_index += 1
+                num_added += 1
                 return_rows.append(
-                    {'name': 'NAMED: ' + elem.name, 'path': root_path + '.' + elem.name,
+                    {'name': prefix + elem.name + ' {NAMED}', 'path': root_path + '.' + elem.name,
                      '$$treeLevel': current_tree_level,
                      'index': current_index})
-            this_num_added, new_rows = self._walk_named_element(elem, root_path + '.' + elem.name,
-                                                                current_tree_level + 1, current_index)
-            current_index += this_num_added
-            num_added += this_num_added
-            return_rows.extend(new_rows)
+                this_num_added, new_rows, potential_doc_string = self._walk_named_element(elem,
+                                                                                          root_path + '.' + elem.name,
+                                                                                          current_tree_level + 1,
+                                                                                          current_index, prefix + "- ")
+                current_index += this_num_added
+                num_added += this_num_added
+                return_rows.extend(new_rows)  # maybe this section?
         for elem in parent_element.ref_elements:
             current_index += 1
             num_added += 1
-            return_rows.append({'name': 'REF: ' + elem.ref_type, 'path': root_path + '.' + elem.ref_type,
+            return_rows.append({'name': prefix + elem.ref_type + ' {REF}', 'path': root_path + '.' + elem.ref_type,
                                 '$$treeLevel': current_tree_level,
                                 'index': current_index})
             # this will really just write the annotation, which we eventually don't want, but OK for now
-            this_num_added, new_rows = self._walk_reference_element(elem, root_path + '.' + elem.ref_type,
-                                                                    current_tree_level + 1, current_index)
+            this_num_added, new_rows, potential_doc_string = self._walk_reference_element(elem)
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
@@ -463,61 +444,64 @@ class BuildingSyncSchemaProcessor(object):
             instance = self._find_referenced_element(elem.ref_type)
             if instance:
                 if isinstance(instance, NamedElement):
-                    this_num_added, new_rows = self._walk_named_element(instance, root_path + '.' + elem.ref_type,
-                                                                        current_tree_level + 1, current_index)
+                    this_num_added, new_rows, potential_doc_string = self._walk_named_element(
+                        instance,
+                        root_path + '.' + elem.ref_type,
+                        current_tree_level + 1,
+                        current_index,
+                        prefix + "- ")
                 elif isinstance(instance, ComplexTypeElement):
                     this_num_added, new_rows = self._walk_complex_element(instance, root_path + '.' + elem.ref_type,
-                                                                          current_tree_level + 1, current_index)
+                                                                          current_tree_level + 1, current_index,
+                                                                          prefix + "- ")
                 else:
-                    raise Exception("Couldn't grok the type of the searched reference element; type: %s" % elem.ref_type)
+                    raise Exception(
+                        "Couldn't grok the type of the searched reference element; type: %s" % elem.ref_type)
                 current_index += this_num_added
                 num_added += this_num_added
                 return_rows.extend(new_rows)
 
         return num_added, return_rows
 
-    def _walk_annotation_element(self, parent_element, root_path, current_tree_level, current_index):
-        return_rows = []
-        num_added = 0
-        current_index += 1
-        num_added += 1
+    @staticmethod
+    def _walk_annotation_element(parent_element):
+        doc_to_show = None
         if parent_element.documentation:
             if len(parent_element.documentation) > 40:
                 doc_to_show = parent_element.documentation[:37] + '...'
             else:
                 doc_to_show = parent_element.documentation
-        else:
-            doc_to_show = "**no documentation element**"
-        return_rows.append(
-            {'name': 'ANNOTATION: Doc=\"%s\"' % doc_to_show, 'path': root_path + '.' + 'Documentation',
-             '$$treeLevel': current_tree_level, 'index': current_index})
-        return num_added, return_rows
+        return doc_to_show
 
-    def _walk_simple_type_element(self, parent_element, root_path, current_tree_level, current_index):
+    def _walk_simple_type_element(self, parent_element, root_path, current_tree_level, current_index, prefix):
         return_rows = []
         num_added = 0
         for elem in parent_element.restrictions:
             current_index += 1
             num_added += 1
             return_rows.append(
-                {'name': 'RESTRICTION', 'path': root_path + '.' + 'Restriction', '$$treeLevel': current_tree_level,
+                {'name': prefix + 'RESTRICTION', 'path': root_path + '.' + 'Restriction',
+                 '$$treeLevel': current_tree_level,
                  'index': current_index})
             this_num_added, new_rows = self._walk_restriction_element(elem, root_path + '.' + 'Restriction',
-                                                                      current_tree_level + 1, current_index)
+                                                                      current_tree_level + 1, current_index,
+                                                                      prefix + "- ")
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
         return num_added, return_rows
 
-    def _walk_restriction_element(self, parent_element, root_path, current_tree_level, current_index):
+    @staticmethod
+    def _walk_restriction_element(parent_element, root_path, current_tree_level, current_index, prefix):
         return_rows = []
         num_added = 0
         for elem in parent_element.enumerations:
             current_index += 1
             num_added += 1
-            return_rows.append({'name': 'Enumeration: ' + elem, 'path': root_path + '.' + 'Enumeration' + ' {%s}' % elem,
-                                '$$treeLevel': current_tree_level,
-                                'index': current_index})
+            return_rows.append(
+                {'name': prefix + 'Choice: ' + elem, 'path': root_path + '.' + 'Enumeration' + ' {%s}' % elem,
+                 '$$treeLevel': current_tree_level,
+                 'index': current_index})
         return num_added, return_rows
 
 
