@@ -327,12 +327,12 @@ class BuildingSyncSchemaProcessor(object):
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
-        for elem in parent_element.complex_types:
-            this_num_added, new_rows = self._walk_complex_element(elem, root_path + '.' + 'ComplexType',
-                                                                  current_tree_level, current_index, prefix + "- ")
-            current_index += this_num_added
-            num_added += this_num_added
-            return_rows.extend(new_rows)
+        # for elem in parent_element.complex_types:
+        #     this_num_added, new_rows = self._walk_complex_element(elem, root_path + '.' + 'ComplexType',
+        #                                                           current_tree_level, current_index, prefix + "- ")
+        #     current_index += this_num_added
+        #     num_added += this_num_added
+        #     return_rows.extend(new_rows)
         return return_rows
 
     def _walk_named_element(self, parent_element, root_path, current_tree_level, current_index, prefix):
@@ -477,12 +477,12 @@ class BuildingSyncSchemaProcessor(object):
         return_rows = []
         num_added = 0
         for elem in parent_element.restrictions:
-            current_index += 1
-            num_added += 1
-            return_rows.append(
-                {'name': prefix + 'RESTRICTION', 'path': root_path + '.' + 'Restriction',
-                 '$$treeLevel': current_tree_level,
-                 'index': current_index})
+            # current_index += 1
+            # num_added += 1
+            # return_rows.append(
+            #     {'name': prefix + 'RESTRICTION', 'path': root_path + '.' + 'Restriction',
+            #      '$$treeLevel': current_tree_level,
+            #      'index': current_index})
             this_num_added, new_rows = self._walk_restriction_element(elem, root_path + '.' + 'Restriction',
                                                                       current_tree_level + 1, current_index,
                                                                       prefix + "- ")
@@ -521,6 +521,10 @@ def reset_schema():
 
     bs_processor = BuildingSyncSchemaProcessor(my_schema)
     schema_entries = bs_processor.walk_root_element()
+
+    trimmed_entries = []
+    for se in schema_entries:
+        trimmed_entries.append({'name': se['name'], 'tree_level': se['$$treeLevel']})
 
     # Create database entries for each schema entry
     for se in schema_entries:
