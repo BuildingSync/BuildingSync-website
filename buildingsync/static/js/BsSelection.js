@@ -85,7 +85,7 @@ app.factory("AttributeService", ['$http', function ($http) {
     service.addUseCaseNum = function (row_pk, use_case_num, required) {
         return $http.put('/api/attributes/' + row_pk + '/add_use_case/', {
             use_case_num: use_case_num,
-            required: required
+            state: required
         })
             .then(function (response) {
                 return response.data;
@@ -94,7 +94,7 @@ app.factory("AttributeService", ['$http', function ($http) {
     service.removeUseCaseNum = function (row_pk, use_case_num, required) {
         return $http.put('/api/attributes/' + row_pk + '/remove_use_case/', {
             use_case_num: use_case_num,
-            required: required
+            state: required
         })
             .then(function (response) {
                 return response.data;
@@ -222,22 +222,30 @@ app.controller('BsController',
                     });
                 });
             };
-            $scope.toggleAttribute = function (row_entity, use_case_num, required) {
-                if (required) {
+            $scope.toggleAttribute = function (row_entity, use_case_num, state) {
+                if (state==='required') {
                     if (_.includes(row_entity.required_use_cases, use_case_num)) {
-                        AttributeService.removeUseCaseNum(row_entity.id, use_case_num, required);
+                        AttributeService.removeUseCaseNum(row_entity.id, use_case_num, 'required');
                         _.pull(row_entity.required_use_cases, use_case_num);
                     } else {
-                        AttributeService.addUseCaseNum(row_entity.id, use_case_num, required);
+                        AttributeService.addUseCaseNum(row_entity.id, use_case_num, 'required');
                         row_entity.required_use_cases.push(use_case_num);
                     }
-                } else {
+                } else if (state==='optional') {
                     if (_.includes(row_entity.optional_use_cases, use_case_num)) {
-                        AttributeService.removeUseCaseNum(row_entity.id, use_case_num, required);
+                        AttributeService.removeUseCaseNum(row_entity.id, use_case_num, 'optional');
                         _.pull(row_entity.optional_use_cases, use_case_num);
                     } else {
-                        AttributeService.addUseCaseNum(row_entity.id, use_case_num, required);
+                        AttributeService.addUseCaseNum(row_entity.id, use_case_num, 'optional');
                         row_entity.optional_use_cases.push(use_case_num);
+                    }
+                } else if (state==='ignored') {
+                    if (_.includes(row_entity.ignored_use_cases, use_case_num)) {
+                        AttributeService.removeUseCaseNum(row_entity.id, use_case_num, 'ignored');
+                        _.pull(row_entity.ignored_use_cases, use_case_num);
+                    } else {
+                        AttributeService.addUseCaseNum(row_entity.id, use_case_num, 'ignored');
+                        row_entity.ignored_use_cases.push(use_case_num);
                     }
                 }
             };

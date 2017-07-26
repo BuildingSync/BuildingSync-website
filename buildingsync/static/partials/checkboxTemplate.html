@@ -1,12 +1,17 @@
 <div>
-    <span ng-click="grid.appScope.toggleAttribute(row.entity, col.colDef.use_case_id, true)">
+    <span ng-click="grid.appScope.toggleAttribute(row.entity, col.colDef.use_case_id, 'required')">
         <input type="checkbox" ng-checked="row.entity.required_use_cases.indexOf(col.colDef.use_case_id) !== -1"
                class="no-click" id="required">
         <label for="required">Req</label>
     </span>
-    <span ng-click="grid.appScope.toggleAttribute(row.entity, col.colDef.use_case_id, false)">
+    <span ng-click="grid.appScope.toggleAttribute(row.entity, col.colDef.use_case_id, 'optional')">
         <input type="checkbox" ng-checked="row.entity.optional_use_cases.indexOf(col.colDef.use_case_id) !== -1"
                class="no-click" id="optional">
         <label for="optional">Opt</label>
+    </span>
+    <span ng-click="grid.appScope.toggleAttribute(row.entity, col.colDef.use_case_id, 'ignored')">
+        <input type="checkbox" ng-checked="row.entity.ignored_use_cases.indexOf(col.colDef.use_case_id) !== -1"
+               class="no-click" id="optional">
+        <label for="optional">Ign</label>
     </span>
 </div>

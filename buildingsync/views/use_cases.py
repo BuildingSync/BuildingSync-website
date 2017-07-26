@@ -25,6 +25,9 @@ class UseCaseViewSet(viewsets.ModelViewSet):
         optional_attributes = all_attributes['optional']
         for opt_attr in optional_attributes:
             u.optional_use_cases.add(opt_attr['id'])
+        ignored_attributes = all_attributes['ignored']
+        for ignored_attr in ignored_attributes:
+            u.ignored_use_cases.add(ignored_attr['id'])
         u.save()
         serializer = UseCaseSerializer(u)
         return JsonResponse(serializer.data)
@@ -44,6 +47,12 @@ class UseCaseViewSet(viewsets.ModelViewSet):
         optional_attributes_for_export = []
         for attr in optional_attributes:
             optional_attributes_for_export.append({'name': attr.name, 'id': attr.id})
+        ignored_attributes = u.optional_use_cases.all()
+        ignored_attributes_for_export = []
+        for attr in ignored_attributes:
+            ignored_attributes_for_export.append({'name': attr.name, 'id': attr.id})
+
         data_object['attributes'] = {'required': required_attributes_for_export,
-                                     'optional': optional_attributes_for_export}
+                                     'optional': optional_attributes_for_export,
+                                     'ignored': ignored_attributes_for_export}
         return JsonResponse(data_object)
