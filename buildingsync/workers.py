@@ -294,7 +294,7 @@ class BuildingSyncSchemaProcessor(object):
         return this_choice
 
     def walk_root_element(self):
-        return self._walk_schema(self.full_schema, "root", 1, 0, "")
+        return self._walk_schema(self.full_schema, "root", 0, 0, "")
 
     def _walk_schema(self, parent_element, root_path, current_tree_level, current_index, prefix):
         return_rows = []
@@ -484,7 +484,7 @@ class BuildingSyncSchemaProcessor(object):
             #      '$$treeLevel': current_tree_level,
             #      'index': current_index})
             this_num_added, new_rows = self._walk_restriction_element(elem, root_path + '.' + 'Restriction',
-                                                                      current_tree_level + 1, current_index,
+                                                                      current_tree_level, current_index,
                                                                       prefix + "- ")
             current_index += this_num_added
             num_added += this_num_added

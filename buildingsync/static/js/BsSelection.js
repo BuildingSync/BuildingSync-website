@@ -184,6 +184,7 @@ app.controller('BsController',
                 $scope.matching_attributes = _.filter(attributes, {schema: $scope.one_schema.id});
                 angular.forEach($scope.matching_attributes, function (value) {
                     value.$$treeLevel = value.tree_level;  // $$treeLevel isn't allowed as a Django db model field, convert here
+                    value.another_tree_level = value.tree_level;
                 });
             };
             $scope.rebuild_columns = function () {
@@ -195,6 +196,12 @@ app.controller('BsController',
                         width: '7%',
                         groupingShowAggregationMenu: false
                     },
+                    // {
+                    //     name: 'another_tree_level',
+                    //     displayName: 'Lvl',
+                    //     width: '5%',
+                    //     groupingShowAggregationMenu: false
+                    // },
                     {
                         name: 'name',
                         cellTemplate: 'static/partials/attributeTemplate.html',
