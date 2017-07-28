@@ -193,20 +193,26 @@ app.controller('BsController',
                     {
                         name: 'id',
                         displayName: 'ID',
-                        width: '7%',
+                        width: '5%',
                         groupingShowAggregationMenu: false
                     },
-                    // {
-                    //     name: 'another_tree_level',
-                    //     displayName: 'Lvl',
-                    //     width: '5%',
-                    //     groupingShowAggregationMenu: false
-                    // },
+                    {
+                        name: 'another_tree_level',
+                        displayName: 'Lvl',
+                        width: '3%',
+                        groupingShowAggregationMenu: false
+                    },
+                    {
+                        name: 'type',
+                        displayName: 'type',
+                        width: '20%',
+                        groupingShowAggregationMenu: false
+                    },
                     {
                         name: 'name',
                         cellTemplate: 'static/partials/attributeTemplate.html',
                         displayName: 'BuildingSync Attribute',
-                        width: '60%',
+                        width: '40%',
                         cellTooltip: true,
                         groupingShowAggregationMenu: false
                     }

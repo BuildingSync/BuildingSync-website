@@ -312,27 +312,26 @@ class BuildingSyncSchemaProcessor(object):
             num_added += 1
             if not potential_doc_string:
                 potential_doc_string = "*No Documentation Found*"
-            return_rows.append({'name': prefix + elem.name + ' {%s}' % potential_doc_string, 'path': root_path + '.' + elem.name,
-                                '$$treeLevel': current_tree_level, 'index': current_index})
-
+            return_rows.append({'name': prefix + elem.name + ' {%s}' % potential_doc_string,
+                                'type': str(NamedElement),
+                                'path': root_path + '.' + elem.name,
+                                '$$treeLevel': current_tree_level,
+                                'index': current_index})
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
         for elem in parent_element.ref_elements:
             current_index += 1
             num_added += 1
-            return_rows.append({'name': prefix + elem.ref_type + ' {REF}', 'path': root_path + '.' + elem.ref_type,
-                                '$$treeLevel': current_tree_level, 'index': current_index})
+            return_rows.append({'name': prefix + elem.ref_type + ' {REF}',
+                                'type': str(ReferenceElement),
+                                'path': root_path + '.' + elem.ref_type,
+                                '$$treeLevel': current_tree_level,
+                                'index': current_index})
             this_num_added, new_rows, potential_doc_string = self._walk_reference_element(elem)
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
-        # for elem in parent_element.complex_types:
-        #     this_num_added, new_rows = self._walk_complex_element(elem, root_path + '.' + 'ComplexType',
-        #                                                           current_tree_level, current_index, prefix + "- ")
-        #     current_index += this_num_added
-        #     num_added += this_num_added
-        #     return_rows.extend(new_rows)
         return return_rows
 
     def _walk_named_element(self, parent_element, root_path, current_tree_level, current_index, prefix):
@@ -391,8 +390,11 @@ class BuildingSyncSchemaProcessor(object):
                 current_index += 1
                 num_added += 1
                 return_rows.append(
-                    {'name': prefix + '%s {%s}' % (elem.name, elem.type), 'path': root_path + '.' + elem.name,
-                     '$$treeLevel': current_tree_level, 'index': current_index})
+                    {'name': prefix + '%s {%s}' % (elem.name, elem.type),
+                     'type': elem.type,
+                     'path': root_path + '.' + elem.name,
+                     '$$treeLevel': current_tree_level,
+                     'index': current_index})
                 instance = self._find_referenced_element(elem.type)
                 if instance:
                     if isinstance(instance, NamedElement):
@@ -409,9 +411,6 @@ class BuildingSyncSchemaProcessor(object):
                     else:
                         raise Exception(
                             "Couldn't grok the type of the searched reference element; type: %s" % elem.type)
-
-
-
                     current_index += this_num_added
                     num_added += this_num_added
                     return_rows.extend(new_rows)
@@ -419,7 +418,9 @@ class BuildingSyncSchemaProcessor(object):
                 current_index += 1
                 num_added += 1
                 return_rows.append(
-                    {'name': prefix + elem.name + ' {NAMED}', 'path': root_path + '.' + elem.name,
+                    {'name': prefix + elem.name + ' {NAMED}',
+                     'path': root_path + '.' + elem.name,
+                     'type': str(NamedElement),
                      '$$treeLevel': current_tree_level,
                      'index': current_index})
                 this_num_added, new_rows, potential_doc_string = self._walk_named_element(elem,
@@ -432,7 +433,9 @@ class BuildingSyncSchemaProcessor(object):
         for elem in parent_element.ref_elements:
             current_index += 1
             num_added += 1
-            return_rows.append({'name': prefix + elem.ref_type + ' {REF}', 'path': root_path + '.' + elem.ref_type,
+            return_rows.append({'name': prefix + elem.ref_type + ' {REF}',
+                                'path': root_path + '.' + elem.ref_type,
+                                'type': str(ReferenceElement),
                                 '$$treeLevel': current_tree_level,
                                 'index': current_index})
             # this will really just write the annotation, which we eventually don't want, but OK for now
@@ -477,12 +480,6 @@ class BuildingSyncSchemaProcessor(object):
         return_rows = []
         num_added = 0
         for elem in parent_element.restrictions:
-            # current_index += 1
-            # num_added += 1
-            # return_rows.append(
-            #     {'name': prefix + 'RESTRICTION', 'path': root_path + '.' + 'Restriction',
-            #      '$$treeLevel': current_tree_level,
-            #      'index': current_index})
             this_num_added, new_rows = self._walk_restriction_element(elem, root_path + '.' + 'Restriction',
                                                                       current_tree_level, current_index,
                                                                       prefix + "- ")
@@ -499,7 +496,9 @@ class BuildingSyncSchemaProcessor(object):
             current_index += 1
             num_added += 1
             return_rows.append(
-                {'name': prefix + 'Choice: ' + elem, 'path': root_path + '.' + 'Enumeration' + ' {%s}' % elem,
+                {'name': prefix + 'Choice: ' + elem,
+                 'path': root_path + '.' + 'Enumeration' + ' {%s}' % elem,
+                 'type': 'Enumeration',
                  '$$treeLevel': current_tree_level,
                  'index': current_index})
         return num_added, return_rows
@@ -522,13 +521,18 @@ def reset_schema():
     bs_processor = BuildingSyncSchemaProcessor(my_schema)
     schema_entries = bs_processor.walk_root_element()
 
-    trimmed_entries = []
-    for se in schema_entries:
-        trimmed_entries.append({'name': se['name'], 'tree_level': se['$$treeLevel']})
+    # trimmed_entries = []
+    # for se in schema_entries:
+    #     trimmed_entries.append({'name': se['name'], 'tree_level': se['$$treeLevel']})
 
     # Create database entries for each schema entry
     for se in schema_entries:
-        b = BuildingSyncAttribute(name=se['name'], tree_level=se['$$treeLevel'], index=se['index'], schema=s)
+        b = BuildingSyncAttribute(
+            name=se['name'],
+            type=se['type'],
+            tree_level=se['$$treeLevel'],
+            index=se['index'],
+            schema=s)
         b.save()
 
     # Return the schema

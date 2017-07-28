@@ -17,6 +17,7 @@ class Schema(models.Model):
 
 class BuildingSyncAttribute(models.Model):
     name = models.CharField(max_length=250)
+    type = models.CharField(max_length=100, default="<unknown_type>")
     schema = models.ForeignKey(Schema, related_name="schema")
     required_use_cases = models.ManyToManyField(UseCase, related_name="required_use_cases")
     optional_use_cases = models.ManyToManyField(UseCase, related_name="optional_use_cases")
