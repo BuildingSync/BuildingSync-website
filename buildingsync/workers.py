@@ -470,10 +470,7 @@ class BuildingSyncSchemaProcessor(object):
     def _walk_annotation_element(parent_element):
         doc_to_show = None
         if parent_element.documentation:
-            if len(parent_element.documentation) > 40:
-                doc_to_show = parent_element.documentation[:37] + '...'
-            else:
-                doc_to_show = parent_element.documentation
+            doc_to_show = parent_element.documentation
         return doc_to_show
 
     def _walk_simple_type_element(self, parent_element, root_path, current_tree_level, current_index, prefix):
