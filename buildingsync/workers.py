@@ -294,7 +294,12 @@ class BuildingSyncSchemaProcessor(object):
         return this_choice
 
     def walk_root_element(self):
-        return self._walk_schema(self.full_schema, "root", 0, 0, "")
+        start_with_audits = True
+        if start_with_audits:
+            a, return_rows, b = self._walk_named_element(self.full_schema.named_elements[0], "audits", 0, 0, "")
+            return return_rows
+        else:
+            return self._walk_schema(self.full_schema, "root", 0, 0, "")
 
     def _walk_schema(self, parent_element, root_path, current_tree_level, current_index, prefix):
         return_rows = []
@@ -323,7 +328,7 @@ class BuildingSyncSchemaProcessor(object):
         for elem in parent_element.ref_elements:
             current_index += 1
             num_added += 1
-            return_rows.append({'name': prefix + elem.ref_type + ' {REF}',
+            return_rows.append({'name': prefix + elem.ref_type,
                                 'type': str(ReferenceElement),
                                 'path': root_path + '.' + elem.ref_type,
                                 '$$treeLevel': current_tree_level,
@@ -390,7 +395,7 @@ class BuildingSyncSchemaProcessor(object):
                 current_index += 1
                 num_added += 1
                 return_rows.append(
-                    {'name': prefix + '%s {%s}' % (elem.name, elem.type),
+                    {'name': prefix + '%s' % elem.name,
                      'type': elem.type,
                      'path': root_path + '.' + elem.name,
                      '$$treeLevel': current_tree_level,
@@ -418,7 +423,7 @@ class BuildingSyncSchemaProcessor(object):
                 current_index += 1
                 num_added += 1
                 return_rows.append(
-                    {'name': prefix + elem.name + ' {NAMED}',
+                    {'name': prefix + elem.name,
                      'path': root_path + '.' + elem.name,
                      'type': str(NamedElement),
                      '$$treeLevel': current_tree_level,
@@ -433,7 +438,7 @@ class BuildingSyncSchemaProcessor(object):
         for elem in parent_element.ref_elements:
             current_index += 1
             num_added += 1
-            return_rows.append({'name': prefix + elem.ref_type + ' {REF}',
+            return_rows.append({'name': prefix + elem.ref_type,
                                 'path': root_path + '.' + elem.ref_type,
                                 'type': str(ReferenceElement),
                                 '$$treeLevel': current_tree_level,
