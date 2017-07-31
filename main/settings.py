@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'ggo+u$&s&adrgss!rufpisb*9t^mt)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
-ALLOWED_HOSTS = ['buildingsynctool.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['selectiontool.buildingsync.net', '127.0.0.1', 'localhost']
 
 # Application definition
 
