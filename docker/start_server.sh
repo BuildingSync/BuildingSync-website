@@ -7,7 +7,6 @@ echo "Waiting for postgres to start"
 
 # Run any migrations before starting -- always for now
 ./manage.py migrate
-#./manage.py create_default_user --username=$SEED_ADMIN_USER --password=$SEED_ADMIN_PASSWORD --organization=$SEED_ADMIN_ORG
 
 WORKERS=$(($(nproc) / 2))
 WORKERS=$(($WORKERS>1?$WORKERS:1))

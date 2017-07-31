@@ -43,7 +43,7 @@ COPY README.rst /srv/bs-tool/README.rst
 RUN npm update && npm install
 RUN $(npm bin)/bower install --config.interactive=false --allow-root
 
-### Copy over the remaining part of the SEED application and some helpers
+### Copy over the remaining part of the application and some helpers
 COPY . /srv/bs-tool/
 COPY /docker/wait-for-it.sh /usr/local/wait-for-it.sh
 
