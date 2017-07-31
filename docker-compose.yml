@@ -1,0 +1,26 @@
+# Docker Compose creates multiple containers on a single machine.
+# run `docker-compose up` to create and run/link the containers
+version: '3'
+services:
+  db-postgres:
+    image: postgres
+    environment:
+      - POSTGRES_DB=bs-tool
+      - POSTGRES_USER=bs-tool
+      - POSTGRES_PASSWORD=super-secret-password
+  web:
+    build: .
+    command: /srv/bs-tool/docker/start_server.sh
+    environment:
+      - POSTGRES_DB=bs-tool
+      - POSTGRES_USER=bs-tool
+      - POSTGRES_PASSWORD=super-secret-password
+      - DJANGO_SECRET_KEY=super-secret-key
+      - DJANGO_SETTINGS_MODULE=main.settings
+    depends_on:
+      - db-postgres
+    ports:
+      - "8000:8000"
+volumes:
+  bstooldata:
+    external: true

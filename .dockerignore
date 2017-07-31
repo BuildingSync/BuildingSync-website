@@ -1,0 +1,6 @@
+.idea
+.git
+.tox
+static
+staticfiles
+node_modules
