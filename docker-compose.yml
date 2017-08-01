@@ -8,6 +8,8 @@ services:
       - POSTGRES_DB=bs-tool
       - POSTGRES_USER=bs-tool
       - POSTGRES_PASSWORD=super-secret-password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
   web:
     build: .
     command: /srv/bs-tool/docker/start_server.sh
@@ -16,11 +18,12 @@ services:
       - POSTGRES_USER=bs-tool
       - POSTGRES_PASSWORD=super-secret-password
       - DJANGO_SECRET_KEY=super-secret-key
-      - DJANGO_SETTINGS_MODULE=main.settings
+      - DJANGO_SETTINGS_MODULE=main.docker
+      - DJANGO_DEBUG=False
     depends_on:
       - db-postgres
     ports:
       - "8000:8000"
 volumes:
-  bstooldata:
+  pgdata:
     external: true

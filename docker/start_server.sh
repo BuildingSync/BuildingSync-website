@@ -8,6 +8,9 @@ echo "Waiting for postgres to start"
 # Run any migrations before starting -- always for now
 ./manage.py migrate
 
+# Create the default user based on the env vars
+./manage.py create_user $BSTOOL_ADMIN_USER $BSTOOL_ADMIN_EMAIL $BSTOOL_ADMIN_PASSWORD
+
 WORKERS=$(($(nproc) / 2))
 WORKERS=$(($WORKERS>1?$WORKERS:1))
 /usr/local/bin/uwsgi --http 0.0.0.0:8000 --module wsgi \
