@@ -22,13 +22,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends npm \
         vim \
     && pip install --upgrade pip \
     && pip install setuptools \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && groupadd --gid 1000 uwsgi \
+    && useradd -g uwsgi -M -u 1000 -r uwsgi \
+    && ln -s /usr/bin/nodejs /usr/bin/node \
+    && mkdir -p /srv/bs-tool
 
+### Note on some of the commands above
+### create the uwsgi user and groud
 ### link the apt install of nodejs to node (expected by bower)
-RUN ln -s /usr/bin/nodejs /usr/bin/node
-
 ### Install python requirements
-RUN mkdir -p /srv/bs-tool
+
 WORKDIR /srv/bs-tool
 COPY requirements.txt /srv/bs-tool/requirements.txt
 RUN pip install -r requirements.txt
@@ -45,9 +49,10 @@ RUN $(npm bin)/bower install --config.interactive=false --allow-root
 
 ### Copy over the remaining part of the application and some helpers
 COPY . /srv/bs-tool/
+
+### Copy the wait-for-it command to /usr/local
 COPY /docker/wait-for-it.sh /usr/local/wait-for-it.sh
 
-RUN mkdir -p /srv/bs-tool/static
-RUN python manage.py collectstatic
+RUN mkdir -p /srv/bs-tool/static && python manage.py collectstatic
 
 EXPOSE 8000

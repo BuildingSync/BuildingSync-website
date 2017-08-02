@@ -29,10 +29,20 @@ if SECRET_KEY == '':
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+# Decide if we can use these with flexible SSL.
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
+
 ALLOWED_HOSTS = ['selectiontool.buildingsync.net', '127.0.0.1', 'localhost']
 
-# Application definition
+# Grab the env vars needed to access postgres
+ENV_VARS = ['POSTGRES_DB', 'POSTGRES_USER', 'POSTGRES_PASSWORD', ]
+for loc in ENV_VARS:
+    locals()[loc] = os.environ.get(loc)
+    if not locals().get(loc):
+        raise Exception("%s Not defined as env variables" % loc)
 
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -77,12 +87,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'main.wsgi.application'
 
 # Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': POSTGRES_DB,
+        'USER': POSTGRES_USER,
+        'PASSWORD': POSTGRES_PASSWORD,
+        'HOST': "db-postgres",
+        'PORT': 5432,
     }
 }
 
@@ -120,11 +132,6 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-# Heroku: Update database configuration from $DATABASE_URL.
-
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 

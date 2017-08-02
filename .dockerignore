@@ -1,6 +1,7 @@
 .idea
 .git
 .tox
+docker/README.md
 static
 staticfiles
 node_modules
