@@ -78,3 +78,5 @@ ENV/
 
 # bower
 buildingsync/static/vendors/bower_components/
+
+config.env

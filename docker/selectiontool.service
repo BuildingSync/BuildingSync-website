@@ -1,0 +1,12 @@
+[Unit]
+Description=selectiontool
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/local/bin/docker-compose -f /srv/bs-tool/docker-compose.yml -f /srv/docker-compose.docker.yml up
+ExecStop=/usr/local/bin/docker-compose -f /srv/bs-tool/docker-compose.yml -f /srv/docker-compose.docker.yml stop
+
+[Install]
+WantedBy=multi-user.target
