@@ -12,7 +12,7 @@ echo "Waiting for postgres to start"
 ./manage.py create_schema
 
 # Create the default user based on the env vars
-./manage.py create_user $BSTOOL_ADMIN_USER $BSTOOL_ADMIN_EMAIL $BSTOOL_ADMIN_PASSWORD
+./manage.py create_user ${BSTOOL_ADMIN_USER} ${BSTOOL_ADMIN_EMAIL} ${BSTOOL_ADMIN_PASSWORD}
 
 WORKERS=$(($(nproc) / 2))
 WORKERS=$(($WORKERS>1?$WORKERS:1))

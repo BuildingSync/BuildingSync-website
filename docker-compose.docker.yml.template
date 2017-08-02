@@ -1,0 +1,20 @@
+# This is the template for deploying with the production env vars
+
+version: '3'
+services:
+  db-postgres:
+    environment:
+      - POSTGRES_DB=bs-tool
+      - POSTGRES_USER=bs-tool
+      - POSTGRES_PASSWORD=super-secret-password
+  web:
+    environment:
+      - POSTGRES_DB=bs-tool
+      - POSTGRES_USER=bs-tool
+      - POSTGRES_PASSWORD=super-secret-password
+      - DJANGO_SECRET_KEY=super-secret-key
+      - DJANGO_SETTINGS_MODULE=main.docker
+      - DJANGO_DEBUG=False
+      - BSTOOL_ADMIN_USER=user1
+      - BSTOOL_ADMIN_EMAIL=user1@buildingsync.net
+      - BSTOOL_ADMIN_PASSWORD=super-secure-password
