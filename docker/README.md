@@ -25,7 +25,7 @@ Starting over - one line
    
 ```bash
 sudo cp /srv/bs-tool/docker-compose.docker.yml.template /srv/docker-compose.docker.yml
-sudo chmod 600 /srv/bs-tool-config.env
+sudo chmod 600 /srv/docker-compose.docker.yml
 ```
 * Set the various environment variables by editing the new /srv/docker-compose.docker.yml
 

@@ -5,8 +5,8 @@ Requires=docker.service
 
 [Service]
 Restart=always
-ExecStart=/usr/local/bin/docker-compose -f docker-compose.yml -f ../docker-compose.docker.yml up
-ExecStop=/usr/local/bin/docker-compose -f docker-compose.yml -f ../docker-compose.docker.yml stop
+ExecStart=/usr/local/bin/docker-compose -f /srv/bs-tool/docker-compose.yml -f /srv/docker-compose.docker.yml up
+ExecStop=/usr/local/bin/docker-compose -f /srv/bs-tool/docker-compose.yml -f /srv/docker-compose.docker.yml stop
 
 [Install]
 WantedBy=multi-user.target
