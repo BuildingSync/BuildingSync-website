@@ -4,3 +4,7 @@ from django.views.generic import TemplateView
 
 class IndexView(LoginRequiredMixin, TemplateView):
     template_name = 'buildingsync/index.html'
+
+
+class AboutView(TemplateView):
+    template_name = 'buildingsync/about.html'
