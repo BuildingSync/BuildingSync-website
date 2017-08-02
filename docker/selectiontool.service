@@ -5,7 +5,7 @@ Requires=docker.service
 
 [Service]
 Restart=always
-EnvironmentFile=/srv/bs-tool/config.env
+EnvironmentFile=/srv/bs-tool-config.env
 ExecStart=/usr/local/bin/docker-compose -f /srv/bs-tool/docker-compose.yml up
 ExecStop=/usr/local/bin/docker-compose -f /srv/bs-tool/docker-compose.yml stop
 

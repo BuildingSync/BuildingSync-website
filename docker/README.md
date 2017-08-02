@@ -21,12 +21,18 @@ Starting over - one line
 
 * Check out the source code to `/srv/bs-tool`
 * Create new secret key from [here](http://www.miniwebtool.com/django-secret-key-generator/).
-* Set the various environment variables
+* Copy the config file
+   
+```bash
+sudo cp /srv/bs-tool/config.env.template /srv/bs-tool-config.env
+sudo chmod 600 /srv/bs-tool-config.env
+```
+* Set the various environment variables by editing /srv/bs-tool-config.env
 
-    * Copy the config.env.template file to the /srv/bs-tool/config.env
-    * Edit the file to update the variables. Use new secret key from the step above.
+    * Use new secret key from the step above
+    * Create new passwords for the default user and postgresql
     
-* Add systemd script
+* Add systemd script by running
 
 ```bash
 sudo systemctl enable /srv/bs-tool/docker/selectiontool.service
