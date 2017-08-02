@@ -318,6 +318,7 @@ class BuildingSyncSchemaProcessor(object):
             if not potential_doc_string:
                 potential_doc_string = "*No Documentation Found*"
             return_rows.append({'name': prefix + elem.name + ' {%s}' % potential_doc_string,
+                                'pure_name': elem.name,
                                 'type': str(NamedElement),
                                 'path': root_path + '.' + elem.name,
                                 '$$treeLevel': current_tree_level,
@@ -329,6 +330,7 @@ class BuildingSyncSchemaProcessor(object):
             current_index += 1
             num_added += 1
             return_rows.append({'name': prefix + elem.ref_type,
+                                'pure_name': elem.ref_type,
                                 'type': str(ReferenceElement),
                                 'path': root_path + '.' + elem.ref_type,
                                 '$$treeLevel': current_tree_level,
@@ -396,6 +398,7 @@ class BuildingSyncSchemaProcessor(object):
                 num_added += 1
                 return_rows.append(
                     {'name': prefix + '%s' % elem.name,
+                     'pure_name': elem.name,
                      'type': elem.type,
                      'path': root_path + '.' + elem.name,
                      '$$treeLevel': current_tree_level,
@@ -424,6 +427,7 @@ class BuildingSyncSchemaProcessor(object):
                 num_added += 1
                 return_rows.append(
                     {'name': prefix + elem.name,
+                     'pure_name': elem.name,
                      'path': root_path + '.' + elem.name,
                      'type': str(NamedElement),
                      '$$treeLevel': current_tree_level,
@@ -439,6 +443,7 @@ class BuildingSyncSchemaProcessor(object):
             current_index += 1
             num_added += 1
             return_rows.append({'name': prefix + elem.ref_type,
+                                'pure_name': elem.ref_type,
                                 'path': root_path + '.' + elem.ref_type,
                                 'type': str(ReferenceElement),
                                 '$$treeLevel': current_tree_level,
@@ -499,6 +504,7 @@ class BuildingSyncSchemaProcessor(object):
             num_added += 1
             return_rows.append(
                 {'name': prefix + 'Choice: ' + elem,
+                 'pure_name': 'Choice: ' + elem,
                  'path': root_path + '.' + 'Enumeration' + ' {%s}' % elem,
                  'type': 'Enumeration',
                  '$$treeLevel': current_tree_level,
@@ -531,9 +537,11 @@ def reset_schema():
     for se in schema_entries:
         b = BuildingSyncAttribute(
             name=se['name'],
+            pure_name=se['pure_name'],
             type=se['type'],
             tree_level=se['$$treeLevel'],
             index=se['index'],
+            path=se['path'],
             schema=s)
         b.save()
 

@@ -2,7 +2,7 @@
 
 {# each app should have their own open tag#}
 {% block htmlopen %}
-{#<html lang="en" ng-app="BsSelection" ng-strict-di>#}
+    {#<html lang="en" ng-app="BsSelection" ng-strict-di>#}
 {% endblock %}
 
 <head>
@@ -72,9 +72,11 @@
                 <a class="list-group-item" href="{% url 'buildingsync:swagger' %}"><span
                         class="glyphicon glyphicon-book"></span> Swagger API Docs</a>
                 {% if request.user.is_superuser %}
-                <a class="list-group-item" href="{% url 'admin:index' %}"><span
-                        class="glyphicon glyphicon-cog"></span> Admin Page</a>
+                    <a class="list-group-item" href="{% url 'admin:index' %}"><span
+                            class="glyphicon glyphicon-cog"></span> Admin Page</a>
                 {% endif %}
+                <a class="list-group-item" href="{% url 'buildingsync:about' %}"><span
+                        class="glyphicon glyphicon-info-sign"></span> About</a>
             </div>
         </div>
         <div class="col-md-10">

@@ -16,6 +16,7 @@ class Schema(models.Model):
 
 
 class BuildingSyncAttribute(models.Model):
+    pure_name = models.CharField(max_length=100, default="<name>")
     name = models.CharField(max_length=250)
     type = models.CharField(max_length=100, default="<unknown_type>")
     schema = models.ForeignKey(Schema, related_name="schema")
@@ -24,3 +25,4 @@ class BuildingSyncAttribute(models.Model):
     ignored_use_cases = models.ManyToManyField(UseCase, related_name="ignored_use_cases")
     tree_level = models.IntegerField()
     index = models.IntegerField(verbose_name="For a given schema, this is the linear index in the tree list", default=0)
+    path = models.CharField(max_length=250, default="")

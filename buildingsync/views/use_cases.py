@@ -56,3 +56,18 @@ class UseCaseViewSet(viewsets.ModelViewSet):
                                      'optional': optional_attributes_for_export,
                                      'ignored': ignored_attributes_for_export}
         return JsonResponse(data_object)
+
+    @decorators.detail_route(methods=['GET'])
+    def get_for_seed(self, request, pk=None):
+        u = UseCase.objects.get(pk=pk)
+        return_object = {}
+        for attr in u.required_use_cases.all():
+            this_object = {'path': attr.path, 'required': True, 'type': '<unknown>'}
+            return_object[attr.pure_name] = this_object
+        for attr in u.optional_use_cases.all():
+            if attr.name in return_object:
+                # this was already in the required section, ignore that it was also here in optional
+                continue
+            this_object = {'path': attr.path, 'required': False, 'type': '<unknown>'}
+            return_object[attr.pure_name] = this_object
+        return JsonResponse({'root': 'Audits.Audit', 'return': return_object})
