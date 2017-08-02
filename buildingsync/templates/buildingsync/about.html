@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+
+{% block htmlopen %}
+<html lang="en" ng-app="BsSelection" ng-strict-di>
+{% endblock %}
+
+{% block content %}
+    <h1>About this tool</h1>
+    <p>This tool is intended to tackle several tasks related to building sync files:</p>
+    <ul class="list-group">
+        <li class="list-group-item">Parse and present the BuildingSync Schema</li>
+        <li class="list-group-item">Allow users to specify different use cases, each of which include different parts of the BuildingSync Schema</li>
+        <li class="list-group-item">Provide validation of BuildingSync instance files against the raw schema as well as specific use cases</li>
+        <li class="list-group-item">Provide an API to allow other tools to get information about a specific use case or validity of a BuildingSync file</li>
+    </ul>
+    <h1>To Do</h1>
+    <p>There are several tasks that will be completed very soon:</p>
+    <ul class="list-group">
+        <li class="list-group-item">Better selection of schema fields, selecting a child field will automatically select the parents up the schema tree</li>
+        <li class="list-group-item">Allow filtering the schema view by field name or selection status</li>
+    </ul>
+{% endblock %}

@@ -14,17 +14,23 @@ class BuildingSyncAttributeViewSet(viewsets.ModelViewSet):
     @decorators.detail_route(methods=['PUT'])
     def remove_use_case(self, request, pk):
         use_case_num = request.data['use_case_num']  # TODO: validate existence, integer
-        required = True if str(request.data['required']) == 'True' else False
+        state = str(request.data['state'])
         this_attribute = BuildingSyncAttribute.objects.get(pk=pk)
-        if required:
+        if state == 'required':
             use_case_ids = [str(uc.id) for uc in this_attribute.required_use_cases.all()]
-        else:
+        elif state == 'optional':
             use_case_ids = [str(uc.id) for uc in this_attribute.optional_use_cases.all()]
+        elif state == 'ignored':
+            use_case_ids = [str(uc.id) for uc in this_attribute.ignored_use_cases.all()]
+        else:
+            return JsonResponse({'status', 'error'}, status=status.HTTP_400_BAD_REQUEST)
         if any([id_num == str(use_case_num) for id_num in use_case_ids]):
-            if required:
+            if state == 'required':
                 this_attribute.required_use_cases.remove(use_case_num)
-            else:
+            elif state == 'optional':
                 this_attribute.optional_use_cases.remove(use_case_num)
+            elif state == 'ignored':
+                this_attribute.ignored_use_cases.remove(use_case_num)
             return JsonResponse({'status': 'success'})
         else:
             return JsonResponse({'status': 'error'}, status=status.HTTP_400_BAD_REQUEST)
@@ -32,18 +38,24 @@ class BuildingSyncAttributeViewSet(viewsets.ModelViewSet):
     @decorators.detail_route(methods=['PUT'])
     def add_use_case(self, request, pk):
         use_case_num = request.data['use_case_num']  # TODO: validate existence, integer
-        required = True if str(request.data['required']) == 'True' else False
+        state = str(request.data['state'])
         this_attribute = BuildingSyncAttribute.objects.get(pk=pk)
-        if required:
+        if state == 'required':
             use_case_ids = [str(uc.id) for uc in this_attribute.required_use_cases.all()]
-        else:
+        elif state == 'optional':
             use_case_ids = [str(uc.id) for uc in this_attribute.optional_use_cases.all()]
+        elif state == 'ignored':
+            use_case_ids = [str(uc.id) for uc in this_attribute.ignored_use_cases.all()]
+        else:
+            return JsonResponse({'status', 'error'}, status=status.HTTP_400_BAD_REQUEST)
         this_use_case = UseCase.objects.get(pk=use_case_num)
         if str(use_case_num) in use_case_ids:
             return JsonResponse({'status': 'error'}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            if required:
+            if state == 'required':
                 this_attribute.required_use_cases.add(this_use_case)
-            else:
+            elif state == 'optional':
                 this_attribute.optional_use_cases.add(this_use_case)
+            elif state == 'ignored':
+                this_attribute.ignored_use_cases.add(this_use_case)
             return JsonResponse({'status': 'success'})

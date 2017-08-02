@@ -15,6 +15,7 @@ swagger_view = get_swagger_view(title='BuildingSync DownSelection API')
 app_name = 'buildingsync'
 urlpatterns = [
     url(r'^$', main.IndexView.as_view(), name='index'),
+    url(r'^about/', main.AboutView.as_view(), name='about'),
     url(r'^swagger/', swagger_view, name='swagger'),
     url(r'api/', include(api_router.urls)),
 ]
