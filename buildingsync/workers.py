@@ -28,6 +28,10 @@ class ReferenceElement(BuildingSyncSchemaElement):
         self.annotations = []
         self.ref_type = None
 
+    @staticmethod
+    def my_string():
+        return "Reference Element"
+
 
 class NamedElement(BuildingSyncSchemaElement):
     def __init__(self):
@@ -39,6 +43,10 @@ class NamedElement(BuildingSyncSchemaElement):
         self.type = None
         self.max_occurs = None
         self.min_occurs = None
+
+    @staticmethod
+    def my_string():
+        return "Named Element"
 
 
 class AnnotationElement(BuildingSyncSchemaElement):
@@ -319,7 +327,7 @@ class BuildingSyncSchemaProcessor(object):
                 potential_doc_string = "*No Documentation Found*"
             return_rows.append({'name': prefix + elem.name + ' {%s}' % potential_doc_string,
                                 'pure_name': elem.name,
-                                'type': str(NamedElement),
+                                'type': NamedElement.my_string(),
                                 'path': root_path + '.' + elem.name,
                                 '$$treeLevel': current_tree_level,
                                 'index': current_index})
@@ -331,7 +339,7 @@ class BuildingSyncSchemaProcessor(object):
             num_added += 1
             return_rows.append({'name': prefix + elem.ref_type,
                                 'pure_name': elem.ref_type,
-                                'type': str(ReferenceElement),
+                                'type': ReferenceElement.my_string(),
                                 'path': root_path + '.' + elem.ref_type,
                                 '$$treeLevel': current_tree_level,
                                 'index': current_index})
@@ -348,14 +356,14 @@ class BuildingSyncSchemaProcessor(object):
         for elem in parent_element.annotations:
             potential_doc_string = self._walk_annotation_element(elem)
         for elem in parent_element.complex_types:
-            this_num_added, new_rows = self._walk_complex_element(elem, root_path + '.' + 'ComplexType',
-                                                                  current_tree_level, current_index, prefix + "- ")
+            this_num_added, new_rows = self._walk_complex_element(elem, root_path,
+                                                                  current_tree_level, current_index, prefix)
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
         for elem in parent_element.simple_types:
-            this_num_added, new_rows = self._walk_simple_type_element(elem, root_path + '.' + 'SimpleType',
-                                                                      current_tree_level, current_index, prefix + "- ")
+            this_num_added, new_rows = self._walk_simple_type_element(elem, root_path,
+                                                                      current_tree_level, current_index, prefix)
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
@@ -373,8 +381,8 @@ class BuildingSyncSchemaProcessor(object):
         return_rows = []
         num_added = 0
         for elem in parent_element.sequences:
-            this_num_added, new_rows = self._walk_sequence_element(elem, root_path + '.' + 'Sequence',
-                                                                   current_tree_level, current_index, prefix + "- ")
+            this_num_added, new_rows = self._walk_sequence_element(elem, root_path,
+                                                                   current_tree_level, current_index, prefix)
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
@@ -413,7 +421,11 @@ class BuildingSyncSchemaProcessor(object):
                             current_index,
                             prefix + "- ")
                     elif isinstance(instance, ComplexTypeElement):
-                        this_num_added, new_rows = self._walk_complex_element(instance, root_path + '.' + elem.type,
+                        if elem.type.startswith('auc:'):
+                            trimmed_type = elem.type[4:]
+                        else:
+                            trimmed_type = elem.type
+                        this_num_added, new_rows = self._walk_complex_element(instance, root_path + '.' + trimmed_type,
                                                                               current_tree_level + 1, current_index,
                                                                               prefix + "- ")
                     else:
@@ -429,7 +441,7 @@ class BuildingSyncSchemaProcessor(object):
                     {'name': prefix + elem.name,
                      'pure_name': elem.name,
                      'path': root_path + '.' + elem.name,
-                     'type': str(NamedElement),
+                     'type': NamedElement.my_string(),
                      '$$treeLevel': current_tree_level,
                      'index': current_index})
                 this_num_added, new_rows, potential_doc_string = self._walk_named_element(elem,
@@ -445,7 +457,7 @@ class BuildingSyncSchemaProcessor(object):
             return_rows.append({'name': prefix + elem.ref_type,
                                 'pure_name': elem.ref_type,
                                 'path': root_path + '.' + elem.ref_type,
-                                'type': str(ReferenceElement),
+                                'type': ReferenceElement.my_string(),
                                 '$$treeLevel': current_tree_level,
                                 'index': current_index})
             # this will really just write the annotation, which we eventually don't want, but OK for now
@@ -489,7 +501,7 @@ class BuildingSyncSchemaProcessor(object):
         for elem in parent_element.restrictions:
             this_num_added, new_rows = self._walk_restriction_element(elem, root_path + '.' + 'Restriction',
                                                                       current_tree_level, current_index,
-                                                                      prefix + "- ")
+                                                                      prefix)
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
@@ -503,8 +515,8 @@ class BuildingSyncSchemaProcessor(object):
             current_index += 1
             num_added += 1
             return_rows.append(
-                {'name': prefix + 'Choice: ' + elem,
-                 'pure_name': 'Choice: ' + elem,
+                {'name': prefix + elem,
+                 'pure_name': elem,
                  'path': root_path + '.' + 'Enumeration' + ' {%s}' % elem,
                  'type': 'Enumeration',
                  '$$treeLevel': current_tree_level,
@@ -523,15 +535,9 @@ def reset_schema():
 
     # parse the schema itself to get all entries
     my_schema = xmlschema.XMLSchema('buildingsync/schemas/BuildingSync_2_0.xsd')
-    # root_element = my_schema.root
-    # get_node(root_element, "root", 1)
 
     bs_processor = BuildingSyncSchemaProcessor(my_schema)
     schema_entries = bs_processor.walk_root_element()
-
-    # trimmed_entries = []
-    # for se in schema_entries:
-    #     trimmed_entries.append({'name': se['name'], 'tree_level': se['$$treeLevel']})
 
     # Create database entries for each schema entry
     for se in schema_entries:
