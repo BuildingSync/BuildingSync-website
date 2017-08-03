@@ -58,7 +58,7 @@ class UseCaseViewSet(viewsets.ModelViewSet):
         return JsonResponse(data_object)
 
     @decorators.detail_route(methods=['GET'])
-    def get_for_seed(self, request, pk=None):
+    def seed_bricr(self, request, pk=None):
         u = UseCase.objects.get(pk=pk)
         return_object = {}
         for attr in u.required_use_cases.all():

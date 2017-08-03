@@ -190,24 +190,24 @@ app.controller('BsController',
             $scope.rebuild_columns = function () {
                 $scope.columns = null;
                 $scope.columns = [
-                    {
-                        name: 'id',
-                        displayName: 'ID',
-                        width: '5%',
-                        groupingShowAggregationMenu: false
-                    },
-                    {
-                        name: 'another_tree_level',
-                        displayName: 'Lvl',
-                        width: '3%',
-                        groupingShowAggregationMenu: false
-                    },
-                    {
-                        name: 'type',
-                        displayName: 'type',
-                        width: '20%',
-                        groupingShowAggregationMenu: false
-                    },
+                    // {
+                    //     name: 'id',
+                    //     displayName: 'ID',
+                    //     width: '5%',
+                    //     groupingShowAggregationMenu: false
+                    // },
+                    // {
+                    //     name: 'another_tree_level',
+                    //     displayName: 'Lvl',
+                    //     width: '3%',
+                    //     groupingShowAggregationMenu: false
+                    // },
+                    // {
+                    //     name: 'type',
+                    //     displayName: 'type',
+                    //     width: '20%',
+                    //     groupingShowAggregationMenu: false
+                    // },
                     {
                         name: 'name',
                         cellTemplate: 'static/partials/attributeTemplate.html',
