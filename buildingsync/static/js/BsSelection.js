@@ -229,29 +229,59 @@ app.controller('BsController',
                 });
             };
             $scope.toggleAttribute = function (row_entity, use_case_num, state) {
-                if (state==='required') {
+                if (state === 'required') {
                     if (_.includes(row_entity.required_use_cases, use_case_num)) {
-                        AttributeService.removeUseCaseNum(row_entity.id, use_case_num, 'required');
-                        _.pull(row_entity.required_use_cases, use_case_num);
+                        AttributeService.removeUseCaseNum(row_entity.id, use_case_num, 'required').then(function () {
+                            _.pull(row_entity.required_use_cases, use_case_num);
+                        });
                     } else {
-                        AttributeService.addUseCaseNum(row_entity.id, use_case_num, 'required');
-                        row_entity.required_use_cases.push(use_case_num);
+                        AttributeService.addUseCaseNum(row_entity.id, use_case_num, 'required').then(function () {
+                            row_entity.required_use_cases.push(use_case_num);
+                            if (_.includes(row_entity.optional_use_cases, use_case_num)) {
+                                AttributeService.removeUseCaseNum(row_entity.id, use_case_num, 'optional');
+                                _.pull(row_entity.optional_use_cases, use_case_num);
+                            }
+                            if (_.includes(row_entity.ignored_use_cases, use_case_num)) {
+                                AttributeService.removeUseCaseNum(row_entity.id, use_case_num, 'ignored');
+                                _.pull(row_entity.ignored_use_cases, use_case_num);
+                            }
+                        });
                     }
-                } else if (state==='optional') {
+                } else if (state === 'optional') {
                     if (_.includes(row_entity.optional_use_cases, use_case_num)) {
-                        AttributeService.removeUseCaseNum(row_entity.id, use_case_num, 'optional');
+                        AttributeService.removeUseCaseNum(row_entity.id, use_case_num, 'optional').then(function () {
                         _.pull(row_entity.optional_use_cases, use_case_num);
+                        });
                     } else {
-                        AttributeService.addUseCaseNum(row_entity.id, use_case_num, 'optional');
-                        row_entity.optional_use_cases.push(use_case_num);
+                        AttributeService.addUseCaseNum(row_entity.id, use_case_num, 'optional').then(function () {
+                            row_entity.optional_use_cases.push(use_case_num);
+                            if (_.includes(row_entity.required_use_cases, use_case_num)) {
+                                AttributeService.removeUseCaseNum(row_entity.id, use_case_num, 'required');
+                                _.pull(row_entity.required_use_cases, use_case_num);
+                            }
+                            if (_.includes(row_entity.ignored_use_cases, use_case_num)) {
+                                AttributeService.removeUseCaseNum(row_entity.id, use_case_num, 'ignored');
+                                _.pull(row_entity.ignored_use_cases, use_case_num);
+                            }
+                        });
                     }
-                } else if (state==='ignored') {
+                } else if (state === 'ignored') {
                     if (_.includes(row_entity.ignored_use_cases, use_case_num)) {
-                        AttributeService.removeUseCaseNum(row_entity.id, use_case_num, 'ignored');
-                        _.pull(row_entity.ignored_use_cases, use_case_num);
+                        AttributeService.removeUseCaseNum(row_entity.id, use_case_num, 'ignored').then(function () {
+                            _.pull(row_entity.ignored_use_cases, use_case_num);
+                        });
                     } else {
-                        AttributeService.addUseCaseNum(row_entity.id, use_case_num, 'ignored');
-                        row_entity.ignored_use_cases.push(use_case_num);
+                        AttributeService.addUseCaseNum(row_entity.id, use_case_num, 'ignored').then(function () {
+                            row_entity.ignored_use_cases.push(use_case_num);
+                            if (_.includes(row_entity.required_use_cases, use_case_num)) {
+                                AttributeService.removeUseCaseNum(row_entity.id, use_case_num, 'required');
+                                _.pull(row_entity.required_use_cases, use_case_num);
+                            }
+                            if (_.includes(row_entity.optional_use_cases, use_case_num)) {
+                                AttributeService.removeUseCaseNum(row_entity.id, use_case_num, 'optional');
+                                _.pull(row_entity.optional_use_cases, use_case_num);
+                            }
+                        });
                     }
                 }
             };

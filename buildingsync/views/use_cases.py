@@ -47,7 +47,7 @@ class UseCaseViewSet(viewsets.ModelViewSet):
         optional_attributes_for_export = []
         for attr in optional_attributes:
             optional_attributes_for_export.append({'name': attr.name, 'id': attr.id})
-        ignored_attributes = u.optional_use_cases.all()
+        ignored_attributes = u.optional_use_cases.all()  # should be ignored-----------------------------------------------
         ignored_attributes_for_export = []
         for attr in ignored_attributes:
             ignored_attributes_for_export.append({'name': attr.name, 'id': attr.id})
@@ -66,7 +66,7 @@ class UseCaseViewSet(viewsets.ModelViewSet):
             return_object[attr.pure_name] = this_object
         for attr in u.optional_use_cases.all():
             if attr.name in return_object:
-                # this was already in the required section, ignore that it was also here in optional
+                # this was already in the required section, ignore that it was also here in optional  # something here isn't working
                 continue
             this_object = {'path': attr.path, 'required': False, 'type': '<unknown>'}
             return_object[attr.pure_name] = this_object
