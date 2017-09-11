@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from rest_framework import decorators
 from rest_framework import viewsets
 
-from buildingsync.models import UseCase
+from buildingsync.models import UseCase, BuildingSyncAttribute
 from buildingsync.serializers import UseCaseSerializer
 
 
@@ -17,17 +17,20 @@ class UseCaseViewSet(viewsets.ModelViewSet):
 
     @decorators.list_route(methods=['POST'], url_path="import")
     def import_use_case(self, request):
+        # First prepare a dict for easily accessing the attribute IDs via string
+        ids = {k.path: k.id for k in BuildingSyncAttribute.objects.all()}
+
         u = UseCase.objects.create(owner=request.user, nickname=request.data['nickname'], show=request.data['show'])
         all_attributes = request.data['attributes']
         required_attributes = all_attributes['required']
         for req_attr in required_attributes:
-            u.required_use_cases.add(req_attr['id'])
+            u.required_use_cases.add(ids[req_attr['path']])
         optional_attributes = all_attributes['optional']
         for opt_attr in optional_attributes:
-            u.optional_use_cases.add(opt_attr['id'])
+            u.optional_use_cases.add(ids[opt_attr['path']])
         ignored_attributes = all_attributes['ignored']
         for ignored_attr in ignored_attributes:
-            u.ignored_use_cases.add(ignored_attr['id'])
+            u.ignored_use_cases.add(ids[ignored_attr['path']])
         u.save()
         serializer = UseCaseSerializer(u)
         return JsonResponse(serializer.data)
@@ -42,15 +45,15 @@ class UseCaseViewSet(viewsets.ModelViewSet):
         required_attributes = u.required_use_cases.all()
         required_attributes_for_export = []
         for attr in required_attributes:
-            required_attributes_for_export.append({'name': attr.name, 'id': attr.id})
+            required_attributes_for_export.append({'name': attr.name, 'id': attr.id, 'path': attr.path})
         optional_attributes = u.optional_use_cases.all()
         optional_attributes_for_export = []
         for attr in optional_attributes:
-            optional_attributes_for_export.append({'name': attr.name, 'id': attr.id})
-        ignored_attributes = u.optional_use_cases.all()
+            optional_attributes_for_export.append({'name': attr.name, 'id': attr.id, 'path': attr.path})
+        ignored_attributes = u.ignored_use_cases.all()
         ignored_attributes_for_export = []
         for attr in ignored_attributes:
-            ignored_attributes_for_export.append({'name': attr.name, 'id': attr.id})
+            ignored_attributes_for_export.append({'name': attr.name, 'id': attr.id, 'path': attr.path})
 
         data_object['attributes'] = {'required': required_attributes_for_export,
                                      'optional': optional_attributes_for_export,
@@ -66,7 +69,7 @@ class UseCaseViewSet(viewsets.ModelViewSet):
             return_object[attr.pure_name] = this_object
         for attr in u.optional_use_cases.all():
             if attr.name in return_object:
-                # this was already in the required section, ignore that it was also here in optional
+                # this was already in the required section, ignore that it was also here in optional  # something here isn't working
                 continue
             this_object = {'path': attr.path, 'required': False, 'type': '<unknown>'}
             return_object[attr.pure_name] = this_object
