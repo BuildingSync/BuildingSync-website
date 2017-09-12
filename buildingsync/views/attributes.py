@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from rest_framework import decorators
 from rest_framework import status
 from rest_framework import viewsets
+from rest_framework.mixins import ListModelMixin
 
 from buildingsync.models import UseCase, BuildingSyncAttribute
 from buildingsync.serializers import BuildingSyncAttributeSerializer
@@ -10,6 +11,10 @@ from buildingsync.serializers import BuildingSyncAttributeSerializer
 class BuildingSyncAttributeViewSet(viewsets.ModelViewSet):
     queryset = BuildingSyncAttribute.objects.all()
     serializer_class = BuildingSyncAttributeSerializer
+
+    def list(self, request, *args, **kwargs):
+        a = ListModelMixin.list(self, request)
+        return a
 
     @decorators.detail_route(methods=['PUT'])
     def remove_use_case(self, request, pk):
