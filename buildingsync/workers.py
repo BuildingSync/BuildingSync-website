@@ -2,8 +2,8 @@ import xmlschema
 
 from buildingsync.models import Schema, BuildingSyncAttribute
 
-SCHEMA_NAME = "BuildingSync, Version 2.0.0"
-SCHEMA_VERSION = 2
+SCHEMA_NAME = "BuildingSync, Version 0.2"
+SCHEMA_VERSION = "0.2"
 
 
 class BuildingSyncSchemaElement(object):
@@ -19,6 +19,7 @@ class BuildingSyncSchemaRoot(BuildingSyncSchemaElement):
         self.complex_types = []
         self.simple_types = []
         self.attributes = []
+        self.annotations = []
 
 
 class ReferenceElement(BuildingSyncSchemaElement):
@@ -76,6 +77,7 @@ class SequenceElement(BuildingSyncSchemaElement):
         super(SequenceElement, self).__init__()
         self.named_elements = []
         self.ref_elements = []
+        self.choices = []
 
 
 class SimpleContentElement(BuildingSyncSchemaElement):
@@ -95,6 +97,7 @@ class SimpleTypeElement(BuildingSyncSchemaElement):
     def __init__(self):
         super(SimpleTypeElement, self).__init__()
         self.restrictions = []
+        self.annotations = []
 
 
 class RestrictionElement(BuildingSyncSchemaElement):
@@ -155,6 +158,8 @@ class BuildingSyncSchemaProcessor(object):
                 full_schema.simple_types.append(self._read_simple_type(child))
             elif child.tag.endswith('attribute'):
                 full_schema.attributes.append(self._read_attribute(child))
+            elif child.tag.endswith('annotation'):
+                full_schema.annotations.append(self._read_annotation(child))
             else:
                 raise Exception("Invalid tag type in _read_schema: " + child.tag)
         return full_schema
@@ -244,6 +249,8 @@ class BuildingSyncSchemaProcessor(object):
                     this_sequence.ref_elements.append(self._read_ref_element(child))
                 else:
                     raise Exception("Invalid element type in _read_sequence, no name or ref in attrib...")
+            elif child.tag.endswith('choice'):
+                this_sequence.choices.append(self._read_choice(child))
             else:
                 raise Exception("Invalid tag type in _read_sequence: " + child.tag)
         return this_sequence
@@ -273,6 +280,8 @@ class BuildingSyncSchemaProcessor(object):
         for child in parent_object.getchildren():
             if child.tag.endswith('restriction'):
                 this_simple_content.restrictions.append(self._read_restriction(child))
+            elif child.tag.endswith('annotation'):
+                this_simple_content.annotations.append(self._read_annotation(child))
             else:
                 raise Exception("Invalid tag type in _read_simple_type: " + child.tag)
         return this_simple_content
@@ -534,7 +543,7 @@ def reset_schema():
     s.save()
 
     # parse the schema itself to get all entries
-    my_schema = xmlschema.XMLSchema('buildingsync/schemas/BuildingSync_2_0.xsd')
+    my_schema = xmlschema.XMLSchema('buildingsync/schemas/BuildingSync.xsd')
 
     bs_processor = BuildingSyncSchemaProcessor(my_schema)
     schema_entries = bs_processor.walk_root_element()

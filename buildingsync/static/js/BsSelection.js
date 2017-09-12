@@ -171,7 +171,7 @@ app.controller('BsController',
                 $scope.one_schema = undefined;
                 $scope.schema_missing = false;
                 if (schemas !== undefined && schemas.length != 0) {
-                    $scope.one_schema = _.find(schemas, {version: 2});
+                    $scope.one_schema = _.find(schemas, {version: "0.2"});
                 }
                 if ($scope.one_schema === undefined) {
                     $scope.one_schema = {name: "*No Schema Defined*", id: 1};
