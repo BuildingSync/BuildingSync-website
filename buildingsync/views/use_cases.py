@@ -15,6 +15,15 @@ class UseCaseViewSet(viewsets.ModelViewSet):
         else:
             return None  # would prefer to return a 403, but this is OK for now...what about when I POST anonymously?
 
+    def create(self, request, *args, **kwargs):
+        d = request.data
+        u = UseCase.objects.create(owner=request.user, nickname=d['nickname'])
+        for attr in BuildingSyncAttribute.objects.all():
+            u.optional_use_cases.add(attr.id)
+        u.save()
+        serializer = UseCaseSerializer(u)
+        return JsonResponse(serializer.data)
+
     @decorators.list_route(methods=['POST'], url_path="import")
     def import_use_case(self, request):
         # First prepare a dict for easily accessing the attribute IDs via string
