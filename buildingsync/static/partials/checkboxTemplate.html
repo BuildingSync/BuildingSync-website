@@ -1,6 +1,6 @@
 <div>
     <span ng-click="grid.appScope.toggleAttribute(row.entity, col.colDef.use_case_id, 'required')">
-        <input type="checkbox" ng-checked="row.entity.required_use_cases.indexOf(col.colDef.use_case_id) !== -1"
+        <input type="checkbox" ng-checked="row.entity.required_use_cases.indexOf(col.colDef.use_case_id) !== -1" ng-disabled="row.entity.type==='Enumeration'"
                class="no-click" id="required">
         <label for="required">Req</label>
     </span>
