@@ -399,11 +399,11 @@ class BuildingSyncSchemaProcessor(object):
 
     def _find_referenced_element(self, original_ref_name):
         looking_for_type_name = original_ref_name.split(':')[1]  # it starts with the namespace 'auc:'
+        if looking_for_type_name in self.named_complex_types:
+            return self.named_complex_types[looking_for_type_name]
         for ne in self.all_named_elements:
             if looking_for_type_name == ne.name:
                 return ne
-        if looking_for_type_name in self.named_complex_types:
-            return self.named_complex_types[looking_for_type_name]
         return None
 
     def _walk_sequence_element(self, parent_element, root_path, current_tree_level, current_index, prefix):
