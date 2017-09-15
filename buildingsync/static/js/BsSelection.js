@@ -170,7 +170,7 @@ app.controller('BsController',
             $scope.rebuildSchemas = function (schemas) {
                 $scope.one_schema = undefined;
                 $scope.schema_missing = false;
-                if (schemas !== undefined && schemas.length != 0) {
+                if (schemas !== undefined && schemas.length !== 0) {
                     $scope.one_schema = _.find(schemas, {version: "0.2"});
                 }
                 if ($scope.one_schema === undefined) {
@@ -306,7 +306,12 @@ app.controller('BsController',
                                     use_case_id: newUseCaseID
                                 });
                                 $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
-                            });
+                            })
+                            .then(AttributeService.getAttributes)
+                            .then(function (attributes) {
+                                $scope.rebuildAttributes(attributes);
+                                $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
+                            })
                     })
             };
             $scope.deleteUseCase = function (x) {
