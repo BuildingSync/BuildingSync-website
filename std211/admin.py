@@ -6,4 +6,4 @@ from django.contrib import admin
 from std211.models import Standard211Instance
 
 # Register your models here.
-admin.register(Standard211Instance)
+admin.site.register(Standard211Instance)
