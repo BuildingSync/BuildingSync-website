@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <h1>Overview</h1>
+            <p>
+                This tool is used to do stuff with the Standard 211 files
+            </p>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <form class="form-group row">
+            <div style="text-align:center;">
+                <input class="ng-hide" ng-model="filePath" on-read-file="importStandard211($fileContent)"
+                       id="input-file-id" type="file"/>
+                <label for="input-file-id" class="btn btn-primary">Import Standard 211 File</label>
+            </div>
+        </form>
+    </div>
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <hr>
+            <h1>Your Standard 211 Files</h1>
+            <table class="table table-striped">
+                <tr>
+                    <th>Instance ID</th>
+                    <th>Data String</th>
+                    <th>Actions</th>
+                </tr>
+                <tr ng-repeat="x in std211files">
+                    <td>{$ x.id $}</td>
+                    <td>{$ x.data_string $}</td>
+                    <td>
+                        <button class="btn btn-primary" ng-click="downloadXML(x)">Download XML (actually JSON)</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

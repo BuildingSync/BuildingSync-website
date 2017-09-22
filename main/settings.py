@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'buildingsync.apps.BuildingsyncConfig',
+    'std211.apps.Std211Config',
     'rest_framework',
     'rest_framework_swagger',
 ]
