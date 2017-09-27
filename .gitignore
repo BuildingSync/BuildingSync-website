@@ -80,3 +80,5 @@ ENV/
 buildingsync/static/vendors/bower_components/
 
 config.env
+package-lock.json
+
