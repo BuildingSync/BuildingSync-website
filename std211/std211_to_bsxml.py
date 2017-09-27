@@ -1,8 +1,8 @@
-import openpyxl
-import json
 import datetime
 import xml.etree.ElementTree as et
 from xml.dom import minidom
+
+import openpyxl
 
 # Known limitations:
 # 1) Some of the keys are not scrubbed for those asterisks
@@ -200,8 +200,7 @@ def getinfo(worksheet, cellrange, variablelength=False, fillcolor=8,
         for row in worksheet.iter_rows(min_col=rangetuple[0], min_row=rangetuple[1],
                                        max_col=rangetuple[2], max_row=rangetuple[3]):
             if variablelength:
-                if (not row[0].value
-                    or row[0].fill.start_color.index != fillcolor):
+                if (not row[0].value or row[0].fill.start_color.index != fillcolor):
                     break
             elif not keepempty:
                 if not row[0].value:
@@ -222,8 +221,7 @@ def getinfo(worksheet, cellrange, variablelength=False, fillcolor=8,
         for col in worksheet.iter_cols(min_col=rangetuple[0], min_row=rangetuple[1],
                                        max_row=rangetuple[3], max_col=rangetuple[2]):
             if variablelength:
-                if (not col[0].value
-                    or col[0].fill.start_color.index != fillcolor):
+                if (not col[0].value or col[0].fill.start_color.index != fillcolor):
                     break
             elif not keepempty:
                 if not col[0].value:
@@ -262,8 +260,7 @@ def getlistinfo(worksheet, cellrange, variablelength=False, fillcolor=8,
                                        max_col=rangetuple[2], max_row=rangetuple[3]):
             # print(row)
             if variablelength:
-                if (not row[0].value
-                    or row[0].fill.start_color.index != fillcolor):
+                if (not row[0].value or row[0].fill.start_color.index != fillcolor):
                     break
             elif not keepempty:
                 if not row[0].value:
@@ -292,8 +289,7 @@ def getlistinfo(worksheet, cellrange, variablelength=False, fillcolor=8,
         for col in worksheet.iter_cols(min_col=rangetuple[0], min_row=rangetuple[1],
                                        max_row=rangetuple[3], max_col=rangetuple[2]):
             if variablelength:
-                if (not col[0].value
-                    or col[0].fill.start_color.index != fillcolor):
+                if (not col[0].value or col[0].fill.start_color.index != fillcolor):
                     break
             elif not keepempty:
                 if not col[0].value:
