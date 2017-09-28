@@ -11,3 +11,4 @@ gunicorn==19.6.0
 uWSGI==2.0.15
 xmlschema==0.9.9
 tox==2.7.0
+openpyxl==2.4.8
