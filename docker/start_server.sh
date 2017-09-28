@@ -8,9 +8,6 @@ echo "Waiting for postgres to start"
 # Run any migrations before starting -- always for now
 ./manage.py migrate
 
-# Create the schema / right now everytime. # TODO: ensure idempotency
-./manage.py create_schema
-
 # Create the default user based on the env vars
 ./manage.py create_user ${BSTOOL_ADMIN_USER} ${BSTOOL_ADMIN_EMAIL} ${BSTOOL_ADMIN_PASSWORD}
 
