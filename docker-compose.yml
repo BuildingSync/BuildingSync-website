@@ -29,6 +29,10 @@ services:
       - db-postgres
     ports:
       - "8000:8000"
+    volumes:
+      - mediadata:/srv/bs-tool/media
 volumes:
   pgdata:
+    external: true
+  mediadata:
     external: true

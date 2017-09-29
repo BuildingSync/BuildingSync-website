@@ -55,4 +55,9 @@ COPY /docker/wait-for-it.sh /usr/local/wait-for-it.sh
 
 RUN mkdir -p /srv/bs-tool/static && python manage.py collectstatic
 
+# entrypoint sets some permissions on directories that may be shared volumes
+COPY /docker/bstool-entrypoint.sh /usr/local/bin/bstool-entrypoint
+RUN chmod 775 /usr/local/bin/bstool-entrypoint
+ENTRYPOINT ["bstool-entrypoint"]
+
 EXPOSE 8000

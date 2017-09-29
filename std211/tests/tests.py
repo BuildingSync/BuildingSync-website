@@ -17,7 +17,9 @@ class TestStandard211(TestCase):
                                         'std211_normative_form_20170328.xlsx')
 
     def test_create_data(self):
-        s = Standard211Instance.objects.create(owner_id=self.user.id)
+        s = Standard211Instance.objects.create(
+            owner_id=self.user.id,
+        )
 
         dict = Standard211Instance.spreadsheet_to_dictionary(self.std211_file)
         self.assertEqual(dict["All - Building"]["City*"], "Atlanta")
@@ -25,8 +27,11 @@ class TestStandard211(TestCase):
         # print json.dumps(dict, indent=2)
 
     def test_to_buildingsync(self):
-        dict = Standard211Instance.spreadsheet_to_dictionary(self.std211_file)
-        xml = Standard211Instance.dictionary_to_xml(dict)
+        s = Standard211Instance.objects.create(
+            owner_id=self.user.id,
+            std211_file=self.std211_file
+        )
+        xml = s.to_buildingsync()
 
         self.assertTrue("<PremisesName>Test Building Input Data</PremisesName>" in xml)
         self.assertTrue("<PostalCodePlus4>99999-9999</PostalCodePlus4>" in xml)

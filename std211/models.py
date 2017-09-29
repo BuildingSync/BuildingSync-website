@@ -8,6 +8,7 @@ import os
 from django.contrib.auth.models import User
 from django.db import models
 
+
 from std211.lib.std211_to_bsxml import (
     getlabeledvalues,
     scan_for_cell_value,
@@ -29,7 +30,8 @@ from std211.lib.std211_to_bsxml import (
 
 class Standard211Instance(models.Model):
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    data_string = models.TextField()
+    filename = models.CharField(max_length=255, null=True, blank=True)
+    std211_file = models.FileField(upload_to='standard211', max_length=500, blank=True, null=True)
 
     @staticmethod
     def spreadsheet_to_dictionary(filename):
@@ -145,7 +147,15 @@ class Standard211Instance(models.Model):
         std211['All - Space Functions'] = space_functions
         return std211
 
-    @staticmethod
-    def dictionary_to_xml(std211_dict):
-        xml = map_to_buildingsync(std211_dict)
-        return prettystring(xml).decode('utf-8')
+    def to_buildingsync(self):
+        if not os.path.exists(self.std211_file.path):
+            return False, "Path doesn't exist"
+
+        try:
+            # get the dict first, then map to buildingsync
+            data = Standard211Instance.spreadsheet_to_dictionary(self.std211_file.path)
+            xml = map_to_buildingsync(data)
+        except Exception as e:
+            return False, e.message
+
+        return True, prettystring(xml).decode('utf-8')
