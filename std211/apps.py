@@ -6,3 +6,4 @@ from django.apps import AppConfig
 
 class Std211Config(AppConfig):
     name = 'std211'
+    verbose_name = 'Standard 211 Tools'

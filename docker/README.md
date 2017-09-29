@@ -9,12 +9,13 @@ below on production, only for testing locally.
 ```bash
 docker-compose build
 docker volume create --name=pgdata
+docker volume create --name=mediadata
 docker-compose up
 ```
 
 Starting over - one line
 
-`docker-compose stop && docker-compose rm -f && docker-compose build && docker volume rm pgdata && docker volume create --name=pgdata && docker-compose up`
+`docker-compose stop && docker-compose rm -f && docker-compose build && docker volume rm pgdata && docker volume rm mediadata && docker volume create --name=pgdata && docker volume create --name=mediadata && docker-compose up`
 
 
 # Deploying with Docker and Docker Compose on Remote Server
