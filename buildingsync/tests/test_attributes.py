@@ -32,7 +32,7 @@ class TestAttributesView(TestCase):
         self.assertEqual(resp.status_code, 200)
         try:
             json.loads(resp.content)
-        except:  # pragma: no cover
+        except BaseException:  # pragma: no cover
             self.fail('Response from get_attributes was not proper json')
 
 

@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.views.generic import TemplateView
 from rest_framework import viewsets
 from rest_framework.parsers import FormParser, MultiPartParser
@@ -59,4 +59,3 @@ class Standard211InstanceViews(viewsets.ModelViewSet):
             return JsonResponse(
                 {'status': 'error', 'message': 'could not find Std211 instance'}
             )
-

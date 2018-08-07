@@ -31,7 +31,7 @@ class TestStandard211(TestCase):
             os.remove(self.std211_file)
 
     def test_create_data(self):
-        s = Standard211Instance.objects.create(
+        Standard211Instance.objects.create(
             owner_id=self.user.id,
         )
 

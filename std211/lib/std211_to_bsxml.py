@@ -127,21 +127,21 @@ def getlabeledvalues(worksheet, cellrange, labelcolor=0,
     if not hasunits:
         for row in worksheet.iter_rows(min_row=minrow, min_col=labelcol,
                                        max_col=labelcol + 1, max_row=maxrow):
-            if row[0].value != None and row[1].value != None:
+            if row[0].value is not None and row[1].value is not None:
                 if variablelength:
                     if (row[0].fill.start_color.index != labelcolor or
-                                row[1].fill.start_color.index != valuecolor):
+                            row[1].fill.start_color.index != valuecolor):
                         break
                 result[row[0].value] = row[1].value
     else:
         for row in worksheet.iter_rows(min_row=minrow, min_col=labelcol,
                                        max_col=labelcol + 2, max_row=maxrow):
-            if row[0].value != None and row[1].value != None:
+            if row[0].value is not None and row[1].value is not None:
                 if variablelength:
                     if (row[0].fill.start_color.index != labelcolor or
-                                row[1].fill.start_color.index != valuecolor):
+                            row[1].fill.start_color.index != valuecolor):
                         break
-                if row[2].value != None:
+                if row[2].value is not None:
                     key = row[0].value + (' (%s)' % row[2].value)
                     result[key] = row[1].value
                 else:
@@ -196,7 +196,6 @@ def getinfo(worksheet, cellrange, variablelength=False, fillcolor=8,
             raise TypeError('Unable to determine cell range')
     result = {}
     if inrows:
-        listcol = rangetuple[0]
         for row in worksheet.iter_rows(min_col=rangetuple[0], min_row=rangetuple[1],
                                        max_col=rangetuple[2], max_row=rangetuple[3]):
             if variablelength:
@@ -217,7 +216,6 @@ def getinfo(worksheet, cellrange, variablelength=False, fillcolor=8,
                 data = dict(zip(labels[1:], data))
             result[row[0].value] = data
     else:
-        listrow = rangetuple[1]
         for col in worksheet.iter_cols(min_col=rangetuple[0], min_row=rangetuple[1],
                                        max_row=rangetuple[3], max_col=rangetuple[2]):
             if variablelength:
@@ -255,7 +253,6 @@ def getlistinfo(worksheet, cellrange, variablelength=False, fillcolor=8,
     # print(rangetuple)
     result = []
     if inrows:
-        listcol = rangetuple[0]
         for row in worksheet.iter_rows(min_col=rangetuple[0], min_row=rangetuple[1],
                                        max_col=rangetuple[2], max_row=rangetuple[3]):
             # print(row)
@@ -278,14 +275,13 @@ def getlistinfo(worksheet, cellrange, variablelength=False, fillcolor=8,
                 # Have to handle None in the labels
                 out = {}
                 for i in range(len(labels)):
-                    if labels[i] == None or data[i] == None:
+                    if labels[i] is None or data[i] is None:
                         continue
                     out[labels[i]] = data[i]
                 data = out
                 # data = dict(zip(labels,data))
             result.append(data)
     else:
-        listrow = rangetuple[1]
         for col in worksheet.iter_cols(min_col=rangetuple[0], min_row=rangetuple[1],
                                        max_row=rangetuple[3], max_col=rangetuple[2]):
             if variablelength:
@@ -306,7 +302,7 @@ def getlistinfo(worksheet, cellrange, variablelength=False, fillcolor=8,
                 # Have to handle None in the labels
                 out = {}
                 for i in range(len(labels)):
-                    if labels[i] == None or data[i] == None:
+                    if labels[i] is None or data[i] is None:
                         continue
                     out[labels[i]] = data[i]
                 data = out
@@ -790,27 +786,28 @@ def map_to_buildingsync(obj):
     return bsxml
 
 
-if __name__ == '__main__':
-    import argparse
-
-    parser = argparse.ArgumentParser(description='Convert ASHRAE Std. 211 Workbook into BSXML.')
-    parser.add_argument('infile', metavar='INFILE')
-    parser.add_argument('-p, --pretty', dest='pretty', action='store_true',
-                        help='output pretty xml')
-    parser.add_argument('-o, --output', dest='outfile', action='store',
-                        default='std211.xml',
-                        help='file to save BSXML output in')
-
-    args = parser.parse_args()
-
-    wb = openpyxl.load_workbook(args.infile)
-    std211 = read_std211_xls(wb)
-    bsxml = map_to_buildingsync(std211)
-    print(prettystring(bsxml).decode('utf-8'))
-    fp = open(args.outfile, 'w')
-    if args.pretty:
-        fp.write(prettystring(bsxml).decode('utf-8'))
-    else:
-        fp.write('<?xml version="1.0" encoding="UTF-8"?>')
-        fp.write(et.tostring(bsxml, encoding='utf-8').decode('utf-8'))
-    fp.close()
+# This is not working at the moment, not sure it it needed.
+# if __name__ == '__main__':
+#     import argparse
+#
+#     parser = argparse.ArgumentParser(description='Convert ASHRAE Std. 211 Workbook into BSXML.')
+#     parser.add_argument('infile', metavar='INFILE')
+#     parser.add_argument('-p, --pretty', dest='pretty', action='store_true',
+#                         help='output pretty xml')
+#     parser.add_argument('-o, --output', dest='outfile', action='store',
+#                         default='std211.xml',
+#                         help='file to save BSXML output in')
+#
+#     args = parser.parse_args()
+#
+#     wb = openpyxl.load_workbook(args.infile)
+#     std211 = read_std211_xls(wb)
+#     bsxml = map_to_buildingsync(std211)
+#     print(prettystring(bsxml).decode('utf-8'))
+#     fp = open(args.outfile, 'w')
+#     if args.pretty:
+#         fp.write(prettystring(bsxml).decode('utf-8'))
+#     else:
+#         fp.write('<?xml version="1.0" encoding="UTF-8"?>')
+#         fp.write(et.tostring(bsxml, encoding='utf-8').decode('utf-8'))
+#     fp.close()

@@ -26,7 +26,7 @@ class BuildingSyncAttributeViewSet(viewsets.ModelViewSet):
             )
         try:
             use_case_num = int(request.data['use_case_num'])
-        except ValueError as e:
+        except ValueError:
             return JsonResponse(
                 {'status': 'error',
                  'message': 'Bad use_case_num variable in request to remove_use_case, not an integer'},
@@ -79,7 +79,7 @@ class BuildingSyncAttributeViewSet(viewsets.ModelViewSet):
             )
         try:
             use_case_num = int(request.data['use_case_num'])
-        except ValueError as e:
+        except ValueError:
             return JsonResponse(
                 {'status': 'error',
                  'message': 'Bad use_case_num variable in request to add_use_case, not an integer'},
