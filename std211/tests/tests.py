@@ -21,6 +21,10 @@ class TestStandard211(TestCase):
         )
         if os.path.exists(self.std211_file):
             os.remove(self.std211_file)
+
+        if not os.path.exists(os.path.dirname(self.std211_file)):
+            os.makedirs(os.path.dirname(self.std211_file))
+
         copyfile(
             os.path.join(os.path.dirname(__file__), 'data', 'std211_normative_form_20170328.xlsx'),
             self.std211_file
