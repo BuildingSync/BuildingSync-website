@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'buildingsync.apps.BuildingsyncConfig',
+    'std211.apps.Std211Config',
     'rest_framework',
     'rest_framework_swagger',
 ]
@@ -114,17 +115,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),  # bower stores files here
+)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Heroku: Update database configuration from $DATABASE_URL.
-
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)

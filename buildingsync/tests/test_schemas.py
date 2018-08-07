@@ -29,7 +29,7 @@ class TestGetSchemaView(TestCase):
         self.assertEqual(resp.status_code, 200)
         try:
             json.loads(resp.content)
-        except:  # pragma: no cover
+        except BaseException:  # pragma: no cover
             self.fail('Response from get_schema was not proper json')
 
 

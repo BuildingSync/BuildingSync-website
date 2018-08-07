@@ -19,7 +19,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+/lib
 lib64/
 parts/
 sdist/
@@ -36,6 +36,7 @@ node_modules
 staticfiles
 # this is where bower puts static files
 /static
+/media
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -80,3 +81,5 @@ ENV/
 buildingsync/static/vendors/bower_components/
 
 config.env
+package-lock.json
+

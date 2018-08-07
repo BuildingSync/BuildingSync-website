@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'buildingsync.apps.BuildingsyncConfig',
+    'std211.apps.Std211Config',
     'rest_framework',
     'rest_framework_swagger',
 ]
@@ -87,6 +88,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'main.wsgi.application'
 
 # Database
+# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -130,12 +133,30 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),  # bower stores files here
+)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'ERROR',
+            'class': 'logging.StreamHandler'
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+    },
+}

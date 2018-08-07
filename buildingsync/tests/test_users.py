@@ -33,5 +33,5 @@ class TestGetCurrentUserIDView(TestCase):
         try:
             data = json.loads(resp.content)
             self.assertEqual(data['id'], self.u.id)
-        except:  # pragma: no cover
+        except BaseException:  # pragma: no cover
             self.fail('Response from get_use_cases was not proper json')

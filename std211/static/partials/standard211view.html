@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <h1>Overview</h1>
+            <p>
+                This tool is used translate a basic Standard 211 Normative Appendix into an
+                instance of BuildingSync XML. Presently, this only support Level 1 Audit data.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <form class="form-group row">
+            <div style="text-align:center;">
+                <input id="input-file-id" class="ng-hide" ngf-select="importStandard211($file)"/>
+                <label for="input-file-id" class="button btn btn-primary">Import Standard 211 File</label>
+            </div>
+        </form>
+    </div>
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <hr>
+            <h1>Your Standard 211 Files</h1>
+            <table class="table table-striped">
+                <tr>
+                    <th>Instance ID</th>
+                    <th>Filename</th>
+                    <th>Actions</th>
+                </tr>
+                <tr ng-repeat="x in std211files">
+                    <td>{$ x.id $}</td>
+                    <td>{$ x.filename $}</td>
+                    <td>
+                        <button class="btn btn-primary" ng-click="downloadXML(x)">Download BuildingSync</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

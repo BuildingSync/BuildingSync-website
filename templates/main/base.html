@@ -22,7 +22,10 @@
     <script src="{% static 'vendors/bower_components/angular-cookies/angular-cookies.js' %}"></script>
     <script src="{% static 'vendors/bower_components/lodash/lodash.js' %}"></script>
     <script src="{% static 'vendors/bower_components/file-saver/FileSaver.min.js' %}"></script>
+    <script src="{% static 'vendors/bower_components/ng-file-upload/ng-file-upload.min.js' %}"></script>
+    <script src=""></script>
     <script src="{% static 'js/BsSelection.js' %}"></script>
+    <script src="{% static 'js/BsStandard211.js' %}"></script>
 </head>
 
 <body>
@@ -68,7 +71,9 @@
             <h3>Information</h3>
             <div id="outline" class="list-group">
                 <a class="list-group-item" href="{% url 'buildingsync:index' %}"><span
-                        class="glyphicon glyphicon-home"></span> Home Page</a>
+                        class="glyphicon glyphicon-th-list"></span> Use Case Tool</a>
+                <a class="list-group-item" href="{% url 'std211:index' %}"><span
+                        class="glyphicon glyphicon-check"></span> Standard 211 Tool</a>
                 <a class="list-group-item" href="{% url 'buildingsync:swagger' %}"><span
                         class="glyphicon glyphicon-book"></span> Swagger API Docs</a>
                 {% if request.user.is_superuser %}

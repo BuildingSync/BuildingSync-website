@@ -15,7 +15,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         $urlRouterProvider.otherwise('/');
         $stateProvider.state('main', {
             url: '/',
-            templateUrl: '/static/partials/view.html',
+            templateUrl: '/static/partials/useCaseview.html',
             controller: 'BsController',
             resolve: {
                 schemas: function (SchemaService) {

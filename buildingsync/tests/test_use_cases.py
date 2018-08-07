@@ -36,7 +36,7 @@ class TestGetUseCaseView(TestCase):
         self.assertEqual(resp.status_code, 200)
         try:
             json.loads(resp.content)
-        except:  # pragma: no cover
+        except BaseException:  # pragma: no cover
             self.fail('Response from get_use_cases was not proper json')
 
 
