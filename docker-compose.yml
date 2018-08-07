@@ -9,7 +9,7 @@ services:
       - POSTGRES_USER=bs-tool
       - POSTGRES_PASSWORD=super-secret-password
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - selectiontool_pgdata:/var/lib/postgresql/data
 #    ports:
 #      - "5431:5432"
   web:
@@ -30,9 +30,9 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - mediadata:/srv/bs-tool/media
+      - selectiontool_mediadata:/srv/bs-tool/media
 volumes:
-  pgdata:
+  selectiontool_pgdata:
     external: true
-  mediadata:
+  selectiontool_mediadata:
     external: true
