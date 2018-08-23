@@ -1,5 +1,0 @@
-[run]
-omit =
-        /usr/*
-        .tox/*
-        buildingsync/schemas/schema2/structure.py

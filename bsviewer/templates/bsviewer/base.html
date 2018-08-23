@@ -1,0 +1,50 @@
+{% extends 'bootstrap.html' %}
+
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+{% block bootstrap3_extra_head %}
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'bsviewer/favicon.ico' %}">
+    <script src="https://use.fontawesome.com/93619a2981.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'bsviewer/buildingsyncmain.css' %}">
+     <link rel="stylesheet" type="text/css" href="{% static 'bsviewer/style.css' %}">
+{% block extra_head %}{% endblock %}
+{% endblock bootstrap3_extra_head %}
+
+
+{% block bootstrap3_content %}
+
+ 	<header id="header" role="banner">
+        <div class="container">
+        <h1>
+            <a class="header" href="{% url 'bsviewer:index' %}">BuildingSync<sup>®</sup> Schema Viewer</a>
+        </h1>
+        </div>
+    </header>
+
+    <!-- TODO: navbar -->
+
+    {% block content_notitle %}
+    <div class="container">
+    	<div class="pad-10">
+
+	        <h1>{% block title %}(no title){% endblock %}</h1>
+
+	        {% bootstrap_messages %}
+
+	        {% block content %}(no content){% endblock %}
+	    </div>    
+
+    </div>
+    {% endblock content_notitle %}
+
+    <footer id="footer">
+      <ul class="copyright">
+        <p>BuildingSync<sup>®</sup> is a registered trademark of the Alliance for Sustainable Energy, LLC.</p>
+        <p><a href="http://www.nrel.gov">NREL</a> is a National Laboratory of the U.S. Department of Energy, Office of Energy Efficiency and Renewable Energy, operated by the Alliance for Sustainable Energy, LLC.
+      </ul>
+    </footer>
+
+
+{% endblock bootstrap3_content %}
+
