@@ -9,6 +9,10 @@ def index(request):
     context = {}
     return render(request, 'bsviewer/index.html', context)
 
+def use_cases(request):    
+	context = {}
+	return render(request, 'bsviewer/use_cases.html', context)
+
 @login_required
 def profile(request):
     if request.GET and request.GET['passwordchange'] == 'done':

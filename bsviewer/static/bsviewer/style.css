@@ -110,3 +110,32 @@ a:focus, a:hover {
     background-color: #2db1a6;
   }
 }
+
+.badge-accent {
+  background-color:#2db1a6;
+}
+
+.badge-accent2 {
+  background-color: #EFAF00;
+}
+
+.btn-accent {
+    color: #fff;
+    background-color: #2db1a6;
+    border-color: #18AFA3;
+}
+
+.btn-accent2 {
+  color: #fff;
+  background-color: #EFAF00;
+  border-color: #F4C43F;
+}
+
+.list-group-item-accent {
+    color: #fff;
+    background-color: #2db1a6;
+}
+
+.list-group-item-accent a {
+  border-bottom: 0px;
+}

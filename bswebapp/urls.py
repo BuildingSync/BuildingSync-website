@@ -22,6 +22,7 @@ from bsviewer import views
 
 urlpatterns = [
     path('viewers/', include('bsviewer.urls'), name='viewer'),
+    path('', views.index, name='home'),
     path('admin/', admin.site.urls, name='admin'),
     path('user/login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('user/profile/', views.profile, name='profile'),

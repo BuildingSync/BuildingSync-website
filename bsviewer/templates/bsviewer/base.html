@@ -18,7 +18,7 @@
  	<header id="header" role="banner">
         <div class="container">
         <h1>
-            <a class="header" href="{% url 'bsviewer:index' %}">BuildingSync<sup>®</sup> Schema Viewer</a>
+            <a class="header" href="{% url 'home' %}">BuildingSync<sup>®</sup> Schema Viewer</a>
         </h1>
         </div>
     </header>
@@ -35,10 +35,10 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li class="{% active_page request 'index'%}">
-                        <a href="{% url 'bsviewer:index' %}">
+                    <li class="{% active_page request 'cases'%}">
+                        <a href="{% url 'bsviewer:cases' %}">
                             <i class="fa fa-search" aria-hidden="true"></i>
-                            Viewer
+                            Use Cases
                         </a>
                     </li>
                     <li class="{% active_page request 'datadictionaryelement'%}">
