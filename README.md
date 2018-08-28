@@ -6,10 +6,11 @@ This is the repository for the BuildingSync Validator web application.
 
 1. Clone the repository.
 1. Setup python 3.  You can use a virtual environment:
-	```bash 
-	   pyenv virtualenv 3.6.3 bs-validator-3.6.3
-	   pyenv local bs-validator-3.6.3
-	```   
+    ```bash
+    pyenv install 3.6.5 
+    pyenv virtualenv 3.6.5 bs-validator-3.6.5
+    pyenv local bs-validator-3.6.3
+    ```   
 1. Install PostgreSQL server for local development (if desired)
 	1. Once installed, create your local database and user:
 		```bash
