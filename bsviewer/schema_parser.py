@@ -101,6 +101,8 @@ class RestrictionElement(BuildingSyncSchemaElement):
     def __init__(self):
         super(RestrictionElement, self).__init__()
         self.enumerations = []
+        self.min_inclusive = 0
+        self.max_inclusive = 0
 
 
 class ChoiceElement(BuildingSyncSchemaElement):
@@ -289,6 +291,10 @@ class BuildingSyncSchemaProcessor(object):
         for child in parent_object.getchildren():
             if child.tag.endswith('enumeration'):
                 this_restriction.enumerations.append(child.attrib['value'])
+            elif child.tag.endswith('minInclusive'):
+                this_restriction.min_inclusive = child.attrib['value']
+            elif child.tag.endswith('maxInclusive'):
+                this_restriction.max_inclusive = child.attrib['value']
             else:
                 raise Exception("Invalid tag type in _read_restriction: " + child.tag)
         return this_restriction
