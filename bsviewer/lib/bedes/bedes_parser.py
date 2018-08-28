@@ -13,8 +13,6 @@ import xmltodict
 class BedesParser(object):
     '''
     Download XML of terms and list options from here: https://bedes.lbl.gov/bedes-online
-
-    # TODO: Need to determine the version of BEDES. Where is this found?
     '''
 
     def __init__(self, version, terms_filename='bedes_online_dictionary_uuid-terms.xml',
@@ -110,4 +108,3 @@ if __name__ == '__main__':
 
     print(bedes.terms)
     print(bedes.categories)
-
