@@ -1,6 +1,8 @@
 from django.contrib import admin
 
-from .models import Schema, BuildingSyncAttribute, UseCase
+from .models.schema import Schema
+from .models.buildingsyncattribute import BuildingSyncAttribute
+from .models.models import UseCase
 
 class SchemaAdmin(admin.ModelAdmin):
 	list_display = ('name', 'version', 'schema_file')

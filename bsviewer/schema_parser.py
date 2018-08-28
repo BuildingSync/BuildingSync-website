@@ -1,6 +1,6 @@
 import xmlschema
 
-from models import Schema, BuildingSyncAttribute
+from .models.buildingsyncattribute import BuildingSyncAttribute
 
 
 class BuildingSyncSchemaElement(object):
@@ -627,17 +627,19 @@ class BuildingSyncSchemaProcessor(object):
         return num_added, return_rows
 
 
-def reset_schema():
-    # Delete any previous schemas (and attributes??)
-    Schema.objects.all().delete()
-    BuildingSyncAttribute.objects.all().delete()
+def process_schema(schema_object):
+    # Delete schema/attributes with same name
+    # TODO: this should be taken care of already with cascade deletes
+    # Schema.objects.all().delete()
+    # BuildingSyncAttribute.objects.all().delete()
 
     # Create a schema to work with
-    s = Schema(name=SCHEMA_NAME, version=SCHEMA_VERSION)
-    s.save()
+    # TODO: this should have been taken care of already
+    # s = Schema(name=schema_name, version=schema_version)
+    # s.save()
 
     # parse the schema itself to get all entries
-    my_schema = xmlschema.XMLSchema('buildingsync/schemas/BuildingSync.xsd')
+    my_schema = xmlschema.XMLSchema(schema_object.schema_file.path)
 
     bs_processor = BuildingSyncSchemaProcessor(my_schema)
     schema_entries = bs_processor.walk_root_element()
@@ -651,8 +653,8 @@ def reset_schema():
             tree_level=se['$$treeLevel'],
             index=se['index'],
             path=se['path'],
-            schema=s)
+            schema=schema_object)
         b.save()
 
     # Return the schema
-    return s
+    return schema_object
