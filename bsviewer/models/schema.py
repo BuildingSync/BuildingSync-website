@@ -12,8 +12,8 @@ def rename_schema_file(instance, path):
 
 # BuildingSync Schema versions
 class Schema(models.Model):
-	name = models.CharField(max_length=100, default="0.2.0", unique=True)
-	version = models.CharField(max_length=100, default="0.2", unique=True, null=False)
+	name = models.CharField(max_length=100, default="0.3.0", unique=True)
+	version = models.CharField(max_length=100, default="0.3", unique=True, null=False)
 	schema_file = models.FileField(upload_to=rename_schema_file)
 	schema_parsed = models.BooleanField(default=False)
 
