@@ -1,0 +1,28 @@
+{% extends 'bsviewer/base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}User Details{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-5">
+            <table class="table">
+                <tr>
+                    <th>First Name</th>
+                    <td>{{ request.user.first_name }}</td>
+                </tr>
+                <tr>
+                    <th>Last Name</th>
+                    <td>{{ request.user.last_name }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ request.user.email }}</td>
+                </tr>
+            </table>
+          <!---   <a href="{#% url 'bsviewer:password_change' %}" class="btn btn-default">Change Password</a>  --->
+        </div>
+    </div>
+
+{% endblock content %}

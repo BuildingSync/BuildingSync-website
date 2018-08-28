@@ -26,34 +26,38 @@
      <nav class="navbar navbar-default navbar-static-top" id="floatingnav" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+<!--                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>
+                </button> -->
                 <!--<a class="navbar-brand" href="{# % url 'bsviewer:index' % #}" class="hidden" id="navbrand">Schema Viewer</a>-->
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li class="{% active_page request 'viewer'%}">
+                    <li class="{% active_page request 'index'%}">
                         <a href="{% url 'bsviewer:index' %}">
                             <i class="fa fa-search" aria-hidden="true"></i>
                             Viewer
+                        </a>
+                    </li>
+                    <li class="{% active_page request 'datadictionaryelement'%}">
+                        <a href="{% url 'bsviewer:index' %}">
+                            <i class="fa fa-list" aria-hidden="true"></i>
+                            Data Dictionary
                         </a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if user.is_authenticated %}
                         {% if request.user.is_staff %}
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-cog" aria-hidden="true"></i>
-                                    <span class="sr-only">Admin</span>
-                                    <span class="caret"></span>
-                                </a>
-                            </li>
+                            <li><a href="{% url 'admin:index' %}"><span class="glyphicon glyphicon-lock"></span> Admin</a></li>
                         {% endif %}
+
+                        <li class="{% active_page request 'profile' %}"><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span> {{ request.user.get_full_name }}</a></li>
+                        <li><a href="{% url 'logout' %}?next={% if return_to_page_on_login %}{{request.path}}{% else %}{% url 'login' %}{% endif %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     {% else %}
+                        <li class="{% active_page request 'login' %}"><a href="{% url 'login' %}{% if return_to_page_on_login %}?next={{request.path}}{% endif %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -84,7 +88,4 @@
 
 {% endblock bootstrap3_content %}
 
-{% block base_extra_script %}
-    <script src="{% static "bsviewer/navbar.js" %}"></script>
-{% endblock base_extra_script %}    
 

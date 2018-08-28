@@ -12,6 +12,7 @@ body {
 
 #nav a, #nav a:hover, #nav a:focus {
 	text-decoration: none;
+  border-bottom: 0px;
 }
 
 #header h1 a:hover, #header h1 a:focus {
@@ -40,10 +41,12 @@ a:focus, a:hover {
 }
 .navbar-default .navbar-nav > li > a {
   color: #f4fafb;
+  border-bottom: 0px;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
   color: #6d7478;
+  border-bottom: 0px;
 }
 .navbar-default .navbar-nav > li > .dropdown-menu {
   background-color: #2db1a6;
