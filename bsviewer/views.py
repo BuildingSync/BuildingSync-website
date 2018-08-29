@@ -34,7 +34,7 @@ def profile(request):
 
 class UseCaseCreate(CreateView):
     model = UseCase
-    fields = ['nickname', 'schema']
+    fields = ['name', 'schema']
     success_url = reverse_lazy('bsviewer:cases')
 
     def form_valid(self, form):
@@ -43,7 +43,7 @@ class UseCaseCreate(CreateView):
 
 class UseCaseUpdate(UpdateView):
     model = UseCase
-    fields = ['nickname', 'schema']
+    fields = ['name', 'schema']
     success_url = reverse_lazy('bsviewer:cases')
 
 class UseCaseDelete(DeleteView):
