@@ -6,6 +6,7 @@ class Enumeration(models.Model):
     attribute = models.ForeignKey(
         'BuildingSyncAttribute', on_delete=models.CASCADE, related_name='enumerations'
     )
+    class_name = models.CharField(max_length=250)
     # required_use_cases = models.ManyToManyField('UseCase', related_name='required_use_cases')
     # optional_use_cases = models.ManyToManyField('UseCase', related_name='optional_use_cases')
     # ignored_use_cases = models.ManyToManyField('UseCase', related_name='ignored_use_cases')
