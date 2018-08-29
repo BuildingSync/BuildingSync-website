@@ -392,7 +392,7 @@ class BuildingSyncSchemaProcessor(object):
         return None
 
     def _walk_sequence_or_choice_element(self, parent_element, root_path, current_tree_level,
-                                         current_index,                                         prefix):
+                                         current_index, prefix):
         return_rows = []
         num_added = 0
         for elem in parent_element.named_elements:
@@ -570,26 +570,38 @@ def process_schema(schema_object):
             schema=schema_object)
         b.save()
 
-    enumeration_names = set()
+    enumeration_names = {}
     for se in schema_entries:
         # go through all the enumerations and figure out what the unique name should be. In
         # some cases, the last element is enough, but that may not work for items such as
         # ClimateZone which exists for CBECS, ASHRAE, CEC, etc... so these would resolve as
         # CBECS ClimateZone
         if se['type'] == 'Enumeration':
-            single_class = se['path'].split('.')[-1]
-            double_class = ' '.join(se['path'].split('.')[-2:-1])
+            first_class = se['path'].split('.')[-1]
+            second_class = ' '.join(se['path'].split('.')[-2:-1])
 
-            # TODO: finish this!
+            if not enumeration_names.get(first_class, None):
+                enumeration_names[first_class] = set()
+
+            enumeration_names[first_class].add(second_class)
+            se['first_class'] = first_class
+            se['second_class'] = second_class
 
     for se in schema_entries:
+        if se['type'] == 'Enumeration':
             attribs = BuildingSyncAttribute.objects.filter(path=se['path'], schema=schema_object)
+
+            # create the name of the enumeration class
+            enum_class_name = se['first_class']
+            if len(enumeration_names[enum_class_name]) > 1:
+                enum_class_name = "%s::%s" % (se['second_class'], se['first_class'])
 
             if len(attribs) == 1:
                 e = Enumeration(
                     name=se['pure_name'],
                     attribute=attribs[0],
                     index=se['index'],
+                    class_name=enum_class_name
                 )
                 e.save()
             elif len(attribs) > 1:
@@ -597,5 +609,4 @@ def process_schema(schema_object):
             else:
                 print('Could not find enumeration path for %s' % se['full_path'])
 
-    # Return the schema
     return schema_object

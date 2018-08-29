@@ -32,5 +32,7 @@ class Command(BaseCommand):
 
         for attribute in schema.attributes.all().order_by('index'):
             print(attribute)
+            for enum in attribute.enumerations.all():
+                print("****************** enumeration: %s" % enum)
 
         self.stdout.write('Finished parsing bedes')

@@ -14,6 +14,7 @@ This is the repository for the BuildingSync Validator web application.
 1. Install PostgreSQL server for local development (if desired)
 	1. Once installed, create your local database and user:
 		```bash
+		psql -c 'DROP DATABASE bs_validator;'
 		psql -c 'CREATE DATABASE bs_validator;'
 		psql -c "CREATE USER bs_validator WITH ENCRYPTED PASSWORD 'bs_validator';"
 		psql -c 'GRANT ALL PRIVILEGES ON DATABASE bs_validator TO bs_validator;'
