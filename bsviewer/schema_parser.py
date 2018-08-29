@@ -4,6 +4,7 @@ from .models.attribute import Attribute
 from .models.enumeration import Enumeration, EnumerationClass
 from django.db import transaction
 
+
 class BuildingSyncSchemaElement(object):
     def __init__(self):
         pass

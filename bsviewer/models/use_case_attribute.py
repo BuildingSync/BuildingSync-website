@@ -20,6 +20,7 @@ class UseCaseAttribute(models.Model):
         # there can only be one state for each attribute and use_case
         unique_together = ('attribute', 'use_case')
 
+
 class UseCaseEnumeration(models.Model):
     use_case = models.ForeignKey('UseCase', on_delete=models.CASCADE)
     enumeration = models.ForeignKey('Enumeration', on_delete=models.CASCADE)

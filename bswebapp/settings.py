@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = '4p67kjj(p6#ny2)p%*t25n)^71k7ha3x3a*mfb6wlvhxc=b03%'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -71,7 +69,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bswebapp.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -84,20 +81,18 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5432',
     }
-}    
-
+}
 
 # DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': os.environ.get('POSTGRES_DB', 'postgres'),
-    #     'USER': os.environ.get('POSTGRES_USER', 'postgres'),
-    #     'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'postgres'),
-    #     'HOST': os.environ.get('POSTGRES_HOST', 'postgres'),
-    #     'PORT': '5432',
-    # }
-#}    
-
+# 'default': {
+#     'ENGINE': 'django.db.backends.postgresql',
+#     'NAME': os.environ.get('POSTGRES_DB', 'postgres'),
+#     'USER': os.environ.get('POSTGRES_USER', 'postgres'),
+#     'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'postgres'),
+#     'HOST': os.environ.get('POSTGRES_HOST', 'postgres'),
+#     'PORT': '5432',
+# }
+# }
 
 
 # Password validation
@@ -133,9 +128,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-

@@ -1,16 +1,23 @@
+import os
+
 from django.db import models
 from django.db.models.signals import post_save, post_delete, pre_save
 from django.dispatch import receiver
+
 from bsviewer.schema_parser import process_schema
-import os
+
 
 def rename_schema_file(instance, path):
     if instance.version:
-        return '{}buildingsync_v_{}.xsd'.format('uploaded_schemas/', instance.version.replace('.', '_'))
+        return '{}buildingsync_v_{}.xsd'.format('uploaded_schemas/',
+                                                instance.version.replace('.', '_'))
     else:
         pass
 
+
 # BuildingSync Schema versions
+
+
 class Schema(models.Model):
     name = models.CharField(max_length=100, default="0.3.0", unique=True)
     version = models.CharField(max_length=100, default="0.3", unique=True, null=False)
@@ -33,17 +40,19 @@ class Schema(models.Model):
 
         return result
 
+
 # post_save process
+
+
 @receiver(post_save, sender=Schema)
 def parse_schema(sender, instance, **kwargs):
-
     # TODO: if parsed bool is false, call 'parse' function in schema_parser
     # set 'parsed' bool to True on Schema model and save
     print('SCHEMA PARSED? {}'.format(instance.schema_parsed))
     if instance.schema_parsed is False:
         process_schema(instance)
         # set parsed = true so it doesn't get parsed again
-        instance.schema_parsed = True;
+        instance.schema_parsed = True
         instance.save()
 
 

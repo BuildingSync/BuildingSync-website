@@ -1,17 +1,5 @@
 from django.core.management.base import BaseCommand
 
-from bsviewer.models.schema import Schema
-from bsviewer.models.use_case import UseCase
-from bsviewer.models.attribute import Attribute
-from bsviewer.models.enumeration import Enumeration
-from bsviewer.models.use_case_attribute import (
-    UseCaseAttribute,
-    UseCaseEnumeration,
-    STATE_REQUIRED,
-    STATE_IGNORED,
-)
-from django.core.management.base import BaseCommand
-
 from bsviewer.models.attribute import Attribute
 from bsviewer.models.enumeration import Enumeration
 from bsviewer.models.schema import Schema
@@ -63,7 +51,6 @@ class Command(BaseCommand):
 
         for attrib in use_case.attributes.all():
             print(attrib)
-
 
         for enums in use_case.enumerations.all():
             print(enums)

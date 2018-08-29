@@ -1,17 +1,19 @@
+import os
+
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, Http404
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models.schema import Schema
-from .models.attribute import Attribute
 from .models.use_case import UseCase
 
 
 def index(request):
     context = {}
     return render(request, 'bsviewer/index.html', context)
+
 
 def use_cases(request):
     user_usecases = {}
@@ -20,16 +22,18 @@ def use_cases(request):
 
     public_usecases = UseCase.objects.filter(make_public=True)
     context = {
-                'user_usecases': user_usecases,
-                'public_usecases': public_usecases
-                }
+        'user_usecases': user_usecases,
+        'public_usecases': public_usecases
+    }
     return render(request, 'bsviewer/use_cases.html', context)
+
 
 @login_required
 def profile(request):
-    if request.GET and request.GET['passwordchange'] == 'done':
-        messages.add_message(request, messages.SUCCESS, 'Password changed')
+    # if request.GET and request.GET['passwordchange'] == 'done':
+    #     messages.add_message(request, messages.SUCCESS, 'Password changed')
     return render(request, 'registration/profile.html')
+
 
 def download_template(request, version):
     if version:
@@ -42,8 +46,7 @@ def download_template(request, version):
                 response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
                 return response
         raise Http404
-    raise Http404   
-
+    raise Http404
 
 
 class UseCaseCreate(CreateView):
@@ -55,12 +58,13 @@ class UseCaseCreate(CreateView):
         form.instance.owner = self.request.user
         return super().form_valid(form)
 
+
 class UseCaseUpdate(UpdateView):
     model = UseCase
     fields = ['name', 'schema', 'import_file']
     success_url = reverse_lazy('bsviewer:cases')
 
+
 class UseCaseDelete(DeleteView):
     model = UseCase
     success_url = reverse_lazy('bsviewer:cases')
-
