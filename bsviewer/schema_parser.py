@@ -130,7 +130,8 @@ class BuildingSyncSchemaProcessor(object):
 
     def check_all_type_references(self):
         for type_ref in self.type_references:
-            looking_for_type_name = type_ref.ref_type.split(':')[1]  # it starts with the namespace 'auc:'
+            # it starts with the namespace 'auc:'
+            looking_for_type_name = type_ref.ref_type.split(':')[1]
             found = False
             for ne in self.all_named_elements:
                 if looking_for_type_name == ne.name:
@@ -150,7 +151,9 @@ class BuildingSyncSchemaProcessor(object):
                 elif 'ref' in child.attrib:
                     full_schema.ref_elements.append(self._read_ref_element(child))
                 else:
-                    raise Exception("Invalid element type in _read_schema, no name or ref in attrib...")
+                    raise Exception(
+                        "Invalid element type in _read_schema, no name or ref in attrib..."
+                    )
             elif child.tag.endswith('complexType'):
                 full_schema.complex_types.append(self._read_complex_type(child))
             elif child.tag.endswith('simpleType'):
@@ -247,7 +250,8 @@ class BuildingSyncSchemaProcessor(object):
                 elif 'ref' in child.attrib:
                     this_sequence.ref_elements.append(self._read_ref_element(child))
                 else:
-                    raise Exception("Invalid element type in _read_sequence, no name or ref in attrib...")
+                    raise Exception(
+                        "Invalid element type in _read_sequence, no name or ref in attrib...")
             elif child.tag.endswith('choice'):
                 this_sequence.choices.append(self._read_choice(child))
             else:
@@ -308,77 +312,43 @@ class BuildingSyncSchemaProcessor(object):
                 elif 'ref' in child.attrib:
                     this_choice.ref_elements.append(self._read_ref_element(child))
                 else:
-                    raise Exception("Invalid element type in _read_schema, no name or ref in attrib...")
+                    raise Exception(
+                        "Invalid element type in _read_schema, no name or ref in attrib...")
             else:
                 raise Exception("Invalid tag type in _read_choice: " + child.tag)
         return this_choice
 
     def walk_root_element(self):
-        start_with_audits = True
-        if start_with_audits:
-            a, return_rows, b = self._walk_named_element(self.full_schema.named_elements[0], "audits", 0, 0, "")
-            return return_rows
-        else:
-            return self._walk_schema(self.full_schema, "root", 0, 0, "")
+        a, return_rows, b = self._walk_named_element(
+            self.full_schema.named_elements[0], "audits", 0, 0, ""
+        )
 
-    def _walk_schema(self, parent_element, root_path, current_tree_level, current_index, prefix):
-        return_rows = []
-        num_added = 0
-        for elem in parent_element.named_elements:
-            # named elements are tricky, since we walk it to find the documentation before actually adding it
-            # so: don't do the usual current_index, append, etc first; instead:
-            #  increment the current_index when we pass it into the walker function, since it will actually be one above
-            #  then increment the local current_index by one and add the current node
-            #  then add all the rows found during the walkabout
-            this_num_added, new_rows, potential_doc_string = self._walk_named_element(elem, root_path + '.' + elem.name,
-                                                                                      current_tree_level + 1,
-                                                                                      current_index + 1, prefix + "- ")
-            current_index += 1
-            num_added += 1
-            if not potential_doc_string:
-                potential_doc_string = "*No Documentation Found*"
-            return_rows.append({'name': prefix + elem.name + ' {%s}' % potential_doc_string,
-                                'pure_name': elem.name,
-                                'type': NamedElement.my_string(),
-                                'path': root_path + '.' + elem.name,
-                                '$$treeLevel': current_tree_level,
-                                'index': current_index})
-            current_index += this_num_added
-            num_added += this_num_added
-            return_rows.extend(new_rows)
-        for elem in parent_element.ref_elements:
-            current_index += 1
-            num_added += 1
-            return_rows.append({'name': prefix + elem.ref_type,
-                                'pure_name': elem.ref_type,
-                                'type': ReferenceElement.my_string(),
-                                'path': root_path + '.' + elem.ref_type,
-                                '$$treeLevel': current_tree_level,
-                                'index': current_index})
-            this_num_added, new_rows, potential_doc_string = self._walk_reference_element(elem)
-            current_index += this_num_added
-            num_added += this_num_added
-            return_rows.extend(new_rows)
         return return_rows
 
-    def _walk_named_element(self, parent_element, root_path, current_tree_level, current_index, prefix):
+    def _walk_named_element(self, parent_element, root_path, current_tree_level, current_index,
+                            prefix):
         return_rows = []
         num_added = 0
         potential_doc_string = None
         for elem in parent_element.annotations:
             potential_doc_string = self._walk_annotation_element(elem)
+
         for elem in parent_element.complex_types:
-            this_num_added, new_rows = self._walk_complex_element(elem, root_path,
-                                                                  current_tree_level, current_index, prefix)
+            this_num_added, new_rows = self._walk_complex_element(
+                elem, root_path, current_tree_level, current_index, prefix
+            )
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
+
         for elem in parent_element.simple_types:
-            this_num_added, new_rows = self._walk_simple_type_element(elem, root_path,
-                                                                      current_tree_level, current_index, prefix)
+            this_num_added, new_rows = self._walk_simple_type_element(
+                elem, root_path, current_tree_level, current_index, prefix
+            )
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
+
         return num_added, return_rows, potential_doc_string
 
     def _walk_reference_element(self, parent_element):
@@ -389,25 +359,30 @@ class BuildingSyncSchemaProcessor(object):
             potential_doc_string = self._walk_annotation_element(elem)
         return num_added, return_rows, potential_doc_string
 
-    def _walk_complex_element(self, parent_element, root_path, current_tree_level, current_index, prefix):
+    def _walk_complex_element(self, parent_element, root_path, current_tree_level, current_index,
+                              prefix):
         return_rows = []
         num_added = 0
         for elem in parent_element.sequences:
-            this_num_added, new_rows = self._walk_sequence_element(elem, root_path,
-                                                                   current_tree_level, current_index, prefix)
+            this_num_added, new_rows = self._walk_sequence_element(
+                elem, root_path, current_tree_level, current_index, prefix
+            )
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
+
         for elem in parent_element.choices:
-            this_num_added, new_rows = self._walk_choice_element(elem, root_path,
-                                                                 current_tree_level, current_index, prefix)
+            this_num_added, new_rows = self._walk_choice_element(
+                elem, root_path, current_tree_level, current_index, prefix
+            )
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
         return num_added, return_rows
 
     def _find_referenced_element(self, original_ref_name):
-        looking_for_type_name = original_ref_name.split(':')[1]  # it starts with the namespace 'auc:'
+        # it starts with the namespace 'auc:'
+        looking_for_type_name = original_ref_name.split(':')[1]
         if looking_for_type_name in self.named_complex_types:
             return self.named_complex_types[looking_for_type_name]
         for ne in self.all_named_elements:
@@ -415,7 +390,8 @@ class BuildingSyncSchemaProcessor(object):
                 return ne
         return None
 
-    def _walk_choice_element(self, parent_element, root_path, current_tree_level, current_index, prefix):
+    def _walk_choice_element(self, parent_element, root_path, current_tree_level, current_index,
+                             prefix):
         return_rows = []
         num_added = 0
         for elem in parent_element.named_elements:
@@ -443,41 +419,52 @@ class BuildingSyncSchemaProcessor(object):
                             trimmed_type = elem.type[4:]
                         else:
                             trimmed_type = elem.type
-                        this_num_added, new_rows = self._walk_complex_element(instance, root_path + '.' + trimmed_type,
-                                                                              current_tree_level + 1, current_index,
-                                                                              prefix + "- ")
+                        this_num_added, new_rows = self._walk_complex_element(
+                            instance, root_path + '.' + trimmed_type, current_tree_level + 1,
+                            current_index, prefix + "- "
+                        )
                     else:
                         raise Exception(
-                            "Couldn't grok the type of the searched reference element; type: %s" % elem.type)
+                            "Couldn't grok the type of the searched reference element; type: %s" % elem.type
+                        )
                     current_index += this_num_added
                     num_added += this_num_added
                     return_rows.extend(new_rows)
             else:
                 current_index += 1
                 num_added += 1
-                return_rows.append(
-                    {'name': prefix + elem.name,
-                     'pure_name': elem.name,
-                     'path': root_path + '.' + elem.name,
-                     'type': NamedElement.my_string(),
-                     '$$treeLevel': current_tree_level,
-                     'index': current_index})
-                this_num_added, new_rows, potential_doc_string = self._walk_named_element(elem,
-                                                                                          root_path + '.' + elem.name,
-                                                                                          current_tree_level + 1,
-                                                                                          current_index, prefix + "- ")
+                return_rows.append({
+                    'name': prefix + elem.name,
+                    'pure_name': elem.name,
+                    'path': root_path + '.' + elem.name,
+                    'type': NamedElement.my_string(),
+                    '$$treeLevel': current_tree_level,
+                    'index': current_index
+                })
+                this_num_added, new_rows, potential_doc_string = self._walk_named_element(
+                    elem,
+                    root_path + '.' + elem.name,
+                    current_tree_level + 1,
+                    current_index,
+                    prefix + "- "
+                )
                 current_index += this_num_added
                 num_added += this_num_added
                 return_rows.extend(new_rows)  # maybe this section?
+
         for elem in parent_element.ref_elements:
             current_index += 1
             num_added += 1
-            return_rows.append({'name': prefix + elem.ref_type,
-                                'pure_name': elem.ref_type,
-                                'path': root_path + '.' + elem.ref_type,
-                                'type': ReferenceElement.my_string(),
-                                '$$treeLevel': current_tree_level,
-                                'index': current_index})
+
+            ref_type_clean = elem.ref_type.split(':')[1]
+            return_rows.append({
+                'name': prefix + ref_type_clean,
+                'pure_name': ref_type_clean,
+                'path': root_path + '.' + ref_type_clean,
+                'type': ReferenceElement.my_string(),
+                '$$treeLevel': current_tree_level,
+                'index': current_index
+            })
             # this will really just write the annotation, which we eventually don't want, but OK for now
             this_num_added, new_rows, potential_doc_string = self._walk_reference_element(elem)
             current_index += this_num_added
@@ -489,86 +476,109 @@ class BuildingSyncSchemaProcessor(object):
                 if isinstance(instance, NamedElement):
                     this_num_added, new_rows, potential_doc_string = self._walk_named_element(
                         instance,
-                        root_path + '.' + elem.ref_type,
+                        root_path + '.' + ref_type_clean,
                         current_tree_level + 1,
                         current_index,
                         prefix + "- ")
                 elif isinstance(instance, ComplexTypeElement):
-                    this_num_added, new_rows = self._walk_complex_element(instance, root_path + '.' + elem.ref_type,
-                                                                          current_tree_level + 1, current_index,
-                                                                          prefix + "- ")
+                    this_num_added, new_rows = self._walk_complex_element(
+                        instance,
+                        root_path + '.' + ref_type_clean,
+                        current_tree_level + 1,
+                        current_index, prefix + "- "
+                    )
                 else:
                     raise Exception(
-                        "Couldn't grok the type of the searched reference element; type: %s" % elem.ref_type)
+                        "Couldn't grok the type of the searched reference element; type: %s" % elem.ref_type
+                    )
                 current_index += this_num_added
                 num_added += this_num_added
                 return_rows.extend(new_rows)
 
         return num_added, return_rows
 
-    def _walk_sequence_element(self, parent_element, root_path, current_tree_level, current_index, prefix):
+    def _walk_sequence_element(self, parent_element, root_path, current_tree_level, current_index,
+                               prefix):
         return_rows = []
         num_added = 0
         for elem in parent_element.named_elements:
             if elem.type:
                 current_index += 1
                 num_added += 1
-                return_rows.append(
-                    {'name': prefix + '%s' % elem.name,
-                     'pure_name': elem.name,
-                     'type': elem.type,
-                     'path': root_path + '.' + elem.name,
-                     '$$treeLevel': current_tree_level,
-                     'index': current_index})
+                return_rows.append({
+                    'name': prefix + '%s' % elem.name,
+                    'pure_name': elem.name,
+                    'type': elem.name,
+                    'path': root_path + '.' + elem.name,
+                    '$$treeLevel': current_tree_level,
+                    'index': current_index
+                })
                 instance = self._find_referenced_element(elem.type)
                 if instance:
                     if isinstance(instance, NamedElement):
                         this_num_added, new_rows, potential_doc_string = self._walk_named_element(
                             instance,
-                            root_path + '.' + elem.type,
+                            root_path + '.' + elem.name,
                             current_tree_level + 1,
                             current_index,
-                            prefix + "- ")
+                            prefix + "- "
+                        )
                     elif isinstance(instance, ComplexTypeElement):
                         if elem.type.startswith('auc:'):
                             trimmed_type = elem.type[4:]
                         else:
                             trimmed_type = elem.type
-                        this_num_added, new_rows = self._walk_complex_element(instance, root_path + '.' + trimmed_type,
-                                                                              current_tree_level + 1, current_index,
-                                                                              prefix + "- ")
+
+                        # we want the path to be elements, not types
+                        this_num_added, new_rows = self._walk_complex_element(
+                            instance,
+                            root_path + '.' + elem.name,
+                            current_tree_level + 1,
+                            current_index,
+                            prefix + "- "
+                        )
                     else:
                         raise Exception(
-                            "Couldn't grok the type of the searched reference element; type: %s" % elem.type)
+                            "Couldn't grok the type of the searched reference element; type: %s" % elem.type
+                        )
                     current_index += this_num_added
                     num_added += this_num_added
                     return_rows.extend(new_rows)
             else:
                 current_index += 1
                 num_added += 1
-                return_rows.append(
-                    {'name': prefix + elem.name,
-                     'pure_name': elem.name,
-                     'path': root_path + '.' + elem.name,
-                     'type': NamedElement.my_string(),
-                     '$$treeLevel': current_tree_level,
-                     'index': current_index})
-                this_num_added, new_rows, potential_doc_string = self._walk_named_element(elem,
-                                                                                          root_path + '.' + elem.name,
-                                                                                          current_tree_level + 1,
-                                                                                          current_index, prefix + "- ")
+                return_rows.append({
+                    'name': prefix + elem.name,
+                    'pure_name': elem.name,
+                    'path': root_path + '.' + elem.name,
+                    'type': NamedElement.my_string(),
+                    '$$treeLevel': current_tree_level,
+                    'index': current_index
+                })
+                this_num_added, new_rows, potential_doc_string = self._walk_named_element(
+                    elem,
+                    root_path + '.' + elem.name,
+                    current_tree_level + 1,
+                    current_index,
+                    prefix + "- "
+                )
                 current_index += this_num_added
                 num_added += this_num_added
                 return_rows.extend(new_rows)  # maybe this section?
+
         for elem in parent_element.ref_elements:
             current_index += 1
             num_added += 1
-            return_rows.append({'name': prefix + elem.ref_type,
-                                'pure_name': elem.ref_type,
-                                'path': root_path + '.' + elem.ref_type,
-                                'type': ReferenceElement.my_string(),
-                                '$$treeLevel': current_tree_level,
-                                'index': current_index})
+
+            ref_type_clean = elem.ref_type.split(':')[1]
+            return_rows.append({
+                'name': prefix + ref_type_clean,
+                'pure_name': ref_type_clean,
+                'path': root_path + '.' + ref_type_clean,
+                'type': ReferenceElement.my_string(),
+                '$$treeLevel': current_tree_level,
+                'index': current_index
+            })
             # this will really just write the annotation, which we eventually don't want, but OK for now
             this_num_added, new_rows, potential_doc_string = self._walk_reference_element(elem)
             current_index += this_num_added
@@ -580,17 +590,22 @@ class BuildingSyncSchemaProcessor(object):
                 if isinstance(instance, NamedElement):
                     this_num_added, new_rows, potential_doc_string = self._walk_named_element(
                         instance,
-                        root_path + '.' + elem.ref_type,
+                        root_path + '.' + ref_type_clean,
                         current_tree_level + 1,
                         current_index,
                         prefix + "- ")
                 elif isinstance(instance, ComplexTypeElement):
-                    this_num_added, new_rows = self._walk_complex_element(instance, root_path + '.' + elem.ref_type,
-                                                                          current_tree_level + 1, current_index,
-                                                                          prefix + "- ")
+                    this_num_added, new_rows = self._walk_complex_element(
+                        instance,
+                        root_path + '.' + ref_type_clean,
+                        current_tree_level + 1,
+                        current_index,
+                        prefix + "- "
+                    )
                 else:
                     raise Exception(
-                        "Couldn't grok the type of the searched reference element; type: %s" % elem.ref_type)
+                        "Couldn't grok the type of the searched reference element; type: %s" % elem.ref_type
+                    )
                 current_index += this_num_added
                 num_added += this_num_added
                 return_rows.extend(new_rows)
@@ -604,38 +619,47 @@ class BuildingSyncSchemaProcessor(object):
             doc_to_show = parent_element.documentation
         return doc_to_show
 
-    def _walk_simple_type_element(self, parent_element, root_path, current_tree_level, current_index, prefix):
+    def _walk_simple_type_element(self, parent_element, root_path, current_tree_level,
+                                  current_index, prefix):
         return_rows = []
         num_added = 0
         for elem in parent_element.restrictions:
-            this_num_added, new_rows = self._walk_restriction_element(elem, root_path + '.' + 'Restriction',
-                                                                      current_tree_level, current_index,
-                                                                      prefix)
+            this_num_added, new_rows = self._walk_restriction_element(
+                elem, root_path + '.' + 'Restriction', current_tree_level, current_index, prefix
+            )
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
         return num_added, return_rows
 
     @staticmethod
-    def _walk_restriction_element(parent_element, root_path, current_tree_level, current_index, prefix):
+    def _walk_restriction_element(parent_element, root_path, current_tree_level, current_index,
+                                  prefix):
         return_rows = []
         num_added = 0
         for elem in parent_element.enumerations:
+            # TODO: Verify that the minInclusive, maxInclusive work here
             current_index += 1
             num_added += 1
-            return_rows.append(
-                {'name': prefix + elem,
-                 'pure_name': elem,
-                 'path': root_path + '.' + 'Enumeration' + ' {%s}' % elem,
-                 'type': 'Enumeration',
-                 '$$treeLevel': current_tree_level,
-                 'index': current_index})
+            return_rows.append({
+                'name': prefix + elem,
+                'class': root_path.split('.')[-2],
+                'pure_name': elem,
+                'path': root_path + '.' + 'Enumeration' + ' {%s}' % elem,
+                'type': 'Enumeration',
+                '$$treeLevel': current_tree_level,
+                'index': current_index
+            })
         return num_added, return_rows
 
 
 def process_schema(schema_object):
+    """
+    parse the schema itself to get all entries
 
-    # parse the schema to get all entries
+    :param schema_object: obj, Schema object as defined by Django
+    :return: obj, Schema object
+    """
     my_schema = xmlschema.XMLSchema(schema_object.schema_file.path)
 
     bs_processor = BuildingSyncSchemaProcessor(my_schema)
@@ -643,6 +667,10 @@ def process_schema(schema_object):
 
     # Create database entries for each schema entry
     for se in schema_entries:
+        # skip all the enumerations until after all the types have been added
+        if se['type'] == 'Enumeration':
+            continue
+
         b = BuildingSyncAttribute(
             name=se['name'],
             pure_name=se['pure_name'],
@@ -652,6 +680,14 @@ def process_schema(schema_object):
             path=se['path'],
             schema=schema_object)
         b.save()
+
+    for se in schema_entries:
+        if se['type'] == 'Enumeration':
+            print(se)
+            # e = Enumeration(
+            #     name=se['name'],
+            #
+            # )
 
     # Return the schema
     return schema_object

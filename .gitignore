@@ -84,4 +84,4 @@ buildingsync/static/vendors/bower_components/
 
 config.env
 package-lock.json
-
+bsviewer/lib/bedes/bedes_v*.json
