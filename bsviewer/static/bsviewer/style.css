@@ -196,3 +196,5 @@ label {
 table th, table td {
   color: #333;
 }
+
+.container p {color: #333;}
