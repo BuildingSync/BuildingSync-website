@@ -1,6 +1,7 @@
+import os
+import csv
 from random import randint
 from shutil import copyfile
-import os
 
 from django.test import TestCase
 
@@ -25,8 +26,25 @@ class TestSchema(TestCase):
         )
         self.schema.save()  # Calling save also processes the schema
 
+    def test_enumerations(self):
+        # check a couple of the attributes to make sure have enumerations
+        test_path = 'Audits.Audit.Contacts.Contact.ContactRole'
+
+        attribute = self.schema.attributes.filter(path=test_path).first()
+        self.assertIsNotNone(attribute)
+        self.assertEqual(attribute.enumeration_classes.count(), 1)
+        self.assertEqual(attribute.enumeration_classes.first().enumerations.count(), 40)
+        self.assertEqual(
+            attribute.enumeration_classes.first().enumerations.first().name, 'Premises'
+        )
+
     def test_to_template(self):
-        # load in the schema
-        data = self.schema.to_template()
-        self.assertEqual(data[0], 'audits.Audit')
-        self.assertEqual(data[1], 'audits.Audit.Sites')
+        filename = self.schema.save_template()
+        self.assertTrue(os.path.exists(filename))
+        with open(filename) as csvfile:
+            for index, row in enumerate(csv.reader(csvfile, delimiter=',')):
+                if index == 0:
+                    self.assertEqual('BuildingSync Path', row[0])
+                elif index == 1:
+                    self.assertEqual('Audits.Audit', row[0])
+                    self.assertEqual('Required', row[1])

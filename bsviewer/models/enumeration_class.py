@@ -8,7 +8,6 @@ class EnumerationClass(models.Model):
 
     # save a reference to the schema in order to allow for quick access to all the enumerations
     schema = models.ForeignKey('Schema', on_delete=models.CASCADE, db_index=True)
-    attribute = models.ForeignKey(Attribute, on_delete=models.CASCADE, related_name='enumeration')
 
     def __str__(self):
         return self.name

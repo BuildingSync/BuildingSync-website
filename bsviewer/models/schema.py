@@ -1,10 +1,11 @@
 import os
+import csv
 
 from django.db import models
 from django.db.models.signals import post_save, post_delete, pre_save
 from django.dispatch import receiver
 
-from bsviewer.schema_parser import process_schema
+from bsviewer.lib.schema_parser import process_schema
 
 
 def rename_schema_file(instance, path):
@@ -28,20 +29,30 @@ class Schema(models.Model):
     def __str__(self):
         return self.name
 
-    def to_template(self):
+    def save_template(self):
         '''
         Generate the use case template
 
         :return: list, CSV format
         '''
-        result = []
+        required_paths = ['Audits.Audit']
+
+        data = [['BuildingSync Path', 'Ignored (Blank), Optional, Required']]
         for attribute in self.attributes.all().order_by('index'):
-            result.append(attribute.path)
+            print(attribute.index)
+            if attribute.path in required_paths:
+                data.append([attribute.path, 'Required'])
+            else:
+                data.append([attribute.path, ''])
 
-        return result
+        tmp_file = 'mapping_template_%s.csv' % self.version
+        with open(tmp_file, 'w', newline='') as f:
+            wr = csv.writer(f)
+            wr.writerows(data)
 
+        self.mapping_template_file = tmp_file
 
-# post_save process
+        return tmp_file
 
 
 @receiver(post_save, sender=Schema)

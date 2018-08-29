@@ -11,6 +11,8 @@ class Attribute(models.Model):
     index = models.IntegerField(
         verbose_name="For a given schema, this is the linear index in the tree list", default=0
     )
+    # There should only ever be one enumeration_class on an attribute
+    enumeration_classes = models.ManyToManyField('EnumerationClass', through='AttributeEnumerationClass')
     path = models.CharField(max_length=500, default="")
 
     def __str__(self):

@@ -1,7 +1,8 @@
 import xmlschema
 
-from .models.attribute import Attribute
-from .models.enumeration import Enumeration, EnumerationClass
+from bsviewer.models.attribute import Attribute
+from bsviewer.models.enumeration import Enumeration, EnumerationClass
+from bsviewer.models.attribute_enumeration_class import AttributeEnumerationClass
 from django.db import transaction
 
 
@@ -322,7 +323,7 @@ class BuildingSyncSchemaProcessor(object):
 
     def walk_root_element(self):
         a, return_rows, b = self._walk_named_element(
-            self.full_schema.named_elements[0], "audits", 0, 0
+            self.full_schema.named_elements[0], "Audits", 0, 0
         )
 
         return return_rows
@@ -589,15 +590,22 @@ def process_schema(schema_object):
                 if len(enumeration_names[enum_class_name]) > 1:
                     enum_class_name = "%s::%s" % (se['second_class'], se['first_class'])
 
+                # there should only exist one enum class per schema
                 ec, _ = EnumerationClass.objects.get_or_create(
-                    attribute=attribs[0], name=enum_class_name, schema=schema_object
+                    name=enum_class_name, schema=schema_object
                 )
+
                 if len(attribs) == 1:
-                    Enumeration.objects.get_or_create(
+                    en, _ = Enumeration.objects.get_or_create(
                         schema=schema_object,
                         enumeration_class=ec,
                         name=se['name'],
                         index=se['index'],
+                    )
+
+                    # associate the attribute with the class
+                    AttributeEnumerationClass.objects.get_or_create(
+                        attribute=attribs[0], enumeration_class=ec
                     )
                 elif len(attribs) > 1:
                     print('More than one enumeration path for %s' % se['full_path'])

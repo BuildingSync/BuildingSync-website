@@ -54,4 +54,5 @@ class Command(BaseCommand):
 
         for enums in use_case.enumerations.all():
             print(enums)
+
         self.stdout.write('Finished parsing and saving 0.3 schema')
