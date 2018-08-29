@@ -1,5 +1,8 @@
 body { 
-    padding-top: 60px; 
+  padding-top: 60px; 
+  font-family: "open sans", Helvetica, sans-serif;
+  background: #eee;
+  font-size:0.9em;
 }
 
 .pad-10 {
@@ -17,11 +20,18 @@ body {
 
 #header {
 	min-height: 60px;
+
 }
 
 #nav a, #nav a:hover, #nav a:focus {
 	text-decoration: none;
   border-bottom: 0px;
+}
+
+#header h1 a {
+  padding-top:8px;
+  font-size: 1.4em;
+    color: #fff;
 }
 
 #header h1 a:hover, #header h1 a:focus {
@@ -51,6 +61,7 @@ a:focus, a:hover {
 .navbar-default .navbar-nav > li > a {
   color: #f4fafb;
   border-bottom: 0px;
+  text-transform: uppercase;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
@@ -107,6 +118,7 @@ a:focus, a:hover {
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: #f4fafb;
+    text-transform: uppercase;
   }
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
@@ -151,4 +163,36 @@ a:focus, a:hover {
 
 header.major {
     margin: 0 0 2em 0;
+}
+
+
+/* colors */
+.container h1, .container h2, .container h3, .container h4, .container h5, .container h6 {
+  color: #333;
+}
+
+header.major h2, header.major h3, header.major h4, header.major h5, header.major h6 {
+  border-bottom: solid 2px #333;
+  color: #333;
+}
+
+header.major p {
+  color: #333;
+}
+
+input[type="submit"], input[type="reset"], input[type="button"], button, .button {
+  background-color:#2e3842;
+}
+
+input[type="text"], select {
+  color: #333;
+ margin-bottom: 20px;
+}
+
+label {
+  color: #333;
+}
+
+table th, table td {
+  color: #333;
 }

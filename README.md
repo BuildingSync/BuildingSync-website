@@ -43,7 +43,10 @@ This is the repository for the BuildingSync Validator web application.
 	python manage.py migrate
 	```
 
-
+* To test schema import, you can run this command:
+	```bash
+	python manage.py reset_schema --schema_version=0.3
+	```
 
 
 
