@@ -10,6 +10,7 @@ class UseCase(models.Model):
     attributes = models.ManyToManyField('Attribute', through=UseCaseAttribute)
     enumerations = models.ManyToManyField('Enumeration', through=UseCaseEnumeration)
     make_public = models.BooleanField(default=False)
+    import_file = models.FileField(upload_to='use_case_mappings/', null=True, help_text="Upload a csv file containing the mapping of your use case to the BuildingSync schema.")
 
     def __str__(self):
         return self.name

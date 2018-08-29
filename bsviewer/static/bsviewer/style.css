@@ -165,6 +165,12 @@ header.major {
     margin: 0 0 2em 0;
 }
 
+.callout-box {
+  margin-top:50px;
+  border:1px solid #333;
+  padding:30px;
+}
+
 
 /* colors */
 .container h1, .container h2, .container h3, .container h4, .container h5, .container h6 {
@@ -189,6 +195,10 @@ input[type="text"], select {
  margin-bottom: 20px;
 }
 
+input {
+  color:#333;
+}
+
 label {
   color: #333;
 }
@@ -198,3 +208,5 @@ table th, table td {
 }
 
 .container p {color: #333;}
+
+span.helptext {color: #333;}
