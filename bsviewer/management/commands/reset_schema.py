@@ -13,7 +13,7 @@ class Command(BaseCommand):
         parser.add_argument('--schema_version', type=float)
 
     def handle(self, *args, **options):
-        # read the fields from the database, right now default to shema 0.3
+        # Load the BuildingSync file.
         schema = Schema.objects.filter(version=options['schema_version']).first()
         if schema:
             schema.delete()
@@ -32,7 +32,8 @@ class Command(BaseCommand):
 
         for attribute in schema.attributes.all().order_by('index'):
             print(attribute)
-            for enum in attribute.enumerations.all().order_by('index'):
-                print("****************** enumeration: %s" % enum)
+            if attribute.enumeration.first():
+                for enum in attribute.enumeration.first().enumerations.all().order_by('index'):
+                    print("****************** enumeration: %s" % enum)
 
         self.stdout.write('Finished parsing and saving schema')

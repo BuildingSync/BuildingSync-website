@@ -20,8 +20,19 @@ class Schema(models.Model):
 	def __str__(self):
 		return self.name
 
+	def to_template(self):
+		'''
+		Generate the use case template
 
-# post_save process 
+		:return: list, CSV format
+		'''
+		result = []
+		for attribute in self.attributes.all().order_by('index'):
+			result.append(attribute.path)
+
+		return result
+
+# post_save process
 @receiver(post_save, sender=Schema)
 def parse_schema(sender, instance, **kwargs):
 
@@ -29,7 +40,7 @@ def parse_schema(sender, instance, **kwargs):
 	# set 'parsed' bool to True on Schema model and save
 	print('SCHEMA PARSED? {}'.format(instance.schema_parsed))
 	if instance.schema_parsed is False:
-		process_schema(instance)	
+		process_schema(instance)
 		# set parsed = true so it doesn't get parsed again
 		instance.schema_parsed = True;
 		instance.save()

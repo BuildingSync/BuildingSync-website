@@ -1,17 +1,14 @@
 from django.db import models
 
-from bsviewer.models.enumeration_class import EnumerationClass
+from bsviewer.models.attribute import Attribute
 
 
-class Enumeration(models.Model):
+class EnumerationClass(models.Model):
     name = models.CharField(max_length=250, db_index=True)
-    index = models.IntegerField(verbose_name='Index in the schema', default=0)
 
     # save a reference to the schema in order to allow for quick access to all the enumerations
     schema = models.ForeignKey('Schema', on_delete=models.CASCADE, db_index=True)
-    enumeration_class = models.ForeignKey(
-        EnumerationClass, on_delete=models.CASCADE, related_name='enumerations'
-    )
+    attribute = models.ForeignKey(Attribute, on_delete=models.CASCADE, related_name='enumeration')
 
     def __str__(self):
         return self.name

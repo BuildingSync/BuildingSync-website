@@ -1,8 +1,8 @@
 import xmlschema
 
 from .models.attribute import Attribute
-from .models.enumeration import Enumeration
-
+from .models.enumeration import Enumeration, EnumerationClass
+from django.db import transaction
 
 class BuildingSyncSchemaElement(object):
     def __init__(self):
@@ -546,19 +546,20 @@ def process_schema(schema_object):
     schema_entries = bs_processor.walk_root_element()
 
     # Create database entries for each schema entry
-    for se in schema_entries:
-        # skip all the enumerations until after all the types have been added
-        if se['type'] == 'Enumeration':
-            continue
+    with transaction.atomic():
+        for se in schema_entries:
+            # skip all the enumerations until after all the types have been added
+            if se['type'] == 'Enumeration':
+                continue
 
-        b = Attribute(
-            name=se['name'],
-            type=se['type'],
-            tree_level=se['$$treeLevel'],
-            index=se['index'],
-            path=se['path'],
-            schema=schema_object)
-        b.save()
+            b = Attribute(
+                name=se['name'],
+                type=se['type'],
+                tree_level=se['$$treeLevel'],
+                index=se['index'],
+                path=se['path'],
+                schema=schema_object)
+            b.save()
 
     enumeration_names = {}
     for se in schema_entries:
@@ -577,26 +578,29 @@ def process_schema(schema_object):
             se['first_class'] = first_class
             se['second_class'] = second_class
 
-    for se in schema_entries:
-        if se['type'] == 'Enumeration':
-            attribs = Attribute.objects.filter(path=se['path'], schema=schema_object)
+    with transaction.atomic():
+        for se in schema_entries:
+            if se['type'] == 'Enumeration':
+                attribs = Attribute.objects.filter(path=se['path'], schema=schema_object)
 
-            # create the name of the enumeration class
-            enum_class_name = se['first_class']
-            if len(enumeration_names[enum_class_name]) > 1:
-                enum_class_name = "%s::%s" % (se['second_class'], se['first_class'])
+                # create the name of the enumeration class
+                enum_class_name = se['first_class']
+                if len(enumeration_names[enum_class_name]) > 1:
+                    enum_class_name = "%s::%s" % (se['second_class'], se['first_class'])
 
-            if len(attribs) == 1:
-                e = Enumeration(
-                    name=se['name'],
-                    attribute=attribs[0],
-                    index=se['index'],
-                    class_name=enum_class_name
+                ec, _ = EnumerationClass.objects.get_or_create(
+                    attribute=attribs[0], name=enum_class_name, schema=schema_object
                 )
-                e.save()
-            elif len(attribs) > 1:
-                print('More than one enumeration path for %s' % se['full_path'])
-            else:
-                print('Could not find enumeration path for %s' % se['full_path'])
+                if len(attribs) == 1:
+                    Enumeration.objects.get_or_create(
+                        schema=schema_object,
+                        enumeration_class=ec,
+                        name=se['name'],
+                        index=se['index'],
+                    )
+                elif len(attribs) > 1:
+                    print('More than one enumeration path for %s' % se['full_path'])
+                else:
+                    print('Could not find enumeration path for %s' % se['full_path'])
 
     return schema_object
