@@ -7,13 +7,63 @@
 {% block content_notitle %}
 
     <div class="container">
-        <div class="row">
-
-            <div class="col-md-8 col-md-offset-2">
-				<h2>Use Cases </h2>
-                <p style="min-height:200px;"></p>
-            </div>
+    	<header class="major">
+			<h2>Use Cases</h2>
+    	</header>
+    	<div class="row">
+        	<div class="col-md-9">
+        		{% if public_usecases %}
+        			<table class="table">
+	  					<tr>
+	  						<th>Name</th>
+	  						<th>Schema Version</th>
+	  					</tr>	
+						{% for case in public_usecases %}
+						<tr>
+							<td>{{ case.nickname }}</td>
+							<td>{{ case.schema }}</td>
+						</tr>
+						{% endfor %}
+					</table>
+        		{% endif %}
+        	</div>
         </div>
+
+        {% if user.is_authenticated %}
+	        <div class="row">
+	        	<div class="col-md-9">
+	        		<h3>Private Use Cases</h3>
+	        		{% if user_usecases %}
+	        			<table class="table">
+		  					<tr>
+		  						<th>Name</th>
+		  						<th>Schema Version</th>
+		  						<th>Public ?</th>
+		  						<th>Actions </th>
+		  					</tr>	
+							{% for case in user_usecases %}
+							<tr>
+								<td>{{ case.nickname }}</td>
+								<td>{{ case.schema }}</td>
+								<td>{{ case.make_public }}</td>
+								<td>
+									<a href="{% url 'bsviewer:use_case_update' case.id %}">Edit</a> | 
+									<a href="{% url 'bsviewer:use_case_delete' case.id %}">Delete</a>
+								</td>
+							</tr>
+							{% endfor %}
+						</table>
+	        		{% endif %}
+	        	</div>
+	        </div>
+	        <a class="btn btn-accent" href="{% url 'bsviewer:use_case_create' %}" role="button">
+	            <i class="fa fa-plus" aria-hidden="true"></i>
+	            New Use Case
+	        </a>
+	        <div class="pad-bot-20">
+	        	&nbsp;
+	        </div>
+        {% endif %}
     </div>
 	
 {% endblock content_notitle %}

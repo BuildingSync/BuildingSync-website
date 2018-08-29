@@ -6,6 +6,15 @@ body {
 	padding: 10px;
 }
 
+.pad-20 {
+  padding: 20px;
+}
+
+.pad-bot-20 {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
 #header {
 	min-height: 60px;
 }
@@ -138,4 +147,8 @@ a:focus, a:hover {
 
 .list-group-item-accent a {
   border-bottom: 0px;
+}
+
+header.major {
+    margin: 0 0 2em 0;
 }

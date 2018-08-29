@@ -1,0 +1,19 @@
+{% extends 'bsviewer/base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}Add Use Case{% endblock %}
+
+{% block content %}
+	<div class="container">
+    	<div class="row">
+			<form action="" method="post">
+			    {% csrf_token %}
+			    {{ form.as_table }}
+			    <div class="pad-20">
+			    	<button type="submit">Submit</button>
+			    </div>	
+			</form>
+		</div>
+	</div>		
+{% endblock content %}
