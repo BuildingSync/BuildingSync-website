@@ -20,7 +20,10 @@ class Command(BaseCommand):
 
         # read the fields from the database, right now default to shema 0.3
         schema = Schema.objects.filter(version='0.3').first()
+
         for attribute in schema.attributes.all().order_by('index'):
             print(attribute)
+            for enum in attribute.enumerations.all():
+                print(' ******************* %s' % enum)
 
         self.stdout.write('Finished parsing bedes')
