@@ -5,15 +5,15 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 from .models.schema import Schema
-from .models.buildingsyncattribute import BuildingSyncAttribute
-from .models.usecase import UseCase
+from .models.attribute import Attribute
+from .models.use_case import UseCase
 
 
 def index(request):
     context = {}
     return render(request, 'bsviewer/index.html', context)
 
-def use_cases(request):    
+def use_cases(request):
 	user_usecases = {}
 	if request.user.is_authenticated:
 		user_usecases = UseCase.objects.filter(owner=request.user)

@@ -8,8 +8,7 @@ class Command(BaseCommand):
     help = 'Closes the specified poll for voting'
 
     def add_arguments(self, parser):
-        # parser.add_argument('nothing', nargs='+', type=int)
-        pass
+        parser.add_argument('--schema_version', type=float)
 
     def handle(self, *args, **options):
         bedes = BedesParser('v1.2')
@@ -19,11 +18,10 @@ class Command(BaseCommand):
         # print(bedes.categories)
 
         # read the fields from the database, right now default to shema 0.3
-        schema = Schema.objects.filter(version='0.3').first()
-
+        schema = Schema.objects.filter(version=options['schema_version']).first()
         for attribute in schema.attributes.all().order_by('index'):
             print(attribute)
-            for enum in attribute.enumerations.all():
+            for enum in attribute.enumerations.all().order_by('index'):
                 print(' ******************* %s' % enum)
 
         self.stdout.write('Finished parsing bedes')
