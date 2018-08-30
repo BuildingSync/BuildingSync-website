@@ -13,6 +13,10 @@ body {
   padding: 20px;
 }
 
+.pad-top-40 {
+  padding-top: 40px;
+}
+
 .pad-bot-20 {
   margin-bottom: 20px;
   padding-bottom: 20px;
@@ -166,7 +170,7 @@ header.major {
 }
 
 .callout-box {
-  margin-top:50px;
+  margin-top:30px;
   border:1px solid #333;
   padding:30px;
 }

@@ -35,18 +35,21 @@ def profile(request):
     return render(request, 'registration/profile.html')
 
 
-def download_template(request, version):
-    if version:
-        schema = Schema.objects.filter(version=version)
-        file_path = schema.mapping_template_file.path
+def download_template(request, name):
+    if name:
+        schema = Schema.objects.filter(name=name)[0]
+        if schema:
+            
+            file_path = schema.usecase_template_file.path
 
-        if os.path.exists(file_path):
-            with open(file_path, 'rb') as fh:
-                response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
-                response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
-                return response
+            if os.path.exists(file_path):
+                with open(file_path, 'rb') as fh:
+                    response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+                    response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+                    return response
+            raise Http404
         raise Http404
-    raise Http404
+    raise Http404    
 
 
 class UseCaseCreate(CreateView):
@@ -63,6 +66,12 @@ class UseCaseUpdate(UpdateView):
     model = UseCase
     fields = ['name', 'schema', 'import_file']
     success_url = reverse_lazy('bsviewer:cases')
+    # versions = Schema.objects.all
+
+    # def get_context_data(self, **kwargs):
+    #     ctx = super(UseCaseUpdate, self).get_context_data(**kwargs)
+    #     ctx['versions'] = self.versions
+    #     return ctx
 
 
 class UseCaseDelete(DeleteView):

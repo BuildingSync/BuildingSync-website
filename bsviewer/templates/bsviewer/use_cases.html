@@ -47,6 +47,9 @@
 								<td>{{ case.schema }}</td>
 								<td>{{ case.make_public }}</td>
 								<td>
+                                    {% if case.schema and not case.import_file %}
+                                        <a href="{% url 'bsviewer:download_template' case.schema %}">Download Use Case Template</a> |
+                                    {% endif %}
 									<a href="{% url 'bsviewer:use_case_update' case.id %}">Edit</a> | 
 									<a href="{% url 'bsviewer:use_case_delete' case.id %}">Delete</a>
 								</td>

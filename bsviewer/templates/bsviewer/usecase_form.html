@@ -7,7 +7,7 @@
 {% block content %}
 	<div class="container">
     	<div class="row">
-    		<div class="col-md-6">
+    		<div class="col-md-5">
 				<form action="" method="post">
 				    {% csrf_token %}
 				    {{ form.as_table }}
@@ -16,16 +16,19 @@
 				    </div>	
 				</form>
 			</div>
-			<div class="col-md-4 col-md-offset-2">
+            {%  if object.schema %}
+            <div class="col-md-4 col-md-offset-2">
 				<div class="callout-box">
-					<h2>Mapping Template</h2>
-					<p>Select a schema version on the left to generate a mapping template.  Fill out this template and upload to map your use case to BuildingSync schema.</p>
-					<span class="pad-20"><a class="btn btn-accent" href="{% url 'bsviewer:cases' %}" role="button">
-                        <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
-                        Download Template
+                    <h2>Use Case Template</h2>
+                    <p>  Fill out this template and upload to map your use case to the BuildingSync schema.</p>
+                    <span class="pad-20"><a class="btn btn-accent" href="{% url 'bsviewer:download_template' object.schema %}" role="button">
+                    <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
+                    Download Use Case Template
                     </a></span>
+
 				</div>
-			</div>	
+			</div>
+            {%  endif  %}
 		</div>
-	</div>		
+	</div>
 {% endblock content %}

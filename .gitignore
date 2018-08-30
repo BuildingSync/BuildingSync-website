@@ -1,4 +1,5 @@
-uploaded_schemas/
+uploaded_schemas/*
+usecase_templates/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

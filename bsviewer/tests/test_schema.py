@@ -24,7 +24,13 @@ class TestSchema(TestCase):
             version='0.3',
             schema_file=schema_file
         )
-        self.schema.save()  # Calling save also processes the schema
+        self.schema.save()  # Calling save also processes the schema and generates the template
+
+    def test_schema_parsed(self):
+        # check that post_save worked: schema_parsed should be True and there should be attributes related to schema in db
+        self.assertTrue(self.schema.schema_parsed)
+        attributes = self.schema.attributes
+        self.assertGreater(attributes.count(), 0)
 
     def test_enumerations(self):
         # check a couple of the attributes to make sure have enumerations
@@ -39,9 +45,9 @@ class TestSchema(TestCase):
         )
 
     def test_to_template(self):
-        filename = self.schema.save_template()
-        self.assertTrue(os.path.exists(filename))
-        with open(filename) as csvfile:
+        # template is generated automatically in post_save
+        self.assertTrue(os.path.exists(self.schema.usecase_template_file.path))
+        with open(self.schema.usecase_template_file.path) as csvfile:
             for index, row in enumerate(csv.reader(csvfile, delimiter=',')):
                 if index == 0:
                     self.assertEqual('BuildingSync Path', row[0])
