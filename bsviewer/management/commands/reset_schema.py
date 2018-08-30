@@ -36,4 +36,6 @@ class Command(BaseCommand):
                 for enum in attribute.enumeration_classes.first().enumerations.all().order_by('index'):
                     print("****************** enumeration: %s" % enum)
 
+        # save off the template for now
+        schema.save_template()
         self.stdout.write('Finished parsing and saving schema')
