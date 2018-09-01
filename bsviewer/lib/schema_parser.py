@@ -512,7 +512,6 @@ class BuildingSyncSchemaProcessor(object):
                 num_added += this_num_added
                 return_rows.extend(new_rows)
 
-
         return num_added, return_rows
 
     @staticmethod
