@@ -30,7 +30,7 @@ class Schema(models.Model):
     def __str__(self):
         return self.name
 
-    def save_template(self,filename=None):
+    def save_template(self, filename=None):
         '''
         Generate the use case template
 
