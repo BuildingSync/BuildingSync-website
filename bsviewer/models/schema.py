@@ -30,7 +30,7 @@ class Schema(models.Model):
     def __str__(self):
         return self.name
 
-    def save_template(self):
+    def save_template(self,filename=None):
         '''
         Generate the use case template
 
@@ -45,7 +45,10 @@ class Schema(models.Model):
             else:
                 data.append([attribute.path, ''])
 
-        tmp_file = 'template_%s.csv' % self.version
+        if not filename:
+            tmp_file = 'template_%s.csv' % self.version
+        else:
+            tmp_file = filename
         with open(tmp_file, 'w', newline='') as f:
             wr = csv.writer(f)
             wr.writerows(data)
