@@ -1,5 +1,7 @@
 # BuildingSync Selection Tool and Validator
 
+[![Build Status](https://travis-ci.org/BuildingSync/selection-tool.svg?branch=develop)](https://travis-ci.org/BuildingSync/selection-tool)
+
 This is the repository for the BuildingSync Validator web application. 
 
 ## Installation
