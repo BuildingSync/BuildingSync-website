@@ -1,3 +1,4 @@
+import os
 from random import randint
 from shutil import copyfile
 
@@ -32,10 +33,13 @@ class Command(BaseCommand):
 
         for attribute in schema.attributes.all().order_by('index'):
             print(attribute)
-            if attribute.enumeration_classes.first():
-                for enum in attribute.enumeration_classes.first().enumerations.all().order_by('index'):
-                    print("****************** enumeration: %s" % enum)
+            # if attribute.enumeration_classes.first():
+            #     for enum in attribute.enumeration_classes.first().enumerations.all().order_by('index'):
+            #         print("****************** enumeration: %s" % enum)
+
+        self.stdout.write('Imported %s fields and %s enumerations' %
+                          (schema.attributes.count(), schema.enumerations.count()))
 
         # save off the template for now
-        schema.save_template()
+        schema.save_template(filename=os.path.join(os.path.dirname(__file__), 'template_0.3'))
         self.stdout.write('Finished parsing and saving schema')

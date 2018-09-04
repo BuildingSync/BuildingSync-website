@@ -88,3 +88,4 @@ package-lock.json
 bsviewer/lib/bedes/bedes_v*.json
 schema_file_*
 /mapping_template*
+template_*

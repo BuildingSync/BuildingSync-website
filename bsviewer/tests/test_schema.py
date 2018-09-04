@@ -50,7 +50,7 @@ class TestSchema(TestCase):
         with open(self.schema.usecase_template_file.path) as csvfile:
             for index, row in enumerate(csv.reader(csvfile, delimiter=',')):
                 if index == 0:
-                    self.assertEqual('BuildingSync Path', row[0])
+                    self.assertEqual('BuildingSyncPath', row[0])
                 elif index == 1:
                     self.assertEqual('Audits.Audit', row[0])
                     self.assertEqual('Required', row[1])

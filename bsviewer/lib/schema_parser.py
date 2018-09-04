@@ -113,6 +113,7 @@ class ChoiceElement(BuildingSyncSchemaElement):
         super(ChoiceElement, self).__init__()
         self.named_elements = []
         self.ref_elements = []
+        self.sequences = []
 
 
 class BuildingSyncSchemaProcessor(object):
@@ -134,7 +135,10 @@ class BuildingSyncSchemaProcessor(object):
     def check_all_type_references(self):
         for type_ref in self.type_references:
             # it starts with the namespace 'auc:'
-            looking_for_type_name = type_ref.ref_type.split(':')[1]
+            if type_ref.ref_type.startswith('auc:'):
+                looking_for_type_name = type_ref.ref_type.split(':')[1]
+            else:
+                looking_for_type_name = type_ref.ref_type
             found = False
             for ne in self.all_named_elements:
                 if looking_for_type_name == ne.name:
@@ -202,6 +206,8 @@ class BuildingSyncSchemaProcessor(object):
                 raise Exception("Invalid tag type in _read_named_element: " + child.tag)
         if named_element.type:
             self.type_definitions.append(named_element)
+            # testing if this resolves the issue
+            # self.type_references.append(named_element)
         self.all_named_elements.append(named_element)
         return named_element
 
@@ -239,6 +245,7 @@ class BuildingSyncSchemaProcessor(object):
                 this_complex_type.choices.append(self._read_choice(child))
             else:
                 raise Exception("Invalid tag type in _read_complex_type: " + child.tag)
+
         if 'name' in parent_object.attrib:
             self.named_complex_types[parent_object.attrib['name']] = this_complex_type
             self.all_complex_elements.append(this_complex_type)
@@ -317,6 +324,8 @@ class BuildingSyncSchemaProcessor(object):
                 else:
                     raise Exception(
                         "Invalid element type in _read_schema, no name or ref in attrib...")
+            elif child.tag.endswith('sequence'):
+                this_choice.choices.append(self._read_sequence(child))
             else:
                 raise Exception("Invalid tag type in _read_choice: " + child.tag)
         return this_choice
@@ -383,11 +392,12 @@ class BuildingSyncSchemaProcessor(object):
 
     def _find_referenced_element(self, original_ref_name):
         # it starts with the namespace 'auc:'
-        looking_for_type_name = original_ref_name.split(':')[1]
-        if looking_for_type_name in self.named_complex_types:
-            return self.named_complex_types[looking_for_type_name]
+        if original_ref_name.startswith('auc:'):
+            original_ref_name = original_ref_name.split(':')[1]
+        if original_ref_name in self.named_complex_types:
+            return self.named_complex_types[original_ref_name]
         for ne in self.all_named_elements:
-            if looking_for_type_name == ne.name:
+            if original_ref_name == ne.name:
                 return ne
         return None
 
@@ -449,11 +459,22 @@ class BuildingSyncSchemaProcessor(object):
                 num_added += this_num_added
                 return_rows.extend(new_rows)  # maybe this section?
 
+        for elem in getattr(parent_element, 'choices', []):
+            this_num_added, new_rows = self._walk_sequence_or_choice_element(
+                elem, root_path, current_tree_level, current_index
+            )
+            current_index += this_num_added
+            num_added += this_num_added
+            return_rows.extend(new_rows)
+
         for elem in parent_element.ref_elements:
             current_index += 1
             num_added += 1
 
-            ref_type_clean = elem.ref_type.split(':')[1]
+            if elem.ref_type.startswith('auc:'):
+                ref_type_clean = elem.ref_type.split(':')[1]
+            else:
+                ref_type_clean = elem.ref_type
             return_rows.append({
                 'name': ref_type_clean,
                 'path': root_path + '.' + ref_type_clean,

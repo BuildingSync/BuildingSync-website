@@ -39,7 +39,7 @@ def download_template(request, name):
     if name:
         schema = Schema.objects.filter(name=name)[0]
         if schema:
-            
+
             file_path = schema.usecase_template_file.path
 
             if os.path.exists(file_path):
@@ -49,7 +49,7 @@ def download_template(request, name):
                     return response
             raise Http404
         raise Http404
-    raise Http404    
+    raise Http404
 
 
 class UseCaseCreate(CreateView):
