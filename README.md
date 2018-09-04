@@ -32,7 +32,10 @@ This is the repository for the BuildingSync Validator web application.
 	```bash
 	python manage.py createsuperuser
 	```
-
+1. Start the app:
+	```bash
+	python manage.py runserver
+	```
 
 
 ## Local Development
