@@ -5,6 +5,7 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib import messages
 
 from .models.schema import Schema
 from .models.use_case import UseCase
@@ -66,12 +67,6 @@ class UseCaseUpdate(UpdateView):
     model = UseCase
     fields = ['name', 'schema', 'import_file']
     success_url = reverse_lazy('bsviewer:cases')
-    # versions = Schema.objects.all
-
-    # def get_context_data(self, **kwargs):
-    #     ctx = super(UseCaseUpdate, self).get_context_data(**kwargs)
-    #     ctx['versions'] = self.versions
-    #     return ctx
 
 
 class UseCaseDelete(DeleteView):

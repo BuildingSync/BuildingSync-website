@@ -18,14 +18,12 @@ def rename_schema_file(instance, path):
 
 
 # BuildingSync Schema versions
-
-
 class Schema(models.Model):
     name = models.CharField(max_length=100, default="0.3.0", unique=True)
     version = models.CharField(max_length=100, default="0.3", unique=True, null=False)
-    schema_file = models.FileField(upload_to=rename_schema_file)
-    schema_parsed = models.BooleanField(default=False)
-    usecase_template_file = models.FileField(upload_to='usecase_templates/', null=True, blank=True)
+    schema_file = models.FileField(upload_to=rename_schema_file, null=True)
+    schema_parsed = models.BooleanField(default=False, help_text="Leave blank. This will be auto-populated.")
+    usecase_template_file = models.FileField(upload_to='usecase_templates/', null=True, blank=True, help_text='Leave blank. This will be auto-populated.')
 
     def __str__(self):
         return self.name
@@ -66,7 +64,7 @@ class Schema(models.Model):
 def parse_schema(sender, instance, **kwargs):
     # if parsed bool is false, call 'parse' function in schema_parser
     # set 'parsed' bool to True on Schema model and save
-    if instance.schema_parsed is False:
+    if instance.schema_parsed is False and instance.schema_file:
         process_schema(instance)
         # set parsed = true so it doesn't get parsed again
         instance.schema_parsed = True

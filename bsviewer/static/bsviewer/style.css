@@ -22,6 +22,15 @@ body {
   padding-bottom: 20px;
 }
 
+.pad-lr-10 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.red {
+  color:red !important;
+}
+
 #header {
 	min-height: 60px;
 
@@ -175,6 +184,12 @@ header.major {
   padding:30px;
 }
 
+.parsing-errors {
+  margin-top:30px;
+  padding:30 10 px;
+  color:#333;
+}
+
 
 /* colors */
 .container h1, .container h2, .container h3, .container h4, .container h5, .container h6 {
@@ -214,3 +229,16 @@ table th, table td {
 .container p {color: #333;}
 
 span.helptext {color: #333;}
+
+form {
+  color: #333;
+  margin: 0 0 0.5em 0;
+}
+
+form a, form a:hover {
+  color: #333;
+}
+
+.panel {
+  color: #333;
+}

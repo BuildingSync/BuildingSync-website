@@ -43,7 +43,7 @@
 		  					</tr>	
 							{% for case in user_usecases %}
 							<tr>
-								<td>{{ case.name }}</td>
+								<td>{{ case.name }} </td>
 								<td>{{ case.schema }}</td>
 								<td>{{ case.make_public }}</td>
 								<td>
@@ -52,7 +52,9 @@
                                     {% endif %}
 									<a href="{% url 'bsviewer:use_case_update' case.id %}">Edit</a> | 
 									<a href="{% url 'bsviewer:use_case_delete' case.id %}">Delete</a>
+                                    {% if case.parsing_errors %}  <span class="red pad-lr-10"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Parsing Errors</span> {% endif %}
 								</td>
+
 							</tr>
 							{% endfor %}
 						</table>

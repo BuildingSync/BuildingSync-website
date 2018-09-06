@@ -6,11 +6,11 @@ from .models.use_case import UseCase
 
 
 class SchemaAdmin(admin.ModelAdmin):
-    list_display = ('name', 'version', 'schema_file')
+    list_display = ('name', 'version', 'schema_file', 'schema_parsed')
 
 
 class UseCaseAdmin(admin.ModelAdmin):
-    list_display = ('name', 'owner', 'schema', 'make_public')
+    list_display = ('name', 'owner', 'schema', 'import_file', 'usecase_parsed', 'make_public')
 
 
 admin.site.register(Schema, SchemaAdmin)
