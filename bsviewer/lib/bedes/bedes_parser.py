@@ -84,7 +84,7 @@ class BedesParser(object):
     def save(self):
         # with open("bedes_list_options_%s.json" % self.version, 'w') as new_file:
         # new_file.write(json.dumps(list_options, indent=2))
-        with open("bedes_%s.json" % self.version, 'w') as new_file:
+        with open("%s/bedes_%s.json" % (self.version, self.version), 'w') as new_file:
             new_file.write(json.dumps(self.data, indent=2))
 
     @property
