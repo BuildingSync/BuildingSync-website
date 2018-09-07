@@ -88,5 +88,6 @@ config.env
 package-lock.json
 bsviewer/lib/bedes/*/bedes_v*.json
 schema_file_*
+use_case_file_*
 /mapping_template*
 template_*

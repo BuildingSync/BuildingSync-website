@@ -91,7 +91,7 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
 def auto_delete_file_on_change(sender, instance, **kwargs):
     """
     Deletes old file from filesystem
-    when corresponding `MediaFile` object is updated
+    when corresponding `File` object is updated
     with new file.
     """
     if not instance.pk:

@@ -23,7 +23,6 @@ def process_usecase(use_case_object):
     # process csv and save attributes
     reader = csv.DictReader(open(use_case_object.import_file.path))
     for row in reader:
-        print(row['BuildingSyncPath'])
 
         # get attribute reference
         results = Attribute.objects.filter(path=row['BuildingSyncPath'], schema=use_case_object.schema)
@@ -40,7 +39,6 @@ def process_usecase(use_case_object):
         state_val = 0
         for state in STATE_TYPES:
             if state[1] == row['State']:
-                print("MATCH: {} and {}".format(state[1], row['State']))
                 state_val = state[0]
 
         # save new record
