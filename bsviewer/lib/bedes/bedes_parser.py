@@ -26,6 +26,8 @@ class BedesParser(object):
         :param list_options_filename:
         """
         self.version = version
+        self.enumerations = []
+        self.terms = []
 
         reldir = os.path.dirname(__file__)
         if not os.path.exists(os.path.join(reldir, self.version)):
@@ -42,6 +44,8 @@ class BedesParser(object):
             os.path.join(reldir, self.version, terms_filename),
             os.path.join(reldir, self.version, list_options_filename)
         )
+        self._cache_terms()
+        self._cache_enumerations()
 
     def term_exists(self, term):
         if term in self.terms:
@@ -84,22 +88,38 @@ class BedesParser(object):
     def save(self):
         # with open("bedes_list_options_%s.json" % self.version, 'w') as new_file:
         # new_file.write(json.dumps(list_options, indent=2))
-        with open("%s/bedes_%s.json" % (self.version, self.version), 'w') as new_file:
+        path = os.path.join(os.path.dirname(__file__), self.version)
+        with open("%s/bedes_%s.json" % (path, self.version), 'w') as new_file:
             new_file.write(json.dumps(self.data, indent=2))
-
-    @property
-    def terms(self):
-        # get all the terms independent of the categories
-        term_names = []
-        for cat, terms in self.data.items():
-            for t in terms:
-                term_names.append(t['Term'])
-
-        return term_names
 
     @property
     def categories(self):
         return self.data.keys()
+
+    def _cache_terms(self):
+        """
+        Get all the terms independent of the categories
+        """
+        self.terms = []
+        for cat, terms in self.data.items():
+            for t in terms:
+                # collect only speficic fields from the terms
+                assembled = {}
+                for t_name in ['Term', 'Category', 'Content-UUID']:
+                    assembled[t_name] = t[t_name]
+                print(t)
+                if t['Term-Definition']:
+                    if t.get('p'):
+                        assembled['Term-Definition'] = t['Term-Definition']['p']
+                self.terms.append(assembled)
+
+    def _cache_enumerations(self):
+        self.enumerations = []
+        for cat, terms in self.data.items():
+            for term in terms:
+                if term.get('list_options', None):
+                    for lo in term['list_options']:
+                        self.enumerations.append(lo['Term'])
 
 
 if __name__ == '__main__':
@@ -108,3 +128,4 @@ if __name__ == '__main__':
 
     print(bedes.terms)
     print(bedes.categories)
+    print(bedes.enumerations)
