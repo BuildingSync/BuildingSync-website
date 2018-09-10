@@ -6,6 +6,7 @@ from bsviewer.models.schema import Schema
 from bsviewer.models.enumeration import Enumeration
 import csv
 
+
 class Command(BaseCommand):
     help = 'Closes the specified poll for voting'
 
@@ -59,7 +60,6 @@ class Command(BaseCommand):
                         "distance": distance
                     })
             results[enumeration.name] = sorted(results[enumeration.name], key=lambda k: -k['distance'])
-
 
         # store the results to CSV
         with open('bedes-mappings-enumerations.csv', 'w') as file:

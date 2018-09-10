@@ -37,6 +37,7 @@ class UseCase(models.Model):
 
         super(UseCase, self).save(*args, **kw)
 
+
 @receiver(post_save, sender=UseCase)
 def parse_usecase(sender, instance, **kwargs):
     # if import_file changed or import_file is new and unparsed, parse it!

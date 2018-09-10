@@ -3,7 +3,6 @@ from bsviewer.models.use_case_attribute import UseCaseAttribute, UseCaseEnumerat
 from bsviewer.models.attribute import Attribute
 
 
-
 def process_usecase(use_case_object):
     """
     parse the use case to get all entries
@@ -50,6 +49,3 @@ def process_usecase(use_case_object):
         rec.save()
 
     return use_case_object, errors
-
-
-
