@@ -1,6 +1,7 @@
 import csv
-from bsviewer.models.use_case_attribute import UseCaseAttribute, UseCaseEnumeration, STATE_TYPES
+
 from bsviewer.models.attribute import Attribute
+from bsviewer.models.use_case_attribute import UseCaseAttribute, STATE_TYPES
 
 
 def process_usecase(use_case_object):
@@ -24,13 +25,15 @@ def process_usecase(use_case_object):
     for row in reader:
 
         # get attribute reference
-        results = Attribute.objects.filter(path=row['BuildingSyncPath'], schema=use_case_object.schema)
+        results = Attribute.objects.filter(path=row['BuildingSyncPath'],
+                                           schema=use_case_object.schema)
 
         if not results.exists():
             errors.append('No attribute matching path: {}'.format(row['BuildingSyncPath']))
             continue
         elif results.count() != 1:
-            errors.append('More than one attribute found matching path: {}'.format(row['BuildingSyncPath']))
+            errors.append(
+                'More than one attribute found matching path: {}'.format(row['BuildingSyncPath']))
             continue
 
         attrib = results[0]

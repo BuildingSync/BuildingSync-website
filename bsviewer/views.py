@@ -5,7 +5,6 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.contrib import messages
 
 from .models.schema import Schema
 from .models.use_case import UseCase
@@ -46,7 +45,8 @@ def download_template(request, name):
             if os.path.exists(file_path):
                 with open(file_path, 'rb') as fh:
                     response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
-                    response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+                    response['Content-Disposition'] = 'inline; filename=' + os.path.basename(
+                        file_path)
                     return response
             raise Http404
         raise Http404
