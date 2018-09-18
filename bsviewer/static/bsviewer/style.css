@@ -5,6 +5,10 @@ body {
   font-size:0.9em;
 }
 
+.pad-5 {
+  padding: 5px;
+}
+
 .pad-10 {
 	padding: 10px;
 }
@@ -27,8 +31,24 @@ body {
   padding-right: 10px;
 }
 
+pad-left-100 {
+  padding-left:100px;
+}
+
 .red {
-  color:red !important;
+  color:#D75452 !important;
+}
+
+.green {
+  color: green;
+}
+
+.badge-red {
+  background-color: #D75452;
+}
+
+.badge-green {
+  background-color: green;
 }
 
 #header {
@@ -145,6 +165,14 @@ a:focus, a:hover {
   }
 }
 
+.panel-accent .panel-heading {
+  background-color:#2db1a6;
+}
+
+.panel-accent .panel-heading .panel-title {
+   color: #fff;
+}
+
 .badge-accent {
   background-color:#2db1a6;
 }
@@ -175,7 +203,7 @@ a:focus, a:hover {
 }
 
 header.major {
-    margin: 0 0 2em 0;
+    margin: 0 0 1em 0;
 }
 
 .callout-box {
@@ -199,10 +227,16 @@ header.major {
 header.major h2, header.major h3, header.major h4, header.major h5, header.major h6 {
   border-bottom: solid 2px #333;
   color: #333;
+  margin: 0 0 0 0;
+  padding-bottom: 0.5em;
 }
 
 header.major p {
   color: #333;
+}
+
+strong {
+  color:#333 !important;
 }
 
 input[type="submit"], input[type="reset"], input[type="button"], button, .button {
@@ -241,4 +275,8 @@ form a, form a:hover {
 
 .panel {
   color: #333;
+}
+
+.btn-link {
+  color: #179389;
 }

@@ -1,0 +1,48 @@
+{% extends 'bsviewer/base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}BuildingSync Schema Viewer{% endblock %}
+
+{% block content_notitle %}
+
+    <div class="container">
+    	<header class="major">
+			<h2>Validator Results</h2>
+    	</header>
+
+{#    <span class="glyphicon glyphicon-ok green"></span>#}
+{#    <span class="glyphicon glyphicon-remove red"></span>#}
+
+         <div>
+            <a href="{% url 'bsviewer:validator' %}" class="btn btn-sm btn-link"><span class="glyphicon glyphicon-chevron-left"></span> Validate Another XML File</a>
+        </div>
+
+        <div class="row">
+            <div class="col-md-11 pad-left-50">
+                 <h3>FILE: {{ filename }} {% if validation_results.valid is True %} <span class="label label-success pad-10">Valid</span> {%  else %} <span class="label label-danger pad-10">Invalid</span> {% endif %}</h3>
+                <p><strong>Schema version:</strong> {{ schema_version }}</p>
+                {# <div>Valid? {{ validation_results.valid }}</div>#}
+                 {% if validation_results.valid is False %}
+                    <div>
+                        <h3>Errors <span class="label label-danger pad5">{{ validation_results.errors|length  }}</span></h3>
+                        <table>
+                            {%  for err in validation_results.errors %}
+                                <tr>
+                                    <td>{{ forloop.counter }}.</td>
+                                    <td>{{ err.path }} <br/>
+                                    {{ err.message }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+{% endblock content_notitle %}

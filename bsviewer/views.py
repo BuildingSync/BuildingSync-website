@@ -9,6 +9,9 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models.schema import Schema
 from .models.use_case import UseCase
 
+from bsviewer import forms
+from bsviewer.lib.validator.workflow import ValidationWorkflow
+
 
 def index(request):
     context = {}
@@ -26,6 +29,61 @@ def use_cases(request):
         'public_usecases': public_usecases
     }
     return render(request, 'bsviewer/use_cases.html', context)
+
+def validator(request):
+    context = {
+        'load_xml_file_form': forms.LoadXMLFile(),
+        'load_xml_example_form': forms.LoadXMLExample(),
+        'a_var': ''
+    }
+
+    if request.POST:
+        form_type = request.POST['form_type']
+        is_example = False
+        if form_type == 'file':
+            form = forms.LoadXMLFile(request.POST, request.FILES)
+        elif form_type == 'example':
+            form = forms.LoadXMLExample(request.POST)
+            is_example = True
+        elif form_type == 'url':
+            form = forms.LoadXMLURL(request.POST)
+        else:
+            return HttpResponseServerError('Invalid form data')
+    else:
+        return render(request, 'bsviewer/validator.html', context)
+
+    if form.is_valid():
+        if form_type == 'file':
+            f = request.FILES['file']
+            filename = f.name
+        else:
+            f = open(request.POST['file_name'], 'r')
+            filename = os.path.basename(request.POST['file_name'])
+            filepath = request.POST['file_name']
+
+        version = '0.3'
+        print("FILENAME: {}".format(filename))
+        print("FORM TYPE: {}".format(form_type))
+        print('FULL NAME: {}'.format(request.POST['file_name']))
+
+        print(f)
+        workflow = ValidationWorkflow(f, filepath, version)
+        #validation_results = workflow.validate_all()
+        validation_results = workflow.validate_schema()
+        if workflow.is_xml:
+            return render(request, 'bsviewer/validator_results.html', {
+                     'validation_results': validation_results,
+                     'filename': filename,
+                     'schema_version': version
+                 })
+        else:
+            # this doesn't work
+            # messages.add_message(request, messages.ERROR, 'Submission did not contain xml data.')
+            context['error'] = 'Submission did not contain xml data.'
+            return render(request, 'validatorviewer/upload.html', context)
+    else:
+        context['load_xml_{}_form'.format(form_type)] = form
+        return render(request, 'bsviewer/validator.html', context)
 
 
 @login_required
