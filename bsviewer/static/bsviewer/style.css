@@ -12,6 +12,9 @@ body {
 .pad-10 {
 	padding: 10px;
 }
+.pad-bot-custom {
+  padding-bottom: 24px;
+}
 
 .pad-20 {
   padding: 20px;

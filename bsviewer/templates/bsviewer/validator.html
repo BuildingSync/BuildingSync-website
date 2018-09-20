@@ -18,7 +18,7 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Upload XML</h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body pad-bot-custom">
                         <form enctype="multipart/form-data" role="form" method="post">
                             {% csrf_token %}
                             {% bootstrap_form load_xml_file_form %}

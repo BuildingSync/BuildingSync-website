@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models.schema import Schema
@@ -102,7 +103,7 @@ def profile(request):
     #     messages.add_message(request, messages.SUCCESS, 'Password changed')
     return render(request, 'registration/profile.html')
 
-
+@login_required
 def download_template(request, name):
     if name:
         schema = Schema.objects.filter(name=name)[0]
@@ -120,8 +121,7 @@ def download_template(request, name):
         raise Http404
     raise Http404
 
-
-class UseCaseCreate(CreateView):
+class UseCaseCreate(LoginRequiredMixin, CreateView):
     model = UseCase
     fields = ['name', 'schema', 'import_file']
     success_url = reverse_lazy('bsviewer:cases')
@@ -130,13 +130,11 @@ class UseCaseCreate(CreateView):
         form.instance.owner = self.request.user
         return super().form_valid(form)
 
-
-class UseCaseUpdate(UpdateView):
+class UseCaseUpdate(LoginRequiredMixin, UpdateView):
     model = UseCase
     fields = ['name', 'schema', 'import_file']
     success_url = reverse_lazy('bsviewer:cases')
 
-
-class UseCaseDelete(DeleteView):
+class UseCaseDelete(LoginRequiredMixin, DeleteView):
     model = UseCase
     success_url = reverse_lazy('bsviewer:cases')
