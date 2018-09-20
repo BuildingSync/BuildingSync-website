@@ -19,7 +19,7 @@ class UseCase(models.Model):
     make_public = models.BooleanField(default=False)
     import_file = models.FileField(upload_to='usecase_mappings/', null=True, blank=True)
     usecase_parsed = models.BooleanField(default=False)
-    parsing_errors = ArrayField(models.CharField(max_length=255, blank=True), null=True)
+    parsing_errors = ArrayField(models.CharField(max_length=255, blank=True), null=True, blank=True)
 
     def __str__(self):
         return self.name

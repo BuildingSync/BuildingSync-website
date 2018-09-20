@@ -76,8 +76,10 @@ def validator(request):
         print("FORM TYPE: {}".format(form_type))
 
         workflow = ValidationWorkflow(f, filepath, version)
-        #validation_results = workflow.validate_all()
-        validation_results = workflow.validate_schema()
+        validation_results = workflow.validate_all()
+        #validation_results = workflow.validate_schema()
+
+        #print(validation_results)
 
         # cleanup file after validation
         if form_type == 'file':

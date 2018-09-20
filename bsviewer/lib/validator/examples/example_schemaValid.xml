@@ -30,7 +30,6 @@
                 <auc:IdentifierValue>A</auc:IdentifierValue>
               </auc:PremisesIdentifier>
             </auc:PremisesIdentifiers>
-            <auc:FloorsAboveGrade>32</auc:FloorsAboveGrade>
             <auc:FloorsBelowGrade>2</auc:FloorsBelowGrade>
             <auc:BuildingAutomationSystem>true</auc:BuildingAutomationSystem>
             <auc:HistoricalLandmark>false</auc:HistoricalLandmark>
@@ -492,7 +491,7 @@
           <auc:FenestrationFrameMaterial>Aluminum no thermal break</auc:FenestrationFrameMaterial>
           <auc:FenestrationOperation>false</auc:FenestrationOperation>
           <auc:GlassType>Clear uncoated</auc:GlassType>
-          <auc:FenestrationGasFill>yes</auc:FenestrationGasFill>
+          <auc:FenestrationGasFill>Argon</auc:FenestrationGasFill>
           <auc:FenestrationGlassLayers>Double pane</auc:FenestrationGlassLayers>
           <auc:FenestrationUFactor>0.9</auc:FenestrationUFactor>
           <auc:SolarHeatGainCoefficient>0.7</auc:SolarHeatGainCoefficient>
@@ -515,7 +514,7 @@
         <auc:TechnologyCategories>
           <auc:TechnologyCategory>
             <auc:PlugLoadReductions>
-              <auc:MeasureName>Upgrade servers</auc:MeasureName>
+              <auc:MeasureName>Install plug load controls</auc:MeasureName>
             </auc:PlugLoadReductions>
           </auc:TechnologyCategory>
         </auc:TechnologyCategories>
@@ -541,7 +540,7 @@
         <auc:TechnologyCategories>
           <auc:TechnologyCategory>
             <auc:ChilledWaterHotWaterAndSteamDistributionSystems>
-              <auc:MeasureName>Insulate DHW tank</auc:MeasureName>
+              <auc:MeasureName>Add pipe insulation</auc:MeasureName>
             </auc:ChilledWaterHotWaterAndSteamDistributionSystems>
           </auc:TechnologyCategory>
         </auc:TechnologyCategories>
@@ -567,7 +566,7 @@
         <auc:TechnologyCategories>
           <auc:TechnologyCategory>
             <auc:ChilledWaterHotWaterAndSteamDistributionSystems>
-              <auc:MeasureName>Install heat pump DHW system</auc:MeasureName>
+              <auc:MeasureName>Add pipe insulation</auc:MeasureName>
             </auc:ChilledWaterHotWaterAndSteamDistributionSystems>
           </auc:TechnologyCategory>
         </auc:TechnologyCategories>
@@ -749,7 +748,7 @@
         <auc:AuditorQualificationNumber>2345</auc:AuditorQualificationNumber>
         <auc:CertificationExpirationDate>2018-08-01</auc:CertificationExpirationDate>
         <auc:CertifiedAuditTeamMemberContactID IDref="Contact-70234398476680"></auc:CertifiedAuditTeamMemberContactID>
-        <auc:AuditTeamMemberCertificationType>Department of Buildings (DOB) Approved Agent</auc:AuditTeamMemberCertificationType>
+        <auc:AuditTeamMemberCertificationType>Professional Engineer (PE)</auc:AuditTeamMemberCertificationType>
       </auc:Qualifications>
       <auc:AuditorContactID IDref="Contact-70234558989420"></auc:AuditorContactID>
       <auc:UserDefinedFields>
@@ -783,10 +782,14 @@
           <auc:PostalCode>60601</auc:PostalCode>
         </auc:Address>
         <auc:ContactTelephoneNumbers>
-          <auc:ContactTelephoneNumber>(111) 111-1111</auc:ContactTelephoneNumber>
+          <auc:ContactTelephoneNumber>
+            <auc:TelephoneNumber>(111) 111-1111</auc:TelephoneNumber>
+          </auc:ContactTelephoneNumber>
         </auc:ContactTelephoneNumbers>
         <auc:ContactEmailAddresses>
-          <auc:ContactEmailAddress>doug.baldwin@aol.com</auc:ContactEmailAddress>
+          <auc:ContactEmailAddress>
+            <auc:EmailAddress>doug.baldwin@aol.com</auc:EmailAddress>
+          </auc:ContactEmailAddress>
         </auc:ContactEmailAddresses>
       </auc:Contact>
       <auc:Contact ID="Contact-70234558989420">
@@ -804,10 +807,14 @@
           <auc:PostalCode>60601</auc:PostalCode>
         </auc:Address>
         <auc:ContactTelephoneNumbers>
-          <auc:ContactTelephoneNumber>(222) 222-2222</auc:ContactTelephoneNumber>
+          <auc:ContactTelephoneNumber>
+            <auc:TelephoneNumber>(222) 222-2222</auc:TelephoneNumber>
+          </auc:ContactTelephoneNumber>
         </auc:ContactTelephoneNumbers>
         <auc:ContactEmailAddresses>
-          <auc:ContactEmailAddress>steve.largent@aol.com</auc:ContactEmailAddress>
+          <auc:ContactEmailAddress>
+            <auc:EmailAddress>steve.largent@aol.com</auc:EmailAddress>
+          </auc:ContactEmailAddress>
         </auc:ContactEmailAddresses>
       </auc:Contact>
       <auc:Contact ID="Contact-70234395810660">
@@ -825,10 +832,14 @@
           <auc:PostalCode>60601</auc:PostalCode>
         </auc:Address>
         <auc:ContactTelephoneNumbers>
-          <auc:ContactTelephoneNumber>(666) 666-6666</auc:ContactTelephoneNumber>
+          <auc:ContactTelephoneNumber>
+            <auc:TelephoneNumber>(666) 666-6666</auc:TelephoneNumber>
+          </auc:ContactTelephoneNumber>
         </auc:ContactTelephoneNumbers>
         <auc:ContactEmailAddresses>
-          <auc:ContactEmailAddress>steve.smith@aol.com</auc:ContactEmailAddress>
+          <auc:ContactEmailAddress>
+            <auc:EmailAddress>steve.smith@aol.com</auc:EmailAddress>
+          </auc:ContactEmailAddress>
         </auc:ContactEmailAddresses>
       </auc:Contact>
       <auc:Contact ID="Contact-70234398535080">
@@ -846,10 +857,14 @@
           <auc:PostalCode>60601</auc:PostalCode>
         </auc:Address>
         <auc:ContactTelephoneNumbers>
-          <auc:ContactTelephoneNumber>(333) 333-3333</auc:ContactTelephoneNumber>
+          <auc:ContactTelephoneNumber>
+            <auc:TelephoneNumber>(333) 333-3333</auc:TelephoneNumber>
+          </auc:ContactTelephoneNumber>
         </auc:ContactTelephoneNumbers>
         <auc:ContactEmailAddresses>
-          <auc:ContactEmailAddress>jim.zorn@aol.com</auc:ContactEmailAddress>
+          <auc:ContactEmailAddress>
+            <auc:EmailAddress>jim.zorn@aol.com</auc:EmailAddress>
+          </auc:ContactEmailAddress>
         </auc:ContactEmailAddresses>
       </auc:Contact>
       <auc:Contact ID="Contact-70234398476680">
@@ -867,10 +882,14 @@
           <auc:PostalCode>60601</auc:PostalCode>
         </auc:Address>
         <auc:ContactTelephoneNumbers>
-          <auc:ContactTelephoneNumber>(444) 444-4444</auc:ContactTelephoneNumber>
+          <auc:ContactTelephoneNumber>
+            <auc:TelephoneNumber>(444) 444-4444</auc:TelephoneNumber>
+          </auc:ContactTelephoneNumber>
         </auc:ContactTelephoneNumbers>
         <auc:ContactEmailAddresses>
-          <auc:ContactEmailAddress>russell.wilson@aol.com</auc:ContactEmailAddress>
+          <auc:ContactEmailAddress>
+            <auc:EmailAddress>russell.wilson@aol.com</auc:EmailAddress>
+          </auc:ContactEmailAddress>
         </auc:ContactEmailAddresses>
       </auc:Contact>
       <auc:Contact ID="Contact-70234398407960">
@@ -888,10 +907,14 @@
           <auc:PostalCode>60601</auc:PostalCode>
         </auc:Address>
         <auc:ContactTelephoneNumbers>
-          <auc:ContactTelephoneNumber>(555) 555-5555</auc:ContactTelephoneNumber>
+          <auc:ContactTelephoneNumber>
+            <auc:TelephoneNumber>(555) 555-5555</auc:TelephoneNumber>
+          </auc:ContactTelephoneNumber>
         </auc:ContactTelephoneNumbers>
         <auc:ContactEmailAddresses>
-          <auc:ContactEmailAddress>curt.warner@aol.com</auc:ContactEmailAddress>
+          <auc:ContactEmailAddress>
+            <auc:EmailAddress>curt.warner@aol.com</auc:EmailAddress>
+          </auc:ContactEmailAddress>
         </auc:ContactEmailAddresses>
       </auc:Contact>
     </auc:Contacts>

@@ -17,6 +17,9 @@ body {
   padding: 20px;
 }
 
+.pad-top-20 {
+  padding-top:20px;
+}
 .pad-top-40 {
   padding-top: 40px;
 }
@@ -218,6 +221,10 @@ header.major {
   color:#333;
 }
 
+.wrap-it {
+  word-wrap: break-word;
+}
+
 
 /* colors */
 .container h1, .container h2, .container h3, .container h4, .container h5, .container h6 {
@@ -275,6 +282,11 @@ form a, form a:hover {
 
 .panel {
   color: #333;
+}
+
+.panel-title a {
+  color: #333;
+  border-bottom:0px;
 }
 
 .btn-link {
