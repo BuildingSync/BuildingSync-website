@@ -1,4 +1,5 @@
 import os
+import tempfile
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404
@@ -56,6 +57,15 @@ def validator(request):
         if form_type == 'file':
             f = request.FILES['file']
             filename = f.name
+
+            # save tmp file
+            tmp_file = tempfile.NamedTemporaryFile(delete=False)
+            filepath = tmp_file.name
+            print('tmp file at: {}'.format(filepath))
+            for chunk in f.chunks():
+                tmp_file.write(chunk)
+            tmp_file.close()
+
         else:
             f = open(request.POST['file_name'], 'r')
             filename = os.path.basename(request.POST['file_name'])
@@ -64,23 +74,21 @@ def validator(request):
         version = '0.3'
         print("FILENAME: {}".format(filename))
         print("FORM TYPE: {}".format(form_type))
-        print('FULL NAME: {}'.format(request.POST['file_name']))
 
-        print(f)
         workflow = ValidationWorkflow(f, filepath, version)
         #validation_results = workflow.validate_all()
         validation_results = workflow.validate_schema()
-        if workflow.is_xml:
-            return render(request, 'bsviewer/validator_results.html', {
-                     'validation_results': validation_results,
-                     'filename': filename,
-                     'schema_version': version
-                 })
-        else:
-            # this doesn't work
-            # messages.add_message(request, messages.ERROR, 'Submission did not contain xml data.')
-            context['error'] = 'Submission did not contain xml data.'
-            return render(request, 'validatorviewer/upload.html', context)
+
+        # cleanup file after validation
+        if form_type == 'file':
+            os.unlink(tmp_file.name)
+
+        return render(request, 'bsviewer/validator_results.html', {
+            'validation_results': validation_results,
+            'filename': filename,
+            'schema_version': version
+        })
+
     else:
         context['load_xml_{}_form'.format(form_type)] = form
         return render(request, 'bsviewer/validator.html', context)

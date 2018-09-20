@@ -17,20 +17,16 @@ class ValidationWorkflow(object):
         :return:
         """
 
-        # file path
+        # file-like object (not using it)
+        # TODO: remove?
+        self.f = f
+        # file path (using this)
         self.filepath = filepath
 
         # add schema version controls.  Only validate against use cases matching schema version
         self.schema_version = version
         self.schema = Schema.objects.get(version=version)
 
-        try:
-            self.xml_root = etree.parse(f).getroot()
-        except etree.XMLSyntaxError:
-            self.is_xml = False
-            return
-        else:
-            self.is_xml = True
         self.use_cases = []
 
         # retrieve all applicable use cases
