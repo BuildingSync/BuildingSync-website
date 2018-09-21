@@ -3,20 +3,19 @@ import tempfile
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseServerError, HttpResponseRedirect, Http404, HttpResponseForbidden
-#from django.core.urlresolvers import reverse
 from django.contrib import messages
-from django.shortcuts import render
+from django.contrib.auth import update_session_auth_hash
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.forms import PasswordChangeForm
 
 from .models.schema import Schema
 from .models.use_case import UseCase
 
 from bsviewer import forms
 from bsviewer.lib.validator.workflow import ValidationWorkflow
-
-
 
 
 def index(request):
@@ -153,6 +152,24 @@ def download_template(request, name):
         raise Http404
     raise Http404
 
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('profile')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'registration/change_password.html', {
+        'form': form
+    })
+
+
 class UseCaseCreate(LoginRequiredMixin, CreateView):
     model = UseCase
     fields = ['name', 'schema', 'import_file']
@@ -170,4 +187,5 @@ class UseCaseUpdate(LoginRequiredMixin, UpdateView):
 class UseCaseDelete(LoginRequiredMixin, DeleteView):
     model = UseCase
     success_url = reverse_lazy('bsviewer:cases')
+
 

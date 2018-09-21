@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.forms import PasswordChangeForm
 from django.urls import include, path
 
 from bsviewer import views
@@ -28,4 +29,5 @@ urlpatterns = [
     path('user/profile/', views.profile, name='profile'),
     path('user/logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
     path('user/updateuser/', views.update_user, name='updateuser'),
+    path('user/password_change/', views.change_password, name='change_password')
 ]
