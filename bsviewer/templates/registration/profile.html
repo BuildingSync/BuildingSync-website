@@ -21,7 +21,9 @@
                     <td>{{ request.user.email }}</td>
                 </tr>
             </table>
-          <!---   <a href="{#% url 'bsviewer:password_change' %}" class="btn btn-default">Change Password</a>  --->
+            <a href="{% url 'updateuser' %}" class="btn btn-info">Edit</a>
+
+{#            <a href="{% url 'bsviewer:password_change' %}" class="btn btn-default">Change Password</a>#}
         </div>
     </div>
 

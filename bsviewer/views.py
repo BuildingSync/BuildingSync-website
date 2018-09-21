@@ -2,7 +2,9 @@ import os
 import tempfile
 
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, HttpResponseServerError, HttpResponseRedirect, Http404, HttpResponseForbidden
+#from django.core.urlresolvers import reverse
+from django.contrib import messages
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -13,6 +15,8 @@ from .models.use_case import UseCase
 
 from bsviewer import forms
 from bsviewer.lib.validator.workflow import ValidationWorkflow
+
+
 
 
 def index(request):
@@ -104,6 +108,34 @@ def profile(request):
     return render(request, 'registration/profile.html')
 
 @login_required
+def update_user(request):
+    if request.POST:
+        form = forms.UpdateUserForm(request.POST)
+        if form.is_valid():
+            model_fields_to_update = {
+                'first_name': request.user,
+                'last_name': request.user,
+                'email': request.user
+            }
+            for field_name, model in model_fields_to_update.items():
+                if not field_name in request.POST:
+                    continue
+                setattr(model, field_name, request.POST[field_name])
+            request.user.save()
+            messages.add_message(request, messages.SUCCESS, 'Profile Updated')
+            return HttpResponseRedirect(reverse_lazy('profile'))
+        else:
+            return render(request, 'registration/updateuser.html', {'update_user_form': form})
+    else:
+        update_user_form = forms.UpdateUserForm({
+            'first_name': request.user.first_name,
+            'last_name': request.user.last_name,
+            'email': request.user.email
+        })
+        return render(request, 'registration/updateuser.html', {'update_user_form': update_user_form})
+
+
+@login_required
 def download_template(request, name):
     if name:
         schema = Schema.objects.filter(name=name)[0]
@@ -138,3 +170,4 @@ class UseCaseUpdate(LoginRequiredMixin, UpdateView):
 class UseCaseDelete(LoginRequiredMixin, DeleteView):
     model = UseCase
     success_url = reverse_lazy('bsviewer:cases')
+

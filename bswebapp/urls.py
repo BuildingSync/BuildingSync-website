@@ -27,4 +27,5 @@ urlpatterns = [
          name='login'),
     path('user/profile/', views.profile, name='profile'),
     path('user/logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('user/updateuser/', views.update_user, name='updateuser'),
 ]
