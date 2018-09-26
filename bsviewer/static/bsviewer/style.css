@@ -199,13 +199,17 @@ a:focus, a:hover {
   border-color: #F4C43F;
 }
 
-.list-group-item-accent {
+.list-group-item-accent .list-group-item-selected {
     color: #fff;
     background-color: #2db1a6;
 }
 
 .list-group-item-accent a {
   border-bottom: 0px;
+}
+
+li.list-group-item {
+  color: #333;
 }
 
 header.major {
@@ -237,7 +241,7 @@ header.major {
 header.major h2, header.major h3, header.major h4, header.major h5, header.major h6 {
   border-bottom: solid 2px #333;
   color: #333;
-  margin: 0 0 0 0;
+  margin: 0 0 0.5em 0;
   padding-bottom: 0.5em;
 }
 
@@ -295,3 +299,23 @@ form a, form a:hover {
 .btn-link {
   color: #179389;
 }
+
+.treeview .list-group-item {
+	cursor: pointer;
+}
+
+.treeview span.indent {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.treeview span.icon {
+	width: 12px;
+	margin-right: 5px;
+}
+
+.treeview .node-disabled {
+	color: silver;
+	cursor: not-allowed;
+}
+

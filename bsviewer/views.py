@@ -1,12 +1,13 @@
 import os
 import tempfile
+import json
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseServerError, HttpResponseRedirect, Http404, HttpResponseForbidden
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import PasswordChangeForm
@@ -16,7 +17,9 @@ from .models.use_case import UseCase
 
 from bsviewer import forms
 from bsviewer.lib.validator.workflow import ValidationWorkflow
+from bsviewer.lib.tree_viewer import get_schema_jstree_data
 
+DEFAULT_SCHEMA_VERSION = '0.3'
 
 def index(request):
     context = {}
@@ -35,6 +38,28 @@ def use_cases(request):
     }
     return render(request, 'bsviewer/use_cases.html', context)
 
+
+def redirect_data_dictionary(request):
+    return redirect(reverse('bsviewer:dictionaryversion', args=[DEFAULT_SCHEMA_VERSION]))
+
+
+def dictionary(request, version):
+    versions = []
+    for version_obj in Schema.objects.all():
+        versions.append({
+            'name': version_obj.version,
+            'is_current': version_obj.version == version,
+            'link': reverse('bsviewer:dictionaryversion', args=[version_obj.version])
+        })
+
+    context = {
+        'schema_version': version,
+        'schema_tree_data': json.dumps(get_schema_jstree_data(version)),
+        'versions': versions
+    }
+
+    return render(request, 'bsviewer/dictionary.html', context)
+
 def validator(request):
     context = {
         'load_xml_file_form': forms.LoadXMLFile(),
@@ -44,12 +69,11 @@ def validator(request):
 
     if request.POST:
         form_type = request.POST['form_type']
-        is_example = False
+        version = request.POST['schema_version']
         if form_type == 'file':
             form = forms.LoadXMLFile(request.POST, request.FILES)
         elif form_type == 'example':
             form = forms.LoadXMLExample(request.POST)
-            is_example = True
         elif form_type == 'url':
             form = forms.LoadXMLURL(request.POST)
         else:
@@ -75,13 +99,12 @@ def validator(request):
             filename = os.path.basename(request.POST['file_name'])
             filepath = request.POST['file_name']
 
-        version = '0.3'
+
         print("FILENAME: {}".format(filename))
         print("FORM TYPE: {}".format(form_type))
 
         workflow = ValidationWorkflow(f, filepath, version)
         validation_results = workflow.validate_all()
-        #validation_results = workflow.validate_schema()
 
         #print(validation_results)
 

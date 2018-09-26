@@ -4,44 +4,45 @@
 
 {% block title %}BuildingSync Schema Viewer{% endblock %}
 
+
 {% block content_notitle %}
 
-    <div class="container">
-    	<header class="major">
-			<h2>Validator</h2>
-    	</header>
-        <p>Validate your XML against the BuildingSync schema and its use cases</p>
+  <div class="container">
+    <header class="major">
+      <h2>Validator</h2>
+    </header>
+    <p>Validate your XML against the BuildingSync schema and its use cases</p>
 
-        <div class="row">
-            <div class="col-md-5 col-md-offset-1">
-                <div class="panel panel-accent">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Upload XML</h3>
-                    </div>
-                    <div class="panel-body pad-bot-custom">
-                        <form enctype="multipart/form-data" role="form" method="post">
-                            {% csrf_token %}
-                            {% bootstrap_form load_xml_file_form %}
-                            {% buttons submit='Upload File' reset="Cancel" %}{% endbuttons %}
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-5 col-md-offset-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Explore Examples</h3>
-                    </div>
-                    <div class="panel-body">
-                         <form role="form" method="post">
-                            {% csrf_token %}
-                            {% bootstrap_form load_xml_example_form %}
-                            {% buttons submit='OK' reset="Cancel" %}{% endbuttons %}
-                        </form>
-                    </div>
-                </div>
-            </div>
+    <div class="row">
+      <div class="col-md-5 col-md-offset-1">
+        <div class="panel panel-accent">
+          <div class="panel-heading">
+            <h3 class="panel-title">Upload XML</h3>
+          </div>
+          <div class="panel-body pad-bot-custom">
+            <form enctype="multipart/form-data" role="form" method="post">
+              {% csrf_token %}
+              {% bootstrap_form load_xml_file_form %}
+              {% buttons submit='Upload File' reset="Cancel" %}{% endbuttons %}
+            </form>
+          </div>
         </div>
+      </div>
+      <div class="col-md-5 col-md-offset-1">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Explore Examples</h3>
+          </div>
+          <div class="panel-body">
+            <form role="form" method="post">
+              {% csrf_token %}
+              {% bootstrap_form load_xml_example_form %}
+              {% buttons submit='OK' reset="Cancel" %}{% endbuttons %}
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
 {% endblock content_notitle %}

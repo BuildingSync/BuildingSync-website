@@ -175,6 +175,7 @@ class BuildingSyncSchemaProcessor(object):
 
     def _read_ref_element(self, parent_object):
         ref_element = ReferenceElement()
+
         ref_element.ref_type = parent_object.attrib['ref']
         for child in parent_object.getchildren():
             if child.tag.endswith('attribute'):
@@ -341,6 +342,7 @@ class BuildingSyncSchemaProcessor(object):
         return_rows = []
         num_added = 0
         potential_doc_string = None
+
         for elem in parent_element.annotations:
             potential_doc_string = self._walk_annotation_element(elem)
 
@@ -412,11 +414,13 @@ class BuildingSyncSchemaProcessor(object):
                 return_rows.append({
                     'name': elem.name,
                     'type': elem.name,
+                    'parent_path': root_path,
                     'path': root_path + '.' + elem.name,
                     '$$treeLevel': current_tree_level,
                     'index': current_index
                 })
                 instance = self._find_referenced_element(elem.type)
+
                 if instance:
                     if isinstance(instance, NamedElement):
                         this_num_added, new_rows, potential_doc_string = self._walk_named_element(
@@ -446,6 +450,7 @@ class BuildingSyncSchemaProcessor(object):
                     'name': elem.name,
                     'path': root_path + '.' + elem.name,
                     'type': NamedElement.my_string(),
+                    'parent_path': root_path,
                     '$$treeLevel': current_tree_level,
                     'index': current_index
                 })
@@ -479,6 +484,7 @@ class BuildingSyncSchemaProcessor(object):
                 'name': ref_type_clean,
                 'path': root_path + '.' + ref_type_clean,
                 'type': ReferenceElement.my_string(),
+                'parent_path': root_path,
                 '$$treeLevel': current_tree_level,
                 'index': current_index
             })
@@ -550,10 +556,27 @@ class BuildingSyncSchemaProcessor(object):
                 'full_path': root_path,
                 'path': '.'.join(root_path.split('.')[0:-1]),
                 'type': 'Enumeration',
+                'parent_path': root_path,
                 '$$treeLevel': current_tree_level,
                 'index': current_index
             })
         return num_added, return_rows
+
+
+# def get_parent_from_path(root_path):
+#     parts = root_path.split('.')
+#     if len(parts) == 1:
+#         # root element, no parent
+#         return None
+#     else:
+#         return parts[-1]
+
+def get_parent_from_path(root_path):
+    parents = Attribute.objects.filter(path=root_path)
+    if parents.count() > 0:
+        return parents[0].pk
+    else:
+        return None
 
 
 def process_schema(schema_object):
@@ -575,10 +598,14 @@ def process_schema(schema_object):
             if se['type'] == 'Enumeration':
                 continue
 
+            # print('----')
+            # print(se)
+
             b = Attribute(
                 name=se['name'],
                 type=se['type'],
                 tree_level=se['$$treeLevel'],
+                parent=get_parent_from_path(se['parent_path']),
                 index=se['index'],
                 path=se['path'],
                 schema=schema_object)

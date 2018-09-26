@@ -121,8 +121,8 @@ class ValidationWorkflow(object):
 
         # traverse use case attributes (not xml)
         for attr in attrs:
-            print(attr.attribute)
-            print(attr.attribute.path)
+            # print(attr.attribute)
+            # print(attr.attribute.path)
 
             # try to find it
             paths = attr.attribute.path.split(".")
