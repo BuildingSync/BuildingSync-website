@@ -3,7 +3,7 @@ import tempfile
 import json
 
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseServerError, HttpResponseRedirect, Http404, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseServerError, HttpResponseRedirect, Http404, JsonResponse, HttpResponseForbidden
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import render, redirect
@@ -14,6 +14,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 
 from .models.schema import Schema
 from .models.use_case import UseCase
+from .models.attribute_enumeration_class import AttributeEnumerationClass
+from .models.enumeration import Enumeration
 
 from bsviewer import forms
 from bsviewer.lib.validator.workflow import ValidationWorkflow
@@ -59,6 +61,32 @@ def dictionary(request, version):
     }
 
     return render(request, 'bsviewer/dictionary.html', context)
+
+
+def retrieve_enum(request):
+
+    element_id = request.GET.get('element_id', None)
+
+    has_enum = False
+    enums = []
+    # first get enumeration class id from the attributeEnumeration relationship table
+    enum_ids = AttributeEnumerationClass.objects.filter(attribute_id=element_id)
+    if enum_ids.count() > 0:
+        # if found, means that this attribute has enums. Retrieve the actual enum values
+        has_enum = True
+        print("ENUM ID RETRIEVED: {}".format(enum_ids[0].pk))
+        enum_results = Enumeration.objects.filter(enumeration_class_id=enum_ids[0].enumeration_class_id).only('name').order_by('pk')
+        print("ENUM_RESULTS: {}".format(enum_results))
+        for item in enum_results:
+            enums.append(item.name)
+        print("ENUMS: {}".format(enums))
+
+    data = {
+        'has_enum': has_enum,
+        'enums': enums
+    }
+    return JsonResponse(data)
+
 
 def validator(request):
     context = {

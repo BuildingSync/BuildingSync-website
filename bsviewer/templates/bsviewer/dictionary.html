@@ -49,6 +49,8 @@
         </div>
       </div>
       <div class="col-md-4">
+
+
         <h4>Search</h4>
         <form class="form-inline" role="form" id="treesearch">
           <div class="form-group">
@@ -59,15 +61,26 @@
               class="glyphicon glyphicon-search"></span></button>
         </form>
 
-         <!--TODO: eventually look up the bedes term and display here-->
-         <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h2 class="panel-title">Data Dictionary Links</h2>
-                </div>
-                <div class="panel-body">
-                   <p><span class="badge badge-accent2"> &nbsp;Coming Soon &nbsp; </span></p>
-                </div>
+        <h2 id="enum_title" class="hidden">SELECTED NAME</h2>
+        <!--TODO: eventually look up the bedes term and display here-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Data Dictionary Links</h2>
             </div>
+            <div class="panel-body">
+               <p><span class="badge badge-accent2"> &nbsp;Coming Soon &nbsp; </span></p>
+            </div>
+         </div>
+
+         <div id="enum_panel" class="panel panel-default hidden">
+            <div class="panel-heading">
+                <h2 class="panel-title">Enumerations</h2>
+            </div>
+            <div class="panel-body">
+               <div id="enum_results"></div>
+            </div>
+         </div>
+
       </div>
     </div>
 
@@ -80,14 +93,6 @@
   <script type="application/javascript">
       $(function () {
           let data = {{ schema_tree_data|safe }};
-          console.log(data);
-          {#      let data2 = [#}
-          {#   { "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },#}
-          {#   { "id" : "ajson2", "parent" : "#", "text" : "Root node 2" },#}
-          {#   { "id" : "ajson3", "parent" : "ajson2", "text" : "Child 1" },#}
-          {#   { "id" : "ajson4", "parent" : "ajson2", "text" : "Child 2" },#}
-          {#];#}
-          {#      console.log(data2);#}
 
           $('#schematree').jstree({
               'core': {
@@ -95,7 +100,7 @@
                   'multiple': false
               },
               'plugins': ["search", "contextmenu"],
-              'contextmenu': {
+             /* 'contextmenu': {
                   'items': function (node, callback) {
                       if (node.data !== null) {
                           callback({
@@ -111,8 +116,44 @@
                           });
                       }
                   }
-              }
+              } */
+          }).on('changed.jstree', function (e, data) {
+            // display enums when present
+            if (data.action === 'select_node' && data.selected.length > 0){
+              var node = data.instance.get_node(data.selected[0]);
+              // retrieve and display enum (if present)
+              $.ajax({
+                url: '{% url "bsviewer:get_enum" %}',
+                data: {
+                  'element_id': data.selected[0]
+                },
+                dataType: 'json',
+                success: function (jsondata) {
+                  if (jsondata.has_enum) {
+                    // TODO: set enum html section and display
+                    $('#enum_title').removeClass("hidden").addClass("visible");
+                    $('#enum_title').html(node.text);
+                    $('#enum_panel').removeClass("hidden").addClass("visible");
+                    $('#enum_results').html('');
+                    /*$('#enum_results').html(jsondata.enums );*/
+                      var ul = $('<ul>').appendTo('#enum_results');
+                      $(jsondata.enums).each(function(index, item) {
+                          console.log(item);
+                        ul.append(
+                            $(document.createElement('li')).text(item)
+                        );
+                      });
+
+                  } else {
+                    $('#enum_panel').addClass("hidden");
+                  }
+                }
+              });
+            } else {
+              $('#enum_panel').addClass("hidden");
+            }
           });
+
       });
       $("#treesearch").submit(function (e) {
           e.preventDefault();

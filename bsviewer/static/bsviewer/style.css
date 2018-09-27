@@ -319,3 +319,10 @@ form a, form a:hover {
 	cursor: not-allowed;
 }
 
+.hidden>div {
+	display:none;
+}
+
+.visible>div {
+	display:block;
+}
