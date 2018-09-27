@@ -239,9 +239,9 @@ header.major {
 }
 
 header.major h2, header.major h3, header.major h4, header.major h5, header.major h6 {
-  border-bottom: solid 2px #333;
+  border-bottom: solid 0px #333;
   color: #333;
-  margin: 0 0 0.5em 0;
+  margin: 0 0 0 0;
   padding-bottom: 0.5em;
 }
 
