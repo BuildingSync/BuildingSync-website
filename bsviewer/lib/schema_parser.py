@@ -593,6 +593,16 @@ def process_schema(schema_object):
 
     # Create database entries for each schema entry
     with transaction.atomic():
+        # first add root
+        b = Attribute(
+            name='Audits',
+            type='Named Element',
+            tree_level=0,
+            index=0,
+            path='Audits',
+            schema=schema_object)
+        b.save()
+
         for se in schema_entries:
             # skip all the enumerations until after all the types have been added
             if se['type'] == 'Enumeration':
@@ -601,10 +611,11 @@ def process_schema(schema_object):
             # print('----')
             # print(se)
 
+            # add 1 to tree level to account for root
             b = Attribute(
                 name=se['name'],
                 type=se['type'],
-                tree_level=se['$$treeLevel'],
+                tree_level=(se['$$treeLevel']+1),
                 parent=get_parent_from_path(se['parent_path']),
                 index=se['index'],
                 path=se['path'],

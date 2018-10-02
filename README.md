@@ -54,6 +54,18 @@ This is the repository for the BuildingSync Validator web application.
 	```
 
 
+## Testing
+
+* To run test:
+   ```bash
+   ./manage.py test
+   ```
+
+* To calculate coverage:
+    ```bash
+    coverage run --source='.' manage.py test
+    coverage report
+    ```
 
 ## Usage
 

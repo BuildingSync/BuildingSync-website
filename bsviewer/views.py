@@ -21,7 +21,8 @@ from bsviewer import forms
 from bsviewer.lib.validator.workflow import ValidationWorkflow
 from bsviewer.lib.tree_viewer import get_schema_jstree_data
 
-DEFAULT_SCHEMA_VERSION = '0.3'
+from django.conf import settings
+DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
 def index(request):
     context = {}
@@ -47,6 +48,13 @@ def redirect_data_dictionary(request):
 
 def dictionary(request, version):
     versions = []
+
+    # find schema matching version
+    try:
+        schema = Schema.objects.get(version=version)
+    except:
+        raise Http404('Schema version provided does not exist.')
+
     for version_obj in Schema.objects.all():
         versions.append({
             'name': version_obj.version,

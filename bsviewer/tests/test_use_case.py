@@ -8,10 +8,13 @@ from django.core.files import File
 from bsviewer.models.use_case import UseCase
 from bsviewer.models.schema import Schema
 
+from django.conf import settings
+DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
+
 
 class TestUseCase(TestCase):
     def setUp(self):
-        self.schema = Schema.objects.filter(version='0.3').first()
+        self.schema = Schema.objects.filter(version=DEFAULT_SCHEMA_VERSION).first()
         if not self.schema:
             # add schema file - make sure to create a copy since the version will be deleted if
             # the schema is deleted
@@ -21,8 +24,8 @@ class TestUseCase(TestCase):
             )
             copyfile(sf, schema_file)
             self.schema = Schema(
-                name='Version 0.3',
-                version='0.3',
+                name='Version {}'.format(DEFAULT_SCHEMA_VERSION),
+                version=DEFAULT_SCHEMA_VERSION,
                 schema_file=schema_file
             )
             self.schema.save()  # Calling save also processes the schema and generates the template
@@ -40,20 +43,17 @@ class TestUseCase(TestCase):
         attributes = self.usecase.usecaseattribute_set
         self.assertEqual(attributes.count(), 0)
 
+        # clean-up files on disk
+        self.schema.delete()
+
     def add_usecase(self):
         # add file and save
-        # make sure to create a copy since the version will be deleted if
-        # the usecase is deleted
         usf = os.path.join(os.path.dirname(__file__), 'data', 'test_use_case.csv')
-        usecase_file = os.path.join(
-            os.path.dirname(__file__), 'data', 'use_case_file_%s.csv' % randint(0, 10000)
-        )
-        copyfile(usf, usecase_file)
 
         # save to model
-        with open(usecase_file, 'r') as f:
+        with open(usf, 'r') as f:
             file_contents = File(f)
-            self.usecase.import_file.save(usecase_file, file_contents, True)
+            self.usecase.import_file.save(usf, file_contents, True)
 
     def delete_usecase(self):
         self.saved_file_path = self.usecase.import_file.path
@@ -66,5 +66,10 @@ class TestUseCase(TestCase):
         attributes = self.usecase.usecaseattribute_set
         self.assertGreater(attributes.count(), 0)
 
+        print('usecase saved filename: {}'.format(self.usecase.import_file.path))
+
         self.delete_usecase()
         self.assertFalse(os.path.exists(self.saved_file_path))
+
+        # clean-up files on disk
+        self.schema.delete()

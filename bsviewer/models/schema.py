@@ -2,12 +2,11 @@ import os
 import csv
 
 from django.db import models
-from django.db.models.signals import post_save, post_delete, pre_save
+from django.db.models.signals import post_save, post_delete, pre_save, pre_delete
 from django.dispatch import receiver
 
 from bsviewer.lib.schema_parser import process_schema
 from django.core.files import File
-
 
 def rename_schema_file(instance, path):
     if instance.version:
@@ -34,7 +33,7 @@ class Schema(models.Model):
 
         :return: list, CSV format
         '''
-        required_paths = ['Audits.Audit']
+        required_paths = ['Audits']
 
         data = [['BuildingSyncPath', 'State']]
         for attribute in self.attributes.all().order_by('index'):
@@ -86,6 +85,10 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
         if os.path.isfile(instance.schema_file.path):
             os.remove(instance.schema_file.path)
 
+    if instance.usecase_template_file:
+        if os.path.isfile(instance.usecase_template_file.path):
+            os.remove(instance.usecase_template_file.path)
+
 
 @receiver(pre_save, sender=Schema)
 def auto_delete_file_on_change(sender, instance, **kwargs):
@@ -106,3 +109,7 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
     if not old_file == new_file:
         if os.path.isfile(old_file.path):
             os.remove(old_file.path)
+
+        if os.path.isfile(instance.usecase_template_file.path):
+            os.remove(instance.usecase_template_file.path)
+            instance.usecase_template_file = None

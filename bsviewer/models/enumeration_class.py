@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class EnumerationClass(models.Model):
     name = models.CharField(max_length=250, db_index=True)
 

@@ -7,6 +7,9 @@ from django.test import TestCase
 
 from bsviewer.models.schema import Schema
 
+from django.conf import settings
+DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
+
 
 class TestSchema(TestCase):
     def setUp(self):
@@ -20,8 +23,8 @@ class TestSchema(TestCase):
         )
         copyfile(sf, schema_file)
         self.schema = Schema(
-            name='Version 0.3',
-            version='0.3',
+            name='Version {}'.format(DEFAULT_SCHEMA_VERSION),
+            version=DEFAULT_SCHEMA_VERSION,
             schema_file=schema_file
         )
         self.schema.save()  # Calling save also processes the schema and generates the template
@@ -31,6 +34,9 @@ class TestSchema(TestCase):
         self.assertTrue(self.schema.schema_parsed)
         attributes = self.schema.attributes
         self.assertGreater(attributes.count(), 0)
+
+        # clean-up files on disk
+        self.schema.delete()
 
     def test_enumerations(self):
         # check a couple of the attributes to make sure have enumerations
@@ -44,6 +50,9 @@ class TestSchema(TestCase):
             attribute.enumeration_classes.first().enumerations.first().name, 'Premises'
         )
 
+        # clean-up files on disk
+        self.schema.delete()
+
     def test_to_template(self):
         # template is generated automatically in post_save
         self.assertTrue(os.path.exists(self.schema.usecase_template_file.path))
@@ -52,5 +61,24 @@ class TestSchema(TestCase):
                 if index == 0:
                     self.assertEqual('BuildingSyncPath', row[0])
                 elif index == 1:
-                    self.assertEqual('Audits.Audit', row[0])
+                    self.assertEqual('Audits', row[0])
                     self.assertEqual('Required', row[1])
+
+        # clean-up files on disk
+        self.schema.delete()
+
+    def test_cleanup(self):
+        # test that physical files are cleaned up on disk
+
+        schema_file_path = self.schema.schema_file.path
+        usecase_template_file_path = self.schema.usecase_template_file.path
+
+        # delete schema
+        self.schema.delete()
+
+        print('schema filepath: {}'.format(schema_file_path))
+        print('usecase template filepath: {}'.format(usecase_template_file_path))
+
+        # assert that physical files were also deleted
+        self.assertFalse(os.path.isfile(schema_file_path))
+        self.assertFalse(os.path.isfile(usecase_template_file_path))
