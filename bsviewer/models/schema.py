@@ -8,6 +8,7 @@ from django.dispatch import receiver
 from bsviewer.lib.schema_parser import process_schema
 from django.core.files import File
 
+
 def rename_schema_file(instance, path):
     if instance.version:
         return '{}buildingsync_v_{}.xsd'.format('uploaded_schemas/',

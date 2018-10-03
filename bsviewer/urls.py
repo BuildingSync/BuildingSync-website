@@ -12,6 +12,6 @@ urlpatterns = [
     path('validator', views.validator, name='validator'),
     path('dictionary', views.redirect_data_dictionary, name='dictionary'),
     re_path(r'^dictionary/(?P<version>\w+.\w+)/$', views.dictionary, name='dictionaryversion'),
-    re_path(r'^ajax/enum/$', views.retrieve_enum, name='get_enum')
+    re_path(r'^ajax/enum/$', views.retrieve_additional_dictionary_data, name='get_additional_data')
 
 ]

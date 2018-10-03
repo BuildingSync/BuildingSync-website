@@ -2,6 +2,7 @@ import os
 import tempfile
 import json
 
+from django.forms.models import model_to_dict
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseServerError, HttpResponseRedirect, Http404, JsonResponse, HttpResponseForbidden
 from django.contrib import messages
@@ -15,6 +16,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from .models.schema import Schema
 from .models.use_case import UseCase
 from .models.attribute_enumeration_class import AttributeEnumerationClass
+from .models.bedes_models import BedesMapping, BedesTerm
 from .models.enumeration import Enumeration
 
 from bsviewer import forms
@@ -71,10 +73,21 @@ def dictionary(request, version):
     return render(request, 'bsviewer/dictionary.html', context)
 
 
-def retrieve_enum(request):
+def retrieve_additional_dictionary_data(request):
 
     element_id = request.GET.get('element_id', None)
 
+    # get Bedes mapping
+    bedes_term = None
+    bedes_mappings = BedesMapping.objects.filter(attribute_id=element_id)
+    if bedes_mappings.count() > 0:
+        # take first, there should only be 1
+        bedes_term = model_to_dict(BedesTerm.objects.get(pk=bedes_mappings[0].bedesTerm_id))
+        #bedes_term = serializers.serialize("json", BedesTerm.objects.get(pk=bedes_mappings[0].bedesTerm_id))
+        print("BEDES TERM: {}".format(bedes_term))
+
+
+    # GET ENUMS
     has_enum = False
     enums = []
     # first get enumeration class id from the attributeEnumeration relationship table
@@ -89,7 +102,10 @@ def retrieve_enum(request):
             enums.append(item.name)
         print("ENUMS: {}".format(enums))
 
+    # TODO: get bedes enum defs
+
     data = {
+        'bedes_term': bedes_term,
         'has_enum': has_enum,
         'enums': enums
     }

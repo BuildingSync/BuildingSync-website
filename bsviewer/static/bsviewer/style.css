@@ -5,6 +5,10 @@ body {
   font-size:0.9em;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .pad-5 {
   padding: 5px;
 }
@@ -14,6 +18,10 @@ body {
 }
 .pad-bot-custom {
   padding-bottom: 24px;
+}
+
+.pad-bot-10 {
+  padding-bottom:10px;
 }
 
 .pad-20 {
@@ -291,9 +299,13 @@ form a, form a:hover {
   color: #333;
 }
 
-.panel-title a {
+.panel-title a, .panel-title a:hover {
   color: #333;
   border-bottom:0px;
+}
+
+.panel-body a, .pnael-body a:hover {
+  color: #333;
 }
 
 .btn-link {
@@ -325,4 +337,8 @@ form a, form a:hover {
 
 .visible>div {
 	display:block;
+}
+
+#schematree a, #schematree a:hover {
+  border-bottom:0px;
 }

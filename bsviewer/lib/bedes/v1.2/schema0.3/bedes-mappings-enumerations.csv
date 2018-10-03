@@ -1,0 +1,1746 @@
+1A,96362,1A,1.0
+1B,96363,1B,1.0
+2A,96364,2A,1.0
+2B,96365,2B,1.0
+3A,96366,3A,1.0
+3B,96367,3B,1.0
+3C,96368,3C,1.0
+4A,96369,4A,1.0
+4B,96370,4B,1.0
+4C,96371,4C,1.0
+5A,96372,5A,1.0
+5B,96373,5B,1.0
+5C,96374,5C,1.0
+6A,96375,6A,1.0
+6B,96376,6B,1.0
+7,96406,7,1.0
+8,96407,8,1.0
+Northern,96379,Northern,1.0
+North-Central,96380,North Central,0.9692307692307692
+South-Central,96381,South Central,0.9692307692307692
+Southern,96382,Southern,1.0
+Climate Zone 1,,,
+Climate Zone 2,,,
+Climate Zone 3,,,
+Climate Zone 4,,,
+Climate Zone 5,,,
+Climate Zone 6,,,
+Climate Zone 7,,,
+Climate Zone 8,,,
+Climate Zone 9,,,
+Climate Zone 10,,,
+Climate Zone 11,,,
+Climate Zone 12,,,
+Climate Zone 13,,,
+Climate Zone 14,,,
+Climate Zone 15,,,
+Climate Zone 16,,,
+1,102645,1,1.0
+2,102646,2,1.0
+3,102647,3,1.0
+4 (Except Marine),,,
+4 (Marine),,,
+5,102649,5,1.0
+6,96405,6,1.0
+Subarctic,96421,Subarctic,1.0
+Marine,96422,Marine,1.0
+Hot-dry,96423,Hot dry,0.9333333333333333
+Mixed-dry,96424,Mixed dry,0.9555555555555556
+Hot-humid,96425,Hot humid,0.9481481481481482
+Mixed-humid,96426,Mixed humid,0.9636363636363636
+Cold,96427,Cold,1.0
+Very cold,96428,Very cold,1.0
+4,102648,4,1.0
+AKGD,96429,AKGD,1.0
+AKMS,96430,AKMS,1.0
+AZNM,96431,AZNM,1.0
+CAMX,96432,CAMX,1.0
+ERCT,96433,ERCT,1.0
+FRCC,96434,FRCC,1.0
+HIMS,96435,HIMS,1.0
+HIOA,96436,HIOA,1.0
+MORE,96437,MORE,1.0
+MROW,96438,MROW,1.0
+NEWE,96439,NEWE,1.0
+NWPP,96440,NWPP,1.0
+NYCW,96441,NYCW,1.0
+NYLI,96442,NYLI,1.0
+NYUP,96443,NYUP,1.0
+RFCE,96444,RFCE,1.0
+RFCM,96445,RFCM,1.0
+RFCW,96446,RFCW,1.0
+RMPA,96447,RMPA,1.0
+SPNO,96448,SPNO,1.0
+SPSO,96449,SPSO,1.0
+SRMV,96450,SRMV,1.0
+SRMW,96451,SRMW,1.0
+SRSO,96452,SRSO,1.0
+SRTV,96453,SRTV,1.0
+SRVC,96454,SRVC,1.0
+Other,,,
+FAA,96456,FAA,1.0
+ICAO,96457,ICAO,1.0
+NWS,96458,NWS,1.0
+WBAN,96459,WBAN,1.0
+WMO,96460,WMO,1.0
+Commercial,103095,Commercial,1.0
+Residential,103094,Residential,1.0
+Mixed use commercial,96464,Mixed use commercial,1.0
+Lots,96466,Lot,0.9166666666666666
+Parking spaces,96467,Parking space,0.9857142857142858
+Apartment units,96468,Apartment unit,0.9866666666666667
+Businesses,96469,Business,0.96
+Guest rooms,96470,Guest room,0.9818181818181818
+Stations,96471,Station,0.975
+Buildings,96472,Building,0.9777777777777777
+Areas,96473,Area,0.96
+Thermal Zones,96474,Thermal zone,0.9525641025641025
+Floors,96475,Floor,0.9666666666666667
+Rooms,96476,Room,0.96
+Bedrooms,96477,Bedroom,0.975
+Unknown,,,
+Draft,102639,Draft,1.0
+Received,102640,Received,1.0
+Under Review,102641,Under review,0.9666666666666666
+On Hold,102642,On hold,0.9333333333333333
+Reviewed and Approved,102643,Reviewed and approved,0.9809523809523809
+Reviewed and Not Approved,102644,Reviewed and not approved,0.968
+Multiple Heights,96486,Multiple heights,0.9483333333333334
+Uniform Height,96487,Uniform height,0.9406593406593406
+No abutments,,,
+Attached from Above,96489,Attached from above,0.9789473684210526
+Attached from Below,96490,Attached from below,0.9789473684210526
+Attached from Above and Below,96491,Attached from above and below,0.9501915708812261
+Stand-alone,98689,Stand alone,0.9636363636363636
+Attached on one side,96494,Attached on one side,1.0
+Attached on two sides,96495,Attached on two sides,1.0
+Attached on three sides,96496,Attached on three sides,1.0
+Within a building,,,
+ENERGY STAR,101852,ENERGY STAR,1.0
+ENERGY STAR Certified Homes,96500,ENERGY STAR Certified Homes,1.0
+LEED,96501,LEED,1.0
+Home Energy Upgrade Certificate of Energy Efficiency Performance,96502,Home Energy Upgrade Certificate of Energy Efficiency Performance,1.0
+Home Energy Upgrade Certificate of Energy Efficiency Improvements,96503,Home Energy Upgrade Certificate of Energy Efficiency Improvements,1.0
+Passive House,96504,Passive House,1.0
+Living Building Challenge,96505,Living Building Challenge,1.0
+Green Globes,96506,Green Globes,1.0
+Challenge Home,96507,Challenge Home,1.0
+WaterSense,96508,WaterSense,1.0
+Indoor airPLUS,96509,Indoor airPLUS,1.0
+NGBS ICC 700,96510,NGBS ICC 700,1.0
+CMP Green Value Score,96511,CMP Green Value Score,1.0
+RESNET HERS,96512,RESNET HERS,1.0
+Home Energy Score,96513,Home Energy Score,1.0
+ASHRAE Building EQ,96514,ASHRAE Building EQ,1.0
+Commercial Building Energy Asset Score,96515,Commercial Building Energy Asset Score,1.0
+Bronze,96518,Bronze,1.0
+Silver,96519,Silver,1.0
+Gold,96520,Gold,1.0
+Emerald,96521,Emerald,1.0
+Certified,96522,Certified,1.0
+Platinum,96523,Platinum,1.0
+One Star,96524,One Star,1.0
+Two Star,96525,Two Star,1.0
+Three Star,96526,Three Star,1.0
+Four Star,96527,Four Star,1.0
+Owner,103122,Owner,1.0
+Occupant,103120,Occupant,1.0
+Tenant,103057,Tenant,1.0
+Landlord,96532,Landlord,1.0
+Rectangular,96535,Rectangular,1.0
+L-Shape,,,
+U-Shape,,,
+H-Shape,,,
+T-Shape,96539,T Shape,0.9142857142857143
+O-Shape,,,
+Perimeter,96543,Perimeter,1.0
+Perimeter and core,96544,Perimeter and core,1.0
+Single zone,98010,Single zone,1.0
+A1,,,
+A2,,,
+A3,,,
+B1,,,
+B2,,,
+B3,,,
+C1,,,
+C2,,,
+C3,,,
+D1,,,
+D2,,,
+D3,,,
+AO1,,,
+BO1,,,
+During the day,97868,During the day,1.0
+At night,97869,At night,1.0
+During sleeping and unoccupied hours,97870,During sleeping and unoccupied hours,1.0
+Never / rarely,96565,Never or rarely,0.9282783882783883
+Seasonal,97871,Seasonal,1.0
+Never-rarely,97872,Never or rarely,0.9118181818181819
+Low,96575,Low,1.0
+High,96576,High,1.0
+Premises,103119,Premises,1.0
+Listing,97261,Listing,1.0
+Name,97262,Name,1.0
+Portfolio Manager Property ID,97263,Portfolio Manager Property,0.9793103448275863
+Portfolio Manager Standard,97264,Portfolio Manager,0.9307692307692308
+Federal real property,97265,Federal real property,1.0
+Tax book number,97266,Tax book number,1.0
+Tax map number,97267,Tax map number,1.0
+Assessor parcel number,97268,Assessor parcel number,1.0
+Tax parcel letter,97269,Tax parcel letter,1.0
+Custom,103080,Customer,0.95
+Manufactured home,97272,Manufactured home,1.0
+Single family,97273,Single family,1.0
+Multifamily,97274,Multifamily,1.0
+Multifamily with commercial,97275,Multifamily with commercial,1.0
+Multifamily individual unit,97276,Multifamily individual unit,1.0
+Public housing,97277,Public housing,1.0
+Health care-Pharmacy,97279,Health care pharmacy,0.96
+Health care-Skilled nursing facility,97280,Health care skilled nursing facility,0.9366013071895425
+Health care-Residential treatment center,97281,Health care residential treatment center,0.911578947368421
+Health care-Inpatient hospital,97282,Health care inpatient hospital,0.9233333333333333
+Health care-Outpatient rehabilitation,97283,Health care outpatient rehabilitation,0.9498069498069498
+Health care-Diagnostic center,97284,Health care diagnostic center,0.9353767560664111
+Health care-Outpatient non-diagnostic,97285,Health care outpatient non diagnostic,0.9146263910969793
+Health care-Outpatient surgical,97286,Health care outpatient surgical,0.9397107897664071
+Health care-Veterinary,97287,Health care veterinary,0.9636363636363636
+Health care-Morgue or mortuary,97288,Health care morgue or mortuary,0.9376190476190477
+Health care,97289,Health care,1.0
+Gas station,97290,Gas station,1.0
+Convenience store,97291,Convenience store,1.0
+Food sales-Grocery store,97292,Food sales grocery store,0.9393939393939393
+Food sales,97293,Food sales,1.0
+Laboratory-Testing,97294,Laboratory testing,0.9430555555555555
+Laboratory-Medical,97295,Laboratory medical,0.9555555555555556
+Laboratory ,97296,Laboratory,0.9818181818181818
+Vivarium,97297,Vivarium,1.0
+Office,103663,Office,1.0
+Bank,97299,Bank,1.0
+Courthouse,102761,Courthouse,1.0
+Public safety station,97301,Public safety station,1.0
+Public safety-Detention center,97302,Public safety detention center,0.9447619047619048
+Public safety-Correctional facility,97303,Public safety correctional facility,0.9347186147186146
+Public safety,97304,Public safety,1.0
+Warehouse-Refrigerated,97305,Warehouse refrigerated,0.9336363636363636
+Warehouse-Unrefrigerated,97306,Warehouse unrefrigerated,0.9666666666666666
+Warehouse-Self-storage,97307,Warehouse self storage,0.9244019138755981
+Warehouse,97308,Warehouse,1.0
+Assembly-Religious,97309,Assembly religious,0.9555555555555556
+Assembly-Cultural entertainment,97310,Assembly cultural entertainment,0.946607341490545
+Assembly-Social entertainment,97311,Assembly social entertainment,0.9501915708812261
+Assembly-Arcade or casino without lodging,97312,Assembly arcade or casino without lodging,0.9189493433395873
+Assembly-Convention center,97313,Assembly convention center,0.9275641025641026
+Assembly-Stadium,97314,Assembly stadium,0.95
+Assembly-Public,97315,Assembly public,0.9466666666666667
+Recreation-Pool,97316,Recreation pool,0.9466666666666667
+Staffed beds,97203,Staffed beds,1.0
+Recreation-Fitness center,97317,Recreation fitness center,0.9419130434782609
+Recreation-Ice rink,97318,Recreation ice rink,0.9343653250773993
+Recreation-Indoor sport,97319,Recreation indoor sport,0.9461697722567287
+Recreation,97320,Recreation,1.0
+Education-Higher,97321,Education higher,0.9357142857142857
+Education-Secondary,97322,Education secondary,0.9578947368421054
+Education-Primary,97323,Education primary,0.9529411764705882
+Education-Preschool or daycare,97324,Education preschool or daycare,0.9376190476190477
+Education,102762,Education,1.0
+Food service-Fast,97326,Food service fast,0.9529411764705882
+Food service-Full,97327,Food service full,0.9529411764705882
+Food service-Limited,97328,Food service limited,0.96
+Food service-Institutional,97329,Food service institutional,0.9358974358974359
+Food service,97330,Food service,1.0
+Lodging-Institutional,97331,Lodging institutional,0.9197994987468672
+Lodging with extended amenities,97332,Lodging with extended amenities,1.0
+Lodging with limited amenities,97333,Lodging with limited amenities,1.0
+Lodging,102764,Lodging,1.0
+Retail-Mall,97335,Retail mall,0.9272727272727274
+Retail-Strip mall,97336,Retail mall,0.9294117647058824
+Retail-Enclosed mall,97337,Retail enclosed mall,0.9155555555555556
+Retail-Dry goods retail,97338,Retail dry goods retail,0.9271221532091097
+Retail-Hypermarket,97339,Retail hypermarket,0.9555555555555556
+Retail,102773,Retail,1.0
+Service-Postal,97341,Service postal,0.9428571428571428
+Service-Repair,97342,Servicer,0.9142857142857143
+Service-Laundry or dry cleaning,97343,Service laundry or dry cleaning,0.9259176863181312
+Service-Studio,97344,Service studio,0.9428571428571428
+Service-Beauty and health,97345,Service beauty and health,0.9245217391304349
+Service-Production and assembly,97346,Service production and assembly,0.9259176863181312
+Service,103139,Service,1.0
+Transportation terminal,97348,Transportation terminal,1.0
+Central Plant,97349,Central plant,0.9692307692307692
+Water treatment-Wastewater,97350,Water treatment wastewater,0.9525641025641025
+Water treatment-Drinking water and distribution,97351,Water treatment drinking water and distribution,0.9429787234042554
+Water treatment,97352,Water treatment,1.0
+Energy generation plant,97353,Energy generation plant,1.0
+Industrial manufacturing plant,97354,Industrial manufacturing plant,1.0
+Utility,103146,Utility,1.0
+Industrial,103096,Industrial,1.0
+Agricultural estate,97357,Agricultural estate,1.0
+Mixed-use commercial,97358,Mixed use commercial,0.9589473684210527
+Parking,97359,Parking,1.0
+Attic,101878,Attic,1.0
+Basement,103649,Basement,1.0
+Dining area,97362,Dining area,1.0
+Living area,97363,Living area,1.0
+Sleeping area,97364,Sleeping area,1.0
+Laundry area,97365,Laundry area,1.0
+Lodging area,97366,Lodging area,1.0
+Dressing area,97367,Dressing area,1.0
+Restroom,97368,Restroom,1.0
+Auditorium,97369,Auditorium,1.0
+Classroom,97370,Classroom,1.0
+Day room,97371,Day room,1.0
+Sport play area,97372,Sport play area,1.0
+Stage,97373,Stage,1.0
+Spectator area,97374,Spectator area,1.0
+Office work area,97375,Office work area,1.0
+Non-office work area,97376,Non office work area,0.9152631578947368
+Common area,97377,Common area,1.0
+Reception area,97378,Reception area,1.0
+Waiting area,97379,Waiting area,1.0
+Transportation waiting area,97380,Transportation waiting area,1.0
+Lobby,103660,Lobby,1.0
+Conference room,97382,Conference room,1.0
+Computer lab,97383,Computer lab,1.0
+Data center,97384,Data center,1.0
+Printing room,97385,Printing room,1.0
+Media center,97386,Media center,1.0
+Telephone data entry,97387,Telephone data entry,1.0
+Darkroom,97388,Darkroom,1.0
+Courtroom,97389,Courtroom,1.0
+Kitchen,102147,Kitchen,1.0
+Kitchenette,97391,Kitchenette,1.0
+Refrigerated storage,97392,Refrigerated storage,1.0
+Bar,97393,Bar,1.0
+Dance floor,97394,Dance floor,1.0
+Security room,97395,Security room,1.0
+Shipping and receiving,97396,Shipping and receiving,1.0
+Mechanical room,97397,Mechanical room,1.0
+Chemical storage room,97398,Chemical storage room,1.0
+Non-chemical storage room,97399,Non chemical storage room,0.9035555555555554
+Janitorial closet,97400,Janitorial closet,1.0
+Vault,97401,Vault,1.0
+Corridor,103653,Corridor,1.0
+Deck,97403,Deck,1.0
+Courtyard,97404,Courtyard,1.0
+Atrium,97405,Atrium,1.0
+Family household,97168,Family household,1.0
+"Married couple, no children",97169,Married couple no children,0.9925925925925926
+"Male householder, no spouse",97170,Male householder no spouse,0.9925925925925926
+"Female householder, no spouse",97171,Female householder no spouse,0.993103448275862
+Cooperative household,97172,Cooperative household,1.0
+Nonfamily household,97173,Nonfamily household,1.0
+Single male,97174,Single male,1.0
+Single female,97175,Single female,1.0
+Student community,97176,Student community,1.0
+Military community,97177,Military community,1.0
+Independent seniors community,97178,Independent seniors community,1.0
+Special accessibility needs community,97179,Special accessibility needs community,1.0
+Government subsidized community,97180,Government subsidized community,1.0
+Therapeutic community,97181,Therapeutic community,1.0
+No specific occupant type,97182,No specific occupant type,1.0
+For-profit organization,97183,For profit organization,0.9478919631093544
+Religious organization,97688,Religious organization,1.0
+Non-profit organization,97185,Non profit organization,0.9478919631093544
+Government organization,97186,Government organization,1.0
+Federal government,97693,Federal government,1.0
+State government,97694,State government,1.0
+Local government,97695,Local government,1.0
+Property,97190,Property,1.0
+Animals,97191,Animals,1.0
+Vacant,97193,Vacant,1.0
+Peak total occupants,97195,Peak total occupants,1.0
+Adults,97196,Adults,1.0
+Children,97197,Children,1.0
+Average residents,97198,Average residents,1.0
+Workers on main shift,97199,Workers on main shift,1.0
+Full-time equivalent workers,97200,Full time equivalent workers,0.9264550264550264
+Average daily salaried labor hours,97201,Average daily salaried labor hours,1.0
+Registered students,97202,Registered students,1.0
+Licensed beds,97204,Licensed beds,1.0
+Capacity,97205,Capacity,1.0
+Capacity percentage,97206,Capacity percentage,1.0
+Hours per day,,,
+Hours per week,,,
+Hours per month,,,
+Hours per year,,,
+Days per week,,,
+Days per month,,,
+Days per year,,,
+Weeks per month,,,
+Weeks per year,,,
+Months per year,,,
+Common,103463,Common,1.0
+Gross,103059,Gross,1.0
+Net,103107,Net,1.0
+Finished,103061,Finished,1.0
+Footprint,103062,Footprint,1.0
+Rentable,103063,Rentable,1.0
+Occupied,103064,Occupied,1.0
+Lighted,103065,Light,0.9428571428571428
+Daylit,103066,Daily,0.9022222222222223
+Heated,103067,Heated,1.0
+Cooled,103068,Cooled,1.0
+Conditioned,103069,Conditioned,1.0
+Unconditioned,103070,Unconditioned,1.0
+Semi-conditioned,103071,Semi conditioned,0.975
+Heated and Cooled,,,
+Heated only,103073,Heated,0.9090909090909091
+Cooled only,103074,Cooled,0.9090909090909091
+Ventilated,103075,Ventilated,1.0
+Enclosed,103076,Enclosed,1.0
+Non-Enclosed,103077,Non enclosed,0.9222222222222223
+Open,103078,Open,1.0
+Lot,103661,Lot,1.0
+Property management company,97686,Property management company,1.0
+Corporation/partnership/LLC,97687,Corporation partnership LLC,0.9703703703703704
+Individual,97689,Individual,1.0
+Franchise,97690,Franchise,1.0
+Other non-government,97691,Other non government,0.98
+Government,97692,Government,1.0
+Owned,97698,Owned,1.0
+Mortgaged,97699,Mortgaged,1.0
+Leased,97700,Leased,1.0
+Rented,97701,Rented,1.0
+Occupied without payment of rent,97702,Occupied without payment of rent,1.0
+North,103640,North,1.0
+Northeast,103641,Northeast,1.0
+East,103642,East,1.0
+Southeast,103643,Southeast,1.0
+South,103644,South,1.0
+Southwest,103645,Southwest,1.0
+West,103646,West,1.0
+Northwest,103647,Northwest,1.0
+Alley,103435,Alley,1.0
+Annex,103436,Annex,1.0
+Arcade,103437,Arcade,1.0
+Avenue,103438,Avenue,1.0
+Bayou,103439,Bayou,1.0
+Beach,103440,Beach,1.0
+Bend,103441,Bend,1.0
+Bluff,103442,Bluff,1.0
+Bluffs,103443,Bluffs,1.0
+Bottom,103444,Bottom,1.0
+Boulevard,103445,Boulevard,1.0
+Branch,103446,Branch,1.0
+Bridge,103447,Bridge,1.0
+Brook,103448,Brook,1.0
+Brooks,103449,Brooks,1.0
+Burg,103450,Burg,1.0
+Burgs,103451,Burgs,1.0
+Bypass,103452,Bypass,1.0
+Camp,103453,Camp,1.0
+Canyon,103454,Canyon,1.0
+Cape,103455,Cape,1.0
+Causeway,103456,Causeway,1.0
+Center,103457,Center,1.0
+Centers,103458,Centers,1.0
+Circle,103459,Circle,1.0
+Circles,103460,Circles,1.0
+Cliff,103461,Cliff,1.0
+Club,103462,Club,1.0
+Commons,103464,Commons,1.0
+Corner,103465,Corner,1.0
+Corners,103466,Corners,1.0
+Course,103467,Course,1.0
+Court,103468,Court,1.0
+Courts,103469,Courts,1.0
+Cove,103470,Cove,1.0
+Coves,103471,Coves,1.0
+Creek,103472,Creek,1.0
+Crescent,103473,Crescent,1.0
+Crest,103474,Crest,1.0
+Crossing,103475,Crossing,1.0
+Crossroad,103476,Crossroad,1.0
+Crossroads,103477,Crossroads,1.0
+Curve,103478,Curve,1.0
+Dale,103479,Dale,1.0
+Dam,103480,Dam,1.0
+Divide,103481,Divide,1.0
+Drive,103482,Drive,1.0
+Drives,103483,Drives,1.0
+Estate,103484,Estate,1.0
+Estates,103485,Estates,1.0
+Expressway,103486,Expressway,1.0
+Extension,103487,Extension,1.0
+Extensions,103488,Extensions,1.0
+Fall,103489,Fall,1.0
+Falls,103490,Falls,1.0
+Ferry,103491,Ferry,1.0
+Field,103492,Field,1.0
+Fields,103493,Fields,1.0
+Flat,103494,Flat,1.0
+Flats,103495,Flats,1.0
+Ford,103496,Ford,1.0
+Fords,103497,Fords,1.0
+Forest,103498,Forest,1.0
+Forge,103499,Forge,1.0
+Forges,103500,Forges,1.0
+Fork,103501,Fork,1.0
+Forks,103502,Forks,1.0
+Fort,103503,Fort,1.0
+Freeway,103504,Freeway,1.0
+Garden,103505,Garden,1.0
+Gardens,103506,Gardens,1.0
+Gateway,103507,Gateway,1.0
+Glen,103508,Glen,1.0
+Glens,103509,Glens,1.0
+Green,103510,Green,1.0
+Greens,103511,Greens,1.0
+Grove,103512,Grove,1.0
+Groves,103513,Groves,1.0
+Harbor,103514,Harbor,1.0
+Harbors,103515,Harbors,1.0
+Haven,103516,Haven,1.0
+Heights,103517,Heights,1.0
+Highway,103518,Highway,1.0
+Hill,103519,Hill,1.0
+Hills,103520,Hills,1.0
+Hollow,103521,Hollow,1.0
+Inlet,103522,Inlet,1.0
+Island,103523,Island,1.0
+Islands,103524,Islands,1.0
+Isle,103525,Isle,1.0
+Junction,103526,Junction,1.0
+Junctions,103527,Junctions,1.0
+Key,103659,Key,1.0
+Keys,103529,Keys,1.0
+Knoll,103530,Knoll,1.0
+Knolls,103531,Knolls,1.0
+Lake,103532,Lake,1.0
+Lakes,103533,Lakes,1.0
+Land,103534,Land,1.0
+Landing,103535,Landing,1.0
+Lane,103536,Lane,1.0
+Light,103537,Light,1.0
+Lights,103538,Lights,1.0
+Loaf,103539,Loaf,1.0
+Lock,103540,Lock,1.0
+Locks,103541,Locks,1.0
+Lodge,103542,Lodge,1.0
+Loop,103543,Loop,1.0
+Mall,103544,Mall,1.0
+Manor,103545,Manor,1.0
+Manors,103546,Manors,1.0
+Meadow,103547,Meadow,1.0
+Meadows,103548,Meadows,1.0
+Mews,103549,Mews,1.0
+Mill,103550,Mill,1.0
+Mills,103551,Mills,1.0
+Mission,103552,Mission,1.0
+Motorway,103553,Motorway,1.0
+Mount,103554,Mount,1.0
+Mountain,103555,Mountain,1.0
+Mountains,103556,Mountains,1.0
+Neck,103557,Neck,1.0
+Orchard,103558,Orchard,1.0
+Oval,103559,Oval,1.0
+Overpass,103560,Overpass,1.0
+Park,103561,Park,1.0
+Parks,103562,Parks,1.0
+Parkway,103563,Parkway,1.0
+Parkways,103564,Parkways,1.0
+Pass,103565,Pass,1.0
+Passage,103566,Passage,1.0
+Path,103567,Path,1.0
+Pike,103568,Pike,1.0
+Pine,103569,Pine,1.0
+Pines,103570,Pines,1.0
+Place,103571,Place,1.0
+Plain,103572,Plain,1.0
+Plains,103573,Plains,1.0
+Plaza,103574,Plaza,1.0
+Point,103575,Point,1.0
+Points,103576,Points,1.0
+Port,103577,Port,1.0
+Ports,103578,Ports,1.0
+Prairie,103579,Prairie,1.0
+Radial,103580,Radial,1.0
+Ramp,103581,Ramp,1.0
+Ranch,103582,Ranch,1.0
+Rapid,103583,Rapid,1.0
+Rapids,103584,Rapids,1.0
+Rest,103585,Rest,1.0
+Ridge,103586,Ridge,1.0
+Ridges,103587,Ridges,1.0
+River,103588,River,1.0
+Road,103589,Road,1.0
+Roads,103590,Roads,1.0
+Route,103591,Route,1.0
+Row,103592,Row,1.0
+Rue,103593,Rue,1.0
+Run,103594,Run,1.0
+Shoal,103595,Shoal,1.0
+Shoals,103596,Shoals,1.0
+Shore,103597,Shore,1.0
+Shores,103598,Shores,1.0
+Skyway,103599,Skyway,1.0
+Spring,103600,Spring,1.0
+Springs,103601,Springs,1.0
+Spur,103602,Spur,1.0
+Spurs,103603,Spurs,1.0
+Square,103604,Square,1.0
+Squares,103605,Squares,1.0
+Station,103606,Station,1.0
+Stravenue,103607,Stravenue,1.0
+Stream,103608,Stream,1.0
+Street,103609,Street,1.0
+Streets,103610,Streets,1.0
+Summit,103611,Summit,1.0
+Terrace,103612,Terrace,1.0
+Throughway,103613,Throughway,1.0
+Trace,103614,Trace,1.0
+Track,103615,Track,1.0
+Trafficway,103616,Trafficway,1.0
+Trail,103617,Trail,1.0
+Trailer,103677,Trailer,1.0
+Tunnel,103619,Tunnel,1.0
+Turnpike,103620,Turnpike,1.0
+Underpass,103621,Underpass,1.0
+Union,103622,Union,1.0
+Unions,103623,Unions,1.0
+Valley,103624,Valley,1.0
+Valleys,103625,Valleys,1.0
+Viaduct,103626,Viaduct,1.0
+View,103627,View,1.0
+Views,103628,Views,1.0
+Village,103629,Village,1.0
+Villages,103630,Villages,1.0
+Ville,103631,Ville,1.0
+Vista,103632,Vista,1.0
+Walk,103633,Walk,1.0
+Walks,103634,Walks,1.0
+Wall,103635,Wall,1.0
+Way,103636,Way,1.0
+Ways,103637,Ways,1.0
+Well,103638,Well,1.0
+Wells,103639,Wells,1.0
+Apartment,103648,Apartment,1.0
+Berth,103650,Berth,1.0
+Block,103651,Block,1.0
+Building,103652,Building,1.0
+Cubicle,103654,Cubicle,1.0
+Department,103655,Department,1.0
+Floor,103656,Floor,1.0
+Front,103657,Front,1.0
+Hanger,103658,Hanger,1.0
+Lower,103662,Lower,1.0
+Penthouse,103664,Penthouse,1.0
+Pier,103665,Pier,1.0
+PO Box,103666,PO Box,1.0
+Rear,103667,Rear,1.0
+Room,103668,Room,1.0
+Seat,103669,Seat,1.0
+Side,103670,Side,1.0
+Slip,103671,Slip,1.0
+Space,103672,Space,1.0
+Stop,103673,Stop,1.0
+Suite,103674,Suite,1.0
+Terminal,103675,Terminal,1.0
+Tower,103676,Tower,1.0
+Unit,103678,Unit,1.0
+Upper,103679,Upper,1.0
+Wing,103680,Wing,1.0
+Steam,98479,Steam,1.0
+Hot water,99302,Hot water,1.0
+Atmospheric,98020,Atmospheric,1.0
+Power,102868,Power,1.0
+Sealed Combustion,98022,Sealed combustion,0.9764705882352941
+Rotary Cup,98023,Rotary cup,0.96
+Full Modulation Manual,,,
+Full Modulation Automatic,,,
+Step Modulation,,,
+High Low,98029,High,0.9
+On Off,,,
+Intermittent ignition device,98032,Intermittent ignition device,1.0
+Pilot light,98033,Pilot light,1.0
+Natural,99343,Natural,1.0
+Mechanical forced,99344,Mechanical forced,1.0
+Mechanical induced,99345,Mechanical induced,1.0
+Single stage,98130,Single stage,1.0
+Multiple discrete stages,98131,Multiple discrete stages,1.0
+Variable,98132,Variable,1.0
+Modulating,98133,Modulating,1.0
+cfh,101494,cfh,1.0
+ft3/min,101495,ft3/min,1.0
+kcf/h,101496,kcf/h,1.0
+MCF/day,101497,MCF/day,1.0
+gpm,101498,gpm,1.0
+W,101499,W,1.0
+kW,101500,kW,1.0
+hp,101501,hp,1.0
+MW,101502,MW,1.0
+Btu/hr,101503,Btu/hr,1.0
+cal/h,101504,cal/h,1.0
+ft-lbf/h,101505,ft-lbf/h,1.0
+ft-lbf/min,101506,ft-lbf/min,1.0
+Btu/s,101507,Btu/s,1.0
+kBtu/hr,101508,kBtu/hr,1.0
+MMBtu/hr,101509,MMBtu/hr,1.0
+therms/h,101510,therms/h,1.0
+lbs/h,101511,lbs/h,1.0
+Klbs/h,101512,Klbs/h,1.0
+Mlbs/h,101513,Mlbs/h,1.0
+Cooling ton,101514,Cooling ton,1.0
+Primary,100286,Primary,1.0
+Secondary,100287,Secondary,1.0
+Tertiary,100288,Tertiary,1.0
+Back-up,98874,Backup,0.9714285714285714
+COP,99361,COP,1.0
+AFUE,98072,AFUE,1.0
+HSPF,98073,HSPF,1.0
+ENERGY STAR Most Efficient,101853,ENERGY STAR Most Efficient,1.0
+FEMP Designated,101854,FEMP Designated,1.0
+CEE Tier 1,101855,CEE Tier 1,1.0
+CEE Tier 2,101856,CEE Tier 2,1.0
+CEE Tier 3,101857,CEE Tier 3,1.0
+None,,,
+Direct steam,97785,Direct,0.9
+Steam to hot water heat exchanger,,,
+Vapor compression,97843,Vapor compression chiller,0.936
+Absorption,97844,Absorption chiller,0.9111111111111111
+Electric Motor,97847,Electric motor,0.9714285714285714
+Gas Turbine,97849,Gas turbine,0.9636363636363636
+Reciprocating,99737,Reciprocating,1.0
+Screw,99738,Screw,1.0
+Scroll,99739,Scroll,1.0
+Centrifugal,100338,Centrifugal,1.0
+Solar energy,97859,Solar energy,1.0
+Combustion,97860,Combustion,1.0
+Waste heat,97861,Waste heat,1.0
+Single effect,97864,Single effect,1.0
+Double effect,97865,Double effect,1.0
+R134a,99743,R134a,1.0
+R123,99744,R123,1.0
+R22,99745,R22,1.0
+R290,99746,R290,1.0
+R401a,99747,R401a,1.0
+R404a,99748,R404a,1.0
+R407a,99749,R407a,1.0
+R407c,99750,R407c,1.0
+R408a,99751,R408a,1.0
+R409a,99752,R409a,1.0
+R410a,99753,R410a,1.0
+R500,99754,R500,1.0
+R502,99755,R502,1.0
+R600a,99756,R600a,1.0
+R744,99757,R744,1.0
+R717,99758,R717,1.0
+R718,99759,R718,1.0
+EER,98166,EER,1.0
+SEER,98167,SEER,1.0
+kW/ton,98168,kW/ton,1.0
+Variable Volume,100352,Variable volume,0.9733333333333334
+Stepped Speed,97965,Stepped speed,0.9692307692307692
+Constant Volume,100354,Constant volume,0.9733333333333334
+Cooling tower,97969,Cooling Tower,0.9692307692307692
+Parallel Plate and Frame Heat Exchanger,97999,Parallel plate and frame heat exchanger,0.9304029304029304
+Series Plate and Frame Heat Exchanger,98000,Series plate and frame heat exchanger,0.9264537264537265
+Strainer Cycle,98001,Strainer cycle,0.956043956043956
+Thermo Cycle,98002,Thermo cycle,0.9484848484848484
+Single Speed,97978,Single pane,0.9136363636363637
+Two Speed,,,
+Variable Speed,97980,Variable,0.9142857142857143
+Wet Bulb Reset,97983,Wet Bulb reset,0.9714285714285714
+Max Cells,97986,Max cells,0.9555555555555556
+Min Cells,97987,Min cells,0.9555555555555556
+Fixed Flow,98005,Fixed,0.9
+Two Position Flow,98006,Two position flow,0.9529411764705882
+Variable Flow,98007,Variable flow,0.9692307692307692
+Open loop ground water,,,
+Closed loop ground source,,,
+Multi zone,98011,Multi zone,1.0
+Warm air,,,
+Fireplace,98014,Fireplace,1.0
+Heating stove,98015,Heating stove,1.0
+Built-in heater,98016,Built in heater,0.959047619047619
+Individual space heater,98017,Individual space heater,1.0
+Split,98050,Split,1.0
+Packaged Terminal,98051,Packaged terminal heat pump,0.9067538126361656
+Packaged Unitary,98052,Packaged unitary heat pump,0.9028846153846153
+Refrigerant,100304,Refrigerant,1.0
+Air,101460,Air,1.0
+Glycol,98162,Glycol,1.0
+Programmable Thermostat,101861,Programmable,0.9043478260869565
+Manual Analog Thermostat,,,
+Manual Digital Thermostat,,,
+Manual On/Off,,,
+EMCS,,,
+Always On,101866,Always on,0.9555555555555556
+Timer,101867,Timer,1.0
+Split DX air conditioner,98113,Split DX air conditioner,1.0
+Packaged terminal air conditioner (PTAC),98114,Packaged terminal air conditioner,0.9650000000000001
+Split heat pump,98115,Split heat pump,1.0
+Packaged terminal heat pump (PTHP),98116,Packaged terminal heat pump,0.9588235294117646
+Variable refrigerant flow,98117,Variable refrigerant flow,1.0
+Packaged/unitary direct expansion/RTU,98118,Packaged unitary direct expansion RTU,0.9383783783783785
+Packaged/unitary heat pump,98119,Packaged unitary heat pump,0.9366153846153846
+Single package vertical air conditioner,98120,Single package vertical air conditioner,1.0
+Single package vertical heat pump,98121,Single package vertical heat pump,1.0
+Direct,102808,Direct,1.0
+Direct indirect,98156,Direct indirect,1.0
+Indirect,102809,Indirect,1.0
+Chilled water,98159,Chilled water,1.0
+Central fan,98210,Central plant,0.9356643356643356
+Induction units,98211,Induction units,1.0
+Low pressure under floor,98212,Low pressure under floor,1.0
+Local fan,98213,Local fan,1.0
+CAV terminal box with reheat,98216,CAV terminal box with reheat,1.0
+VAV terminal box fan powered no reheat,98217,VAV terminal box fan powered no reheat,1.0
+VAV terminal box fan powered with reheat,98218,VAV terminal box fan powered with reheat,1.0
+VAV terminal box not fan powered no reheat,98219,VAV terminal box not fan powered no reheat,1.0
+VAV terminal box not fan powered with reheat,98220,VAV terminal box not fan powered with reheat,1.0
+Automatically controlled register,,,
+Manually controlled register,,,
+Uncontrolled register,,,
+Heating plant,98226,Heating plant,1.0
+Local electric resistance,98227,Local electric resistance,1.0
+Local gas,98228,Local gas,1.0
+Dual Maximum,,,
+Single Maximum,,,
+Mini-split,98235,Mini split,0.96
+Multi-split,98236,Multi split,0.9636363636363636
+Terminal reheat,98237,Terminal reheat,1.0
+Fan coil 2 pipe,98238,Fan coil 2 pipe,1.0
+Fan coil 4 pipe,98239,Fan coil 4 pipe,1.0
+VRF terminal units,98240,VRF terminal units,1.0
+1 pipe,98243,1 pipe,1.0
+2 pipe,98244,2 pipe,1.0
+3 pipe,98245,3 pipe,1.0
+4 pipe,98246,4 pipe,1.0
+Dry bulb temperature,98249,Dry bulb temperature,1.0
+Enthalpy,98250,Enthalpy,1.0
+Demand controlled ventilation,98251,Demand controlled ventilation,1.0
+Nonintegrated,98252,Nonintegrated,1.0
+Fixed,98660,Fixed,1.0
+Differential,98256,Differential,1.0
+Coldest Reset,98259,Coldest reset,0.9692307692307692
+Outside Air Reset,98267,Outside air reset,0.9529411764705882
+Scheduled,98662,Scheduled,1.0
+Staged Setpoint,98263,Staged setpoint,0.9733333333333334
+Warmest Reset,98269,Warmest reset,0.9692307692307692
+Perimeter baseboard,98272,Perimeter baseboard,1.0
+Chilled beam,98273,Chilled beam,1.0
+Radiator,98276,Radiator,1.0
+Radiant floor or ceiling,98277,Radiant floor or ceiling,1.0
+Single,98320,Single,1.0
+Dual,98321,Dual,1.0
+Three,98322,Three,1.0
+Ductless,98323,Ductless,1.0
+Connections sealed with mastic,98326,Connections sealed with mastic,1.0
+No observable leaks,98327,No observable leaks,1.0
+Some observable leaks,98328,Some observable leaks,1.0
+Significant leaks,98329,Significant leaks,1.0
+Catastrophic leaks,98330,Catastrophic leaks,1.0
+Flex uncategorized,,,
+Grey flex,98333,Grey flex,1.0
+Mylar flex,98334,Mylar flex,1.0
+Duct board,98335,Duct board,1.0
+Sheet metal,100622,Sheet metal,1.0
+Galvanized,98337,Galvanized,1.0
+Flexible,98338,Flexible,1.0
+Fiberboard,98339,Fiberboard,1.0
+No ducting,98340,No ducting,1.0
+Duct leakage tester,98343,Duct leakage tester,1.0
+Blower door subtract,98344,Blower door subtract,1.0
+Pressure pan,98345,Pressure pan,1.0
+Visual inspection,98346,Visual inspection,1.0
+Roof,102314,Roof,1.0
+Mechanical Room,101871,Mechanical room,0.9733333333333334
+Mechanical Floor,101872,Mechanical room,0.9473809523809523
+Interior,101874,Interior,1.0
+Exterior,101875,Exterior,1.0
+Closet,101876,Closet,1.0
+Garage,101877,Garage,1.0
+Water Spray,98480,Water spray,0.9636363636363636
+Desiccant wheel,98505,Desiccant wheel,1.0
+Liquid desiccant,98506,Liquid desiccant,1.0
+Exhaust only,98562,Exhaust only,1.0
+Supply only,98563,Supply only,1.0
+Dedicated outdoor air system,,,
+Heat recovery ventilator,98565,Heat recovery ventilator,1.0
+Energy recovery ventilator,98566,Energy recovery ventilator,1.0
+Average Flow,98569,Average flow,0.9666666666666666
+Critical Zone,98570,Critical zone,0.9692307692307692
+CO2 Sensors,,,
+Occupancy Sensors,99100,Occupancy,0.9058823529411765
+Bathroom,102148,Bathroom,1.0
+Kitchen hood,98611,Kitchen,0.9166666666666667
+Laboratory hood,98612,Laboratory,0.9333333333333333
+Air changes per hour,98652,Air changes per hour,1.0
+Flow per area,98653,Flow per area,1.0
+Flow per person,98654,Flow per person,1.0
+Flow per zone,98655,Flow per zone,1.0
+Wind and stack open area,98656,Wind and stack open area,1.0
+Integrated with central air distribution,,,
+Integrated with local air distribution,,,
+As needed,98832,As needed,1.0
+Daily,98833,Daily,1.0
+Weekly,98834,Weekly,1.0
+Bi-weekly,98835,Bi weekly,0.9407407407407408
+Monthly,98836,Monthly,1.0
+Semi-quarterly,98837,Semi quarterly,0.9714285714285714
+Quarterly,98838,Quarterly,1.0
+Semi-annually,98839,Semi annually,0.9692307692307692
+Annually,98840,Annually,1.0
+Packaged Terminal Air Conditioner,98842,Packaged terminal air conditioner,0.9636363636363636
+Four Pipe Fan Coil Unit,,,
+Packaged Terminal Heat Pump,,,
+Packaged Rooftop Air Conditioner,,,
+Packaged Rooftop Heat Pump,,,
+Packaged Rooftop VAV with Hot Water Reheat,,,
+Packaged Rooftop VAV with Electric Reheat,,,
+VAV with Hot Water Reheat,,,
+VAV with Electric Reheat,,,
+Warm Air Furnace,,,
+Ventilation Only,98852,Ventilation,0.9375
+Dedicated Outdoor Air System,,,
+Water Loop Heat Pump,,,
+Ground Source Heat Pump,,,
+Pneumatic,98856,Pneumatic,1.0
+Electric,99776,Electric,1.0
+A19,98996,A19,1.0
+A21,98997,A21,1.0
+G16C,98998,G16C,1.0
+G25M,98999,G25M,1.0
+G40M,99000,G40M,1.0
+MR16,99042,MR16,1.0
+PAR16,99002,PAR16,1.0
+PAR20,99044,PAR20,1.0
+PAR30,99045,PAR30,1.0
+PAR38,99046,PAR38,1.0
+PS-Series,,,
+R20,99048,R20,1.0
+R30,99008,R30,1.0
+R40,99009,R40,1.0
+TC,99010,TC,1.0
+TM,99011,TM,1.0
+Super T8,99014,Super T8,1.0
+T12,99015,T12,1.0
+T5,99016,T5,1.0
+T5HO,99017,T5HO,1.0
+T8,99018,T8,1.0
+T12U,99019,T12U,1.0
+T8U,99020,T8U,1.0
+2 ft,,,
+4 ft,,,
+2D,99027,2D,1.0
+A-series,99028,A series,0.9249999999999999
+Circline,99029,Circline,1.0
+Spiral,99030,Spiral,1.0
+Instant start,99063,Instant start,1.0
+Rapid start,99064,Rapid start,1.0
+Programmed start,99065,Programmed start,1.0
+A-shape,,,
+BR30,99039,BR30,1.0
+BR40,99040,BR40,1.0
+MR11,99041,MR11,1.0
+MR8,99043,MR8,1.0
+Pin Base,99047,Pin base,0.95
+Sodium Vapor High Pressure,99051,Sodium vapor high pressure,0.9451505016722407
+Sodium Vapor Low Pressure,99052,Sodium vapor low pressure,0.952
+Metal Halide,99053,Metal halide,0.9666666666666666
+Mercury Vapor,99054,Mercury vapor,0.9692307692307692
+Probe start,99057,Probe start,1.0
+Pulse start,99058,Pulse start,1.0
+LED,99061,LED,1.0
+Electromagnetic,99068,Electromagnetic,1.0
+Electronic,99069,Electronic,1.0
+Integrated,99070,Integrated,1.0
+Core and Coil,,,
+F-Can,,,
+No Ballast,99074,Ballast,0.9
+120,,,
+208,,,
+240,,,
+277,,,
+347,,,
+480,,,
+120/277 (dual),,,
+120-277 (universal),,,
+347-480 (high voltage),,,
+Plug-in,99086,Plug in,0.9428571428571428
+Recessed,99087,Recessed,1.0
+Surface,99088,Surface,1.0
+Suspended,99089,Suspended,1.0
+Direct-Indirect,99094,Direct indirect,0.9312820512820513
+Spotlight,99095,Spotlight,1.0
+Floodlighting,99096,Floodlighting,1.0
+Omnidirectional,99097,Omnidirectional,1.0
+Vacancy Sensors,,,
+Astronomical,,,
+Chronological,,,
+Continuous,100788,Continuous,1.0
+Continuous Plus Off,99111,Continuous,0.9052631578947368
+Stepped Dimming,99112,Stepped dimming,0.9733333333333334
+Stepped Switching,99113,Stepped dimming,0.9011764705882354
+Manual Dimming,99118,Manual dimming,0.9714285714285714
+Bi-level Control,,,
+Tri-level Control,,,
+Specular Reflector,99124,Specular reflector,0.930718954248366
+Prismatic Reflector,99125,Prismatic reflector,0.9345029239766082
+Hot water and space heating,,,
+Space heating,99304,Space heating system,0.9299999999999999
+Hybrid system,,,
+Air direct,,,
+Air indirect,,,
+Liquid direct,99310,Liquid desiccant,0.917948717948718
+Liquid indirect,99311,Liquid desiccant,0.9050641025641025
+Passive thermosyphon,99312,Passive thermosyphon,1.0
+Single glazing black,99315,Single glazing black,1.0
+Single glazing selective,99316,Single glazing selective,1.0
+Double glazing black,99317,Double glazing black,1.0
+Double glazing selective,99318,Double glazing selective,1.0
+Evacuated tube,99319,Evacuated tube,1.0
+Integrated collector storage,99320,Integrated collector storage,1.0
+Temperature,99349,Temperature,1.0
+Demand,102866,Demand,1.0
+Looped,99354,Looped,1.0
+Distributed,99355,Distributed,1.0
+Point-of-use,99356,Point of use,0.9333333333333333
+Energy Factor,99359,Energy factor,0.9692307692307692
+Thermal Efficiency,,,
+Hot top range,99533,Hot top range,1.0
+Open burner range,99534,Open burner range,1.0
+Wok range,99535,Wok range,1.0
+Braising pan,99536,Braising pan,1.0
+Underfired broiler,99537,Underfired broiler,1.0
+Overfired broiler,99538,Overfired broiler,1.0
+Conveyor broiler,99539,Conveyor broiler,1.0
+Salamander broiler,99540,Salamander broiler,1.0
+Broiler,99541,Broiler,1.0
+Microwave oven,99542,Microwave oven,1.0
+Toaster,99543,Toaster,1.0
+Standard fryer,99544,Standard fryer,1.0
+Large vat fryer,99545,Large vat fryer,1.0
+Split vat fryer,99546,Split vat fryer,1.0
+Convection oven,99547,Convection oven,1.0
+Combination oven,99548,Combination oven,1.0
+Standard oven,99549,Standard oven,1.0
+Conveyor oven,99550,Conveyor oven,1.0
+Slow cook-and-hold oven,99551,Slow cook and hold oven,0.9271221532091097
+Deck oven,99552,Deck oven,1.0
+Mini-Rack oven,99553,Mini rack oven,0.9095238095238095
+Rack (Roll-In) oven,,,
+Range oven,99555,Range oven,1.0
+Rapid cook oven,99556,Rapid cook oven,1.0
+Rotisserie oven,99557,Rotisserie oven,1.0
+Retherm oven,99558,Retherm oven,1.0
+Convection toaster oven,99559,Convection toaster oven,1.0
+Steam cooker,99560,Steam cooker,1.0
+Steam kettle,99561,Steam kettle,1.0
+Drawer warmer,99562,Drawer warmer,1.0
+Heated transparent merchandising cabinets,99563,Heated transparent merchandising cabinets,1.0
+Cook-and-hold appliance,99564,Cook and hold appliance,0.9271221532091097
+Proofing cabinet,99565,Proofing cabinet,1.0
+Single-sided griddle,99566,Single sided griddle,0.9484210526315789
+Double-sided griddle,99567,Double sided griddle,0.9484210526315789
+Griddle,99568,Griddle,1.0
+Fry-top griddle,99569,Fry top griddle,0.9355555555555556
+Automatic drip filter coffee maker,99570,Automatic drip filter coffee maker,1.0
+Single-serve coffee maker,99571,Single serve coffee maker,0.9423333333333334
+Espresso machine,99572,Espresso machine,1.0
+Refrigerator,99762,Refrigerator,1.0
+Freezer,99763,Freezer,1.0
+Combination,102587,Combination,1.0
+Side-by-side,99767,Side by side,0.9333333333333333
+Top and bottom,99768,Top and bottom,1.0
+Walk-in,99769,Walk in,0.9428571428571428
+Horizontal,99772,Horizontal,1.0
+Vertical,99773,Vertical,1.0
+Off cycle,99777,Off cycle,1.0
+Hot gas,99778,Hot gas,1.0
+Reverse cycle,99779,Reverse cycle,1.0
+Water,99780,Water,1.0
+Cool gas,99781,Cool gas,1.0
+Stationary Rack,99925,Stationary rack,0.9733333333333334
+Conveyor,99926,Conveyor,1.0
+Counter top,99929,Counter top,1.0
+Stationary Under Counter,99930,Stationary under counter,0.9393939393939393
+Stationary Single Tank Door Type,99931,Stationary single tank door type,0.95
+Stationary Pot Pan Utensil,99932,Stationary pot  pan utensil,0.9385977951195342
+Stationary glasswashing,99933,Stationary glasswashing,1.0
+Single Tank Conveyor,99934,Single tank conveyor,0.96
+Multiple Tank Conveyor,99935,Multiple tank conveyor,0.9636363636363636
+Single Tank Flight Conveyor,99936,Single tank flight conveyor,0.9222222222222222
+Multiple Tank Flight Conveyor,99937,Multiple tank flight conveyor,0.9278514588859417
+Top,100118,Top,1.0
+Combination All In One Clothes Washer Dryer,100108,Combination all in one clothes washer dryer,0.9063482086737901
+Unitized Stacked Washer Dryer Pair,100109,Unitized stacked washer dryer pair,0.9262745098039216
+VFD,,,
+Multi-Speed,,,
+On Demand,100281,On demand,0.9481481481481482
+Standby,100282,Standby,1.0
+Schedule,100283,Schedule,1.0
+Backup,100289,Backup,1.0
+Boiler,100292,Boiler,1.0
+Chilled Water,100293,Chilled Water,1.0
+Domestic Hot Water,102304,Domestic Hot Water,1.0
+Solar Hot Water,100295,Solar Hot Water,1.0
+Condenser,100296,Condenser,1.0
+Cooling Tower,100297,Cooling Tower,1.0
+Ground Loop,100298,Ground Loop,1.0
+Pool,102324,Pool,1.0
+Recirculation,100300,Recirculation,1.0
+Process Hot Water,100301,Process Hot Water,1.0
+Process Cold Water,100302,Process Cold Water,1.0
+Potable Cold Water,100303,Potable Cold Water,1.0
+Axial,100337,Axial,1.0
+Direct drive,100341,Direct drive,1.0
+Standard belt,100342,Standard belt,1.0
+Cogged belt,100343,Cogged belt,1.0
+Synchronous belts,100344,Synchronous belts,1.0
+Supply,100347,Supply,1.0
+Return,100348,Return,1.0
+Exhaust,100349,Exhaust,1.0
+Stepped,100353,Stepped,1.0
+Series,100357,Series,1.0
+Parallel,100358,Parallel,1.0
+Draw Through,100359,Draw through,0.9666666666666666
+Blow Through,100360,Blow through,0.9666666666666666
+Fan,102310,Fan,1.0
+Pump,102309,Pump,1.0
+Conveyance,102322,Conveyance,1.0
+Plug Load,102320,Plug load,0.9555555555555556
+Process Load,102321,Process load,0.9666666666666666
+Compressor,100401,Compressor,1.0
+Run around coil,100433,Run around coil,1.0
+Thermal wheel,100434,Thermal wheel,1.0
+Heat pipe,100435,Heat pipe,1.0
+Water to air heat exchanger,100436,Water to air heat exchanger,1.0
+Water to water heat exchanger,100437,Water to water heat exchanger,1.0
+Air to air heat exchanger,100438,Air to air heat exchanger,1.0
+Earth to air heat exchanger,100439,Earth to air heat exchanger,1.0
+Earth to water heat exchanger,100440,Earth to water heat exchanger,1.0
+Wood,100723,Wood,1.0
+Masonite,100612,Masonite,1.0
+Stone,100613,Stone,1.0
+Tile,100808,Tile,1.0
+Brick,100658,Brick,1.0
+Masonry,100659,Masonry,1.0
+Concrete,100657,Concrete,1.0
+Fiber cement,100618,Fiber cement,1.0
+Metal,100619,Metal,1.0
+Metal panel,100620,Metal panel,1.0
+Metal panel standing seam,100621,Metal panel standing seam,1.0
+EIFS,100623,EIFS,1.0
+Shingles asphalt,100624,Shingles asphalt,1.0
+Shingles composition,100625,Shingles composition,1.0
+Shingles wood,100626,Shingles wood,1.0
+Shingles asbestos,100627,Shingles asbestos,1.0
+Shingles slate or tile,100628,Shingles slate or tile,1.0
+Shakes wood,100629,Shakes wood,1.0
+Carpet,100807,Carpet,1.0
+Linoleum,100811,Linoleum,1.0
+Asphalt or fiberglass,100632,Asphalt or fiberglass,1.0
+Plastic rubber synthetic sheeting,100633,Plastic rubber synthetic sheeting,1.0
+White,100636,White,1.0
+Medium,100638,Medium,1.0
+Medium dark,100639,Medium dark,1.0
+Dark,100640,Dark,1.0
+Reflective,100734,Reflective,1.0
+Loose fill,100643,Loose fill,1.0
+Batt,100644,Batt,1.0
+Spray on,100645,Spray-on,0.95
+Rigid,100646,Rigid,1.0
+Cavity,100787,Cavity,1.0
+Steel,100721,Steel,1.0
+Empty,,,
+Insulated,100530,Insulated,1.0
+Solid,100531,Solid wood,0.9
+Not Applicable,,,
+Very rough,100534,Very rough,1.0
+Rough,100535,Rough,1.0
+Medium rough,100536,Medium rough,1.0
+Medium smooth,100537,Medium smooth,1.0
+Smooth,100538,Smooth,1.0
+Very smooth,100539,Very smooth,1.0
+Cool roof,100541,Cool roof,1.0
+Green roof,100542,Green roof,1.0
+Sloped,100606,Sloped,1.0
+Greater than 2 to 12,100607,Greater than 2 to 12,1.0
+Less than 2 to 12,100608,Less than 2 to 12,1.0
+Discrete,100664,Discrete,1.0
+Double Hung,,,
+Overhang,100676,Overhang,1.0
+Fin,100677,Fin,1.0
+Awning,100678,Awning,1.0
+Solar screen,100701,Solar screen,1.0
+Solar film,100700,Solar film,1.0
+Louver,100681,Louver,1.0
+Screen,100682,Screen,1.0
+Deciduous foliage,100683,Deciduous foliage,1.0
+Evergreen foliage,100684,Evergreen foliage,1.0
+Neighboring building,100685,Neighboring building,1.0
+Blind,100689,Blind,1.0
+Curtain,100690,Curtain,1.0
+Shade,100702,Shade,1.0
+All Zones,100695,All zones,0.9555555555555556
+Core Only,,,
+Curbed Mounted,,,
+Solid wood,100705,Solid wood,1.0
+Hollow wood,100706,Hollow wood,1.0
+Uninsulated metal,100707,Uninsulated metal,1.0
+Insulated metal,100708,Insulated metal,1.0
+Glass,100709,Glass,1.0
+NonSwinging,,,
+Swinging,,,
+Aluminum uncategorized,100715,Aluminum uncategorized,1.0
+Aluminum no thermal break,100716,Aluminum no thermal break,1.0
+Aluminum thermal break,100717,Aluminum Thermal break,0.9818181818181818
+Clad,100718,Clad,1.0
+Composite,100719,Composite,1.0
+Fiberglass,100720,Fiberglass,1.0
+Vinyl,100810,Vinyl,1.0
+Tight,102002,Tight,1.0
+Average,102858,Average,1.0
+Loose,100728,Loose fill,0.9
+Clear uncoated,100730,Clear uncoated,1.0
+Low e,100731,Low e,1.0
+Tinted,100732,Tinted,1.0
+Tinted plus low e,100733,Tinted plus low e,1.0
+Reflective on tint,100735,Reflective on tint,1.0
+High performance tint,100736,High performance tint,1.0
+Sunbelt low E low SHGC,100737,Sunbelt low e low SHGC,0.9818181818181818
+Suspended film,100738,Suspended film,1.0
+Plastic,100739,Plastic,1.0
+Argon,100742,Argon,1.0
+Krypton,100743,Krypton,1.0
+Other Insulating Gas,,,
+Single pane,100748,Single pane,1.0
+Double pane,100749,Double pane,1.0
+Triple pane,100750,Triple-pane,0.9636363636363636
+Single paned with storm panel,100751,Single paned with storm panel,1.0
+12 in Horizontal,,,
+12 in Vertical,,,
+24 in Horizontal,,,
+24 in Vertical,,,
+36 in Horizontal,,,
+36 in Vertical,,,
+48 in Horizontal,,,
+48 in Vertical,,,
+Fully Insulated Slab,,,
+Unheated,100804,Unheated,1.0
+Semi conditioned,100784,Semi conditioned,1.0
+Hardwood,,,
+Flashing,100814,Flashing,1.0
+Fitting,100815,Fitting,1.0
+Building Automation System,100818,Building automation system,0.9442307692307692
+Server,100819,Server,1.0
+Networking,100820,Networking protocol,0.9052631578947368
+Security,100821,Security room,0.9230769230769231
+Telephoning,100822,Telephone,0.9232323232323232
+UPS,100823,UPS,1.0
+Personal Computer,,,
+Task Lighting,100976,Task lighting,0.9692307692307692
+Printing,100977,Printing room,0.9230769230769231
+Cash Register,100978,Cash register,0.9692307692307692
+Audio,100979,Audio,1.0
+Display,100980,Display,1.0
+Set Top Box,100981,Set top box,0.9272727272727274
+Business Equipment,,,
+Medical Equipment,101134,Medical equipment,0.9389705882352941
+Laboratory Equipment,101135,Laboratory equipment,0.9484210526315789
+Machinery,101136,Machinery,1.0
+Air Compressor,101137,Air compressor,0.9714285714285714
+Fume Hood,101138,Fume hood,0.9555555555555556
+Appliance,101139,Appliance,1.0
+Gaming/Hobby/Leisure,,,
+Infrastructure,101141,Infrastructure,1.0
+Electric Vehicle Charging,101142,Electric vehicle charging,0.968
+Escalator,101294,Escalator,1.0
+Elevator,101295,Elevator,1.0
+Conveyor Belt,101296,Conveyor belt,0.9692307692307692
+Overhead Conveyor,101297,Overhead conveyor,0.9764705882352941
+People,101300,People,1.0
+Freight,101301,Freight,1.0
+Goods,101302,Goods,1.0
+Battery,101454,Battery,1.0
+Thermal Energy Storage,101455,Thermal energy storage,0.9536363636363636
+Pumped-Storage Hydroelectricity,101456,Pumped-storage hydroelectricity,0.9741935483870968
+Flywheel,101457,Flywheel,1.0
+Ice,101461,Ice,1.0
+Pool water,101462,Pool water,1.0
+Domestic water,101463,Domestic water,1.0
+Molten salt,101464,Molten salt,1.0
+Sand,101465,Sand,1.0
+Rock,101466,Rock,1.0
+Chemical oxides,101467,Chemical oxides,1.0
+On grade,101471,On grade,1.0
+Building integrated,101472,Building integrated,1.0
+Standby generator,101475,Standby generator,1.0
+Turbine,101476,Turbine,1.0
+Microturbine,101477,Microturbine,1.0
+Fuel cell,101478,Fuel cell,1.0
+Gasification,101479,Gasification,1.0
+Binary Cycle,101480,Binary cycle,0.9484848484848484
+Anaerobic biodigester,101481,Anaerobic biodigester,1.0
+Hydrokinetic,101482,Hydrokinetic,1.0
+Solar parabolic trough,101483,Solar parabolic trough,1.0
+Solar power tower,101484,Solar power tower,1.0
+Wind,101485,Wind,1.0
+AC to AC,101488,AC to AC,1.0
+AC to DC,101489,AC to DC,1.0
+Low Voltage,101490,Low voltage,0.9636363636363636
+No Load,101491,No load,0.9333333333333333
+Hot Tub,101665,Hot tub,0.9428571428571428
+Olympic,101669,Olympic,1.0
+Recreational,101670,Recreational,1.0
+Short Course,101671,Short course,0.9666666666666666
+Restroom Sink Use,,,
+Restroom Toilet/Urinal Water Use,,,
+Kitchen Water Use,,,
+Shower Facility Water Use,,,
+Drinking Fountain Water Use,101827,Drinking fountain,0.9067538126361656
+Janitorial Water Use,,,
+Laundry Water Use,,,
+Indoor Washdown Water Use (if indoor),,,
+Outdoor Landscape Water Use,,,
+Outdoor Non-Landscape Water Use,,,
+Outdoor Washdown Water Use (if outdoor),,,
+Cooling Tower Make-up Water Use,,,
+Hydronic Loop Make-up Water Use,,,
+Evaporative Cooling System Water Use,,,
+Pre-Treatment Process Water Use,,,
+Captured Rain Water,101838,Captured rainwater,0.9461988304093567
+Recycled Greywater,,,
+Condensate Recovery,,,
+Stormwater Sewer Production,,,
+Stormwater Discharge,,,
+Potable water,102939,Potable water,1.0
+Wastewater,102940,Wastewater,1.0
+Greywater,102941,Greywater,1.0
+Reclaimed water,102942,Reclaimed water,1.0
+Captured rainwater,102943,Captured rainwater,1.0
+Alternative water,102944,Alternative water,1.0
+Very Tight,102001,Very tight,0.9155555555555556
+Leaky,102004,Leaky,1.0
+Very Leaky,102005,Very leaky,0.96
+CFM25,102007,CFM25,1.0
+CFM50,102008,CFM50,1.0
+CFM75,102009,CFM75,1.0
+CFMnatural,102010,CFMnatural,1.0
+ACH50,102011,ACH50,1.0
+ACHnatural,102012,ACHnatural,1.0
+Effective Leakage Area,102013,Effective Leakage Area,1.0
+Blower door,102015,Blower door,1.0
+Tracer gas,102016,Tracer gas,1.0
+Checklist,102017,Checklist,1.0
+Interior ceiling,102140,Interior lighting,0.9111344537815126
+Foundation,102317,Fountain,0.9349999999999999
+Crawlspace,102143,Crawlspace,1.0
+Walls,102144,Wall,0.96
+Around windows,,,
+All week,102271,All week,1.0
+Weekday,102272,Weekday,1.0
+Weekend,102273,Weekend,1.0
+Saturday,102274,Saturday,1.0
+Sunday,102275,Sunday,1.0
+Holiday,102276,Holiday,1.0
+Monday,102277,Monday,1.0
+Tuesday,102278,Tuesday,1.0
+Wednesday,102279,Wednesday,1.0
+Thursday,102280,Thursday,1.0
+Friday,102281,Friday,1.0
+Business,102282,Business,1.0
+Unoccupied,102284,Unoccupied,1.0
+Sleeping,102285,Sleeping,1.0
+Public access,102286,Public access,1.0
+Setback,102287,Setback,1.0
+Operating,102288,Operating,1.0
+HVAC equipment,102289,HVAC equipment,1.0
+Cooling equipment,102290,Cooling equipment,1.0
+Heating equipment,102291,Heating equipment,1.0
+Lighting,102303,Lighting,1.0
+Cooking equipment,102293,Cooking equipment,1.0
+Miscellaneous equipment,102294,Miscellaneous equipment,1.0
+On-peak,102295,On peak,0.9238095238095239
+Off-peak,102296,Off peak,0.9416666666666667
+Super off-peak,102297,Super off peak,0.9714285714285714
+Air Distribution,102299,Air distribution,0.975
+Heating System,102300,Heating stove,0.9263736263736264
+Cooling System,102301,Cooling,0.9
+Other HVAC,,,
+Cooking,102305,Cooking,1.0
+Refrigeration,102306,Refrigeration,1.0
+Dishwasher,102307,Dishwasher,1.0
+Laundry,102308,Laundry,1.0
+Motor,102311,Motor,1.0
+Heat Recovery,102312,Heat recovery,0.9692307692307692
+Ceiling,102315,Ceiling,1.0
+Fenestration,102316,Fenestration,1.0
+General Controls and Operations,,,
+Critical IT System,,,
+"On-Site Storage, Transmission, Generation",,,
+Water Use,102325,Water,0.9111111111111111
+Replace boiler,102327,Replace,0.9
+Replace burner,102363,Replace,0.9
+Decentralize boiler,,,
+Insulate boiler room,,,
+Add energy recovery,,,
+Convert gas-fired unit to boiler loop,,,
+Convert system from steam to hot water,,,
+Clean and/or repair,,,
+Implement training and/or documentation,,,
+"Upgrade operating protocols, calibration, and/or sequencing",,,
+Convert to Cleaner Fuels,,,
+Install VSD on electric centrifugal chillers,,,
+Replace chiller,,,
+Install gas cooling,,,
+Add or repair economizer cycle,,,
+Add or replace cooling tower,,,
+Add heat recovery,,,
+Add or upgrade BAS/EMS/EMCS,,,
+Add or upgrade controls,,,
+Convert pneumatic controls to DDC,,,
+Replace or modify AHU,,,
+Improve distribution fans,,,
+Improve ventilation fans,,,
+Convert CV system to VAV system,,,
+Repair leaks / seal ducts,,,
+Add duct insulation,,,
+Balance ventilation/distribution system,,,
+Repair or replace HVAC damper and controller,,,
+Replace package units,,,
+Replace packaged terminal units,,,
+Install passive solar heating,,,
+Replace AC and heating units with ground coupled heat pump systems,,,
+Add enhanced dehumidification,,,
+Install solar ventilation preheating system,,,
+Add or repair economizer,,,
+Install thermal destratification fans,,,
+Install demand control ventilation,,,
+Install air source heat pump,,,
+Install variable refrigerant flow system,,,
+Capture and return condensate,,,
+Install or Upgrade Master Venting,,,
+Other heating,,,
+Other cooling,,,
+Other ventilation,,,
+Other distribution,102386,Water distribution,0.9259259259259259
+Retrofit with CFLs,,,
+Retrofit with T-5,,,
+Retrofit with T-8,,,
+Install spectrally enhanced lighting,,,
+Retrofit with fiber optic lighting technologies,,,
+Retrofit with light emitting diode technologies,,,
+Add daylight controls,,,
+Add occupancy sensors,,,
+Install photocell control,,,
+Install timers,,,
+Replace diffusers,,,
+Upgrade exit signs to LED,,,
+Upgrade exterior lighting,,,
+Air seal envelope,,,
+Increase wall insulation,,,
+Insulate thermal bypasses,,,
+Increase ceiling insulation,,,
+Increase roof insulation,,,
+Insulate attic hatch / stair box,,,
+Add attic/knee wall insulation,,,
+Install cool/green roof,,,
+Add shading devices,,,
+Add window films,,,
+Install or replace solar screens,,,
+Replace glazing,,,
+Replace windows,,,
+Increase floor insulation,,,
+Insulate foundation,,,
+Add pipe insulation,,,
+Repair and/or replace steam traps,,,
+"Retrofit and replace chiller plant pumping, piping, and controls",,,
+Repair or replace existing condensate return systems or install new condensate return systems,,,
+Add recirculating pumps,,,
+Replace or upgrade water heater,,,
+Install solar hot water system,,,
+Separate SHW from heating,,,
+Replace with higher efficiency pump,,,
+Replace with variable speed pump,,,
+Install or upgrade master venting,,,
+Replace steam traps with orifice plates,,,
+Install steam condensate heat recovery,,,
+Add elevator regenerative drives,,,
+Upgrade controls,,,
+Upgrade motors,,,
+Add drive controls,,,
+Replace with higher efficiency,,,
+Add VSD motor controller,,,
+Replace ice/refrigeration equipment with high efficiency units,,,
+Replace air-cooled ice/refrigeration equipment,,,
+Replace refrigerators,,,
+Install CHP/cogeneration systems,,,
+Install fuel cells,,,
+Install microturbines,,,
+Convert fuels,,,
+"Install landfill gas, wastewater treatment plant digester gas, or coal bed methane power plant",,,
+Install photovoltaic system,,,
+Install wind energy system,,,
+Install wood waste or other organic waste stream heating or power plant,,,
+Implement power factor corrections,,,
+Implement power quality upgrades,,,
+Upgrade transformers,,,
+Install gas distribution systems,,,
+Decrease SHW temperature,,,
+Install SHW controls,,,
+Install solar thermal SHW,,,
+Install water pressure booster,,,
+Insulate SHW piping,,,
+Insulate SHW tank,,,
+Replace piping,102491,Replace,0.9
+Replace tankless coil,,,
+Upgrade SHW boiler,,,
+Install heat pump SHW system,,,
+Install tankless water heaters,,,
+Install low-flow faucets and showerheads,,,
+Install low-flow plumbing equipment,,,
+Install on-site sewer treatment systems,,,
+Implement water efficient irrigation,,,
+Install thermal energy storage,,,
+Change to more favorable rate schedule,,,
+Energy cost reduction through rate adjustments - uncategorized,102514,Energy cost reduction through rate adjustments,0.9483870967741936
+Energy service billing and meter auditing recommendations,,,
+Change to lower energy cost supplier(s),,,
+Implement industrial process improvements,,,
+Implement production and/or manufacturing improvements,,,
+Install advanced metering systems,,,
+Replace with ENERGY STAR rated,,,
+Install plug load controls,,,
+Automatic shutdown or sleep mode for computers,,,
+De-lamp vending machines,,,
+Replace clothes dryers,,,
+Replace washing machines,,,
+Improve data center efficiency,,,
+Implement hot aisle hold aisle design,,,
+Implement server virtualization,,,
+Upgrade servers,,,
+Individual system,102549,Individual system,1.0
+Multiple systems,102550,Multiple systems,1.0
+Individual premise,102551,Individual premises,0.9894736842105263
+Multiple premises,102552,Multiple premises,1.0
+Entire facility,102553,Entire facility,1.0
+Entire site,102554,Entire site,1.0
+Cubic Meters,102837,Cubic Meters,1.0
+kcf,102838,kcf,1.0
+MCF,102839,MCF,1.0
+Gallons,102840,gallons,0.9047619047619048
+Wh,102841,Wh,1.0
+kWh,102842,kWh,1.0
+MWh,102843,MWh,1.0
+Btu,102844,Btu,1.0
+kBtu,102845,kBtu,1.0
+MMBtu,102846,MMBtu,1.0
+therms,102847,therms/h,0.95
+lbs,102848,lbs,1.0
+Klbs,102849,Klbs/h,0.9333333333333333
+Mlbs,102850,Mlbs,1.0
+Mass ton,102851,Mass ton,1.0
+Ton-hour,102852,Ton-hour,1.0
+Simple payback,102709,Simple payback,1.0
+Return on investment,102710,Return on investment,1.0
+Lifecycle cost,102711,Life cycle cost,0.9438095238095238
+Net present value,102712,Net present value,1.0
+Internal rate of return,102713,Internal rate of return,1.0
+Modified internal rate of return,102714,Modified internal rate of return,1.0
+Levelized cost of energy,102715,Levelized cost of energy,1.0
+Savings to investment ratio,102716,Savings to investment ratio,1.0
+Option A: Retrofit Isolation With Partial Measurement,,,
+Option B: Retrofit Isolation With Full Measurement,,,
+Option C: Whole Building Measurement,,,
+Option D: Calibrated Simulation,,,
+Proposed,102589,Proposed,1.0
+Evaluated,102590,Evaluated,1.0
+Selected,102591,Selected,1.0
+Initiated,102592,Initiated,1.0
+Discarded,102593,Discarded,1.0
+In Progress,102594,In Progress,1.0
+Completed,102595,Completed,1.0
+MV,102596,MV,1.0
+Verified,102597,Verified,1.0
+Unsatisfactory,102598,Unsatisfactory,1.0
+Long payback,102601,Long payback,1.0
+Requires permit,102602,Requires permit,1.0
+National Median,102605,National median,0.9733333333333334
+Regional Median,102606,Regional median,0.9733333333333334
+Adjusted to specific year,102607,Adjusted to specific year,1.0
+Weather normalized,102608,Weather normalized,1.0
+Cooling,102747,Cooling,1.0
+Heating,102748,Heating,1.0
+Hot Water,102749,Hot water,0.9555555555555556
+Interior Lighting,102750,Interior lighting,0.9764705882352941
+Overall HVAC Systems,,,
+"Floor U-Value, Mass",,,
+"Roof U-Value, Non-Attic",,,
+"Walls U-Value, Framed",,,
+Walls + Windows U-Value,,,
+Window Solar Heat Gain Coefficient,,,
+Windows U-Value,,,
+Assisted Living Facility,,,
+City Hall,,,
+Community Center,,,
+Library,,,
+Medical Office,,,
+Multi-family (4 floors or greater),,,
+Multi-family (fewer than 4 floors),,,
+Parking Garage (Ventilation Only),,,
+Police Station,,,
+Post Office,,,
+Religious Building,,,
+Senior Center,,,
+Warehouse non-refrigerated,102775,Warehouse refrigerated,0.9692307692307692
+ASHRAE,102650,ASHRAE,1.0
+IECC,102651,IECC,1.0
+California Title 24,102652,California Title 24,1.0
+IgCC,102653,IgCC,1.0
+Portfolio Manager,102655,Portfolio Manager,1.0
+Buildings Performance Database Tool,102656,Buildings Performance Database Tool,1.0
+EnergyIQ,102657,EnergyIQ,1.0
+Labs21,102658,Labs21,1.0
+Fabs21,102659,Fabs21,1.0
+On Site Measurement,,,
+Weather Station,102795,Weather station,0.9733333333333334
+TMY,102796,TMY,1.0
+TMY2,102797,TMY2,1.0
+TMY3,102798,TMY3,1.0
+IWEC,102799,IWEC,1.0
+CWEC,102800,CWEC,1.0
+CZRV2,102801,CZRV2,1.0
+Multiple buildings on a single lot,102803,Multiple buildings on a single lot,1.0
+Multiple buildings on multiple lots,102804,Multiple buildings on multiple lots,1.0
+Not shared,102805,Not shared,1.0
+CO2e,102812,CO2e,1.0
+CO2,102813,CO2,1.0
+CH4,102814,CH4,1.0
+N2O,102815,N2O,1.0
+NOx,102816,NOx,1.0
+SO2,102817,SO2,1.0
+US EIA,102819,US EIA,1.0
+US EPA,102820,US EPA,1.0
+Site,102932,Site,1.0
+Source,102933,Source,1.0
+Onsite,102934,Onsite,1.0
+Offsite,102935,Offsite,1.0
+Median,102857,Median,1.0
+Total,102859,Total,1.0
+Peak,,,
+Minimum,102861,Minimum,1.0
+Currency,102863,Current,0.9214285714285715
+Current,102949,Current,1.0
+Current Angle,102865,Current angle,0.9692307692307692
+Frequency,102867,Frequency,1.0
+Power Factor,102869,Power factor,0.9666666666666666
+Energy,102870,Energy,1.0
+Voltage,102871,Voltage,1.0
+Voltage Angle,102872,Voltage angle,0.9692307692307692
+Distortion Power Factor,102873,Distortion power factor,0.9652173913043479
+Volumetric Flow,102874,Volumetric flow,0.9733333333333334
+Humidity ratio,102875,Humidity ratio,1.0
+Relative humidity,102876,Relative humidity,1.0
+Diffuse Horizontal Radiation,102877,Diffuse horizontal radiation,0.9714285714285714
+Direct Normal Radiation,102878,Direct normal radiation,0.9652173913043479
+Global Horizontal Radiation,102879,Global horizontal radiation,0.9703703703703704
+Dry Bulb Temperature,102880,Dry bulb temperature,0.9044444444444444
+Wet Bulb Temperature,102881,Wet bulb temperature,0.9044444444444444
+Wind Speed,102882,Wind speed,0.96
+1 minute,102884,1 minute,1.0
+10 minute,102885,10 minute,1.0
+15 minute,102886,15 minute,1.0
+30 minute,102887,30 minute,1.0
+Hour,102888,Hour,1.0
+Day,102889,Day,1.0
+Week,102890,Week,1.0
+Month,102891,Month,1.0
+Annual,102892,Annual,1.0
+Quarter,102893,Quarter,1.0
+Phase AN,102896,Phase AN,1.0
+Phase A,102897,Phase A,1.0
+Phase AB,102898,Phase AB,1.0
+Phase BN,102899,Phase BN,1.0
+Phase B,102900,Phase B,1.0
+Phase CN,102901,Phase CN,1.0
+Phase C,102902,Phase C,1.0
+Phase ABC,102903,Phase ABC,1.0
+Phase BC,102904,Phase BC,1.0
+Phase CA,102905,Phase CA,1.0
+Phase S1,102906,Phase S1,1.0
+Phase S2,102907,Phase S2,1.0
+Phase S1S2,102908,Phase S1S2,1.0
+Phase S1N,102909,Phase S1N,1.0
+Phase S2N,102910,Phase S2N,1.0
+Phase S1S2N,102911,Phase S1S2N,1.0
+Forward,102914,Forward,1.0
+Reverse,102915,Reverse,1.0
+Pre retrofit,102946,Pre retrofit,1.0
+Post retrofit,102947,Post retrofit,1.0
+Baseline,102948,Baseline,1.0
+Target,102950,Target,1.0
+Design Target,102951,Design target,0.9358974358974359
+Last billing period,102952,Last billing period,1.0
+Additional to last billing period,102953,Additional to last billing period,1.0
+Current billing period,102954,Current billing period,1.0
+Billed to date,102955,Billed to date,1.0
+Current day,102956,Current day,1.0
+Current day last year,102957,Current day last year,1.0
+Previous day,102958,Previous day,1.0
+Previous day last year,102959,Previous day last year,1.0
+Preliminary Energy-Use Analysis,,,
+Level 1: Walk-through,,,
+Level 2: Energy Survey and Analysis,,,
+Level 3: Detailed Survey and Analysis,,,
+EPA ENERGY STAR certified,,,
+LEED certified,,,
+Simple building,,,
+Class 1 building,,,
+Increasing,,,
+Decreasing,,,
+Direct metering,103098,Direct metering,1.0
+Master meter without sub metering,103099,Master meter without sub metering,1.0
+Master meter with sub metering,103100,Master meter with sub metering,1.0
+Revenue grade meter,103103,Revenue grade meter,1.0
+Advanced resource meter,103104,Advanced resource meter,1.0
+Analog,103105,Analog,1.0
+Interval,103106,Interval,1.0
+Smart meter,103108,Smart meter,1.0
+PDU input meter,103109,PDU input meter,1.0
+IT equipment input meter,103110,IT equipment input meter,1.0
+Supply UPS output meter,103111,Supply UPS output meter,1.0
+PDU output meter,103112,PDU output meter,1.0
+Interruptible,103115,Interruptible,1.0
+Firm,103116,Firm,1.0
+Agency,103121,Agency,1.0
+Customer,103123,Customer,1.0
+Customer agreement,103124,Customer agreement,1.0
+Administrator,103125,Administrator,1.0
+Qualified Assessor,103126,Qualified assessor,0.9777777777777777
+Contributor,103127,Contributor,1.0
+Property Management Company,103128,Property management company,0.9223703703703704
+Operator,103129,Operator,1.0
+Energy Auditor,103130,Energy Auditor,1.0
+Energy Modeler,103131,Energy modeler,0.9714285714285714
+Contractor,103132,Contractor,1.0
+Implementer,103133,Implementer,1.0
+Financier,103134,Financier,1.0
+Commissioning Agent,103135,Commissioning agent,0.9789473684210526
+MV Agent,103136,MV agent,0.9416666666666667
+Evaluator,103137,Evaluator,1.0
+Builder,103138,Builder,1.0
+Billing,103140,Billing,1.0
+Architect,103141,Architect,1.0
+Mechanical Engineer,103142,Mechanical engineer,0.9567251461988304
+Energy Consultant,103143,Energy consultant,0.9764705882352941
+Service and Product Provider,103144,Service and product provider,0.9714285714285714
+Authority Having Jurisdiction,103145,Authority having jurisdiction,0.9724137931034482
+Power plant,103147,Power plant,1.0
+Electric Distribution Utility (EDU),103148,Electric distribution utility,0.9404926108374385
+ESCO,103149,ESCO,1.0
+Facilitator,103150,Facilitator,1.0
+Facility Manager,103151,Facility manager,0.975
+Trainer,103152,Trainer,1.0
+Electrical Engineer,103153,Electrical engineer,0.9567251461988304
+Controls Engineer,103154,Controls engineer,0.9514705882352941
+Lender,103155,Lender,1.0
+Servicer,103156,Servicer,1.0
+Originator,103157,Originator,1.0
+Days,103420,Day,0.9166666666666666
+Evenings,103421,Evening,0.975
+Cell,103422,Cellular,0.9
+Personal,103424,Personal,1.0
+Work,103425,Work,1.0

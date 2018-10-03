@@ -103,13 +103,16 @@ class BedesParser(object):
         self.terms = []
         for cat, terms in self.data.items():
             for t in terms:
-                # collect only speficic fields from the terms
+                # collect only specific fields from the terms
                 assembled = {}
-                for t_name in ['Term', 'Category', 'Content-UUID']:
+                for t_name in ['Term', 'Category', 'Content-UUID', 'URL']:
                     assembled[t_name] = t[t_name]
-                print(t)
+
+                #print(t)
+                assembled['Term-Definition'] = None
+
                 if t['Term-Definition']:
-                    if t.get('p'):
+                    if t['Term-Definition'].get('p'):
                         assembled['Term-Definition'] = t['Term-Definition']['p']
                 self.terms.append(assembled)
 
@@ -126,6 +129,6 @@ if __name__ == '__main__':
     bedes = BedesParser('v1.2')
     bedes.save()
 
-    print(bedes.terms)
-    print(bedes.categories)
-    print(bedes.enumerations)
+    #print(bedes.terms)
+    #print(bedes.categories)
+    #print(bedes.enumerations)

@@ -67,8 +67,15 @@
             <div class="panel-heading">
                 <h2 class="panel-title">Data Dictionary Links</h2>
             </div>
-            <div class="panel-body">
-               <p><span class="badge badge-accent2"> &nbsp;Coming Soon &nbsp; </span></p>
+            <div class="panel-body" id="bedes_panel">
+              <div id="bedes_none" class="visible">
+                No mapping found
+              </div>
+              <div id="bedes_found" class="hidden">
+                <div class="pad-bot-10"><span class="bold" id="bedes_term"></span>&mdash;<span id="bedes_definition"></span></div>
+                <div class="pad-bot-10"><span class="bold">Category &mdash;</span> <span id="bedes_category"></span></div>
+                <div class="pull-right"><a id="bedes_url" href="" target="_blank">BEDES <i class="fa fa-external-link" aria-hidden="true"></i></a></div>
+              </div>
             </div>
          </div>
 
@@ -99,50 +106,48 @@
                   'data': data,
                   'multiple': false
               },
-              'plugins': ["search", "contextmenu"],
-             /* 'contextmenu': {
-                  'items': function (node, callback) {
-                      if (node.data !== null) {
-                          callback({
-                              'gotoid': {
-                                  'label': 'Go to ' + node.data['refid'],
-                                  'action': function () {
-                                      var jst = $('#schematree').jstree(true);
-                                      jst.deselect_node(node);
-                                      jst.select_node(jst.get_node(node.data['refid']));
-                                  },
-                                  'icon': 'glyphicon glyphicon-share-alt'
-                              }
-                          });
-                      }
-                  }
-              } */
+              'plugins': ["search"],
           }).on('changed.jstree', function (e, data) {
             // display enums when present
             if (data.action === 'select_node' && data.selected.length > 0){
               var node = data.instance.get_node(data.selected[0]);
-              // retrieve and display enum (if present)
+              // retrieve and display bedes terms and enum (if present)
               $.ajax({
-                url: '{% url "bsviewer:get_enum" %}',
+                url: '{% url "bsviewer:get_additional_data" %}',
                 data: {
                   'element_id': data.selected[0]
                 },
                 dataType: 'json',
                 success: function (jsondata) {
+
+                  // set bedes section and display
+                  if (jsondata.bedes_term != null){
+                    $('#bedes_none').removeClass("visible").addClass("hidden");
+                    $('#bedes_found').removeClass("hidden").addClass("visible");
+                    $('#bedes_term').html(jsondata.bedes_term['term']);
+                    $('#bedes_category').html(jsondata.bedes_term['category']);
+                    $('#bedes_definition').html(jsondata.bedes_term['definition']);
+                    $('#bedes_url').attr('href', jsondata.bedes_term['url']);
+
+                  } else {
+                      // None
+                      $('#bedes_found').removeClass("visible").addClass("hidden");
+                      $('#bedes_none').removeClass("hidden").addClass("visible");
+                  }
                   if (jsondata.has_enum) {
-                    // TODO: set enum html section and display
-                    $('#enum_title').removeClass("hidden").addClass("visible");
-                    $('#enum_title').html(node.text);
-                    $('#enum_panel').removeClass("hidden").addClass("visible");
-                    $('#enum_results').html('');
-                    /*$('#enum_results').html(jsondata.enums );*/
-                      var ul = $('<ul>').appendTo('#enum_results');
-                      $(jsondata.enums).each(function(index, item) {
-                          console.log(item);
-                        ul.append(
-                            $(document.createElement('li')).text(item)
-                        );
-                      });
+                  // set enum html section and display
+                  $('#enum_title').removeClass("hidden").addClass("visible");
+                  $('#enum_title').html(node.text);
+                  $('#enum_panel').removeClass("hidden").addClass("visible");
+                  $('#enum_results').html('');
+                  /*$('#enum_results').html(jsondata.enums );*/
+                  var ul = $('<ul>').appendTo('#enum_results');
+                  $(jsondata.enums).each(function(index, item) {
+                      console.log(item);
+                    ul.append(
+                        $(document.createElement('li')).text(item)
+                    );
+                  });
 
                   } else {
                     $('#enum_panel').addClass("hidden");
