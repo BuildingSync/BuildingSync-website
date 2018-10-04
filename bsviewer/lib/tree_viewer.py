@@ -13,8 +13,10 @@ glyphicon_map = {
     'UserDefinedFields': 'cog',
 }
 
+
 def strip_namespace(x):
     return x.replace('auc:', '')
+
 
 def get_jstree_node(el):
     node_name = el.name
@@ -30,6 +32,7 @@ def get_jstree_node(el):
     }
 
     return node
+
 
 def get_schema_jstree_data(version):
 
@@ -51,7 +54,6 @@ def get_schema_jstree_data(version):
         if el.tree_level == 0:
             node['state'] = {}
             node['state']['opened'] = True
-
 
         jstree_data.append(node)
 

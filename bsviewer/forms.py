@@ -5,6 +5,7 @@ from .models.schema import Schema
 
 SCHEMA_DEFAULT_VERSION = 0.3
 
+
 class LoadXMLFile(forms.Form):
     schema_version = forms.ModelChoiceField(queryset=Schema.objects.all(), empty_label=None, to_field_name='version', initial=SCHEMA_DEFAULT_VERSION)
     file = forms.FileField(label='XML File')

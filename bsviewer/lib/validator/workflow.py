@@ -33,11 +33,9 @@ class ValidationWorkflow(object):
 
         self.xml_dict = dict()
 
-
         # retrieve all applicable use cases (public)
         for ucase in UseCase.objects.filter(schema=self.schema, make_public=True):
             self.use_cases.append(ucase)
-
 
     def validate_schema(self):
         resp = OrderedDict()
@@ -78,7 +76,6 @@ class ValidationWorkflow(object):
 
         return resp
 
-
     def validate_use_cases(self):
         resp = OrderedDict()
         resp['use_cases'] = OrderedDict()
@@ -95,7 +92,6 @@ class ValidationWorkflow(object):
 
         return resp
 
-
     def validate_all(self):
         resp = OrderedDict()
         schema_resp = self.validate_schema()
@@ -107,7 +103,6 @@ class ValidationWorkflow(object):
         print('VALIDATING USE CASES...')
         resp.update(self.validate_use_cases())
         return resp
-
 
     def process_use_case(self, use_case):
         results = OrderedDict()
@@ -133,7 +128,7 @@ class ValidationWorkflow(object):
                 for path in paths:
                     fpath = 'auc:' + path
                     loopingVar = loopingVar[fpath]
-            except:
+            except BaseException:
                 if attr.state == 2:
                     # Required attribute, error out
                     results['errors'].append({'path': attr.attribute.path, 'message': 'Required element not found'})
@@ -143,11 +138,8 @@ class ValidationWorkflow(object):
             # TODO: validate enums here -- in the case that the Use Case's allowable enum values is a subset of the schema's
             # other validation (such as value of elements) have been validate via the schema_validation
 
-
         # set valid to valse if errors.count > 0
         if len(results['errors']) > 0:
             results['valid'] = False
 
         return results
-
-

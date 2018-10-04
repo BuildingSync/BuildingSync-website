@@ -615,7 +615,7 @@ def process_schema(schema_object):
             b = Attribute(
                 name=se['name'],
                 type=se['type'],
-                tree_level=(se['$$treeLevel']+1),
+                tree_level=(se['$$treeLevel'] + 1),
                 parent=get_parent_from_path(se['parent_path']),
                 index=se['index'],
                 path=se['path'],

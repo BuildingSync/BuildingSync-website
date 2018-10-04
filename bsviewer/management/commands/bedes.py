@@ -12,6 +12,7 @@ import csv
 from django.conf import settings
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
+
 class Command(BaseCommand):
     help = 'Closes the specified poll for voting'
 
@@ -128,7 +129,7 @@ class Command(BaseCommand):
         if not os.path.isfile("%s/bedes-mappings-enumerations.csv" % (the_path)):
             raise FileNotFoundError(
                 "Cannot find the bedes-mappings-enumerations.csv file in lib/bedes/{}/schema{} directory".format(bedes_version,
-                                                                                                          schema_version))
+                                                                                                                 schema_version))
 
         # get schema
         schema = Schema.objects.filter(version=schema_version).first()
@@ -151,7 +152,7 @@ class Command(BaseCommand):
                     category=term['bedes_category'],
                     definition=term['bedes_definition'],
                     url=term['bedes_url']
-                    )
+                )
 
         # rewind
         csv_file.seek(0)
@@ -166,7 +167,7 @@ class Command(BaseCommand):
                     attr = attributes[0]
                     bedes_term = terms[0]
                     bmap = BedesMapping(
-                         bedesTerm=bedes_term,
-                         attribute=attr
+                        bedesTerm=bedes_term,
+                        attribute=attr
                     )
                     bmap.save()

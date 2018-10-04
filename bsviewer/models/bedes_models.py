@@ -12,6 +12,7 @@ class BedesTerm(models.Model):
     def __str__(self):
         return self.term
 
+
 class BedesMapping(models.Model):
     attribute = models.ForeignKey('Attribute', on_delete=models.CASCADE, db_index=True)
     bedesTerm = models.ForeignKey('BedesTerm', on_delete=models.CASCADE, db_index=True)

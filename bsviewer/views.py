@@ -26,6 +26,7 @@ from bsviewer.lib.tree_viewer import get_schema_jstree_data
 from django.conf import settings
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
+
 def index(request):
     context = {}
     return render(request, 'bsviewer/index.html', context)
@@ -54,7 +55,7 @@ def dictionary(request, version):
     # find schema matching version
     try:
         schema = Schema.objects.get(version=version)
-    except:
+    except BaseException:
         raise Http404('Schema version provided does not exist.')
 
     for version_obj in Schema.objects.all():
@@ -85,7 +86,6 @@ def retrieve_additional_dictionary_data(request):
         bedes_term = model_to_dict(BedesTerm.objects.get(pk=bedes_mappings[0].bedesTerm_id))
         #bedes_term = serializers.serialize("json", BedesTerm.objects.get(pk=bedes_mappings[0].bedesTerm_id))
         print("BEDES TERM: {}".format(bedes_term))
-
 
     # GET ENUMS
     has_enum = False
@@ -151,14 +151,13 @@ def validator(request):
             filename = os.path.basename(request.POST['file_name'])
             filepath = request.POST['file_name']
 
-
         print("FILENAME: {}".format(filename))
         print("FORM TYPE: {}".format(form_type))
 
         workflow = ValidationWorkflow(f, filepath, version)
         validation_results = workflow.validate_all()
 
-        #print(validation_results)
+        # print(validation_results)
 
         # cleanup file after validation
         if form_type == 'file':
@@ -181,6 +180,7 @@ def profile(request):
     #     messages.add_message(request, messages.SUCCESS, 'Password changed')
     return render(request, 'registration/profile.html')
 
+
 @login_required
 def update_user(request):
     if request.POST:
@@ -192,7 +192,7 @@ def update_user(request):
                 'email': request.user
             }
             for field_name, model in model_fields_to_update.items():
-                if not field_name in request.POST:
+                if field_name not in request.POST:
                     continue
                 setattr(model, field_name, request.POST[field_name])
             request.user.save()
@@ -227,6 +227,7 @@ def download_template(request, name):
         raise Http404
     raise Http404
 
+
 @login_required
 def change_password(request):
     if request.method == 'POST':
@@ -254,13 +255,13 @@ class UseCaseCreate(LoginRequiredMixin, CreateView):
         form.instance.owner = self.request.user
         return super().form_valid(form)
 
+
 class UseCaseUpdate(LoginRequiredMixin, UpdateView):
     model = UseCase
     fields = ['name', 'schema', 'import_file']
     success_url = reverse_lazy('bsviewer:cases')
 
+
 class UseCaseDelete(LoginRequiredMixin, DeleteView):
     model = UseCase
     success_url = reverse_lazy('bsviewer:cases')
-
-

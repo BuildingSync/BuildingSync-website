@@ -108,7 +108,7 @@ class BedesParser(object):
                 for t_name in ['Term', 'Category', 'Content-UUID', 'URL']:
                     assembled[t_name] = t[t_name]
 
-                #print(t)
+                # print(t)
                 assembled['Term-Definition'] = None
 
                 if t['Term-Definition']:
@@ -129,6 +129,6 @@ if __name__ == '__main__':
     bedes = BedesParser('v1.2')
     bedes.save()
 
-    #print(bedes.terms)
-    #print(bedes.categories)
-    #print(bedes.enumerations)
+    # print(bedes.terms)
+    # print(bedes.categories)
+    # print(bedes.enumerations)
