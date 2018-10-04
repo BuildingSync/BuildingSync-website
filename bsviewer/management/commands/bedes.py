@@ -1,13 +1,13 @@
 import os
+import csv
 import jellyfish
-from django.core.management.base import BaseCommand
 
+from django.core.management.base import BaseCommand
 from bsviewer.lib.bedes.bedes_parser import BedesParser
 from bsviewer.models.schema import Schema
 from bsviewer.models.enumeration import Enumeration
 from bsviewer.models.attribute import Attribute
-from bsviewer.models.bedes_models import BedesTerm, BedesMapping
-import csv
+from bsviewer.models.bedes_models import BedesTerm, BedesMapping, BedesEnumeration, BedesEnumerationMapping
 
 from django.conf import settings
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
@@ -73,43 +73,59 @@ class Command(BaseCommand):
         if not os.path.exists(the_path):
             os.makedirs(the_path)
 
+        content_uuids = []
         with open("%s/bedes-mappings-terms.csv" % (the_path), 'w') as file:
             writer = csv.writer(file, delimiter=',')
+            # headers: attribute name, attribute id, attribute path, Content-UUID, bedes term, bedes_category, bedes definition, bedes URL,  distance
+            writer.writerow(['attribute_name', 'attribute_id', 'attribute_path', 'bedes_content_uuid', 'bedes_term', 'bedes_category', 'bedes_definition', 'bedes_url', 'distance'])
             for name, be in results.items():
                 if len(be) > 0:
-                    # headers: attribute name, attribute id, attribute path, Content-UUID, bedes term, bedes category, bedes definition, bedes URL, distance
-                    out = [name, be[0]['attribute_id'], be[0]['attribute_path'], be[0]['bedes_object']['Content-UUID'], be[0]['bedes_term'], be[0]['bedes_object']['Category'], be[0]['bedes_object']['Term-Definition'], be[0]['bedes_object']['URL'], be[0]['distance']]
+                    out = [name, be[0]['attribute_id'], be[0]['attribute_path'], be[0]['bedes_object']['Content-UUID'], be[0]['bedes_term'], be[0]['bedes_object']['Category'], be[0]['bedes_object']['Term-Definition'], be[0]['bedes_object']['URL'],  be[0]['distance']]
+                    content_uuids.append(be[0]['bedes_object']['Content-UUID'])
                 else:
                     out = [name, '', '', '', '', '', '', '', '']
                 writer.writerow(out)
+
+        list_set = set(content_uuids)
+        # convert the set to the list
+        unique_cnt = len(list(list_set))
+        print('*******DEBUG: There are {} unique BEDES terms to add*******'.format(unique_cnt))
 
         results = {}
         for enumeration in Enumeration.objects.filter(schema=schema):
             results[enumeration.name] = []
             for be in bedes.enumerations:
-                distance = jellyfish.jaro_winkler(enumeration.name, be)
+                distance = jellyfish.jaro_winkler(enumeration.name, be['Term'])
                 if distance >= 0.9:
                     results[enumeration.name].append({
                         "enumeration_id": enumeration.id,
-                        "bedes_term": be,
+                        "bedes_term": be['Term'],
+                        "bedes_object": be,
                         "distance": distance
                     })
 
             results[enumeration.name] = sorted(results[enumeration.name], key=lambda k: -k['distance'])
 
         # store the results to CSV
+        content_uuids = []
         with open("%s/bedes-mappings-enumerations.csv" % (the_path), 'w') as file:
             writer = csv.writer(file, delimiter=',')
+            # headers: enumeration name, enumeration id,
+            # bedes Content-UUID, bedes term, bedes definition, bedes URL, bedes Related Term UUID, distance
+            writer.writerow(['enum_name', 'enum_id', 'bedes_content_uuid', 'bedes_term', 'bedes_definition', 'bedes_url', 'bedes_related_term_uuid', 'distance'])
             for enum, be in results.items():
                 if len(be) > 0:
-                    # TODO: enumerations currently only have a name, return other info too
-                    # headers: enumeration name, enumeration id, Content-UUID, bedes term, bedes category, bedes definition, bedes URL, distance
-                    # out = [enum, be[0]['enumeration_id'], be[0]['bedes_object']['Content-UUID'], be[0]['bedes_term'], be[0]['bedes_object']['Category'], be[0]['bedes_object']['Term-Definition'], be[0]['bedes_object']['URL'], be[0]['distance']]
-                    out = [enum, be[0]['enumeration_id'], be[0]['bedes_term'], be[0]['distance']]
+                    content_uuids.append(be[0]['bedes_object']['Content-UUID'])
+                    out = [enum, be[0]['enumeration_id'], be[0]['bedes_object']['Content-UUID'], be[0]['bedes_term'], be[0]['bedes_object']['Option-Definition'], be[0]['bedes_object']['URL'], be[0]['bedes_object']['Related-Term-UUID'], be[0]['distance']]
+
                 else:
-                    #out = [enum, '', '', '', '', '', '', '']
-                    out = [enum, '', '', '']
+                    out = [enum, '', '', '', '', '', '', '']
                 writer.writerow(out)
+
+        list_set = set(content_uuids)
+        # convert the set to the list
+        unique_cnt = len(list(list_set))
+        print('*******DEBUG: There are {} unique BEDES enum values to add*******'.format(unique_cnt))
 
         # print(results)
 
@@ -137,17 +153,19 @@ class Command(BaseCommand):
         # first delete all
         BedesTerm.objects.all().delete()
         BedesMapping.objects.all().delete()
+        BedesEnumeration.objects.all().delete()
+        BedesEnumerationMapping.objects.all().delete()
 
+        # save all terms
         csv_file = open("%s/bedes-mappings-terms.csv" % (the_path), mode='r')
-        bedes_mappings = csv.DictReader(csv_file, fieldnames=['name', 'attribute_id', 'attribute_path', 'content_uuid', 'bedes_term', 'bedes_category', 'bedes_definition', 'bedes_url', 'distance'])
-
-        # save all the terms
+        bedes_mappings = csv.DictReader(csv_file)
+        header = bedes_mappings.fieldnames
         for term in bedes_mappings:
-            # headers: attribute name, attribute id, attribute path, Content-UUID, bedes term, bedes category, bedes definition, bedes URL, distance
-            # get_or_create here b/c CSV structure maps schema attributes to bedes terms and there could be multiple listings of the same bedes term.
+            # get_or_create here b/c CSV structure maps schema attributes to bedes terms
+            # there could be multiple listings of the same bedes term
             if term['distance'] != "":
-                b = BedesTerm.objects.get_or_create(
-                    content_uuid=term['content_uuid'],
+                BedesTerm.objects.get_or_create(
+                    content_uuid=term['bedes_content_uuid'],
                     term=term['bedes_term'],
                     category=term['bedes_category'],
                     definition=term['bedes_definition'],
@@ -156,12 +174,13 @@ class Command(BaseCommand):
 
         # rewind
         csv_file.seek(0)
+        headers_again = next(bedes_mappings)
         for term in bedes_mappings:
             # mappings CSV only contains distances >= 0.90 or it's blank
             if term['distance'] != "":
                 # found a match
                 attributes = Attribute.objects.filter(id=term['attribute_id'], schema=schema)
-                terms = BedesTerm.objects.filter(content_uuid=term['content_uuid'])
+                terms = BedesTerm.objects.filter(content_uuid=term['bedes_content_uuid'])
 
                 if terms.count() > 0 and attributes.count() > 0:
                     attr = attributes[0]
@@ -169,5 +188,40 @@ class Command(BaseCommand):
                     bmap = BedesMapping(
                         bedesTerm=bedes_term,
                         attribute=attr
+                    )
+                    bmap.save()
+
+        # save all enumerations
+        csv_file = open("%s/bedes-mappings-enumerations.csv" % (the_path), mode='r')
+        bedes_mappings = csv.DictReader(csv_file)
+        header = bedes_mappings.fieldnames
+        for term in bedes_mappings:
+              # get_or_create here b/c CSV structure maps schema attributes to bedes terms
+              # there could be multiple listings of the same bedes term.
+            if term['distance'] != "":
+               BedesEnumeration.objects.get_or_create(
+                    content_uuid=term['bedes_content_uuid'],
+                    term=term['bedes_term'],
+                    definition=term['bedes_definition'],
+                    url=term['bedes_url'],
+                    related_term_uuid=term['bedes_related_term_uuid']
+               )
+
+        # rewind
+        csv_file.seek(0)
+        headers_again = next(bedes_mappings)
+        for term in bedes_mappings:
+            # mappings CSV only contains distances >= 0.90 or it's blank
+            if term['distance'] != "":
+                # found a match
+                enums = Enumeration.objects.filter(id=term['enum_id'], schema=schema)
+                terms = BedesEnumeration.objects.filter(content_uuid=term['bedes_content_uuid'])
+
+                if terms.count() > 0 and enums.count() > 0:
+                    enum = enums[0]
+                    bedes_term = terms[0]
+                    bmap = BedesEnumerationMapping(
+                        bedesEnumeration=bedes_term,
+                        enumeration=enum
                     )
                     bmap.save()

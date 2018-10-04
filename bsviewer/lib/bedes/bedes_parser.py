@@ -86,8 +86,6 @@ class BedesParser(object):
                 self.data[term['Category']][-1]['list_options'] = list_options[term['Term']]
 
     def save(self):
-        # with open("bedes_list_options_%s.json" % self.version, 'w') as new_file:
-        # new_file.write(json.dumps(list_options, indent=2))
         path = os.path.join(os.path.dirname(__file__), self.version)
         with open("%s/bedes_%s.json" % (path, self.version), 'w') as new_file:
             new_file.write(json.dumps(self.data, indent=2))
@@ -110,7 +108,6 @@ class BedesParser(object):
 
                 # print(t)
                 assembled['Term-Definition'] = None
-
                 if t['Term-Definition']:
                     if t['Term-Definition'].get('p'):
                         assembled['Term-Definition'] = t['Term-Definition']['p']
@@ -122,7 +119,11 @@ class BedesParser(object):
             for term in terms:
                 if term.get('list_options', None):
                     for lo in term['list_options']:
-                        self.enumerations.append(lo['Term'])
+                        # collect only specific fields from the terms
+                        assembled = {}
+                        for t_name in ['Term', 'Content-UUID', 'URL', 'Option-Definition', 'Related-Term-UUID']:
+                            assembled[t_name] = lo[t_name]
+                        self.enumerations.append(assembled)
 
 
 if __name__ == '__main__':
