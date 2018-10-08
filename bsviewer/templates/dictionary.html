@@ -1,4 +1,4 @@
-{% extends 'bsviewer/base.html' %}
+{% extends 'base.html' %}
 
 {% load bootstrap3 %}
 {% load staticfiles %}
@@ -113,7 +113,7 @@
               var node = data.instance.get_node(data.selected[0]);
               // retrieve and display bedes terms and enum (if present)
               $.ajax({
-                url: '{% url "bsviewer:get_additional_data" %}',
+                url: '{% url "get_additional_data" %}',
                 data: {
                   'element_id': data.selected[0]
                 },

@@ -29,7 +29,7 @@ DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
 def index(request):
     context = {}
-    return render(request, 'bsviewer/index.html', context)
+    return render(request, 'index.html', context)
 
 
 def use_cases(request):
@@ -42,11 +42,11 @@ def use_cases(request):
         'user_usecases': user_usecases,
         'public_usecases': public_usecases
     }
-    return render(request, 'bsviewer/use_cases.html', context)
+    return render(request, 'use_cases.html', context)
 
 
 def redirect_data_dictionary(request):
-    return redirect(reverse('bsviewer:dictionaryversion', args=[DEFAULT_SCHEMA_VERSION]))
+    return redirect(reverse('dictionaryversion', args=[DEFAULT_SCHEMA_VERSION]))
 
 
 def dictionary(request, version):
@@ -62,7 +62,7 @@ def dictionary(request, version):
         versions.append({
             'name': version_obj.version,
             'is_current': version_obj.version == version,
-            'link': reverse('bsviewer:dictionaryversion', args=[version_obj.version])
+            'link': reverse('dictionaryversion', args=[version_obj.version])
         })
 
     context = {
@@ -71,7 +71,7 @@ def dictionary(request, version):
         'versions': versions
     }
 
-    return render(request, 'bsviewer/dictionary.html', context)
+    return render(request, 'dictionary.html', context)
 
 
 def retrieve_additional_dictionary_data(request):
@@ -131,7 +131,7 @@ def validator(request):
         else:
             return HttpResponseServerError('Invalid form data')
     else:
-        return render(request, 'bsviewer/validator.html', context)
+        return render(request, 'validator.html', context)
 
     if form.is_valid():
         if form_type == 'file':
@@ -163,7 +163,7 @@ def validator(request):
         if form_type == 'file':
             os.unlink(tmp_file.name)
 
-        return render(request, 'bsviewer/validator_results.html', {
+        return render(request, 'validator_results.html', {
             'validation_results': validation_results,
             'filename': filename,
             'schema_version': version
@@ -171,7 +171,7 @@ def validator(request):
 
     else:
         context['load_xml_{}_form'.format(form_type)] = form
-        return render(request, 'bsviewer/validator.html', context)
+        return render(request, 'validator.html', context)
 
 
 @login_required
@@ -212,7 +212,8 @@ def update_user(request):
 @login_required
 def download_template(request, name):
     if name:
-        schema = Schema.objects.filter(name=name)[0]
+        # For some reason, this is linked to the version, not the name. hmm...
+        schema = Schema.objects.filter(version=name)[0]
         if schema:
 
             file_path = schema.usecase_template_file.path
@@ -221,7 +222,7 @@ def download_template(request, name):
                 with open(file_path, 'rb') as fh:
                     response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
                     response['Content-Disposition'] = 'inline; filename=' + os.path.basename(
-                        file_path)
+                        file_path) + '.csv'
                     return response
             raise Http404
         raise Http404
@@ -249,7 +250,7 @@ def change_password(request):
 class UseCaseCreate(LoginRequiredMixin, CreateView):
     model = UseCase
     fields = ['name', 'schema', 'import_file']
-    success_url = reverse_lazy('bsviewer:cases')
+    success_url = reverse_lazy('cases')
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
@@ -259,9 +260,9 @@ class UseCaseCreate(LoginRequiredMixin, CreateView):
 class UseCaseUpdate(LoginRequiredMixin, UpdateView):
     model = UseCase
     fields = ['name', 'schema', 'import_file']
-    success_url = reverse_lazy('bsviewer:cases')
+    success_url = reverse_lazy('cases')
 
 
 class UseCaseDelete(LoginRequiredMixin, DeleteView):
     model = UseCase
-    success_url = reverse_lazy('bsviewer:cases')
+    success_url = reverse_lazy('cases')
