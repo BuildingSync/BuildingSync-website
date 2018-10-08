@@ -80,7 +80,7 @@ class Command(BaseCommand):
             writer.writerow(['attribute_name', 'attribute_id', 'attribute_path', 'bedes_content_uuid', 'bedes_term', 'bedes_category', 'bedes_definition', 'bedes_url', 'distance'])
             for name, be in results.items():
                 if len(be) > 0:
-                    out = [name, be[0]['attribute_id'], be[0]['attribute_path'], be[0]['bedes_object']['Content-UUID'], be[0]['bedes_term'], be[0]['bedes_object']['Category'], be[0]['bedes_object']['Term-Definition'], be[0]['bedes_object']['URL'],  be[0]['distance']]
+                    out = [name, be[0]['attribute_id'], be[0]['attribute_path'], be[0]['bedes_object']['Content-UUID'], be[0]['bedes_term'], be[0]['bedes_object']['Category'], be[0]['bedes_object']['Term-Definition'], be[0]['bedes_object']['URL'], be[0]['distance']]
                     content_uuids.append(be[0]['bedes_object']['Content-UUID'])
                 else:
                     out = [name, '', '', '', '', '', '', '', '']
@@ -199,13 +199,13 @@ class Command(BaseCommand):
               # get_or_create here b/c CSV structure maps schema attributes to bedes terms
               # there could be multiple listings of the same bedes term.
             if term['distance'] != "":
-               BedesEnumeration.objects.get_or_create(
+                BedesEnumeration.objects.get_or_create(
                     content_uuid=term['bedes_content_uuid'],
                     term=term['bedes_term'],
                     definition=term['bedes_definition'],
                     url=term['bedes_url'],
                     related_term_uuid=term['bedes_related_term_uuid']
-               )
+                )
 
         # rewind
         csv_file.seek(0)
