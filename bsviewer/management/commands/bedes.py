@@ -1,15 +1,17 @@
-import os
 import csv
+import os
+
 import jellyfish
-
-from django.core.management.base import BaseCommand
-from bsviewer.lib.bedes.bedes_parser import BedesParser
-from bsviewer.models.schema import Schema
-from bsviewer.models.enumeration import Enumeration
-from bsviewer.models.attribute import Attribute
-from bsviewer.models.bedes_models import BedesTerm, BedesMapping, BedesEnumeration, BedesEnumerationMapping
-
 from django.conf import settings
+from django.core.management.base import BaseCommand
+
+from bsviewer.lib.bedes.bedes_parser import BedesParser
+from bsviewer.models.attribute import Attribute
+from bsviewer.models.bedes_models import BedesTerm, BedesMapping, BedesEnumeration, \
+    BedesEnumerationMapping
+from bsviewer.models.enumeration import Enumeration
+from bsviewer.models.schema import Schema
+
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
 
@@ -69,7 +71,8 @@ class Command(BaseCommand):
         # print(results)
 
         # store the results to CSV
-        the_path = os.path.join(os.path.dirname(__file__), '../../lib/bedes', bedes_version, "schema" + schema_version)
+        the_path = os.path.join(os.path.dirname(__file__), '../../lib/bedes', bedes_version,
+                                "schema" + schema_version)
         if not os.path.exists(the_path):
             os.makedirs(the_path)
 
@@ -77,10 +80,16 @@ class Command(BaseCommand):
         with open("%s/bedes-mappings-terms.csv" % (the_path), 'w') as file:
             writer = csv.writer(file, delimiter=',')
             # headers: attribute name, attribute id, attribute path, Content-UUID, bedes term, bedes_category, bedes definition, bedes URL,  distance
-            writer.writerow(['attribute_name', 'attribute_id', 'attribute_path', 'bedes_content_uuid', 'bedes_term', 'bedes_category', 'bedes_definition', 'bedes_url', 'distance'])
+            writer.writerow(
+                ['attribute_name', 'attribute_id', 'attribute_path', 'bedes_content_uuid',
+                 'bedes_term', 'bedes_category', 'bedes_definition', 'bedes_url', 'distance'])
             for name, be in results.items():
                 if len(be) > 0:
-                    out = [name, be[0]['attribute_id'], be[0]['attribute_path'], be[0]['bedes_object']['Content-UUID'], be[0]['bedes_term'], be[0]['bedes_object']['Category'], be[0]['bedes_object']['Term-Definition'], be[0]['bedes_object']['URL'], be[0]['distance']]
+                    out = [name, be[0]['attribute_id'], be[0]['attribute_path'],
+                           be[0]['bedes_object']['Content-UUID'], be[0]['bedes_term'],
+                           be[0]['bedes_object']['Category'],
+                           be[0]['bedes_object']['Term-Definition'], be[0]['bedes_object']['URL'],
+                           be[0]['distance']]
                     content_uuids.append(be[0]['bedes_object']['Content-UUID'])
                 else:
                     out = [name, '', '', '', '', '', '', '', '']
@@ -104,7 +113,8 @@ class Command(BaseCommand):
                         "distance": distance
                     })
 
-            results[enumeration.name] = sorted(results[enumeration.name], key=lambda k: -k['distance'])
+            results[enumeration.name] = sorted(results[enumeration.name],
+                                               key=lambda k: -k['distance'])
 
         # store the results to CSV
         content_uuids = []
@@ -112,11 +122,16 @@ class Command(BaseCommand):
             writer = csv.writer(file, delimiter=',')
             # headers: enumeration name, enumeration id,
             # bedes Content-UUID, bedes term, bedes definition, bedes URL, bedes Related Term UUID, distance
-            writer.writerow(['enum_name', 'enum_id', 'bedes_content_uuid', 'bedes_term', 'bedes_definition', 'bedes_url', 'bedes_related_term_uuid', 'distance'])
+            writer.writerow(
+                ['enum_name', 'enum_id', 'bedes_content_uuid', 'bedes_term', 'bedes_definition',
+                 'bedes_url', 'bedes_related_term_uuid', 'distance'])
             for enum, be in results.items():
                 if len(be) > 0:
                     content_uuids.append(be[0]['bedes_object']['Content-UUID'])
-                    out = [enum, be[0]['enumeration_id'], be[0]['bedes_object']['Content-UUID'], be[0]['bedes_term'], be[0]['bedes_object']['Option-Definition'], be[0]['bedes_object']['URL'], be[0]['bedes_object']['Related-Term-UUID'], be[0]['distance']]
+                    out = [enum, be[0]['enumeration_id'], be[0]['bedes_object']['Content-UUID'],
+                           be[0]['bedes_term'], be[0]['bedes_object']['Option-Definition'],
+                           be[0]['bedes_object']['URL'], be[0]['bedes_object']['Related-Term-UUID'],
+                           be[0]['distance']]
 
                 else:
                     out = [enum, '', '', '', '', '', '', '']
@@ -125,7 +140,8 @@ class Command(BaseCommand):
         list_set = set(content_uuids)
         # convert the set to the list
         unique_cnt = len(list(list_set))
-        print('*******DEBUG: There are {} unique BEDES enum values to add*******'.format(unique_cnt))
+        print(
+            '*******DEBUG: There are {} unique BEDES enum values to add*******'.format(unique_cnt))
 
         # print(results)
 
@@ -137,15 +153,20 @@ class Command(BaseCommand):
         # TODO: enumerations
 
         # find the CSVs
-        the_path = os.path.join(os.path.dirname(__file__), '../../lib/bedes', bedes_version, "schema" + schema_version)
+        the_path = os.path.join(os.path.dirname(__file__), '../../lib/bedes', bedes_version,
+                                "schema" + schema_version)
         if not os.path.isfile("%s/bedes-mappings-terms.csv" % (the_path)):
-            raise FileNotFoundError("Cannot find the bedes-mappings-terms.csv file in lib/bedes/{}/schema{} directory".format(bedes_version, schema_version))
+            raise FileNotFoundError(
+                "Cannot find the bedes-mappings-terms.csv file in lib/bedes/{}/schema{} directory".format(
+                    bedes_version, schema_version))
 
-        the_path = os.path.join(os.path.dirname(__file__), '../../lib/bedes', bedes_version, "schema" + schema_version)
+        the_path = os.path.join(os.path.dirname(__file__), '../../lib/bedes', bedes_version,
+                                "schema" + schema_version)
         if not os.path.isfile("%s/bedes-mappings-enumerations.csv" % (the_path)):
             raise FileNotFoundError(
-                "Cannot find the bedes-mappings-enumerations.csv file in lib/bedes/{}/schema{} directory".format(bedes_version,
-                                                                                                                 schema_version))
+                "Cannot find the bedes-mappings-enumerations.csv file in lib/bedes/{}/schema{} directory".format(
+                    bedes_version,
+                    schema_version))
 
         # get schema
         schema = Schema.objects.filter(version=schema_version).first()
@@ -159,7 +180,7 @@ class Command(BaseCommand):
         # save all terms
         csv_file = open("%s/bedes-mappings-terms.csv" % (the_path), mode='r')
         bedes_mappings = csv.DictReader(csv_file)
-        header = bedes_mappings.fieldnames
+        # header = bedes_mappings.fieldnames
         for term in bedes_mappings:
             # get_or_create here b/c CSV structure maps schema attributes to bedes terms
             # there could be multiple listings of the same bedes term
@@ -174,7 +195,7 @@ class Command(BaseCommand):
 
         # rewind
         csv_file.seek(0)
-        headers_again = next(bedes_mappings)
+        # headers_again = next(bedes_mappings)
         for term in bedes_mappings:
             # mappings CSV only contains distances >= 0.90 or it's blank
             if term['distance'] != "":
@@ -194,10 +215,10 @@ class Command(BaseCommand):
         # save all enumerations
         csv_file = open("%s/bedes-mappings-enumerations.csv" % (the_path), mode='r')
         bedes_mappings = csv.DictReader(csv_file)
-        header = bedes_mappings.fieldnames
+        # header = bedes_mappings.fieldnames
         for term in bedes_mappings:
-              # get_or_create here b/c CSV structure maps schema attributes to bedes terms
-              # there could be multiple listings of the same bedes term.
+            # get_or_create here b/c CSV structure maps schema attributes to bedes terms
+            # there could be multiple listings of the same bedes term.
             if term['distance'] != "":
                 BedesEnumeration.objects.get_or_create(
                     content_uuid=term['bedes_content_uuid'],
@@ -209,7 +230,7 @@ class Command(BaseCommand):
 
         # rewind
         csv_file.seek(0)
-        headers_again = next(bedes_mappings)
+        # headers_again = next(bedes_mappings)
         for term in bedes_mappings:
             # mappings CSV only contains distances >= 0.90 or it's blank
             if term['distance'] != "":

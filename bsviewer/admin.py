@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.contrib.admin import AdminSite
-
-from .models.schema import Schema
-from .models.attribute import Attribute
-from .models.use_case import UseCase
-from django.contrib.auth.models import Group, User
 from django.contrib.auth.admin import GroupAdmin, UserAdmin
+from django.contrib.auth.models import Group, User
+
+from .models.attribute import Attribute
+from .models.schema import Schema
+from .models.use_case import UseCase
 
 
 class SchemaAdmin(admin.ModelAdmin):

@@ -1,13 +1,13 @@
 import os
 
 from django.contrib.auth.models import User
-from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.db import models
 from django.db.models.signals import post_save, pre_save, post_delete
 from django.dispatch import receiver
 
-from bsviewer.models.use_case_attribute import UseCaseEnumeration, UseCaseAttribute
 from bsviewer.lib.usecase_parser import process_usecase
+from bsviewer.models.use_case_attribute import UseCaseEnumeration, UseCaseAttribute
 
 
 class UseCase(models.Model):

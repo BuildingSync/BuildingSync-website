@@ -1,29 +1,34 @@
+import json
 import os
 import tempfile
-import json
 
-from django.forms.models import model_to_dict
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseServerError, HttpResponseRedirect, Http404, JsonResponse, HttpResponseForbidden
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.forms.models import model_to_dict
+from django.http import (
+    HttpResponse,
+    HttpResponseServerError,
+    HttpResponseRedirect,
+    Http404,
+    JsonResponse
+)
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.contrib.auth.forms import PasswordChangeForm
 
-from .models.schema import Schema
-from .models.use_case import UseCase
+from bsviewer import forms
+from bsviewer.lib.tree_viewer import get_schema_jstree_data
+from bsviewer.lib.validator.workflow import ValidationWorkflow
 from .models.attribute_enumeration_class import AttributeEnumerationClass
 from .models.bedes_models import BedesMapping, BedesTerm
 from .models.enumeration import Enumeration
+from .models.schema import Schema
+from .models.use_case import UseCase
 
-from bsviewer import forms
-from bsviewer.lib.validator.workflow import ValidationWorkflow
-from bsviewer.lib.tree_viewer import get_schema_jstree_data
-
-from django.conf import settings
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
 
@@ -54,7 +59,7 @@ def dictionary(request, version):
 
     # find schema matching version
     try:
-        schema = Schema.objects.get(version=version)
+        Schema.objects.get(version=version)
     except BaseException:
         raise Http404('Schema version provided does not exist.')
 
@@ -75,7 +80,6 @@ def dictionary(request, version):
 
 
 def retrieve_additional_dictionary_data(request):
-
     element_id = request.GET.get('element_id', None)
 
     # get Bedes mapping
@@ -84,7 +88,7 @@ def retrieve_additional_dictionary_data(request):
     if bedes_mappings.count() > 0:
         # take first, there should only be 1
         bedes_term = model_to_dict(BedesTerm.objects.get(pk=bedes_mappings[0].bedesTerm_id))
-        #bedes_term = serializers.serialize("json", BedesTerm.objects.get(pk=bedes_mappings[0].bedesTerm_id))
+        # bedes_term = serializers.serialize("json", BedesTerm.objects.get(pk=bedes_mappings[0].bedesTerm_id))
         print("BEDES TERM: {}".format(bedes_term))
 
     # GET ENUMS
@@ -96,7 +100,8 @@ def retrieve_additional_dictionary_data(request):
         # if found, means that this attribute has enums. Retrieve the actual enum values
         has_enum = True
         print("ENUM ID RETRIEVED: {}".format(enum_ids[0].pk))
-        enum_results = Enumeration.objects.filter(enumeration_class_id=enum_ids[0].enumeration_class_id).only('name').order_by('pk')
+        enum_results = Enumeration.objects.filter(
+            enumeration_class_id=enum_ids[0].enumeration_class_id).only('name').order_by('pk')
         print("ENUM_RESULTS: {}".format(enum_results))
         for item in enum_results:
             enums.append(item.name)
@@ -206,7 +211,8 @@ def update_user(request):
             'last_name': request.user.last_name,
             'email': request.user.email
         })
-        return render(request, 'registration/updateuser.html', {'update_user_form': update_user_form})
+        return render(request, 'registration/updateuser.html',
+                      {'update_user_form': update_user_form})
 
 
 @login_required

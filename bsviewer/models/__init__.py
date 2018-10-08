@@ -1,1 +1,1 @@
-from .bedes_models import BedesTerm
+from .bedes_models import BedesTerm  # noqa

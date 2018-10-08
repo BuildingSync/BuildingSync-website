@@ -1,11 +1,10 @@
-from lxml import etree
-import xmlschema
 from collections import OrderedDict
+
+import xmlschema
 import xmltodict
 
-from bsviewer.lib.validator.basevalidator import BaseValidator, ValidationError
-from bsviewer.models.use_case import UseCase
 from bsviewer.models.schema import Schema
+from bsviewer.models.use_case import UseCase
 from bsviewer.models.use_case_attribute import UseCaseAttribute
 
 
@@ -85,8 +84,6 @@ class ValidationWorkflow(object):
             self.xml = xmltodict.parse(file.read())
 
         for use_case in self.use_cases:
-            use_case_resp = OrderedDict()
-
             print("validating use case: {}".format(use_case.name))
             resp['use_cases'][use_case] = self.process_use_case(use_case)
 
@@ -112,7 +109,7 @@ class ValidationWorkflow(object):
         # get all attributes of use case where state > 0
         # 1 = Optional, 2 = Required
         attrs = UseCaseAttribute.objects.filter(state__gt=0, use_case=use_case)
-        #print("NUMBER OF ATTRIBUTES RETRIEVED: {}".format(attrs.count()))
+        # print("NUMBER OF ATTRIBUTES RETRIEVED: {}".format(attrs.count()))
 
         # traverse use case attributes (not xml)
         for attr in attrs:
@@ -131,7 +128,8 @@ class ValidationWorkflow(object):
             except BaseException:
                 if attr.state == 2:
                     # Required attribute, error out
-                    results['errors'].append({'path': attr.attribute.path, 'message': 'Required element not found'})
+                    results['errors'].append(
+                        {'path': attr.attribute.path, 'message': 'Required element not found'})
                 # now go to next attribute
                 continue
 
