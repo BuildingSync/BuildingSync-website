@@ -20,9 +20,9 @@ urlpatterns = [
     path('use_case/create/', views.UseCaseCreate.as_view(), name='use_case_create'),
     path('use_case/<int:pk>/update/', views.UseCaseUpdate.as_view(), name='use_case_update'),
     path('use_case/<int:pk>/delete/', views.UseCaseDelete.as_view(), name='use_case_delete'),
-    re_path('download_template/(?P<name>\S+)/', views.download_template, name='download_template'),
+    re_path('download_template/(?P<id>\S+)/$', views.download_template, name='download_template'),
     path('validator', views.validator, name='validator'),
     path('dictionary', views.redirect_data_dictionary, name='dictionary'),
-    re_path(r'^dictionary/(?P<version>\w+.\w+)/$', views.dictionary, name='dictionaryversion'),
+    re_path(r'^dictionary/(?P<version>\w+.\w+.\w+)/$', views.dictionary, name='dictionaryversion'),
     re_path(r'^ajax/enum/$', views.retrieve_additional_dictionary_data, name='get_additional_data')
 ]

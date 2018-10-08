@@ -55,6 +55,7 @@ def redirect_data_dictionary(request):
 
 
 def dictionary(request, version):
+    # This should pass in an ID, right?
     versions = []
 
     # find schema matching version
@@ -216,10 +217,10 @@ def update_user(request):
 
 
 @login_required
-def download_template(request, name):
-    if name:
+def download_template(request, id):
+    if id:
         # For some reason, this is linked to the version, not the name. hmm...
-        schema = Schema.objects.filter(version=name)[0]
+        schema = Schema.objects.filter(pk=id)[0]
         if schema:
 
             file_path = schema.usecase_template_file.path
