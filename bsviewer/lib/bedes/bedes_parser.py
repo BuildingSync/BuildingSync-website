@@ -11,9 +11,9 @@ import xmltodict
 
 
 class BedesParser(object):
-    '''
+    """
     Download XML of terms and list options from here: https://bedes.lbl.gov/bedes-online
-    '''
+    """
 
     def __init__(self, version, terms_filename='bedes_online_dictionary_uuid-terms.xml',
                  list_options_filename='bedes_online_dictionary_uuid-lo.xml'):
