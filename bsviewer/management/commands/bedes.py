@@ -192,7 +192,7 @@ class Command(BaseCommand):
         # save all terms
         csv_file = open("%s/bedes-mappings-terms.csv" % (the_path), mode='r')
         bedes_mappings = csv.DictReader(csv_file)
-        header = bedes_mappings.fieldnames
+        bedes_mappings.fieldnames
         for term in bedes_mappings:
             # get_or_create here b/c CSV structure maps schema attributes to bedes terms
             # there could be multiple listings of the same bedes term
@@ -207,7 +207,7 @@ class Command(BaseCommand):
 
         # rewind
         csv_file.seek(0)
-        headers_again = next(bedes_mappings)
+        next(bedes_mappings)
         for term in bedes_mappings:
             # mappings CSV only contains distances >= 0.90 or it's blank
             if term['distance'] != "":
@@ -227,7 +227,7 @@ class Command(BaseCommand):
         # save all enumerations
         csv_file = open("%s/bedes-mappings-enumerations.csv" % (the_path), mode='r')
         bedes_mappings = csv.DictReader(csv_file)
-        header = bedes_mappings.fieldnames
+        bedes_mappings.fieldnames
         for term in bedes_mappings:
             # get_or_create here b/c CSV structure maps schema attributes to bedes terms
             # there could be multiple listings of the same bedes term.
@@ -242,7 +242,7 @@ class Command(BaseCommand):
 
         # rewind
         csv_file.seek(0)
-        headers_again = next(bedes_mappings)
+        next(bedes_mappings)
         for term in bedes_mappings:
             # mappings CSV only contains distances >= 0.90 or it's blank
             if term['distance'] != "":

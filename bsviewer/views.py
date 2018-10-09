@@ -55,12 +55,12 @@ def redirect_data_dictionary(request):
 
 
 def dictionary(request, version):
-    # This should pass in an ID, right?
+
     versions = []
 
     # find schema matching version
     try:
-        schema = Schema.objects.get(version=version)
+        Schema.objects.get(version=version)
     except BaseException:
         raise Http404('Schema version provided does not exist.')
 
@@ -111,7 +111,7 @@ def retrieve_additional_dictionary_data(request):
             if bedes_mappings.count() > 0:
                 # take first
                 bedes_enum = model_to_dict(BedesEnumeration.objects.get(pk=bedes_mappings[0].bedesEnumeration_id))
-                #print("BEDES ENUM: {}".format(bedes_enum))
+                # print("BEDES ENUM: {}".format(bedes_enum))
                 enum_list['bedes_term'] = bedes_enum
             enums.append(enum_list)
 
