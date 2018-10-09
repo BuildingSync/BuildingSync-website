@@ -13,34 +13,34 @@ DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
 class BsviewerViewTests(TestCase):
     def test_index_ok(self):
-        response = self.client.get(reverse('bsviewer:index'))
+        response = self.client.get(reverse('index'))
         print('Testing Index page OK')
         self.assertEqual(response.status_code, 200)
 
     def test_validator_ok(self):
-        response = self.client.get(reverse('bsviewer:validator'))
+        response = self.client.get(reverse('validator'))
         print('Testing Validator page OK')
         self.assertEqual(response.status_code, 200)
 
     def test_use_cases_ok(self):
-        response = self.client.get(reverse('bsviewer:cases'))
+        response = self.client.get(reverse('cases'))
         print('Testing Cases page OK')
         self.assertEqual(response.status_code, 200)
 
     def test_dictionary_redirect(self):
         self.add_schema()
-        response = self.client.get(reverse('bsviewer:dictionary'))
+        response = self.client.get(reverse('dictionary'))
         print('Testing Dictionary page redirect')
-        redirect_url = '/viewers/dictionary/{}/'.format(DEFAULT_SCHEMA_VERSION)
+        redirect_url = '/dictionary/{}/'.format(DEFAULT_SCHEMA_VERSION)
         self.assertRedirects(response, redirect_url)
 
         # clean-up files on disk
         self.schema.delete()
 
     def test_dictionary_404_when_no_schema(self):
-        response = self.client.get(reverse('bsviewer:dictionary'))
+        response = self.client.get(reverse('dictionary'))
         print('Testing Dictionary page redirect')
-        redirect_url = '/viewers/dictionary/{}/'.format(DEFAULT_SCHEMA_VERSION)
+        redirect_url = '/dictionary/{}/'.format(DEFAULT_SCHEMA_VERSION)
         self.assertRedirects(response, redirect_url, target_status_code=404)
 
     def add_schema(self):

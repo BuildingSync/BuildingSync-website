@@ -1,35 +1,40 @@
+import json
 import os
 import tempfile
-import json
-
-from django.forms.models import model_to_dict
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseServerError, HttpResponseRedirect, Http404, JsonResponse, HttpResponseForbidden
-from django.contrib import messages
-from django.contrib.auth import update_session_auth_hash
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy, reverse
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.contrib.auth.forms import PasswordChangeForm
-
-from .models.schema import Schema
-from .models.use_case import UseCase
-from .models.attribute_enumeration_class import AttributeEnumerationClass
-from .models.bedes_models import BedesMapping, BedesTerm
-from .models.enumeration import Enumeration
-
-from bsviewer import forms
-from bsviewer.lib.validator.workflow import ValidationWorkflow
-from bsviewer.lib.tree_viewer import get_schema_jstree_data
 
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.forms.models import model_to_dict
+from django.http import (
+    HttpResponse,
+    HttpResponseServerError,
+    HttpResponseRedirect,
+    Http404,
+    JsonResponse
+)
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy, reverse
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+from bsviewer import forms
+from bsviewer.lib.tree_viewer import get_schema_jstree_data
+from bsviewer.lib.validator.workflow import ValidationWorkflow
+from .models.attribute_enumeration_class import AttributeEnumerationClass
+from .models.bedes_models import BedesMapping, BedesTerm, BedesEnumeration, BedesEnumerationMapping
+from .models.enumeration import Enumeration
+from .models.schema import Schema
+from .models.use_case import UseCase
+
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
 
 def index(request):
     context = {}
-    return render(request, 'bsviewer/index.html', context)
+    return render(request, 'index.html', context)
 
 
 def use_cases(request):
@@ -42,19 +47,20 @@ def use_cases(request):
         'user_usecases': user_usecases,
         'public_usecases': public_usecases
     }
-    return render(request, 'bsviewer/use_cases.html', context)
+    return render(request, 'use_cases.html', context)
 
 
 def redirect_data_dictionary(request):
-    return redirect(reverse('bsviewer:dictionaryversion', args=[DEFAULT_SCHEMA_VERSION]))
+    return redirect(reverse('dictionaryversion', args=[DEFAULT_SCHEMA_VERSION]))
 
 
 def dictionary(request, version):
+
     versions = []
 
     # find schema matching version
     try:
-        schema = Schema.objects.get(version=version)
+        Schema.objects.get(version=version)
     except BaseException:
         raise Http404('Schema version provided does not exist.')
 
@@ -62,7 +68,7 @@ def dictionary(request, version):
         versions.append({
             'name': version_obj.version,
             'is_current': version_obj.version == version,
-            'link': reverse('bsviewer:dictionaryversion', args=[version_obj.version])
+            'link': reverse('dictionaryversion', args=[version_obj.version])
         })
 
     context = {
@@ -71,11 +77,10 @@ def dictionary(request, version):
         'versions': versions
     }
 
-    return render(request, 'bsviewer/dictionary.html', context)
+    return render(request, 'dictionary.html', context)
 
 
 def retrieve_additional_dictionary_data(request):
-
     element_id = request.GET.get('element_id', None)
 
     # get Bedes mapping
@@ -84,7 +89,7 @@ def retrieve_additional_dictionary_data(request):
     if bedes_mappings.count() > 0:
         # take first, there should only be 1
         bedes_term = model_to_dict(BedesTerm.objects.get(pk=bedes_mappings[0].bedesTerm_id))
-        #bedes_term = serializers.serialize("json", BedesTerm.objects.get(pk=bedes_mappings[0].bedesTerm_id))
+        # bedes_term = serializers.serialize("json", BedesTerm.objects.get(pk=bedes_mappings[0].bedesTerm_id))
         print("BEDES TERM: {}".format(bedes_term))
 
     # GET ENUMS
@@ -95,11 +100,21 @@ def retrieve_additional_dictionary_data(request):
     if enum_ids.count() > 0:
         # if found, means that this attribute has enums. Retrieve the actual enum values
         has_enum = True
-        print("ENUM ID RETRIEVED: {}".format(enum_ids[0].pk))
-        enum_results = Enumeration.objects.filter(enumeration_class_id=enum_ids[0].enumeration_class_id).only('name').order_by('pk')
-        print("ENUM_RESULTS: {}".format(enum_results))
+        enum_results = Enumeration.objects.filter(
+            enumeration_class_id=enum_ids[0].enumeration_class_id).only('name').order_by('pk')
+
         for item in enum_results:
-            enums.append(item.name)
+            enum_list = {}
+            enum_list['name'] = item.name
+            enum_list['bedes_term'] = None
+            bedes_mappings = BedesEnumerationMapping.objects.filter(enumeration_id=item.id)
+            if bedes_mappings.count() > 0:
+                # take first
+                bedes_enum = model_to_dict(BedesEnumeration.objects.get(pk=bedes_mappings[0].bedesEnumeration_id))
+                # print("BEDES ENUM: {}".format(bedes_enum))
+                enum_list['bedes_term'] = bedes_enum
+            enums.append(enum_list)
+
         print("ENUMS: {}".format(enums))
 
     # TODO: get bedes enum defs
@@ -131,7 +146,7 @@ def validator(request):
         else:
             return HttpResponseServerError('Invalid form data')
     else:
-        return render(request, 'bsviewer/validator.html', context)
+        return render(request, 'validator.html', context)
 
     if form.is_valid():
         if form_type == 'file':
@@ -163,7 +178,7 @@ def validator(request):
         if form_type == 'file':
             os.unlink(tmp_file.name)
 
-        return render(request, 'bsviewer/validator_results.html', {
+        return render(request, 'validator_results.html', {
             'validation_results': validation_results,
             'filename': filename,
             'schema_version': version
@@ -171,7 +186,7 @@ def validator(request):
 
     else:
         context['load_xml_{}_form'.format(form_type)] = form
-        return render(request, 'bsviewer/validator.html', context)
+        return render(request, 'validator.html', context)
 
 
 @login_required
@@ -206,13 +221,15 @@ def update_user(request):
             'last_name': request.user.last_name,
             'email': request.user.email
         })
-        return render(request, 'registration/updateuser.html', {'update_user_form': update_user_form})
+        return render(request, 'registration/updateuser.html',
+                      {'update_user_form': update_user_form})
 
 
 @login_required
-def download_template(request, name):
-    if name:
-        schema = Schema.objects.filter(name=name)[0]
+def download_template(request, id):
+    if id:
+        # For some reason, this is linked to the version, not the name. hmm...
+        schema = Schema.objects.filter(pk=id)[0]
         if schema:
 
             file_path = schema.usecase_template_file.path
@@ -221,7 +238,7 @@ def download_template(request, name):
                 with open(file_path, 'rb') as fh:
                     response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
                     response['Content-Disposition'] = 'inline; filename=' + os.path.basename(
-                        file_path)
+                        file_path) + '.csv'
                     return response
             raise Http404
         raise Http404
@@ -249,7 +266,7 @@ def change_password(request):
 class UseCaseCreate(LoginRequiredMixin, CreateView):
     model = UseCase
     fields = ['name', 'schema', 'import_file']
-    success_url = reverse_lazy('bsviewer:cases')
+    success_url = reverse_lazy('cases')
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
@@ -259,9 +276,9 @@ class UseCaseCreate(LoginRequiredMixin, CreateView):
 class UseCaseUpdate(LoginRequiredMixin, UpdateView):
     model = UseCase
     fields = ['name', 'schema', 'import_file']
-    success_url = reverse_lazy('bsviewer:cases')
+    success_url = reverse_lazy('cases')
 
 
 class UseCaseDelete(LoginRequiredMixin, DeleteView):
     model = UseCase
-    success_url = reverse_lazy('bsviewer:cases')
+    success_url = reverse_lazy('cases')

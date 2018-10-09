@@ -1,5 +1,3 @@
-import os
-
 from lxml import etree
 
 

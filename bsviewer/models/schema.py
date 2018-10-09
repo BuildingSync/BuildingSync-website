@@ -1,12 +1,12 @@
-import os
 import csv
+import os
 
+from django.core.files import File
 from django.db import models
-from django.db.models.signals import post_save, post_delete, pre_save, pre_delete
+from django.db.models.signals import post_save, post_delete, pre_save
 from django.dispatch import receiver
 
 from bsviewer.lib.schema_parser import process_schema
-from django.core.files import File
 
 
 def rename_schema_file(instance, path):
@@ -22,8 +22,10 @@ class Schema(models.Model):
     name = models.CharField(max_length=100, default="0.3.0", unique=True)
     version = models.CharField(max_length=100, default="0.3", unique=True, null=False)
     schema_file = models.FileField(upload_to=rename_schema_file, null=True)
-    schema_parsed = models.BooleanField(default=False, help_text="Leave blank. This will be auto-populated.")
-    usecase_template_file = models.FileField(upload_to='usecase_templates/', null=True, blank=True, help_text='Leave blank. This will be auto-populated.')
+    schema_parsed = models.BooleanField(default=False,
+                                        help_text="Leave blank. This will be auto-populated.")
+    usecase_template_file = models.FileField(upload_to='usecase_templates/', null=True, blank=True,
+                                             help_text='Leave blank. This will be auto-populated.')
 
     def __str__(self):
         return self.name

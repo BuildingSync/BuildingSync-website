@@ -5,10 +5,10 @@
 {% load staticfiles %}
 
 {% block bootstrap3_extra_head %}
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'bsviewer/favicon.ico' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
     <script src="https://use.fontawesome.com/93619a2981.js"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'bsviewer/buildingsyncmain.css' %}">
-     <link rel="stylesheet" type="text/css" href="{% static 'bsviewer/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'buildingsyncmain.css' %}">
+     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 {% block extra_head %}{% endblock %}
 {% endblock bootstrap3_extra_head %}
 
@@ -28,19 +28,19 @@
           <div class="collapse navbar-collapse" id="myNavbar">
               <ul class="nav navbar-nav">
                   <li class="{% active_page request 'cases'%}">
-                      <a href="{% url 'bsviewer:cases' %}">
+                      <a href="{% url 'cases' %}">
                           <i class="fa fa-search" aria-hidden="true"></i>
                           Use Cases
                       </a>
                   </li>
                     <li class="{% active_page request 'datadictionaryelement'%}">
-                        <a href="{% url 'bsviewer:dictionary' %}">
+                        <a href="{% url 'dictionary' %}">
                             <i class="fa fa-book" aria-hidden="true"></i>
                             Data Dictionary
                         </a>
                     </li>
                   <li class="{% active_page request 'validator'%}">
-                      <a href="{% url 'bsviewer:validator' %}">
+                      <a href="{% url 'validator' %}">
                           <i class="fa fa-file-code-o" aria-hidden="true"></i>
                           Validator
                       </a>

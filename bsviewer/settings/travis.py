@@ -5,7 +5,7 @@ from __future__ import absolute_import
 
 import os
 
-from bswebapp.settings.dev import *  # noqa
+from bsviewer.settings.dev import *  # noqa
 
 # postgres DB config
 DATABASES = {
@@ -48,4 +48,4 @@ LOGGING = {
     },
 }
 
-DEFAULT_SCHEMA_VERSION = '0.3.0'ß
+DEFAULT_SCHEMA_VERSION = '0.3.0'

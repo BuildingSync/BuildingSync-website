@@ -1,4 +1,4 @@
-{% extends 'bsviewer/base.html' %}
+{% extends 'base.html' %}
 
 {% load bootstrap3 %}
 
@@ -8,7 +8,7 @@
 <div class="pad-10">
 	<p>Are you sure you want to delete the use case: {{ usecase }}?</p>
 
-</div>		
+</div>
 
 <form action="" method="POST">
   {% csrf_token %}
