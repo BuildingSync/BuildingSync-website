@@ -50,7 +50,7 @@ This is the repository for the BuildingSync Validator web application.
 
 * To test schema import, you can run this command:
 	```bash
-	python manage.py reset_schema --schema_version=0.3
+	python manage.py reset_schema --schema_version=0.3.0
 	```
 
 
@@ -72,6 +72,8 @@ This is the repository for the BuildingSync Validator web application.
 * Run the following command to clean-up your code before committing:
 ```bash
 autopep8 --in-place --aggressive --aggressive --recursive --max-line-length 100 --ignore E501,E402,W503,E731 --exclude=conf.py,structure.py .
+
+tox -e flake8
 ```
 
 ## Usage
@@ -113,14 +115,18 @@ To parse and map a new BEDES version:
 
 1. Parse the BEDES XMLs into a JSON file and map the BEDES terms to the BuildingSync attributes:
     ```bash
-    python manage.py bedes --schema-version=X.X --bedes-version=X.X
+    python manage.py bedes --schema_version=X.X.X --bedes_version=X.X
     ```
+    Note that the bedes_version contains a v, ex: v1.2.
     This will create a ```bedes_vX.X.json``` file in the lib/bedes/vX.X directory.  It will also create 2 CSV files:  ```bedes-mappings-enumerations.csv``` and ```bedes-mappings-terms.csv``` in the lib/bedes/vX.X/schemaX.X directory.
 
     *Note* &mdash; The BEDES terms must be mapped for each version of the BuildingSync schema by calling the ```python manage.py bedes``` command above.
 
 1. Review these mapping files and make changes as needed.
 
-1. Once satisfied with the mappings,
-
+1. Once satisfied with the mappings, run the same command with the --save_to_db flag:
+    ```bash
+    python manage.py bedes --schema_version=X.X.X --bedes_version=X.X --save_to_db
+    ```
+    Note that you must run this command without the --save_to_db flag first, in order to create the CSV files.
 

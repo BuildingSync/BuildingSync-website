@@ -143,9 +143,13 @@
                   /*$('#enum_results').html(jsondata.enums );*/
                   var ul = $('<ul>').appendTo('#enum_results');
                   $(jsondata.enums).each(function(index, item) {
-                      console.log(item);
+                    {#console.log(item);#}
+                    var text = '<strong>' + item.name + '</strong>';
+                    if (item['bedes_term']){
+                      text = '<strong>' + text + '</strong>' + '<br/>' + item['bedes_term']['definition'] + '&nbsp;&nbsp;<a href="' + item['bedes_term']['url'] + '" target="_blank">' + 'BEDES <i class="fa fa-external-link" aria-hidden="true"></i></a>';
+                    }
                     ul.append(
-                        $(document.createElement('li')).text(item)
+                        $(document.createElement('li')).html(text)
                     );
                   });
 

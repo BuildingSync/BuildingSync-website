@@ -122,4 +122,4 @@ STATIC_ROOT = os.path.join(SETTINGS_PATH, 'collected_static')
 #     os.path.join(SETTINGS_PATH, 'static'),  # bower stores files here
 # )
 
-DEFAULT_SCHEMA_VERSION = '0.3'
+DEFAULT_SCHEMA_VERSION = '0.3.0'

@@ -24,7 +24,7 @@ from bsviewer import forms
 from bsviewer.lib.tree_viewer import get_schema_jstree_data
 from bsviewer.lib.validator.workflow import ValidationWorkflow
 from .models.attribute_enumeration_class import AttributeEnumerationClass
-from .models.bedes_models import BedesMapping, BedesTerm
+from .models.bedes_models import BedesMapping, BedesTerm, BedesEnumeration, BedesEnumerationMapping
 from .models.enumeration import Enumeration
 from .models.schema import Schema
 from .models.use_case import UseCase
@@ -55,7 +55,7 @@ def redirect_data_dictionary(request):
 
 
 def dictionary(request, version):
-    # This should pass in an ID, right?
+
     versions = []
 
     # find schema matching version
@@ -100,12 +100,21 @@ def retrieve_additional_dictionary_data(request):
     if enum_ids.count() > 0:
         # if found, means that this attribute has enums. Retrieve the actual enum values
         has_enum = True
-        print("ENUM ID RETRIEVED: {}".format(enum_ids[0].pk))
         enum_results = Enumeration.objects.filter(
             enumeration_class_id=enum_ids[0].enumeration_class_id).only('name').order_by('pk')
-        print("ENUM_RESULTS: {}".format(enum_results))
+
         for item in enum_results:
-            enums.append(item.name)
+            enum_list = {}
+            enum_list['name'] = item.name
+            enum_list['bedes_term'] = None
+            bedes_mappings = BedesEnumerationMapping.objects.filter(enumeration_id=item.id)
+            if bedes_mappings.count() > 0:
+                # take first
+                bedes_enum = model_to_dict(BedesEnumeration.objects.get(pk=bedes_mappings[0].bedesEnumeration_id))
+                # print("BEDES ENUM: {}".format(bedes_enum))
+                enum_list['bedes_term'] = bedes_enum
+            enums.append(enum_list)
+
         print("ENUMS: {}".format(enums))
 
     # TODO: get bedes enum defs
