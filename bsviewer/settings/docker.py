@@ -19,15 +19,23 @@ SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '4p67kjj(p6#ny2)p%*t25n)^71k7ha3x3a*mfb6wlvhxc=b03%'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
+if SECRET_KEY == '':
+    raise Exception('SECRET_KEY not set in docker config')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['selectiontool.buildingsync.net', '127.0.0.1', 'localhost']
+
+ENV_VARS = ['POSTGRES_DB', 'POSTGRES_USER', 'POSTGRES_PASSWORD', ]
+for loc in ENV_VARS:
+    locals()[loc] = os.environ.get(loc)
+    if not locals().get(loc):
+        raise Exception("%s Not defined as env variables" % loc)
 
 # Application definition
-
 INSTALLED_APPS = [
     'bsviewer.apps.BsviewerConfig',
     'django.contrib.admin',
@@ -74,12 +82,12 @@ WSGI_APPLICATION = 'bsviewer.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bs_validator',
-        'USER': 'bs_validator',
-        'PASSWORD': 'bs_validator',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': POSTGRES_DB,
+        'USER': POSTGRES_USER,
+        'PASSWORD': POSTGRES_PASSWORD,
+        'HOST': "db-postgres",
+        'PORT': 5432,
     }
 }
 
