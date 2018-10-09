@@ -117,7 +117,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(SETTINGS_PATH, 'staticfiles')
+STATIC_ROOT = os.path.join(SETTINGS_PATH, 'collected_static')
 # STATICFILES_DIRS = (
 #     os.path.join(SETTINGS_PATH, 'static'),  # bower stores files here
 # )

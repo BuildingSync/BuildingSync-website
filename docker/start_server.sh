@@ -17,6 +17,5 @@ echo "Waiting for postgres to start"
 
 WORKERS=$(($(nproc) / 2))
 WORKERS=$(($WORKERS>1?$WORKERS:1))
-/usr/bin/uwsgi --http 0.0.0.0:8000 --module bsviewer.wsgi:application --uid 1000 --gid 1000 \
-    --max-requests 5000 --cheaper-initial 1 -p $WORKERS --single-interpreter --enable-threads \
-    --wsgi-file /srv/selection-tool/bsviewer/wsgi.py
+
+/usr/local/uwsgi --ini /srv/selection-tool/docker/uwsgi.ini

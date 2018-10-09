@@ -13,7 +13,9 @@ RUN apk add --no-cache python3 \
         libxslt-dev \
         linux-headers \
         bash \
-        bash-completion && \
+        bash-completion \
+        nginx \
+        supervisor && \
     python3 -m ensurepip && \
     rm -r /usr/lib/python*/ensurepip && \
     pip3 install --upgrade pip setuptools && \
@@ -37,9 +39,15 @@ COPY . /srv/selection-tool/
 ### Copy the wait-for-it command to /usr/local
 COPY /docker/wait-for-it.sh /usr/local/wait-for-it.sh
 
+# nginx configurations
+COPY /docker/nginx.conf /etc/nginx/sites-available/default
+COPY /docker/supervisor.conf /etc/supervisor/conf.d/selection_tool.conf
+
 # entrypoint sets some permissions on directories that may be shared volumes
 COPY /docker/selection-tool-entrypoint.sh /usr/local/bin/selection-tool-entrypoint
 RUN chmod 775 /usr/local/bin/selection-tool-entrypoint
 ENTRYPOINT ["selection-tool-entrypoint"]
+
+CMD ["supervisord", "-n"]
 
 EXPOSE 8000
