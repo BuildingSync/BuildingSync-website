@@ -23,6 +23,7 @@ class Command(BaseCommand):
         :param options:
         :return:
         """
+        self.stdout.write('Importing schema %s' % options['schema_version'])
         if not options['overwrite']:
             if Schema.objects.filter(version=options['schema_version']).exists():
                 self.stdout.write(
@@ -47,7 +48,7 @@ class Command(BaseCommand):
 
         # Print out some of the data for validation purposes
         for attribute in schema.attributes.all().order_by('index'):
-            self.stdout.write(attribute)
+            self.stdout.write(str(attribute))
             # if attribute.enumeration_classes.first():
             #     for enum in attribute.enumeration_classes.first().enumerations.all().order_by('index'):
             #         print("****************** enumeration: %s" % enum)
