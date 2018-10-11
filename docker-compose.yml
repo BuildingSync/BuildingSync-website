@@ -12,7 +12,6 @@ services:
       - selectiontool_pgdata:/var/lib/postgresql/data
   web:
     build: .
-    command: /srv/selection-tool/docker/start_server.sh
     environment:
       - POSTGRES_DB=selection-tool
       - POSTGRES_USER=selection-tool
@@ -26,7 +25,7 @@ services:
     depends_on:
       - db-postgres
     ports:
-      - "8000:8000"
+      - "8080:80"
     volumes:
       - selectiontool_mediadata:/srv/selection-tool/media
 volumes:
