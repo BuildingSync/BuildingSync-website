@@ -83,9 +83,9 @@ WSGI_APPLICATION = 'bsviewer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': POSTGRES_DB,
-        'USER': POSTGRES_USER,
-        'PASSWORD': POSTGRES_PASSWORD,
+        'NAME': POSTGRES_DB,  # noqa
+        'USER': POSTGRES_USER,  # noqa
+        'PASSWORD': POSTGRES_PASSWORD,  # noqa
         'HOST': "db-postgres",
         'PORT': 5432,
     }
