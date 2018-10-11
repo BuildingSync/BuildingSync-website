@@ -131,3 +131,41 @@ STATIC_ROOT = os.path.join(SETTINGS_PATH, 'collected_static')
 # )
 
 DEFAULT_SCHEMA_VERSION = '0.3.0'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        # Include the default Django email handler for errors
+        # This is what you'd get without configuring logging at all.
+        'mail_admins': {
+            'class': 'django.utils.log.AdminEmailHandler',
+            'level': 'ERROR',
+            'include_html': True,
+        },
+        # Log to a text file that can be rotated by logrotate
+        'logfile': {
+            'class': 'logging.handlers.WatchedFileHandler',
+            'filename': '/var/log/django/bsviewer.log'
+        },
+        # Print to console as well to see in docker logs
+        'console': {
+            'level': 'ERROR',
+            'class': 'logging.StreamHandler'
+        }
+    },
+    'loggers': {
+        # Again, default Django configuration to email unhandled exceptions
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        # Might as well log any errors anywhere else in Django
+        'django': {
+            'handlers': ['logfile', 'console'],
+            'level': 'ERROR',
+            'propagate': False,
+        }
+    },
+}
