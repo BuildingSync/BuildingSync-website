@@ -2,19 +2,34 @@ import os
 from random import randint
 from shutil import copyfile
 
+from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from bsviewer.models.schema import Schema
 
 
 class Command(BaseCommand):
-    help = 'Closes the specified poll for voting'
+    help = 'manage schemas'
 
     def add_arguments(self, parser):
-        parser.add_argument('--schema_version', type=float)
+        parser.add_argument('--schema_version', type=str, default=settings.DEFAULT_SCHEMA_VERSION)
+        parser.add_argument('--overwrite', default=False, action='store_true')
 
     def handle(self, *args, **options):
-        # Load the BuildingSync file.
+        """
+        Load the BuildingSync file.
+
+        :param args:
+        :param options:
+        :return:
+        """
+        self.stdout.write('Importing schema %s' % options['schema_version'])
+        if not options['overwrite']:
+            if Schema.objects.filter(version=options['schema_version']).exists():
+                self.stdout.write(
+                    'Schema already exists in the database: %s' % options['schema_version'])
+                exit(0)
+
         schema = Schema.objects.filter(version=options['schema_version']).first()
         if schema:
             schema.delete()
@@ -31,8 +46,9 @@ class Command(BaseCommand):
         )
         schema.save()  # Calling save also processes the schema
 
+        # Print out some of the data for validation purposes
         for attribute in schema.attributes.all().order_by('index'):
-            print(attribute)
+            self.stdout.write(str(attribute))
             # if attribute.enumeration_classes.first():
             #     for enum in attribute.enumeration_classes.first().enumerations.all().order_by('index'):
             #         print("****************** enumeration: %s" % enum)
