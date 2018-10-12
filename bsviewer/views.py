@@ -86,24 +86,28 @@ def retrieve_additional_dictionary_data(request):
     # get Bedes mapping
     bedes_term = None
     bedes_mappings = BedesMapping.objects.filter(attribute_id=element_id)
+    #print('ELEMENT ID: {}'.format(element_id))
     if bedes_mappings.count() > 0:
         # take first, there should only be 1
         bedes_term = model_to_dict(BedesTerm.objects.get(pk=bedes_mappings[0].bedesTerm_id))
         # bedes_term = serializers.serialize("json", BedesTerm.objects.get(pk=bedes_mappings[0].bedesTerm_id))
-        print("BEDES TERM: {}".format(bedes_term))
+        #print("BEDES TERM: {}".format(bedes_term))
 
     # GET ENUMS
     has_enum = False
     enums = []
     # first get enumeration class id from the attributeEnumeration relationship table
     enum_ids = AttributeEnumerationClass.objects.filter(attribute_id=element_id)
+
     if enum_ids.count() > 0:
         # if found, means that this attribute has enums. Retrieve the actual enum values
+        #print('enum class id: {}'.format(enum_ids[0].enumeration_class_id))
         has_enum = True
         enum_results = Enumeration.objects.filter(
             enumeration_class_id=enum_ids[0].enumeration_class_id).only('name').order_by('pk')
 
         for item in enum_results:
+            #print('ENUM Found: {}, {}'.format(item.name, item.id))
             enum_list = {}
             enum_list['name'] = item.name
             enum_list['bedes_term'] = None
@@ -115,7 +119,7 @@ def retrieve_additional_dictionary_data(request):
                 enum_list['bedes_term'] = bedes_enum
             enums.append(enum_list)
 
-        print("ENUMS: {}".format(enums))
+        #print("ENUMS: {}".format(enums))
 
     # TODO: get bedes enum defs
 
@@ -265,7 +269,7 @@ def change_password(request):
 
 class UseCaseCreate(LoginRequiredMixin, CreateView):
     model = UseCase
-    fields = ['name', 'schema', 'import_file']
+    fields = ['name', 'description', 'schema', 'import_file']
     success_url = reverse_lazy('cases')
 
     def form_valid(self, form):
@@ -275,7 +279,7 @@ class UseCaseCreate(LoginRequiredMixin, CreateView):
 
 class UseCaseUpdate(LoginRequiredMixin, UpdateView):
     model = UseCase
-    fields = ['name', 'schema', 'import_file']
+    fields = ['name', 'description', 'schema', 'import_file']
     success_url = reverse_lazy('cases')
 
 

@@ -13,6 +13,7 @@ from bsviewer.models.use_case_attribute import UseCaseEnumeration, UseCaseAttrib
 class UseCase(models.Model):
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=100, default="Use Case Name")
+    description = models.TextField()
     schema = models.ForeignKey('Schema', on_delete=models.CASCADE, db_index=True)
     attributes = models.ManyToManyField('Attribute', through=UseCaseAttribute, related_name="usecaseattributes")
     enumerations = models.ManyToManyField('Enumeration', through=UseCaseEnumeration)

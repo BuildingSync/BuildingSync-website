@@ -31,7 +31,7 @@ class SchemaAdmin(admin.ModelAdmin):
 
 
 class UseCaseAdmin(admin.ModelAdmin):
-    list_display = ('name', 'owner', 'schema', 'import_file', 'usecase_parsed', 'make_public')
+    list_display = ('name', 'description', 'owner', 'schema', 'import_file', 'usecase_parsed', 'make_public')
 
 
 class MyAdminSite(AdminSite):
