@@ -37,12 +37,16 @@ class Command(BaseCommand):
         # schema file - make sure to create a copy since the version will be deleted if
         # the schema is deleted
         sf = 'bsviewer/lib/buildingsync_schemas/BuildingSync_v%s.xsd' % options['schema_version']
-        schema_file = 'schema_file_%s' % randint(0, 10000)
+        schema_file = 'bsviewer/media/uploaded_schemas/BuildingSync_v%s.xsd' % options['schema_version']
+        if os.path.exists(schema_file):
+            os.remove(schema_file)
+        if not os.path.exists(os.path.dirname(schema_file)):
+            os.makedirs(os.path.dirname(schema_file))
         copyfile(sf, schema_file)
         schema = Schema(
             name='Version %s' % options['schema_version'],
             version=options['schema_version'],
-            schema_file=schema_file
+            schema_file='uploaded_schemas/BuildingSync_v%s.xsd' % options['schema_version']
         )
         schema.save()  # Calling save also processes the schema
 
@@ -56,6 +60,3 @@ class Command(BaseCommand):
         self.stdout.write('Imported %s fields and %s enumerations' %
                           (schema.attributes.count(), schema.enumerations.count()))
 
-        # save off the template for now
-        schema.save_template(filename=os.path.join(os.path.dirname(__file__), 'template_0.3'))
-        self.stdout.write('Finished parsing and saving schema')
