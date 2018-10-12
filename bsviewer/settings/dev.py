@@ -121,5 +121,7 @@ STATIC_ROOT = os.path.join(SETTINGS_PATH, 'collected_static')
 # STATICFILES_DIRS = (
 #     os.path.join(SETTINGS_PATH, 'static'),  # bower stores files here
 # )
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(SETTINGS_PATH, 'media')
 
 DEFAULT_SCHEMA_VERSION = '0.3.0'

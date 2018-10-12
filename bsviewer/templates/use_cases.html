@@ -48,7 +48,7 @@
 								<td>{{ case.make_public }}</td>
 								<td>
                                     {% if case.schema and not case.import_file %}
-                                        <a href="{% url 'download_template' id=case.schema.id %}">Download Use Case Template</a> |
+                                        <a href="{% url 'download_template' template_id=case.schema.id %}">Download Use Case Template</a> |
                                     {% endif %}
 									<a href="{% url 'use_case_update' case.id %}">Edit</a> |
 									<a href="{% url 'use_case_delete' case.id %}">Delete</a>

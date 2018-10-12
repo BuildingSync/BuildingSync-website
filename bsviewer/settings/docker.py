@@ -110,28 +110,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = '/'
-
-# Internationalization
-# https://docs.djangoproject.com/en/2.1/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
-USE_I18N = True
-USE_L10N = True
-USE_TZ = True
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.1/howto/static-files/
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(SETTINGS_PATH, 'collected_static')
-# STATICFILES_DIRS = (
-#     os.path.join(SETTINGS_PATH, 'static'),  # bower stores files here
-# )
-
-DEFAULT_SCHEMA_VERSION = '0.3.0'
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -169,3 +147,28 @@ LOGGING = {
         }
     },
 }
+
+LOGIN_REDIRECT_URL = '/'
+
+# Internationalization
+# https://docs.djangoproject.com/en/2.1/topics/i18n/
+
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'UTC'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.1/howto/static-files/
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(SETTINGS_PATH, 'collected_static')
+# STATICFILES_DIRS = (
+#     os.path.join(SETTINGS_PATH, 'static'),  # bower stores files here
+# )
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(SETTINGS_PATH, 'media')
+
+DEFAULT_SCHEMA_VERSION = '0.3.0'
+

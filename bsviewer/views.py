@@ -226,12 +226,10 @@ def update_user(request):
 
 
 @login_required
-def download_template(request, id):
-    if id:
-        # For some reason, this is linked to the version, not the name. hmm...
-        schema = Schema.objects.filter(pk=id)[0]
+def download_template(request, template_id):
+    if template_id:
+        schema = Schema.objects.filter(pk=template_id)[0]
         if schema:
-
             file_path = schema.usecase_template_file.path
 
             if os.path.exists(file_path):
