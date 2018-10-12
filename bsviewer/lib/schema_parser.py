@@ -147,7 +147,7 @@ class BuildingSyncSchemaProcessor(object):
             if found:
                 continue
             raise Exception("Couldn't find reference %s" % looking_for_type_name)
-        print("All type refs were properly accounted.")
+        # print("All type refs were properly accounted.")
 
     def _read_schema(self, root_element):
         full_schema = BuildingSyncSchemaRoot()

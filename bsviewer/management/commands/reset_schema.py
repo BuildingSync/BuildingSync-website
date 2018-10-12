@@ -1,5 +1,4 @@
 import os
-from random import randint
 from shutil import copyfile
 
 from django.conf import settings
@@ -37,7 +36,8 @@ class Command(BaseCommand):
         # schema file - make sure to create a copy since the version will be deleted if
         # the schema is deleted
         sf = 'bsviewer/lib/buildingsync_schemas/BuildingSync_v%s.xsd' % options['schema_version']
-        schema_file = 'bsviewer/media/uploaded_schemas/BuildingSync_v%s.xsd' % options['schema_version']
+        schema_file = 'bsviewer/media/uploaded_schemas/BuildingSync_v%s.xsd' % options[
+            'schema_version']
         if os.path.exists(schema_file):
             os.remove(schema_file)
         if not os.path.exists(os.path.dirname(schema_file)):
@@ -59,4 +59,3 @@ class Command(BaseCommand):
 
         self.stdout.write('Imported %s fields and %s enumerations' %
                           (schema.attributes.count(), schema.enumerations.count()))
-

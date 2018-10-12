@@ -23,7 +23,6 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
 if SECRET_KEY == '':
     raise Exception('SECRET_KEY not set in docker config')
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -90,7 +89,6 @@ DATABASES = {
         'PORT': 5432,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -171,4 +169,3 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(SETTINGS_PATH, 'media')
 
 DEFAULT_SCHEMA_VERSION = '0.3.0'
-

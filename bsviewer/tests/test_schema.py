@@ -1,13 +1,12 @@
-import os
 import csv
-from random import randint
-from shutil import copyfile
+import os
 
+from django.conf import settings
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
 from bsviewer.models.schema import Schema
 
-from django.conf import settings
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
 
@@ -18,14 +17,13 @@ class TestSchema(TestCase):
         # schema file - make sure to create a copy since the version will be deleted if
         # the schema is deleted
         sf = os.path.join(os.path.dirname(__file__), 'data', 'test_schema.xsd')
-        schema_file = os.path.join(
-            os.path.dirname(__file__), 'data', 'schema_file_%s.xsd' % randint(0, 10000)
-        )
-        copyfile(sf, schema_file)
+        file = open(sf, 'rb')
+        simple_uploaded_file = SimpleUploadedFile(file.name, file.read())
+
         self.schema = Schema(
             name='Version {}'.format(DEFAULT_SCHEMA_VERSION),
             version=DEFAULT_SCHEMA_VERSION,
-            schema_file=schema_file
+            schema_file=simple_uploaded_file
         )
         self.schema.save()  # Calling save also processes the schema and generates the template
 
