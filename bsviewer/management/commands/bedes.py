@@ -51,7 +51,7 @@ class Command(BaseCommand):
         print("reading schema attributes")
         schema = Schema.objects.filter(version=schema_version).first()
         results = {}
-        for attribute in schema.attributes.all().order_by('index'):
+        for attribute in schema.attributes.all().order_by('id'):
             # print(attribute.na)
             # calculate string distance for every item in bedes
             # use id as the key since name is not unique

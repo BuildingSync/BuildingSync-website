@@ -5,7 +5,7 @@ from bsviewer.models.enumeration_class import EnumerationClass
 
 class Enumeration(models.Model):
     name = models.CharField(max_length=250, db_index=True)
-    index = models.IntegerField(verbose_name='Index in the schema', default=0)
+    # index = models.IntegerField(verbose_name='Index in the schema', default=0)
 
     # save a reference to the schema in order to allow for quick access to all the enumerations
     schema = models.ForeignKey(

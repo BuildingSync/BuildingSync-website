@@ -598,7 +598,6 @@ def process_schema(schema_object):
             name='Audits',
             type='Named Element',
             tree_level=0,
-            index=0,
             path='Audits',
             schema=schema_object)
         b.save()
@@ -617,7 +616,6 @@ def process_schema(schema_object):
                 type=se['type'],
                 tree_level=(se['$$treeLevel'] + 1),
                 parent=get_parent_from_path(se['parent_path']),
-                index=se['index'],
                 path=se['path'],
                 schema=schema_object)
             b.save()
@@ -658,8 +656,7 @@ def process_schema(schema_object):
                     en, _ = Enumeration.objects.get_or_create(
                         schema=schema_object,
                         enumeration_class=ec,
-                        name=se['name'],
-                        index=se['index'],
+                        name=se['name']
                     )
 
                     # associate the attribute with the class

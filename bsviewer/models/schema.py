@@ -39,7 +39,7 @@ class Schema(models.Model):
         required_paths = ['Audits']
 
         data = [['BuildingSyncPath', 'State']]
-        for attribute in self.attributes.all().order_by('index'):
+        for attribute in self.attributes.all().order_by('id'):
             if attribute.path in required_paths:
                 data.append([attribute.path, 'Required'])
             else:
