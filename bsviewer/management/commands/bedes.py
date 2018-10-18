@@ -82,6 +82,8 @@ class Command(BaseCommand):
         # store the results to CSV
         the_path = os.path.join(os.path.dirname(__file__), '../../lib/bedes', bedes_version,
                                 "schema" + schema_version)
+
+        print("THE PATH: {}".format(the_path))
         if not os.path.exists(the_path):
             os.makedirs(the_path)
 
@@ -162,7 +164,8 @@ class Command(BaseCommand):
     def save_mappings_to_database(self, bedes_version, schema_version):
         # Save bedes terms from CSV files to database
         # Only save bedes-buildingsync mappings when distance is > 90%
-        # TODO: enumerations
+
+        print("SAVING TO DATABASE")
 
         # find the CSVs
         the_path = os.path.join(os.path.dirname(__file__), '../../lib/bedes', bedes_version,

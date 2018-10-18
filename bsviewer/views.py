@@ -83,6 +83,8 @@ def dictionary(request, version):
 def retrieve_additional_dictionary_data(request):
     element_id = request.GET.get('element_id', None)
 
+    print("ELEMENT ID TO RETRIEVE: {}".format(element_id))
+
     # get Bedes mapping
     bedes_term = None
     bedes_mappings = BedesMapping.objects.filter(attribute_id=element_id)
@@ -118,10 +120,7 @@ def retrieve_additional_dictionary_data(request):
                 # print("BEDES ENUM: {}".format(bedes_enum))
                 enum_list['bedes_term'] = bedes_enum
             enums.append(enum_list)
-
         # print("ENUMS: {}".format(enums))
-
-    # TODO: get bedes enum defs
 
     data = {
         'bedes_term': bedes_term,

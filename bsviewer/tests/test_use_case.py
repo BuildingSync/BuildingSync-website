@@ -43,9 +43,6 @@ class TestUseCase(TestCase):
         attributes = self.usecase.usecaseattribute_set
         self.assertEqual(attributes.count(), 0)
 
-        # clean-up files on disk
-        self.schema.delete()
-
     def add_usecase(self):
         # add file and save
         usf = os.path.join(os.path.dirname(__file__), 'data', 'test_use_case.csv')
@@ -71,5 +68,7 @@ class TestUseCase(TestCase):
         self.delete_usecase()
         self.assertFalse(os.path.exists(self.saved_file_path))
 
+    def tearDown(self):
         # clean-up files on disk
-        self.schema.delete()
+        if self.schema and self.schema.id is not None:
+            self.schema.delete()

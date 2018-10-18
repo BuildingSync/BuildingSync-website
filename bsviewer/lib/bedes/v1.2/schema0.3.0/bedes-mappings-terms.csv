@@ -1,97 +1,97 @@
 attribute_name,attribute_id,attribute_path,bedes_content_uuid,bedes_term,bedes_category,bedes_definition,bedes_url,distance
-Audits,1,Audits,,,,,,
-Audit,2,Audits.Audit,,,,,,
-Sites,3,Audits.Audit.Sites,,,,,,
-Site,4,Audits.Audit.Sites.Site,,,,,,
-ClimateZoneType,5,Audits.Audit.Sites.Site.ClimateZoneType,83d301d1-3e81-4213-a3a8-c09d1e75337a,Climate Zone Type,Premises,"The climate zone type, based on the organization defining it. Many different organizations have implemented different climate zone definitions based on their needs. The list below represents the current list. This list can be added to over time based on the collaborative BEDES development process.",https://bedes.lbl.gov/node/83d301d1-3e81-4213-a3a8-c09d1e75337a,0.9764705882352941
-ASHRAE,6,Audits.Audit.Sites.Site.ClimateZoneType.ASHRAE,,,,,,
-ClimateZone,7,Audits.Audit.Sites.Site.ClimateZoneType.ASHRAE.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
-EnergyStar,8,Audits.Audit.Sites.Site.ClimateZoneType.EnergyStar,ba39a9a6-84fb-4bca-bfc2-77cc2954e243,Energy Software Tool,Global Terms,A software program that is used in some fashion to calculate the energy consumption of a building,https://bedes.lbl.gov/node/ba39a9a6-84fb-4bca-bfc2-77cc2954e243,0.9
-ClimateZone,9,Audits.Audit.Sites.Site.ClimateZoneType.EnergyStar.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
-CaliforniaTitle24,10,Audits.Audit.Sites.Site.ClimateZoneType.CaliforniaTitle24,,,,,,
-ClimateZone,11,Audits.Audit.Sites.Site.ClimateZoneType.CaliforniaTitle24.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
-IECC,12,Audits.Audit.Sites.Site.ClimateZoneType.IECC,,,,,,
-ClimateZone,13,Audits.Audit.Sites.Site.ClimateZoneType.IECC.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
-BuildingAmerica,14,Audits.Audit.Sites.Site.ClimateZoneType.BuildingAmerica,,,,,,
-ClimateZone,15,Audits.Audit.Sites.Site.ClimateZoneType.BuildingAmerica.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
-CBECS,16,Audits.Audit.Sites.Site.ClimateZoneType.CBECS,,,,,,
-ClimateZone,17,Audits.Audit.Sites.Site.ClimateZoneType.CBECS.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
-DOE,18,Audits.Audit.Sites.Site.ClimateZoneType.DOE,,,,,,
-ClimateZone,19,Audits.Audit.Sites.Site.ClimateZoneType.DOE.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
-Other,20,Audits.Audit.Sites.Site.ClimateZoneType.Other,,,,,,
-ClimateZone,21,Audits.Audit.Sites.Site.ClimateZoneType.Other.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
-Address,22,Audits.Audit.Sites.Site.Address,9ae91208-70a6-4fe4-b486-166eadb219f7,Address Label,Contact,,https://bedes.lbl.gov/node/9ae91208-70a6-4fe4-b486-166eadb219f7,0.9076923076923077
-StreetAddressDetail,23,Audits.Audit.Sites.Site.Address.StreetAddressDetail,,,,,,
-Simplified,24,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Simplified,,,,,,
-StreetAddress,25,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Simplified.StreetAddress,,,,,,
-StreetAdditionalInfo,26,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Simplified.StreetAdditionalInfo,,,,,,
-Complex,27,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex,,,,,,
-StreetNumberPrefix,28,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.StreetNumberPrefix,,,,,,
-StreetNumberNumeric,29,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.StreetNumberNumeric,,,,,,
-StreetNumberSuffix,30,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.StreetNumberSuffix,,,,,,
-StreetDirPrefix,31,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.StreetDirPrefix,,,,,,
-StreetName,32,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.StreetName,81d08d4f-64e0-47f2-9615-2654eea7b288,Street Name,Contact,"The portion of the complete street name that identifies the particular thoroughfare (as opposed to the Street Name Pre Modifier, Street Name Post Modifier, Street Name Pre Directional, Street Name Post Directional, Street Name Pre Type, Street Name Post Type, and Separator Element (if any) in the complete street name.)",https://bedes.lbl.gov/node/81d08d4f-64e0-47f2-9615-2654eea7b288,0.9818181818181818
-StreetAdditionalInfo,33,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.StreetAdditionalInfo,,,,,,
-StreetSuffix,34,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.StreetSuffix,,,,,,
-StreetSuffixModifier,35,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.StreetSuffixModifier,,,,,,
-StreetDirSuffix,36,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.StreetDirSuffix,,,,,,
-SubaddressType,37,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.SubaddressType,aeae978b-c81e-4318-b6af-8ac8da74dd51,Subaddress Type,Contact,The type of subaddress to which the associated Subaddress Identifier applies.,https://bedes.lbl.gov/node/aeae978b-c81e-4318-b6af-8ac8da74dd51,0.9866666666666667
-SubaddressIdentifier,38,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.SubaddressIdentifier,61ba6f05-7526-4de3-8e86-467d6262c98e,Subaddress Identifier,Contact,"The letters, numbers, words, or combination thereof used to distinguish different subaddresses of the same type when several occur within the same feature. For example, in subaddress ""Building 4"", the Subaddress Identifier = ""4"". Subaddress Identifier can also be parts of a building, for example ""Penthouse"" or ""Mezzanine"".",https://bedes.lbl.gov/node/61ba6f05-7526-4de3-8e86-467d6262c98e,0.9904761904761905
-City,39,Audits.Audit.Sites.Site.Address.City,c208fe09-422d-4031-abf6-073aa7bda8c5,City,Contact,The city for the Address associated with this contact.,https://bedes.lbl.gov/node/c208fe09-422d-4031-abf6-073aa7bda8c5,1.0
-State,40,Audits.Audit.Sites.Site.Address.State,9a8423a7-0729-4eca-b6b4-4ec39a1f4a5b,State,Contact,The state for the address associated with this contact.,https://bedes.lbl.gov/node/9a8423a7-0729-4eca-b6b4-4ec39a1f4a5b,1.0
-PostalCode,41,Audits.Audit.Sites.Site.Address.PostalCode,,,,,,
-PostalCodePlus4,42,Audits.Audit.Sites.Site.Address.PostalCodePlus4,,,,,,
-County,43,Audits.Audit.Sites.Site.Address.County,be811d87-d5db-4e1c-84ec-ccbbccdb852c,County,Contact,The county for the address associated with this contact.,https://bedes.lbl.gov/node/be811d87-d5db-4e1c-84ec-ccbbccdb852c,1.0
-Country,44,Audits.Audit.Sites.Site.Address.Country,be811d87-d5db-4e1c-84ec-ccbbccdb852c,County,Contact,The county for the address associated with this contact.,https://bedes.lbl.gov/node/be811d87-d5db-4e1c-84ec-ccbbccdb852c,0.9714285714285714
-FloorAreas,45,Audits.Audit.Sites.Site.FloorAreas,,,,,,
-FloorArea,46,Audits.Audit.Sites.Site.FloorAreas.FloorArea,,,,,,
-FloorAreaType,47,Audits.Audit.Sites.Site.FloorAreas.FloorArea.FloorAreaType,,,,,,
-FloorAreaCustomName,48,Audits.Audit.Sites.Site.FloorAreas.FloorArea.FloorAreaCustomName,,,,,,
-FloorAreaValue,49,Audits.Audit.Sites.Site.FloorAreas.FloorArea.FloorAreaValue,468fbd28-7043-45fb-8287-9e4ee2efbe6d,Floor Area Qualifier,Premises,Floor area can be defined and described in many different ways for different purposes. This type field allows multiple types of floor area definitions to exist in the same dataset.,https://bedes.lbl.gov/node/468fbd28-7043-45fb-8287-9e4ee2efbe6d,0.9003296703296704
-FloorAreaPercentage,50,Audits.Audit.Sites.Site.FloorAreas.FloorArea.FloorAreaPercentage,,,,,,
-Story,51,Audits.Audit.Sites.Site.FloorAreas.FloorArea.Story,,,,,,
-UserDefinedFields,52,Audits.Audit.Sites.Site.UserDefinedFields,,,,,,
-UserDefinedField,53,Audits.Audit.Sites.Site.UserDefinedFields.UserDefinedField,,,,,,
-FieldName,54,Audits.Audit.Sites.Site.UserDefinedFields.UserDefinedField.FieldName,,,,,,
-FieldValue,55,Audits.Audit.Sites.Site.UserDefinedFields.UserDefinedField.FieldValue,,,,,,
-Contacts,56,Audits.Audit.Contacts,20589c14-3fcc-4cb5-a30f-63e06d7009a6,Contact ID,Contact,Identification number associated with the contact.,https://bedes.lbl.gov/node/20589c14-3fcc-4cb5-a30f-63e06d7009a6,0.915
-Contact,57,Audits.Audit.Contacts.Contact,20589c14-3fcc-4cb5-a30f-63e06d7009a6,Contact ID,Contact,Identification number associated with the contact.,https://bedes.lbl.gov/node/20589c14-3fcc-4cb5-a30f-63e06d7009a6,0.9400000000000001
-ContactRole,58,Audits.Audit.Contacts.Contact.ContactRole,03062e7b-8e40-4e16-a3d1-476a85c1fc4d,Contact Title,Contact,The title or position of the contact within their organization.,https://bedes.lbl.gov/node/03062e7b-8e40-4e16-a3d1-476a85c1fc4d,0.9020979020979021
-ContactName,59,Audits.Audit.Contacts.Contact.ContactName,028bb2ae-c261-4c5d-b247-3db21cff10ab,Contact Name,Contact,Name of the contact when not full name or company name,https://bedes.lbl.gov/node/028bb2ae-c261-4c5d-b247-3db21cff10ab,0.9833333333333333
-ContactCompany,60,Audits.Audit.Contacts.Contact.ContactCompany,,,,,,
-ContactTitle,61,Audits.Audit.Contacts.Contact.ContactTitle,03062e7b-8e40-4e16-a3d1-476a85c1fc4d,Contact Title,Contact,The title or position of the contact within their organization.,https://bedes.lbl.gov/node/03062e7b-8e40-4e16-a3d1-476a85c1fc4d,0.9846153846153847
-ContactTelephoneNumbers,62,Audits.Audit.Contacts.Contact.ContactTelephoneNumbers,,,,,,
-ContactTelephoneNumber,63,Audits.Audit.Contacts.Contact.ContactTelephoneNumbers.ContactTelephoneNumber,,,,,,
-ContactTelephoneNumberLabel,64,Audits.Audit.Contacts.Contact.ContactTelephoneNumbers.ContactTelephoneNumber.ContactTelephoneNumberLabel,,,,,,
-TelephoneNumber,65,Audits.Audit.Contacts.Contact.ContactTelephoneNumbers.ContactTelephoneNumber.TelephoneNumber,b526e5b0-78d4-4b0b-a8dc-5b8de50ce608,Telephone Number,Contact,Telephone number associated with the contact. Format: Country code (area code) NNN-NNNN.,https://bedes.lbl.gov/node/b526e5b0-78d4-4b0b-a8dc-5b8de50ce608,0.9874999999999999
-ContactEmailAddresses,66,Audits.Audit.Contacts.Contact.ContactEmailAddresses,,,,,,
-ContactEmailAddress,67,Audits.Audit.Contacts.Contact.ContactEmailAddresses.ContactEmailAddress,,,,,,
-ContactEmailAddressLabel,68,Audits.Audit.Contacts.Contact.ContactEmailAddresses.ContactEmailAddress.ContactEmailAddressLabel,,,,,,
-EmailAddress,69,Audits.Audit.Contacts.Contact.ContactEmailAddresses.ContactEmailAddress.EmailAddress,27655d45-7813-432a-901a-1dc821bc52c1,Email Address,Contact,"OrderedDict([('a', OrderedDict([('@href', 'mailto:email@serviceprovider.suffix'), ('#text', 'email@serviceprovider.suffix')])), ('#text', 'Electronic mail address with common format:')])",https://bedes.lbl.gov/node/27655d45-7813-432a-901a-1dc821bc52c1,0.9846153846153847
-Address,70,Audits.Audit.Contacts.Contact.Address,9ae91208-70a6-4fe4-b486-166eadb219f7,Address Label,Contact,,https://bedes.lbl.gov/node/9ae91208-70a6-4fe4-b486-166eadb219f7,0.9076923076923077
-StreetAddressDetail,71,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail,,,,,,
-Simplified,72,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Simplified,,,,,,
-StreetAddress,73,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Simplified.StreetAddress,,,,,,
-StreetAdditionalInfo,74,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Simplified.StreetAdditionalInfo,,,,,,
-Complex,75,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex,,,,,,
-StreetNumberPrefix,76,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetNumberPrefix,,,,,,
-StreetNumberNumeric,77,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetNumberNumeric,,,,,,
-StreetNumberSuffix,78,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetNumberSuffix,,,,,,
-StreetDirPrefix,79,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetDirPrefix,,,,,,
-StreetName,80,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetName,81d08d4f-64e0-47f2-9615-2654eea7b288,Street Name,Contact,"The portion of the complete street name that identifies the particular thoroughfare (as opposed to the Street Name Pre Modifier, Street Name Post Modifier, Street Name Pre Directional, Street Name Post Directional, Street Name Pre Type, Street Name Post Type, and Separator Element (if any) in the complete street name.)",https://bedes.lbl.gov/node/81d08d4f-64e0-47f2-9615-2654eea7b288,0.9818181818181818
-StreetAdditionalInfo,81,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetAdditionalInfo,,,,,,
-StreetSuffix,82,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetSuffix,,,,,,
-StreetSuffixModifier,83,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetSuffixModifier,,,,,,
-StreetDirSuffix,84,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetDirSuffix,,,,,,
-SubaddressType,85,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.SubaddressType,aeae978b-c81e-4318-b6af-8ac8da74dd51,Subaddress Type,Contact,The type of subaddress to which the associated Subaddress Identifier applies.,https://bedes.lbl.gov/node/aeae978b-c81e-4318-b6af-8ac8da74dd51,0.9866666666666667
-SubaddressIdentifier,86,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.SubaddressIdentifier,61ba6f05-7526-4de3-8e86-467d6262c98e,Subaddress Identifier,Contact,"The letters, numbers, words, or combination thereof used to distinguish different subaddresses of the same type when several occur within the same feature. For example, in subaddress ""Building 4"", the Subaddress Identifier = ""4"". Subaddress Identifier can also be parts of a building, for example ""Penthouse"" or ""Mezzanine"".",https://bedes.lbl.gov/node/61ba6f05-7526-4de3-8e86-467d6262c98e,0.9904761904761905
-City,87,Audits.Audit.Contacts.Contact.Address.City,c208fe09-422d-4031-abf6-073aa7bda8c5,City,Contact,The city for the Address associated with this contact.,https://bedes.lbl.gov/node/c208fe09-422d-4031-abf6-073aa7bda8c5,1.0
-State,88,Audits.Audit.Contacts.Contact.Address.State,9a8423a7-0729-4eca-b6b4-4ec39a1f4a5b,State,Contact,The state for the address associated with this contact.,https://bedes.lbl.gov/node/9a8423a7-0729-4eca-b6b4-4ec39a1f4a5b,1.0
-PostalCode,89,Audits.Audit.Contacts.Contact.Address.PostalCode,,,,,,
-PostalCodePlus4,90,Audits.Audit.Contacts.Contact.Address.PostalCodePlus4,,,,,,
-County,91,Audits.Audit.Contacts.Contact.Address.County,be811d87-d5db-4e1c-84ec-ccbbccdb852c,County,Contact,The county for the address associated with this contact.,https://bedes.lbl.gov/node/be811d87-d5db-4e1c-84ec-ccbbccdb852c,1.0
-Country,92,Audits.Audit.Contacts.Contact.Address.Country,be811d87-d5db-4e1c-84ec-ccbbccdb852c,County,Contact,The county for the address associated with this contact.,https://bedes.lbl.gov/node/be811d87-d5db-4e1c-84ec-ccbbccdb852c,0.9714285714285714
-UserDefinedFields,93,Audits.Audit.Contacts.Contact.UserDefinedFields,,,,,,
-UserDefinedField,94,Audits.Audit.Contacts.Contact.UserDefinedFields.UserDefinedField,,,,,,
-FieldName,95,Audits.Audit.Contacts.Contact.UserDefinedFields.UserDefinedField.FieldName,,,,,,
-FieldValue,96,Audits.Audit.Contacts.Contact.UserDefinedFields.UserDefinedField.FieldValue,,,,,,
+Audits,4389,Audits,,,,,,
+Audit,4390,Audits.Audit,,,,,,
+Sites,4391,Audits.Audit.Sites,,,,,,
+Site,4392,Audits.Audit.Sites.Site,,,,,,
+ClimateZoneType,4393,Audits.Audit.Sites.Site.ClimateZoneType,83d301d1-3e81-4213-a3a8-c09d1e75337a,Climate Zone Type,Premises,"The climate zone type, based on the organization defining it. Many different organizations have implemented different climate zone definitions based on their needs. The list below represents the current list. This list can be added to over time based on the collaborative BEDES development process.",https://bedes.lbl.gov/node/83d301d1-3e81-4213-a3a8-c09d1e75337a,0.9764705882352941
+ASHRAE,4394,Audits.Audit.Sites.Site.ClimateZoneType.ASHRAE,,,,,,
+ClimateZone,4395,Audits.Audit.Sites.Site.ClimateZoneType.ASHRAE.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
+EnergyStar,4396,Audits.Audit.Sites.Site.ClimateZoneType.EnergyStar,ba39a9a6-84fb-4bca-bfc2-77cc2954e243,Energy Software Tool,Global Terms,A software program that is used in some fashion to calculate the energy consumption of a building,https://bedes.lbl.gov/node/ba39a9a6-84fb-4bca-bfc2-77cc2954e243,0.9
+ClimateZone,4397,Audits.Audit.Sites.Site.ClimateZoneType.EnergyStar.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
+CaliforniaTitle24,4398,Audits.Audit.Sites.Site.ClimateZoneType.CaliforniaTitle24,,,,,,
+ClimateZone,4399,Audits.Audit.Sites.Site.ClimateZoneType.CaliforniaTitle24.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
+IECC,4400,Audits.Audit.Sites.Site.ClimateZoneType.IECC,,,,,,
+ClimateZone,4401,Audits.Audit.Sites.Site.ClimateZoneType.IECC.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
+BuildingAmerica,4402,Audits.Audit.Sites.Site.ClimateZoneType.BuildingAmerica,,,,,,
+ClimateZone,4403,Audits.Audit.Sites.Site.ClimateZoneType.BuildingAmerica.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
+CBECS,4404,Audits.Audit.Sites.Site.ClimateZoneType.CBECS,,,,,,
+ClimateZone,4405,Audits.Audit.Sites.Site.ClimateZoneType.CBECS.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
+DOE,4406,Audits.Audit.Sites.Site.ClimateZoneType.DOE,,,,,,
+ClimateZone,4407,Audits.Audit.Sites.Site.ClimateZoneType.DOE.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
+Other,4408,Audits.Audit.Sites.Site.ClimateZoneType.Other,,,,,,
+ClimateZone,4409,Audits.Audit.Sites.Site.ClimateZoneType.Other.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
+Address,4410,Audits.Audit.Sites.Site.Address,9ae91208-70a6-4fe4-b486-166eadb219f7,Address Label,Contact,,https://bedes.lbl.gov/node/9ae91208-70a6-4fe4-b486-166eadb219f7,0.9076923076923077
+StreetAddressDetail,4411,Audits.Audit.Sites.Site.Address.StreetAddressDetail,,,,,,
+Simplified,4412,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Simplified,,,,,,
+StreetAddress,4413,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Simplified.StreetAddress,,,,,,
+StreetAdditionalInfo,4414,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Simplified.StreetAdditionalInfo,,,,,,
+Complex,4415,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex,,,,,,
+StreetNumberPrefix,4416,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.StreetNumberPrefix,,,,,,
+StreetNumberNumeric,4417,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.StreetNumberNumeric,,,,,,
+StreetNumberSuffix,4418,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.StreetNumberSuffix,,,,,,
+StreetDirPrefix,4419,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.StreetDirPrefix,,,,,,
+StreetName,4420,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.StreetName,81d08d4f-64e0-47f2-9615-2654eea7b288,Street Name,Contact,"The portion of the complete street name that identifies the particular thoroughfare (as opposed to the Street Name Pre Modifier, Street Name Post Modifier, Street Name Pre Directional, Street Name Post Directional, Street Name Pre Type, Street Name Post Type, and Separator Element (if any) in the complete street name.)",https://bedes.lbl.gov/node/81d08d4f-64e0-47f2-9615-2654eea7b288,0.9818181818181818
+StreetAdditionalInfo,4421,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.StreetAdditionalInfo,,,,,,
+StreetSuffix,4422,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.StreetSuffix,,,,,,
+StreetSuffixModifier,4423,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.StreetSuffixModifier,,,,,,
+StreetDirSuffix,4424,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.StreetDirSuffix,,,,,,
+SubaddressType,4425,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.SubaddressType,aeae978b-c81e-4318-b6af-8ac8da74dd51,Subaddress Type,Contact,The type of subaddress to which the associated Subaddress Identifier applies.,https://bedes.lbl.gov/node/aeae978b-c81e-4318-b6af-8ac8da74dd51,0.9866666666666667
+SubaddressIdentifier,4426,Audits.Audit.Sites.Site.Address.StreetAddressDetail.Complex.SubaddressIdentifier,61ba6f05-7526-4de3-8e86-467d6262c98e,Subaddress Identifier,Contact,"The letters, numbers, words, or combination thereof used to distinguish different subaddresses of the same type when several occur within the same feature. For example, in subaddress ""Building 4"", the Subaddress Identifier = ""4"". Subaddress Identifier can also be parts of a building, for example ""Penthouse"" or ""Mezzanine"".",https://bedes.lbl.gov/node/61ba6f05-7526-4de3-8e86-467d6262c98e,0.9904761904761905
+City,4427,Audits.Audit.Sites.Site.Address.City,c208fe09-422d-4031-abf6-073aa7bda8c5,City,Contact,The city for the Address associated with this contact.,https://bedes.lbl.gov/node/c208fe09-422d-4031-abf6-073aa7bda8c5,1.0
+State,4428,Audits.Audit.Sites.Site.Address.State,9a8423a7-0729-4eca-b6b4-4ec39a1f4a5b,State,Contact,The state for the address associated with this contact.,https://bedes.lbl.gov/node/9a8423a7-0729-4eca-b6b4-4ec39a1f4a5b,1.0
+PostalCode,4429,Audits.Audit.Sites.Site.Address.PostalCode,,,,,,
+PostalCodePlus4,4430,Audits.Audit.Sites.Site.Address.PostalCodePlus4,,,,,,
+County,4431,Audits.Audit.Sites.Site.Address.County,be811d87-d5db-4e1c-84ec-ccbbccdb852c,County,Contact,The county for the address associated with this contact.,https://bedes.lbl.gov/node/be811d87-d5db-4e1c-84ec-ccbbccdb852c,1.0
+Country,4432,Audits.Audit.Sites.Site.Address.Country,be811d87-d5db-4e1c-84ec-ccbbccdb852c,County,Contact,The county for the address associated with this contact.,https://bedes.lbl.gov/node/be811d87-d5db-4e1c-84ec-ccbbccdb852c,0.9714285714285714
+FloorAreas,4433,Audits.Audit.Sites.Site.FloorAreas,,,,,,
+FloorArea,4434,Audits.Audit.Sites.Site.FloorAreas.FloorArea,,,,,,
+FloorAreaType,4435,Audits.Audit.Sites.Site.FloorAreas.FloorArea.FloorAreaType,,,,,,
+FloorAreaCustomName,4436,Audits.Audit.Sites.Site.FloorAreas.FloorArea.FloorAreaCustomName,,,,,,
+FloorAreaValue,4437,Audits.Audit.Sites.Site.FloorAreas.FloorArea.FloorAreaValue,468fbd28-7043-45fb-8287-9e4ee2efbe6d,Floor Area Qualifier,Premises,Floor area can be defined and described in many different ways for different purposes. This type field allows multiple types of floor area definitions to exist in the same dataset.,https://bedes.lbl.gov/node/468fbd28-7043-45fb-8287-9e4ee2efbe6d,0.9003296703296704
+FloorAreaPercentage,4438,Audits.Audit.Sites.Site.FloorAreas.FloorArea.FloorAreaPercentage,,,,,,
+Story,4439,Audits.Audit.Sites.Site.FloorAreas.FloorArea.Story,,,,,,
+UserDefinedFields,4440,Audits.Audit.Sites.Site.UserDefinedFields,,,,,,
+UserDefinedField,4441,Audits.Audit.Sites.Site.UserDefinedFields.UserDefinedField,,,,,,
+FieldName,4442,Audits.Audit.Sites.Site.UserDefinedFields.UserDefinedField.FieldName,,,,,,
+FieldValue,4443,Audits.Audit.Sites.Site.UserDefinedFields.UserDefinedField.FieldValue,,,,,,
+Contacts,4444,Audits.Audit.Contacts,20589c14-3fcc-4cb5-a30f-63e06d7009a6,Contact ID,Contact,Identification number associated with the contact.,https://bedes.lbl.gov/node/20589c14-3fcc-4cb5-a30f-63e06d7009a6,0.915
+Contact,4445,Audits.Audit.Contacts.Contact,20589c14-3fcc-4cb5-a30f-63e06d7009a6,Contact ID,Contact,Identification number associated with the contact.,https://bedes.lbl.gov/node/20589c14-3fcc-4cb5-a30f-63e06d7009a6,0.9400000000000001
+ContactRole,4446,Audits.Audit.Contacts.Contact.ContactRole,03062e7b-8e40-4e16-a3d1-476a85c1fc4d,Contact Title,Contact,The title or position of the contact within their organization.,https://bedes.lbl.gov/node/03062e7b-8e40-4e16-a3d1-476a85c1fc4d,0.9020979020979021
+ContactName,4447,Audits.Audit.Contacts.Contact.ContactName,028bb2ae-c261-4c5d-b247-3db21cff10ab,Contact Name,Contact,Name of the contact when not full name or company name,https://bedes.lbl.gov/node/028bb2ae-c261-4c5d-b247-3db21cff10ab,0.9833333333333333
+ContactCompany,4448,Audits.Audit.Contacts.Contact.ContactCompany,,,,,,
+ContactTitle,4449,Audits.Audit.Contacts.Contact.ContactTitle,03062e7b-8e40-4e16-a3d1-476a85c1fc4d,Contact Title,Contact,The title or position of the contact within their organization.,https://bedes.lbl.gov/node/03062e7b-8e40-4e16-a3d1-476a85c1fc4d,0.9846153846153847
+ContactTelephoneNumbers,4450,Audits.Audit.Contacts.Contact.ContactTelephoneNumbers,,,,,,
+ContactTelephoneNumber,4451,Audits.Audit.Contacts.Contact.ContactTelephoneNumbers.ContactTelephoneNumber,,,,,,
+ContactTelephoneNumberLabel,4452,Audits.Audit.Contacts.Contact.ContactTelephoneNumbers.ContactTelephoneNumber.ContactTelephoneNumberLabel,,,,,,
+TelephoneNumber,4453,Audits.Audit.Contacts.Contact.ContactTelephoneNumbers.ContactTelephoneNumber.TelephoneNumber,b526e5b0-78d4-4b0b-a8dc-5b8de50ce608,Telephone Number,Contact,Telephone number associated with the contact. Format: Country code (area code) NNN-NNNN.,https://bedes.lbl.gov/node/b526e5b0-78d4-4b0b-a8dc-5b8de50ce608,0.9874999999999999
+ContactEmailAddresses,4454,Audits.Audit.Contacts.Contact.ContactEmailAddresses,,,,,,
+ContactEmailAddress,4455,Audits.Audit.Contacts.Contact.ContactEmailAddresses.ContactEmailAddress,,,,,,
+ContactEmailAddressLabel,4456,Audits.Audit.Contacts.Contact.ContactEmailAddresses.ContactEmailAddress.ContactEmailAddressLabel,,,,,,
+EmailAddress,4457,Audits.Audit.Contacts.Contact.ContactEmailAddresses.ContactEmailAddress.EmailAddress,27655d45-7813-432a-901a-1dc821bc52c1,Email Address,Contact,"OrderedDict([('a', OrderedDict([('@href', 'mailto:email@serviceprovider.suffix'), ('#text', 'email@serviceprovider.suffix')])), ('#text', 'Electronic mail address with common format:')])",https://bedes.lbl.gov/node/27655d45-7813-432a-901a-1dc821bc52c1,0.9846153846153847
+Address,4458,Audits.Audit.Contacts.Contact.Address,9ae91208-70a6-4fe4-b486-166eadb219f7,Address Label,Contact,,https://bedes.lbl.gov/node/9ae91208-70a6-4fe4-b486-166eadb219f7,0.9076923076923077
+StreetAddressDetail,4459,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail,,,,,,
+Simplified,4460,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Simplified,,,,,,
+StreetAddress,4461,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Simplified.StreetAddress,,,,,,
+StreetAdditionalInfo,4462,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Simplified.StreetAdditionalInfo,,,,,,
+Complex,4463,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex,,,,,,
+StreetNumberPrefix,4464,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetNumberPrefix,,,,,,
+StreetNumberNumeric,4465,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetNumberNumeric,,,,,,
+StreetNumberSuffix,4466,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetNumberSuffix,,,,,,
+StreetDirPrefix,4467,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetDirPrefix,,,,,,
+StreetName,4468,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetName,81d08d4f-64e0-47f2-9615-2654eea7b288,Street Name,Contact,"The portion of the complete street name that identifies the particular thoroughfare (as opposed to the Street Name Pre Modifier, Street Name Post Modifier, Street Name Pre Directional, Street Name Post Directional, Street Name Pre Type, Street Name Post Type, and Separator Element (if any) in the complete street name.)",https://bedes.lbl.gov/node/81d08d4f-64e0-47f2-9615-2654eea7b288,0.9818181818181818
+StreetAdditionalInfo,4469,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetAdditionalInfo,,,,,,
+StreetSuffix,4470,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetSuffix,,,,,,
+StreetSuffixModifier,4471,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetSuffixModifier,,,,,,
+StreetDirSuffix,4472,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetDirSuffix,,,,,,
+SubaddressType,4473,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.SubaddressType,aeae978b-c81e-4318-b6af-8ac8da74dd51,Subaddress Type,Contact,The type of subaddress to which the associated Subaddress Identifier applies.,https://bedes.lbl.gov/node/aeae978b-c81e-4318-b6af-8ac8da74dd51,0.9866666666666667
+SubaddressIdentifier,4474,Audits.Audit.Contacts.Contact.Address.StreetAddressDetail.Complex.SubaddressIdentifier,61ba6f05-7526-4de3-8e86-467d6262c98e,Subaddress Identifier,Contact,"The letters, numbers, words, or combination thereof used to distinguish different subaddresses of the same type when several occur within the same feature. For example, in subaddress ""Building 4"", the Subaddress Identifier = ""4"". Subaddress Identifier can also be parts of a building, for example ""Penthouse"" or ""Mezzanine"".",https://bedes.lbl.gov/node/61ba6f05-7526-4de3-8e86-467d6262c98e,0.9904761904761905
+City,4475,Audits.Audit.Contacts.Contact.Address.City,c208fe09-422d-4031-abf6-073aa7bda8c5,City,Contact,The city for the Address associated with this contact.,https://bedes.lbl.gov/node/c208fe09-422d-4031-abf6-073aa7bda8c5,1.0
+State,4476,Audits.Audit.Contacts.Contact.Address.State,9a8423a7-0729-4eca-b6b4-4ec39a1f4a5b,State,Contact,The state for the address associated with this contact.,https://bedes.lbl.gov/node/9a8423a7-0729-4eca-b6b4-4ec39a1f4a5b,1.0
+PostalCode,4477,Audits.Audit.Contacts.Contact.Address.PostalCode,,,,,,
+PostalCodePlus4,4478,Audits.Audit.Contacts.Contact.Address.PostalCodePlus4,,,,,,
+County,4479,Audits.Audit.Contacts.Contact.Address.County,be811d87-d5db-4e1c-84ec-ccbbccdb852c,County,Contact,The county for the address associated with this contact.,https://bedes.lbl.gov/node/be811d87-d5db-4e1c-84ec-ccbbccdb852c,1.0
+Country,4480,Audits.Audit.Contacts.Contact.Address.Country,be811d87-d5db-4e1c-84ec-ccbbccdb852c,County,Contact,The county for the address associated with this contact.,https://bedes.lbl.gov/node/be811d87-d5db-4e1c-84ec-ccbbccdb852c,0.9714285714285714
+UserDefinedFields,4481,Audits.Audit.Contacts.Contact.UserDefinedFields,,,,,,
+UserDefinedField,4482,Audits.Audit.Contacts.Contact.UserDefinedFields.UserDefinedField,,,,,,
+FieldName,4483,Audits.Audit.Contacts.Contact.UserDefinedFields.UserDefinedField.FieldName,,,,,,
+FieldValue,4484,Audits.Audit.Contacts.Contact.UserDefinedFields.UserDefinedField.FieldValue,,,,,,

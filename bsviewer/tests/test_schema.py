@@ -1,12 +1,11 @@
-import os
 import csv
+import json
+import os
 from random import randint
 from shutil import copyfile
-
 from django.test import TestCase
-
+from bsviewer.lib.tree_viewer import get_schema_jstree_data
 from bsviewer.models.schema import Schema
-
 from django.conf import settings
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
@@ -31,9 +30,6 @@ class TestSchema(TestCase):
         attributes = self.schema.attributes
         self.assertGreater(attributes.count(), 0)
 
-        # clean-up files on disk
-        self.schema.delete()
-
     def test_enumerations(self):
         # check a couple of the attributes to make sure have enumerations
         test_path = 'Audits.Audit.Contacts.Contact.ContactRole'
@@ -46,9 +42,6 @@ class TestSchema(TestCase):
             attribute.enumeration_classes.first().enumerations.first().name, 'Premises'
         )
 
-        # clean-up files on disk
-        self.schema.delete()
-
     def test_to_template(self):
         # template is generated automatically in post_save
         self.assertTrue(os.path.exists(self.schema.usecase_template_file.path))
@@ -60,8 +53,16 @@ class TestSchema(TestCase):
                     self.assertEqual('Audits', row[0])
                     self.assertEqual('Required', row[1])
 
-        # clean-up files on disk
-        self.schema.delete()
+    def test_schema_js_tree(self):
+        # test the retrieval of the schema as a jstree for dictionary view
+        js_tree = get_schema_jstree_data(DEFAULT_SCHEMA_VERSION)
+
+        # assert that js_tree is a list, not-empty
+        self.assertTrue(isinstance(js_tree, list))
+        self.assertGreater(len(js_tree), 0)
+
+        # ensure can be dumped to JSON
+        json.dumps(js_tree)
 
     def test_cleanup(self):
         # test that physical files are cleaned up on disk
@@ -78,3 +79,8 @@ class TestSchema(TestCase):
         # assert that physical files were also deleted
         self.assertFalse(os.path.isfile(schema_file_path))
         self.assertFalse(os.path.isfile(usecase_template_file_path))
+
+    def tearDown(self):
+        # clean-up files on disk
+        if self.schema and self.schema.id is not None:
+            self.schema.delete()
