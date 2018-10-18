@@ -11,9 +11,12 @@ from bsviewer.models.use_case_attribute import (
     STATE_IGNORED,
 )
 
+from django.conf import settings
+DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
+
 
 class Command(BaseCommand):
-    help = 'Closes the specified poll for voting'
+    help = 'Create a use case'
 
     def add_arguments(self, parser):
         # parser.add_argument('--filename', type=str)
@@ -23,7 +26,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         # grab a schema
-        schema = Schema.objects.filter(version='0.3').first()
+        schema = Schema.objects.filter(version=DEFAULT_SCHEMA_VERSION).first()
         if not schema:
             self.stdout.write('Schema not found, import schema first')
 
@@ -55,4 +58,4 @@ class Command(BaseCommand):
         for enums in use_case.enumerations.all():
             print(enums)
 
-        self.stdout.write('Finished parsing and saving 0.3 schema')
+        self.stdout.write('Finished parsing and saving {} schema'.format(DEFAULT_SCHEMA_VERSION))

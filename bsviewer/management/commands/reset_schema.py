@@ -31,7 +31,7 @@ class Command(BaseCommand):
         )
         schema.save()  # Calling save also processes the schema
 
-        for attribute in schema.attributes.all().order_by('index'):
+        for attribute in schema.attributes.all().order_by('id'):
             print(attribute)
             # if attribute.enumeration_classes.first():
             #     for enum in attribute.enumeration_classes.first().enumerations.all().order_by('index'):
