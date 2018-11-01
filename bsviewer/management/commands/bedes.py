@@ -59,7 +59,7 @@ class Command(BaseCommand):
             for bt in bedes.terms:
                 distance = jellyfish.jaro_winkler(attribute.name, bt['Term'])
 
-                if distance >= 0.9:
+                if distance >= 0.95:
                     results[attribute.id].append({
                         "attribute_name": attribute.name,
                         "attribute_path": attribute.path,
@@ -115,11 +115,11 @@ class Command(BaseCommand):
         for enumeration in Enumeration.objects.filter(schema=schema):
             results[enumeration.id] = []
             for be in bedes.enumerations:
-                distance = jellyfish.jaro_winkler(enumeration.name, be['Term'])
-                if distance >= 0.9:
+                distance = jellyfish.jaro_winkler(enumeration.name, be['List-Option'])
+                if distance >= 0.95:
                     results[enumeration.id].append({
                         "enumeration_name": enumeration.name,
-                        "bedes_term": be['Term'],
+                        "bedes_term": be['List-Option'],
                         "bedes_object": be,
                         "distance": distance
                     })
@@ -143,7 +143,7 @@ class Command(BaseCommand):
                 if len(be) > 0 and 'bedes_object' in be[0]:
                     content_uuids.append(be[0]['bedes_object']['Content-UUID'])
                     out = [be[0]['enumeration_name'], enum, be[0]['bedes_object']['Content-UUID'],
-                           be[0]['bedes_term'], be[0]['bedes_object']['Option-Definition'],
+                           be[0]['bedes_term'], be[0]['bedes_object']['List-Option-Definition'],
                            be[0]['bedes_object']['URL'], be[0]['bedes_object']['Related-Term-UUID'],
                            be[0]['distance']]
 

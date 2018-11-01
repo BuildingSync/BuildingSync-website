@@ -108,9 +108,9 @@ class BedesParser(object):
 
                 # print(t)
                 assembled['Term-Definition'] = None
-                if t['Term-Definition']:
-                    if t['Term-Definition'].get('p'):
-                        assembled['Term-Definition'] = t['Term-Definition']['p']
+                if t['Definition']:
+                    if t['Definition'].get('p'):
+                        assembled['Term-Definition'] = t['Definition']['p']
                 self.terms.append(assembled)
 
     def _cache_enumerations(self):
@@ -121,13 +121,13 @@ class BedesParser(object):
                     for lo in term['list_options']:
                         # collect only specific fields from the terms
                         assembled = {}
-                        for t_name in ['Term', 'Content-UUID', 'URL', 'Option-Definition', 'Related-Term-UUID']:
+                        for t_name in ['List-Option', 'Content-UUID', 'URL', 'List-Option-Definition', 'Related-Term-UUID']:
                             assembled[t_name] = lo[t_name]
                         self.enumerations.append(assembled)
 
 
 if __name__ == '__main__':
-    bedes = BedesParser('v1.2')
+    bedes = BedesParser('v2.2')
     bedes.save()
 
     # print(bedes.terms)
