@@ -117,7 +117,7 @@ To parse and map a new BEDES version:
     ```bash
     python manage.py bedes --schema_version=X.X.X --bedes_version=X.X
     ```
-    Note that the bedes_version contains a v, ex: v1.2.
+    Note that the bedes_version contains a v, ex: v2.2.
     This will create a ```bedes_vX.X.json``` file in the lib/bedes/vX.X directory.  It will also create 2 CSV files:  ```bedes-mappings-enumerations.csv``` and ```bedes-mappings-terms.csv``` in the lib/bedes/vX.X/schemaX.X directory.
 
     *Note* &mdash; The BEDES terms must be mapped for each version of the BuildingSync schema by calling the ```python manage.py bedes``` command above.
