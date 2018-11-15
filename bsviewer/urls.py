@@ -1,11 +1,14 @@
 from django.contrib.auth import views as auth_views
-from django.urls import path
-from django.urls import re_path
+from django.urls import path, re_path, include
 
 from bsviewer import views
 from bsviewer.admin import admin_site
+from rest_framework import routers
 
 app_name = 'bsviewer'
+
+router = routers.DefaultRouter()
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('', views.index, name='home'),
@@ -24,5 +27,8 @@ urlpatterns = [
     path('validator', views.validator, name='validator'),
     path('dictionary', views.redirect_data_dictionary, name='dictionary'),
     re_path(r'^dictionary/(?P<version>\w+.\w+.\w+)/$', views.dictionary, name='dictionaryversion'),
-    re_path(r'^ajax/enum/$', views.retrieve_additional_dictionary_data, name='get_additional_data')
+    re_path(r'^ajax/enum/$', views.retrieve_additional_dictionary_data, name='get_additional_data'),
+    re_path(r'^api/', include(router.urls)),
+    re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    re_path(r'^api/validate', views.ValidatorApi.as_view())
 ]

@@ -85,7 +85,7 @@ class ValidationWorkflow(object):
 
         for use_case in self.use_cases:
             print("validating use case: {}".format(use_case.name))
-            resp['use_cases'][use_case] = self.process_use_case(use_case)
+            resp['use_cases'][use_case.name] = self.process_use_case(use_case)
 
         return resp
 

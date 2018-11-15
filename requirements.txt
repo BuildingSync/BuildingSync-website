@@ -1,5 +1,7 @@
 Django==2.1
 django-bootstrap3==10.0.1
+djangorestframework==3.8.2
+djangorestframework-xml==1.0.1
 lxml==4.1.1
 psycopg2==2.7.3.1
 xmlschema==1.0.3

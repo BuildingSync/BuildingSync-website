@@ -29,8 +29,51 @@ from .models.enumeration import Enumeration
 from .models.schema import Schema
 from .models.use_case import UseCase
 
+from rest_framework import viewsets, views
+from rest_framework.response import Response
+# from rest_framework_xml.parsers import XMLParser
+from rest_framework.parsers import FileUploadParser, MultiPartParser
+# from rest_framework_xml.renderers import XMLRenderer
+
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
+class ValidatorApi(views.APIView):
+    """
+    API endpoint for validating schemas
+    """
+    parser_classes = (MultiPartParser,)
+    def post(self, request, *args, **kwargs):
+
+        version = request.data.get('schema_version', None)
+
+        if not version:
+            # use default version
+            version = DEFAULT_SCHEMA_VERSION
+
+        # find schema matching version
+        try:
+            Schema.objects.get(version=version)
+        except BaseException:
+            return Response({"success": False, "error": "No schema matching schema_version {} in database".format(version)})
+
+        f = request.data['file']
+        if f:
+            tmp_file = tempfile.NamedTemporaryFile(delete=False)
+            filepath = tmp_file.name
+            print('tmp file at: {}'.format(filepath))
+            for chunk in f.chunks():
+                tmp_file.write(chunk)
+            tmp_file.close()
+
+            workflow = ValidationWorkflow(f, filepath, version)
+            validation_results = workflow.validate_all()
+            # print("VALIDATION RESULTS.use_cases: {}".format(validation_results['use_cases']))
+            # cleanup file after validation
+            os.unlink(tmp_file.name)
+
+            return Response({"schema_version": version, "validation_results": validation_results, "success": True})
+        else:
+            return Response({"success": False, "error": "No schema_version or file parameters sent"})
 
 def index(request):
     context = {}
