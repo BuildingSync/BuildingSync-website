@@ -1,7 +1,7 @@
 import csv
 
 from bsviewer.models.attribute import Attribute
-from bsviewer.models.use_case_attribute import UseCaseAttribute, STATE_TYPES
+from bsviewer.models.use_case_attribute import UseCaseAttribute, UseCaseUDF, STATE_TYPES
 
 
 def process_usecase(use_case_object):
@@ -22,33 +22,131 @@ def process_usecase(use_case_object):
 
     # process csv and save attributes
     reader = csv.DictReader(open(use_case_object.import_file.path))
+    last_udf_fieldname = None
     for row in reader:
 
-        # get attribute reference
-        results = Attribute.objects.filter(path=row['BuildingSyncPath'],
-                                           schema=use_case_object.schema)
 
-        if not results.exists():
-            errors.append('No attribute matching path: {}'.format(row['BuildingSyncPath']))
-            continue
-        elif results.count() != 1:
-            errors.append(
-                'More than one attribute found matching path: {}'.format(row['BuildingSyncPath']))
-            continue
+        # Special Case: User-Defined Fields
+        # always come in pairs, assuming FieldName then FieldValue
+        # need to preserve relationship btw FieldName and FieldValue
+        # could be more than 1 within a UserDefinedFields section
+        if 'UserDefinedFields.UserDefinedField.FieldName' in row['BuildingSyncPath']:
 
-        attrib = results[0]
-        # get state
-        state_val = 0
-        for state in STATE_TYPES:
-            if state[1] == row['State']:
-                state_val = state[0]
+            # get attribute reference
+            results = Attribute.objects.filter(path=row['BuildingSyncPath'],
+                                               schema=use_case_object.schema)
 
-        # save new record
-        rec = UseCaseAttribute(
-            use_case=use_case_object,
-            attribute=attrib,
-            state=state_val
-        )
-        rec.save()
+            if not results.exists():
+                errors.append('No attribute matching path: {}'.format(row['BuildingSyncPath']))
+                continue
+            elif results.count() != 1:
+                errors.append(
+                    'More than one attribute found matching path: {}'.format(row['BuildingSyncPath']))
+                continue
+
+            attrib = results[0]
+            # get state
+            state_val = 0
+            for state in STATE_TYPES:
+                if state[1] == row['State']:
+                    state_val = state[0]
+
+            # check if record already exists first
+            rec = None
+            uc_results = UseCaseAttribute.objects.filter(use_case=use_case_object, attribute=attrib)
+            if uc_results.exists():
+                # don't add twice but get first record
+                rec = uc_results[0]
+            else:
+
+                rec = UseCaseAttribute(
+                    use_case=use_case_object,
+                    attribute=attrib,
+                    state=state_val
+                )
+                rec.save()
+
+            udf = UseCaseUDF(
+                use_case_attribute=rec,
+                state=state_val,
+                values=row['RequiredValues']
+            )
+            udf.save()
+            last_udf_fieldname = udf
+
+
+        elif 'UserDefinedFields.UserDefinedField.FieldValue' in row['BuildingSyncPath']:
+
+            # get attribute reference
+            results = Attribute.objects.filter(path=row['BuildingSyncPath'],
+                                               schema=use_case_object.schema)
+
+            if not results.exists():
+                errors.append('No attribute matching path: {}'.format(row['BuildingSyncPath']))
+                continue
+            elif results.count() != 1:
+                errors.append(
+                    'More than one attribute found matching path: {}'.format(row['BuildingSyncPath']))
+                continue
+
+            attrib = results[0]
+            # get state
+            state_val = 0
+            for state in STATE_TYPES:
+                if state[1] == row['State']:
+                    state_val = state[0]
+
+            # check if record already exists first
+            rec = None
+            uc_results = UseCaseAttribute.objects.filter(use_case=use_case_object, attribute=attrib)
+            if uc_results.exists():
+                # don't add twice but get first record
+                rec = uc_results[0]
+            else:
+                rec = UseCaseAttribute(
+                    use_case=use_case_object,
+                    attribute=attrib,
+                    state=state_val
+                )
+                rec.save()
+
+            udf = UseCaseUDF(
+                use_case_attribute=rec,
+                state=state_val,
+                values=row['RequiredValues'],
+                associated_field_id=last_udf_fieldname
+            )
+            udf.save()
+
+            last_udf_fieldname.associated_field_id = udf
+            last_udf_fieldname.save()
+
+        else:
+            # get attribute reference
+            results = Attribute.objects.filter(path=row['BuildingSyncPath'],
+                                                   schema=use_case_object.schema)
+
+            if not results.exists():
+                errors.append('No attribute matching path: {}'.format(row['BuildingSyncPath']))
+                continue
+            elif results.count() != 1:
+                errors.append(
+                    'More than one attribute found matching path: {}'.format(row['BuildingSyncPath']))
+                continue
+
+            attrib = results[0]
+            # get state
+            state_val = 0
+            for state in STATE_TYPES:
+                if state[1] == row['State']:
+                    state_val = state[0]
+
+            # save new record
+            rec = UseCaseAttribute(
+                use_case=use_case_object,
+                attribute=attrib,
+                state=state_val
+            )
+            rec.save()
 
     return use_case_object, errors

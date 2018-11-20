@@ -67,7 +67,6 @@ class ValidatorApi(views.APIView):
 
             workflow = ValidationWorkflow(f, filepath, version)
             validation_results = workflow.validate_all()
-            # print("VALIDATION RESULTS.use_cases: {}".format(validation_results['use_cases']))
             # cleanup file after validation
             os.unlink(tmp_file.name)
 
