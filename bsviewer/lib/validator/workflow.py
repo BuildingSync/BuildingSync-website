@@ -2,10 +2,11 @@ from collections import OrderedDict
 
 import xmlschema
 import xmltodict
+import copy
 
 from bsviewer.models.schema import Schema
 from bsviewer.models.use_case import UseCase
-from bsviewer.models.use_case_attribute import UseCaseAttribute
+from bsviewer.models.use_case_attribute import UseCaseAttribute, UseCaseUDF
 
 
 class ValidationWorkflow(object):
@@ -118,20 +119,82 @@ class ValidationWorkflow(object):
 
             # try to find it
             paths = attr.attribute.path.split(".")
-            loopingVar = self.xml
+            loopingVar = copy.deepcopy(self.xml)
+            # special case: UDF
+            if 'UserDefinedField.FieldName' in attr.attribute.path:
+                # retrieve all FieldNames from UseCaseUDF
+                udfFields = UseCaseUDF.objects.filter(use_case_attribute=attr)
+                #print("UDF FIELDS: {}".format(udfFields))
 
-            # validate presence of required element
-            try:
-                for path in paths:
-                    fpath = 'auc:' + path
-                    loopingVar = loopingVar[fpath]
-            except BaseException:
-                if attr.state == 2:
-                    # Required attribute, error out
-                    results['errors'].append(
-                        {'path': attr.attribute.path, 'message': 'Required element not found'})
-                # now go to next attribute
+                for udf in udfFields:
+                    loopingVar = copy.deepcopy(self.xml)
+                    print("attr path: {}".format(attr.attribute.path))
+                    print("UDF values: {}".format(udf.values))
+
+                    # also retrieve matching FieldValue
+                    try:
+                        for path in paths:
+                            fpath = 'auc:' + path
+                            if loopingVar.__class__.__name__ == 'OrderedDict':
+                                #if 'Above Grade Demising Wall Area' in udf.values:
+                                    #print("VAR: {}, fpath: {}".format(loopingVar, fpath))
+                                loopingVar = loopingVar[fpath]
+                            else:
+                                # it's a list
+                                if 'Above Grade Demising Wall Area' in udf.values:
+                                    print("VAR: {}, fpath: {}".format(loopingVar, fpath))
+                                for index, l in enumerate(loopingVar):
+                                    loopingVar[index] = l[fpath]
+                        # If found, check that it has correct value
+                        #print("***!!!! LOOPING VAR CLASS: {}".format(loopingVar.__class__.__name__))
+                        # for now assume it's a list?
+                        if udf.values in loopingVar:
+                            print("FOUND A MATCH!")
+                        else:
+                            msg = 'Required UDF element not found with FieldName = ' + udf.values
+                            results['errors'].append(
+                                {'path': attr.attribute.path, 'message': msg})
+
+                    except BaseException:
+                        print("---EXCEPTION!!! ---")
+                        if attr.state == 2:
+                            # Required attribute, error out
+                            msg = 'Required UDF element not found with FieldName = ' + udf.values
+                            results['errors'].append(
+                                {'path': attr.attribute.path, 'message': msg})
+                        # now go to next attribute
+                        continue
+
+                # TODO: check for enums matching defined enums
+
+            elif 'UserDefinedField.FieldValue' in attr.attribute.path:
+                # skip, taken care of above
                 continue
+
+            else:
+                # validate presence of required element
+                try:
+                    for path in paths:
+                        fpath = 'auc:' + path
+                        if loopingVar.__class__.__name__ == 'OrderedDict':
+                            # if 'Above Grade Demising Wall Area' in udf.values:
+                            # print("VAR: {}, fpath: {}".format(loopingVar, fpath))
+                            loopingVar = loopingVar[fpath]
+                        else:
+                            # it's a list
+                            if 'Above Grade Demising Wall Area' in udf.values:
+                                print("VAR: {}, fpath: {}".format(loopingVar, fpath))
+                            for index, l in enumerate(loopingVar):
+                                loopingVar[index] = l[fpath]
+
+                    #print("LOOPING VAR: {}".format(loopingVar))
+                except BaseException:
+                    if attr.state == 2:
+                        # Required attribute, error out
+                        results['errors'].append(
+                            {'path': attr.attribute.path, 'message': 'Required element not found'})
+                    # now go to next attribute
+                    continue
 
             # TODO: validate enums here -- in the case that the Use Case's allowable enum values is a subset of the schema's
             # other validation (such as value of elements) have been validate via the schema_validation
