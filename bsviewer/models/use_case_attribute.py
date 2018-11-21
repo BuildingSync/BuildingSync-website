@@ -35,8 +35,3 @@ class UseCaseUDF(models.Model):
     state = models.IntegerField(choices=STATE_TYPES, default=STATE_IGNORED)
     values = models.CharField(max_length=512)
     associated_field = models.ForeignKey('UseCaseUDF', on_delete=models.CASCADE, blank=True, null=True)
-
-# class UseCaseUDFEnumeration(models.Model):
-#     use_case_attribute = models.ForeignKey('UseCaseAttribute', on_delete=models.CASCADE)
-#     enumeration = models.ForeignKey('Enumeration', on_delete=models.CASCADE)
-#     state = models.IntegerField(choices=STATE_TYPES, default=STATE_IGNORED)
