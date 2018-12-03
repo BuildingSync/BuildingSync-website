@@ -27,7 +27,7 @@
         {# <div>Valid? {{ validation_results.valid }}</div>#}
         {% if validation_results.schema.valid is False %}
           <div>
-            <h3>Errors <span class="label label-danger pad5">{{ validation_results.schema.errors|length }}</span></h3>
+            <h3>Issues <span class="label label-danger pad5">{{ validation_results.schema.errors|length }}</span></h3>
             <table>
               {% for err in validation_results.schema.errors %}
                 <tr>
@@ -73,7 +73,7 @@
                     </h3>
                   {% endif %}
                   {%  if uc.valid is False %}
-                    <h4>Errors <span class="label label-danger pad5">{{ uc.errors|length }}</span></h4>
+                    <h4>Issues <span class="label label-danger pad5">{{ uc.errors|length }}</span></h4>
                     <table style="table-layout: fixed; ">
                       {% for err in uc.errors %}
                         <tr class="wrap-it">

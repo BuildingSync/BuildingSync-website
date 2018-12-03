@@ -8,7 +8,7 @@
 
     <div class="container">
     	<header class="major">
-			<h2>Use Cases</h2>
+			<h2>Public Use Cases</h2>
     	</header>
     	<div class="row">
         	<div class="col-md-9">
@@ -17,11 +17,13 @@
 	  					<tr>
 	  						<th>Name</th>
 	  						<th>Schema Version</th>
+                <th>Description</th>
 	  					</tr>
 						{% for case in public_usecases %}
 						<tr>
 							<td>{{ case.name }}</td>
 							<td>{{ case.schema }}</td>
+              <td>{{ case.description }}</td>
 						</tr>
 						{% endfor %}
 					</table>
@@ -30,9 +32,9 @@
         </div>
 
         {% if user.is_authenticated %}
-	        <div class="row">
+	        <div class="row pad-top-20">
 	        	<div class="col-md-9">
-	        		<h3>Private Use Cases</h3>
+	        		<h3>My Use Cases</h3>
 	        		{% if user_usecases %}
 	        			<table class="table">
 		  					<tr>
