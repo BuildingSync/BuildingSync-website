@@ -76,7 +76,6 @@ def process_usecase(use_case_object):
                 udf.save()
                 last_udf_fieldname = udf
 
-
             elif 'UserDefinedFields.UserDefinedField.FieldValue' in row['BuildingSyncPath']:
 
                 # get attribute reference
@@ -126,7 +125,7 @@ def process_usecase(use_case_object):
             else:
                 # get attribute reference
                 results = Attribute.objects.filter(path=row['BuildingSyncPath'],
-                                                       schema=use_case_object.schema)
+                                                   schema=use_case_object.schema)
 
                 if not results.exists():
                     errors.append('No attribute matching path: {}'.format(row['BuildingSyncPath']))

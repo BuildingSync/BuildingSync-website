@@ -1,3 +1,2 @@
-from .models.schema import Schema
-from rest_framework import serializers
-
+# from .models.schema import Schema
+# from rest_framework import serializers

@@ -30,6 +30,7 @@ class UseCaseEnumeration(models.Model):
         # there can only be one state for each enumeration and use_case
         unique_together = ('enumeration', 'use_case')
 
+
 class UseCaseUDF(models.Model):
     use_case_attribute = models.ForeignKey('UseCaseAttribute', on_delete=models.CASCADE)
     state = models.IntegerField(choices=STATE_TYPES, default=STATE_IGNORED)

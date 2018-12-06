@@ -29,19 +29,19 @@ from .models.enumeration import Enumeration
 from .models.schema import Schema
 from .models.use_case import UseCase
 
-from rest_framework import viewsets, views
+from rest_framework import views
 from rest_framework.response import Response
-# from rest_framework_xml.parsers import XMLParser
-from rest_framework.parsers import FileUploadParser, MultiPartParser
-# from rest_framework_xml.renderers import XMLRenderer
+from rest_framework.parsers import MultiPartParser
 
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
+
 
 class ValidatorApi(views.APIView):
     """
     API endpoint for validating schemas
     """
     parser_classes = (MultiPartParser,)
+
     def post(self, request, *args, **kwargs):
 
         version = request.data.get('schema_version', None)
@@ -73,6 +73,7 @@ class ValidatorApi(views.APIView):
             return Response({"schema_version": version, "validation_results": validation_results, "success": True})
         else:
             return Response({"success": False, "error": "No schema_version or file parameters sent"})
+
 
 def index(request):
     context = {}
