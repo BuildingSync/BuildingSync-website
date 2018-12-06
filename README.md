@@ -10,17 +10,17 @@ This is the repository for the BuildingSync Validator web application.
 1. Setup python 3.  You can use a virtual environment:
     ```bash
     pyenv install 3.6.5 
-    pyenv virtualenv 3.6.5 bs-validator-3.6.5
-    pyenv local bs-validator-3.6.3
+    pyenv virtualenv 3.6.5 bsync-validator-3.6.5
+    pyenv local bsync-validator-3.6.3
     ```   
 1. Install PostgreSQL server for local development (if desired)
 	* Once installed, create your local database and user:
 		```bash
-		psql -c 'DROP DATABASE bs_validator;'
-		psql -c 'CREATE DATABASE bs_validator;'
-		psql -c "CREATE USER bs_validator WITH ENCRYPTED PASSWORD 'bs_validator';"
-		psql -c 'GRANT ALL PRIVILEGES ON DATABASE bs_validator TO bs_validator;'
-		psql -c 'ALTER USER bs_validator CREATEDB;'
+		psql -c 'DROP DATABASE bsync_validator;'
+		psql -c 'CREATE DATABASE bsync_validator;'
+		psql -c "CREATE USER bsync_validator WITH ENCRYPTED PASSWORD 'bsync_validator';"
+		psql -c 'GRANT ALL PRIVILEGES ON DATABASE bsync_validator TO bsync_validator;'
+		psql -c 'ALTER USER bsync_validator CREATEDB;'
 		```
 1. Install Django and associated requirements:
 	```bash
