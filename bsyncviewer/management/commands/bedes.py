@@ -12,47 +12,42 @@ from bsyncviewer.models.bedes_models import BedesTerm, BedesMapping, BedesEnumer
 from bsyncviewer.models.enumeration import Enumeration
 from bsyncviewer.models.schema import Schema
 
-DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
-
 
 class Command(BaseCommand):
     help = 'Closes the specified poll for voting'
 
     def add_arguments(self, parser):
-        parser.add_argument('--schema_version', type=str, default=DEFAULT_SCHEMA_VERSION)
-        parser.add_argument('--bedes_version', type=str, default='v2.2')
+        parser.add_argument('--schema_version', type=str, default=settings.DEFAULT_SCHEMA_VERSION)
+        parser.add_argument('--bedes_version', type=str, default='v1.2')
         parser.add_argument('--save_to_db', default=False, action="store_true")
 
     def handle(self, *args, **options):
-
-        # handle arguments
         bedes_version = options['bedes_version']
         schema_version = options['schema_version']
         save_to_db = options['save_to_db']
 
         if save_to_db:
+            self.stdout.write('Saving BEDES mappings to database')
             # if save_to_db is True, save CSV files to DB (don't reparse)
             self.save_mappings_to_database(bedes_version, schema_version)
-
         else:
             # do the parsing (only)
+            self.stdout.write('Parsing BEDES data and matching to attributes')
             self.parse(bedes_version, schema_version)
 
     def parse(self, bedes_version, schema_version):
-
         # parse correct bedes version
         bedes = BedesParser(bedes_version)
         bedes.save()
 
-        # print(bedes.terms)
-        # print(bedes.categories)
+        # self.stdout.write(bedes.terms)
+        # self.stdout.write(bedes.categories)
 
         # read the fields from the database, right now default to schema 0.3
-        print("reading schema attributes")
         schema = Schema.objects.filter(version=schema_version).first()
         results = {}
         for attribute in schema.attributes.all().order_by('id'):
-            # print(attribute.na)
+            # self.stdout.write(attribute.na)
             # calculate string distance for every item in bedes
             # use id as the key since name is not unique
             results[attribute.id] = []
@@ -77,7 +72,7 @@ class Command(BaseCommand):
                     "attribute_path": attribute.path
                 })
 
-        # print(results)
+        # self.stdout.write(results)
 
         # store the results to CSV
         the_path = os.path.join(os.path.dirname(__file__), '../../lib/bedes', bedes_version,
@@ -109,7 +104,7 @@ class Command(BaseCommand):
         list_set = set(content_uuids)
         # convert the set to the list
         unique_cnt = len(list(list_set))
-        print('*******There are {} unique BEDES terms to add*******'.format(unique_cnt))
+        self.stdout.write('*******There are {} unique BEDES terms to add*******'.format(unique_cnt))
 
         results = {}
         for enumeration in Enumeration.objects.filter(schema=schema):
@@ -154,10 +149,10 @@ class Command(BaseCommand):
         list_set = set(content_uuids)
         # convert the set to the list
         unique_cnt = len(list(list_set))
-        print(
+        self.stdout.write(
             '*******There are {} unique BEDES enum values to add*******'.format(unique_cnt))
 
-        # print(results)
+        # self.stdout.write(results)
 
         self.stdout.write('Finished parsing bedes')
 
