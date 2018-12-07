@@ -17,7 +17,7 @@ services:
       - POSTGRES_USER=selection-tool
       - POSTGRES_PASSWORD=super-secret-password
       - DJANGO_SECRET_KEY=super-secret-key
-      - DJANGO_SETTINGS_MODULE=bsviewer.settings.docker
+      - DJANGO_SETTINGS_MODULE=bsyncviewer.settings.docker
       - DJANGO_DEBUG=False
       - SELECTION_TOOL_ADMIN_USER=user1
       - SELECTION_TOOL_ADMIN_EMAIL=user1@buildingsync.net

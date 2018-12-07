@@ -2,5 +2,5 @@
 .git
 .tox
 docker/README.md
-bsviewer/collected_static
-bsviewer/media
+bsyncviewer/collected_static
+bsyncviewer/media
