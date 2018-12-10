@@ -52,7 +52,7 @@
                           <li><a href="{% url 'admin:index' %}"><span class="glyphicon glyphicon-lock"></span> Admin</a></li>
                       {% endif %}
 
-                      <li class="{% active_page request 'profile' %}"><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span> {{ request.user.get_full_name }}</a></li>
+                      <li class="{% active_page request 'profile' %}"><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span> {{ request.user.get_username }}</a></li>
                       <li><a href="{% url 'logout' %}?next={% if return_to_page_on_login %}{{request.path}}{% else %}{% url 'login' %}{% endif %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                   {% else %}
                       <li class="{% active_page request 'login' %}"><a href="{% url 'login' %}{% if return_to_page_on_login %}?next={{request.path}}{% endif %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
