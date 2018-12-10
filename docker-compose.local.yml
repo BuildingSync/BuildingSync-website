@@ -11,7 +11,7 @@
 version: '3'
 services:
   db-postgres:
-    image: postgres
+    image: 127.0.0.1:5000/postgres
     environment:
       - POSTGRES_DB=selection-tool
       - POSTGRES_USER
@@ -25,7 +25,7 @@ services:
         max_attempts: 3
         window: 120s
   web:
-    build: .
+    image: 127.0.0.1:5000/selection-tool
     environment:
       - POSTGRES_DB=selection-tool
       - POSTGRES_USER
