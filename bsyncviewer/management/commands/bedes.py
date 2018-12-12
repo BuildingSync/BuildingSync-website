@@ -18,7 +18,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument('--schema_version', type=str, default=settings.DEFAULT_SCHEMA_VERSION)
-        parser.add_argument('--bedes_version', type=str, default='v1.2')
+        parser.add_argument('--bedes_version', type=str, default='v2.2')
         parser.add_argument('--save_to_db', default=False, action="store_true")
 
     def handle(self, *args, **options):
