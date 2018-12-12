@@ -1,13 +1,13 @@
 import os
-from random import randint
-from shutil import copyfile
-
-from django.test import Client, TestCase
-from bsyncviewer.lib.validator.workflow import ValidationWorkflow
-from bsyncviewer.models.schema import Schema
-from bsyncviewer.forms import LoadXMLFile, LoadXMLExample
 
 from django.conf import settings
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.test import Client, TestCase
+
+from bsyncviewer.forms import LoadXMLFile, LoadXMLExample
+from bsyncviewer.lib.validator.workflow import ValidationWorkflow
+from bsyncviewer.models.schema import Schema
+
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
 
@@ -18,14 +18,13 @@ class TestValidator(TestCase):
             # add schema file - make sure to create a copy since the version will be deleted if
             # the schema is deleted
             sf = os.path.join(os.path.dirname(__file__), 'data', 'test_schema.xsd')
-            schema_file = os.path.join(
-                os.path.dirname(__file__), 'data', 'schema_file_%s.xsd' % randint(0, 10000)
-            )
-            copyfile(sf, schema_file)
+            file = open(sf, 'rb')
+            simple_uploaded_file = SimpleUploadedFile(file.name, file.read())
+
             self.schema = Schema(
                 name='Version {}'.format(DEFAULT_SCHEMA_VERSION),
                 version=DEFAULT_SCHEMA_VERSION,
-                schema_file=schema_file
+                schema_file=simple_uploaded_file
             )
             self.schema.save()  # Calling save also processes the schema and generates the template
 

@@ -157,10 +157,13 @@ class Command(BaseCommand):
         self.stdout.write('Finished parsing bedes')
 
     def save_mappings_to_database(self, bedes_version, schema_version):
-        # Save bedes terms from CSV files to database
-        # Only save bedes-buildingsync mappings when distance is > 90%
+        """
+        Save bedes terms from CSV files to database
+        Only save bedes-buildingsync mappings when distance is > 90%
 
-        print("SAVING TO DATABASE")
+        :param bedes_version: string, version of bedes to import
+        :param schema_version: string, version of buildingsync to import
+        """
 
         # find the CSVs
         the_path = os.path.join(os.path.dirname(__file__), '../../lib/bedes', bedes_version,
@@ -190,7 +193,6 @@ class Command(BaseCommand):
         # save all terms
         csv_file = open("%s/bedes-mappings-terms.csv" % (the_path), mode='r')
         bedes_mappings = csv.DictReader(csv_file)
-        bedes_mappings.fieldnames
         for term in bedes_mappings:
             # get_or_create here b/c CSV structure maps schema attributes to bedes terms
             # there could be multiple listings of the same bedes term
