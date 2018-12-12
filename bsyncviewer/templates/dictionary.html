@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/themes/default/style.min.css"/>
+{% endblock %}
+
+{% block title %}BuildingSync Schema Viewer - Data Dictionary{% endblock %}
+
+{% block content_notitle %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="dropdown pull-right header-row-item">
+          <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="versionSelector"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Version: {{ schema_version }} <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labeledby="versionSelector">
+            {% for version in versions %}
+              <li>
+                <a href="{{ version.link }}">
+                  {{ version.name }}
+                  {% if version.is_current %}
+                    <span class="glyphicon glyphicon-ok" aria-hidden="false"></span>
+                    <span class="sr-only"> selected</span>
+                  {% endif %}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+         <header class="major">
+          <h2>Data Dictionary</h2>
+        </header>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8">
+        <div class="panel panel-accent">
+          <div class="panel-heading">
+            <h3 class="panel-title">Schema Browser</h3>
+          </div>
+          <div class="panel-body" id="schematree"></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h4>Search</h4>
+        <form class="form-inline" role="form" id="treesearch">
+          <div class="form-group col-md-10">
+            <label class="sr-only">Search</label>
+            <input type="text" class="" id="treesearchquery">
+          </div>
+          <button type="submit" class="btn btn-default" style="margin-bottom:20px;"><span
+              class="glyphicon glyphicon-search"></span></button>
+        </form>
+
+
+        <h2 id="enum_title" class="hidden">SELECTED NAME</h2>
+        <!--TODO: eventually look up the bedes term and display here-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Data Dictionary Links</h2>
+            </div>
+            <div class="panel-body" id="bedes_panel">
+              <div id="bedes_none" class="visible">
+                No mapping found
+              </div>
+              <div id="bedes_found" class="hidden">
+                <div class="pad-bot-10"><span class="bold" id="bedes_term"></span>&mdash;<span id="bedes_definition"></span></div>
+                <div class="pad-bot-10"><span class="bold">Category &mdash;</span> <span id="bedes_category"></span></div>
+                <div class="pull-right"><a id="bedes_url" href="" target="_blank">BEDES <i class="fa fa-external-link" aria-hidden="true"></i></a></div>
+              </div>
+            </div>
+         </div>
+
+         <div id="enum_panel" class="panel panel-default hidden">
+            <div class="panel-heading">
+                <h2 class="panel-title">Enumerations</h2>
+            </div>
+            <div class="panel-body">
+               <div id="enum_results"></div>
+            </div>
+         </div>
+
+      </div>
+    </div>
+
+  </div>
+
+{% endblock content_notitle %}
+
+{% block extra_script %}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/jstree.min.js"></script>
+  <script type="application/javascript">
+      $(function () {
+          let data = {{ schema_tree_data|safe }};
+
+          $('#schematree').jstree({
+              'core': {
+                  'data': data,
+                  'multiple': false
+              },
+              'plugins': ["search"],
+          }).on('changed.jstree', function (e, data) {
+            // display enums when present
+            if (data.action === 'select_node' && data.selected.length > 0){
+              var node = data.instance.get_node(data.selected[0]);
+              // retrieve and display bedes terms and enum (if present)
+              $.ajax({
+                url: '{% url "get_additional_data" %}',
+                data: {
+                  'element_id': data.selected[0]
+                },
+                dataType: 'json',
+                success: function (jsondata) {
+
+                  // set bedes section and display
+                  if (jsondata.bedes_term != null){
+                    $('#bedes_none').removeClass("visible").addClass("hidden");
+                    $('#bedes_found').removeClass("hidden").addClass("visible");
+                    $('#bedes_term').html(jsondata.bedes_term['term']);
+                    $('#bedes_category').html(jsondata.bedes_term['category']);
+                    $('#bedes_definition').html(jsondata.bedes_term['definition']);
+                    $('#bedes_url').attr('href', jsondata.bedes_term['url']);
+
+                  } else {
+                      // None
+                      $('#bedes_found').removeClass("visible").addClass("hidden");
+                      $('#bedes_none').removeClass("hidden").addClass("visible");
+                  }
+                  if (jsondata.has_enum) {
+                  // set enum html section and display
+                  $('#enum_title').removeClass("hidden").addClass("visible");
+                  $('#enum_title').html(node.text);
+                  $('#enum_panel').removeClass("hidden").addClass("visible");
+                  $('#enum_results').html('');
+                  /*$('#enum_results').html(jsondata.enums );*/
+                  var ul = $('<ul>').appendTo('#enum_results');
+                  $(jsondata.enums).each(function(index, item) {
+                    {#console.log(item);#}
+                    var text = '<strong>' + item.name + '</strong>';
+                    if (item['bedes_term']){
+                      text = '<strong>' + text + '</strong>' + '<br/>' + item['bedes_term']['definition'] + '&nbsp;&nbsp;<a href="' + item['bedes_term']['url'] + '" target="_blank">' + 'BEDES <i class="fa fa-external-link" aria-hidden="true"></i></a>';
+                    }
+                    ul.append(
+                        $(document.createElement('li')).html(text)
+                    );
+                  });
+
+                  } else {
+                    $('#enum_panel').addClass("hidden");
+                  }
+                }
+              });
+            } else {
+              $('#enum_panel').addClass("hidden");
+            }
+          });
+
+      });
+      $("#treesearch").submit(function (e) {
+          e.preventDefault();
+          $('#schematree').jstree(true).search($("#treesearchquery").val());
+      });
+  </script>
+
+{% endblock extra_script %}
