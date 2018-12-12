@@ -39,7 +39,7 @@ services:
     depends_on:
       - db-postgres
     ports:
-      - "8080:80"
+      - "80:80"
     volumes:
       - selectiontool_mediadata:/srv/selection-tool/media
     deploy:

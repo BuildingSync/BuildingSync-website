@@ -16,9 +16,9 @@ SECRET_KEY (required), unique key for BSYNC SELECTION TOOL web application
 # example (do not use these values in production).
 export POSTGRES_USER=selection-tool
 export POSTGRES_PASSWORD=super-secret-password
-export SELECTION_TOOL_ADMIN_USER=admin@bsync.org
+export SELECTION_TOOL_ADMIN_USER=admin
 export SELECTION_TOOL_ADMIN_PASSWORD=super-secret-password
-export SELECTION_TOOL_ADMIN_ORG=default
+export SELECTION_TOOL_ADMIN_EMAIL=admin@buildingsync.net
 export SECRET_KEY=ARQV8qGuJKH8sGnBf6ZeEdJQRKLTUhsvEcp8qG9X9sCPXvGLhdxqnNXpZcy6HEyf
 arguments
 
@@ -38,18 +38,13 @@ if [ -z ${SELECTION_TOOL_ADMIN_USER+x} ]; then
     exit 1
 fi
 
-if [ -z ${SELECTION_TOOL_ADMIN_USER+x} ]; then
-    echo "SELECTION_TOOL_ADMIN_USER is not set"
-    exit 1
-fi
-
 if [ -z ${SELECTION_TOOL_ADMIN_PASSWORD+x} ]; then
     echo "SELECTION_TOOL_ADMIN_PASSWORD is not set"
     exit 1
 fi
 
-if [ -z ${SELECTION_TOOL_ADMIN_ORG+x} ]; then
-    echo "SELECTION_TOOL_ADMIN_PASSWORD is not set"
+if [ -z ${SELECTION_TOOL_ADMIN_EMAIL+x} ]; then
+    echo "SELECTION_TOOL_ADMIN_EMAIL is not set"
     exit 1
 fi
 
@@ -73,18 +68,18 @@ else
 fi
 
 echo "Building latest version of BSYNC SELECTION TOOL"
+# for some reason it skips images, so explicitly pull the postgres image
+docker pull postgres:9.6.10
 docker-compose build --pull
 
 echo "Tagging local containers"
-docker tag buildingsync/selection-tool:latest 127.0.0.1:5000/selection-tool
-docker tag postgres:latest 127.0.0.1:5000/postgres
-docker tag redis:latest 127.0.0.1:5000/redis
+docker tag selection-tool_web:latest 127.0.0.1:5000/selection-tool
+docker tag postgres 127.0.0.1:5000/postgres
 
 sleep 3
 echo "Pushing tagged versions to local registry"
 docker push 127.0.0.1:5000/selection-tool
 docker push 127.0.0.1:5000/postgres
-docker push 127.0.0.1:5000/redis
 
 echo "Deploying"
 # check if the stack is running, and if so then shut it down

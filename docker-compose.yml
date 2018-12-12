@@ -3,7 +3,7 @@
 version: '3'
 services:
   db-postgres:
-    image: postgres
+    image: postgres:9.6.10
     environment:
       - POSTGRES_DB=selection-tool
       - POSTGRES_USER=selection-tool
@@ -19,8 +19,8 @@ services:
       - SECRET_KEY=super-secret-key
       - DJANGO_SETTINGS_MODULE=bsyncviewer.settings.docker
       - DJANGO_DEBUG=False
-      - SELECTION_TOOL_ADMIN_USER=user1
-      - SELECTION_TOOL_ADMIN_EMAIL=user1@buildingsync.net
+      - SELECTION_TOOL_ADMIN_USER=admin
+      - SELECTION_TOOL_ADMIN_EMAIL=admin@buildingsync.net
       - SELECTION_TOOL_ADMIN_PASSWORD=super-secure-password
     depends_on:
       - db-postgres
