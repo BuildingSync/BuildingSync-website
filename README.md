@@ -10,17 +10,17 @@ This is the repository for the BuildingSync Validator web application.
 1. Setup python 3.  You can use a virtual environment:
     ```bash
     pyenv install 3.6.5 
-    pyenv virtualenv 3.6.5 bs-validator-3.6.5
-    pyenv local bs-validator-3.6.3
+    pyenv virtualenv 3.6.5 bsync-validator-3.6.5
+    pyenv local bsync-validator-3.6.3
     ```   
 1. Install PostgreSQL server for local development (if desired)
 	* Once installed, create your local database and user:
 		```bash
-		psql -c 'DROP DATABASE bs_validator;'
-		psql -c 'CREATE DATABASE bs_validator;'
-		psql -c "CREATE USER bs_validator WITH ENCRYPTED PASSWORD 'bs_validator';"
-		psql -c 'GRANT ALL PRIVILEGES ON DATABASE bs_validator TO bs_validator;'
-		psql -c 'ALTER USER bs_validator CREATEDB;'
+		psql -c 'DROP DATABASE bsync_validator;'
+		psql -c 'CREATE DATABASE bsync_validator;'
+		psql -c "CREATE USER bsync_validator WITH ENCRYPTED PASSWORD 'bsync_validator';"
+		psql -c 'GRANT ALL PRIVILEGES ON DATABASE bsync_validator TO bsync_validator;'
+		psql -c 'ALTER USER bsync_validator CREATEDB;'
 		```
 1. Install Django and associated requirements:
 	```bash
@@ -117,7 +117,7 @@ To parse and map a new BEDES version:
     ```bash
     python manage.py bedes --schema_version=X.X.X --bedes_version=X.X
     ```
-    Note that the bedes_version contains a v, ex: v1.2.
+    Note that the bedes_version contains a v, ex: v2.2.
     This will create a ```bedes_vX.X.json``` file in the lib/bedes/vX.X directory.  It will also create 2 CSV files:  ```bedes-mappings-enumerations.csv``` and ```bedes-mappings-terms.csv``` in the lib/bedes/vX.X/schemaX.X directory.
 
     *Note* &mdash; The BEDES terms must be mapped for each version of the BuildingSync schema by calling the ```python manage.py bedes``` command above.

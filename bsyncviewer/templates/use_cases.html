@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}BuildingSync Schema Viewer{% endblock %}
+
+{% block content_notitle %}
+
+    <div class="container">
+    	<header class="major">
+			<h2>Public Use Cases</h2>
+    	</header>
+    	<div class="row">
+        	<div class="col-md-9">
+        		{% if public_usecases %}
+        			<table class="table">
+	  					<tr>
+	  						<th>Name</th>
+	  						<th>Schema Version</th>
+                <th>Description</th>
+	  					</tr>
+						{% for case in public_usecases %}
+						<tr>
+							<td>{{ case.name }}</td>
+							<td>{{ case.schema }}</td>
+              <td>{{ case.description }}</td>
+						</tr>
+						{% endfor %}
+					</table>
+        		{% endif %}
+        	</div>
+        </div>
+
+        {% if user.is_authenticated %}
+	        <div class="row pad-top-20">
+	        	<div class="col-md-9">
+	        		<h3>My Use Cases</h3>
+	        		{% if user_usecases %}
+	        			<table class="table">
+		  					<tr>
+		  						<th>Name</th>
+		  						<th>Schema Version</th>
+		  						<th>Public ?</th>
+		  						<th>Actions </th>
+		  					</tr>
+							{% for case in user_usecases %}
+							<tr>
+								<td>{{ case.name }} </td>
+								<td>{{ case.schema }}</td>
+								<td>{{ case.make_public }}</td>
+								<td>
+                                    {% if case.schema and not case.import_file %}
+                                        <a href="{% url 'download_template' id=case.schema.id %}">Download Use Case Template</a> |
+                                    {% endif %}
+									<a href="{% url 'use_case_update' case.id %}">Edit</a> |
+									<a href="{% url 'use_case_delete' case.id %}">Delete</a>
+                                    {% if case.parsing_errors %}  <span class="red pad-lr-10"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Parsing Errors</span> {% endif %}
+								</td>
+
+							</tr>
+							{% endfor %}
+						</table>
+	        		{% endif %}
+	        	</div>
+	        </div>
+	        <a class="btn btn-accent" href="{% url 'use_case_create' %}" role="button">
+	            <i class="fa fa-plus" aria-hidden="true"></i>
+	            New Use Case
+	        </a>
+	        <div class="pad-bot-20">
+	        	&nbsp;
+	        </div>
+        {% endif %}
+    </div>
+
+{% endblock content_notitle %}

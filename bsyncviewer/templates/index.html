@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}BuildingSync Schema Viewer{% endblock %}
+
+{% block content_notitle %}
+
+    <div class="container">
+
+        <header class="major">
+        	<div class="row">
+	            <div class="col-md-4">
+	            	<h2>Use Cases</h2>
+	            	<p>Browse the BuildingSync<sup>&reg;</sup> schema and existing use cases of the schema.</p>
+	            	<p>Create new use cases that include specific parts of the BuildingSync schema.</p>
+	            	<a class="btn btn-accent" href="{% url 'cases' %}" role="button">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                        Use Cases
+                    </a>
+	            </div>
+	            <div class="col-md-4">
+	            	<h2>Validator</h2>
+	            	<p>Validate an xml against the BuildingSync schema or existing use cases of the schema.</p>
+	            		<a class="btn btn-accent" href="{% url 'validator' %}" role="button">
+                        <i class="fa fa-file-code-o" aria-hidden="true"></i>
+                        Validate XML
+                    </a>
+	            </div>
+	            <div class="col-md-4">
+	            	<h2>Resources</h2>
+                	<ul class="list-group">
+					 	<li class="list-group-item list-group-item-accent">
+					   		<a href="https://buildingsync.net/index.html">
+	                        <i class="fa fa-globe" aria-hidden="true"></i> BuildingSync
+	                    	</a>
+	                  	</li>
+	                  	<li class="list-group-item list-group-item-accent">
+	                  		<a href="{% url 'dictionary' %}">
+	                        <i class="fa fa-book" aria-hidden="true"></i> Data Dictionary
+	                    	</a>
+						</li>
+					</ul>
+	            </div>
+        	</div>
+        </header>
+    </div>
+
+{% endblock content_notitle %}

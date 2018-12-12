@@ -25,7 +25,7 @@ Starting over - one line
 * Copy the config file
    
 ```bash
-sudo cp /srv/bs-tool/docker-compose.docker.yml.template /srv/docker-compose.docker.yml
+sudo cp /srv/selection-tool/docker-compose.docker.yml.template /srv/docker-compose.docker.yml
 sudo chmod 600 /srv/docker-compose.docker.yml
 ```
 * Set the various environment variables by editing the new /srv/docker-compose.docker.yml
