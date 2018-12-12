@@ -87,8 +87,11 @@ buildingsync/static/vendors/bower_components/
 config.env
 package-lock.json
 bsyncviewer/lib/bedes/*/bedes_v*.json
+bsyncviewer/media/
 schema_file_*
 use_case_file_*
 /mapping_template*
 template_*
 /bedes-mappings-*.csv
+
+

@@ -17,7 +17,6 @@ echo "Waiting for postgres to start"
 # Create the default user based on the env vars
 echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('${SELECTION_TOOL_ADMIN_USER}', '${SELECTION_TOOL_ADMIN_EMAIL}', '${SELECTION_TOOL_ADMIN_PASSWORD}')" | python manage.py shell
 
-
 WORKERS=$(($(nproc) / 2))
 WORKERS=$(($WORKERS>1?$WORKERS:1))
 

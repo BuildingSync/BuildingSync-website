@@ -23,7 +23,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 if SECRET_KEY == '':
     raise Exception('SECRET_KEY not set in docker config')
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -45,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -91,7 +91,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
@@ -129,6 +128,8 @@ STATIC_ROOT = os.path.join(SETTINGS_PATH, 'collected_static')
 # STATICFILES_DIRS = (
 #     os.path.join(SETTINGS_PATH, 'static'),  # bower stores files here
 # )
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(SETTINGS_PATH, 'media')
 
 DEFAULT_SCHEMA_VERSION = '0.3.0'
 

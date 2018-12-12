@@ -272,19 +272,17 @@ def update_user(request):
 
 
 @login_required
-def download_template(request, id):
-    if id:
-        # For some reason, this is linked to the version, not the name. hmm...
-        schema = Schema.objects.filter(pk=id)[0]
+def download_template(request, template_id):
+    if template_id:
+        schema = Schema.objects.filter(pk=template_id)[0]
         if schema:
-
             file_path = schema.usecase_template_file.path
 
             if os.path.exists(file_path):
                 with open(file_path, 'rb') as fh:
                     response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
                     response['Content-Disposition'] = 'inline; filename=' + os.path.basename(
-                        file_path) + '.csv'
+                        file_path)
                     return response
             raise Http404
         raise Http404

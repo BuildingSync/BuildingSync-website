@@ -27,7 +27,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - selectiontool_mediadata:/srv/selection-tool/media
+      - selectiontool_mediadata:/srv/selection-tool/bsviewer/media
 volumes:
   selectiontool_pgdata:
     external: true

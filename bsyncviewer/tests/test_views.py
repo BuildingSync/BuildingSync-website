@@ -1,15 +1,17 @@
 import os
-from random import randint
-from shutil import copyfile
 from io import StringIO
-from django.core.management import call_command
-from django.test import Client, TestCase
-from django.urls import reverse
-from bsyncviewer.models.schema import Schema
-from bsyncviewer.models.bedes_models import BedesEnumeration, BedesTerm, BedesMapping
-from bsyncviewer.models.attribute import Attribute
 
 from django.conf import settings
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.management import call_command
+from django.test import Client
+from django.test import TestCase
+from django.urls import reverse
+
+from bsyncviewer.models.attribute import Attribute
+from bsyncviewer.models.bedes_models import BedesEnumeration, BedesTerm, BedesMapping
+from bsyncviewer.models.schema import Schema
+
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
 
@@ -46,7 +48,6 @@ class BsyncviewerViewTests(TestCase):
         self.assertRedirects(response, redirect_url, target_status_code=404)
 
     def test_bedes_ajax_call(self):
-
         # need schema and bedes imported
         self.add_schema()
         self.add_bedes_mapping()
@@ -61,7 +62,9 @@ class BsyncviewerViewTests(TestCase):
         bterm = bterm[0]
         # get attribute
         mapping = BedesMapping.objects.filter(bedesTerm_id=bterm.pk)[0]
-        print('mapping: {}, bedestermid: {}, attributeid: {}'.format(mapping.id, mapping.bedesTerm_id, mapping.attribute_id))
+        print(
+            'mapping: {}, bedestermid: {}, attributeid: {}'.format(mapping.id, mapping.bedesTerm_id,
+                                                                   mapping.attribute_id))
 
         attrb = Attribute.objects.get(id=mapping.attribute_id)
         print('attribute: {}'.format(attrb))
@@ -87,14 +90,13 @@ class BsyncviewerViewTests(TestCase):
             # add schema file - make sure to create a copy since the version will be deleted if
             # the schema is deleted
             sf = os.path.join(os.path.dirname(__file__), 'data', 'test_schema.xsd')
-            schema_file = os.path.join(
-                os.path.dirname(__file__), 'data', 'schema_file_%s.xsd' % randint(0, 10000)
-            )
-            copyfile(sf, schema_file)
+            file = open(sf, 'rb')
+            simple_uploaded_file = SimpleUploadedFile(file.name, file.read())
+
             self.schema = Schema(
                 name='Version {}'.format(DEFAULT_SCHEMA_VERSION),
                 version=DEFAULT_SCHEMA_VERSION,
-                schema_file=schema_file
+                schema_file=simple_uploaded_file
             )
             self.schema.save()  # Calling save also processes the schema and generates the template
 
@@ -102,10 +104,12 @@ class BsyncviewerViewTests(TestCase):
         # create the CSV files
         out = StringIO()
         print("VERSION: {}".format(DEFAULT_SCHEMA_VERSION))
-        call_command('bedes', schema_version=DEFAULT_SCHEMA_VERSION, bedes_version='v2.2', stdout=out)
+        call_command('bedes', schema_version=DEFAULT_SCHEMA_VERSION, bedes_version='v2.2',
+                     stdout=out)
 
         # add to database
-        call_command('bedes', schema_version=DEFAULT_SCHEMA_VERSION, bedes_version='v2.2', save_to_db=True, stdout=out)
+        call_command('bedes', schema_version=DEFAULT_SCHEMA_VERSION, bedes_version='v2.2',
+                     save_to_db=True, stdout=out)
 
     # TODO: test that you can't add a use case if not authenticated
     # TODO: test that you can add one when authenticated

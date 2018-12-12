@@ -1,9 +1,11 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django.urls import path, re_path, include
+from rest_framework import routers
 
 from bsyncviewer import views
 from bsyncviewer.admin import admin_site
-from rest_framework import routers
 
 app_name = 'bsyncviewer'
 
@@ -23,7 +25,8 @@ urlpatterns = [
     path('use_case/create/', views.UseCaseCreate.as_view(), name='use_case_create'),
     path('use_case/<int:pk>/update/', views.UseCaseUpdate.as_view(), name='use_case_update'),
     path('use_case/<int:pk>/delete/', views.UseCaseDelete.as_view(), name='use_case_delete'),
-    re_path('download_template/(?P<id>\S+)/$', views.download_template, name='download_template'),
+    re_path('download_template/(?P<template_id>\S+)/$', views.download_template,
+            name='download_template'),
     path('validator', views.validator, name='validator'),
     path('dictionary', views.redirect_data_dictionary, name='dictionary'),
     re_path(r'^dictionary/(?P<version>\w+.\w+.\w+)/$', views.dictionary, name='dictionaryversion'),
@@ -32,3 +35,6 @@ urlpatterns = [
     re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     re_path(r'^api/validate', views.ValidatorApi.as_view())
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

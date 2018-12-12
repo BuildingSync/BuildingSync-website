@@ -11,7 +11,7 @@ from bsyncviewer.settings.dev import *  # noqa
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bs_validator',
+        'NAME': 'bsync_validator',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'localhost',
