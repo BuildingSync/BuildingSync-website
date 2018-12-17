@@ -74,7 +74,7 @@ docker-compose build --pull
 
 echo "Tagging local containers"
 docker tag selection-tool_web:latest 127.0.0.1:5000/selection-tool
-docker tag postgres 127.0.0.1:5000/postgres
+docker tag postgres:9.6.10 127.0.0.1:5000/postgres
 
 sleep 3
 echo "Pushing tagged versions to local registry"
