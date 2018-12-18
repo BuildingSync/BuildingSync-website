@@ -101,7 +101,50 @@ Admin users: Find the use case in the Django Administration console and click th
 
 ### Validator
 
-<TODO>
+The validator page allows users to validate XMLs against the BuildingSync schema and its public use cases.  It can be tried with selected example files, or custom XML files can be uploaded for validation.
+
+#### Validator API
+
+There is also a validator endpoint to validate XML files against the BuildingSync schema and its public use cases.
+
+Request: POST to https://selectiontool.buildingsync.net/api/validate
+Use form-data to specify the following parameters for schema version and XML file:  ```schema_version``` and ```file```.
+
+Example Response:
+```json
+{
+    "schema_version": "0.3.0",
+    "validation_results": {
+        "schema": {
+            "valid": true,
+            "schema_version": "0.3.0"
+        },
+        "use_cases": {
+            "EXAMPLE USE CASE 1": {
+                "valid": false,
+                "errors": [
+                    {
+                        "path": "Audits.Audit.Sites.Site.Facilities.Facility.ConditionedFloorsAboveGrade",
+                        "message": "Required element not found"
+                    },
+                    {
+                        "path": "Audits.Audit.Sites.Site.Facilities.Facility.ConditionedFloorsBelowGrade",
+                        "message": "Required element not found"
+                    },
+                    {
+                        "path": "Audits.Audit.Sites.Site.Facilities.Facility.UnconditionedFloorsAboveGrade",
+                        "message": "Required element not found"
+                    }
+                ]
+            },
+            "EXAMPLE USE CASE 1": {
+                "valid": true
+            }
+        }
+    },
+    "success": true
+}
+```
 
 ### BEDES
 

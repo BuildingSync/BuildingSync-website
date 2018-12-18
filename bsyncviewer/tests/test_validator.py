@@ -68,7 +68,7 @@ class TestValidator(TestCase):
 
     def test_example_form_valid_data(self):
         head, tail = os.path.split(os.path.dirname(__file__))
-        file_name = os.path.join(head, 'lib', 'validator', 'examples', 'example_schemaValid.xml')
+        file_name = os.path.join(head, 'lib', 'validator', 'examples', 'Example – A Valid Schema.xml')
 
         form_data = {
             'schema_version': DEFAULT_SCHEMA_VERSION,
@@ -83,7 +83,7 @@ class TestValidator(TestCase):
     def test_validator_workflow(self):
         version = DEFAULT_SCHEMA_VERSION
         head, tail = os.path.split(os.path.dirname(__file__))
-        filepath = os.path.join(head, 'lib', 'validator', 'examples', 'example_schemaValid.xml')
+        filepath = os.path.join(head, 'lib', 'validator', 'examples', 'Example – A Valid Schema.xml')
         f = open(filepath, 'r')
         workflow = ValidationWorkflow(f, filepath, version)
         validation_results = workflow.validate_all()
