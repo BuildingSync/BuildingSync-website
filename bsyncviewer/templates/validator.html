@@ -37,7 +37,9 @@
             <form role="form" method="post">
               {% csrf_token %}
               {% bootstrap_form load_xml_example_form %}
-              {% buttons submit='OK' reset="Cancel" %}{% endbuttons %}
+              {% buttons submit='OK' reset="Cancel" %}
+              {% endbuttons %}
+               <div class="pull-right"><a href="{% url 'download_examples' %}">Download Examples</a></div>
             </form>
           </div>
         </div>

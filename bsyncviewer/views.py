@@ -234,11 +234,22 @@ def validator(request):
         context['load_xml_{}_form'.format(form_type)] = form
         return render(request, 'validator.html', context)
 
+def download_examples(request):
+    file_path = os.path.join(
+        os.path.abspath(os.path.dirname(__file__)), 'lib', 'validator', 'examples', 'example_files.zip'
+    )
+
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type='application/force-download')
+            response['Content-Disposition'] = 'attachment; filename="%s"' % os.path.basename(
+                file_path)
+            return response
+    raise Http404
+
 
 @login_required
 def profile(request):
-    # if request.GET and request.GET['passwordchange'] == 'done':
-    #     messages.add_message(request, messages.SUCCESS, 'Password changed')
     return render(request, 'registration/profile.html')
 
 
