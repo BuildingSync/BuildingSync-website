@@ -33,7 +33,6 @@ from rest_framework import views
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser
 
-from shutil import copyfile
 
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
@@ -235,6 +234,7 @@ def validator(request):
     else:
         context['load_xml_{}_form'.format(form_type)] = form
         return render(request, 'validator.html', context)
+
 
 def download_examples(request):
     file_path = os.path.join(

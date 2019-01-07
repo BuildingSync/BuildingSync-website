@@ -8,6 +8,7 @@ from rest_framework import status
 
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
+
 class TestApi(APITestCase):
     def setUp(self):
         self.schema = Schema.objects.filter(version=DEFAULT_SCHEMA_VERSION).first()
