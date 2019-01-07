@@ -91,6 +91,11 @@ class TestValidator(TestCase):
         self.assertIn('schema', validation_results)
         self.assertIn('use_cases', validation_results)
 
+    def test_validator_api(self):
+        version = DEFAULT_SCHEMA_VERSION
+
+
+
     def tearDown(self):
         # clean-up files on disk
         if self.schema and self.schema.id is not None:

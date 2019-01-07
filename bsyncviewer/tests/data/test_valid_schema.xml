@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<auc:Audits xmlns:auc="http://nrel.gov/schemas/bedes-auc/2014">
+  <auc:Audit ID="Audit-70234559076380">
+    <auc:Sites>
+      <auc:Site ID="Site-70234398332900">
+        <auc:Address>
+          <auc:StreetAddressDetail>
+            <auc:Simplified>
+              <auc:StreetAddress>225 West 41st Street</auc:StreetAddress>
+            </auc:Simplified>
+          </auc:StreetAddressDetail>
+          <auc:City>New York</auc:City>
+          <auc:State>NY</auc:State>
+          <auc:PostalCode>10036</auc:PostalCode>
+        </auc:Address>
+      </auc:Site>
+    </auc:Sites>
+    <auc:Contacts>
+      <auc:Contact ID="Contact-70234559056300">
+        <auc:ContactRole>Contributor</auc:ContactRole>
+        <auc:ContactName>Doug Baldwin - Sub</auc:ContactName>
+        <auc:ContactCompany>Submitter Company</auc:ContactCompany>
+        <auc:Address>
+          <auc:StreetAddressDetail>
+            <auc:Simplified>
+              <auc:StreetAddress>123 Street</auc:StreetAddress>
+            </auc:Simplified>
+          </auc:StreetAddressDetail>
+          <auc:City>Chicago</auc:City>
+          <auc:State>IL</auc:State>
+          <auc:PostalCode>60601</auc:PostalCode>
+        </auc:Address>
+        <auc:ContactTelephoneNumbers>
+          <auc:ContactTelephoneNumber>
+            <auc:TelephoneNumber>(111) 111-1111</auc:TelephoneNumber>
+          </auc:ContactTelephoneNumber>
+        </auc:ContactTelephoneNumbers>
+        <auc:ContactEmailAddresses>
+          <auc:ContactEmailAddress>
+            <auc:EmailAddress>doug.baldwin@aol.com</auc:EmailAddress>
+          </auc:ContactEmailAddress>
+        </auc:ContactEmailAddresses>
+      </auc:Contact>
+      <auc:Contact ID="Contact-70234558989420">
+        <auc:ContactRole>Energy Auditor</auc:ContactRole>
+        <auc:ContactName>Steve Largent - Aud</auc:ContactName>
+        <auc:ContactCompany>Auditor Company</auc:ContactCompany>
+        <auc:Address>
+          <auc:StreetAddressDetail>
+            <auc:Simplified>
+              <auc:StreetAddress>123 Street</auc:StreetAddress>
+            </auc:Simplified>
+          </auc:StreetAddressDetail>
+          <auc:City>Chicago</auc:City>
+          <auc:State>IL</auc:State>
+          <auc:PostalCode>60601</auc:PostalCode>
+        </auc:Address>
+        <auc:ContactTelephoneNumbers>
+          <auc:ContactTelephoneNumber>
+            <auc:TelephoneNumber>(222) 222-2222</auc:TelephoneNumber>
+          </auc:ContactTelephoneNumber>
+        </auc:ContactTelephoneNumbers>
+        <auc:ContactEmailAddresses>
+          <auc:ContactEmailAddress>
+            <auc:EmailAddress>steve.largent@aol.com</auc:EmailAddress>
+          </auc:ContactEmailAddress>
+        </auc:ContactEmailAddresses>
+      </auc:Contact>
+      <auc:Contact ID="Contact-70234395810660">
+        <auc:ContactRole>Operator</auc:ContactRole>
+        <auc:ContactName>Steve Smith - BOper</auc:ContactName>
+        <auc:ContactCompany>Building Operator</auc:ContactCompany>
+        <auc:Address>
+          <auc:StreetAddressDetail>
+            <auc:Simplified>
+              <auc:StreetAddress>123 Street</auc:StreetAddress>
+            </auc:Simplified>
+          </auc:StreetAddressDetail>
+          <auc:City>Chicago</auc:City>
+          <auc:State>IL</auc:State>
+          <auc:PostalCode>60601</auc:PostalCode>
+        </auc:Address>
+        <auc:ContactTelephoneNumbers>
+          <auc:ContactTelephoneNumber>
+            <auc:TelephoneNumber>(666) 666-6666</auc:TelephoneNumber>
+          </auc:ContactTelephoneNumber>
+        </auc:ContactTelephoneNumbers>
+        <auc:ContactEmailAddresses>
+          <auc:ContactEmailAddress>
+            <auc:EmailAddress>steve.smith@aol.com</auc:EmailAddress>
+          </auc:ContactEmailAddress>
+        </auc:ContactEmailAddresses>
+      </auc:Contact>
+      <auc:Contact ID="Contact-70234398535080">
+        <auc:ContactRole>Owner</auc:ContactRole>
+        <auc:ContactName>Jim Zorn - BOwn</auc:ContactName>
+        <auc:ContactCompany>Acme Properties</auc:ContactCompany>
+        <auc:Address>
+          <auc:StreetAddressDetail>
+            <auc:Simplified>
+              <auc:StreetAddress>123 Street</auc:StreetAddress>
+            </auc:Simplified>
+          </auc:StreetAddressDetail>
+          <auc:City>Chicago</auc:City>
+          <auc:State>IL</auc:State>
+          <auc:PostalCode>60601</auc:PostalCode>
+        </auc:Address>
+        <auc:ContactTelephoneNumbers>
+          <auc:ContactTelephoneNumber>
+            <auc:TelephoneNumber>(333) 333-3333</auc:TelephoneNumber>
+          </auc:ContactTelephoneNumber>
+        </auc:ContactTelephoneNumbers>
+        <auc:ContactEmailAddresses>
+          <auc:ContactEmailAddress>
+            <auc:EmailAddress>jim.zorn@aol.com</auc:EmailAddress>
+          </auc:ContactEmailAddress>
+        </auc:ContactEmailAddresses>
+      </auc:Contact>
+      <auc:Contact ID="Contact-70234398476680">
+        <auc:ContactRole>Qualified Assessor</auc:ContactRole>
+        <auc:ContactName>Russell Wilson - Lic Pro</auc:ContactName>
+        <auc:ContactCompany>Licensed Professional</auc:ContactCompany>
+        <auc:Address>
+          <auc:StreetAddressDetail>
+            <auc:Simplified>
+              <auc:StreetAddress>123 Street</auc:StreetAddress>
+            </auc:Simplified>
+          </auc:StreetAddressDetail>
+          <auc:City>Chicago</auc:City>
+          <auc:State>IL</auc:State>
+          <auc:PostalCode>60601</auc:PostalCode>
+        </auc:Address>
+        <auc:ContactTelephoneNumbers>
+          <auc:ContactTelephoneNumber>
+            <auc:TelephoneNumber>(444) 444-4444</auc:TelephoneNumber>
+          </auc:ContactTelephoneNumber>
+        </auc:ContactTelephoneNumbers>
+        <auc:ContactEmailAddresses>
+          <auc:ContactEmailAddress>
+            <auc:EmailAddress>russell.wilson@aol.com</auc:EmailAddress>
+          </auc:ContactEmailAddress>
+        </auc:ContactEmailAddresses>
+      </auc:Contact>
+      <auc:Contact ID="Contact-70234398407960">
+        <auc:ContactRole>Property Management Company</auc:ContactRole>
+        <auc:ContactName>Curt Warner - PM</auc:ContactName>
+        <auc:ContactCompany>Property Management Inc.</auc:ContactCompany>
+        <auc:Address>
+          <auc:StreetAddressDetail>
+            <auc:Simplified>
+              <auc:StreetAddress>123 Street</auc:StreetAddress>
+            </auc:Simplified>
+          </auc:StreetAddressDetail>
+          <auc:City>Chicago</auc:City>
+          <auc:State>IL</auc:State>
+          <auc:PostalCode>60601</auc:PostalCode>
+        </auc:Address>
+        <auc:ContactTelephoneNumbers>
+          <auc:ContactTelephoneNumber>
+            <auc:TelephoneNumber>(555) 555-5555</auc:TelephoneNumber>
+          </auc:ContactTelephoneNumber>
+        </auc:ContactTelephoneNumbers>
+        <auc:ContactEmailAddresses>
+          <auc:ContactEmailAddress>
+            <auc:EmailAddress>curt.warner@aol.com</auc:EmailAddress>
+          </auc:ContactEmailAddress>
+        </auc:ContactEmailAddresses>
+      </auc:Contact>
+    </auc:Contacts>
+  </auc:Audit>
+</auc:Audits>

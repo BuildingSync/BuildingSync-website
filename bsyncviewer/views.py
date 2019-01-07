@@ -33,6 +33,8 @@ from rest_framework import views
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser
 
+from shutil import copyfile
+
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
 
