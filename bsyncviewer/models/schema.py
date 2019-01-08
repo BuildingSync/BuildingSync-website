@@ -1,7 +1,7 @@
 import csv
 import os
 
-from django.core.files import File
+from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save, post_delete, pre_save
 from django.dispatch import receiver
@@ -30,14 +30,15 @@ class Schema(models.Model):
     def __str__(self):
         return self.name
 
-    def save_template(self, filename=None):
-        '''
-        Generate the use case template
+    def save_template(self):
+        """
+        Generate and save the use case template to the database (and file system)
 
-        :return: list, CSV format
-        '''
+        :return: None
+        """
         required_paths = ['Audits']
 
+        # persist the contents of the schema into a csv format
         data = [['BuildingSyncPath', 'State']]
         for attribute in self.attributes.all().order_by('id'):
             if attribute.path in required_paths:
@@ -45,21 +46,27 @@ class Schema(models.Model):
             else:
                 data.append([attribute.path, ''])
 
-        if not filename:
-            tmp_file = 'template_%s.csv' % self.version
-        else:
-            tmp_file = filename
-        with open(tmp_file, 'w', newline='') as f:
+        # upload_to has the trailing slash
+        tmp_file = '%s/%stemplate_%s.csv' % (
+            settings.MEDIA_ROOT,
+            self._meta.get_field('usecase_template_file').upload_to,
+            self.version
+        )
+
+        # save to model
+        with open(tmp_file, 'w') as f:
+            f.truncate()  # clear out the file if it already exists
             wr = csv.writer(f)
             wr.writerows(data)
 
-        # save to model
-        with open(tmp_file, 'r') as f:
-            file_contents = File(f)
-            self.usecase_template_file.save(tmp_file, file_contents, True)
+        # manually set the name of the file. The root is the MEDIA_ROOT, so include all but that.
+        self.usecase_template_file.name = '%stemplate_%s.csv' % (
+            self._meta.get_field('usecase_template_file').upload_to,
+            self.version
+        )
 
-        # delete tmp_file
-        os.remove(tmp_file)
+        # save the instance of the model.
+        self.save()
 
 
 @receiver(post_save, sender=Schema)
@@ -72,7 +79,7 @@ def parse_schema(sender, instance, **kwargs):
         instance.schema_parsed = True
         instance.save()
 
-    # also save template
+    # also create and save use case template
     if not instance.usecase_template_file:
         instance.save_template()
 
