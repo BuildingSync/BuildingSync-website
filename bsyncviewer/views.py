@@ -16,6 +16,7 @@ from django.http import (
     Http404,
     JsonResponse
 )
+from django.core.mail import send_mail, BadHeaderError
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -319,6 +320,26 @@ def change_password(request):
         'form': form
     })
 
+def emailView(request):
+    if request.method == 'GET':
+        form = forms.ContactForm()
+    else:
+        form = forms.ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, message, email, ['admin@buildingsync.net'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect('success')
+    return render(request, "email.html", {'form': form})
+
+def successView(request):
+    #return HttpResponse('Success! Thank you for your message.')
+    messages.add_message(request, messages.SUCCESS, 'Email Sent! Thank you for your message.')
+    return HttpResponseRedirect(reverse_lazy('index'))
 
 class UseCaseCreate(LoginRequiredMixin, CreateView):
     model = UseCase
@@ -339,3 +360,4 @@ class UseCaseUpdate(LoginRequiredMixin, UpdateView):
 class UseCaseDelete(LoginRequiredMixin, DeleteView):
     model = UseCase
     success_url = reverse_lazy('cases')
+
