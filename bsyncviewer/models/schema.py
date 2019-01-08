@@ -46,6 +46,14 @@ class Schema(models.Model):
             else:
                 data.append([attribute.path, ''])
 
+        # create the path if it doesn't exist yet (in docker the path is automatically created)
+        os.makedirs(
+            '%s/%s' % (
+                settings.MEDIA_ROOT, self._meta.get_field('usecase_template_file').upload_to
+            ),
+            exist_ok=True
+        )
+
         # upload_to has the trailing slash
         tmp_file = '%s/%stemplate_%s.csv' % (
             settings.MEDIA_ROOT,
