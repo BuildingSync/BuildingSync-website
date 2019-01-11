@@ -11,7 +11,6 @@ echo "Waiting for postgres to start"
 
 # Check if a schema has been imports
 ./manage.py reset_schema --schema_version 0.3.0
-./manage.py bedes --schema_version=0.3.0 --bedes_version=v2.2
 ./manage.py bedes --schema_version=0.3.0 --bedes_version=v2.2 --save_to_db
 
 # Create the default user based on the env vars

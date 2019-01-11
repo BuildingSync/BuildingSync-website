@@ -3,7 +3,7 @@
 version: '3'
 services:
   db-postgres:
-    image: postgres:9.6.10
+    image: postgres:11.1
     environment:
       - POSTGRES_DB=selection-tool
       - POSTGRES_USER=selection-tool
@@ -27,7 +27,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - selectiontool_mediadata:/srv/selection-tool/bsviewer/media
+      - selectiontool_mediadata:/srv/selection-tool/bsyncviewer/media
 volumes:
   selectiontool_pgdata:
     external: true

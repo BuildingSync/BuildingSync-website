@@ -68,13 +68,14 @@ else
 fi
 
 echo "Building latest version of BSYNC SELECTION TOOL"
-# for some reason it skips images, so explicitly pull the postgres image
-docker pull postgres:9.6.10
-docker-compose build --pull
+# explicitly pull images from docker-compose. Note that you will need to keep the
+# versions consistent between the compose file and what is below.
+docker-compose pull
+docker-compose build
 
 echo "Tagging local containers"
 docker tag selectiontool_web:latest 127.0.0.1:5000/selection-tool
-docker tag postgres:9.6.10 127.0.0.1:5000/postgres
+docker tag postgres:11.1 127.0.0.1:5000/postgres
 
 sleep 3
 echo "Pushing tagged versions to local registry"
