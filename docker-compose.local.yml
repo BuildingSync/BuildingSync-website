@@ -41,7 +41,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - selectiontool_mediadata:/srv/selection-tool/media
+      - selectiontool_mediadata:/srv/selection-tool/bsyncviewer/media
     deploy:
       restart_policy:
         condition: on-failure

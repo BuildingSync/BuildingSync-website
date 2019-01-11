@@ -32,7 +32,7 @@ ENV_VARS = ['POSTGRES_DB', 'POSTGRES_USER', 'POSTGRES_PASSWORD', ]
 for loc in ENV_VARS:
     locals()[loc] = os.environ.get(loc)
     if not locals().get(loc):
-        raise Exception("%s Not defined as env variables" % loc)
+        raise Exception('%s Not defined as env variables' % loc)
 
 # Application definition
 INSTALLED_APPS = [
@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'bsyncviewer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': 'db-postgres',
+        'PORT': 5432,
         'NAME': POSTGRES_DB,  # noqa
         'USER': POSTGRES_USER,  # noqa
         'PASSWORD': POSTGRES_PASSWORD,  # noqa
-        'HOST': "db-postgres",
-        'PORT': 5432,
     }
 }
 
@@ -128,7 +128,7 @@ STATIC_ROOT = os.path.join(SETTINGS_PATH, 'collected_static')
 # STATICFILES_DIRS = (
 #     os.path.join(SETTINGS_PATH, 'static'),  # bower stores files here
 # )
-MEDIA_URL = "/media/"
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(SETTINGS_PATH, 'media')
 
 DEFAULT_SCHEMA_VERSION = '0.3.0'
