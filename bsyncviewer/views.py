@@ -320,6 +320,7 @@ def change_password(request):
         'form': form
     })
 
+
 def emailView(request):
     if request.method == 'GET':
         form = forms.ContactForm()
@@ -336,10 +337,12 @@ def emailView(request):
             return redirect('success')
     return render(request, "email.html", {'form': form})
 
+
 def successView(request):
-    #return HttpResponse('Success! Thank you for your message.')
+    # return HttpResponse('Success! Thank you for your message.')
     messages.add_message(request, messages.SUCCESS, 'Email Sent! Thank you for your message.')
     return HttpResponseRedirect(reverse_lazy('index'))
+
 
 class UseCaseCreate(LoginRequiredMixin, CreateView):
     model = UseCase
@@ -360,4 +363,3 @@ class UseCaseUpdate(LoginRequiredMixin, UpdateView):
 class UseCaseDelete(LoginRequiredMixin, DeleteView):
     model = UseCase
     success_url = reverse_lazy('cases')
-
