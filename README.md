@@ -113,11 +113,11 @@ Use form-data to specify the following parameters for schema version and XML fil
 Example Response:
 ```json
 {
-    "schema_version": "0.3.0",
+    "schema_version": "1.0.0",
     "validation_results": {
         "schema": {
             "valid": true,
-            "schema_version": "0.3.0"
+            "schema_version": "1.0.0"
         },
         "use_cases": {
             "EXAMPLE USE CASE 1": {
