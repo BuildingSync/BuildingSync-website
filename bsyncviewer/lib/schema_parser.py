@@ -200,6 +200,7 @@ class BuildingSyncSchemaProcessor(object):
             if child.tag.endswith('annotation'):
                 named_element.annotations.append(self._read_annotation(child))
             elif child.tag.endswith('complexType'):
+                print(named_element.name)
                 named_element.complex_types.append(self._read_complex_type(child))
             elif child.tag.endswith('simpleType'):
                 named_element.simple_types.append(self._read_simple_type(child))
@@ -236,6 +237,7 @@ class BuildingSyncSchemaProcessor(object):
     def _read_complex_type(self, parent_object):
         this_complex_type = ComplexTypeElement()
         for child in parent_object.getchildren():
+            print(child.tag)
             if child.tag.endswith('sequence'):
                 this_complex_type.sequences.append(self._read_sequence(child))
             elif child.tag.endswith('simpleContent'):
@@ -245,7 +247,9 @@ class BuildingSyncSchemaProcessor(object):
             elif child.tag.endswith('choice'):
                 this_complex_type.choices.append(self._read_choice(child))
             else:
-                raise Exception("Invalid tag type in _read_complex_type: " + child.tag)
+                print(child)
+                exc = "Invalid tag type in _read_complex_type: " + child.tag
+                raise Exception(exc)
 
         if 'name' in parent_object.attrib:
             self.named_complex_types[parent_object.attrib['name']] = this_complex_type
@@ -333,7 +337,7 @@ class BuildingSyncSchemaProcessor(object):
 
     def walk_root_element(self):
         a, return_rows, b = self._walk_named_element(
-            self.full_schema.named_elements[0], "Audits", 0, 0
+            self.full_schema.named_elements[0], "BuildingSync", 0, 0
         )
 
         return return_rows
@@ -593,12 +597,12 @@ def process_schema(schema_object):
 
     # Create database entries for each schema entry
     with transaction.atomic():
-        # first add root
+        # first add root.  for some reason the parser always skips root element
         b = Attribute(
-            name='Audits',
+            name='BuildingSync',
             type='Named Element',
             tree_level=0,
-            path='Audits',
+            path='BuildingSync',
             schema=schema_object)
         b.save()
 

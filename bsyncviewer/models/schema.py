@@ -19,8 +19,8 @@ def rename_schema_file(instance, path):
 
 # BuildingSync Schema versions
 class Schema(models.Model):
-    name = models.CharField(max_length=100, default="0.3.0", unique=True)
-    version = models.CharField(max_length=100, default="0.3.0", unique=True, null=False)
+    name = models.CharField(max_length=100, default="1.0.0", unique=True)
+    version = models.CharField(max_length=100, default="1.0.0", unique=True, null=False)
     schema_file = models.FileField(upload_to=rename_schema_file, null=True)
     schema_parsed = models.BooleanField(default=False,
                                         help_text="Leave blank. This will be auto-populated.")
@@ -36,10 +36,11 @@ class Schema(models.Model):
 
         :return: None
         """
-        required_paths = ['Audits']
+        # the schema only has the root element required
+        required_paths = ['BuildingSync']
 
         # persist the contents of the schema into a csv format
-        data = [['BuildingSyncPath', 'State']]
+        data = [['BuildingSyncPath', 'State', 'RequiredValues', 'RequiredPairedElement']]
         for attribute in self.attributes.all().order_by('id'):
             if attribute.path in required_paths:
                 data.append([attribute.path, 'Required'])
