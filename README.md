@@ -137,7 +137,7 @@ Example Response:
                     }
                 ]
             },
-            "EXAMPLE USE CASE 1": {
+            "EXAMPLE USE CASE 2": {
                 "valid": true
             }
         }
