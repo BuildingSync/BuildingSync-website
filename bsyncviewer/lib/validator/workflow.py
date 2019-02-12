@@ -74,7 +74,7 @@ class ValidationWorkflow(object):
                 resp['errors'].append(tmp_err)
             except Exception as e:
                 print("GENERIC EXCEPTION DURING XMLSCHEMA VALIDATION")
-                print("EXCEPTION TYPE: {}, e: {}".format(type(e), e))    
+                print("EXCEPTION TYPE: {}, e: {}".format(type(e), e))
                 resp['errors'] = []
                 resp['errors'].append({'path': '', 'message': e})
 
@@ -103,7 +103,7 @@ class ValidationWorkflow(object):
         schema_resp = self.validate_schema()
         resp['schema'] = schema_resp
         if schema_resp['valid'] is False:
-           return resp
+            return resp
 
         print('VALIDATING USE CASES...')
         resp.update(self.validate_use_cases())
@@ -151,9 +151,9 @@ class ValidationWorkflow(object):
                         # not sure if it's a list if only one is found
                         match = False
                         if loopingVar.__class__.__name__ == 'OrderedDict':
-                            #print("ORDERED DICT: {}".format(loopingVar))
+                            # print("ORDERED DICT: {}".format(loopingVar))
                             if loopingVar['auc:FieldName'] == udf.values:
-                                #print("FOUND MATCH!")
+                                # print("FOUND MATCH!")
                                 match = True
                                 # now check field Value
                                 if associatedFieldValue.values and l['auc:FieldValue'] not in associatedFieldValue.values:
@@ -162,11 +162,11 @@ class ValidationWorkflow(object):
                                     results['errors'].append(
                                         {'path': attr.attribute.path, 'message': msg})
                         else:
-                            #print("LIST")
+                            # print("LIST")
                             for index, l in enumerate(loopingVar):
                                 print("elem: {}".format(l))
                                 if l['auc:FieldName'] == udf.values:
-                                    #print("FOUND MATCH!")
+                                    # print("FOUND MATCH!")
                                     match = True
                                     # now check field Value
                                     if associatedFieldValue.values and l['auc:FieldValue'] not in associatedFieldValue.values:
