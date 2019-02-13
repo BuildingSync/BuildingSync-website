@@ -33,14 +33,14 @@ class TestSchema(TestCase):
 
     def test_enumerations(self):
         # check a couple of the attributes to make sure have enumerations
-        test_path = 'Audits.Audit.Contacts.Contact.ContactRole'
+        test_path = 'BuildingSync.Facilities.Facility.Sites.Site.ClimateZoneType.ASHRAE.ClimateZone'
 
         attribute = self.schema.attributes.filter(path=test_path).first()
         self.assertIsNotNone(attribute)
         self.assertEqual(attribute.enumeration_classes.count(), 1)
-        self.assertEqual(attribute.enumeration_classes.first().enumerations.count(), 40)
+        self.assertEqual(attribute.enumeration_classes.first().enumerations.count(), 17)
         self.assertEqual(
-            attribute.enumeration_classes.first().enumerations.first().name, 'Premises'
+            attribute.enumeration_classes.first().enumerations.first().name, '1A'
         )
 
     def test_to_template(self):
@@ -51,7 +51,7 @@ class TestSchema(TestCase):
                 if index == 0:
                     self.assertEqual('BuildingSyncPath', row[0])
                 elif index == 1:
-                    self.assertEqual('Audits', row[0])
+                    self.assertEqual('BuildingSync', row[0])
                     self.assertEqual('Required', row[1])
 
     def test_schema_js_tree(self):
