@@ -54,8 +54,6 @@ class BedesParser(object):
             return False
 
     def parse(self, terms_filename, list_options_filename):
-        print(terms_filename)
-        print(list_options_filename)
         list_options = defaultdict(OrderedDict)
         with open(list_options_filename) as file:
             tmp = xmltodict.parse(file.read())
