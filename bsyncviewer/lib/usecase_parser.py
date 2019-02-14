@@ -32,7 +32,7 @@ def process_usecase(use_case_object):
                 state_val = state[0]
 
         # only processed non-ignored
-        if state_val is not 0:
+        if state_val != 0:
             # Special Case: User-Defined Fields
             # always come in pairs, assuming FieldName then FieldValue
             # need to preserve relationship btw FieldName and FieldValue

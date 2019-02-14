@@ -21,7 +21,7 @@ class SchemaForm(forms.ModelForm):
         pattern = re.compile("\d+\.\d+\.\d+")
 
         if not pattern.match(version):
-            raise forms.ValidationError("Version must be in X.X.X format. Example: 0.3.0.")
+            raise forms.ValidationError("Version must be in X.X.X format. Example: 1.0.0")
 
         return self.cleaned_data
 

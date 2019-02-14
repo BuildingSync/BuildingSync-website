@@ -1,0 +1,117 @@
+attribute_name,attribute_id,attribute_path,bedes_content_uuid,bedes_term,bedes_category,bedes_definition,bedes_url,distance
+BuildingSync,5262,BuildingSync,,,,,,
+Programs,5263,BuildingSync.Programs,,,,,,
+Program,5264,BuildingSync.Programs.Program,,,,,,
+ProgramDate,5265,BuildingSync.Programs.Program.ProgramDate,,,,,,
+ProgramFundingSource,5266,BuildingSync.Programs.Program.ProgramFundingSource,,,,,,
+ProgramClassification,5267,BuildingSync.Programs.Program.ProgramClassification,,,,,,
+Facilities,5268,BuildingSync.Facilities,,,,,,
+Facility,5269,BuildingSync.Facilities.Facility,,,,,,
+Sites,5270,BuildingSync.Facilities.Facility.Sites,,,,,,
+Site,5271,BuildingSync.Facilities.Facility.Sites.Site,,,,,,
+ClimateZoneType,5272,BuildingSync.Facilities.Facility.Sites.Site.ClimateZoneType,83d301d1-3e81-4213-a3a8-c09d1e75337a,Climate Zone Type,Premises,"The climate zone type, based on the organization defining it. Many different organizations have implemented different climate zone definitions based on their needs. The list below represents the current list. This list can be added to over time based on the collaborative BEDES development process.",https://bedes.lbl.gov/node/83d301d1-3e81-4213-a3a8-c09d1e75337a,0.9764705882352941
+ASHRAE,5273,BuildingSync.Facilities.Facility.Sites.Site.ClimateZoneType.ASHRAE,,,,,,
+ClimateZone,5274,BuildingSync.Facilities.Facility.Sites.Site.ClimateZoneType.ASHRAE.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
+EnergyStar,5275,BuildingSync.Facilities.Facility.Sites.Site.ClimateZoneType.EnergyStar,,,,,,
+ClimateZone,5276,BuildingSync.Facilities.Facility.Sites.Site.ClimateZoneType.EnergyStar.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
+CaliforniaTitle24,5277,BuildingSync.Facilities.Facility.Sites.Site.ClimateZoneType.CaliforniaTitle24,,,,,,
+ClimateZone,5278,BuildingSync.Facilities.Facility.Sites.Site.ClimateZoneType.CaliforniaTitle24.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
+IECC,5279,BuildingSync.Facilities.Facility.Sites.Site.ClimateZoneType.IECC,,,,,,
+ClimateZone,5280,BuildingSync.Facilities.Facility.Sites.Site.ClimateZoneType.IECC.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
+BuildingAmerica,5281,BuildingSync.Facilities.Facility.Sites.Site.ClimateZoneType.BuildingAmerica,,,,,,
+ClimateZone,5282,BuildingSync.Facilities.Facility.Sites.Site.ClimateZoneType.BuildingAmerica.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
+DOE,5283,BuildingSync.Facilities.Facility.Sites.Site.ClimateZoneType.DOE,,,,,,
+ClimateZone,5284,BuildingSync.Facilities.Facility.Sites.Site.ClimateZoneType.DOE.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
+Other,5285,BuildingSync.Facilities.Facility.Sites.Site.ClimateZoneType.Other,,,,,,
+ClimateZone,5286,BuildingSync.Facilities.Facility.Sites.Site.ClimateZoneType.Other.ClimateZone,af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,Premises,"Based on the Climate Zone Type term, this is the climate zone designation. For example, if the Climate Zone Type is ASHRAE, and the climate zone for this site fell into the Hot - Humid zone, this term would have the value of ""2A"".",https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,0.9833333333333333
+eGRIDRegionCode,5287,BuildingSync.Facilities.Facility.Sites.Site.eGRIDRegionCode,1c03bd87-9df9-42e9-abf6-f16e2e3b3092,eGRID Region Code,Premises,The eGRID (Emissions and Generation Resource Database) region code associated with the data being described.,https://bedes.lbl.gov/node/1c03bd87-9df9-42e9-abf6-f16e2e3b3092,0.9764705882352941
+WeatherDataStationID,5288,BuildingSync.Facilities.Facility.Sites.Site.WeatherDataStationID,9bcb413f-f100-4f77-953c-5ebdad916148,Weather Data Station ID,Premises,"For an actual weather station, this is the ID assigned by NOAA. For hourly energy simulations, this is the six digit code associated with the hourly weather data, generally found in the name of the weather data file, as well as in the header of the data file.",https://bedes.lbl.gov/node/9bcb413f-f100-4f77-953c-5ebdad916148,0.9739130434782608
+WeatherStationName,5289,BuildingSync.Facilities.Facility.Sites.Site.WeatherStationName,848b9da6-495b-4d9d-85a5-29bf95733a73,Weather Station Name,Premises,"The name of the weather station associated with this premises, which could be used for simulations, weather normalization, anomaly resolution, etc. For simulations, this is usually the name of the weather file, but the name is also in the header of the data file (TMY, IWEC), such as USA_CO_Denver.Intl.AP.",https://bedes.lbl.gov/node/848b9da6-495b-4d9d-85a5-29bf95733a73,0.98
+WeatherStationCategory,5290,BuildingSync.Facilities.Facility.Sites.Site.WeatherStationCategory,93778e60-f5c0-450e-bfee-f0ff60085678,Weather Station Category,Premises,Describes the type of weather station used to specify the site's weather.,https://bedes.lbl.gov/node/93778e60-f5c0-450e-bfee-f0ff60085678,0.9833333333333333
+Longitude,5291,BuildingSync.Facilities.Facility.Sites.Site.Longitude,b263d4b0-0f00-48fd-a750-3e8d610bdb98,Longitude,Premises,"Distance measured in degrees east or west from an imaginary line (called the prime meridian) that goes from the North Pole to the South Pole and that passes through Greenwich, England.",https://bedes.lbl.gov/node/b263d4b0-0f00-48fd-a750-3e8d610bdb98,1.0
+Latitude,5292,BuildingSync.Facilities.Facility.Sites.Site.Latitude,913d4b10-bf26-4c0d-b662-699c339c3ad6,Latitude,Premises,Distance north or south of the equator measured in degrees up to 90 degrees.,https://bedes.lbl.gov/node/913d4b10-bf26-4c0d-b662-699c339c3ad6,1.0
+PremisesIdentifiers,5293,BuildingSync.Facilities.Facility.Sites.Site.PremisesIdentifiers,,,,,,
+PremisesIdentifier,5294,BuildingSync.Facilities.Facility.Sites.Site.PremisesIdentifiers.PremisesIdentifier,,,,,,
+IdentifierLabel,5295,BuildingSync.Facilities.Facility.Sites.Site.PremisesIdentifiers.PremisesIdentifier.IdentifierLabel,224f52fa-2b57-4a3e-8956-2c94bd1996be,Identifier Label,Premises,"Identifier qualifier used in a specific program or dataset. There can be multiple instances of Identifier Labels and associated Identifiers within a given dataset, such as a Listing Identifier, a Project Identifier, or a Custom Identifier.",https://bedes.lbl.gov/node/224f52fa-2b57-4a3e-8956-2c94bd1996be,0.9874999999999999
+IdentifierCustomName,5296,BuildingSync.Facilities.Facility.Sites.Site.PremisesIdentifiers.PremisesIdentifier.IdentifierCustomName,,,,,,
+IdentifierValue,5297,BuildingSync.Facilities.Facility.Sites.Site.PremisesIdentifiers.PremisesIdentifier.IdentifierValue,,,,,,
+PremisesName,5298,BuildingSync.Facilities.Facility.Sites.Site.PremisesName,,,,,,
+PremisesNotes,5299,BuildingSync.Facilities.Facility.Sites.Site.PremisesNotes,,,,,,
+Address,5300,BuildingSync.Facilities.Facility.Sites.Site.Address,,,,,,
+StreetAddressDetail,5301,BuildingSync.Facilities.Facility.Sites.Site.Address.StreetAddressDetail,,,,,,
+Simplified,5302,BuildingSync.Facilities.Facility.Sites.Site.Address.StreetAddressDetail.Simplified,,,,,,
+StreetAddress,5303,BuildingSync.Facilities.Facility.Sites.Site.Address.StreetAddressDetail.Simplified.StreetAddress,,,,,,
+StreetAdditionalInfo,5304,BuildingSync.Facilities.Facility.Sites.Site.Address.StreetAddressDetail.Simplified.StreetAdditionalInfo,,,,,,
+Complex,5305,BuildingSync.Facilities.Facility.Sites.Site.Address.StreetAddressDetail.Complex,,,,,,
+StreetNumberPrefix,5306,BuildingSync.Facilities.Facility.Sites.Site.Address.StreetAddressDetail.Complex.StreetNumberPrefix,,,,,,
+StreetNumberNumeric,5307,BuildingSync.Facilities.Facility.Sites.Site.Address.StreetAddressDetail.Complex.StreetNumberNumeric,,,,,,
+StreetNumberSuffix,5308,BuildingSync.Facilities.Facility.Sites.Site.Address.StreetAddressDetail.Complex.StreetNumberSuffix,,,,,,
+StreetDirPrefix,5309,BuildingSync.Facilities.Facility.Sites.Site.Address.StreetAddressDetail.Complex.StreetDirPrefix,,,,,,
+StreetName,5310,BuildingSync.Facilities.Facility.Sites.Site.Address.StreetAddressDetail.Complex.StreetName,81d08d4f-64e0-47f2-9615-2654eea7b288,Street Name,Contact,"The portion of the complete street name that identifies the particular thoroughfare (as opposed to the Street Name Pre Modifier, Street Name Post Modifier, Street Name Pre Directional, Street Name Post Directional, Street Name Pre Type, Street Name Post Type, and Separator Element (if any) in the complete street name.)",https://bedes.lbl.gov/node/81d08d4f-64e0-47f2-9615-2654eea7b288,0.9818181818181818
+StreetAdditionalInfo,5311,BuildingSync.Facilities.Facility.Sites.Site.Address.StreetAddressDetail.Complex.StreetAdditionalInfo,,,,,,
+StreetSuffix,5312,BuildingSync.Facilities.Facility.Sites.Site.Address.StreetAddressDetail.Complex.StreetSuffix,,,,,,
+StreetSuffixModifier,5313,BuildingSync.Facilities.Facility.Sites.Site.Address.StreetAddressDetail.Complex.StreetSuffixModifier,,,,,,
+StreetDirSuffix,5314,BuildingSync.Facilities.Facility.Sites.Site.Address.StreetAddressDetail.Complex.StreetDirSuffix,,,,,,
+SubaddressType,5315,BuildingSync.Facilities.Facility.Sites.Site.Address.StreetAddressDetail.Complex.SubaddressType,aeae978b-c81e-4318-b6af-8ac8da74dd51,Subaddress Type,Contact,The type of subaddress to which the associated Subaddress Identifier applies.,https://bedes.lbl.gov/node/aeae978b-c81e-4318-b6af-8ac8da74dd51,0.9866666666666667
+SubaddressIdentifier,5316,BuildingSync.Facilities.Facility.Sites.Site.Address.StreetAddressDetail.Complex.SubaddressIdentifier,61ba6f05-7526-4de3-8e86-467d6262c98e,Subaddress Identifier,Contact,"The letters, numbers, words, or combination thereof used to distinguish different subaddresses of the same type when several occur within the same feature. For example, in subaddress ""Building 4"", the Subaddress Identifier = ""4"". Subaddress Identifier can also be parts of a building, for example ""Penthouse"" or ""Mezzanine"".",https://bedes.lbl.gov/node/61ba6f05-7526-4de3-8e86-467d6262c98e,0.9904761904761905
+City,5317,BuildingSync.Facilities.Facility.Sites.Site.Address.City,c208fe09-422d-4031-abf6-073aa7bda8c5,City,Contact,City,https://bedes.lbl.gov/node/c208fe09-422d-4031-abf6-073aa7bda8c5,1.0
+State,5318,BuildingSync.Facilities.Facility.Sites.Site.Address.State,9a8423a7-0729-4eca-b6b4-4ec39a1f4a5b,State,Contact,State,https://bedes.lbl.gov/node/9a8423a7-0729-4eca-b6b4-4ec39a1f4a5b,1.0
+PostalCode,5319,BuildingSync.Facilities.Facility.Sites.Site.Address.PostalCode,,,,,,
+PostalCodePlus4,5320,BuildingSync.Facilities.Facility.Sites.Site.Address.PostalCodePlus4,,,,,,
+County,5321,BuildingSync.Facilities.Facility.Sites.Site.Address.County,be811d87-d5db-4e1c-84ec-ccbbccdb852c,County,Contact,County,https://bedes.lbl.gov/node/be811d87-d5db-4e1c-84ec-ccbbccdb852c,1.0
+Country,5322,BuildingSync.Facilities.Facility.Sites.Site.Address.Country,be811d87-d5db-4e1c-84ec-ccbbccdb852c,County,Contact,County,https://bedes.lbl.gov/node/be811d87-d5db-4e1c-84ec-ccbbccdb852c,0.9714285714285714
+FloorAreas,5323,BuildingSync.Facilities.Facility.Sites.Site.FloorAreas,,,,,,
+FloorArea,5324,BuildingSync.Facilities.Facility.Sites.Site.FloorAreas.FloorArea,,,,,,
+FloorAreaType,5325,BuildingSync.Facilities.Facility.Sites.Site.FloorAreas.FloorArea.FloorAreaType,,,,,,
+FloorAreaCustomName,5326,BuildingSync.Facilities.Facility.Sites.Site.FloorAreas.FloorArea.FloorAreaCustomName,,,,,,
+FloorAreaValue,5327,BuildingSync.Facilities.Facility.Sites.Site.FloorAreas.FloorArea.FloorAreaValue,,,,,,
+FloorAreaPercentage,5328,BuildingSync.Facilities.Facility.Sites.Site.FloorAreas.FloorArea.FloorAreaPercentage,,,,,,
+Story,5329,BuildingSync.Facilities.Facility.Sites.Site.FloorAreas.FloorArea.Story,,,,,,
+Ownership,5330,BuildingSync.Facilities.Facility.Sites.Site.Ownership,24bd82d8-839c-4442-a939-457fae1d207d,Ownership,Contact,"The type of organization, association, or business, that owns the premises.",https://bedes.lbl.gov/node/24bd82d8-839c-4442-a939-457fae1d207d,1.0
+OwnershipStatus,5331,BuildingSync.Facilities.Facility.Sites.Site.OwnershipStatus,11aa3a57-c513-4a19-89ec-3b2a4f2b2088,Ownership Status,Contact,Ownership status of the premises or equipment with respect to the contact.,https://bedes.lbl.gov/node/11aa3a57-c513-4a19-89ec-3b2a4f2b2088,0.9874999999999999
+PrimaryContactID,5332,BuildingSync.Facilities.Facility.Sites.Site.PrimaryContactID,,,,,,
+UserDefinedFields,5333,BuildingSync.Facilities.Facility.Sites.Site.UserDefinedFields,,,,,,
+UserDefinedField,5334,BuildingSync.Facilities.Facility.Sites.Site.UserDefinedFields.UserDefinedField,,,,,,
+FieldName,5335,BuildingSync.Facilities.Facility.Sites.Site.UserDefinedFields.UserDefinedField.FieldName,,,,,,
+FieldValue,5336,BuildingSync.Facilities.Facility.Sites.Site.UserDefinedFields.UserDefinedField.FieldValue,,,,,,
+Contacts,5337,BuildingSync.Facilities.Facility.Contacts,,,,,,
+Contact,5338,BuildingSync.Facilities.Facility.Contacts.Contact,,,,,,
+ContactRole,5339,BuildingSync.Facilities.Facility.Contacts.Contact.ContactRole,,,,,,
+ContactName,5340,BuildingSync.Facilities.Facility.Contacts.Contact.ContactName,028bb2ae-c261-4c5d-b247-3db21cff10ab,Contact Name,Contact,Name of the contact when not full name or company name,https://bedes.lbl.gov/node/028bb2ae-c261-4c5d-b247-3db21cff10ab,0.9833333333333333
+ContactCompany,5341,BuildingSync.Facilities.Facility.Contacts.Contact.ContactCompany,,,,,,
+ContactTitle,5342,BuildingSync.Facilities.Facility.Contacts.Contact.ContactTitle,03062e7b-8e40-4e16-a3d1-476a85c1fc4d,Contact Title,Contact,The title or position of the contact within their organization.,https://bedes.lbl.gov/node/03062e7b-8e40-4e16-a3d1-476a85c1fc4d,0.9846153846153847
+ContactTelephoneNumbers,5343,BuildingSync.Facilities.Facility.Contacts.Contact.ContactTelephoneNumbers,,,,,,
+ContactTelephoneNumber,5344,BuildingSync.Facilities.Facility.Contacts.Contact.ContactTelephoneNumbers.ContactTelephoneNumber,,,,,,
+ContactTelephoneNumberLabel,5345,BuildingSync.Facilities.Facility.Contacts.Contact.ContactTelephoneNumbers.ContactTelephoneNumber.ContactTelephoneNumberLabel,,,,,,
+TelephoneNumber,5346,BuildingSync.Facilities.Facility.Contacts.Contact.ContactTelephoneNumbers.ContactTelephoneNumber.TelephoneNumber,b526e5b0-78d4-4b0b-a8dc-5b8de50ce608,Telephone Number,Contact,Telephone number associated with the contact. Format: Country code (area code) NNN-NNNN.,https://bedes.lbl.gov/node/b526e5b0-78d4-4b0b-a8dc-5b8de50ce608,0.9874999999999999
+ContactEmailAddresses,5347,BuildingSync.Facilities.Facility.Contacts.Contact.ContactEmailAddresses,,,,,,
+ContactEmailAddress,5348,BuildingSync.Facilities.Facility.Contacts.Contact.ContactEmailAddresses.ContactEmailAddress,,,,,,
+ContactEmailAddressLabel,5349,BuildingSync.Facilities.Facility.Contacts.Contact.ContactEmailAddresses.ContactEmailAddress.ContactEmailAddressLabel,,,,,,
+EmailAddress,5350,BuildingSync.Facilities.Facility.Contacts.Contact.ContactEmailAddresses.ContactEmailAddress.EmailAddress,27655d45-7813-432a-901a-1dc821bc52c1,Email Address,Contact,"OrderedDict([('a', OrderedDict([('@href', 'mailto:email@serviceprovider.suffix'), ('#text', 'email@serviceprovider.suffix')])), ('#text', 'Electronic mail address with common format:')])",https://bedes.lbl.gov/node/27655d45-7813-432a-901a-1dc821bc52c1,0.9846153846153847
+Address,5351,BuildingSync.Facilities.Facility.Contacts.Contact.Address,,,,,,
+StreetAddressDetail,5352,BuildingSync.Facilities.Facility.Contacts.Contact.Address.StreetAddressDetail,,,,,,
+Simplified,5353,BuildingSync.Facilities.Facility.Contacts.Contact.Address.StreetAddressDetail.Simplified,,,,,,
+StreetAddress,5354,BuildingSync.Facilities.Facility.Contacts.Contact.Address.StreetAddressDetail.Simplified.StreetAddress,,,,,,
+StreetAdditionalInfo,5355,BuildingSync.Facilities.Facility.Contacts.Contact.Address.StreetAddressDetail.Simplified.StreetAdditionalInfo,,,,,,
+Complex,5356,BuildingSync.Facilities.Facility.Contacts.Contact.Address.StreetAddressDetail.Complex,,,,,,
+StreetNumberPrefix,5357,BuildingSync.Facilities.Facility.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetNumberPrefix,,,,,,
+StreetNumberNumeric,5358,BuildingSync.Facilities.Facility.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetNumberNumeric,,,,,,
+StreetNumberSuffix,5359,BuildingSync.Facilities.Facility.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetNumberSuffix,,,,,,
+StreetDirPrefix,5360,BuildingSync.Facilities.Facility.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetDirPrefix,,,,,,
+StreetName,5361,BuildingSync.Facilities.Facility.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetName,81d08d4f-64e0-47f2-9615-2654eea7b288,Street Name,Contact,"The portion of the complete street name that identifies the particular thoroughfare (as opposed to the Street Name Pre Modifier, Street Name Post Modifier, Street Name Pre Directional, Street Name Post Directional, Street Name Pre Type, Street Name Post Type, and Separator Element (if any) in the complete street name.)",https://bedes.lbl.gov/node/81d08d4f-64e0-47f2-9615-2654eea7b288,0.9818181818181818
+StreetAdditionalInfo,5362,BuildingSync.Facilities.Facility.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetAdditionalInfo,,,,,,
+StreetSuffix,5363,BuildingSync.Facilities.Facility.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetSuffix,,,,,,
+StreetSuffixModifier,5364,BuildingSync.Facilities.Facility.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetSuffixModifier,,,,,,
+StreetDirSuffix,5365,BuildingSync.Facilities.Facility.Contacts.Contact.Address.StreetAddressDetail.Complex.StreetDirSuffix,,,,,,
+SubaddressType,5366,BuildingSync.Facilities.Facility.Contacts.Contact.Address.StreetAddressDetail.Complex.SubaddressType,aeae978b-c81e-4318-b6af-8ac8da74dd51,Subaddress Type,Contact,The type of subaddress to which the associated Subaddress Identifier applies.,https://bedes.lbl.gov/node/aeae978b-c81e-4318-b6af-8ac8da74dd51,0.9866666666666667
+SubaddressIdentifier,5367,BuildingSync.Facilities.Facility.Contacts.Contact.Address.StreetAddressDetail.Complex.SubaddressIdentifier,61ba6f05-7526-4de3-8e86-467d6262c98e,Subaddress Identifier,Contact,"The letters, numbers, words, or combination thereof used to distinguish different subaddresses of the same type when several occur within the same feature. For example, in subaddress ""Building 4"", the Subaddress Identifier = ""4"". Subaddress Identifier can also be parts of a building, for example ""Penthouse"" or ""Mezzanine"".",https://bedes.lbl.gov/node/61ba6f05-7526-4de3-8e86-467d6262c98e,0.9904761904761905
+City,5368,BuildingSync.Facilities.Facility.Contacts.Contact.Address.City,c208fe09-422d-4031-abf6-073aa7bda8c5,City,Contact,City,https://bedes.lbl.gov/node/c208fe09-422d-4031-abf6-073aa7bda8c5,1.0
+State,5369,BuildingSync.Facilities.Facility.Contacts.Contact.Address.State,9a8423a7-0729-4eca-b6b4-4ec39a1f4a5b,State,Contact,State,https://bedes.lbl.gov/node/9a8423a7-0729-4eca-b6b4-4ec39a1f4a5b,1.0
+PostalCode,5370,BuildingSync.Facilities.Facility.Contacts.Contact.Address.PostalCode,,,,,,
+PostalCodePlus4,5371,BuildingSync.Facilities.Facility.Contacts.Contact.Address.PostalCodePlus4,,,,,,
+County,5372,BuildingSync.Facilities.Facility.Contacts.Contact.Address.County,be811d87-d5db-4e1c-84ec-ccbbccdb852c,County,Contact,County,https://bedes.lbl.gov/node/be811d87-d5db-4e1c-84ec-ccbbccdb852c,1.0
+Country,5373,BuildingSync.Facilities.Facility.Contacts.Contact.Address.Country,be811d87-d5db-4e1c-84ec-ccbbccdb852c,County,Contact,County,https://bedes.lbl.gov/node/be811d87-d5db-4e1c-84ec-ccbbccdb852c,0.9714285714285714
+UserDefinedFields,5374,BuildingSync.Facilities.Facility.Contacts.Contact.UserDefinedFields,,,,,,
+UserDefinedField,5375,BuildingSync.Facilities.Facility.Contacts.Contact.UserDefinedFields.UserDefinedField,,,,,,
+FieldName,5376,BuildingSync.Facilities.Facility.Contacts.Contact.UserDefinedFields.UserDefinedField.FieldName,,,,,,
+FieldValue,5377,BuildingSync.Facilities.Facility.Contacts.Contact.UserDefinedFields.UserDefinedField.FieldValue,,,,,,

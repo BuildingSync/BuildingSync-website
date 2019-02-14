@@ -127,7 +127,7 @@ def dictionary(request, version):
 def retrieve_additional_dictionary_data(request):
     element_id = request.GET.get('element_id', None)
 
-    print("ELEMENT ID TO RETRIEVE: {}".format(element_id))
+    # print("ELEMENT ID TO RETRIEVE: {}".format(element_id))
 
     # get Bedes mapping
     bedes_term = None
@@ -203,7 +203,7 @@ def validator(request):
             # save tmp file
             tmp_file = tempfile.NamedTemporaryFile(delete=False)
             filepath = tmp_file.name
-            print('tmp file at: {}'.format(filepath))
+            # print('tmp file at: {}'.format(filepath))
             for chunk in f.chunks():
                 tmp_file.write(chunk)
             tmp_file.close()
@@ -213,8 +213,8 @@ def validator(request):
             filename = os.path.basename(request.POST['file_name'])
             filepath = request.POST['file_name']
 
-        print("FILENAME: {}".format(filename))
-        print("FORM TYPE: {}".format(form_type))
+        # print("FILENAME: {}".format(filename))
+        # print("FORM TYPE: {}".format(form_type))
 
         workflow = ValidationWorkflow(f, filepath, version)
         validation_results = workflow.validate_all()
