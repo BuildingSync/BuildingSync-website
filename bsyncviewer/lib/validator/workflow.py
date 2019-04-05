@@ -90,7 +90,10 @@ class ValidationWorkflow(object):
 
         # parse xml with xmltodict (incorrect when using the to_dict function from schema parsing)
         with open(self.filepath) as file:
-            self.xml = xmltodict.parse(file.read())
+            # ignore auc namespace
+            # TODO: store namespaces somewhere when there are more than one version of the schema
+            namespaces = {'http://buildingsync.net/schemas/bedes-auc/2019': None}
+            self.xml = xmltodict.parse(file.read(), process_namespaces=True, namespaces=namespaces)
 
         for use_case in self.use_cases:
             print("validating use case: {}".format(use_case.name))
@@ -139,7 +142,7 @@ class ValidationWorkflow(object):
                     try:
                         print("PATHS: {}".format(paths))
                         for path in paths:
-                            fpath = 'auc:' + path
+                            fpath = path
                             if loopingVar.__class__.__name__ == 'OrderedDict':
                                 loopingVar = loopingVar[fpath]
                             else:
@@ -152,11 +155,11 @@ class ValidationWorkflow(object):
                         match = False
                         if loopingVar.__class__.__name__ == 'OrderedDict':
                             # print("ORDERED DICT: {}".format(loopingVar))
-                            if loopingVar['auc:FieldName'] == udf.values:
+                            if loopingVar['FieldName'] == udf.values:
                                 # print("FOUND MATCH!")
                                 match = True
                                 # now check field Value
-                                if associatedFieldValue.values and l['auc:FieldValue'] not in associatedFieldValue.values:
+                                if associatedFieldValue.values and l['FieldValue'] not in associatedFieldValue.values:
                                     # enum not matching
                                     msg = 'FieldValue for FieldName =  ' + udf.values + ' contains a value that is not allowed'
                                     results['errors'].append(
@@ -165,11 +168,11 @@ class ValidationWorkflow(object):
                             # print("LIST")
                             for index, l in enumerate(loopingVar):
                                 print("elem: {}".format(l))
-                                if l['auc:FieldName'] == udf.values:
+                                if l['FieldName'] == udf.values:
                                     # print("FOUND MATCH!")
                                     match = True
                                     # now check field Value
-                                    if associatedFieldValue.values and l['auc:FieldValue'] not in associatedFieldValue.values:
+                                    if associatedFieldValue.values and l['FieldValue'] not in associatedFieldValue.values:
                                         # enum not matching
                                         msg = 'FieldValue for FieldName =  ' + udf.values + ' contains a value that is not allowed'
                                         results['errors'].append(
@@ -196,7 +199,7 @@ class ValidationWorkflow(object):
                 # validate presence of required element
                 try:
                     for path in paths:
-                        fpath = 'auc:' + path
+                        fpath = path
                         if loopingVar.__class__.__name__ == 'OrderedDict':
                             loopingVar = loopingVar[fpath]
                         else:
