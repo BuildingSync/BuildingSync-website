@@ -40,7 +40,7 @@ class Schema(models.Model):
         required_paths = ['BuildingSync']
 
         # persist the contents of the schema into a csv format
-        data = [['BuildingSyncPath', 'State', 'RequiredValues', 'RequiredPairedElement']]
+        data = [['BuildingSyncPath', 'State', 'RequiredValues', 'RequiredPairedElement', 'GroupID']]
         for attribute in self.attributes.all().order_by('id'):
             if attribute.path in required_paths:
                 data.append([attribute.path, 'Required'])
