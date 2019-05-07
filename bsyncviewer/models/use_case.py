@@ -7,7 +7,7 @@ from django.db.models.signals import post_save, pre_save, post_delete
 from django.dispatch import receiver
 
 from bsyncviewer.lib.usecase_parser import process_usecase
-from bsyncviewer.models.use_case_attribute import UseCaseEnumeration, UseCaseAttribute
+from bsyncviewer.models.use_case_attribute import UseCaseAttributeEnumeration, UseCaseAttribute
 
 
 class UseCase(models.Model):
@@ -16,7 +16,7 @@ class UseCase(models.Model):
     description = models.TextField()
     schema = models.ForeignKey('Schema', on_delete=models.CASCADE, db_index=True)
     attributes = models.ManyToManyField('Attribute', through=UseCaseAttribute, related_name="usecaseattributes")
-    enumerations = models.ManyToManyField('Enumeration', through=UseCaseEnumeration)
+    #enumerations = models.ManyToManyField('Enumeration', through=UseCaseAttributeEnumeration)
     make_public = models.BooleanField(default=False)
     import_file = models.FileField(upload_to='usecase_mappings/', null=True, blank=True)
     usecase_parsed = models.BooleanField(default=False)

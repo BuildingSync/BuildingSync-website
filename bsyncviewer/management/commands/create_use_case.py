@@ -6,7 +6,7 @@ from bsyncviewer.models.schema import Schema
 from bsyncviewer.models.use_case import UseCase
 from bsyncviewer.models.use_case_attribute import (
     UseCaseAttribute,
-    UseCaseEnumeration,
+    UseCaseAttributeEnumeration,
     STATE_REQUIRED,
     STATE_IGNORED,
 )
@@ -46,16 +46,17 @@ class Command(BaseCommand):
             )
 
         # grab some random enumerations
-        enums = Enumeration.objects.filter(schema=schema).order_by('?')[:10]
-        for enum in enums:
-            UseCaseEnumeration.objects.get_or_create(
-                use_case=use_case, enumeration=enum, state=STATE_IGNORED
-            )
+        # TODO: change this!! not handled this way anymore
+        # enums = Enumeration.objects.filter(schema=schema).order_by('?')[:10]
+        # for enum in enums:
+        #     UseCaseAttributeEnumeration.objects.get_or_create(
+        #         use_case=use_case, enumeration=enum, state=STATE_IGNORED
+        #     )
 
         for attrib in use_case.attributes.all():
             print(attrib)
 
-        for enums in use_case.enumerations.all():
-            print(enums)
+        # for enums in use_case.enumerations.all():
+            # print(enums)
 
         self.stdout.write('Finished parsing and saving {} schema'.format(DEFAULT_SCHEMA_VERSION))
