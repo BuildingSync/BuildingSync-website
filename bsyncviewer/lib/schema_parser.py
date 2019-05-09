@@ -572,8 +572,8 @@ class BuildingSyncSchemaProcessor(object):
 #     else:
 #         return parts[-1]
 
-def get_parent_from_path(root_path):
-    parents = Attribute.objects.filter(path=root_path)
+def get_parent_from_path(root_path, schema):
+    parents = Attribute.objects.filter(path=root_path, schema=schema)
     if parents.count() > 0:
         return parents[0].pk
     else:
@@ -616,7 +616,7 @@ def process_schema(schema_object):
                 name=se['name'],
                 type=se['type'],
                 tree_level=(se['$$treeLevel'] + 1),
-                parent=get_parent_from_path(se['parent_path']),
+                parent=get_parent_from_path(se['parent_path'], schema_object),
                 path=se['path'],
                 schema=schema_object)
             b.save()
