@@ -226,6 +226,10 @@ li.list-group-item {
   color: #333;
 }
 
+li.list-group-item a:focus, li.list-group-item a:hover {
+  color:#2CB0A5;
+}
+
 header.major {
     margin: 0 0 1em 0;
 }
