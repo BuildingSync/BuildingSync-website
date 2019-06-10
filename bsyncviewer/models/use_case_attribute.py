@@ -28,7 +28,7 @@ class UseCaseAttribute(models.Model):
         unique_together = ('attribute', 'use_case')
 
 
-# this stores what the required_values are for an attribute in a use case 
+# this stores what the required_values are for an attribute in a use case
 # could be a subset of the full enum (in that case validate against attribute enum)
 # or attribute could not have an enum in the schema, just in the use case
 class UseCaseAttributeEnumeration(models.Model):

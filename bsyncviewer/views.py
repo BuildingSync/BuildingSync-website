@@ -80,9 +80,11 @@ def index(request):
     context = {}
     return render(request, 'index.html', context)
 
+
 def use_case_mappings(request):
     context = {}
     return render(request, 'use_case_mappings.html', context)
+
 
 def use_cases(request):
     user_usecases = {}

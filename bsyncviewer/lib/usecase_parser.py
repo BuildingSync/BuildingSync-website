@@ -30,22 +30,22 @@ def process_usecase(use_case_object):
         for state in STATE_TYPES:
             if state[1] == row['State']:
                 state_val = state[0]
-     
+
         # only processed non-ignored
         if state_val != 0:
 
             # get attribute reference
             results = Attribute.objects.filter(path=row['BuildingSyncPath'],
-                                                  schema=use_case_object.schema)
+                                               schema=use_case_object.schema)
 
             if not results.exists():
                 errors.append('No attribute matching path: {}'.format(row['BuildingSyncPath']))
                 continue
             elif results.count() != 1:
                 errors.append('More than one attribute found matching path: {}'.format(row['BuildingSyncPath']))
-                continue    
+                continue
 
-            attrib = results[0]    
+            attrib = results[0]
 
             # get groupID
             groupId = None
@@ -53,8 +53,8 @@ def process_usecase(use_case_object):
                 if row['GroupID'] != "":
                     groupId = row['GroupID']
 
-            # get groupingLevel  
-            groupingLevel = None  
+            # get groupingLevel
+            groupingLevel = None
             if 'GroupingLevel' in row:
                 if row['GroupingLevel'] != "":
                     groupingLevel = row['GroupingLevel']
@@ -77,8 +77,8 @@ def process_usecase(use_case_object):
                         use_case=use_case_object,
                         attribute=attrib,
                         state=state_val,
-                        group_id = groupId,
-                        grouping_level = groupingLevel
+                        group_id=groupId,
+                        grouping_level=groupingLevel
                     )
                     rec.save()
 
@@ -103,8 +103,8 @@ def process_usecase(use_case_object):
                         use_case=use_case_object,
                         attribute=attrib,
                         state=state_val,
-                        group_id = groupId,
-                        grouping_level = groupingLevel
+                        group_id=groupId,
+                        grouping_level=groupingLevel
                     )
                     rec.save()
 
@@ -126,8 +126,8 @@ def process_usecase(use_case_object):
                     use_case=use_case_object,
                     attribute=attrib,
                     state=state_val,
-                    group_id = groupId,
-                    grouping_level = groupingLevel
+                    group_id=groupId,
+                    grouping_level=groupingLevel
                 )
                 rec.save()
 
@@ -142,8 +142,9 @@ def process_usecase(use_case_object):
                 tmp_errors = process_paired_elements(row, rec, use_case_object.schema)
                 if not tmp_errors:
                     errors = errors + tmp_errors
-             
+
     return use_case_object, errors
+
 
 # for a record, narrow down the allowable enum
 def process_required_values(row, attrib, rec, schema):
@@ -153,7 +154,7 @@ def process_required_values(row, attrib, rec, schema):
         # split the string into a list and strip whitespace
         vals = row['RequiredValues'].split(',')
         vals = [x.strip(' ') for x in vals]
-        #print("vals are:{}".format(vals))
+        # print("vals are:{}".format(vals))
 
         for val in vals:
             # check if there's an enum for this attribute in schema
@@ -170,21 +171,20 @@ def process_required_values(row, attrib, rec, schema):
                 # then get all possible enums
                 possible_enums = Enumeration.objects.filter(enumeration_class=enum_classes[0])
                 if possible_enums.exists():
-                    if any(item.name.lower() == val.lower() for item in possible_enums): 
+                    if any(item.name.lower() == val.lower() for item in possible_enums):
                         # match, add it
                         e = UseCaseAttributeEnumeration(
                             use_case_attribute=rec,
                             enumeration=val)
                         e.save()
-                    else: 
+                    else:
                         # not found, add error message
                         errors.append("The required value " + val + " was not found in the schema attribute enumeration... skipping")
-
-    
     return errors
 
+
 # for a record, store the required elements
-def process_paired_elements(row, rec, schema):    
+def process_paired_elements(row, rec, schema):
 
     errors = []
 
@@ -210,7 +210,7 @@ def process_paired_elements(row, rec, schema):
 
             e = UseCaseRequiredPairedElement(
                 use_case_attribute=rec,
-                paired_attribute=attrs[0] 
+                paired_attribute=attrs[0]
             )
             e.save()
 

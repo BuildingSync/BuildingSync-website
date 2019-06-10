@@ -1,14 +1,11 @@
 from django.core.management.base import BaseCommand
 
 from bsyncviewer.models.attribute import Attribute
-from bsyncviewer.models.enumeration import Enumeration
 from bsyncviewer.models.schema import Schema
 from bsyncviewer.models.use_case import UseCase
 from bsyncviewer.models.use_case_attribute import (
     UseCaseAttribute,
-    UseCaseAttributeEnumeration,
     STATE_REQUIRED,
-    STATE_IGNORED,
 )
 
 from django.conf import settings

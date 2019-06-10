@@ -6,7 +6,7 @@ import copy
 
 from bsyncviewer.models.schema import Schema
 from bsyncviewer.models.use_case import UseCase
-from bsyncviewer.models.use_case_attribute import UseCaseAttribute, UseCaseUDF, UseCaseRequiredPairedElement, UseCaseAttributeEnumeration, STATE_TYPES
+from bsyncviewer.models.use_case_attribute import UseCaseAttribute, UseCaseUDF, UseCaseRequiredPairedElement, UseCaseAttributeEnumeration
 
 
 class ValidationWorkflow(object):
@@ -155,16 +155,16 @@ class ValidationWorkflow(object):
     #             else:
     #                 # can't recurse futher into new_node because it is not a dict
     #                 break
-    #   
+    #
     #     if len(results) == 0:
     #         return []
     #     elif len(results) == 1:
     #         return results[0]
     #     else:
-    #         return results    
+    #         return results
 
     def find_path_in_schema(self, attr_path):
-        
+
         # try to find path(s) in XML
         paths = copy.deepcopy(attr_path.split("."))
         loopingVar = copy.deepcopy(self.xml)
@@ -174,7 +174,7 @@ class ValidationWorkflow(object):
         # print(paths)
 
         try:
-            for path in paths:  
+            for path in paths:
                 # print("CURRENT PATH: {}".format(path))
                 fpath = path
                 if loopingVar.__class__.__name__ == 'OrderedDict':
@@ -189,18 +189,18 @@ class ValidationWorkflow(object):
                             # print("L is a list!")
                             loopingVar = []
                             for x in l:
-                                loopingVar.append(x[fpath])                            
+                                loopingVar.append(x[fpath])
                         else:
-                            #print("L is an ordered Dict!")
-                            #print("l[fpath]: {}".format(l[fpath]))
+                            # print("L is an ordered Dict!")
+                            # print("l[fpath]: {}".format(l[fpath]))
                             loopingVar[index] = l[fpath]
 
         except BaseException:
-            found = False 
+            found = False
 
         return found, loopingVar
-        
-    def process_use_case_groups(self, use_case, errors):    
+
+    def process_use_case_groups(self, use_case, errors):
         # process required-1 and optional-1 groups
         attrs = UseCaseAttribute.objects.filter(state__gt=2, group_id__isnull=False, use_case=use_case).order_by('group_id')
         group_num = 0
@@ -229,14 +229,16 @@ class ValidationWorkflow(object):
                 # Optional-1, but more than 1 selected
                 msg = 'Optional-1 error: multiple elements found, but there should be 0 or 1 of the following: ' + req_str
                 error = {'path': group_level, 'message': msg}
+            return error
 
         for attr in attrs:
             if group_num != attr.group_id and group_num > 0:
                 error = _error_check(state, match_cnt, group_level, req_paths)
-                if error is not None: errors.append(error) 
+                if error is not None:
+                    errors.append(error)
 
             # reset group number and match count
-            if group_num != attr.group_id:    
+            if group_num != attr.group_id:
                 group_num = attr.group_id
                 match_cnt = 0
                 state = attr.state
@@ -248,13 +250,13 @@ class ValidationWorkflow(object):
             found, the_path = self.find_path_in_schema(attr.attribute.path)
             if found:
                 match_cnt += 1
-  
+
         # error_check for last group
         error = _error_check(state, match_cnt, group_level, req_paths)
-        if error is not None: errors.append(error)
+        if error is not None:
+            errors.append(error)
 
-        return errors        
-
+        return errors
 
     def process_use_case(self, use_case):
         results = OrderedDict()
@@ -270,9 +272,9 @@ class ValidationWorkflow(object):
         for attr in attrs:
             # try to find it
             paths = copy.deepcopy(attr.attribute.path.split("."))
-            loopingVar = copy.deepcopy(self.xml)
+
             # special case: UDF
-            #print("ATTR PATH: {}".format(attr.attribute.path))
+            # print("ATTR PATH: {}".format(attr.attribute.path))
             if 'UserDefinedField.FieldName' in attr.attribute.path:
                 # retrieve all FieldNames from UseCaseUDF
                 udfFields = UseCaseUDF.objects.filter(use_case_attribute=attr)
@@ -282,12 +284,12 @@ class ValidationWorkflow(object):
                 for udf in udfFields:
                     # also retrieve matching FieldValue
                     associatedFieldValue = UseCaseUDF.objects.get(pk=udf.associated_field.pk)
-                    #print("UDF values: {}".format(udf.values))
+                    # print("UDF values: {}".format(udf.values))
 
-                    #print("PATHS: {}".format(paths))
+                    # print("PATHS: {}".format(paths))
                     # back up path 1 level to get both fieldName and FieldValue
                     path_found, the_path = self.find_path_in_schema(attr.attribute.path.replace('.FieldName', ''))
-                    #print("PATH FOUND: {}.  The path: {}".format(path_found, the_path))
+                    # print("PATH FOUND: {}.  The path: {}".format(path_found, the_path))
                     if not path_found and attr.state == 2:
                         msg = 'Required UDF element not found with FieldName = ' + udf.values
                         results['errors'].append(
@@ -304,7 +306,7 @@ class ValidationWorkflow(object):
                                 # print("FOUND MATCH!")
                                 match = True
                                 # now check field Value
-                                if associatedFieldValue.values and l['FieldValue'] not in associatedFieldValue.values:
+                                if associatedFieldValue.values and the_path['FieldValue'] not in associatedFieldValue.values:
                                     # enum not matching
                                     msg = 'FieldValue for FieldName =  ' + udf.values + ' contains a value that is not allowed'
                                     results['errors'].append(
@@ -312,7 +314,7 @@ class ValidationWorkflow(object):
                         else:
                             # print("LIST")
                             for index, l in enumerate(the_path):
-                                #print("elem: {}".format(l))
+                                # print("elem: {}".format(l))
                                 if l['FieldName'] == udf.values:
                                     # print("FOUND MATCH!")
                                     match = True
@@ -336,7 +338,7 @@ class ValidationWorkflow(object):
                 # validate presence of required element
                 path_found, the_path = self.find_path_in_schema(attr.attribute.path)
 
-                #print("path_found: {}, the path: {}".format(path_found, the_path))
+                # print("path_found: {}, the path: {}".format(path_found, the_path))
                 if not path_found and attr.state == 2:
                     # Required attribute, error out
                     results['errors'].append(
@@ -348,17 +350,17 @@ class ValidationWorkflow(object):
                     # validate required_values / enums here -- in the case that the Use Case's allowable enum values is a subset of the schema's
                     req_vals = list(UseCaseAttributeEnumeration.objects.filter(use_case_attribute=attr).values_list('enumeration', flat=True))
                     if len(req_vals) > 0:
-                        #print("req_vals: {}".format(req_vals))
-                        #print("the_path: {}".format(the_path))
-                        #print("last_path: {}".format(paths[-1]))
+                        # print("req_vals: {}".format(req_vals))
+                        # print("the_path: {}".format(the_path))
+                        # print("last_path: {}".format(paths[-1]))
 
                         req_str = ", "
                         req_str = req_str.join(req_vals)
 
-                        # if the_path is a dict, then look up by last_path name 
+                        # if the_path is a dict, then look up by last_path name
                         if the_path.__class__.__name__ == 'OrderedDict':
-                            #print("IT IS AN ORDERED DICT!")
-                                          
+                            # print("IT IS AN ORDERED DICT!")
+
                             # make sure value in xml is in the list of valid enums
                             if the_path[paths[-1]].lower() not in [x.lower() for x in req_vals]:
                                 msg = "Value " + the_path[paths[-1]] + " is not in the list of enums: " + req_str
@@ -367,7 +369,7 @@ class ValidationWorkflow(object):
 
                         elif type(the_path) is str:
                             # it's a single string
-                            #print("IT IS A SINGLE STRING")
+                            # print("IT IS A SINGLE STRING")
                             if the_path.lower() not in [x.lower() for x in req_vals]:
                                 msg = "Value " + the_path + " is not in the list of enums: " + req_str
                                 print(msg)
@@ -375,28 +377,27 @@ class ValidationWorkflow(object):
 
                         else:
                             # the_path is a list of values (no paths): validate each separately
-                            #print("IT IS A LIST!")
+                            # print("IT IS A LIST!")
                             fail = False
                             fail_val = None
                             for x in the_path:
                                 # x could be a value or an ordered dict
                                 if x.__class__.__name__ == 'OrderedDict':
-                                    #print('YAY! an ordered dict within the list!')
+                                    # print('YAY! an ordered dict within the list!')
                                     # just check the first key..there should only be one?
                                     if list(x.keys())[0].lower() not in [x.lower() for x in req_vals]:
                                         fail = True
                                         fail_val = list(x.keys())[0]
-                                        #print("FAILING VAL: {}".format(fail_val))
-                                else:    
+                                        # print("FAILING VAL: {}".format(fail_val))
+                                else:
                                     if x.lower() not in [x.lower() for x in req_vals]:
                                         fail = True
                                         fail_val = x
-                                        #print("FAILING VAL: {}".format(fail_val))
+                                        # print("FAILING VAL: {}".format(fail_val))
                             if fail:
                                 msg = "Value " + fail_val + " is not in the list of enums: " + req_str
                                 print(msg)
                                 results['errors'].append({'path': attr.attribute.path, 'message': msg})
-                                
 
                     # validate required paired element(s)
                     req_elems = UseCaseRequiredPairedElement.objects.filter(use_case_attribute=attr)
@@ -410,7 +411,7 @@ class ValidationWorkflow(object):
                             results['errors'].append(
                                 {'path': attr.attribute.path, 'message': msg})
 
-        results['errors'] = self.process_use_case_groups(use_case, results['errors'])    
+        results['errors'] = self.process_use_case_groups(use_case, results['errors'])
 
         # set valid to valse if errors.count > 0
         if len(results['errors']) > 0:
