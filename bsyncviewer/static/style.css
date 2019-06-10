@@ -45,7 +45,13 @@ body {
   padding-right: 10px;
 }
 
-pad-left-100 {
+.pad-lr-20 {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 20px;
+}
+
+.pad-left-100 {
   padding-left:100px;
 }
 
@@ -279,6 +285,10 @@ label {
 }
 
 table th, table td {
+  color: #333;
+}
+
+ul li {
   color: #333;
 }
 

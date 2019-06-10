@@ -42,10 +42,10 @@ class ValidationWorkflow(object):
         # load selected schema and validate
         if self.schema.schema_file:
             my_schema = xmlschema.XMLSchema(self.schema.schema_file.path, validation='lax')
-            print("SCHEMA PATH: {}".format(self.schema.schema_file.path))
+            # print("SCHEMA PATH: {}".format(self.schema.schema_file.path))
             resp['valid'] = my_schema.is_valid(self.filepath)
-            print("FILE PATH: {}".format(self.filepath))
-            print("VALID?: {}".format(resp['valid']))
+            # print("FILE PATH: {}".format(self.filepath))
+            # print("VALID?: {}".format(resp['valid']))
             resp['schema_version'] = self.schema.version
             try:
                 # this only returns the first error
@@ -169,7 +169,6 @@ class ValidationWorkflow(object):
         paths = copy.deepcopy(attr_path.split("."))
         loopingVar = copy.deepcopy(self.xml)
         found = True
-        l = None
 
         # print("PATHS:")
         # print(paths)
@@ -184,30 +183,17 @@ class ValidationWorkflow(object):
                     # it's a list
                     # print("THE LIST: {}".format(loopingVar))
                     for index, l in enumerate(loopingVar):
-                        # print("INDEX: {}".format(index))
-                        # print("l: {}".format(l))
 
                         if fpath not in l and isinstance(l, list):
                             # add another loop
                             # print("L is a list!")
-                            # print("list length: {}".format(len(l)))
-                            # print('first list elem: {}'.format(l[0]))
                             loopingVar = []
                             for x in l:
-                                # print("elem: {}".format(x))
-                                # print('fpath: {}'.format(fpath))
-                                # print("x[fpath]: {}".format(x[fpath]))
-                                # print("loopingVar: {}".format(loopingVar))
-                                loopingVar.append(x[fpath])
-                                #print("loopingVar: {}".format(loopingVar))
-
-                            
+                                loopingVar.append(x[fpath])                            
                         else:
                             #print("L is an ordered Dict!")
                             #print("l[fpath]: {}".format(l[fpath]))
                             loopingVar[index] = l[fpath]
-
-            # decide whether we need to restore the last loopingVar or not
 
         except BaseException:
             found = False 
@@ -279,7 +265,6 @@ class ValidationWorkflow(object):
         # 1 = Optional, 2 = Required, 3 = Required-1, 4 = Optional-1.
         # validate allowable values and required paired elements in this loop, but not groups
         attrs = UseCaseAttribute.objects.filter(state__gt=0, use_case=use_case)
-        # print("NUMBER OF ATTRIBUTES RETRIEVED: {}".format(attrs.count()))
 
         # traverse use case attributes (not xml)
         for attr in attrs:
@@ -287,6 +272,7 @@ class ValidationWorkflow(object):
             paths = copy.deepcopy(attr.attribute.path.split("."))
             loopingVar = copy.deepcopy(self.xml)
             # special case: UDF
+            #print("ATTR PATH: {}".format(attr.attribute.path))
             if 'UserDefinedField.FieldName' in attr.attribute.path:
                 # retrieve all FieldNames from UseCaseUDF
                 udfFields = UseCaseUDF.objects.filter(use_case_attribute=attr)
@@ -296,10 +282,12 @@ class ValidationWorkflow(object):
                 for udf in udfFields:
                     # also retrieve matching FieldValue
                     associatedFieldValue = UseCaseUDF.objects.get(pk=udf.associated_field.pk)
-                    print("UDF values: {}".format(udf.values))
+                    #print("UDF values: {}".format(udf.values))
 
                     #print("PATHS: {}".format(paths))
-                    path_found, the_path = self.find_path_in_schema(attr.attribute.path)
+                    # back up path 1 level to get both fieldName and FieldValue
+                    path_found, the_path = self.find_path_in_schema(attr.attribute.path.replace('.FieldName', ''))
+                    #print("PATH FOUND: {}.  The path: {}".format(path_found, the_path))
                     if not path_found and attr.state == 2:
                         msg = 'Required UDF element not found with FieldName = ' + udf.values
                         results['errors'].append(
@@ -309,11 +297,10 @@ class ValidationWorkflow(object):
                     elif path_found:
                         # If found, check that it has correct value
                         # not sure if it's a list if only one is found
-                        loopingVar = copy.deepcopy(self.xml)
                         match = False
-                        if loopingVar.__class__.__name__ == 'OrderedDict':
-                            # print("ORDERED DICT: {}".format(loopingVar))
-                            if loopingVar['FieldName'] == udf.values:
+                        if the_path.__class__.__name__ == 'OrderedDict':
+
+                            if the_path['FieldName'] == udf.values:
                                 # print("FOUND MATCH!")
                                 match = True
                                 # now check field Value
@@ -324,8 +311,8 @@ class ValidationWorkflow(object):
                                         {'path': attr.attribute.path, 'message': msg})
                         else:
                             # print("LIST")
-                            for index, l in enumerate(loopingVar):
-                                print("elem: {}".format(l))
+                            for index, l in enumerate(the_path):
+                                #print("elem: {}".format(l))
                                 if l['FieldName'] == udf.values:
                                     # print("FOUND MATCH!")
                                     match = True
