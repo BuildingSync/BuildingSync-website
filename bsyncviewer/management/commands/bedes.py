@@ -1,5 +1,6 @@
 import csv
 import os
+import re
 
 import jellyfish
 from django.conf import settings
@@ -62,16 +63,76 @@ class Command(BaseCommand):
                         "bedes_object": bt,
                         "distance": distance
                     })
-
+                    
             results[attribute.id] = sorted(results[attribute.id], key=lambda k: -k['distance'])
 
             if not results[attribute.id]:
-                # didn't find anything
+                # didn't find any term-to-term matches
+
+                words_data = {}
+                words_data['bedes_word'] = []
+                words_data['bedes_word_URL'] = []
+                words_data['is_bedes_term'] = []
+                       
+                bsync_words = []
+                # split BSync term into a list of individual words
+                bsync_words = self.acronym_check(re.findall('[A-Z][^A-Z ]*', attribute.name))
+                current_word_number = 0
+                
+                for bsync_word in bsync_words:
+
+                    words_data['bedes_word'].append('No Match')
+                    words_data['bedes_word_URL'].append('No Match')
+                    words_data['is_bedes_term'].append('False')
+
+                    for bt in bedes.terms:
+                        # right now we're looking at direct matches, so we don't really need jellyfish distance calculations,
+                        # but code has been left in case we want to use it and try out distance thresholds (like .99 or something)
+                        distance = jellyfish.jaro_winkler(bsync_word, bt['Term'])  
+
+                        if distance == 1:
+                            words_data['bedes_word'][current_word_number] = bt['Term']
+                            words_data['bedes_word_URL'][current_word_number] = bt['URL']
+                            words_data['is_bedes_term'][current_word_number] = 'True'
+                        else:
+                            # if match not found, try to match with plural version of BEDES term; program was missing matches because
+                            # BSync terms and words are pluralized while BEDES terms/words aren't
+                            distance = jellyfish.jaro_winkler(bsync_word, bt['Term'] + 's')
+                            if distance == 1:
+                                words_data['bedes_word'][current_word_number] = bt['Term']
+                                words_data['bedes_word_URL'][current_word_number] = bt['URL']
+                                words_data['is_bedes_term'][current_word_number] = 'True'
+                            
+                    if words_data['is_bedes_term'][current_word_number] == 'False':
+                        # if a BSync word didn't match with an entire BEDES term, iterate through BEDES terms, split into words, and look for word-to-word matches
+                        for bt in bedes.terms:
+                            bedes_words = []
+                            bedes_words = self.acronym_check(re.findall('[A-Z][^A-Z ]*', bt['Term']))
+                            for bedes_word in bedes_words:
+                                
+                                distance = jellyfish.jaro_winkler(bsync_word, bedes_word)
+
+                                if distance == 1:
+                                    words_data['bedes_word'][current_word_number] = bedes_word
+                                    words_data['bedes_word_URL'][current_word_number] = bt['URL']
+                                else:
+                                    distance = jellyfish.jaro_winkler(bsync_word, bedes_word + 's')
+                                    if distance == 1:
+                                        words_data['bedes_word'][current_word_number] = bedes_word
+                                        words_data['bedes_word_URL'][current_word_number] = bt['URL']
+                                    
+                            if words_data['bedes_word'][current_word_number] != 'No Match':
+                                break
+                                                                         
+                    current_word_number += 1
+
                 results[attribute.id].append({
                     "attribute_name": attribute.name,
-                    "attribute_path": attribute.path
-                })
-
+                    "attribute_path": attribute.path,
+                    "bedes_word": words_data['bedes_word'],
+                    "bedes_word_URL": words_data['bedes_word_URL'],
+                    "is_bedes_term": words_data['is_bedes_term']
+                    })
         # self.stdout.write(results)
 
         # store the results to CSV
@@ -85,20 +146,25 @@ class Command(BaseCommand):
         content_uuids = []
         with open("%s/bedes-mappings-terms.csv" % (the_path), 'w') as file:
             writer = csv.writer(file, delimiter=',')
-            # headers: attribute name, attribute id, attribute path, Content-UUID, bedes term, bedes_category, bedes definition, bedes URL,  distance
+            # headers: attribute name, attribute id, attribute path, Content-UUID, bedes term, bedes_category, bedes definition, bedes URL,  distance,
+            # bedes_word, 'bedes_word_URL', 'is_bedes_term'
             writer.writerow(
                 ['attribute_name', 'attribute_id', 'attribute_path', 'bedes_content_uuid',
-                 'bedes_term', 'bedes_category', 'bedes_definition', 'bedes_url', 'distance'])
+                 'bedes_term', 'bedes_category', 'bedes_definition', 'bedes_url', 'distance', 'bedes_word', 'bedes_word_URL', 'is_bedes_term'])
             for id, be in results.items():
                 if len(be) > 0 and 'bedes_object' in be[0]:
                     out = [be[0]['attribute_name'], id, be[0]['attribute_path'],
                            be[0]['bedes_object']['Content-UUID'], be[0]['bedes_term'],
                            be[0]['bedes_object']['Category'],
                            be[0]['bedes_object']['Term-Definition'], be[0]['bedes_object']['URL'],
-                           be[0]['distance']]
+                           be[0]['distance'], '', '', '']
                     content_uuids.append(be[0]['bedes_object']['Content-UUID'])
                 else:
-                    out = [be[0]['attribute_name'], id, be[0]['attribute_path'], '', '', '', '', '', '']
+                    if 'bedes_word' in be[0]:
+                        out = [be[0]['attribute_name'], id, be[0]['attribute_path'], '', '', '', '', '', '',
+                               ', '.join(be[0]['bedes_word']), ', '.join(be[0]['bedes_word_URL']), ', '.join(be[0]['is_bedes_term'])] 
+                    else:    
+                        out = [be[0]['attribute_name'], id, be[0]['attribute_path'], '', '', '', '', '', '', '', '', '']
                 writer.writerow(out)
 
         list_set = set(content_uuids)
@@ -111,6 +177,7 @@ class Command(BaseCommand):
             results[enumeration.id] = []
             for be in bedes.enumerations:
                 distance = jellyfish.jaro_winkler(enumeration.name, be['List-Option'])
+                
                 if distance >= 0.95:
                     results[enumeration.id].append({
                         "enumeration_name": enumeration.name,
@@ -127,7 +194,7 @@ class Command(BaseCommand):
 
         # store the results to CSV
         content_uuids = []
-        with open("%s/bedes-mappings-enumerations.csv" % (the_path), 'w') as file:
+        with open("%s/bedes-mappings-enumerations.csv" % (the_path), 'w', encoding ='utf-8') as file:
             writer = csv.writer(file, delimiter=',')
             # headers: enumeration name, enumeration id,
             # bedes Content-UUID, bedes term, bedes definition, bedes URL, bedes Related Term UUID, distance
@@ -209,7 +276,7 @@ class Command(BaseCommand):
         csv_file.seek(0)
         next(bedes_mappings)
         for term in bedes_mappings:
-            # mappings CSV only contains distances >= 0.90 or it's blank
+            # mappings CSV only contains distances >= 0.95 or it's blank
             if term['distance'] != "":
                 # found a match
                 attributes = Attribute.objects.filter(id=term['attribute_id'], schema=schema)
@@ -225,7 +292,7 @@ class Command(BaseCommand):
                     bmap.save()
 
         # save all enumerations
-        csv_file = open("%s/bedes-mappings-enumerations.csv" % (the_path), mode='r')
+        csv_file = open("%s/bedes-mappings-enumerations.csv" % (the_path), mode='r', encoding='utf-8')
         bedes_mappings = csv.DictReader(csv_file)
         bedes_mappings.fieldnames
         for term in bedes_mappings:
@@ -244,7 +311,7 @@ class Command(BaseCommand):
         csv_file.seek(0)
         next(bedes_mappings)
         for term in bedes_mappings:
-            # mappings CSV only contains distances >= 0.90 or it's blank
+            # mappings CSV only contains distances >= 0.95 or it's blank
             if term['distance'] != "":
                 # found a match
                 enums = Enumeration.objects.filter(id=term['enum_id'], schema=schema)
@@ -258,3 +325,30 @@ class Command(BaseCommand):
                         enumeration=enum
                     )
                     bmap.save()
+
+    # function to take in a word list that has been separated at Uppercase letters, and rejoin any acronyms that
+    # have been separated
+    def acronym_check(self, word_list):
+        
+        acronym_list = []
+        acronym = ''
+            
+        word_list.append('buffer')    # arbitrary string added to end of list to help check run properly.  Deleted after check has run
+        for i in range(len(word_list)):
+            if len(word_list[i]) == 1:
+                acronym = acronym + word_list[i]
+            else:
+                # check for 'words' that are 2 characters long ending in a lowercase s
+                # looking for ends of pluralized acronyms (like 'IDs')
+                if len(word_list[i]) == 2 and word_list[i][1] == 's':
+                    word_list[i] = word_list[i][0]
+                    acronym = acronym + word_list[i]
+                else:
+                    if acronym != '':
+                        acronym_list.append(acronym)
+                        acronym = ''
+                    acronym_list.append(word_list[i])
+        word_list = acronym_list
+        del word_list[-1]
+
+        return word_list

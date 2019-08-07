@@ -476,7 +476,7 @@
       "URL": "https://bedes.lbl.gov/node/f0f367dc-2e4d-472d-8da6-291bfa0b1858",
       "Term": "Assessment Program Organization",
       "Definition": {
-        "p": "The name of the body or group providing the verification or certification assessment program. More than one can apply to a premises."
+        "p": "The name of the body or group providing the verification or certification assessment program. More than one can apply to a premises.\u00c2"
       },
       "Data-Type": "Constrained List",
       "Unit-of-Measure": "N/A",
@@ -9512,7 +9512,7 @@
       "URL": "https://bedes.lbl.gov/node/10f87b8c-6b55-494b-b19e-e6f2292e45cb",
       "Term": "Credential State",
       "Definition": {
-        "p": "State in which the credential is issued.\u00a0Please see State for a complete list of constrained list options."
+        "p": "State in which the credential is issued.\u00c2\u00a0Please see State for a complete list of constrained list options."
       },
       "Data-Type": "Constrained List",
       "Unit-of-Measure": "N/A",
@@ -13871,7 +13871,7 @@
       "URL": "https://bedes.lbl.gov/node/824d0f87-b703-493d-8b09-b8c626d73f48",
       "Term": "Air Infiltration Blower Door Test",
       "Definition": {
-        "p": "Type of blower door test.\u00a0\u00a0Use Air Infiltration Test to qualify these values."
+        "p": "Type of blower door test.\u00c2\u00a0\u00c2\u00a0Use Air Infiltration Test to qualify these values."
       },
       "Data-Type": "Constrained List",
       "Unit-of-Measure": "N/A",
@@ -16002,7 +16002,7 @@
       "URL": "https://bedes.lbl.gov/node/0e817abf-dbb8-4c43-9711-9db056fb5e6d",
       "Term": "Foundation Ground Coupling",
       "Definition": {
-        "p": "The type of coupling between foundation and ground.\u00a0 Use Location and Conditioning Status terms to further qualify coupling."
+        "p": "The type of coupling between foundation and ground.\u00c2\u00a0 Use Location and Conditioning Status terms to further qualify coupling."
       },
       "Data-Type": "Constrained List",
       "Unit-of-Measure": "N/A",
@@ -16054,7 +16054,7 @@
       "URL": "https://bedes.lbl.gov/node/aa58e3ac-0653-415b-b64a-586009ca8b83",
       "Term": "Foundation Height",
       "Definition": {
-        "p": "Height of the premises foundation. [NOTE: The Location term can be used to further refine this definition, such as Foundation Height\u00a0 Above Grade or Foundation Height Below Grade.]"
+        "p": "Height of the premises foundation. [NOTE: The Location term can be used to further refine this definition, such as Foundation Height\u00c2\u00a0 Above Grade or Foundation Height Below Grade.]"
       },
       "Data-Type": "Decimal",
       "Unit-of-Measure": "ft",
@@ -16109,7 +16109,7 @@
       "URL": "https://bedes.lbl.gov/node/8c9baf3c-216a-47b4-b716-ba81cea58775",
       "Term": "Framing Factor",
       "Definition": {
-        "p": "Fraction (0-1)\u00a0of the surface that is composed of structural framing material."
+        "p": "Fraction (0-1)\u00c2\u00a0of the surface that is composed of structural framing material."
       },
       "Data-Type": "Decimal",
       "Unit-of-Measure": "N/A",
@@ -17276,7 +17276,7 @@
       "URL": "https://bedes.lbl.gov/node/c95ad029-039c-4c51-9f58-d60b2492cbe3",
       "Term": "Solar Reflectance Index",
       "Definition": {
-        "p": "A measure of a roof's ability to reject solar heat, as shown by a small temperature rise. It is defined so that a standard black (reflectance 0.05, emittance 0.90) is 0 and a standard white (reflectance 0.80, emittance 0.90) is 100.\u00a0SRI"
+        "p": "A measure of a roof's ability to reject solar heat, as shown by a small temperature rise. It is defined so that a standard black (reflectance 0.05, emittance 0.90) is 0 and a standard white (reflectance 0.80, emittance 0.90) is 100.\u00c2\u00a0SRI"
       },
       "Data-Type": "Integer",
       "Unit-of-Measure": "N/A",
@@ -17394,7 +17394,7 @@
       "URL": "https://bedes.lbl.gov/node/d0dc1cd6-e818-4539-9686-2fe3ea0d5922",
       "Term": "Weatherstrip Description",
       "Definition": {
-        "p": "Material used in weatherstipping application. This can apply to doors, windows, as well as system components such as refrigeration doors."
+        "p": "Material used in weatherstipping application. This can apply to doors, windows, as well as system components such as refrigeration doors.\u00c2"
       },
       "Data-Type": "Constrained List",
       "Unit-of-Measure": "N/A",
@@ -18911,7 +18911,7 @@
         "p": "The R-value of a complete construction including all material layers as well as the interior and exterior air film coefficients."
       },
       "Data-Type": "Decimal",
-      "Unit-of-Measure": "hr\u00b7ft2\u00b7\u00b0F/Btu",
+      "Unit-of-Measure": "hr\u00c2\u00b7ft2\u00c2\u00b7\u00c2\u00b0F/Btu",
       "Category": "Global Terms",
       "Sector": "Commercial, Residential, Multifamily",
       "Application": "N/A",
@@ -20306,7 +20306,7 @@
       "URL": "https://bedes.lbl.gov/node/1d4d8967-8e09-4990-87c8-1d9389a8df8a",
       "Term": "Percentage Of Total Installed Capacity",
       "Definition": {
-        "p": "Percentage\u00a0of maximum, peak or rated installed capacity of a system, piece, or set of equipment that is either available or being used."
+        "p": "Percentage\u00c2\u00a0of maximum, peak or rated installed capacity of a system, piece, or set of equipment that is either available or being used."
       },
       "Data-Type": "Decimal",
       "Unit-of-Measure": "Percent",
@@ -20496,7 +20496,7 @@
         "p": "The R-value, also known as thermal resistance, is a quantity determined by the temperature difference, at steady state, between two defined surfaces of a material or construction that induces a unit heat flow rate through unit area (R = _T/q). R-value is the reciprocal of thermal conductance. A unit of thermal resistance used for comparing insulating values of different materials, for the specific thickness of the material. The higher the R-value number, a material, the greater its insulating properties and the slower the heat flow through it. This R-value does not include the interior and exterior air film coefficients."
       },
       "Data-Type": "Decimal",
-      "Unit-of-Measure": "hr\u00b7ft2\u00b7\u00b0F/Btu",
+      "Unit-of-Measure": "hr\u00c2\u00b7ft2\u00c2\u00b7\u00c2\u00b0F/Btu",
       "Category": "Global Terms",
       "Sector": "Commercial, Residential, Multifamily",
       "Application": "BuildingSync",
@@ -20659,10 +20659,10 @@
       "URL": "https://bedes.lbl.gov/node/bd48375a-d3dc-4dad-a83a-8cdb8ab08b54",
       "Term": "Specific Heat",
       "Definition": {
-        "p": "Ratio of the quantity of heat required to raise the temperature of a given mass of any substance one degree to the quantity required to raise the temperature of an equal mass of a standard substance one degree (usually water at 59\u00a1F (15\u00a1C)"
+        "p": "Ratio of the quantity of heat required to raise the temperature of a given mass of any substance one degree to the quantity required to raise the temperature of an equal mass of a standard substance one degree (usually water at 59\u00c2\u00a1F (15\u00c2\u00a1C)"
       },
       "Data-Type": "Decimal",
-      "Unit-of-Measure": "Btu/lb-\u00a1F",
+      "Unit-of-Measure": "Btu/lb-\u00c2\u00a1F",
       "Category": "Global Terms",
       "Sector": "Commercial, Residential, Multifamily",
       "Application": "N/A",
@@ -20780,7 +20780,7 @@
         "p": "The C-factor, or thermal conductivity, is the heat flux through a flat body induced by a unit temperature difference between the surfaces of that body."
       },
       "Data-Type": "Decimal",
-      "Unit-of-Measure": "Btu/h\u00b7ft2\u00b7\u00b0F",
+      "Unit-of-Measure": "Btu/h\u00c2\u00b7ft2\u00c2\u00b7\u00c2\u00b0F",
       "Category": "Global Terms",
       "Sector": "Commercial, Residential, Multifamily",
       "Application": "N/A",
@@ -20795,7 +20795,7 @@
         "p": "The property of a material to conduct heat. A measure of the ability of a material to transfer heat per unit time, given one unit area of the material and a temperature gradient through the thickness of the material."
       },
       "Data-Type": "Decimal",
-      "Unit-of-Measure": "Btu/h\u00b7ft\u00b7\u00b0F",
+      "Unit-of-Measure": "Btu/h\u00c2\u00b7ft\u00c2\u00b7\u00c2\u00b0F",
       "Category": "Global Terms",
       "Sector": "Commercial, Residential, Multifamily",
       "Application": "N/A",
@@ -20956,7 +20956,7 @@
         "p": "the thermal transmission in unit time through a unit area of a particular body or assembly, including its boundary films, divided by the difference between the environmental temperatures on either side of the body or assembly. Note that the U-factor for a construction assembly, including fenestration, includes the interior and exterior film coefficients (the boundary films referenced above). For characterization of fenestration products, the U-factor is calculated for the whole product, including the effect of the frame (center of glass, edge of glass, frame). U-factor = 1 / R-value"
       },
       "Data-Type": "Decimal",
-      "Unit-of-Measure": "Btu/hr\u00b7ft2\u00b7\u00b0F",
+      "Unit-of-Measure": "Btu/hr\u00c2\u00b7ft2\u00c2\u00b7\u00c2\u00b0F",
       "Category": "Global Terms",
       "Sector": "Commercial, Residential, Multifamily",
       "Application": "N/A",
@@ -24309,7 +24309,7 @@
         "p": "Insulation R-Value of hot water storage tank."
       },
       "Data-Type": "Decimal",
-      "Unit-of-Measure": "hr\u00b7ft2\u00b7\u00b0F/Btu",
+      "Unit-of-Measure": "hr\u00c2\u00b7ft2\u00c2\u00b7\u00c2\u00b0F/Btu",
       "Category": "HVAC",
       "Sector": "Commercial, Residential, Multifamily",
       "Application": "BuildingSync",
@@ -24637,7 +24637,7 @@
       "URL": "https://bedes.lbl.gov/node/ff823834-5f6d-4f63-a125-155f8c378f57",
       "Term": "Condenser Fan Speed Operation",
       "Definition": {
-        "p": "The condenser fan control option used by the unit. If the unit has several constant-speed condenser fans that stage on in conjunction with multiple compressors, this should be set to \u00d2Stepped Speed.\u00d3"
+        "p": "The condenser fan control option used by the unit. If the unit has several constant-speed condenser fans that stage on in conjunction with multiple compressors, this should be set to \u00c3\u2019Stepped Speed.\u00c3\u201c"
       },
       "Data-Type": "Constrained List",
       "Unit-of-Measure": "N/A",
@@ -25474,7 +25474,7 @@
         "p": "R-value of duct insulation."
       },
       "Data-Type": "Decimal",
-      "Unit-of-Measure": "hr\u00b7ft2\u00b7\u00b0F/Btu",
+      "Unit-of-Measure": "hr\u00c2\u00b7ft2\u00c2\u00b7\u00c2\u00b0F/Btu",
       "Category": "HVAC",
       "Sector": "Commercial, Residential, Multifamily",
       "Application": "BuildingSync",
@@ -26295,7 +26295,7 @@
         "p": "Minimum outside temperature at which the heat pump can operate"
       },
       "Data-Type": "Decimal",
-      "Unit-of-Measure": "\u00a1F",
+      "Unit-of-Measure": "\u00c2\u00a1F",
       "Category": "HVAC",
       "Sector": "Commercial, Residential, Multifamily",
       "Application": "BuildingSync",
@@ -26845,7 +26845,7 @@
       "URL": "https://bedes.lbl.gov/node/f2e049ee-f34a-40ab-9776-fabcbad9c3f9",
       "Term": "Heating Staging",
       "Definition": {
-        "p": "The method of heating staging used by the unit. Select \u00d2Single Stage\u00d3 for units with single stage (on/off) control. Select \u00d2Multiple, Discrete Stages\u00d3 for units with multiple discrete stages (low-fire / high-fire). Select \u00d2Modulating\u00d3 for units which contain modulating burners."
+        "p": "The method of heating staging used by the unit. Select \u00c3\u2019Single Stage\u00c3\u201c for units with single stage (on/off) control. Select \u00c3\u2019Multiple, Discrete Stages\u00c3\u201c for units with multiple discrete stages (low-fire / high-fire). Select \u00c3\u2019Modulating\u00c3\u201c for units which contain modulating burners."
       },
       "Data-Type": "Constrained List",
       "Unit-of-Measure": "N/A",
