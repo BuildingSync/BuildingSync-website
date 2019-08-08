@@ -1,6 +1,8 @@
 import csv
 import os
 import re
+import datetime
+from collections import defaultdict
 
 import jellyfish
 from django.conf import settings
@@ -23,6 +25,7 @@ class Command(BaseCommand):
         parser.add_argument('--save_to_db', default=False, action="store_true")
 
     def handle(self, *args, **options):
+        print("Time: " + str(datetime.datetime.now().time())) # tk just checking how long the program takes to run, for my own curiosity.  Will delete in final draft.
         bedes_version = options['bedes_version']
         schema_version = options['schema_version']
         save_to_db = options['save_to_db']
@@ -35,6 +38,7 @@ class Command(BaseCommand):
             # do the parsing (only)
             self.stdout.write('Parsing BEDES data and matching to attributes')
             self.parse(bedes_version, schema_version)
+        print("Time: " + str(datetime.datetime.now().time())) #tk
 
     def parse(self, bedes_version, schema_version):
         # parse correct bedes version
@@ -61,77 +65,76 @@ class Command(BaseCommand):
                         "attribute_path": attribute.path,
                         "bedes_term": bt['Term'],
                         "bedes_object": bt,
-                        "distance": distance
+                        "distance": distance,
+                        "term_or_lo": 'Term'
                     })
-                    
+
+            # if no matches found in BEDES terms, check list options
+            if not results[attribute.id]:
+                for be in bedes.enumerations:
+                    # .lower() function used to neutralize upper/lower case discrepancies (there are many in enumerations/list options)
+                    distance = jellyfish.jaro_winkler(attribute.name.lower(), be['List-Option'].lower())
+
+                    if distance >= 0.95:
+                        results[attribute.id].append({
+                            "attribute_name": attribute.name,
+                            "attribute_path": attribute.path,
+                            "bedes_term": be['List-Option'],
+                            "bedes_object": be,
+                            "distance": distance,
+                            "term_or_lo": 'List-Option'
+                        })
+
+            # sort matched terms by distance value (highest matched in first index position)
             results[attribute.id] = sorted(results[attribute.id], key=lambda k: -k['distance'])
 
             if not results[attribute.id]:
-                # didn't find any term-to-term matches
+                # didn't find any term-to-term or term-to-list-option matches, start word-level matching
 
-                words_data = {}
-                words_data['bedes_word'] = []
-                words_data['bedes_word_URL'] = []
-                words_data['is_bedes_term'] = []
+                words_data = defaultdict(list)
                        
                 bsync_words = []
                 # split BSync term into a list of individual words
                 bsync_words = self.acronym_check(re.findall('[A-Z][^A-Z ]*', attribute.name))
-                current_word_number = 0
                 
                 for bsync_word in bsync_words:
 
-                    words_data['bedes_word'].append('No Match')
-                    words_data['bedes_word_URL'].append('No Match')
-                    words_data['is_bedes_term'].append('False')
+                    # run word matching function against BEDES terms and list options (enumerations)
+                    term_match_status, term_match_URL = self.word_matching(bsync_word, bedes.terms)
+                    lo_match_status, lo_match_URL = self.word_matching(bsync_word, bedes.enumerations)
 
-                    for bt in bedes.terms:
-                        # right now we're looking at direct matches, so we don't really need jellyfish distance calculations,
-                        # but code has been left in case we want to use it and try out distance thresholds (like .99 or something)
-                        distance = jellyfish.jaro_winkler(bsync_word, bt['Term'])  
-
-                        if distance == 1:
-                            words_data['bedes_word'][current_word_number] = bt['Term']
-                            words_data['bedes_word_URL'][current_word_number] = bt['URL']
-                            words_data['is_bedes_term'][current_word_number] = 'True'
+                    
+                    if term_match_status == 'Matched-Term':
+                        words_data['matched_to_term'].append(bsync_word)
+                        words_data['matched_term_URL'].append(term_match_URL)
+                        words_data['term_or_lo'].append('Term')
+                    else:
+                        if lo_match_status == 'Matched-Term':
+                            words_data['matched_to_term'].append(bsync_word)
+                            words_data['matched_term_URL'].append(lo_match_URL)
+                            words_data['term_or_lo'].append('List-Option')
                         else:
-                            # if match not found, try to match with plural version of BEDES term; program was missing matches because
-                            # BSync terms and words are pluralized while BEDES terms/words aren't
-                            distance = jellyfish.jaro_winkler(bsync_word, bt['Term'] + 's')
-                            if distance == 1:
-                                words_data['bedes_word'][current_word_number] = bt['Term']
-                                words_data['bedes_word_URL'][current_word_number] = bt['URL']
-                                words_data['is_bedes_term'][current_word_number] = 'True'
-                            
-                    if words_data['is_bedes_term'][current_word_number] == 'False':
-                        # if a BSync word didn't match with an entire BEDES term, iterate through BEDES terms, split into words, and look for word-to-word matches
-                        for bt in bedes.terms:
-                            bedes_words = []
-                            bedes_words = self.acronym_check(re.findall('[A-Z][^A-Z ]*', bt['Term']))
-                            for bedes_word in bedes_words:
-                                
-                                distance = jellyfish.jaro_winkler(bsync_word, bedes_word)
-
-                                if distance == 1:
-                                    words_data['bedes_word'][current_word_number] = bedes_word
-                                    words_data['bedes_word_URL'][current_word_number] = bt['URL']
+                            if term_match_status == 'Matched-Word':
+                                words_data['matched_to_word'].append(bsync_word)
+                                words_data['matched_word_example_URL'].append(term_match_URL)
+                            else:
+                                if lo_match_status == 'Matched-Word':
+                                    words_data['matched_to_word'].append(bsync_word)
+                                    words_data['matched_word_example_URL'].append(lo_match_URL)
                                 else:
-                                    distance = jellyfish.jaro_winkler(bsync_word, bedes_word + 's')
-                                    if distance == 1:
-                                        words_data['bedes_word'][current_word_number] = bedes_word
-                                        words_data['bedes_word_URL'][current_word_number] = bt['URL']
-                                    
-                            if words_data['bedes_word'][current_word_number] != 'No Match':
-                                break
-                                                                         
-                    current_word_number += 1
+                                    words_data['unmatched_words'].append(bsync_word)
+
 
                 results[attribute.id].append({
                     "attribute_name": attribute.name,
                     "attribute_path": attribute.path,
-                    "bedes_word": words_data['bedes_word'],
-                    "bedes_word_URL": words_data['bedes_word_URL'],
-                    "is_bedes_term": words_data['is_bedes_term']
+                    "word_matching": True,
+                    "term_or_lo": words_data['term_or_lo'],
+                    "matched_to_term": words_data['matched_to_term'],
+                    "matched_term_URL": words_data['matched_term_URL'],
+                    "matched_to_word": words_data['matched_to_word'],
+                    "matched_word_example_URL": words_data['matched_word_example_URL'],
+                    "unmatched_words": words_data['unmatched_words']
                     })
         # self.stdout.write(results)
 
@@ -146,25 +149,35 @@ class Command(BaseCommand):
         content_uuids = []
         with open("%s/bedes-mappings-terms.csv" % (the_path), 'w') as file:
             writer = csv.writer(file, delimiter=',')
-            # headers: attribute name, attribute id, attribute path, Content-UUID, bedes term, bedes_category, bedes definition, bedes URL,  distance,
-            # bedes_word, 'bedes_word_URL', 'is_bedes_term'
+            # write row of column headers
             writer.writerow(
                 ['attribute_name', 'attribute_id', 'attribute_path', 'bedes_content_uuid',
-                 'bedes_term', 'bedes_category', 'bedes_definition', 'bedes_url', 'distance', 'bedes_word', 'bedes_word_URL', 'is_bedes_term'])
+                 'bedes_term', 'bedes_category', 'bedes_definition', 'bedes_url', 'distance',
+                 'term_or_lo', 'matched_to_term', 'matched_term_URL', 'matched_to_word', 'matched_word_example_URL', 'unmatched_words'])
             for id, be in results.items():
                 if len(be) > 0 and 'bedes_object' in be[0]:
+                    # if structures to grab relevant information from appropriate fields depending on whether a term or an list option was matched
+                    if be[0]['term_or_lo'] == 'Term':
+                        output_category = be[0]['bedes_object']['Category']
+                        output_definition = be[0]['bedes_object']['Term-Definition']
+                    if be[0]['term_or_lo'] == 'List-Option':
+                        output_category = ''
+                        output_definition = be[0]['bedes_object']['List-Option-Definition']
                     out = [be[0]['attribute_name'], id, be[0]['attribute_path'],
-                           be[0]['bedes_object']['Content-UUID'], be[0]['bedes_term'],
-                           be[0]['bedes_object']['Category'],
-                           be[0]['bedes_object']['Term-Definition'], be[0]['bedes_object']['URL'],
-                           be[0]['distance'], '', '', '']
+                               be[0]['bedes_object']['Content-UUID'], be[0]['bedes_term'],
+                               output_category,
+                               output_definition, be[0]['bedes_object']['URL'],
+                               be[0]['distance'], be[0]['term_or_lo'], '', '', '', '', '']
                     content_uuids.append(be[0]['bedes_object']['Content-UUID'])
                 else:
-                    if 'bedes_word' in be[0]:
-                        out = [be[0]['attribute_name'], id, be[0]['attribute_path'], '', '', '', '', '', '',
-                               ', '.join(be[0]['bedes_word']), ', '.join(be[0]['bedes_word_URL']), ', '.join(be[0]['is_bedes_term'])] 
-                    else:    
-                        out = [be[0]['attribute_name'], id, be[0]['attribute_path'], '', '', '', '', '', '', '', '', '']
+                    # output word matching data if no direct term matches were found
+                    if 'word_matching' in be[0]:
+                        out = [be[0]['attribute_name'], id, be[0]['attribute_path'], '', '', '', '', '', '', ', '.join(be[0]['term_or_lo']),
+                               ', '.join(be[0]['matched_to_term']), ', '.join(be[0]['matched_term_URL']), ', '.join(be[0]['matched_to_word']),
+                               ', '.join(be[0]['matched_word_example_URL']), ', '.join(be[0]['unmatched_words'])]
+                    else:
+                        # this code should never run if working properly.  Can search 'debug134' in output file to make sure it hasn't run
+                        out = [be[0]['attribute_name'], id, be[0]['attribute_path'], '', '', 'debug134', '', '', '', '', '', '', '', '', '']
                 writer.writerow(out)
 
         list_set = set(content_uuids)
@@ -352,3 +365,57 @@ class Command(BaseCommand):
         del word_list[-1]
 
         return word_list
+
+    # function to take in a BSync word (parsed from a term that didn't match), and run it through either
+    # all BEDES terms or list options looking for exact matches, or word-for-word matches and return relevant data
+    def word_matching(self, bsync_word, term_dict):
+
+        bsync_word = bsync_word.lower() # converting to all same case to neutralize case differences in matching
+                                        #(will do to BEDES words we check against also)
+        
+        # check term_dict data to see if we're searching through BEDES terms or list-options
+        # term_key is set to the String key that corresponds to the correct data we're
+        # looking for in the term_dict (different between terms and list-options)
+        if 'List-Option' in term_dict[0].keys():
+            term_key = 'List-Option'
+        else:
+            term_key = 'Term'
+        
+        # initialize return strings with default values
+        # match_status has 3 options: 'Unmatched', 'Matched-Term', or 'Matched-Word' depending on type of match accomplished
+        match_status = 'Unmatched'
+        match_URL = ''   
+        
+        for term in term_dict:
+
+            # searching for exact Bsync word to full BEDES term(or list option) match.
+            # also trying to match with plural version of BEDES term; program was missing many matches because
+            # BSync terms and words are pluralized while BEDES terms/words aren't.
+            if bsync_word == term[term_key].lower() or bsync_word == term[term_key].lower() + 's':
+                match_URL = term['URL']
+                match_status = 'Matched-Term'
+                
+        if match_status == 'Unmatched':
+            # if a BSync word didn't match with an entire BEDES term, iterate through BEDES terms, split into words, and look for word-to-word matches
+            for term in term_dict:
+                
+                bedes_words = []
+                # split the term with appropriate method depending on its source
+                if term_key == 'Term':
+                    bedes_words = self.acronym_check(re.findall('[A-Z][^A-Z ]*', term[term_key]))
+                else:
+                    bedes_words = re.findall('[^:^(^)^,^ ][^,^ ^:^(^)]*', term[term_key])
+                    
+                for bedes_word in bedes_words:
+                    
+                    bedes_word = bedes_word.lower().replace('-', ' ') 
+                    if bsync_word == bedes_word or bsync_word == bedes_word + 's':
+                        match_URL = term['URL']
+                        match_status = 'Matched-Word'
+                       
+                if match_status != 'Unmatched':
+                    break # we're breaking out on first word match, just to return example data;
+                          # can continue iterating and checking if we want to gather more data
+        
+        return match_status, match_URL
+        
