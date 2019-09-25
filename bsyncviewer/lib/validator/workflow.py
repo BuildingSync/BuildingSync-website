@@ -42,7 +42,9 @@ class ValidationWorkflow(object):
         # load selected schema and validate
         if self.schema.schema_file:
             my_schema = xmlschema.XMLSchema(self.schema.schema_file.path, validation='lax')
+            print("SCHEMA PATH: {}".format(self.schema.schema_file.path))
             resp['valid'] = my_schema.is_valid(self.filepath)
+            print("FILE PATH: {}".format(self.filepath))
             print("VALID?: {}".format(resp['valid']))
             resp['schema_version'] = self.schema.version
             try:
@@ -63,12 +65,18 @@ class ValidationWorkflow(object):
                         resp['errors'].append(tmp_err)
 
             except xmlschema.validators.exceptions.XMLSchemaValidationError as ex:
+                print("XMLSCHEMA VALIDATION ERROR EXCEPTION")
                 resp['valid'] = False
                 print("EX: {}".format(ex))
                 resp['errors'] = []
                 # TODO: this is probably not needed anymore due to the use of 'to_dict' in try block instead of 'validate'
                 tmp_err = {'path': ex.path.replace('auc:', ''), 'message': ex.reason}
                 resp['errors'].append(tmp_err)
+            except Exception as e:
+                print("GENERIC EXCEPTION DURING XMLSCHEMA VALIDATION")
+                print("EXCEPTION TYPE: {}, e: {}".format(type(e), e))
+                resp['errors'] = []
+                resp['errors'].append({'path': '', 'message': e})
 
         else:
             resp['valid'] = False
@@ -82,7 +90,10 @@ class ValidationWorkflow(object):
 
         # parse xml with xmltodict (incorrect when using the to_dict function from schema parsing)
         with open(self.filepath) as file:
-            self.xml = xmltodict.parse(file.read())
+            # ignore auc namespace
+            # TODO: store namespaces somewhere when there are more than one version of the schema
+            namespaces = {'http://buildingsync.net/schemas/bedes-auc/2019': None}
+            self.xml = xmltodict.parse(file.read(), process_namespaces=True, namespaces=namespaces)
 
         for use_case in self.use_cases:
             print("validating use case: {}".format(use_case.name))
@@ -94,9 +105,8 @@ class ValidationWorkflow(object):
         resp = OrderedDict()
         schema_resp = self.validate_schema()
         resp['schema'] = schema_resp
-        # restore this when you have a valid xml
-        # if not schema_resp['valid']:
-        #    return resp
+        if schema_resp['valid'] is False:
+            return resp
 
         print('VALIDATING USE CASES...')
         resp.update(self.validate_use_cases())
@@ -132,7 +142,7 @@ class ValidationWorkflow(object):
                     try:
                         print("PATHS: {}".format(paths))
                         for path in paths:
-                            fpath = 'auc:' + path
+                            fpath = path
                             if loopingVar.__class__.__name__ == 'OrderedDict':
                                 loopingVar = loopingVar[fpath]
                             else:
@@ -144,25 +154,25 @@ class ValidationWorkflow(object):
                         # not sure if it's a list if only one is found
                         match = False
                         if loopingVar.__class__.__name__ == 'OrderedDict':
-                            print("ORDERED DICT: {}".format(loopingVar))
-                            if loopingVar['auc:FieldName'] == udf.values:
-                                print("FOUND MATCH!")
+                            # print("ORDERED DICT: {}".format(loopingVar))
+                            if loopingVar['FieldName'] == udf.values:
+                                # print("FOUND MATCH!")
                                 match = True
                                 # now check field Value
-                                if associatedFieldValue.values and l['auc:FieldValue'] not in associatedFieldValue.values:
+                                if associatedFieldValue.values and l['FieldValue'] not in associatedFieldValue.values:
                                     # enum not matching
                                     msg = 'FieldValue for FieldName =  ' + udf.values + ' contains a value that is not allowed'
                                     results['errors'].append(
                                         {'path': attr.attribute.path, 'message': msg})
                         else:
-                            print("LIST")
+                            # print("LIST")
                             for index, l in enumerate(loopingVar):
                                 print("elem: {}".format(l))
-                                if l['auc:FieldName'] == udf.values:
-                                    print("FOUND MATCH!")
+                                if l['FieldName'] == udf.values:
+                                    # print("FOUND MATCH!")
                                     match = True
                                     # now check field Value
-                                    if associatedFieldValue.values and l['auc:FieldValue'] not in associatedFieldValue.values:
+                                    if associatedFieldValue.values and l['FieldValue'] not in associatedFieldValue.values:
                                         # enum not matching
                                         msg = 'FieldValue for FieldName =  ' + udf.values + ' contains a value that is not allowed'
                                         results['errors'].append(
@@ -174,7 +184,7 @@ class ValidationWorkflow(object):
                                 {'path': attr.attribute.path, 'message': msg})
 
                     except BaseException:
-                        print("---EXCEPTION!!! ---")
+                        print("---EXCEPTION when trying path: {}".format(paths))
                         if attr.state == 2:
                             # Required attribute, error out
                             msg = 'Required UDF element not found with FieldName = ' + udf.values
@@ -189,7 +199,7 @@ class ValidationWorkflow(object):
                 # validate presence of required element
                 try:
                     for path in paths:
-                        fpath = 'auc:' + path
+                        fpath = path
                         if loopingVar.__class__.__name__ == 'OrderedDict':
                             loopingVar = loopingVar[fpath]
                         else:
