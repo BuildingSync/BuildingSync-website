@@ -201,19 +201,21 @@ class ValidationWorkflow(object):
         return found, loopingVar
 
     def process_use_case_groups(self, use_case, errors):
-        # process required-1 and optional-1 groups
+        # process required-1, optional-1, and optional-multi groups
         attrs = UseCaseAttribute.objects.filter(state__gt=2, group_id__isnull=False, use_case=use_case).order_by('group_id')
         group_num = 0
         group_level = ''
         match_cnt = 0
+        multi_cnt = 0
         state = 0
         req_paths = []
 
-        def _error_check(state, match_cnt, group_level, req_paths):
+        def _error_check(state, match_cnt, group_level, req_paths, multi_cnt):
             # see if errors occurred
             # if required-1 and match > 1 error: too many at level X
             # if required-1 and match == 0 error: one-of x,y,z required at level X
             # if optional-1 and match > 1 error: too many at level X
+            # if optional-multi and match != number of optional-multi fields: missing required elements under the group
             error = None
             req_str = ", "
             req_str = req_str.join(req_paths)
@@ -229,11 +231,15 @@ class ValidationWorkflow(object):
                 # Optional-1, but more than 1 selected
                 msg = 'Optional-1 error: multiple elements found, but there should be 0 or 1 of the following: ' + req_str
                 error = {'path': group_level, 'message': msg}
+            elif state == 5 and match_cnt != multi_cnt:
+                # Optional-Multi, but missing some elements
+                msg = 'Optional-Multi error: optional path with multiple elements found, but missing one or more of the required group elements: ' + req_str
+                error = {'path': group_level, 'message': msg}
             return error
 
         for attr in attrs:
             if group_num != attr.group_id and group_num > 0:
-                error = _error_check(state, match_cnt, group_level, req_paths)
+                error = _error_check(state, match_cnt, group_level, req_paths, multi_cnt)
                 if error is not None:
                     errors.append(error)
 
@@ -241,9 +247,14 @@ class ValidationWorkflow(object):
             if group_num != attr.group_id:
                 group_num = attr.group_id
                 match_cnt = 0
+                multi_cnt = 0
                 state = attr.state
                 group_level = attr.grouping_level
                 req_paths = []
+
+            # increase multi_cnt for Optional-Multi state
+            if state == 5:
+                multi_cnt += 1
 
             # find a match
             req_paths.append(attr.attribute.path)
@@ -252,7 +263,7 @@ class ValidationWorkflow(object):
                 match_cnt += 1
 
         # error_check for last group
-        error = _error_check(state, match_cnt, group_level, req_paths)
+        error = _error_check(state, match_cnt, group_level, req_paths, multi_cnt)
         if error is not None:
             errors.append(error)
 

@@ -27,8 +27,12 @@ def process_usecase(use_case_object):
         print("PROCESSING: {}".format(row['BuildingSyncPath']))
         # get state
         state_val = 0
+        tmp_state = row['State']
+        # special case
+        if tmp_state == 'Optional-Both':
+            tmp_state = 'Optional-Multi'
         for state in STATE_TYPES:
-            if state[1] == row['State']:
+            if state[1] == tmp_state:
                 state_val = state[0]
 
         # only processed non-ignored

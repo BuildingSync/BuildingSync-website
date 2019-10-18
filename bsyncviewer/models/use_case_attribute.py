@@ -5,13 +5,15 @@ STATE_OPTIONAL = 1
 STATE_REQUIRED = 2
 STATE_REQUIRED_1 = 3
 STATE_OPTIONAL_1 = 4
+STATE_OPTIONAL_MULTI = 5
 
 STATE_TYPES = (
     (STATE_IGNORED, 'Ignored'),
     (STATE_OPTIONAL, 'Optional'),
     (STATE_REQUIRED, 'Required'),
     (STATE_REQUIRED_1, 'Required-1'),
-    (STATE_OPTIONAL_1, 'Optional-1')
+    (STATE_OPTIONAL_1, 'Optional-1'),
+    (STATE_OPTIONAL_MULTI, 'Optional-Multi')
 )
 
 
