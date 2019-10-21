@@ -367,7 +367,7 @@ class ValidationWorkflow(object):
                                 print(msg)
                                 results['errors'].append({'path': attr.attribute.path, 'message': msg})
 
-                        elif type(the_path) is str:
+                        elif isinstance(the_path, str):
                             # it's a single string
                             # print("IT IS A SINGLE STRING")
                             if the_path.lower() not in [x.lower() for x in req_vals]:

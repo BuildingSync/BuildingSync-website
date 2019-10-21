@@ -18,7 +18,7 @@ class SchemaForm(forms.ModelForm):
     # validate that schema version is in X.X.X format (3 parts)
     def clean(self):
         version = self.cleaned_data.get('version')
-        pattern = re.compile("\d+\.\d+\.\d+")
+        pattern = re.compile(r"\d+\.\d+\.\d+")
 
         if not pattern.match(version):
             raise forms.ValidationError("Version must be in X.X.X format. Example: 1.0.0")
