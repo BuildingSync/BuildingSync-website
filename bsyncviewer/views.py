@@ -289,22 +289,22 @@ def update_user(request):
                       {'update_user_form': update_user_form})
 
 
-@login_required
-def download_template(request, template_id):
-    if template_id:
-        schema = Schema.objects.filter(pk=template_id)[0]
-        if schema:
-            file_path = schema.usecase_template_file.path
+# @login_required
+# def download_template(request, template_id):
+#     if template_id:
+#         schema = Schema.objects.filter(pk=template_id)[0]
+#         if schema:
+#             file_path = schema.usecase_template_file.path
 
-            if os.path.exists(file_path):
-                with open(file_path, 'rb') as fh:
-                    response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
-                    response['Content-Disposition'] = 'inline; filename=' + os.path.basename(
-                        file_path)
-                    return response
-            raise Http404
-        raise Http404
-    raise Http404
+#             if os.path.exists(file_path):
+#                 with open(file_path, 'rb') as fh:
+#                     response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+#                     response['Content-Disposition'] = 'inline; filename=' + os.path.basename(
+#                         file_path)
+#                     return response
+#             raise Http404
+#         raise Http404
+#     raise Http404
 
 
 @login_required

@@ -16,22 +16,6 @@
 				    </div>
 				</form>
 			</div>
-            {%  if object.schema %}
-            <div class="col-md-7">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <div class="callout-box">
-                            <h2>Use Case Template</h2>
-                            <p> Fill out the CSV Use Case template file mapping your use case to the BuildingSync schema and upload it to the left.</p>
-                            <span class="pad-20"><a class="btn btn-accent" href="{% url 'download_template' template_id=object.schema.id %}" role="button">
-                            <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
-                            Download Use Case Template
-                            </a></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {%  endif  %}
 		</div>
         <div class="row">
             <div class="col-md-12">
