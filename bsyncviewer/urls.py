@@ -27,6 +27,7 @@ urlpatterns = [
     path('use_case/<int:pk>/update/', views.UseCaseUpdate.as_view(), name='use_case_update'),
     path('use_case/<int:pk>/delete/', views.UseCaseDelete.as_view(), name='use_case_delete'),
     re_path('download_examples', views.download_examples, name='download_examples'),
+    re_path('download_usecase_example', views.download_usecase_example, name='download_usecase_example'),
     path('validator', views.validator, name='validator'),
     path('dictionary', views.redirect_data_dictionary, name='dictionary'),
     re_path(r'^dictionary/(?P<version>\w+.\w+.\w+)/$', views.dictionary, name='dictionaryversion'),

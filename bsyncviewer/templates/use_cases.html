@@ -28,13 +28,8 @@
 						{% endfor %}
 					</table>
         		{% endif %}
-        	</div>
-        </div>
-
-        {% if user.is_authenticated %}
-	        <div class="row pad-top-20">
-	        	<div class="col-md-9">
-	        		<h3>My Use Cases</h3>
+        		{% if user.is_authenticated %}
+        			<h3>My Use Cases</h3>
 	        		{% if user_usecases %}
 	        			<table class="table">
 		  					<tr>
@@ -58,20 +53,25 @@
 							{% endfor %}
 						</table>
 	        		{% endif %}
-	        	</div>
-	        </div>
-	        <a class="btn btn-accent" href="{% url 'use_case_create' %}" role="button">
-	            <i class="fa fa-plus" aria-hidden="true"></i>
-	            New Use Case
-	        </a>
-	        <a class="btn btn-accent" href="{% url 'use_case_mappings' %}" role="button">
-	            <i class="fa fa-question" aria-hidden="true"></i>
-	            Adding and Validating Use Cases
-	        </a>
-	        <div class="pad-bot-20">
-	        	&nbsp;
-	        </div>
-        {% endif %}
+	        		<a class="btn btn-accent" href="{% url 'use_case_create' %}" role="button">
+			            <i class="fa fa-plus" aria-hidden="true"></i>
+			            New Use Case
+			        </a>
+			        <div class="pad-bot-20">
+			        	&nbsp;
+			        </div>
+	        	{% endif %}	
+        	</div>
+        	<div class="col-md-3">
+        		<div class="callout-box">
+        			<p>Click the link below for more information on adding and validating use cases</p>
+        			<span class="pad-10"><a class="btn btn-accent" href="{% url 'use_case_mappings' %}" role="button">	
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>	
+                        Use Case Help Page
+                        </a></span>
+        		</div> 	
+        	</div>
+        </div>
     </div>
 
 {% endblock content_notitle %}

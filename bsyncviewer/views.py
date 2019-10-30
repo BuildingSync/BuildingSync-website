@@ -254,6 +254,18 @@ def download_examples(request):
             return response
     raise Http404
 
+def download_usecase_example(request):
+    file_path = os.path.join(
+        os.path.abspath(os.path.dirname(__file__)), 'lib', 'use_cases', 'example_usecase_definitions.sch'
+    )
+
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type='application/force-download')
+            response['Content-Disposition'] = 'attachment; filename="%s"' % os.path.basename(
+                file_path)
+            return response
+    raise Http404
 
 @login_required
 def profile(request):

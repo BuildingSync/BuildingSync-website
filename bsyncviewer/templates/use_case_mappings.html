@@ -8,39 +8,22 @@
 
     <div class="container">
     	<header class="major">
-			<h2>Mapping Use Cases</h2>
+			<h2>Use Case Help</h2>
     	</header>
     	<div class="row">
         	<div class="col-md-12">
-        		<p>The diagram below shows the process of adding a use case to the selection-tool website. Tips for filling out the mapping spreadsheet can also be found below. </p>
-                <img class="pad-bot-10" src="static/images/selectiontool-usecases_final.jpg" width="100%"/>
+        		<p>The diagram below shows the process of adding a use case to the selection-tool website.</p>
+                <img class="pad-bot-10" src="static/images/selectiontool-usecases_v2.png" width="100%"/>
         	</div>
         </div>
 
         <div class="row">
             <div class="col-md-12">
-                <h3>Tips for Mapping Use Cases</h3>
+                <h3>Helpful Links</h3>
                 <ul>
-                    <li class="pad-bot-10">The mapping spreadsheet has 6 columns:
-                        <ul class="pad-lr-20">
-                            <li><strong>BuildingSyncPath</strong> &mdash; This column is auto-generated when download the mapping spreadsheet for your use case. It contains a row for each element in the BuildingSync schema.</li>
-                            <li><strong>State</strong> &mdash; The state column indicates whether an element of the schema is required or optional for the use case.  Leave blank when an element is not applicable to the use case.  Possible state values are:
-                                <ul>
-                                    <li><strong>Required</strong> &mdash; This element is required for the use case. </li>
-                                    <li><strong>Optional</strong> &mdash; This element is optional for the use case. </li>
-                                    <li><strong>Required-1</strong> &mdash; This is used in conjunction with the GroupID and GroupingLevel columns. It is used to indicate that one (and only one) element in the group defined by groupID is required.</li>
-                                    <li><strong>Optional-1</strong> &mdash; This is used in conjunction with the GroupID and GroupingLevel columns. It is used to indicate that, while optional, if one of the elements in the group (defined by groupID) is present, then there can be only one.</li>
-                                    <li><strong>Optional-Multi</strong>&mdash; This is used in conjunction with the GroupID and GroupingLevel columns. It is used to indicate that, while the group is optional, if it is present, then multiple fields are required to be present.</li>
-                                </ul>
-                            </li>
-                            <li><strong>RequiredValues</strong> &mdash; This column should contain a comma-delimited list of the allowable values for the element.</li>
-                            <li><strong>RequiredPairedElement</strong> &mdash; If the element has associated elements, list the paths of the other elements here, in comma-delimited format.  Use the same syntax as in the BuildingSyncPath column.</li>
-                            <li><strong>GroupID</strong> &mdash; This column is only required to designate groups of elements where only one or multiple elements are required.  The ID should be unique across the use case. Leave blank otherwise.</li>
-                            <li><strong>GroupingLevel</strong> &mdash; This column is required for groups of elements where only one or multiple element are required.  It is used to mark elements in the group path appropriately.  The level should be the lowest level under which there is one or more required element.  If there is a groupID, enter the grouping level using the same syntax as in the BuildingSyncPath column. Leave blank otherwise.</li>
-                        </ul>
-                    </li>
-                    <li class="pad-bot-10">Each BuildingSyncPath can only be part of one group.  The selection-tool does not support complex relationships where a path is present in multiple groups.</li>
-                    <li class="pad-bot-10">GroupID and GroupingLevel should only be used for identifying groups of elements where only one element (or multiple specific elements) of a group are required.  It should not be used to designate a list of values for a specific element.</li>
+                    <li class="pad-bot-10"><a href="{% url 'download_usecase_example' %}">Download Example Schematron File</a></li>
+                    <li class=pad-bot-10><a href="http://schematron.com" target="_blank">Schematron Website</a></li>
+                       
                 </ul>
             </div>
         </div>
