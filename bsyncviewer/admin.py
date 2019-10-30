@@ -15,15 +15,13 @@ class SchemaForm(forms.ModelForm):
         model = Schema
         fields = '__all__'
 
-    # validate that schema version is in X.X.X format (3 parts)
-    # also accept X.X.X.aaX where a = letter and X = number
+    # validate that schema version is valid semantic version
     def clean(self):
         version = self.cleaned_data.get('version')
         if not semantic_version.validate(version):
             raise forms.ValidationError("Version must be a valid semantic version")
 
         return self.cleaned_data
-
 
 class SchemaAdmin(admin.ModelAdmin):
     form = SchemaForm

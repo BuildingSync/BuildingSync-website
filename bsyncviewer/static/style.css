@@ -356,3 +356,7 @@ form a, form a:hover {
 #schematree a, #schematree a:hover {
   border-bottom:0px;
 }
+
+ul.errorlist li{
+  color: red;
+}

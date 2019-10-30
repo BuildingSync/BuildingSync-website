@@ -5,6 +5,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.db.models.signals import post_save, pre_save, post_delete
 from django.dispatch import receiver
+from django.core.validators import FileExtensionValidator
 
 
 class UseCase(models.Model):
@@ -13,7 +14,7 @@ class UseCase(models.Model):
     description = models.TextField()
     schema = models.ForeignKey('Schema', on_delete=models.CASCADE, db_index=True)
     make_public = models.BooleanField(default=False)
-    import_file = models.FileField(upload_to='usecase_mappings/', null=True, blank=True, help_text="This should be a Schematron file defining the use case")
+    import_file = models.FileField(upload_to='usecase_mappings/', null=True, blank=True, validators=[FileExtensionValidator(allowed_extensions=['sch'])],help_text="This should be a Schematron file defining the use case")
 
     def __str__(self):
         return self.name
