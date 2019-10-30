@@ -34,11 +34,6 @@ class TestUseCase(TestCase):
         )
         self.usecase.save()  # Calling save also processes the schema and generates the template
 
-    def test_usecase_unparsed(self):
-        # check that post_save didn't run: usecase_parsed should be False and import_file should be None
-        self.assertFalse(self.usecase.usecase_parsed)
-        attributes = self.usecase.usecaseattribute_set
-        self.assertEqual(attributes.count(), 0)
 
     def add_usecase(self):
         # add file and save
@@ -56,10 +51,8 @@ class TestUseCase(TestCase):
 
     def test_add_usecase_file_parsed_then_delete(self):
         self.add_usecase()
-        # then check that parsed = True and there are attributes in UseCaseAttributes
-        self.assertTrue(self.usecase.usecase_parsed)
-        attributes = self.usecase.usecaseattribute_set
-        self.assertGreater(attributes.count(), 0)
+        # then check that file has a path
+        self.assertTrue(self.usecase.import_file.path != '')
 
         print('usecase saved filename: {}'.format(self.usecase.import_file.path))
 
