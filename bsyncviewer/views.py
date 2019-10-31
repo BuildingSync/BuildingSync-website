@@ -254,6 +254,7 @@ def download_examples(request):
             return response
     raise Http404
 
+
 def download_usecase_example(request):
     file_path = os.path.join(
         os.path.abspath(os.path.dirname(__file__)), 'lib', 'use_cases', 'example_usecase_definitions.sch'
@@ -266,6 +267,7 @@ def download_usecase_example(request):
                 file_path)
             return response
     raise Http404
+
 
 @login_required
 def profile(request):

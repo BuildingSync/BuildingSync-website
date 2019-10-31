@@ -237,7 +237,6 @@ class BuildingSyncSchemaProcessor(object):
     def _read_complex_type(self, parent_object):
         this_complex_type = ComplexTypeElement()
         for child in parent_object.getchildren():
-            print("***CHILD: {}".format(child))
             if child.tag.endswith('sequence'):
                 this_complex_type.sequences.append(self._read_sequence(child))
             elif child.tag.endswith('simpleContent'):
@@ -247,7 +246,7 @@ class BuildingSyncSchemaProcessor(object):
             elif child.tag.endswith('choice'):
                 this_complex_type.choices.append(self._read_choice(child))
             elif child.tag.endswith('annotation'):
-                this_complex_type.annotations.append(self._read_annotation(child))   
+                this_complex_type.annotations.append(self._read_annotation(child))
             else:
                 exc = "Invalid tag type in _read_complex_type: " + child.tag
                 raise Exception(exc)

@@ -23,6 +23,7 @@ class SchemaForm(forms.ModelForm):
 
         return self.cleaned_data
 
+
 class SchemaAdmin(admin.ModelAdmin):
     form = SchemaForm
 

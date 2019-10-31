@@ -1,7 +1,6 @@
 from collections import OrderedDict
 
 import xmlschema
-import xmltodict
 import copy
 import subprocess
 
@@ -145,18 +144,16 @@ class ValidationWorkflow(object):
     def process_use_case(self, use_case):
         results = OrderedDict()
         results['valid'] = True
-        results['errors'] = []  
+        results['errors'] = []
 
         result = subprocess.run(['stron-nokogiri', use_case.import_file.path, self.filepath], stdout=subprocess.PIPE)
         errors = result.stdout.decode('utf-8')
         results['errors'] = errors.split('\n')
-        results['errors'] = [i for i in results['errors'] if i] 
+        results['errors'] = [i for i in results['errors'] if i]
         print("RESULTS ERROR: {}".format(results['errors']))
-        
+
         # set valid to valse if errors.count > 0
         if len(results['errors']) > 0:
             results['valid'] = False
 
         return results
-
-

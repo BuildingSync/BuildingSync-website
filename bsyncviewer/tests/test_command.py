@@ -58,7 +58,6 @@ class TestCommandWithSchema(TestCase):
         print("USE CASES: {}".format(use_cases))
         self.assertGreater(use_cases, 0)
 
-
     def test_bedes_command(self):
         # The schema must exist before this command is called.
         print('TESTING BEDES COMMAND')

@@ -34,10 +34,9 @@ class TestUseCase(TestCase):
         )
         self.usecase.save()  # Calling save also processes the schema and generates the template
 
-
     def add_usecase(self):
         # add file and save
-        usf = os.path.join(os.path.dirname(__file__), 'data', 'test_use_case.csv')
+        usf = os.path.join(os.path.dirname(__file__), 'data', 'test_use_case.sch')
         file = open(usf, 'rb')
         simple_uploaded_file = SimpleUploadedFile(file.name, file.read())
 
@@ -49,7 +48,7 @@ class TestUseCase(TestCase):
         self.saved_file_path = self.usecase.import_file.path
         self.usecase.delete()
 
-    def test_add_usecase_file_parsed_then_delete(self):
+    def test_add_usecase_file_then_delete(self):
         self.add_usecase()
         # then check that file has a path
         self.assertTrue(self.usecase.import_file.path != '')
