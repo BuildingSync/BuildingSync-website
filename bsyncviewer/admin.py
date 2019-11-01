@@ -18,6 +18,7 @@ class SchemaForm(forms.ModelForm):
     # validate that schema version is valid semantic version
     def clean(self):
         version = self.cleaned_data.get('version')
+
         if not semantic_version.validate(version):
             raise forms.ValidationError("Version must be a valid semantic version")
 
