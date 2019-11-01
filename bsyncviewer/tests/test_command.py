@@ -9,7 +9,6 @@ from django.test import TestCase
 from bsyncviewer.models.bedes_models import BedesTerm, BedesEnumeration
 from bsyncviewer.models.schema import Schema
 from bsyncviewer.models.use_case import UseCase
-from bsyncviewer.models.use_case_attribute import UseCaseAttribute
 
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
@@ -56,10 +55,8 @@ class TestCommandWithSchema(TestCase):
 
         # assert that a use case was created
         use_cases = UseCase.objects.all().count()
-        use_case_attrs = UseCaseAttribute.objects.all().count()
-        print("USE CASES: {}, USE CASE ATTRIBUTES: {}".format(use_cases, use_case_attrs))
+        print("USE CASES: {}".format(use_cases))
         self.assertGreater(use_cases, 0)
-        self.assertGreater(use_case_attrs, 0)
 
     def test_bedes_command(self):
         # The schema must exist before this command is called.
