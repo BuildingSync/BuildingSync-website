@@ -1,4 +1,5 @@
 import csv
+import xmltodict
 import os
 import re
 from collections import defaultdict
@@ -13,6 +14,17 @@ from bsyncviewer.models.bedes_models import BedesTerm, BedesMapping, BedesEnumer
     BedesEnumerationMapping
 from bsyncviewer.models.enumeration import Enumeration
 from bsyncviewer.models.schema import Schema
+
+# MATCH TYPES:
+# Term-to-List-Option Match -> use bedes_url col (will contain only 1 URL)
+# Term-to-Term Match -> use bedes_url col (will contain only 1 URL)
+# Words: all Term -> use matched_term_URL col (could be a list of URLs)
+# Words: all Unmatched -> DO NOTHING
+# Words: all Word -> use matched_word_example_URL col, (could be a list of URLs)
+# Words: Term, Unmatched -> use matched_term_URL col, (could be a list of URLs)
+# Words: Term, Word -> use BOTH matched_word_example_URL AND matched_term_URL
+# Words: Term, Word, Unmatched -> use BOTH matched_word_example_URL AND matched_term_URL
+# Words: Word, Unmatched -> use matched_word_example_URL (could be a list of URLs)
 
 
 class Command(BaseCommand):
@@ -582,6 +594,12 @@ class Command(BaseCommand):
         # save all terms
         csv_file = open("%s/bedes-mappings-terms.csv" % (the_path), mode='r')
         bedes_mappings = csv.DictReader(csv_file)
+
+        # will also need XML term file to get the definitions or the additional terms
+        xml_dict = None
+        with open(os.path.join(os.path.dirname(__file__), '../../lib/bedes', bedes_version, 'bedes_online_dictionary_uuid-terms.xml')) as file:
+            xml_dict = xmltodict.parse(file.read())
+
         for term in bedes_mappings:
             # get_or_create here b/c CSV structure maps schema attributes to bedes terms
             # there could be multiple listings of the same bedes term
@@ -593,25 +611,86 @@ class Command(BaseCommand):
                     definition=term['bedes_definition'],
                     url=term['bedes_url']
                 )
+            # if mapping Words, find and save all word mappings
+            if term['matched_term_URL'] != "":
+                items = term['matched_term_URL'].split(',')
+                for item in items:
+                    # find in xml dict
+                    match = next((i for i in xml_dict['nodes']['node'] if i["URL"] == item), False)
+                    if match:
+                        # save term
+                        definition = None
+                        if match['Definition'].get('p'):
+                            definition = match['Definition']['p']
+                        else:
+                            definition = match['Definition']
+                        BedesTerm.objects.get_or_create(
+                            content_uuid=match['Content-UUID'],
+                            term=match['Term'],
+                            category=match['Category'],
+                            definition=definition,
+                            url=item
+                        )
+
+            # same with matched word
+            if term['matched_word_example_URL'] != "":
+                items = term['matched_term_URL'].split(',')
+                for item in items:
+                    # find in xml dict
+                    match = next((i for i in xml_dict['nodes']['node'] if i["URL"] == item), False)
+                    if match:
+                        # save term
+                        definition = None
+                        if match['Definition'].get('p'):
+                            definition = match['Definition']['p']
+                        else:
+                            definition = match['Definition']
+                        BedesTerm.objects.get_or_create(
+                            content_uuid=match['Content-UUID'],
+                            term=match['Term'],
+                            category=match['Category'],
+                            definition=definition,
+                            url=item
+                        )
 
         # rewind
         csv_file.seek(0)
         next(bedes_mappings)
         for term in bedes_mappings:
-            # mappings CSV only contains distances >= 0.95 or it's blank
-            if term['distance'] != "":
+            # mappings CSV contains match_type.  all Unmatched is the only one to ignore
+            if term['match_type'] != "all Unmatched":
                 # found a match
                 attributes = Attribute.objects.filter(id=term['attribute_id'], schema=schema)
-                terms = BedesTerm.objects.filter(content_uuid=term['bedes_content_uuid'])
+                terms = []
+                if term['bedes_content_uuid'] != "":
+                    terms = BedesTerm.objects.filter(content_uuid=term['bedes_content_uuid'])
+                elif term['matched_term_URL'] != "":
+                    # split list and get UUIDs
+                    tlist = term['matched_term_URL'].split(',')
+                    tlist = [i.strip('https://bedes.lbl.gov/node/') for i in tlist]
 
-                if terms.count() > 0 and attributes.count() > 0:
+                    if term['matched_word_example_URL'] != "":
+                        # add these too
+                        tlist2 = term['matched_word_example_URL'].split(',')
+                        tlist2 = [i.strip('https://bedes.lbl.gov/node/') for i in tlist2]
+                        tlist = tlist + tlist2
+                    terms = BedesTerm.objects.filter(content_uuid__in=tlist)
+                elif term['matched_word_example_URL'] != "":
+                    # split list and get UUIDs    
+                    tlist = term['matched_word_example_URL'].split(',')
+                    tlist = [i.strip('https://bedes.lbl.gov/node/') for i in tlist]
+                    terms = BedesTerm.objects.filter(content_uuid__in=tlist)
+
+                if len(terms) > 0 and len(attributes) > 0:
                     attr = attributes[0]
-                    bedes_term = terms[0]
-                    bmap = BedesMapping(
-                        bedesTerm=bedes_term,
-                        attribute=attr
-                    )
-                    bmap.save()
+                    for i in terms:
+                        bedes_term = i
+                        bmap = BedesMapping(
+                            bedesTerm=bedes_term,
+                            attribute=attr,
+                            match_type=term['match_type']
+                        )
+                        bmap.save()
 
         # save all enumerations
         csv_file = open("%s/bedes-mappings-enumerations.csv" % (the_path), mode='r', encoding='utf-8')
