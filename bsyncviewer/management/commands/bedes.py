@@ -585,11 +585,11 @@ class Command(BaseCommand):
         # get schema
         schema = Schema.objects.filter(version=schema_version).first()
 
-        # first delete all
-        BedesTerm.objects.all().delete()
-        BedesMapping.objects.all().delete()
-        BedesEnumeration.objects.all().delete()
-        BedesEnumerationMapping.objects.all().delete()
+        # don't delete..reuse
+        # BedesTerm.objects.all().delete()
+        # BedesMapping.objects.all().delete()
+        # BedesEnumeration.objects.all().delete()
+        # BedesEnumerationMapping.objects.all().delete()
 
         # save all terms
         csv_file = open("%s/bedes-mappings-terms.csv" % (the_path), mode='r')
@@ -616,7 +616,10 @@ class Command(BaseCommand):
                 items = term['matched_term_URL'].split(',')
                 for item in items:
                     # find in xml dict
+                    item = item.strip(' ')
+
                     match = next((i for i in xml_dict['nodes']['node'] if i["URL"] == item), False)
+
                     if match:
                         # save term
                         definition = None
@@ -637,6 +640,7 @@ class Command(BaseCommand):
                 items = term['matched_term_URL'].split(',')
                 for item in items:
                     # find in xml dict
+                    item = item.strip(' ')
                     match = next((i for i in xml_dict['nodes']['node'] if i["URL"] == item), False)
                     if match:
                         # save term
@@ -667,22 +671,27 @@ class Command(BaseCommand):
                 elif term['matched_term_URL'] != "":
                     # split list and get UUIDs
                     tlist = term['matched_term_URL'].split(',')
-                    tlist = [i.strip('https://bedes.lbl.gov/node/') for i in tlist]
+                    tlist = [i.strip(' ').replace('https://bedes.lbl.gov/node/', '') for i in tlist]
 
                     if term['matched_word_example_URL'] != "":
                         # add these too
                         tlist2 = term['matched_word_example_URL'].split(',')
-                        tlist2 = [i.strip('https://bedes.lbl.gov/node/') for i in tlist2]
+                        tlist2 = [i.strip(' ').replace('https://bedes.lbl.gov/node/', '') for i in tlist2]
                         tlist = tlist + tlist2
+
                     terms = BedesTerm.objects.filter(content_uuid__in=tlist)
+
                 elif term['matched_word_example_URL'] != "":
                     # split list and get UUIDs    
                     tlist = term['matched_word_example_URL'].split(',')
-                    tlist = [i.strip('https://bedes.lbl.gov/node/') for i in tlist]
+                    tlist = [i.strip(' ').replace('https://bedes.lbl.gov/node/', '') for i in tlist]
                     terms = BedesTerm.objects.filter(content_uuid__in=tlist)
 
                 if len(terms) > 0 and len(attributes) > 0:
                     attr = attributes[0]
+                    # first delete all old mappings for this attribute
+                    BedesMapping.objects.filter(attribute=attr).delete()
+                    # then add new mappings
                     for i in terms:
                         bedes_term = i
                         bmap = BedesMapping(
@@ -721,8 +730,7 @@ class Command(BaseCommand):
                 if terms.count() > 0 and enums.count() > 0:
                     enum = enums[0]
                     bedes_term = terms[0]
-                    bmap = BedesEnumerationMapping(
+                    BedesEnumerationMapping.objects.get_or_create(
                         bedesEnumeration=bedes_term,
                         enumeration=enum
                     )
-                    bmap.save()

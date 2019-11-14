@@ -71,9 +71,7 @@
                 No mapping found
               </div>
               <div id="bedes_found" class="hidden">
-                <div class="pad-bot-10"><span class="bold" id="bedes_term"></span>&mdash;<span id="bedes_definition"></span></div>
-                <div class="pad-bot-10"><span class="bold">Category &mdash;</span> <span id="bedes_category"></span></div>
-                <div class="pull-right"><a id="bedes_url" href="" target="_blank">BEDES <i class="fa fa-external-link" aria-hidden="true"></i></a></div>
+                <div class="pad-bot-10"><span id="term_results"></span></div>
               </div>
             </div>
          </div>
@@ -120,13 +118,25 @@
                 success: function (jsondata) {
 
                   // set bedes section and display
-                  if (jsondata.bedes_term != null){
+                  if (jsondata.bedes_terms.length > 0){
+
+                    
                     $('#bedes_none').removeClass("visible").addClass("hidden");
                     $('#bedes_found').removeClass("hidden").addClass("visible");
-                    $('#bedes_term').html(jsondata.bedes_term['term']);
-                    $('#bedes_category').html(jsondata.bedes_term['category']);
-                    $('#bedes_definition').html(jsondata.bedes_term['definition']);
-                    $('#bedes_url').attr('href', jsondata.bedes_term['url']);
+                    $('#term_results').html('');
+
+                    // $('#bedes_term').html(jsondata.bedes_terms[0]['term']);
+                    // $('#bedes_category').html(jsondata.bedes_terms[0]['category']);
+                    // $('#bedes_definition').html(jsondata.bedes_terms[0]['definition']);
+                    // $('#bedes_url').attr('href', jsondata.bedes_terms[0]['url']);
+                    var term_ul = $('<ul>').appendTo('#term_results');
+                    $(jsondata.bedes_terms).each(function(index, item) {
+                      var text = '<strong>' + item['term'] + '</strong> &mdash;' + item['definition'] + '&nbsp;&nbsp;(<em>Category: ' + item['category'] + '</em>)&nbsp;&nbsp;<a href="' + item['url'] + '" target="_blank">' + 'BEDES <i class="fa fa-external-link" aria-hidden="true"></i></a>';
+                      
+                      term_ul.append(
+                        $(document.createElement('li')).html(text).addClass('pad-bot-10')
+                      );
+                    });
 
                   } else {
                       // None

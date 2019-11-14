@@ -134,15 +134,15 @@ def retrieve_additional_dictionary_data(request):
 
     # print("ELEMENT ID TO RETRIEVE: {}".format(element_id))
 
-    # get Bedes mapping
-    bedes_term = None
+    # get Bedes mappings
+    bedes_terms = []
     bedes_mappings = BedesMapping.objects.filter(attribute_id=element_id)
     # print('ELEMENT ID: {}'.format(element_id))
     if bedes_mappings.count() > 0:
-        # take first, there should only be 1
-        bedes_term = model_to_dict(BedesTerm.objects.get(pk=bedes_mappings[0].bedesTerm_id))
-        # bedes_term = serializers.serialize("json", BedesTerm.objects.get(pk=bedes_mappings[0].bedesTerm_id))
-        # print("BEDES TERM: {}".format(bedes_term))
+        for item in bedes_mappings:
+            bedes_term = model_to_dict(BedesTerm.objects.get(pk=item.bedesTerm_id))
+            # print("BEDES TERM: {}".format(bedes_term))
+            bedes_terms.append(bedes_term)
 
     # GET ENUMS
     has_enum = False
@@ -172,7 +172,7 @@ def retrieve_additional_dictionary_data(request):
         # print("ENUMS: {}".format(enums))
 
     data = {
-        'bedes_term': bedes_term,
+        'bedes_terms': bedes_terms,
         'has_enum': has_enum,
         'enums': enums
     }
