@@ -682,7 +682,7 @@ class Command(BaseCommand):
                     terms = BedesTerm.objects.filter(content_uuid__in=tlist)
 
                 elif term['matched_word_example_URL'] != "":
-                    # split list and get UUIDs    
+                    # split list and get UUIDs
                     tlist = term['matched_word_example_URL'].split(',')
                     tlist = [i.strip(' ').replace('https://bedes.lbl.gov/node/', '') for i in tlist]
                     terms = BedesTerm.objects.filter(content_uuid__in=tlist)
