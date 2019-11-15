@@ -134,4 +134,4 @@ STATIC_ROOT = os.path.join(SETTINGS_PATH, 'collected_static')
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(SETTINGS_PATH, 'media')
 
-DEFAULT_SCHEMA_VERSION = '2.0.0-pr1'
+DEFAULT_SCHEMA_VERSION = '1.0.0'
