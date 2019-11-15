@@ -70,8 +70,9 @@ local_settings.py
 # Sphinx documentation
 docs/_build/
 
-# pyenv
+# py/rb env
 .python-version
+.ruby-version
 
 # dotenv
 .env

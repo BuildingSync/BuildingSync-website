@@ -29,7 +29,7 @@ This is the repository for the BuildingSync Validator web application.
 1.  Initialize the database:
 	```bash
 	python manage.py migrate
-	```	
+	```
 1.  Create a superuser:
 	```bash
 	python manage.py createsuperuser
