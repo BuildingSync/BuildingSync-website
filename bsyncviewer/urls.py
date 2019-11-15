@@ -6,15 +6,19 @@ from rest_framework import routers
 
 from bsyncviewer import views
 from bsyncviewer.admin import admin_site
+from .views import emailView, successView
 
 app_name = 'bsyncviewer'
 
 router = routers.DefaultRouter()
 
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('', views.index, name='home'),
     path('use_case_mappings', views.use_case_mappings, name='use_case_mappings'),
+    path('email/', emailView, name='email'),
+    path('success/', successView, name='success'),
     path('admin/', admin_site.urls, name='admin'),
     path('user/login/', auth_views.LoginView.as_view(template_name='registration/login.html'),
          name='login'),
