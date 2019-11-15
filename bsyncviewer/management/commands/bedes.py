@@ -41,8 +41,9 @@ class Command(BaseCommand):
         save_to_db = options['save_to_db']
 
         if save_to_db:
-            self.stdout.write('Saving BEDES mappings to database')
-            # if save_to_db is True, save CSV files to DB (don't reparse)
+            self.stdout.write('Reparsing BEDES data and Saving BEDES mappings to database')
+            # if save_to_db is True, save CSV files to DB (always reparse just in case)
+            self.parse(bedes_version, schema_version)
             self.save_mappings_to_database(bedes_version, schema_version)
         else:
             # do the parsing (only)
@@ -53,9 +54,6 @@ class Command(BaseCommand):
         # parse correct bedes version
         bedes = BedesParser(bedes_version)
         bedes.save()
-
-        # self.stdout.write(bedes.terms)
-        # self.stdout.write(bedes.categories)
 
         # check for manual mappings CSV file
         the_path = os.path.join(os.path.dirname(__file__), '../../lib/bedes', bedes_version)
@@ -75,7 +73,6 @@ class Command(BaseCommand):
         schema = Schema.objects.filter(version=schema_version).first()
         results = {}
         for attribute in schema.attributes.all().order_by('id'):
-            # self.stdout.write(attribute.na)
 
             # use id as the key since name is not unique
             results[attribute.id] = []
@@ -242,7 +239,6 @@ class Command(BaseCommand):
                     "matched_word_example_URL": words_data['matched_word_example_URL'],
                     "unmatched_words": words_data['unmatched_words']
                 })
-        # self.stdout.write(results)
 
         # store the results to CSV
         the_path = os.path.join(os.path.dirname(__file__), '../../lib/bedes', bedes_version,
@@ -396,8 +392,6 @@ class Command(BaseCommand):
         unique_cnt = len(list(list_set))
         self.stdout.write(
             '*******There are {} unique BEDES enum values to add*******'.format(unique_cnt))
-
-        # self.stdout.write(results)
 
         self.stdout.write('Finished parsing bedes')
 
@@ -585,12 +579,7 @@ class Command(BaseCommand):
         # get schema
         schema = Schema.objects.filter(version=schema_version).first()
 
-        # don't delete..reuse
-        # BedesTerm.objects.all().delete()
-        # BedesMapping.objects.all().delete()
-        # BedesEnumeration.objects.all().delete()
-        # BedesEnumerationMapping.objects.all().delete()
-
+        # don't delete existing...reuse
         # save all terms
         csv_file = open("%s/bedes-mappings-terms.csv" % (the_path), mode='r')
         bedes_mappings = csv.DictReader(csv_file)
