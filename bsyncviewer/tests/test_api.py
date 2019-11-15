@@ -1,17 +1,19 @@
 import os
-from django.conf import settings
-from rest_framework.test import APITestCase
+
 from django.core.files.uploadedfile import SimpleUploadedFile
-from bsyncviewer.models.schema import Schema
 from django.urls import reverse
 from rest_framework import status
+from rest_framework.test import APITestCase
 
-DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
+from bsyncviewer.models.schema import Schema
+
+# Use a custom version that is not an actual version to prevent overwriting saved BEDES mappings
+TEST_SCHEMA_VERSION = '0.0.1'
 
 
 class TestApi(APITestCase):
     def setUp(self):
-        self.schema = Schema.objects.filter(version=DEFAULT_SCHEMA_VERSION).first()
+        self.schema = Schema.objects.filter(version=TEST_SCHEMA_VERSION).first()
         if not self.schema:
             # add schema file - make sure to create a copy since the version will be deleted if
             # the schema is deleted
@@ -20,8 +22,8 @@ class TestApi(APITestCase):
             simple_uploaded_file = SimpleUploadedFile(file.name, file.read())
 
             self.schema = Schema(
-                name='Version {}'.format(DEFAULT_SCHEMA_VERSION),
-                version=DEFAULT_SCHEMA_VERSION,
+                name='Version {}'.format(TEST_SCHEMA_VERSION),
+                version=TEST_SCHEMA_VERSION,
                 schema_file=simple_uploaded_file
             )
             self.schema.save()  # Calling save also processes the schema and generates the template
@@ -36,7 +38,7 @@ class TestApi(APITestCase):
         f = open(filepath, 'rb')
         simple_uploaded_file = SimpleUploadedFile(f.name, f.read())
 
-        data = {'schema_version': DEFAULT_SCHEMA_VERSION, 'file': simple_uploaded_file}
+        data = {'schema_version': TEST_SCHEMA_VERSION, 'file': simple_uploaded_file}
 
         url = reverse('validate_api')
         print("URL: {}".format(url))

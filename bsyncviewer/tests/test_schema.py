@@ -1,14 +1,14 @@
 import json
 import os
 
-from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
 from bsyncviewer.lib.tree_viewer import get_schema_jstree_data
 from bsyncviewer.models.schema import Schema
 
-DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
+# Use a custom version that is not an actual version to prevent overwriting saved BEDES mappings
+TEST_SCHEMA_VERSION = '0.0.1'
 
 
 class TestSchema(TestCase):
@@ -18,8 +18,8 @@ class TestSchema(TestCase):
         simple_uploaded_file = SimpleUploadedFile(file.name, file.read())
 
         self.schema = Schema(
-            name='Version {}'.format(DEFAULT_SCHEMA_VERSION),
-            version=DEFAULT_SCHEMA_VERSION,
+            name='Version {}'.format(TEST_SCHEMA_VERSION),
+            version=TEST_SCHEMA_VERSION,
             schema_file=simple_uploaded_file
         )
         self.schema.save()  # Calling save also processes the schema and generates the template
@@ -44,7 +44,7 @@ class TestSchema(TestCase):
 
     def test_schema_js_tree(self):
         # test the retrieval of the schema as a jstree for dictionary view
-        js_tree = get_schema_jstree_data(DEFAULT_SCHEMA_VERSION)
+        js_tree = get_schema_jstree_data(TEST_SCHEMA_VERSION)
 
         # assert that js_tree is a list, not-empty
         self.assertTrue(isinstance(js_tree, list))

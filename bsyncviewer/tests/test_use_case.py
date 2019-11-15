@@ -1,18 +1,18 @@
 import os
 
-from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
 from bsyncviewer.models.schema import Schema
 from bsyncviewer.models.use_case import UseCase
 
-DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
+# Use a custom version that is not an actual version to prevent overwriting saved BEDES mappings
+TEST_SCHEMA_VERSION = '0.0.1'
 
 
 class TestUseCase(TestCase):
     def setUp(self):
-        self.schema = Schema.objects.filter(version=DEFAULT_SCHEMA_VERSION).first()
+        self.schema = Schema.objects.filter(version=TEST_SCHEMA_VERSION).first()
         if not self.schema:
             # add schema file - make sure to create a copy since the version will be deleted if
             # the schema is deleted
@@ -21,8 +21,8 @@ class TestUseCase(TestCase):
             simple_uploaded_file = SimpleUploadedFile(file.name, file.read())
 
             self.schema = Schema(
-                name='Version {}'.format(DEFAULT_SCHEMA_VERSION),
-                version=DEFAULT_SCHEMA_VERSION,
+                name='Version {}'.format(TEST_SCHEMA_VERSION),
+                version=TEST_SCHEMA_VERSION,
                 schema_file=simple_uploaded_file
             )
             self.schema.save()  # Calling save also processes the schema and generates the template

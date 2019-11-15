@@ -1,25 +1,28 @@
 import os
+
+from django.conf import settings
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management.base import BaseCommand
 
 from bsyncviewer.models.schema import Schema
 from bsyncviewer.models.use_case import UseCase
-from django.core.files.uploadedfile import SimpleUploadedFile
-from django.conf import settings
+
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
 
 class Command(BaseCommand):
-    help = 'Create a use case'
+    help = 'Create a use case. Note that this is a hard code use case for testing.'
 
     def add_arguments(self, parser):
-        # parser.add_argument('--filename', type=str)
+        parser.add_argument('--schema_version', type=str, default=settings.DEFAULT_SCHEMA_VERSION)
         # parser.add_argument('--filename', type=str)
         pass
 
     def handle(self, *args, **options):
+        schema_version = options['schema_version']
 
         # grab a schema
-        schema = Schema.objects.filter(version=DEFAULT_SCHEMA_VERSION).first()
+        schema = Schema.objects.filter(version=schema_version).first()
         if not schema:
             self.stdout.write('Schema not found, import schema first')
 
@@ -35,4 +38,4 @@ class Command(BaseCommand):
         use_case.import_file = simple_uploaded_file
         use_case.save()
 
-        self.stdout.write('Finished parsing and saving {} schema'.format(DEFAULT_SCHEMA_VERSION))
+        self.stdout.write('Finished parsing and saving {} schema'.format(schema_version))

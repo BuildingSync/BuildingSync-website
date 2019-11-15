@@ -1,7 +1,6 @@
 import os
 from io import StringIO
 
-from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management import call_command
 from django.test import Client
@@ -12,7 +11,8 @@ from bsyncviewer.models.attribute import Attribute
 from bsyncviewer.models.bedes_models import BedesEnumeration, BedesTerm, BedesMapping
 from bsyncviewer.models.schema import Schema
 
-DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
+# Use a custom version that is not an actual version to prevent overwriting saved BEDES mappings
+TEST_SCHEMA_VERSION = '0.0.1'
 
 
 class BsyncviewerViewTests(TestCase):
@@ -31,20 +31,21 @@ class BsyncviewerViewTests(TestCase):
         print('Testing Cases page OK')
         self.assertEqual(response.status_code, 200)
 
-    def test_dictionary_redirect(self):
-        self.add_schema()
-        response = self.client.get(reverse('dictionary'))
-        print('Testing Dictionary page redirect')
-        redirect_url = '/dictionary/{}/'.format(DEFAULT_SCHEMA_VERSION)
-        self.assertRedirects(response, redirect_url)
-
-        # clean-up files on disk
-        self.schema.delete()
+    # The default redirect is to 1.0.0 but we are not loading that schema anymore.
+    # def test_dictionary_redirect(self):
+    #     self.add_schema()
+    #     response = self.client.get(reverse('dictionary'))
+    #     print('Testing Dictionary page redirect')
+    #     redirect_url = '/dictionary/{}/'.format('0.0.1')
+    #     self.assertRedirects(response, redirect_url)
+    #
+    #     # clean-up files on disk
+    #     self.schema.delete()
 
     def test_dictionary_404_when_no_schema(self):
         response = self.client.get(reverse('dictionary'))
         print('Testing Dictionary page redirect')
-        redirect_url = '/dictionary/{}/'.format(DEFAULT_SCHEMA_VERSION)
+        redirect_url = '/dictionary/{}/'.format('1.0.0')
         self.assertRedirects(response, redirect_url, target_status_code=404)
 
     def test_bedes_ajax_call(self):
@@ -85,7 +86,7 @@ class BsyncviewerViewTests(TestCase):
         self.schema.delete()
 
     def add_schema(self):
-        self.schema = Schema.objects.filter(version=DEFAULT_SCHEMA_VERSION).first()
+        self.schema = Schema.objects.filter(version=TEST_SCHEMA_VERSION).first()
         if not self.schema:
             # add schema file - make sure to create a copy since the version will be deleted if
             # the schema is deleted
@@ -94,8 +95,8 @@ class BsyncviewerViewTests(TestCase):
             simple_uploaded_file = SimpleUploadedFile(file.name, file.read())
 
             self.schema = Schema(
-                name='Version {}'.format(DEFAULT_SCHEMA_VERSION),
-                version=DEFAULT_SCHEMA_VERSION,
+                name='Version {}'.format(TEST_SCHEMA_VERSION),
+                version=TEST_SCHEMA_VERSION,
                 schema_file=simple_uploaded_file
             )
             self.schema.save()  # Calling save also processes the schema and generates the template
@@ -103,12 +104,12 @@ class BsyncviewerViewTests(TestCase):
     def add_bedes_mapping(self):
         # create the CSV files
         out = StringIO()
-        print("VERSION: {}".format(DEFAULT_SCHEMA_VERSION))
-        call_command('bedes', schema_version=DEFAULT_SCHEMA_VERSION, bedes_version='v2.2',
+        print("VERSION: {}".format(TEST_SCHEMA_VERSION))
+        call_command('bedes', schema_version=TEST_SCHEMA_VERSION, bedes_version='v2.2',
                      stdout=out)
 
         # add to database
-        call_command('bedes', schema_version=DEFAULT_SCHEMA_VERSION, bedes_version='v2.2',
+        call_command('bedes', schema_version=TEST_SCHEMA_VERSION, bedes_version='v2.2',
                      save_to_db=True, stdout=out)
 
     # TODO: test that you can't add a use case if not authenticated
