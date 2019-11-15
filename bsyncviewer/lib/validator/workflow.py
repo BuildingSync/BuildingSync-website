@@ -1,12 +1,11 @@
 from collections import OrderedDict
 
 import xmlschema
-import xmltodict
 import copy
+import subprocess
 
 from bsyncviewer.models.schema import Schema
 from bsyncviewer.models.use_case import UseCase
-from bsyncviewer.models.use_case_attribute import UseCaseAttribute, UseCaseUDF
 
 
 class ValidationWorkflow(object):
@@ -42,10 +41,10 @@ class ValidationWorkflow(object):
         # load selected schema and validate
         if self.schema.schema_file:
             my_schema = xmlschema.XMLSchema(self.schema.schema_file.path, validation='lax')
-            print("SCHEMA PATH: {}".format(self.schema.schema_file.path))
+            # print("SCHEMA PATH: {}".format(self.schema.schema_file.path))
             resp['valid'] = my_schema.is_valid(self.filepath)
-            print("FILE PATH: {}".format(self.filepath))
-            print("VALID?: {}".format(resp['valid']))
+            # print("FILE PATH: {}".format(self.filepath))
+            # print("VALID?: {}".format(resp['valid']))
             resp['schema_version'] = self.schema.version
             try:
                 # this only returns the first error
@@ -88,15 +87,8 @@ class ValidationWorkflow(object):
         resp = OrderedDict()
         resp['use_cases'] = OrderedDict()
 
-        # parse xml with xmltodict (incorrect when using the to_dict function from schema parsing)
-        with open(self.filepath) as file:
-            # ignore auc namespace
-            # TODO: store namespaces somewhere when there are more than one version of the schema
-            namespaces = {'http://buildingsync.net/schemas/bedes-auc/2019': None}
-            self.xml = xmltodict.parse(file.read(), process_namespaces=True, namespaces=namespaces)
-
         for use_case in self.use_cases:
-            print("validating use case: {}".format(use_case.name))
+            print("Validating use case: {}".format(use_case.name))
             resp['use_cases'][use_case.name] = self.process_use_case(use_case)
 
         return resp
@@ -112,110 +104,53 @@ class ValidationWorkflow(object):
         resp.update(self.validate_use_cases())
         return resp
 
+    def find_path_in_schema(self, attr_path):
+
+        # try to find path(s) in XML
+        paths = copy.deepcopy(attr_path.split("."))
+        loopingVar = copy.deepcopy(self.xml)
+        found = True
+
+        # print("PATHS:")
+        # print(paths)
+
+        try:
+            for path in paths:
+                # print("CURRENT PATH: {}".format(path))
+                fpath = path
+                if loopingVar.__class__.__name__ == 'OrderedDict':
+                    loopingVar = loopingVar[fpath]
+                else:
+                    # it's a list
+                    # print("THE LIST: {}".format(loopingVar))
+                    for index, l in enumerate(loopingVar):
+
+                        if fpath not in l and isinstance(l, list):
+                            # add another loop
+                            # print("L is a list!")
+                            loopingVar = []
+                            for x in l:
+                                loopingVar.append(x[fpath])
+                        else:
+                            # print("L is an ordered Dict!")
+                            # print("l[fpath]: {}".format(l[fpath]))
+                            loopingVar[index] = l[fpath]
+
+        except BaseException:
+            found = False
+
+        return found, loopingVar
+
     def process_use_case(self, use_case):
         results = OrderedDict()
         results['valid'] = True
         results['errors'] = []
 
-        # get all attributes of use case where state > 0
-        # 1 = Optional, 2 = Required
-        attrs = UseCaseAttribute.objects.filter(state__gt=0, use_case=use_case)
-        # print("NUMBER OF ATTRIBUTES RETRIEVED: {}".format(attrs.count()))
-
-        # traverse use case attributes (not xml)
-        for attr in attrs:
-            # try to find it
-            paths = copy.deepcopy(attr.attribute.path.split("."))
-            loopingVar = copy.deepcopy(self.xml)
-            # special case: UDF
-            if 'UserDefinedField.FieldName' in attr.attribute.path:
-                # retrieve all FieldNames from UseCaseUDF
-                udfFields = UseCaseUDF.objects.filter(use_case_attribute=attr)
-                # remove the last path (FIELDNAME)
-                paths = paths[:-1]
-
-                for udf in udfFields:
-                    associatedFieldValue = UseCaseUDF.objects.get(pk=udf.associated_field.pk)
-                    loopingVar = copy.deepcopy(self.xml)
-                    print("UDF values: {}".format(udf.values))
-                    # also retrieve matching FieldValue
-                    try:
-                        print("PATHS: {}".format(paths))
-                        for path in paths:
-                            fpath = path
-                            if loopingVar.__class__.__name__ == 'OrderedDict':
-                                loopingVar = loopingVar[fpath]
-                            else:
-                                # it's a list
-                                for index, l in enumerate(loopingVar):
-                                    loopingVar[index] = l[fpath]
-
-                        # If found, check that it has correct value
-                        # not sure if it's a list if only one is found
-                        match = False
-                        if loopingVar.__class__.__name__ == 'OrderedDict':
-                            # print("ORDERED DICT: {}".format(loopingVar))
-                            if loopingVar['FieldName'] == udf.values:
-                                # print("FOUND MATCH!")
-                                match = True
-                                # now check field Value
-                                if associatedFieldValue.values and l['FieldValue'] not in associatedFieldValue.values:
-                                    # enum not matching
-                                    msg = 'FieldValue for FieldName =  ' + udf.values + ' contains a value that is not allowed'
-                                    results['errors'].append(
-                                        {'path': attr.attribute.path, 'message': msg})
-                        else:
-                            # print("LIST")
-                            for index, l in enumerate(loopingVar):
-                                print("elem: {}".format(l))
-                                if l['FieldName'] == udf.values:
-                                    # print("FOUND MATCH!")
-                                    match = True
-                                    # now check field Value
-                                    if associatedFieldValue.values and l['FieldValue'] not in associatedFieldValue.values:
-                                        # enum not matching
-                                        msg = 'FieldValue for FieldName =  ' + udf.values + ' contains a value that is not allowed'
-                                        results['errors'].append(
-                                            {'path': attr.attribute.path, 'message': msg})
-
-                        if not match and udf.state == 2:
-                            msg = 'Required UDF element not found with FieldName = ' + udf.values
-                            results['errors'].append(
-                                {'path': attr.attribute.path, 'message': msg})
-
-                    except BaseException:
-                        print("---EXCEPTION when trying path: {}".format(paths))
-                        if attr.state == 2:
-                            # Required attribute, error out
-                            msg = 'Required UDF element not found with FieldName = ' + udf.values
-                            results['errors'].append(
-                                {'path': attr.attribute.path, 'message': msg})
-                        # now go to next attribute
-                        continue
-            elif 'UserDefinedField.FieldValue' in attr.attribute.path:
-                # skip, taken care of above
-                continue
-            else:
-                # validate presence of required element
-                try:
-                    for path in paths:
-                        fpath = path
-                        if loopingVar.__class__.__name__ == 'OrderedDict':
-                            loopingVar = loopingVar[fpath]
-                        else:
-                            # it's a list
-                            for index, l in enumerate(loopingVar):
-                                loopingVar[index] = l[fpath]
-                except BaseException:
-                    if attr.state == 2:
-                        # Required attribute, error out
-                        results['errors'].append(
-                            {'path': attr.attribute.path, 'message': 'Required element not found'})
-                    # now go to next attribute
-                    continue
-
-            # TODO: validate enums here -- in the case that the Use Case's allowable enum values is a subset of the schema's
-            # other validation (such as value of elements) have been validate via the schema_validation
+        result = subprocess.run(['stron-nokogiri', use_case.import_file.path, self.filepath], stdout=subprocess.PIPE)
+        errors = result.stdout.decode('utf-8')
+        results['errors'] = errors.split('\n')
+        results['errors'] = [i for i in results['errors'] if i]
+        print("RESULTS ERROR: {}".format(results['errors']))
 
         # set valid to valse if errors.count > 0
         if len(results['errors']) > 0:

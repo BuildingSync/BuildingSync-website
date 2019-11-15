@@ -70,6 +70,7 @@ class ComplexTypeElement(BuildingSyncSchemaElement):
         self.simple_contents = []
         self.attributes = []
         self.choices = []
+        self.annotations = []
 
 
 class SequenceElement(BuildingSyncSchemaElement):
@@ -244,6 +245,8 @@ class BuildingSyncSchemaProcessor(object):
                 this_complex_type.attributes.append(self._read_attribute(child))
             elif child.tag.endswith('choice'):
                 this_complex_type.choices.append(self._read_choice(child))
+            elif child.tag.endswith('annotation'):
+                this_complex_type.annotations.append(self._read_annotation(child))
             else:
                 exc = "Invalid tag type in _read_complex_type: " + child.tag
                 raise Exception(exc)
@@ -572,8 +575,8 @@ class BuildingSyncSchemaProcessor(object):
 #     else:
 #         return parts[-1]
 
-def get_parent_from_path(root_path):
-    parents = Attribute.objects.filter(path=root_path)
+def get_parent_from_path(root_path, schema):
+    parents = Attribute.objects.filter(path=root_path, schema=schema)
     if parents.count() > 0:
         return parents[0].pk
     else:
@@ -616,7 +619,7 @@ def process_schema(schema_object):
                 name=se['name'],
                 type=se['type'],
                 tree_level=(se['$$treeLevel'] + 1),
-                parent=get_parent_from_path(se['parent_path']),
+                parent=get_parent_from_path(se['parent_path'], schema_object),
                 path=se['path'],
                 schema=schema_object)
             b.save()

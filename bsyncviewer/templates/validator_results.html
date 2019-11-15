@@ -78,8 +78,7 @@
                       {% for err in uc.errors %}
                         <tr class="wrap-it">
                           <td width="5%">{{ forloop.counter }}.</td>
-                          <td class="wrap-it">{{ err.path }} <br/>
-                            {{ err.message }}</td>
+                          <td class="wrap-it">{{ err }}</td>
                         </tr>
                       {% endfor %}
                     </table>

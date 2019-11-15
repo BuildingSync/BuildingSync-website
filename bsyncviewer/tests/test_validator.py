@@ -1,6 +1,5 @@
 import os
 
-from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase
 
@@ -8,12 +7,13 @@ from bsyncviewer.forms import LoadXMLFile, LoadXMLExample
 from bsyncviewer.lib.validator.workflow import ValidationWorkflow
 from bsyncviewer.models.schema import Schema
 
-DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
+# Use a custom version that is not an actual version to prevent overwriting saved BEDES mappings
+TEST_SCHEMA_VERSION = '0.0.1'
 
 
 class TestValidator(TestCase):
     def setUp(self):
-        self.schema = Schema.objects.filter(version=DEFAULT_SCHEMA_VERSION).first()
+        self.schema = Schema.objects.filter(version=TEST_SCHEMA_VERSION).first()
         if not self.schema:
             # add schema file - make sure to create a copy since the version will be deleted if
             # the schema is deleted
@@ -22,8 +22,8 @@ class TestValidator(TestCase):
             simple_uploaded_file = SimpleUploadedFile(file.name, file.read())
 
             self.schema = Schema(
-                name='Version {}'.format(DEFAULT_SCHEMA_VERSION),
-                version=DEFAULT_SCHEMA_VERSION,
+                name='Version {}'.format(TEST_SCHEMA_VERSION),
+                version=TEST_SCHEMA_VERSION,
                 schema_file=simple_uploaded_file
             )
             self.schema.save()  # Calling save also processes the schema and generates the template
@@ -67,11 +67,10 @@ class TestValidator(TestCase):
         })
 
     def test_example_form_valid_data(self):
-        head, tail = os.path.split(os.path.dirname(__file__))
         file_name = os.path.join(os.path.join(os.path.dirname(__file__), 'data', 'test_valid_schema.xml'))
 
         form_data = {
-            'schema_version': DEFAULT_SCHEMA_VERSION,
+            'schema_version': TEST_SCHEMA_VERSION,
             'form_type': 'example',
             'file_name': file_name
         }
@@ -81,11 +80,9 @@ class TestValidator(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_validator_workflow(self):
-        version = DEFAULT_SCHEMA_VERSION
-        head, tail = os.path.split(os.path.dirname(__file__))
         filepath = os.path.join(os.path.join(os.path.dirname(__file__), 'data', 'test_valid_schema.xml'))
         f = open(filepath, 'r')
-        workflow = ValidationWorkflow(f, filepath, version)
+        workflow = ValidationWorkflow(f, filepath, TEST_SCHEMA_VERSION)
         validation_results = workflow.validate_all()
         print("VAL: {}".format(validation_results))
         self.assertIn('schema', validation_results)

@@ -78,7 +78,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_HOST_USER = ''
 # EMAIL_HOST_PASSWORD = ''
 # EMAIL_USE_TLS = False
-# DEFAULT_FROM_EMAIL = 'BuildingSync  <admin@buildingsync.net>'
+# DEFAULT_FROM_EMAIL = 'BuildingSync  <info@buildingsync.net>'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases

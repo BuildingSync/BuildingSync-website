@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}BuildingSync Schema Viewer{% endblock %}
+
+{% block content_notitle %}
+
+    <div class="container">
+    	<header class="major">
+			<h2>Use Case Help</h2>
+    	</header>
+    	<div class="row">
+        	<div class="col-md-12">
+        		<p>The diagram below shows the process of adding a use case to the selection-tool website.</p>
+                <img class="pad-bot-10" src="static/images/selectiontool-usecases_v2.png" width="100%"/>
+        	</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Helpful Links</h3>
+                <ul>
+                    <li class="pad-bot-10"><a href="{% url 'download_usecase_example' %}">Download Example Schematron File</a></li>
+                    <li class=pad-bot-10><a href="http://schematron.com" target="_blank">Schematron Website</a></li>
+                       
+                </ul>
+            </div>
+        </div>
+       
+    </div>
+
+{% endblock content_notitle %}

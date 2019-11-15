@@ -55,7 +55,7 @@ class BedesParser(object):
 
     def parse(self, terms_filename, list_options_filename):
         list_options = defaultdict(OrderedDict)
-        with open(list_options_filename) as file:
+        with open(list_options_filename, encoding='utf-8') as file:
             tmp = xmltodict.parse(file.read())
             # create a look up from this data to easily associate the data
             for lo in tmp['nodes']['node']:

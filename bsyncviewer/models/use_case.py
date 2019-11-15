@@ -1,13 +1,10 @@
 import os
 
 from django.contrib.auth.models import User
-from django.contrib.postgres.fields import ArrayField
 from django.db import models
-from django.db.models.signals import post_save, pre_save, post_delete
+from django.db.models.signals import pre_save, post_delete
 from django.dispatch import receiver
-
-from bsyncviewer.lib.usecase_parser import process_usecase
-from bsyncviewer.models.use_case_attribute import UseCaseEnumeration, UseCaseAttribute
+from django.core.validators import FileExtensionValidator
 
 
 class UseCase(models.Model):
@@ -15,12 +12,8 @@ class UseCase(models.Model):
     name = models.CharField(max_length=100, default="Use Case Name")
     description = models.TextField()
     schema = models.ForeignKey('Schema', on_delete=models.CASCADE, db_index=True)
-    attributes = models.ManyToManyField('Attribute', through=UseCaseAttribute, related_name="usecaseattributes")
-    enumerations = models.ManyToManyField('Enumeration', through=UseCaseEnumeration)
     make_public = models.BooleanField(default=False)
-    import_file = models.FileField(upload_to='usecase_mappings/', null=True, blank=True)
-    usecase_parsed = models.BooleanField(default=False)
-    parsing_errors = ArrayField(models.CharField(max_length=255, blank=True), null=True, blank=True)
+    import_file = models.FileField(upload_to='usecase_mappings/', null=True, blank=True, validators=[FileExtensionValidator(allowed_extensions=['sch'])], help_text="This should be a Schematron file defining the use case")
 
     def __str__(self):
         return self.name
@@ -28,28 +21,6 @@ class UseCase(models.Model):
     def __init__(self, *args, **kwargs):
         super(UseCase, self).__init__(*args, **kwargs)
         self.__original_import_file = self.import_file
-
-    def save(self, *args, **kw):
-        if self.pk is not None:
-            orig = UseCase.objects.get(pk=self.pk)
-            if orig.import_file != self.import_file:
-                print("Import file has changed, re-parse!")
-                self.usecase_parsed = False
-
-        super(UseCase, self).save(*args, **kw)
-
-
-@receiver(post_save, sender=UseCase)
-def parse_usecase(sender, instance, **kwargs):
-    # if import_file changed or import_file is new and unparsed, parse it!
-    if instance.usecase_parsed is False and instance.import_file:
-        print('***Parsing use case import file***')
-        instance, errors = process_usecase(instance)
-        print("{} ERRORS found during use case parsing.".format(len(errors)))
-        # print("ERRORS: {}".format(errors))
-        instance.parsing_errors = errors
-        instance.usecase_parsed = True
-        instance.save()
 
 
 # These two auto-delete files from filesystem when they are unneeded:

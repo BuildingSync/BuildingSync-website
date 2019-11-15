@@ -1,4 +1,4 @@
-import re
+import semantic_version
 from django.contrib import admin
 from django.contrib.admin import AdminSite
 from django.contrib.auth.admin import GroupAdmin, UserAdmin
@@ -15,13 +15,12 @@ class SchemaForm(forms.ModelForm):
         model = Schema
         fields = '__all__'
 
-    # validate that schema version is in X.X.X format (3 parts)
+    # validate that schema version is valid semantic version
     def clean(self):
         version = self.cleaned_data.get('version')
-        pattern = re.compile("\d+\.\d+\.\d+")
 
-        if not pattern.match(version):
-            raise forms.ValidationError("Version must be in X.X.X format. Example: 1.0.0")
+        if not semantic_version.validate(version):
+            raise forms.ValidationError("Version must be a valid semantic version")
 
         return self.cleaned_data
 
@@ -31,7 +30,7 @@ class SchemaAdmin(admin.ModelAdmin):
 
 
 class UseCaseAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'owner', 'schema', 'import_file', 'usecase_parsed', 'make_public')
+    list_display = ('name', 'description', 'owner', 'schema', 'import_file', 'make_public')
 
 
 class MyAdminSite(AdminSite):

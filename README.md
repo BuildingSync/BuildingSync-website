@@ -29,7 +29,7 @@ This is the repository for the BuildingSync Validator web application.
 1.  Initialize the database:
 	```bash
 	python manage.py migrate
-	```	
+	```
 1.  Create a superuser:
 	```bash
 	python manage.py createsuperuser
@@ -50,7 +50,7 @@ This is the repository for the BuildingSync Validator web application.
 
 * To test schema import, you can run this command:
 	```bash
-	python manage.py reset_schema --schema_version=0.3.0
+	python manage.py reset_schema --schema_version=1.0.0
 	```
 
 
@@ -82,37 +82,16 @@ tox -e flake8
 
 The BuildingSync Schema Viewer can support multiple versions of the BuildingSync schema.  Admin users can manage schemas from the Django Administration console.  Click on the 'Admin' link in the top navigation bar to access the Django Administration pages.
 
-To add a schema, specify the name, version, and schema file (XSD) to parse and save the record.  The schema file will be parsed automatically and a use case template (CSV) file will be generated.
-This template file can then be used by users to upload their particular use case in a format that can be consumed by this tool.
+To add a schema, specify the name, version, and schema file (XSD) to parse and save the record.  The schema file will be parsed automatically.
 
 To modify an existing schema, click on the edit link.  If changes are made to the uploaded XSD schema file and re-uploaded, ensure that the 'schema parsed' checkbox is unchecked before saving the record.  This will trigger the automatic schema parsing.
 
-
 ### Use Cases
 
-Authenticated users can add private use cases to the BuildingSync Schema Viewer.
+Authenticated users can add private use cases to the BuildingSync Schema Viewer.  Use cases are represented by a schematron file that defines a set of rules and patterns.
 
 To add a use case, click on the 'Use Case' link in the top navigation bar, then click on the '+ New Use Case' button.
-Select a name and a BuildingSync schema version and click 'Submit'.  Once the schema version is set, a Use Case Template will be available for download from the Use Cases page, or from the Edit page.  Download the CSV template, fill it out with the details of the use case, and upload it to the 'Import File' field of the use case form. Click 'Submit'.  Once the file is submitted, the use case will be automatically parsed.  Parsing errors, if any, will be displayed on the use case page.
-
-The CSV template contains 4 columns: BuildingSyncPath, State, RequiredValues, and RequiredPairElement.
-* BuildingSyncPath: This will be filled out automatically when you download the template
-* State: enter either *Required* or *Optional*.  Leave blank to ignore the element.
-* RequiredValues:  If the element must be one of a specified list, enter the elements in a comma separated list.  Ex: Gross,Conditioned
-* RequiredPairedElement:  This is used to tie another element with the current one.  Mostly used for the UserDefinedFields' *Name* and *Value* fields.  
-
-**Note for UserDefinedFields**:  User-Defined Fields should all have a single entry in RequiredValues which defines the FieldName.  If you need to add a single User-Defined Field at a particular path, you can fill out the template as is (one field for FieldName and one for FieldValue will already be present in the template).  If, however, you need to add more than one User-Defined Field at a particular path, you will need to copy and paste the FieldName and FieldValue fields for however many fields you want to add.  Here is an example excerpt from a use case mapping template, showing entries for 2 User-Defined Fields at the same BuildingSyncPath level, for example:
-
-
-| BuildingSyncPath     | State           | RequiredValues  |  RequiredPairedElement | 
-| -------------------- |-----------------| ----------------| ---------------------- |
-| Audits.Audit.Sites.Site.Facilities.Facility.UserDefinedFields                             | Optional      |   |   |
-| Audits.Audit.Sites.Site.Facilities.Facility.UserDefinedFields.UserDefinedField            | Optional      |   |   |
-| Audits.Audit.Sites.Site.Facilities.Facility.UserDefinedFields.UserDefinedField.FieldName  | Optional      | Spaces Excluded from GFA | Audits.Audit.Sites.Site.Facilities.Facility.UserDefinedFields.UserDefinedField.FieldValue | 
-| Audits.Audit.Sites.Site.Facilities.Facility.UserDefinedFields.UserDefinedField.FieldValue | Optional      |   |   |
-| Audits.Audit.Sites.Site.Facilities.Facility.UserDefinedFields.UserDefinedField.FieldName  | Optional      | Above Grade Demising Wall Area | Audits.Audit.Sites.Site.Facilities.Facility.UserDefinedFields.UserDefinedField.FieldValue | 
-| Audits.Audit.Sites.Site.Facilities.Facility.UserDefinedFields.UserDefinedField.FieldValue | Optional      |   |   |
- 
+Select a name and a BuildingSync schema version.  Select your use case definitions schematron file and upload, then click 'Submit'.  
 
 Once ready, contact a BuildingSync admin to make the use case public. Public use cases will be available on the 'Validator' page to validate XML files submitted by users.
 

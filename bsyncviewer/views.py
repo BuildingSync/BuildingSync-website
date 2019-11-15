@@ -82,6 +82,11 @@ def index(request):
     return render(request, 'index.html', context)
 
 
+def use_case_mappings(request):
+    context = {}
+    return render(request, 'use_case_mappings.html', context)
+
+
 def use_cases(request):
     user_usecases = {}
     if request.user.is_authenticated:
@@ -130,15 +135,15 @@ def retrieve_additional_dictionary_data(request):
 
     # print("ELEMENT ID TO RETRIEVE: {}".format(element_id))
 
-    # get Bedes mapping
-    bedes_term = None
+    # get Bedes mappings
+    bedes_terms = []
     bedes_mappings = BedesMapping.objects.filter(attribute_id=element_id)
     # print('ELEMENT ID: {}'.format(element_id))
     if bedes_mappings.count() > 0:
-        # take first, there should only be 1
-        bedes_term = model_to_dict(BedesTerm.objects.get(pk=bedes_mappings[0].bedesTerm_id))
-        # bedes_term = serializers.serialize("json", BedesTerm.objects.get(pk=bedes_mappings[0].bedesTerm_id))
-        # print("BEDES TERM: {}".format(bedes_term))
+        for item in bedes_mappings:
+            bedes_term = model_to_dict(BedesTerm.objects.get(pk=item.bedesTerm_id))
+            # print("BEDES TERM: {}".format(bedes_term))
+            bedes_terms.append(bedes_term)
 
     # GET ENUMS
     has_enum = False
@@ -168,7 +173,7 @@ def retrieve_additional_dictionary_data(request):
         # print("ENUMS: {}".format(enums))
 
     data = {
-        'bedes_term': bedes_term,
+        'bedes_terms': bedes_terms,
         'has_enum': has_enum,
         'enums': enums
     }
@@ -251,6 +256,20 @@ def download_examples(request):
     raise Http404
 
 
+def download_usecase_example(request):
+    file_path = os.path.join(
+        os.path.abspath(os.path.dirname(__file__)), 'lib', 'use_cases', 'example_usecase_definitions.sch'
+    )
+
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type='application/force-download')
+            response['Content-Disposition'] = 'attachment; filename="%s"' % os.path.basename(
+                file_path)
+            return response
+    raise Http404
+
+
 @login_required
 def profile(request):
     return render(request, 'registration/profile.html')
@@ -286,24 +305,6 @@ def update_user(request):
 
 
 @login_required
-def download_template(request, template_id):
-    if template_id:
-        schema = Schema.objects.filter(pk=template_id)[0]
-        if schema:
-            file_path = schema.usecase_template_file.path
-
-            if os.path.exists(file_path):
-                with open(file_path, 'rb') as fh:
-                    response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
-                    response['Content-Disposition'] = 'inline; filename=' + os.path.basename(
-                        file_path)
-                    return response
-            raise Http404
-        raise Http404
-    raise Http404
-
-
-@login_required
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -331,7 +332,7 @@ def emailView(request):
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
             try:
-                send_mail(subject, message, email, ['admin@buildingsync.net'])
+                send_mail(subject, message, email, ['info@buildingsync.net'])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('success')

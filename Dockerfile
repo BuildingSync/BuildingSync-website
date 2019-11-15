@@ -14,6 +14,8 @@ RUN apk add --no-cache python3 \
         linux-headers \
         bash \
         bash-completion \
+        ruby \
+        ruby-dev \
         nginx && \
     ln -sf /usr/bin/python3 /usr/bin/python && \
     python -m ensurepip && \
@@ -27,7 +29,8 @@ RUN apk add --no-cache python3 \
     adduser -G uwsgi -H -u 1000 -S uwsgi && \
     mkdir -p /run/nginx && \
     echo "daemon off;" >> /etc/nginx/nginx.conf && \
-    rm -f /etc/nginx/conf.d/default.conf
+    rm -f /etc/nginx/conf.d/default.conf && \
+    echo "gem: --no-rdoc --no-ri" > /etc/gemrc
 
 ## Note on some of the commands above:
 ##   - create the uwsgi user and group to have id of 1000
@@ -38,6 +41,9 @@ RUN apk add --no-cache python3 \
 WORKDIR /srv/selection-tool
 COPY /requirements.txt /srv/selection-tool/requirements.txt
 RUN pip install -r requirements.txt
+
+#install the schematron-nokogiri gem
+RUN gem install schematron-nokogiri
 
 ### Copy over the remaining part of the application and some helpers
 COPY . /srv/selection-tool/

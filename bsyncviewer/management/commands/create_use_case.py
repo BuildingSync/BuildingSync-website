@@ -1,32 +1,28 @@
-from django.core.management.base import BaseCommand
-
-from bsyncviewer.models.attribute import Attribute
-from bsyncviewer.models.enumeration import Enumeration
-from bsyncviewer.models.schema import Schema
-from bsyncviewer.models.use_case import UseCase
-from bsyncviewer.models.use_case_attribute import (
-    UseCaseAttribute,
-    UseCaseEnumeration,
-    STATE_REQUIRED,
-    STATE_IGNORED,
-)
+import os
 
 from django.conf import settings
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.management.base import BaseCommand
+
+from bsyncviewer.models.schema import Schema
+from bsyncviewer.models.use_case import UseCase
+
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
 
 class Command(BaseCommand):
-    help = 'Create a use case'
+    help = 'Create a use case. Note that this is a hard code use case for testing.'
 
     def add_arguments(self, parser):
-        # parser.add_argument('--filename', type=str)
+        parser.add_argument('--schema_version', type=str, default=settings.DEFAULT_SCHEMA_VERSION)
         # parser.add_argument('--filename', type=str)
         pass
 
     def handle(self, *args, **options):
+        schema_version = options['schema_version']
 
         # grab a schema
-        schema = Schema.objects.filter(version=DEFAULT_SCHEMA_VERSION).first()
+        schema = Schema.objects.filter(version=schema_version).first()
         if not schema:
             self.stdout.write('Schema not found, import schema first')
 
@@ -36,26 +32,10 @@ class Command(BaseCommand):
             use_case.delete()
 
         use_case = UseCase(name='test use case', schema=schema)
+        usf = os.path.join(os.path.dirname(__file__), '..', '..', 'tests', 'data', 'test_use_case.sch')
+        file = open(usf, 'rb')
+        simple_uploaded_file = SimpleUploadedFile(file.name, file.read())
+        use_case.import_file = simple_uploaded_file
         use_case.save()
 
-        # grab random attributes
-        attributes = Attribute.objects.filter(schema=schema).order_by('?')[:10]
-        for attrib in attributes:
-            UseCaseAttribute.objects.get_or_create(
-                use_case=use_case, attribute=attrib, state=STATE_REQUIRED
-            )
-
-        # grab some random enumerations
-        enums = Enumeration.objects.filter(schema=schema).order_by('?')[:10]
-        for enum in enums:
-            UseCaseEnumeration.objects.get_or_create(
-                use_case=use_case, enumeration=enum, state=STATE_IGNORED
-            )
-
-        for attrib in use_case.attributes.all():
-            print(attrib)
-
-        for enums in use_case.enumerations.all():
-            print(enums)
-
-        self.stdout.write('Finished parsing and saving {} schema'.format(DEFAULT_SCHEMA_VERSION))
+        self.stdout.write('Finished parsing and saving {} schema'.format(schema_version))

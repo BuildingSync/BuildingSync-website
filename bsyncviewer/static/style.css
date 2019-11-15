@@ -45,7 +45,13 @@ body {
   padding-right: 10px;
 }
 
-pad-left-100 {
+.pad-lr-20 {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 20px;
+}
+
+.pad-left-100 {
   padding-left:100px;
 }
 
@@ -220,6 +226,10 @@ li.list-group-item {
   color: #333;
 }
 
+li.list-group-item a:focus, li.list-group-item a:hover {
+  color:#2CB0A5;
+}
+
 header.major {
     margin: 0 0 1em 0;
 }
@@ -282,6 +292,10 @@ table th, table td {
   color: #333;
 }
 
+ul li {
+  color: #333;
+}
+
 .container p {color: #333;}
 
 span.helptext {color: #333;}
@@ -341,4 +355,8 @@ form a, form a:hover {
 
 #schematree a, #schematree a:hover {
   border-bottom:0px;
+}
+
+ul.errorlist li{
+  color: red;
 }

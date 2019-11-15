@@ -1,15 +1,14 @@
-import csv
 import json
 import os
 
-from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
 from bsyncviewer.lib.tree_viewer import get_schema_jstree_data
 from bsyncviewer.models.schema import Schema
 
-DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
+# Use a custom version that is not an actual version to prevent overwriting saved BEDES mappings
+TEST_SCHEMA_VERSION = '0.0.1'
 
 
 class TestSchema(TestCase):
@@ -19,8 +18,8 @@ class TestSchema(TestCase):
         simple_uploaded_file = SimpleUploadedFile(file.name, file.read())
 
         self.schema = Schema(
-            name='Version {}'.format(DEFAULT_SCHEMA_VERSION),
-            version=DEFAULT_SCHEMA_VERSION,
+            name='Version {}'.format(TEST_SCHEMA_VERSION),
+            version=TEST_SCHEMA_VERSION,
             schema_file=simple_uploaded_file
         )
         self.schema.save()  # Calling save also processes the schema and generates the template
@@ -43,20 +42,9 @@ class TestSchema(TestCase):
             attribute.enumeration_classes.first().enumerations.first().name, '1A'
         )
 
-    def test_to_template(self):
-        # template is generated automatically in post_save
-        self.assertTrue(os.path.exists(self.schema.usecase_template_file.path))
-        with open(self.schema.usecase_template_file.path) as csvfile:
-            for index, row in enumerate(csv.reader(csvfile, delimiter=',')):
-                if index == 0:
-                    self.assertEqual('BuildingSyncPath', row[0])
-                elif index == 1:
-                    self.assertEqual('BuildingSync', row[0])
-                    self.assertEqual('Required', row[1])
-
     def test_schema_js_tree(self):
         # test the retrieval of the schema as a jstree for dictionary view
-        js_tree = get_schema_jstree_data(DEFAULT_SCHEMA_VERSION)
+        js_tree = get_schema_jstree_data(TEST_SCHEMA_VERSION)
 
         # assert that js_tree is a list, not-empty
         self.assertTrue(isinstance(js_tree, list))
@@ -69,17 +57,14 @@ class TestSchema(TestCase):
         # test that physical files are cleaned up on disk
 
         schema_file_path = self.schema.schema_file.path
-        usecase_template_file_path = self.schema.usecase_template_file.path
 
         # delete schema
         self.schema.delete()
 
         print('schema filepath: {}'.format(schema_file_path))
-        print('usecase template filepath: {}'.format(usecase_template_file_path))
 
         # assert that physical files were also deleted
         self.assertFalse(os.path.isfile(schema_file_path))
-        self.assertFalse(os.path.isfile(usecase_template_file_path))
 
     def tearDown(self):
         # clean-up files on disk
