@@ -332,7 +332,7 @@ def emailView(request):
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
             try:
-                send_mail(subject, message, email, ['admin@buildingsync.net'])
+                send_mail(subject, message, email, ['info@buildingsync.net'])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('success')
