@@ -1,5 +1,3 @@
-release_instructions.md
-
 # Release Instructions
 
 Follow the list below for a new release:
