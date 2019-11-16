@@ -2,7 +2,7 @@
 
 ## Version 1.0
 
-Date Range: 08/09/18 - 11/15/19
+Date Range: Initial Commit - 11/15/19
 
 - Official version 1.0 release of Use Case Selection Tool.
 - See README.md for more details
