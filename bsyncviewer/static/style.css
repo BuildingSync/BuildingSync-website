@@ -1,0 +1,362 @@
+body { 
+  padding-top: 60px; 
+  font-family: "open sans", Helvetica, sans-serif;
+  background: #eee;
+  font-size:0.9em;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.pad-5 {
+  padding: 5px;
+}
+
+.pad-10 {
+	padding: 10px;
+}
+.pad-bot-custom {
+  padding-bottom: 24px;
+}
+
+.pad-bot-10 {
+  padding-bottom:10px;
+}
+
+.pad-20 {
+  padding: 20px;
+}
+
+.pad-top-20 {
+  padding-top:20px;
+}
+.pad-top-40 {
+  padding-top: 40px;
+}
+
+.pad-bot-20 {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.pad-lr-10 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.pad-lr-20 {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 20px;
+}
+
+.pad-left-100 {
+  padding-left:100px;
+}
+
+.red {
+  color:#D75452 !important;
+}
+
+.green {
+  color: green;
+}
+
+.badge-red {
+  background-color: #D75452;
+}
+
+.badge-green {
+  background-color: green;
+}
+
+#header {
+	min-height: 60px;
+
+}
+
+#nav a, #nav a:hover, #nav a:focus {
+	text-decoration: none;
+  border-bottom: 0px;
+}
+
+#header h1 a {
+  padding-top:8px;
+  font-size: 1.4em;
+    color: #fff;
+}
+
+#header h1 a:hover, #header h1 a:focus {
+    text-decoration: none;
+    color:#fff;
+}
+
+a:focus, a:hover {
+	text-decoration: none;
+    color:#fff;
+}
+
+.navbar-default {
+  background-color: #2db1a6;
+  border-color: #2db1a6;
+}
+.navbar-default .navbar-brand {
+  color: #f4fafb;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #6d7478;
+}
+.navbar-default .navbar-text {
+  color: #f4fafb;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #f4fafb;
+  border-bottom: 0px;
+  text-transform: uppercase;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #6d7478;
+  border-bottom: 0px;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu {
+  background-color: #2db1a6;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu > li > a {
+  color: #f4fafb;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu > li > a:hover,
+.navbar-default .navbar-nav > li > .dropdown-menu > li > a:focus {
+  color: #6d7478;
+  background-color: #2db1a6;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu > li.divider {
+  background-color: #2db1a6;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #6d7478;
+  background-color: #2db1a6;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #6d7478;
+  background-color: #2db1a6;
+}
+.navbar-default .navbar-toggle {
+  border-color: #2db1a6;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #2db1a6;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #f4fafb;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #f4fafb;
+}
+.navbar-default .navbar-link {
+  color: #f4fafb;
+}
+.navbar-default .navbar-link:hover {
+  color: #6d7478;
+}
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #f4fafb;
+    text-transform: uppercase;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #6d7478;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #6d7478;
+    background-color: #2db1a6;
+  }
+}
+
+.panel-accent .panel-heading {
+  background-color:#2db1a6;
+}
+
+.panel-accent .panel-heading .panel-title {
+   color: #fff;
+}
+
+.badge-accent {
+  background-color:#2db1a6;
+}
+
+.badge-accent2 {
+  background-color: #EFAF00;
+}
+
+.btn-accent {
+    color: #fff;
+    background-color: #2db1a6;
+    border-color: #18AFA3;
+}
+
+.btn-accent2 {
+  color: #fff;
+  background-color: #EFAF00;
+  border-color: #F4C43F;
+}
+
+.list-group-item-accent .list-group-item-selected {
+    color: #fff;
+    background-color: #2db1a6;
+}
+
+.list-group-item-accent a {
+  border-bottom: 0px;
+}
+
+li.list-group-item {
+  color: #333;
+}
+
+li.list-group-item a:focus, li.list-group-item a:hover {
+  color:#2CB0A5;
+}
+
+header.major {
+    margin: 0 0 1em 0;
+}
+
+.callout-box {
+  margin-top:30px;
+  border:1px solid #333;
+  padding:30px;
+}
+
+.parsing-errors {
+  margin-top:30px;
+  padding:30 10 px;
+  color:#333;
+}
+
+.wrap-it {
+  word-wrap: break-word;
+}
+
+
+/* colors */
+.container h1, .container h2, .container h3, .container h4, .container h5, .container h6 {
+  color: #333;
+}
+
+header.major h2, header.major h3, header.major h4, header.major h5, header.major h6 {
+  border-bottom: solid 0px #333;
+  color: #333;
+  margin: 0 0 0 0;
+  padding-bottom: 0.5em;
+}
+
+header.major p {
+  color: #333;
+}
+
+strong {
+  color:#333 !important;
+}
+
+input[type="submit"], input[type="reset"], input[type="button"], button, .button {
+  background-color:#2e3842;
+}
+
+input[type="text"], select {
+  color: #333;
+ margin-bottom: 20px;
+}
+
+input {
+  color:#333;
+}
+
+label {
+  color: #333;
+}
+
+table th, table td {
+  color: #333;
+}
+
+ul li {
+  color: #333;
+}
+
+.container p {color: #333;}
+
+span.helptext {color: #333;}
+
+form {
+  color: #333;
+  margin: 0 0 0.5em 0;
+}
+
+form a, form a:hover {
+  color: #333;
+}
+
+.panel {
+  color: #333;
+}
+
+.panel-title a, .panel-title a:hover {
+  color: #333;
+  border-bottom:0px;
+}
+
+.panel-body a, .pnael-body a:hover {
+  color: #333;
+}
+
+.btn-link {
+  color: #179389;
+}
+
+.treeview .list-group-item {
+	cursor: pointer;
+}
+
+.treeview span.indent {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.treeview span.icon {
+	width: 12px;
+	margin-right: 5px;
+}
+
+.treeview .node-disabled {
+	color: silver;
+	cursor: not-allowed;
+}
+
+.hidden>div {
+	display:none;
+}
+
+.visible>div {
+	display:block;
+}
+
+#schematree a, #schematree a:hover {
+  border-bottom:0px;
+}
+
+ul.errorlist li{
+  color: red;
+}

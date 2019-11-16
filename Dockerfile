@@ -2,62 +2,66 @@
 # AUTHOR:           Nicholas Long <nicholas.long@nrel.gov>
 # DESCRIPTION:      Dockerfile for running BuildingSync Data Selection Tool
 # TO_BUILD_AND_RUN: docker-compose build && docker-compose up
+FROM alpine:3.8
 
-# Latest Ubuntu LTS
-FROM ubuntu:16.04
+RUN apk add --no-cache python3 \
+        python3-dev \
+        postgresql-dev \
+        alpine-sdk \
+        pcre \
+        pcre-dev \
+        libxslt-dev \
+        linux-headers \
+        bash \
+        bash-completion \
+        ruby \
+        ruby-dev \
+        nginx && \
+    ln -sf /usr/bin/python3 /usr/bin/python && \
+    python -m ensurepip && \
+    rm -r /usr/lib/python*/ensurepip && \
+    ln -sf /usr/bin/pip3 /usr/bin/pip && \
+    pip install --upgrade pip setuptools && \
+    pip install git+https://github.com/Supervisor/supervisor@837c159ae51f3 && \
+    mkdir -p /var/log/supervisord/ && \
+    rm -r /root/.cache && \
+    addgroup -g 1000 uwsgi && \
+    adduser -G uwsgi -H -u 1000 -S uwsgi && \
+    mkdir -p /run/nginx && \
+    echo "daemon off;" >> /etc/nginx/nginx.conf && \
+    rm -f /etc/nginx/conf.d/default.conf && \
+    echo "gem: --no-rdoc --no-ri" > /etc/gemrc
 
-### Required dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends npm \
-        nodejs \
-        build-essential \
-        git \
-        python2.7 \
-        python-pip \
-        python-dev \
-        python-gdbm \
-        libpq-dev \
-        libpcre3 \
-        libpcre3-dev \
-        enchant \
-        vim \
-    && pip install --upgrade pip \
-    && pip install setuptools \
-    && rm -rf /var/lib/apt/lists/* \
-    && groupadd --gid 1000 uwsgi \
-    && useradd -g uwsgi -M -u 1000 -r uwsgi \
-    && ln -s /usr/bin/nodejs /usr/bin/node \
-    && mkdir -p /srv/bs-tool
+## Note on some of the commands above:
+##   - create the uwsgi user and group to have id of 1000
+##   - copy over python3 as python
+##   - pip install --upgrade pip overwrites the pip so it is no longer a symlink
+##   - install supervisor that works with Python3.
 
-### Note on some of the commands above
-### create the uwsgi user and groud
-### link the apt install of nodejs to node (expected by bower)
-### Install python requirements
-
-WORKDIR /srv/bs-tool
-COPY requirements.txt /srv/bs-tool/requirements.txt
+WORKDIR /srv/selection-tool
+COPY /requirements.txt /srv/selection-tool/requirements.txt
 RUN pip install -r requirements.txt
 
-### Install JavaScript requirements - do this first because they take awhile
-### and the dependencies will probably change slower than python packages.
-### README.md stops the no readme warning
-COPY bower.json /srv/bs-tool/bower.json
-COPY .bowerrc /srv/bs-tool/.bowerrc
-COPY package.json /srv/bs-tool/package.json
-COPY README.rst /srv/bs-tool/README.rst
-RUN npm update && npm install
-RUN $(npm bin)/bower install --config.interactive=false --allow-root
+#install the schematron-nokogiri gem
+RUN gem install schematron-nokogiri
 
 ### Copy over the remaining part of the application and some helpers
-COPY . /srv/bs-tool/
+COPY . /srv/selection-tool/
 
 ### Copy the wait-for-it command to /usr/local
 COPY /docker/wait-for-it.sh /usr/local/wait-for-it.sh
 
-RUN mkdir -p /srv/bs-tool/static && python manage.py collectstatic
+# nginx configurations - alpine doesn't use the sites-available directory. Put the selection tool
+# configuration file into the /etc/nginx/conf.d/ folder.
+COPY /docker/nginx.conf /etc/nginx/conf.d/selection_tool.conf
+# Supervisor looks in /etc/supervisor for the configuration file.
+COPY /docker/supervisord.conf /etc/supervisor/supervisord.conf
 
 # entrypoint sets some permissions on directories that may be shared volumes
-COPY /docker/bstool-entrypoint.sh /usr/local/bin/bstool-entrypoint
-RUN chmod 775 /usr/local/bin/bstool-entrypoint
-ENTRYPOINT ["bstool-entrypoint"]
+COPY /docker/selection-tool-entrypoint.sh /usr/local/bin/selection-tool-entrypoint
+RUN chmod 775 /usr/local/bin/selection-tool-entrypoint
+ENTRYPOINT ["selection-tool-entrypoint"]
 
-EXPOSE 8000
+CMD ["supervisord"]
+
+EXPOSE 80

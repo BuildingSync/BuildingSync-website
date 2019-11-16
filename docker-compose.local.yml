@@ -1,0 +1,55 @@
+# Docker Compose for deployment. This removes the hard coded usernames and
+# passwords and pulls Docker Hub buildingsync/selection-tool for the latest version.
+# Must set the following environment variables
+#   POSTGRES_USER
+#   POSTGRES_PASSWORD
+#   SELECTION_TOOL_ADMIN_USER
+#   SELECTION_TOOL_ADMIN_PASSWORD
+#   SELECTION_TOOL_ADMIN_ORG
+#   SECRET_KEY
+
+version: '3'
+services:
+  db-postgres:
+    image: 127.0.0.1:5000/postgres
+    environment:
+      - POSTGRES_DB=selection-tool
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+    volumes:
+      - selectiontool_pgdata:/var/lib/postgresql/data
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+  web:
+    image: 127.0.0.1:5000/selection-tool
+    environment:
+      - POSTGRES_DB=selection-tool
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - SECRET_KEY
+      - DJANGO_SETTINGS_MODULE=bsyncviewer.settings.docker
+      - DJANGO_DEBUG=False
+      - SELECTION_TOOL_ADMIN_USER
+      - SELECTION_TOOL_ADMIN_EMAIL
+      - SELECTION_TOOL_ADMIN_PASSWORD
+    depends_on:
+      - db-postgres
+    ports:
+      - "80:80"
+    volumes:
+      - selectiontool_mediadata:/srv/selection-tool/bsyncviewer/media
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+volumes:
+  selectiontool_pgdata:
+    external: true
+  selectiontool_mediadata:
+    external: true

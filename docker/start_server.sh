@@ -1,18 +1,22 @@
 #!/bin/bash
 
-cd /srv/bs-tool
+cd /srv/selection-tool
 
 echo "Waiting for postgres to start"
 /usr/local/wait-for-it.sh --strict db-postgres:5432
 
 # Run any migrations before starting -- always for now
 ./manage.py migrate
+./manage.py collectstatic --noinput
+
+# Check if a schema has been imports
+./manage.py reset_schema --schema_version 1.0.0
+./manage.py bedes --schema_version=1.0.0 --bedes_version=v2.2 --save_to_db
 
 # Create the default user based on the env vars
-./manage.py create_user ${BSTOOL_ADMIN_USER} ${BSTOOL_ADMIN_EMAIL} ${BSTOOL_ADMIN_PASSWORD}
+echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('${SELECTION_TOOL_ADMIN_USER}', '${SELECTION_TOOL_ADMIN_EMAIL}', '${SELECTION_TOOL_ADMIN_PASSWORD}')" | python manage.py shell
 
 WORKERS=$(($(nproc) / 2))
 WORKERS=$(($WORKERS>1?$WORKERS:1))
-/usr/local/bin/uwsgi --http 0.0.0.0:8000 --module wsgi --uid 1000 --gid 1000 \
-    --max-requests 5000 --cheaper-initial 1 -p $WORKERS --single-interpreter --enable-threads \
-    --wsgi-file /srv/bs-tool/main/wsgi.py
+
+/usr/bin/uwsgi --ini /srv/selection-tool/docker/uwsgi.ini

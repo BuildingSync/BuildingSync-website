@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}BuildingSync Schema Viewer{% endblock %}
+
+{% block content_notitle %}
+
+    <div class="container">
+    	<header class="major">
+			<h2>Public Use Cases</h2>
+    	</header>
+    	<div class="row">
+        	<div class="col-md-9">
+        		{% if public_usecases %}
+        			<table class="table">
+	  					<tr>
+	  						<th>Name</th>
+	  						<th>Schema Version</th>
+                <th>Description</th>
+	  					</tr>
+						{% for case in public_usecases %}
+						<tr>
+							<td>{{ case.name }}</td>
+							<td>{{ case.schema }}</td>
+              <td>{{ case.description }}</td>
+						</tr>
+						{% endfor %}
+					</table>
+        		{% endif %}
+        		{% if user.is_authenticated %}
+        			<h3>My Use Cases</h3>
+	        		{% if user_usecases %}
+	        			<table class="table">
+		  					<tr>
+		  						<th>Name</th>
+		  						<th>Schema Version</th>
+		  						<th>Public ?</th>
+		  						<th>Actions </th>
+		  					</tr>
+							{% for case in user_usecases %}
+							<tr>
+								<td>{{ case.name }} </td>
+								<td>{{ case.schema }}</td>
+								<td>{{ case.make_public }}</td>
+								<td>
+									<a href="{% url 'use_case_update' case.id %}">Edit</a> |
+									<a href="{% url 'use_case_delete' case.id %}">Delete</a>
+                                    {% if case.parsing_errors %}  <span class="red pad-lr-10"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Parsing Errors</span> {% endif %}
+								</td>
+
+							</tr>
+							{% endfor %}
+						</table>
+	        		{% endif %}
+	        		<a class="btn btn-accent" href="{% url 'use_case_create' %}" role="button">
+			            <i class="fa fa-plus" aria-hidden="true"></i>
+			            New Use Case
+			        </a>
+			        <div class="pad-bot-20">
+			        	&nbsp;
+			        </div>
+	        	{% endif %}	
+        	</div>
+        	<div class="col-md-3">
+        		<div class="callout-box">
+        			<p>Click the link below for more information on adding and validating use cases</p>
+        			<span class="pad-10"><a class="btn btn-accent" href="{% url 'use_case_mappings' %}" role="button">	
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>	
+                        Use Case Help Page
+                        </a></span>
+        		</div> 	
+        	</div>
+        </div>
+    </div>
+
+{% endblock content_notitle %}

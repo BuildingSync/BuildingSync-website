@@ -1,0 +1,34 @@
+<!-- edited with XMLSpy v2016 rel. 2 sp1 (x64) (http://www.altova.com) by Dan Macumber (NREL) -->
+<auc:BuildingSync xmlns:auc="http://buildingsync.net/schemas/bedes-auc/2019" xsi:schemaLocation="http://buildingsync.net/schemas/bedes-auc/2019 https://raw.githubusercontent.com/BuildingSync/schema/v1.0-patch/BuildingSync.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <auc:Facilities>
+    <auc:Facility>
+      <auc:Sites>
+        <auc:Site>
+          <auc:Address>
+            <auc:StreetAddressDetail>
+              <auc:Simplified>
+              <auc:StreetAddress>123 Main St</auc:StreetAddress>
+              </auc:Simplified>
+            </auc:StreetAddressDetail>
+            <auc:City>San Francisco</auc:City>
+            <auc:State>CA</auc:State>
+            <auc:PostalCode>94114</auc:PostalCode>
+          </auc:Address>
+          <auc:ClimateZoneType>
+            <auc:ASHRAE>
+              <auc:ClimateZone>3C</auc:ClimateZone>
+            </auc:ASHRAE>
+            <auc:CaliforniaTitle24>
+              <auc:ClimateZone>Climate Zone 3</auc:ClimateZone>
+            </auc:CaliforniaTitle24>
+          </auc:ClimateZoneType>
+          <auc:WeatherDataStationID>724940</auc:WeatherDataStationID>
+          <auc:WeatherStationName>USA_CA_San.Francisco.Intl.AP</auc:WeatherStationName>
+          <auc:Longitude>-122.42768558472727</auc:Longitude>
+          <auc:Latitude>37.76937674999205</auc:Latitude>
+          <auc:Ownership>Unknown</auc:Ownership>
+        </auc:Site>
+      </auc:Sites>
+    </auc:Facility>
+  </auc:Facilities>
+</auc:BuildingSync>
