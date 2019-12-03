@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+  <sch:title>Audit Template</sch:title>
   <sch:ns prefix="auc" uri="http://buildingsync.net/schemas/bedes-auc/2019"/>
   <sch:pattern>
-    <sch:title>"New York City Energy Efficiency Report"</sch:title>
+    <sch:title>New York City Energy Efficiency Report</sch:title>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility[auc:Measures/auc:Measure/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID]">
       <sch:assert test="auc:Measures/auc:Measure/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID/@IDref/text() = auc:Sites/auc:Site/auc:Buildings/auc:Building/@ID/text()"></sch:assert>
     </sch:rule>
@@ -12,14 +13,29 @@
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility[auc:Reports/auc:Report/auc:AuditorContactID]">
       <sch:assert test="auc:Reports/auc:Report/auc:AuditorContactID/@IDref/text() = auc:Contacts/auc:Contact/@ID/text()"></sch:assert>
     </sch:rule>
-    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility[auc:Reports/auc:Report/auc:Qualifications/auc:Qualification/auc:CertifiedAuditTeamMemberContactID]">
-      <sch:assert test="auc:Reports/auc:Report/auc:Qualifications/auc:Qualification/auc:CertifiedAuditTeamMemberContactID/@IDref/text() = auc:Contacts/auc:Contact/@ID/text()"></sch:assert>
-    </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility[auc:Reports/auc:Report/auc:LinkedPremisesOrSystem/auc:Building/auc:LinkedBuildingID]">
       <sch:assert test="auc:Reports/auc:Report/auc:LinkedPremisesOrSystem/auc:Building/auc:LinkedBuildingID/@IDref/text() = auc:Sites/auc:Site/auc:Buildings/auc:Building/@ID/text()"></sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility[auc:Reports/auc:Report/auc:LinkedPremisesOrSystem/auc:Site/auc:LinkedSiteID]">
       <sch:assert test="auc:Reports/auc:Report/auc:LinkedPremisesOrSystem/auc:Site/auc:LinkedSiteID/@IDref/text() = auc:Sites/auc:Site[count(auc:Buildings/auc:Building) &gt;= 1]/@ID/text()"></sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility[auc:Reports/auc:Report/auc:Qualifications/auc:Qualification/auc:CertifiedAuditTeamMemberContactID]">
+      <sch:assert test="auc:Reports/auc:Report/auc:Qualifications/auc:Qualification/auc:CertifiedAuditTeamMemberContactID/@IDref/text() = auc:Contacts/auc:Contact/@ID/text()"></sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility[auc:Reports/auc:Report/auc:Scenarios/auc:Scenario/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID]">
+      <sch:assert test="auc:Reports/auc:Report/auc:Scenarios/auc:Scenario/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID/@IDref/text() = auc:Sites/auc:Sites/auc:Buildings/auc:Building/@ID/text()"></sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility[auc:Reports/auc:Report/auc:Scenarios/auc:Scenario/auc:LinkedPremises/auc:Site/auc:LinkedSiteID]">
+      <sch:assert test="auc:Reports/auc:Report/auc:Scenarios/auc:Scenario/auc:LinkedPremises/auc:Site/auc:LinkedSiteID/@IDref/text() = auc:Sites/auc:Sites[count(auc:Buildings/auc:Building) &gt;= 1]/@ID/text()"></sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility[auc:Reports/auc:Report/auc:Scenarios/auc:Scenario/auc:ScenarioType/auc:PackageOfMeasures/auc:MeasureIDs/auc:MeasureID]">
+      <sch:assert test="auc:Reports/auc:Report/auc:Scenarios/auc:Scenario/auc:ScenarioType/auc:PackageOfMeasures/auc:MeasureIDs/auc:MeasureID/@IDref/text() = auc:Measures/auc:Measure/@ID/text()"></sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility[auc:Reports/auc:Report/auc:Scenarios/auc:Scenario/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Shared Resource System ID']/auc:FieldValue]">
+      <sch:assert test="auc:Reports/auc:Report/auc:Scenarios/auc:Scenario/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Shared Resource System ID']/auc:FieldValue/text() = auc:Systems/*/@ID/text()"></sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility[auc:Reports/auc:Report/auc:Scenarios/auc:Scenario/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Shared Resource System ID']/auc:FieldValue]">
+      <sch:assert test="auc:Reports/auc:Report/auc:Scenarios/auc:Scenario/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Shared Resource System ID']/auc:FieldValue/text() = auc:Systems/*/@ID/text()"></sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility[auc:Sites/auc:Site/auc:Buildings/auc:Building/auc:Sections/auc:Section/auc:ExteriorFloors/auc:ExteriorFloor/auc:ExteriorFloorID]">
       <sch:assert test="auc:Sites/auc:Site/auc:Buildings/auc:Building/auc:Sections/auc:Section/auc:ExteriorFloors/auc:ExteriorFloor/auc:ExteriorFloorID/@IDref/text() = auc:Systems/auc:ExteriorFloorSystems/auc:ExteriorFloorSystem/@ID/text()"></sch:assert>
@@ -120,6 +136,15 @@
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility[auc:Systems/auc:PumpSystems/auc:PumpSystem/auc:LinkedSystemIDs/auc:LinkedSystemID]">
       <sch:assert test="(auc:Systems/auc:PumpSystems/auc:PumpSystem/auc:LinkedSystemIDs/auc:LinkedSystemID/@IDref/text() = auc:Systems/auc:HVACSystems/auc:HVACSystem/auc:Plants/auc:CondenserPlants/auc:CondenserPlant/@ID/text()) | (auc:Systems/auc:PumpSystems/auc:PumpSystem/auc:LinkedSystemIDs/auc:LinkedSystemID/@IDref/text() = auc:Systems/auc:HVACSystems/auc:HVACSystem/auc:Plants/auc:CoolingPlants/auc:CoolingPlant/@ID/text())"></sch:assert>
     </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report[auc:Scenarios/auc:Scenario/auc:ResourceUses/auc:ResourceUse/auc:UtilityIDs/auc:UtilityID]">
+      <sch:assert test="auc:Scenarios/auc:Scenario/auc:ResourceUses/auc:ResourceUse/auc:UtilityIDs/auc:UtilityID/@IDref/text() = auc:Utilities/auc:Utility/@ID/text()"></sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Linked Time Series ID']/auc:FieldValue]">
+      <sch:assert test="auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Linked Time Series ID']/auc:FieldValue/text() = auc:TimeSeriesData/auc:TimeSeries/@ID/text()"></sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[auc:TimeSeriesData/auc:TimeSeries/auc:ResourceUseID]">
+      <sch:assert test="auc:TimeSeriesData/auc:TimeSeries/auc:ResourceUseID/@IDref/text() = auc:ResourceUses/auc:ResourceUse/@ID/text()"></sch:assert>
+    </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[auc:OtherHVACSystems/auc:OtherHVACSystem/auc:LinkedDeliveryIDs/auc:LinkedDeliveryID]">
       <sch:assert test="auc:OtherHVACSystems/auc:OtherHVACSystem/auc:LinkedDeliveryIDs/auc:LinkedDeliveryID/@IDref/text() = auc:HeatingAndCoolingSystems/auc:Deliveries/auc:Delivery/@ID/text()"></sch:assert>
     </sch:rule>
@@ -209,7 +234,7 @@
       <sch:assert test="not(auc:DiscardReason)">element "auc:DiscardReason" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="not(auc:EndDate)">element "auc:EndDate" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="count(auc:ImplementationStatus) &gt;= 0">element "auc:ImplementationStatus" is OPTIONAL</sch:assert>
-      <sch:assert test="count(auc:LinkedPremises) &gt;= 0">element "auc:LinkedPremises" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:LinkedPremises) &gt;= 1">element "auc:LinkedPremises" is REQUIRED</sch:assert>
       <sch:assert test="count(auc:LongDescription) &gt;= 0">element "auc:LongDescription" is OPTIONAL</sch:assert>
       <sch:assert test="count(auc:MVCost) &gt;= 0">element "auc:MVCost" is OPTIONAL</sch:assert>
       <sch:assert test="not(auc:MVOption)">element "auc:MVOption" is NOT RECOMMENDED</sch:assert>
@@ -335,7 +360,7 @@
       <sch:assert test="count(auc:Refrigeration) &gt;= 0">element "auc:Refrigeration" is OPTIONAL</sch:assert>
       <sch:assert test="count(auc:RenewableEnergySystems) &gt;= 0">element "auc:RenewableEnergySystems" is OPTIONAL</sch:assert>
       <sch:assert test="count(auc:ServiceHotWaterSystems) &gt;= 0">element "auc:ServiceHotWaterSystems" is OPTIONAL</sch:assert>
-      <sch:assert test="not(auc:Uncategorized)">element "auc:Uncategorized" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:Uncategorized) &gt;= 0">element "auc:Uncategorized" is OPTIONAL</sch:assert>
       <sch:assert test="count(auc:WaterAndSewerConservationSystems) &gt;= 0">element "auc:WaterAndSewerConservationSystems" is OPTIONAL</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Measures/auc:Measure/auc:TechnologyCategories/auc:TechnologyCategory/auc:AdvancedMeteringSystems">
@@ -354,13 +379,13 @@
       <sch:assert test="count(auc:MeasureName) &gt;= 1">element "auc:MeasureName" is REQUIRED</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Measures/auc:Measure/auc:TechnologyCategories/auc:TechnologyCategory/auc:BuildingAutomationSystems/auc:MeasureName">
-      <sch:assert test="contains('_Add or upgrade BAS/EMS/EMCS_ _Add or upgrade controls_ _Convert pneumatic controls to DDC_ _Other_ _Upgrade operating protocols, calibration, and/or sequencing_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Add or upgrade BAS/EMS/EMCS", "Add or upgrade controls", "Convert pneumatic controls to DDC", "Other", or "Upgrade operating protocols, calibration, and/or sequencing"</sch:assert>
+      <sch:assert test="contains('_Add heat recovery_ _Add or upgrade BAS/EMS/EMCS_ _Add or upgrade controls_ _Convert pneumatic controls to DDC_ _Other_ _Upgrade operating protocols, calibration, and/or sequencing_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Add heat recovery", "Add or upgrade BAS/EMS/EMCS", "Add or upgrade controls", "Convert pneumatic controls to DDC", "Other", or "Upgrade operating protocols, calibration, and/or sequencing"</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Measures/auc:Measure/auc:TechnologyCategories/auc:TechnologyCategory/auc:BuildingEnvelopeModifications">
       <sch:assert test="count(auc:MeasureName) &gt;= 1">element "auc:MeasureName" is REQUIRED</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Measures/auc:Measure/auc:TechnologyCategories/auc:TechnologyCategory/auc:BuildingEnvelopeModifications/auc:MeasureName">
-      <sch:assert test="contains('_Add attic/knee wall insulation_ _Add shading devices_ _Add window films_ _Air seal envelope_ _Clean and/or repair_ _Close shaft vents for elevators or stairwells_ _Increase ceiling insulation_ _Increase floor insulation_ _Increase roof insulation_ _Increase wall insulation_ _Install cool/green roof_ _Install or replace solar screens_ _Insulate attic hatch / stair box_ _Insulate foundation_ _Insulate thermal bypasses_ _Other_ _Replace glazing_ _Replace windows_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Add attic/knee wall insulation", "Add shading devices", "Add window films", "Air seal envelope", "Clean and/or repair", "Close shaft vents for elevators or stairwells", "Increase ceiling insulation", "Increase floor insulation", "Increase roof insulation", "Increase wall insulation", "Install cool/green roof", "Install or replace solar screens", "Insulate attic hatch / stair box", "Insulate foundation", "Insulate thermal bypasses", "Other", "Replace glazing", or "Replace windows"</sch:assert>
+      <sch:assert test="contains('_Add attic/knee wall insulation_ _Add shading devices_ _Add window films_ _Air seal envelope_ _Clean and/or repair_ _Close elevator and/or stairwell shaft vents_ _Increase ceiling insulation_ _Increase floor insulation_ _Increase roof insulation_ _Increase wall insulation_ _Install cool/green roof_ _Install or replace solar screens_ _Insulate attic hatch / stair box_ _Insulate foundation_ _Insulate thermal bypasses_ _Other_ _Replace glazing_ _Replace windows_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Add attic/knee wall insulation", "Add shading devices", "Add window films", "Air seal envelope", "Clean and/or repair", "Close elevator and/or stairwell shaft vents", "Increase ceiling insulation", "Increase floor insulation", "Increase roof insulation", "Increase wall insulation", "Install cool/green roof", "Install or replace solar screens", "Insulate attic hatch / stair box", "Insulate foundation", "Insulate thermal bypasses", "Other", "Replace glazing", or "Replace windows"</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Measures/auc:Measure/auc:TechnologyCategories/auc:TechnologyCategory/auc:ChilledWaterHotWaterAndSteamDistributionSystems">
       <sch:assert test="count(auc:MeasureName) &gt;= 1">element "auc:MeasureName" is REQUIRED</sch:assert>
@@ -432,13 +457,13 @@
       <sch:assert test="count(auc:MeasureName) &gt;= 1">element "auc:MeasureName" is REQUIRED</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Measures/auc:Measure/auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherElectricMotorsAndDrives/auc:MeasureName">
-      <sch:assert test="contains('_Add VFD/VSD motor controller_ _Add drive controls_ _Clean and/or repair_ _Implement training and/or documentation_ _Other_ _Replace with higher efficiency_ _Upgrade operating protocols, calibration, and/or sequencing_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Add VFD/VSD motor controller", "Add drive controls", "Clean and/or repair", "Implement training and/or documentation", "Other", "Replace with higher efficiency", or "Upgrade operating protocols, calibration, and/or sequencing"</sch:assert>
+      <sch:assert test="contains('_Add VSD motor controller_ _Add drive controls_ _Clean and/or repair_ _Implement training and/or documentation_ _Other_ _Replace with higher efficiency_ _Upgrade operating protocols, calibration, and/or sequencing_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Add VSD motor controller", "Add drive controls", "Clean and/or repair", "Implement training and/or documentation", "Other", "Replace with higher efficiency", or "Upgrade operating protocols, calibration, and/or sequencing"</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Measures/auc:Measure/auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherHVAC">
       <sch:assert test="count(auc:MeasureName) &gt;= 1">element "auc:MeasureName" is REQUIRED</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Measures/auc:Measure/auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherHVAC/auc:MeasureName">
-      <sch:assert test="contains('_Add duct insulation_ _Add energy recovery_ _Add enhanced dehumidification_ _Add or repair economizer_ _Add or replace cooling tower_ _Balance ventilation/distribution system_ _Capture and return condensate_ _Clean and/or repair_ _Convert CAV system to VAV system_ _Implement training and/or documentation_ _Improve distribution fans_ _Improve ventilation fans_ _Install air source heat pump_ _Install demand control ventilation_ _Install gas cooling_ _Install or Upgrade Master Venting_ _Install passive solar heating_ _Install solar ventilation preheating system_ _Install thermal destratification fans_ _Install variable refrigerant flow system_ _Other_ _Other cooling_ _Other distribution_ _Other heating_ _Other ventilation_ _Repair leaks / seal ducts_ _Repair or replace HVAC damper and controller_ _Replace AC and heating units with ground coupled heat pump systems_ _Replace burner_ _Replace or modify AHU_ _Replace package units_ _Replace packaged terminal units_ _Upgrade operating protocols, calibration, and/or sequencing_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Add duct insulation", "Add energy recovery", "Add enhanced dehumidification", "Add or repair economizer", "Add or replace cooling tower", "Balance ventilation/distribution system", "Capture and return condensate", "Clean and/or repair", "Convert CAV system to VAV system", "Implement training and/or documentation", "Improve distribution fans", "Improve ventilation fans", "Install air source heat pump", "Install demand control ventilation", "Install gas cooling", "Install or Upgrade Master Venting", "Install passive solar heating", "Install solar ventilation preheating system", "Install thermal destratification fans", "Install variable refrigerant flow system", "Other", "Other cooling", "Other distribution", "Other heating", "Other ventilation", "Repair leaks / seal ducts", "Repair or replace HVAC damper and controller", "Replace AC and heating units with ground coupled heat pump systems", "Replace burner", "Replace or modify AHU", "Replace package units", "Replace packaged terminal units", or "Upgrade operating protocols, calibration, and/or sequencing"</sch:assert>
+      <sch:assert test="contains('_Add duct insulation_ _Add energy recovery_ _Add enhanced dehumidification_ _Add or repair economizer_ _Add or replace cooling tower_ _Balance ventilation/distribution system_ _Capture and return condensate_ _Clean and/or repair_ _Convert CV system to VAV system_ _Implement training and/or documentation_ _Improve distribution fans_ _Improve ventilation fans_ _Install air source heat pump_ _Install demand control ventilation_ _Install gas cooling_ _Install or Upgrade Master Venting_ _Install passive solar heating_ _Install solar ventilation preheating system_ _Install thermal destratification fans_ _Install variable refrigerant flow system_ _Other_ _Other cooling_ _Other distribution_ _Other heating_ _Other ventilation_ _Repair leaks / seal ducts_ _Repair or replace HVAC damper and controller_ _Replace AC and heating units with ground coupled heat pump systems_ _Replace burner_ _Replace or modify AHU_ _Replace package units_ _Replace packaged terminal units_ _Upgrade operating protocols, calibration, and/or sequencing_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Add duct insulation", "Add energy recovery", "Add enhanced dehumidification", "Add or repair economizer", "Add or replace cooling tower", "Balance ventilation/distribution system", "Capture and return condensate", "Clean and/or repair", "Convert CV system to VAV system", "Implement training and/or documentation", "Improve distribution fans", "Improve ventilation fans", "Install air source heat pump", "Install demand control ventilation", "Install gas cooling", "Install or Upgrade Master Venting", "Install passive solar heating", "Install solar ventilation preheating system", "Install thermal destratification fans", "Install variable refrigerant flow system", "Other", "Other cooling", "Other distribution", "Other heating", "Other ventilation", "Repair leaks / seal ducts", "Repair or replace HVAC damper and controller", "Replace AC and heating units with ground coupled heat pump systems", "Replace burner", "Replace or modify AHU", "Replace package units", "Replace packaged terminal units", or "Upgrade operating protocols, calibration, and/or sequencing"</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Measures/auc:Measure/auc:TechnologyCategories/auc:TechnologyCategory/auc:PlugLoadReductions">
       <sch:assert test="count(auc:MeasureName) &gt;= 1">element "auc:MeasureName" is REQUIRED</sch:assert>
@@ -464,11 +489,17 @@
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Measures/auc:Measure/auc:TechnologyCategories/auc:TechnologyCategory/auc:ServiceHotWaterSystems/auc:MeasureName">
       <sch:assert test="contains('_Clean and/or repair_ _Decrease SHW temperature_ _Implement training and/or documentation_ _Install SHW controls_ _Install heat pump SHW system_ _Install solar thermal SHW_ _Install tankless water heaters_ _Install water pressure booster_ _Insulate SHW piping_ _Insulate SHW tank_ _Other_ _Replace piping_ _Replace tankless coil_ _Separate SHW from heating_ _Upgrade SHW boiler_ _Upgrade operating protocols, calibration, and/or sequencing_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Clean and/or repair", "Decrease SHW temperature", "Implement training and/or documentation", "Install SHW controls", "Install heat pump SHW system", "Install solar thermal SHW", "Install tankless water heaters", "Install water pressure booster", "Insulate SHW piping", "Insulate SHW tank", "Other", "Replace piping", "Replace tankless coil", "Separate SHW from heating", "Upgrade SHW boiler", or "Upgrade operating protocols, calibration, and/or sequencing"</sch:assert>
     </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Measures/auc:Measure/auc:TechnologyCategories/auc:TechnologyCategory/auc:Uncategorized">
+      <sch:assert test="count(auc:MeasureName) &gt;= 1">element "auc:MeasureName" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Measures/auc:Measure/auc:TechnologyCategories/auc:TechnologyCategory/auc:Uncategorized/auc:MeasureName">
+      <sch:assert test="contains('_Other_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Other"</sch:assert>
+    </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Measures/auc:Measure/auc:TechnologyCategories/auc:TechnologyCategory/auc:WaterAndSewerConservationSystems">
       <sch:assert test="count(auc:MeasureName) &gt;= 1">element "auc:MeasureName" is REQUIRED</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Measures/auc:Measure/auc:TechnologyCategories/auc:TechnologyCategory/auc:WaterAndSewerConservationSystems/auc:MeasureName">
-      <sch:assert test="contains('_Clean and/or repair_ _Implement training and/or documentation_ _Implement water efficient irrigation_ _Install low-flow faucets and showerheads_ _Install low-flow plumbing equipment_ _Install on-site sewer treatment systems_ _Other_ _Upgrade operating protocols, calibration, and/or sequencing_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Clean and/or repair", "Implement training and/or documentation", "Implement water efficient irrigation", "Install low-flow faucets and showerheads", "Install low-flow plumbing equipment", "Install on-site sewer treatment systems", "Other", or "Upgrade operating protocols, calibration, and/or sequencing"</sch:assert>
+      <sch:assert test="contains('_Clean and/or repair_ _Implement training and/or documentation_ _Implement water efficient irrigation_ _Install low-flow faucets and showerheads_ _Install low-flow plumbing equipment_ _Install onsite sewer treatment systems_ _Other_ _Upgrade operating protocols, calibration, and/or sequencing_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Clean and/or repair", "Implement training and/or documentation", "Implement water efficient irrigation", "Install low-flow faucets and showerheads", "Install low-flow plumbing equipment", "Install onsite sewer treatment systems", "Other", or "Upgrade operating protocols, calibration, and/or sequencing"</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Measures/auc:Measure/auc:UsefulLife">
       <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
@@ -537,9 +568,1916 @@
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios">
       <sch:assert test="count(auc:Scenario) &gt;= 0">element "auc:Scenario" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]) &gt;= 0">element "auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]) &gt;= 0">element "auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]) &gt;= 0">element "auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]) &gt;= 0">element "auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]) &gt;= 0">element "auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]) &gt;= 0">element "auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]) &gt;= 0">element "auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]) &gt;= 0">element "auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]) &gt;= 0">element "auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]) &gt;= 0">element "auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]) &gt;= 0">element "auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0)]) &gt;= 0">element "auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0)]" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]) &gt;= 0">element "auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:Scenario[(count(auc:ScenarioType/auc:Target) &gt; 0)]) &gt;= 0">element "auc:Scenario[(count(auc:ScenarioType/auc:Target) &gt; 0)]" is OPTIONAL</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario">
       <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]">
+      <sch:assert test="count(auc:AllResourceTotals) &gt;= 0">element "auc:AllResourceTotals" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:AnnualCoolingDegreeDays)">element "auc:AnnualCoolingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualHeatingDegreeDays)">element "auc:AnnualHeatingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CDDBaseTemperature)">element "auc:CDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:HDDBaseTemperature)">element "auc:HDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:LinkedPremises) &gt;= 1">element "auc:LinkedPremises" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Normalization)">element "auc:Normalization" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ResourceUses)">element "auc:ResourceUses" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ScenarioName)">element "auc:ScenarioName" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ScenarioNotes) &gt;= 0">element "auc:ScenarioNotes" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:ScenarioType) &gt;= 1">element "auc:ScenarioType" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:TemporalStatus) &gt;= 1">element "auc:TemporalStatus" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:TimeSeriesData)">element "auc:TimeSeriesData" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 0">element "auc:UserDefinedFields" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:WeatherType)">element "auc:WeatherType" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:AllResourceTotals">
+      <sch:assert test="count(auc:AllResourceTotal) &gt;= 0">element "auc:AllResourceTotal" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:ElectricitySourcedFromOnsiteRenewableSystems)">element "auc:ElectricitySourcedFromOnsiteRenewableSystems" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EndUse) &gt;= 1">element "auc:EndUse" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:EnergyCost) &gt;= 0">element "auc:EnergyCost" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:OnsiteRenewableSystemElectricityExported)">element "auc:OnsiteRenewableSystemElectricityExported" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceBoundary) &gt;= 1">element "auc:ResourceBoundary" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:SiteEnergyUse)">element "auc:SiteEnergyUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:SiteEnergyUseIntensity) &gt;= 0">element "auc:SiteEnergyUseIntensity" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:SourceEnergyUse)">element "auc:SourceEnergyUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SourceEnergyUseIntensity)">element "auc:SourceEnergyUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SummerPeak)">element "auc:SummerPeak" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:TemporalStatus)">element "auc:TemporalStatus" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 0">element "auc:UserDefinedFields" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:WasteWaterVolume)">element "auc:WasteWaterVolume" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterCost)">element "auc:WaterCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterIntensity)">element "auc:WaterIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterResource)">element "auc:WaterResource" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterUse)">element "auc:WaterUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WinterPeak)">element "auc:WinterPeak" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:EndUse">
+      <sch:assert test="contains('_All end uses_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "All end uses"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:EnergyCost">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:ResourceBoundary">
+      <sch:assert test="contains('_Site_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Site"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:SiteEnergyUseIntensity">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Site Energy Use Intensity Is Not Applicable']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Site Energy Use Intensity Is Not Applicable']/auc:FieldValue" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Site Energy Use Intensity Is Not Applicable_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Site Energy Use Intensity Is Not Applicable"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Site Energy Use Intensity Is Not Applicable']/auc:FieldValue">
+      <sch:assert test="contains('_false_ _true_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "false" or "true"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:LinkedPremises">
+      <sch:assert test="count(auc:Building) &gt;= 1">element "auc:Building" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Facility)">element "auc:Facility" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Section)">element "auc:Section" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Site)">element "auc:Site" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Space)">element "auc:Space" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ThermalZone)">element "auc:ThermalZone" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:LinkedPremises/auc:Building">
+      <sch:assert test="count(auc:LinkedBuildingID) &gt;= 1">element "auc:LinkedBuildingID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:ScenarioType">
+      <sch:assert test="count(auc:Benchmark) &gt;= 1">element "auc:Benchmark" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:CurrentBuilding)">element "auc:CurrentBuilding" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Other)">element "auc:Other" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PackageOfMeasures)">element "auc:PackageOfMeasures" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Target)">element "auc:Target" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:ScenarioType/auc:Benchmark">
+      <sch:assert test="not(auc:BenchmarkTool)">element "auc:BenchmarkTool" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:BenchmarkType) &gt;= 0">element "auc:BenchmarkType" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:BenchmarkValue) &gt;= 0">element "auc:BenchmarkValue" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:BenchmarkYear) &gt;= 0">element "auc:BenchmarkYear" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:LinkedPremises)">element "auc:LinkedPremises" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:ScenarioType/auc:Benchmark/auc:BenchmarkType">
+      <sch:assert test="count(auc:CBECS) &gt;= 0">element "auc:CBECS" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:CodeMinimum) &gt;= 0">element "auc:CodeMinimum" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:Other) &gt;= 0">element "auc:Other" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:PortfolioManager) &gt;= 0">element "auc:PortfolioManager" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:StandardPractice) &gt;= 0">element "auc:StandardPractice" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:ScenarioType/auc:Benchmark/auc:BenchmarkType/auc:CBECS">
+      <sch:assert test="not(auc:ClimateZone)">element "auc:ClimateZone" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:ScenarioType/auc:Benchmark/auc:BenchmarkType/auc:CodeMinimum">
+      <sch:assert test="not(auc:CalculationMethod)">element "auc:CalculationMethod" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:CodeName) &gt;= 1">element "auc:CodeName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:CodeVersion) &gt;= 1">element "auc:CodeVersion" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:CodeYear) &gt;= 1">element "auc:CodeYear" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:ScenarioType/auc:Benchmark/auc:BenchmarkType/auc:CodeMinimum/auc:CodeName">
+      <sch:assert test="contains('_ASHRAE_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "ASHRAE"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:ScenarioType/auc:Benchmark/auc:BenchmarkType/auc:CodeMinimum/auc:CodeVersion">
+      <sch:assert test="(number(text()) = text()) and (number() = 100)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be equal to 100</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:ScenarioType/auc:Benchmark/auc:BenchmarkType/auc:CodeMinimum/auc:CodeYear">
+      <sch:assert test="(number(text()) = text()) and (number() = 2015)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be equal to 2015</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:ScenarioType/auc:Benchmark/auc:BenchmarkType/auc:Other">
+      <sch:assert test="not(auc:CalculationMethod)">element "auc:CalculationMethod" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:OtherBenchmarkDescription) &gt;= 0">element "auc:OtherBenchmarkDescription" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:ScenarioType/auc:Benchmark/auc:BenchmarkType/auc:PortfolioManager">
+      <sch:assert test="not(auc:BuildingProfileStatus)">element "auc:BuildingProfileStatus" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:FederalSustainabilityChecklistCompletionPercentage)">element "auc:FederalSustainabilityChecklistCompletionPercentage" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PMBenchmarkDate)">element "auc:PMBenchmarkDate" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:ScenarioType/auc:Benchmark/auc:BenchmarkType/auc:StandardPractice">
+      <sch:assert test="count(auc:StandardPracticeDescription) &gt;= 1">element "auc:StandardPracticeDescription" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:ScenarioType/auc:Benchmark/auc:BenchmarkType/auc:StandardPractice/auc:StandardPracticeDescription">
+      <sch:assert test="contains('_ASHRAE Building Energy Quotient_ _CIBSE Benchmarking_ _DOE Building Performance Database_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "ASHRAE Building Energy Quotient", "CIBSE Benchmarking", or "DOE Building Performance Database"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:ScenarioType/auc:Benchmark/auc:BenchmarkValue">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:ScenarioType/auc:Benchmark/auc:BenchmarkYear">
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 1800)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 1800</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:TemporalStatus">
+      <sch:assert test="contains('_Current_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Current"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Benchmark Value Is Not Applicable']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Benchmark Value Is Not Applicable']/auc:FieldValue" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Benchmark Year Is Not Applicable']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Benchmark Year Is Not Applicable']/auc:FieldValue" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'San Francisco Affidavit Benchmark Affirmation']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'San Francisco Affidavit Benchmark Affirmation']/auc:FieldValue" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'San Francisco Affidavit Benchmark Not Verified Reason']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'San Francisco Affidavit Benchmark Not Verified Reason']/auc:FieldValue" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'San Francisco Affidavit Benchmark Signature']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'San Francisco Affidavit Benchmark Signature']/auc:FieldValue" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Scenario Notes For Not Applicable']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Scenario Notes For Not Applicable']/auc:FieldValue" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Benchmark Value Is Not Applicable_ _Benchmark Year Is Not Applicable_ _San Francisco Affidavit Benchmark Affirmation_ _San Francisco Affidavit Benchmark Signature_ _San Francisco Affidavit Benchmark Not Verified Reason_ _Scenario Notes For Not Applicable_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Benchmark Value Is Not Applicable", "Benchmark Year Is Not Applicable", "San Francisco Affidavit Benchmark Affirmation", "San Francisco Affidavit Benchmark Signature", "San Francisco Affidavit Benchmark Not Verified Reason", or "Scenario Notes For Not Applicable"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Benchmark Value Is Not Applicable']/auc:FieldValue">
+      <sch:assert test="contains('_false_ _true_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "false" or "true"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Benchmark Year Is Not Applicable']/auc:FieldValue">
+      <sch:assert test="contains('_false_ _true_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "false" or "true"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Benchmark) &gt; 0)]/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Scenario Notes For Not Applicable']/auc:FieldValue">
+      <sch:assert test="contains('_false_ _true_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "false" or "true"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]">
+      <sch:assert test="count(auc:AllResourceTotals) &gt;= 0">element "auc:AllResourceTotals" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:AnnualCoolingDegreeDays)">element "auc:AnnualCoolingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualHeatingDegreeDays)">element "auc:AnnualHeatingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CDDBaseTemperature)">element "auc:CDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:HDDBaseTemperature)">element "auc:HDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:LinkedPremises) &gt;= 1">element "auc:LinkedPremises" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:Normalization) &gt;= 1">element "auc:Normalization" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:ResourceUses)">element "auc:ResourceUses" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ScenarioName)">element "auc:ScenarioName" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ScenarioNotes)">element "auc:ScenarioNotes" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ScenarioType) &gt;= 1">element "auc:ScenarioType" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:TemporalStatus) &gt;= 1">element "auc:TemporalStatus" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:TimeSeriesData)">element "auc:TimeSeriesData" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:UserDefinedFields)">element "auc:UserDefinedFields" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WeatherType)">element "auc:WeatherType" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]/auc:AllResourceTotals">
+      <sch:assert test="count(auc:AllResourceTotal) &gt;= 0">element "auc:AllResourceTotal" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:ElectricitySourcedFromOnsiteRenewableSystems)">element "auc:ElectricitySourcedFromOnsiteRenewableSystems" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EndUse) &gt;= 1">element "auc:EndUse" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:EnergyCost)">element "auc:EnergyCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:OnsiteRenewableSystemElectricityExported)">element "auc:OnsiteRenewableSystemElectricityExported" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceBoundary) &gt;= 1">element "auc:ResourceBoundary" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:SiteEnergyUse)">element "auc:SiteEnergyUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SiteEnergyUseIntensity)">element "auc:SiteEnergyUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SourceEnergyUse)">element "auc:SourceEnergyUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:SourceEnergyUseIntensity) &gt;= 0">element "auc:SourceEnergyUseIntensity" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:SummerPeak)">element "auc:SummerPeak" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:TemporalStatus)">element "auc:TemporalStatus" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 0">element "auc:UserDefinedFields" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:WasteWaterVolume)">element "auc:WasteWaterVolume" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterCost)">element "auc:WaterCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterIntensity)">element "auc:WaterIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterResource)">element "auc:WaterResource" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterUse)">element "auc:WaterUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WinterPeak)">element "auc:WinterPeak" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:EndUse">
+      <sch:assert test="contains('_All end uses_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "All end uses"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:ResourceBoundary">
+      <sch:assert test="contains('_Source_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Source"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:SourceEnergyUseIntensity">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Source Energy Use Intensity Is Not Applicable']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Source Energy Use Intensity Is Not Applicable']/auc:FieldValue" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Source Energy Use Intensity Is Not Applicable_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Source Energy Use Intensity Is Not Applicable"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Source Energy Use Intensity Is Not Applicable']/auc:FieldValue">
+      <sch:assert test="contains('_false_ _true_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "false" or "true"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]/auc:LinkedPremises">
+      <sch:assert test="count(auc:Building) &gt;= 1">element "auc:Building" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Facility)">element "auc:Facility" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Section)">element "auc:Section" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Site)">element "auc:Site" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Space)">element "auc:Space" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ThermalZone)">element "auc:ThermalZone" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]/auc:LinkedPremises/auc:Building">
+      <sch:assert test="count(auc:LinkedBuildingID) &gt;= 1">element "auc:LinkedBuildingID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]/auc:Normalization">
+      <sch:assert test="contains('_Weather normalized_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Weather normalized"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]/auc:ScenarioType">
+      <sch:assert test="not(auc:Benchmark)">element "auc:Benchmark" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:CurrentBuilding) &gt;= 1">element "auc:CurrentBuilding" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Other)">element "auc:Other" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PackageOfMeasures)">element "auc:PackageOfMeasures" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Target)">element "auc:Target" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]/auc:ScenarioType/auc:CurrentBuilding">
+      <sch:assert test="not(auc:AssetScore)">element "auc:AssetScore" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CalculationMethod)">element "auc:CalculationMethod" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ENERGYSTARScore)">element "auc:ENERGYSTARScore" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and (count(auc:Normalization) &gt; 0)]/auc:TemporalStatus">
+      <sch:assert test="contains('_Current_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Current"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]">
+      <sch:assert test="count(auc:AllResourceTotals) &gt;= 0">element "auc:AllResourceTotals" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:AnnualCoolingDegreeDays) &gt;= 0">element "auc:AnnualCoolingDegreeDays" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:AnnualHeatingDegreeDays) &gt;= 0">element "auc:AnnualHeatingDegreeDays" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:CDDBaseTemperature) &gt;= 0">element "auc:CDDBaseTemperature" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:HDDBaseTemperature) &gt;= 0">element "auc:HDDBaseTemperature" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:LinkedPremises) &gt;= 1">element "auc:LinkedPremises" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Normalization)">element "auc:Normalization" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceUses) &gt;= 0">element "auc:ResourceUses" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:ScenarioName)">element "auc:ScenarioName" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ScenarioNotes)">element "auc:ScenarioNotes" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ScenarioType) &gt;= 1">element "auc:ScenarioType" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:TemporalStatus) &gt;= 1">element "auc:TemporalStatus" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:TimeSeriesData)">element "auc:TimeSeriesData" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 0">element "auc:UserDefinedFields" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:WeatherType)">element "auc:WeatherType" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:AllResourceTotals">
+      <sch:assert test="count(auc:AllResourceTotal) &gt;= 0">element "auc:AllResourceTotal" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:AllResourceTotals/auc:AllResourceTotal">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:ElectricitySourcedFromOnsiteRenewableSystems)">element "auc:ElectricitySourcedFromOnsiteRenewableSystems" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EndUse) &gt;= 1">element "auc:EndUse" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:EnergyCost) &gt;= 0">element "auc:EnergyCost" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:OnsiteRenewableSystemElectricityExported)">element "auc:OnsiteRenewableSystemElectricityExported" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceBoundary) &gt;= 1">element "auc:ResourceBoundary" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:SiteEnergyUse)">element "auc:SiteEnergyUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SiteEnergyUseIntensity)">element "auc:SiteEnergyUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SourceEnergyUse)">element "auc:SourceEnergyUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SourceEnergyUseIntensity)">element "auc:SourceEnergyUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SummerPeak)">element "auc:SummerPeak" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:TemporalStatus)">element "auc:TemporalStatus" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:UserDefinedFields)">element "auc:UserDefinedFields" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WasteWaterVolume)">element "auc:WasteWaterVolume" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterCost)">element "auc:WaterCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:WaterIntensity) &gt;= 0">element "auc:WaterIntensity" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:WaterResource)">element "auc:WaterResource" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterUse)">element "auc:WaterUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WinterPeak)">element "auc:WinterPeak" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:EndUse">
+      <sch:assert test="contains('_All end uses_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "All end uses"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:EnergyCost">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:ResourceBoundary">
+      <sch:assert test="contains('_Site_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Site"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:WaterIntensity">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:AnnualCoolingDegreeDays">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:AnnualHeatingDegreeDays">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:CDDBaseTemperature">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:HDDBaseTemperature">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:LinkedPremises">
+      <sch:assert test="count(auc:Building) &gt;= 1">element "auc:Building" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Facility)">element "auc:Facility" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Section)">element "auc:Section" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Site)">element "auc:Site" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Space)">element "auc:Space" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ThermalZone)">element "auc:ThermalZone" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:LinkedPremises/auc:Building">
+      <sch:assert test="count(auc:LinkedBuildingID) &gt;= 1">element "auc:LinkedBuildingID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:ResourceUses">
+      <sch:assert test="count(auc:ResourceUse) &gt;= 0">element "auc:ResourceUse" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:ResourceUses/auc:ResourceUse">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:AnnualFuelUseConsistentUnits) &gt;= 0">element "auc:AnnualFuelUseConsistentUnits" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:AnnualFuelUseNativeUnits)">element "auc:AnnualFuelUseNativeUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualPeakConsistentUnits)">element "auc:AnnualPeakConsistentUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualPeakNativeUnits)">element "auc:AnnualPeakNativeUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:Emissions) &gt;= 0">element "auc:Emissions" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:EndUse)">element "auc:EndUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:EnergyResource)">element "auc:EnergyResource" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:FuelUseIntensity)">element "auc:FuelUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PeakResourceUnits)">element "auc:PeakResourceUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PercentEndUse)">element "auc:PercentEndUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PercentResource)">element "auc:PercentResource" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ResourceBoundary)">element "auc:ResourceBoundary" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ResourceUnits)">element "auc:ResourceUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:SharedResourceSystem) &gt;= 1">element "auc:SharedResourceSystem" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 0">element "auc:UserDefinedFields" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:UtilityIDs)">element "auc:UtilityIDs" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterResource)">element "auc:WaterResource" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:ResourceUses/auc:ResourceUse/auc:AnnualFuelUseConsistentUnits">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:ResourceUses/auc:ResourceUse/auc:Emissions">
+      <sch:assert test="count(auc:Emission) &gt;= 0">element "auc:Emission" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:ResourceUses/auc:ResourceUse/auc:Emissions/auc:Emission">
+      <sch:assert test="not(auc:AvoidedEmissions)">element "auc:AvoidedEmissions" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EmissionBoundary) &gt;= 1">element "auc:EmissionBoundary" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:EmissionsFactor)">element "auc:EmissionsFactor" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:EmissionsFactorSource)">element "auc:EmissionsFactorSource" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EmissionsType) &gt;= 1">element "auc:EmissionsType" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:GHGEmissions) &gt;= 1">element "auc:GHGEmissions" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:ResourceUses/auc:ResourceUse/auc:Emissions/auc:Emission/auc:EmissionBoundary">
+      <sch:assert test="contains('_Net_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Net"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:ResourceUses/auc:ResourceUse/auc:Emissions/auc:Emission/auc:EmissionsType">
+      <sch:assert test="contains('_CO2e_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "CO2e"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:ResourceUses/auc:ResourceUse/auc:Emissions/auc:Emission/auc:GHGEmissions">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:ResourceUses/auc:ResourceUse/auc:SharedResourceSystem">
+      <sch:assert test="contains('_Unknown_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Unknown"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:ResourceUses/auc:ResourceUse/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'GHG Emissions Is Not Applicable']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'GHG Emissions Is Not Applicable']/auc:FieldValue" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:ResourceUses/auc:ResourceUse/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:ResourceUses/auc:ResourceUse/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_GHG Emissions Is Not Applicable_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "GHG Emissions Is Not Applicable"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:ResourceUses/auc:ResourceUse/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'GHG Emissions Is Not Applicable']/auc:FieldValue">
+      <sch:assert test="contains('_false_ _true_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "false" or "true"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:ScenarioType">
+      <sch:assert test="not(auc:Benchmark)">element "auc:Benchmark" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:CurrentBuilding) &gt;= 1">element "auc:CurrentBuilding" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Other)">element "auc:Other" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PackageOfMeasures)">element "auc:PackageOfMeasures" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Target)">element "auc:Target" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:ScenarioType/auc:CurrentBuilding">
+      <sch:assert test="not(auc:AssetScore)">element "auc:AssetScore" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CalculationMethod)">element "auc:CalculationMethod" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ENERGYSTARScore)">element "auc:ENERGYSTARScore" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:TemporalStatus">
+      <sch:assert test="contains('_Current_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Current"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Year Of Degree Days']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Year Of Degree Days']/auc:FieldValue" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Year Of Degree Days_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Year Of Degree Days"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:CurrentBuilding) &gt; 0) and not(auc:Normalization)]/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Year Of Degree Days']/auc:FieldValue">
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 1800)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 1800</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]">
+      <sch:assert test="count(auc:AllResourceTotals) &gt;= 0">element "auc:AllResourceTotals" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:AnnualCoolingDegreeDays)">element "auc:AnnualCoolingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualHeatingDegreeDays)">element "auc:AnnualHeatingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CDDBaseTemperature)">element "auc:CDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:HDDBaseTemperature)">element "auc:HDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:LinkedPremises) &gt;= 1">element "auc:LinkedPremises" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Normalization)">element "auc:Normalization" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceUses) &gt;= 0">element "auc:ResourceUses" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:ScenarioName)">element "auc:ScenarioName" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ScenarioNotes)">element "auc:ScenarioNotes" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ScenarioType) &gt;= 1">element "auc:ScenarioType" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:TemporalStatus) &gt;= 1">element "auc:TemporalStatus" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:TimeSeriesData) &gt;= 0">element "auc:TimeSeriesData" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 1">element "auc:UserDefinedFields" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:WeatherType)">element "auc:WeatherType" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:AllResourceTotals">
+      <sch:assert test="count(auc:AllResourceTotal) &gt;= 0">element "auc:AllResourceTotal" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:AllResourceTotals/auc:AllResourceTotal">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:ElectricitySourcedFromOnsiteRenewableSystems)">element "auc:ElectricitySourcedFromOnsiteRenewableSystems" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EndUse) &gt;= 1">element "auc:EndUse" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:EnergyCost) &gt;= 0">element "auc:EnergyCost" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:OnsiteRenewableSystemElectricityExported)">element "auc:OnsiteRenewableSystemElectricityExported" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceBoundary) &gt;= 1">element "auc:ResourceBoundary" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:SiteEnergyUse)">element "auc:SiteEnergyUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SiteEnergyUseIntensity)">element "auc:SiteEnergyUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SourceEnergyUse)">element "auc:SourceEnergyUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SourceEnergyUseIntensity)">element "auc:SourceEnergyUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SummerPeak)">element "auc:SummerPeak" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:TemporalStatus)">element "auc:TemporalStatus" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 0">element "auc:UserDefinedFields" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:WasteWaterVolume)">element "auc:WasteWaterVolume" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterCost)">element "auc:WaterCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterIntensity)">element "auc:WaterIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterResource)">element "auc:WaterResource" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterUse)">element "auc:WaterUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WinterPeak)">element "auc:WinterPeak" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:EndUse">
+      <sch:assert test="contains('_All end uses_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "All end uses"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:EnergyCost">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:ResourceBoundary">
+      <sch:assert test="contains('_Site_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Site"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Linked Time Series ID']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Linked Time Series ID']/auc:FieldValue" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Percentage Of Annual Energy Cost Paid By Tenant']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Percentage Of Annual Energy Cost Paid By Tenant']/auc:FieldValue" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Linked Time Series ID_ _Percentage Of Annual Energy Cost Paid By Tenant_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Linked Time Series ID" or "Percentage Of Annual Energy Cost Paid By Tenant"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Percentage Of Annual Energy Cost Paid By Tenant']/auc:FieldValue">
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0) and (number() &lt;= 1)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number, MUST be greater than or equal to 0, and MUST be less than or equal to 1</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:LinkedPremises">
+      <sch:assert test="count(auc:Building) &gt;= 0">element "auc:Building" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:Facility)">element "auc:Facility" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Section)">element "auc:Section" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:Site) &gt;= 0">element "auc:Site" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:Space)">element "auc:Space" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ThermalZone)">element "auc:ThermalZone" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:LinkedPremises/auc:Building">
+      <sch:assert test="count(auc:LinkedBuildingID) &gt;= 1">element "auc:LinkedBuildingID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:LinkedPremises/auc:Site">
+      <sch:assert test="count(auc:LinkedSiteID) &gt;= 1">element "auc:LinkedSiteID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:LinkedPremises/auc:Site/auc:LinkedSiteID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:ResourceUses">
+      <sch:assert test="count(auc:ResourceUse) &gt;= 0">element "auc:ResourceUse" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:ResourceUses/auc:ResourceUse">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:AnnualFuelUseConsistentUnits)">element "auc:AnnualFuelUseConsistentUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualFuelUseNativeUnits)">element "auc:AnnualFuelUseNativeUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualPeakConsistentUnits)">element "auc:AnnualPeakConsistentUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualPeakNativeUnits)">element "auc:AnnualPeakNativeUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Emissions)">element "auc:Emissions" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:EndUse)">element "auc:EndUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EnergyResource) &gt;= 0">element "auc:EnergyResource" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:FuelUseIntensity)">element "auc:FuelUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PeakResourceUnits)">element "auc:PeakResourceUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PercentEndUse)">element "auc:PercentEndUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PercentResource)">element "auc:PercentResource" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceBoundary) &gt;= 1">element "auc:ResourceBoundary" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:ResourceUnits) &gt;= 0">element "auc:ResourceUnits" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:SharedResourceSystem) &gt;= 1">element "auc:SharedResourceSystem" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:UserDefinedFields)">element "auc:UserDefinedFields" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:UtilityIDs)">element "auc:UtilityIDs" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterResource)">element "auc:WaterResource" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:ResourceUses/auc:ResourceUse/auc:EnergyResource">
+      <sch:assert test="contains('_Biofuel B10_ _Biofuel B20_ _Biofuel B5_ _Diesel_ _District chilled water_ _District hot water_ _District steam_ _Dual fuel_ _Electricity_ _Electricity-Exported_ _Electricity-Onsite generated_ _Fuel oil_ _Fuel oil no 1_ _Fuel oil no 2_ _Fuel oil no 4_ _Fuel oil no 5 (heavy)_ _Fuel oil no 5 (light)_ _Fuel oil no 6_ _Gasoline_ _Kerosene_ _Liquid propane_ _Natural gas_ _Other_ _Other delivered-Exported_ _Other delivered-Onsite generated_ _Other metered-Exported_ _Other metered-Onsite generated_ _Propane_ _Thermal-Exported_ _Thermal-Onsite generated_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Biofuel B10", "Biofuel B20", "Biofuel B5", "Diesel", "District chilled water", "District hot water", "District steam", "Dual fuel", "Electricity", "Electricity-Exported", "Electricity-Onsite generated", "Fuel oil", "Fuel oil no 1", "Fuel oil no 2", "Fuel oil no 4", "Fuel oil no 5 (heavy)", "Fuel oil no 5 (light)", "Fuel oil no 6", "Gasoline", "Kerosene", "Liquid propane", "Natural gas", "Other", "Other delivered-Exported", "Other delivered-Onsite generated", "Other metered-Exported", "Other metered-Onsite generated", "Propane", "Thermal-Exported", or "Thermal-Onsite generated"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:ResourceUses/auc:ResourceUse/auc:ResourceBoundary">
+      <sch:assert test="contains('_Site_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Site"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:ResourceUses/auc:ResourceUse/auc:ResourceUnits">
+      <sch:assert test="contains('_Gallons_ _Mlbs_ _Ton-hour_ _kBtu_ _kWh_ _kcf_ _therms_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Gallons", "Mlbs", "Ton-hour", "kBtu", "kWh", "kcf", or "therms"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:ResourceUses/auc:ResourceUse/auc:SharedResourceSystem">
+      <sch:assert test="contains('_Not shared_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Not shared"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:ScenarioType">
+      <sch:assert test="not(auc:Benchmark)">element "auc:Benchmark" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CurrentBuilding)">element "auc:CurrentBuilding" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:Other) &gt;= 1">element "auc:Other" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:PackageOfMeasures)">element "auc:PackageOfMeasures" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Target)">element "auc:Target" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:ScenarioType/auc:Other">
+      <sch:assert test="not(auc:AnnualPeakElectricityReduction)">element "auc:AnnualPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsCost)">element "auc:AnnualSavingsCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSiteEnergy)">element "auc:AnnualSavingsSiteEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSourceEnergy)">element "auc:AnnualSavingsSourceEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterCostSavings)">element "auc:AnnualWaterCostSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterSavings)">element "auc:AnnualWaterSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:InternalRateOfReturn)">element "auc:InternalRateOfReturn" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:NetPresentValue)">element "auc:NetPresentValue" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SimplePayback)">element "auc:SimplePayback" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SummerPeakElectricityReduction)">element "auc:SummerPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WinterPeakElectricityReduction)">element "auc:WinterPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:TemporalStatus">
+      <sch:assert test="contains('_Current_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Current"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:TimeSeriesData">
+      <sch:assert test="count(auc:TimeSeries) &gt;= 0">element "auc:TimeSeries" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:TimeSeriesData/auc:TimeSeries">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:CDDBaseTemperature)">element "auc:CDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CoolingDegreeDays)">element "auc:CoolingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EndTimestamp) &gt;= 0">element "auc:EndTimestamp" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:EnergyFlowDirection)">element "auc:EnergyFlowDirection" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:HeatingDegreeDays)">element "auc:HeatingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:IntervalFrequency) &gt;= 1">element "auc:IntervalFrequency" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:IntervalReading) &gt;= 0">element "auc:IntervalReading" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:Phase)">element "auc:Phase" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ReadingType) &gt;= 1">element "auc:ReadingType" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:ResourceUseID) &gt;= 0">element "auc:ResourceUseID" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:StartTimestamp) &gt;= 0">element "auc:StartTimestamp" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:TimeSeriesReadingQuantity) &gt;= 1">element "auc:TimeSeriesReadingQuantity" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:UserDefinedFields)">element "auc:UserDefinedFields" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:hDDBaseTemperature)">element "auc:hDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:TimeSeriesData/auc:TimeSeries/auc:IntervalFrequency">
+      <sch:assert test="contains('_Annual_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Annual"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:TimeSeriesData/auc:TimeSeries/auc:IntervalReading">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:TimeSeriesData/auc:TimeSeries/auc:ReadingType">
+      <sch:assert test="contains('_Average_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Average"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:TimeSeriesData/auc:TimeSeries/auc:ResourceUseID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:TimeSeriesData/auc:TimeSeries/auc:TimeSeriesReadingQuantity">
+      <sch:assert test="contains('_Energy_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Energy"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue) &gt;= 1">element "auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Other Scenario Type_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Other Scenario Type"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Annual Summary')]/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue">
+      <sch:assert test="contains('_Audit Template Annual Summary_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Audit Template Annual Summary"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]">
+      <sch:assert test="not(auc:AllResourceTotals)">element "auc:AllResourceTotals" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualCoolingDegreeDays)">element "auc:AnnualCoolingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualHeatingDegreeDays)">element "auc:AnnualHeatingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CDDBaseTemperature)">element "auc:CDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:HDDBaseTemperature)">element "auc:HDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:LinkedPremises) &gt;= 1">element "auc:LinkedPremises" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Normalization)">element "auc:Normalization" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceUses) &gt;= 0">element "auc:ResourceUses" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:ScenarioName)">element "auc:ScenarioName" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ScenarioNotes)">element "auc:ScenarioNotes" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ScenarioType) &gt;= 1">element "auc:ScenarioType" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:TemporalStatus) &gt;= 1">element "auc:TemporalStatus" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:TimeSeriesData)">element "auc:TimeSeriesData" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 1">element "auc:UserDefinedFields" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:WeatherType)">element "auc:WeatherType" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:LinkedPremises">
+      <sch:assert test="count(auc:Building) &gt;= 0">element "auc:Building" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:Facility)">element "auc:Facility" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Section)">element "auc:Section" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:Site) &gt;= 0">element "auc:Site" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:Space)">element "auc:Space" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ThermalZone)">element "auc:ThermalZone" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:LinkedPremises/auc:Building">
+      <sch:assert test="count(auc:LinkedBuildingID) &gt;= 1">element "auc:LinkedBuildingID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:LinkedPremises/auc:Site">
+      <sch:assert test="count(auc:LinkedSiteID) &gt;= 1">element "auc:LinkedSiteID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:LinkedPremises/auc:Site/auc:LinkedSiteID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:ResourceUses">
+      <sch:assert test="count(auc:ResourceUse) &gt;= 0">element "auc:ResourceUse" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:ResourceUses/auc:ResourceUse">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:AnnualFuelUseConsistentUnits)">element "auc:AnnualFuelUseConsistentUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualFuelUseNativeUnits)">element "auc:AnnualFuelUseNativeUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualPeakConsistentUnits)">element "auc:AnnualPeakConsistentUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualPeakNativeUnits)">element "auc:AnnualPeakNativeUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Emissions)">element "auc:Emissions" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EndUse) &gt;= 1">element "auc:EndUse" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:EnergyResource) &gt;= 0">element "auc:EnergyResource" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:FuelUseIntensity)">element "auc:FuelUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PeakResourceUnits)">element "auc:PeakResourceUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PercentEndUse)">element "auc:PercentEndUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PercentResource)">element "auc:PercentResource" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceBoundary) &gt;= 1">element "auc:ResourceBoundary" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:ResourceUnits) &gt;= 0">element "auc:ResourceUnits" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:SharedResourceSystem) &gt;= 1">element "auc:SharedResourceSystem" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:UserDefinedFields)">element "auc:UserDefinedFields" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:UtilityIDs)">element "auc:UtilityIDs" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterResource)">element "auc:WaterResource" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:ResourceUses/auc:ResourceUse/auc:EndUse">
+      <sch:assert test="contains('_All end uses_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "All end uses"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:ResourceUses/auc:ResourceUse/auc:EnergyResource">
+      <sch:assert test="contains('_Biofuel B10_ _Biofuel B20_ _Biofuel B5_ _Diesel_ _District chilled water_ _District hot water_ _District steam_ _Dual fuel_ _Electricity_ _Electricity-Exported_ _Electricity-Onsite generated_ _Fuel oil_ _Fuel oil no 1_ _Fuel oil no 2_ _Fuel oil no 4_ _Fuel oil no 5 (heavy)_ _Fuel oil no 5 (light)_ _Fuel oil no 6_ _Gasoline_ _Kerosene_ _Liquid propane_ _Natural gas_ _Other_ _Other delivered-Exported_ _Other delivered-Onsite generated_ _Other metered-Exported_ _Other metered-Onsite generated_ _Propane_ _Thermal-Exported_ _Thermal-Onsite generated_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Biofuel B10", "Biofuel B20", "Biofuel B5", "Diesel", "District chilled water", "District hot water", "District steam", "Dual fuel", "Electricity", "Electricity-Exported", "Electricity-Onsite generated", "Fuel oil", "Fuel oil no 1", "Fuel oil no 2", "Fuel oil no 4", "Fuel oil no 5 (heavy)", "Fuel oil no 5 (light)", "Fuel oil no 6", "Gasoline", "Kerosene", "Liquid propane", "Natural gas", "Other", "Other delivered-Exported", "Other delivered-Onsite generated", "Other metered-Exported", "Other metered-Onsite generated", "Propane", "Thermal-Exported", or "Thermal-Onsite generated"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:ResourceUses/auc:ResourceUse/auc:ResourceBoundary">
+      <sch:assert test="contains('_Site_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Site"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:ResourceUses/auc:ResourceUse/auc:ResourceUnits">
+      <sch:assert test="contains('_Gallons_ _Mlbs_ _Ton-hour_ _kBtu_ _kWh_ _kcf_ _therms_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Gallons", "Mlbs", "Ton-hour", "kBtu", "kWh", "kcf", or "therms"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:ResourceUses/auc:ResourceUse/auc:SharedResourceSystem">
+      <sch:assert test="contains('_Not shared_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Not shared"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:ScenarioType">
+      <sch:assert test="not(auc:Benchmark)">element "auc:Benchmark" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CurrentBuilding)">element "auc:CurrentBuilding" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:Other) &gt;= 1">element "auc:Other" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:PackageOfMeasures)">element "auc:PackageOfMeasures" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Target)">element "auc:Target" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:ScenarioType/auc:Other">
+      <sch:assert test="not(auc:AnnualPeakElectricityReduction)">element "auc:AnnualPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsCost)">element "auc:AnnualSavingsCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSiteEnergy)">element "auc:AnnualSavingsSiteEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSourceEnergy)">element "auc:AnnualSavingsSourceEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterCostSavings)">element "auc:AnnualWaterCostSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterSavings)">element "auc:AnnualWaterSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:InternalRateOfReturn)">element "auc:InternalRateOfReturn" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:NetPresentValue)">element "auc:NetPresentValue" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SimplePayback)">element "auc:SimplePayback" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SummerPeakElectricityReduction)">element "auc:SummerPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WinterPeakElectricityReduction)">element "auc:WinterPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:TemporalStatus">
+      <sch:assert test="contains('_Current_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Current"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue) &gt;= 1">element "auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Other Scenario Type_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Other Scenario Type"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Available Energy')]/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue">
+      <sch:assert test="contains('_Audit Template Available Energy_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Audit Template Available Energy"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]">
+      <sch:assert test="count(auc:AllResourceTotals) &gt;= 0">element "auc:AllResourceTotals" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:AnnualCoolingDegreeDays)">element "auc:AnnualCoolingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualHeatingDegreeDays)">element "auc:AnnualHeatingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CDDBaseTemperature)">element "auc:CDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:HDDBaseTemperature)">element "auc:HDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:LinkedPremises) &gt;= 1">element "auc:LinkedPremises" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Normalization)">element "auc:Normalization" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ResourceUses)">element "auc:ResourceUses" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ScenarioName)">element "auc:ScenarioName" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ScenarioNotes)">element "auc:ScenarioNotes" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ScenarioType) &gt;= 1">element "auc:ScenarioType" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:TemporalStatus) &gt;= 1">element "auc:TemporalStatus" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:TimeSeriesData) &gt;= 0">element "auc:TimeSeriesData" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 1">element "auc:UserDefinedFields" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:WeatherType)">element "auc:WeatherType" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:AllResourceTotals">
+      <sch:assert test="count(auc:AllResourceTotal) &gt;= 0">element "auc:AllResourceTotal" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:AllResourceTotals/auc:AllResourceTotal">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:ElectricitySourcedFromOnsiteRenewableSystems)">element "auc:ElectricitySourcedFromOnsiteRenewableSystems" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EndUse) &gt;= 1">element "auc:EndUse" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:EnergyCost) &gt;= 0">element "auc:EnergyCost" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:OnsiteRenewableSystemElectricityExported)">element "auc:OnsiteRenewableSystemElectricityExported" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceBoundary) &gt;= 1">element "auc:ResourceBoundary" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:SiteEnergyUse)">element "auc:SiteEnergyUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SiteEnergyUseIntensity)">element "auc:SiteEnergyUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SourceEnergyUse)">element "auc:SourceEnergyUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SourceEnergyUseIntensity)">element "auc:SourceEnergyUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SummerPeak)">element "auc:SummerPeak" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:TemporalStatus)">element "auc:TemporalStatus" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 0">element "auc:UserDefinedFields" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:WasteWaterVolume)">element "auc:WasteWaterVolume" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterCost)">element "auc:WaterCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterIntensity)">element "auc:WaterIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterResource)">element "auc:WaterResource" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterUse)">element "auc:WaterUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WinterPeak)">element "auc:WinterPeak" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:EndUse">
+      <sch:assert test="contains('_All end uses_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "All end uses"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:EnergyCost">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:ResourceBoundary">
+      <sch:assert test="contains('_Site_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Site"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Linked Time Series ID']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Linked Time Series ID']/auc:FieldValue" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Linked Time Series ID_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Linked Time Series ID"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:LinkedPremises">
+      <sch:assert test="count(auc:Building) &gt;= 0">element "auc:Building" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:Facility)">element "auc:Facility" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Section)">element "auc:Section" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:Site) &gt;= 0">element "auc:Site" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:Space)">element "auc:Space" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ThermalZone)">element "auc:ThermalZone" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:LinkedPremises/auc:Building">
+      <sch:assert test="count(auc:LinkedBuildingID) &gt;= 1">element "auc:LinkedBuildingID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:LinkedPremises/auc:Site">
+      <sch:assert test="count(auc:LinkedSiteID) &gt;= 1">element "auc:LinkedSiteID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:LinkedPremises/auc:Site/auc:LinkedSiteID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:ScenarioType">
+      <sch:assert test="not(auc:Benchmark)">element "auc:Benchmark" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CurrentBuilding)">element "auc:CurrentBuilding" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:Other) &gt;= 1">element "auc:Other" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:PackageOfMeasures)">element "auc:PackageOfMeasures" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Target)">element "auc:Target" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:ScenarioType/auc:Other">
+      <sch:assert test="not(auc:AnnualPeakElectricityReduction)">element "auc:AnnualPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsCost)">element "auc:AnnualSavingsCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSiteEnergy)">element "auc:AnnualSavingsSiteEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSourceEnergy)">element "auc:AnnualSavingsSourceEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterCostSavings)">element "auc:AnnualWaterCostSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterSavings)">element "auc:AnnualWaterSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:InternalRateOfReturn)">element "auc:InternalRateOfReturn" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:NetPresentValue)">element "auc:NetPresentValue" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SimplePayback)">element "auc:SimplePayback" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SummerPeakElectricityReduction)">element "auc:SummerPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WinterPeakElectricityReduction)">element "auc:WinterPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:TemporalStatus">
+      <sch:assert test="contains('_Current_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Current"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:TimeSeriesData">
+      <sch:assert test="count(auc:TimeSeries) &gt;= 0">element "auc:TimeSeries" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:TimeSeriesData/auc:TimeSeries">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:CDDBaseTemperature)">element "auc:CDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CoolingDegreeDays)">element "auc:CoolingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EndTimestamp) &gt;= 0">element "auc:EndTimestamp" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:EnergyFlowDirection)">element "auc:EnergyFlowDirection" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:HeatingDegreeDays)">element "auc:HeatingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:IntervalFrequency) &gt;= 1">element "auc:IntervalFrequency" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:IntervalReading) &gt;= 0">element "auc:IntervalReading" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:Phase)">element "auc:Phase" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ReadingType) &gt;= 1">element "auc:ReadingType" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:ResourceUseID) &gt;= 0">element "auc:ResourceUseID" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:StartTimestamp) &gt;= 0">element "auc:StartTimestamp" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:TimeSeriesReadingQuantity) &gt;= 1">element "auc:TimeSeriesReadingQuantity" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:UserDefinedFields)">element "auc:UserDefinedFields" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:hDDBaseTemperature)">element "auc:hDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:TimeSeriesData/auc:TimeSeries/auc:IntervalFrequency">
+      <sch:assert test="contains('_Day_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Day"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:TimeSeriesData/auc:TimeSeries/auc:IntervalReading">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:TimeSeriesData/auc:TimeSeries/auc:ReadingType">
+      <sch:assert test="contains('_Point_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Point"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:TimeSeriesData/auc:TimeSeries/auc:ResourceUseID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:TimeSeriesData/auc:TimeSeries/auc:TimeSeriesReadingQuantity">
+      <sch:assert test="contains('_Energy_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Energy"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue) &gt;= 1">element "auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Other Scenario Type_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Other Scenario Type"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Deliveries')]/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue">
+      <sch:assert test="contains('_Audit Template Energy Deliveries_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Audit Template Energy Deliveries"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]">
+      <sch:assert test="count(auc:AllResourceTotals) &gt;= 0">element "auc:AllResourceTotals" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:AnnualCoolingDegreeDays)">element "auc:AnnualCoolingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualHeatingDegreeDays)">element "auc:AnnualHeatingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CDDBaseTemperature)">element "auc:CDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:HDDBaseTemperature)">element "auc:HDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:LinkedPremises) &gt;= 1">element "auc:LinkedPremises" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Normalization)">element "auc:Normalization" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ResourceUses)">element "auc:ResourceUses" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ScenarioName)">element "auc:ScenarioName" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ScenarioNotes)">element "auc:ScenarioNotes" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ScenarioType) &gt;= 1">element "auc:ScenarioType" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:TemporalStatus) &gt;= 1">element "auc:TemporalStatus" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:TimeSeriesData) &gt;= 0">element "auc:TimeSeriesData" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 1">element "auc:UserDefinedFields" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:WeatherType)">element "auc:WeatherType" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:AllResourceTotals">
+      <sch:assert test="count(auc:AllResourceTotal) &gt;= 0">element "auc:AllResourceTotal" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:AllResourceTotals/auc:AllResourceTotal">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:ElectricitySourcedFromOnsiteRenewableSystems)">element "auc:ElectricitySourcedFromOnsiteRenewableSystems" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EndUse) &gt;= 1">element "auc:EndUse" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:EnergyCost) &gt;= 0">element "auc:EnergyCost" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:OnsiteRenewableSystemElectricityExported)">element "auc:OnsiteRenewableSystemElectricityExported" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceBoundary) &gt;= 1">element "auc:ResourceBoundary" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:SiteEnergyUse) &gt;= 0">element "auc:SiteEnergyUse" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:SiteEnergyUseIntensity)">element "auc:SiteEnergyUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SourceEnergyUse)">element "auc:SourceEnergyUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SourceEnergyUseIntensity)">element "auc:SourceEnergyUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SummerPeak)">element "auc:SummerPeak" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:TemporalStatus)">element "auc:TemporalStatus" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 0">element "auc:UserDefinedFields" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:WasteWaterVolume)">element "auc:WasteWaterVolume" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterCost)">element "auc:WaterCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterIntensity)">element "auc:WaterIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterResource)">element "auc:WaterResource" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterUse)">element "auc:WaterUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WinterPeak)">element "auc:WinterPeak" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:EndUse">
+      <sch:assert test="contains('_All end uses_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "All end uses"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:EnergyCost">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:ResourceBoundary">
+      <sch:assert test="contains('_Site_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Site"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:SiteEnergyUse">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Linked Time Series ID']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Linked Time Series ID']/auc:FieldValue" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Linked Time Series ID_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Linked Time Series ID"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:LinkedPremises">
+      <sch:assert test="count(auc:Building) &gt;= 0">element "auc:Building" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:Facility)">element "auc:Facility" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Section)">element "auc:Section" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:Site) &gt;= 0">element "auc:Site" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:Space)">element "auc:Space" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ThermalZone)">element "auc:ThermalZone" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:LinkedPremises/auc:Building">
+      <sch:assert test="count(auc:LinkedBuildingID) &gt;= 1">element "auc:LinkedBuildingID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:LinkedPremises/auc:Site">
+      <sch:assert test="count(auc:LinkedSiteID) &gt;= 1">element "auc:LinkedSiteID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:LinkedPremises/auc:Site/auc:LinkedSiteID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:ScenarioType">
+      <sch:assert test="not(auc:Benchmark)">element "auc:Benchmark" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CurrentBuilding)">element "auc:CurrentBuilding" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:Other) &gt;= 1">element "auc:Other" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:PackageOfMeasures)">element "auc:PackageOfMeasures" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Target)">element "auc:Target" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:ScenarioType/auc:Other">
+      <sch:assert test="not(auc:AnnualPeakElectricityReduction)">element "auc:AnnualPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsCost)">element "auc:AnnualSavingsCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSiteEnergy)">element "auc:AnnualSavingsSiteEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSourceEnergy)">element "auc:AnnualSavingsSourceEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterCostSavings)">element "auc:AnnualWaterCostSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterSavings)">element "auc:AnnualWaterSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:InternalRateOfReturn)">element "auc:InternalRateOfReturn" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:NetPresentValue)">element "auc:NetPresentValue" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SimplePayback)">element "auc:SimplePayback" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SummerPeakElectricityReduction)">element "auc:SummerPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WinterPeakElectricityReduction)">element "auc:WinterPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:TemporalStatus">
+      <sch:assert test="contains('_Current_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Current"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:TimeSeriesData">
+      <sch:assert test="count(auc:TimeSeries) &gt;= 0">element "auc:TimeSeries" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:TimeSeriesData/auc:TimeSeries">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:CDDBaseTemperature)">element "auc:CDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CoolingDegreeDays)">element "auc:CoolingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EndTimestamp) &gt;= 0">element "auc:EndTimestamp" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:EnergyFlowDirection)">element "auc:EnergyFlowDirection" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:HeatingDegreeDays)">element "auc:HeatingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:IntervalFrequency) &gt;= 1">element "auc:IntervalFrequency" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:IntervalReading) &gt;= 0">element "auc:IntervalReading" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:Phase)">element "auc:Phase" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ReadingType) &gt;= 1">element "auc:ReadingType" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:ResourceUseID) &gt;= 0">element "auc:ResourceUseID" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:StartTimestamp) &gt;= 0">element "auc:StartTimestamp" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:TimeSeriesReadingQuantity) &gt;= 1">element "auc:TimeSeriesReadingQuantity" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:UserDefinedFields)">element "auc:UserDefinedFields" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:hDDBaseTemperature)">element "auc:hDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:TimeSeriesData/auc:TimeSeries/auc:IntervalFrequency">
+      <sch:assert test="contains('_Other_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Other"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:TimeSeriesData/auc:TimeSeries/auc:IntervalReading">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:TimeSeriesData/auc:TimeSeries/auc:ReadingType">
+      <sch:assert test="contains('_Peak_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Peak"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:TimeSeriesData/auc:TimeSeries/auc:ResourceUseID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:TimeSeriesData/auc:TimeSeries/auc:TimeSeriesReadingQuantity">
+      <sch:assert test="contains('_Voltage_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Voltage"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue) &gt;= 1">element "auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Other Scenario Type_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Other Scenario Type"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Meter Readings')]/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue">
+      <sch:assert test="contains('_Audit Template Energy Meter Readings_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Audit Template Energy Meter Readings"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]">
+      <sch:assert test="not(auc:AllResourceTotals)">element "auc:AllResourceTotals" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualCoolingDegreeDays)">element "auc:AnnualCoolingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualHeatingDegreeDays)">element "auc:AnnualHeatingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CDDBaseTemperature)">element "auc:CDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:HDDBaseTemperature)">element "auc:HDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:LinkedPremises) &gt;= 1">element "auc:LinkedPremises" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Normalization)">element "auc:Normalization" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceUses) &gt;= 0">element "auc:ResourceUses" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:ScenarioName)">element "auc:ScenarioName" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ScenarioNotes)">element "auc:ScenarioNotes" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ScenarioType) &gt;= 1">element "auc:ScenarioType" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:TemporalStatus) &gt;= 1">element "auc:TemporalStatus" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:TimeSeriesData)">element "auc:TimeSeriesData" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 1">element "auc:UserDefinedFields" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:WeatherType)">element "auc:WeatherType" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:LinkedPremises">
+      <sch:assert test="count(auc:Building) &gt;= 1">element "auc:Building" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Facility)">element "auc:Facility" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Section)">element "auc:Section" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Site)">element "auc:Site" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Space)">element "auc:Space" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ThermalZone)">element "auc:ThermalZone" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:LinkedPremises/auc:Building">
+      <sch:assert test="count(auc:LinkedBuildingID) &gt;= 1">element "auc:LinkedBuildingID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:ResourceUses">
+      <sch:assert test="count(auc:ResourceUse) &gt;= 0">element "auc:ResourceUse" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:ResourceUses/auc:ResourceUse">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:AnnualFuelUseConsistentUnits)">element "auc:AnnualFuelUseConsistentUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualFuelUseNativeUnits)">element "auc:AnnualFuelUseNativeUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualPeakConsistentUnits)">element "auc:AnnualPeakConsistentUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualPeakNativeUnits)">element "auc:AnnualPeakNativeUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Emissions)">element "auc:Emissions" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EndUse) &gt;= 1">element "auc:EndUse" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:EnergyResource) &gt;= 0">element "auc:EnergyResource" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:FuelUseIntensity)">element "auc:FuelUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PeakResourceUnits)">element "auc:PeakResourceUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PercentEndUse)">element "auc:PercentEndUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PercentResource)">element "auc:PercentResource" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceBoundary) &gt;= 1">element "auc:ResourceBoundary" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:ResourceUnits) &gt;= 0">element "auc:ResourceUnits" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:SharedResourceSystem) &gt;= 1">element "auc:SharedResourceSystem" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:UserDefinedFields)">element "auc:UserDefinedFields" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:UtilityIDs) &gt;= 0">element "auc:UtilityIDs" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:WaterResource)">element "auc:WaterResource" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:ResourceUses/auc:ResourceUse/auc:EndUse">
+      <sch:assert test="contains('_All end uses_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "All end uses"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:ResourceUses/auc:ResourceUse/auc:EnergyResource">
+      <sch:assert test="contains('_Biofuel B10_ _Biofuel B20_ _Biofuel B5_ _Diesel_ _District chilled water_ _District hot water_ _District steam_ _Dual fuel_ _Electricity_ _Electricity-Exported_ _Electricity-Onsite generated_ _Fuel oil_ _Fuel oil no 1_ _Fuel oil no 2_ _Fuel oil no 4_ _Fuel oil no 5 (heavy)_ _Fuel oil no 5 (light)_ _Fuel oil no 6_ _Gasoline_ _Kerosene_ _Liquid propane_ _Natural gas_ _Other_ _Other delivered-Exported_ _Other delivered-Onsite generated_ _Other metered-Exported_ _Other metered-Onsite generated_ _Propane_ _Thermal-Exported_ _Thermal-Onsite generated_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Biofuel B10", "Biofuel B20", "Biofuel B5", "Diesel", "District chilled water", "District hot water", "District steam", "Dual fuel", "Electricity", "Electricity-Exported", "Electricity-Onsite generated", "Fuel oil", "Fuel oil no 1", "Fuel oil no 2", "Fuel oil no 4", "Fuel oil no 5 (heavy)", "Fuel oil no 5 (light)", "Fuel oil no 6", "Gasoline", "Kerosene", "Liquid propane", "Natural gas", "Other", "Other delivered-Exported", "Other delivered-Onsite generated", "Other metered-Exported", "Other metered-Onsite generated", "Propane", "Thermal-Exported", or "Thermal-Onsite generated"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:ResourceUses/auc:ResourceUse/auc:ResourceBoundary">
+      <sch:assert test="contains('_Site_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Site"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:ResourceUses/auc:ResourceUse/auc:ResourceUnits">
+      <sch:assert test="contains('_Gallons_ _Mlbs_ _Ton-hour_ _kBtu_ _kWh_ _kcf_ _therms_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Gallons", "Mlbs", "Ton-hour", "kBtu", "kWh", "kcf", or "therms"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:ResourceUses/auc:ResourceUse/auc:SharedResourceSystem">
+      <sch:assert test="contains('_Not shared_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Not shared"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:ResourceUses/auc:ResourceUse/auc:UtilityIDs">
+      <sch:assert test="count(auc:UtilityID) &gt;= 0">element "auc:UtilityID" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:ResourceUses/auc:ResourceUse/auc:UtilityIDs/auc:UtilityID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:ScenarioType">
+      <sch:assert test="not(auc:Benchmark)">element "auc:Benchmark" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CurrentBuilding)">element "auc:CurrentBuilding" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:Other) &gt;= 1">element "auc:Other" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:PackageOfMeasures)">element "auc:PackageOfMeasures" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Target)">element "auc:Target" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:ScenarioType/auc:Other">
+      <sch:assert test="not(auc:AnnualPeakElectricityReduction)">element "auc:AnnualPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsCost)">element "auc:AnnualSavingsCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSiteEnergy)">element "auc:AnnualSavingsSiteEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSourceEnergy)">element "auc:AnnualSavingsSourceEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterCostSavings)">element "auc:AnnualWaterCostSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterSavings)">element "auc:AnnualWaterSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:InternalRateOfReturn)">element "auc:InternalRateOfReturn" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:NetPresentValue)">element "auc:NetPresentValue" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SimplePayback)">element "auc:SimplePayback" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SummerPeakElectricityReduction)">element "auc:SummerPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WinterPeakElectricityReduction)">element "auc:WinterPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:TemporalStatus">
+      <sch:assert test="contains('_Current_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Current"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue) &gt;= 1">element "auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Other Scenario Type_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Other Scenario Type"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Supply Sources')]/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue">
+      <sch:assert test="contains('_Audit Template Energy Supply Sources_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Audit Template Energy Supply Sources"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]">
+      <sch:assert test="not(auc:AllResourceTotals)">element "auc:AllResourceTotals" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualCoolingDegreeDays)">element "auc:AnnualCoolingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualHeatingDegreeDays)">element "auc:AnnualHeatingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CDDBaseTemperature)">element "auc:CDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:HDDBaseTemperature)">element "auc:HDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:LinkedPremises) &gt;= 1">element "auc:LinkedPremises" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Normalization)">element "auc:Normalization" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceUses) &gt;= 0">element "auc:ResourceUses" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:ScenarioName)">element "auc:ScenarioName" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ScenarioNotes)">element "auc:ScenarioNotes" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ScenarioType) &gt;= 1">element "auc:ScenarioType" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:TemporalStatus) &gt;= 1">element "auc:TemporalStatus" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:TimeSeriesData)">element "auc:TimeSeriesData" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 1">element "auc:UserDefinedFields" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:WeatherType)">element "auc:WeatherType" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:LinkedPremises">
+      <sch:assert test="count(auc:Building) &gt;= 1">element "auc:Building" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Facility)">element "auc:Facility" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Section)">element "auc:Section" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Site)">element "auc:Site" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Space)">element "auc:Space" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ThermalZone)">element "auc:ThermalZone" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:LinkedPremises/auc:Building">
+      <sch:assert test="count(auc:LinkedBuildingID) &gt;= 1">element "auc:LinkedBuildingID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:ResourceUses">
+      <sch:assert test="count(auc:ResourceUse) &gt;= 0">element "auc:ResourceUse" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:ResourceUses/auc:ResourceUse">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:AnnualFuelUseConsistentUnits)">element "auc:AnnualFuelUseConsistentUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:AnnualFuelUseNativeUnits) &gt;= 0">element "auc:AnnualFuelUseNativeUnits" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:AnnualPeakConsistentUnits)">element "auc:AnnualPeakConsistentUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualPeakNativeUnits)">element "auc:AnnualPeakNativeUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Emissions)">element "auc:Emissions" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EndUse) &gt;= 0">element "auc:EndUse" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:EnergyResource) &gt;= 0">element "auc:EnergyResource" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:FuelUseIntensity)">element "auc:FuelUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PeakResourceUnits)">element "auc:PeakResourceUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PercentEndUse)">element "auc:PercentEndUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PercentResource)">element "auc:PercentResource" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceBoundary) &gt;= 1">element "auc:ResourceBoundary" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:ResourceUnits) &gt;= 0">element "auc:ResourceUnits" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:SharedResourceSystem) &gt;= 1">element "auc:SharedResourceSystem" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 0">element "auc:UserDefinedFields" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:UtilityIDs)">element "auc:UtilityIDs" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterResource)">element "auc:WaterResource" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:ResourceUses/auc:ResourceUse/auc:AnnualFuelUseNativeUnits">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:ResourceUses/auc:ResourceUse/auc:EndUse">
+      <sch:assert test="contains('_All end uses_ _Conveyance_ _Cooking_ _Cooling_ _Domestic hot water_ _Heating_ _IT equipment_ _Laundry_ _Plug load_ _Process load_ _Pump_ _Refrigeration_ _Total lighting_ _Ventilation_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "All end uses", "Conveyance", "Cooking", "Cooling", "Domestic hot water", "Heating", "IT equipment", "Laundry", "Plug load", "Process load", "Pump", "Refrigeration", "Total lighting", or "Ventilation"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:ResourceUses/auc:ResourceUse/auc:EnergyResource">
+      <sch:assert test="contains('_Biofuel B10_ _Biofuel B20_ _Biofuel B5_ _Diesel_ _District chilled water_ _District hot water_ _District steam_ _Dual fuel_ _Electricity_ _Electricity-Exported_ _Electricity-Onsite generated_ _Fuel oil_ _Fuel oil no 1_ _Fuel oil no 2_ _Fuel oil no 4_ _Fuel oil no 5 (heavy)_ _Fuel oil no 5 (light)_ _Fuel oil no 6_ _Gasoline_ _Kerosene_ _Liquid propane_ _Natural gas_ _Other_ _Other delivered-Exported_ _Other delivered-Onsite generated_ _Other metered-Exported_ _Other metered-Onsite generated_ _Propane_ _Thermal-Exported_ _Thermal-Onsite generated_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Biofuel B10", "Biofuel B20", "Biofuel B5", "Diesel", "District chilled water", "District hot water", "District steam", "Dual fuel", "Electricity", "Electricity-Exported", "Electricity-Onsite generated", "Fuel oil", "Fuel oil no 1", "Fuel oil no 2", "Fuel oil no 4", "Fuel oil no 5 (heavy)", "Fuel oil no 5 (light)", "Fuel oil no 6", "Gasoline", "Kerosene", "Liquid propane", "Natural gas", "Other", "Other delivered-Exported", "Other delivered-Onsite generated", "Other metered-Exported", "Other metered-Onsite generated", "Propane", "Thermal-Exported", or "Thermal-Onsite generated"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:ResourceUses/auc:ResourceUse/auc:ResourceBoundary">
+      <sch:assert test="contains('_Site_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Site"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:ResourceUses/auc:ResourceUse/auc:ResourceUnits">
+      <sch:assert test="contains('_Gallons_ _Mlbs_ _Ton-hour_ _kBtu_ _kWh_ _kcf_ _therms_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Gallons", "Mlbs", "Ton-hour", "kBtu", "kWh", "kcf", or "therms"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:ResourceUses/auc:ResourceUse/auc:SharedResourceSystem">
+      <sch:assert test="contains('_Not shared_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Not shared"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:ResourceUses/auc:ResourceUse/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Other End Use']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Other End Use']/auc:FieldValue" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:ResourceUses/auc:ResourceUse/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:ResourceUses/auc:ResourceUse/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Other End Use_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Other End Use"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:ScenarioType">
+      <sch:assert test="not(auc:Benchmark)">element "auc:Benchmark" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CurrentBuilding)">element "auc:CurrentBuilding" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:Other) &gt;= 1">element "auc:Other" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:PackageOfMeasures)">element "auc:PackageOfMeasures" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Target)">element "auc:Target" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:ScenarioType/auc:Other">
+      <sch:assert test="not(auc:AnnualPeakElectricityReduction)">element "auc:AnnualPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsCost)">element "auc:AnnualSavingsCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSiteEnergy)">element "auc:AnnualSavingsSiteEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSourceEnergy)">element "auc:AnnualSavingsSourceEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterCostSavings)">element "auc:AnnualWaterCostSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterSavings)">element "auc:AnnualWaterSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:InternalRateOfReturn)">element "auc:InternalRateOfReturn" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:NetPresentValue)">element "auc:NetPresentValue" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SimplePayback)">element "auc:SimplePayback" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SummerPeakElectricityReduction)">element "auc:SummerPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WinterPeakElectricityReduction)">element "auc:WinterPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:TemporalStatus">
+      <sch:assert test="contains('_Current_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Current"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue) &gt;= 1">element "auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Other Scenario Type_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Other Scenario Type"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Energy Uses')]/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue">
+      <sch:assert test="contains('_Audit Template Energy Uses_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Audit Template Energy Uses"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]">
+      <sch:assert test="count(auc:AllResourceTotals) &gt;= 0">element "auc:AllResourceTotals" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:AnnualCoolingDegreeDays)">element "auc:AnnualCoolingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualHeatingDegreeDays)">element "auc:AnnualHeatingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CDDBaseTemperature)">element "auc:CDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:HDDBaseTemperature)">element "auc:HDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:LinkedPremises) &gt;= 1">element "auc:LinkedPremises" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Normalization)">element "auc:Normalization" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceUses) &gt;= 0">element "auc:ResourceUses" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:ScenarioName)">element "auc:ScenarioName" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ScenarioNotes)">element "auc:ScenarioNotes" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ScenarioType) &gt;= 1">element "auc:ScenarioType" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:TemporalStatus) &gt;= 1">element "auc:TemporalStatus" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:TimeSeriesData) &gt;= 0">element "auc:TimeSeriesData" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 1">element "auc:UserDefinedFields" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:WeatherType)">element "auc:WeatherType" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:AllResourceTotals">
+      <sch:assert test="count(auc:AllResourceTotal) &gt;= 0">element "auc:AllResourceTotal" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:AllResourceTotals/auc:AllResourceTotal">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:ElectricitySourcedFromOnsiteRenewableSystems)">element "auc:ElectricitySourcedFromOnsiteRenewableSystems" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EndUse) &gt;= 1">element "auc:EndUse" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:EnergyCost) &gt;= 0">element "auc:EnergyCost" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:OnsiteRenewableSystemElectricityExported)">element "auc:OnsiteRenewableSystemElectricityExported" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceBoundary) &gt;= 1">element "auc:ResourceBoundary" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:SiteEnergyUse)">element "auc:SiteEnergyUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SiteEnergyUseIntensity)">element "auc:SiteEnergyUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SourceEnergyUse)">element "auc:SourceEnergyUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SourceEnergyUseIntensity)">element "auc:SourceEnergyUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SummerPeak)">element "auc:SummerPeak" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:TemporalStatus)">element "auc:TemporalStatus" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 0">element "auc:UserDefinedFields" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:WasteWaterVolume)">element "auc:WasteWaterVolume" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterCost)">element "auc:WaterCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterIntensity)">element "auc:WaterIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterResource)">element "auc:WaterResource" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterUse)">element "auc:WaterUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WinterPeak)">element "auc:WinterPeak" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:EndUse">
+      <sch:assert test="contains('_All end uses_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "All end uses"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:EnergyCost">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:ResourceBoundary">
+      <sch:assert test="contains('_Site_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Site"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Linked Time Series ID']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Linked Time Series ID']/auc:FieldValue" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Percentage Of Annual Energy Cost Paid By Tenant']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Percentage Of Annual Energy Cost Paid By Tenant']/auc:FieldValue" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Linked Time Series ID_ _Percentage Of Annual Energy Cost Paid By Tenant_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Linked Time Series ID" or "Percentage Of Annual Energy Cost Paid By Tenant"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:AllResourceTotals/auc:AllResourceTotal/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Percentage Of Annual Energy Cost Paid By Tenant']/auc:FieldValue">
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0) and (number() &lt;= 1)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number, MUST be greater than or equal to 0, and MUST be less than or equal to 1</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:LinkedPremises">
+      <sch:assert test="count(auc:Building) &gt;= 0">element "auc:Building" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:Facility)">element "auc:Facility" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Section)">element "auc:Section" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:Site) &gt;= 0">element "auc:Site" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:Space)">element "auc:Space" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ThermalZone)">element "auc:ThermalZone" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:LinkedPremises/auc:Building">
+      <sch:assert test="count(auc:LinkedBuildingID) &gt;= 1">element "auc:LinkedBuildingID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:LinkedPremises/auc:Site">
+      <sch:assert test="count(auc:LinkedSiteID) &gt;= 1">element "auc:LinkedSiteID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:LinkedPremises/auc:Site/auc:LinkedSiteID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:ResourceUses">
+      <sch:assert test="count(auc:ResourceUse) &gt;= 0">element "auc:ResourceUse" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:ResourceUses/auc:ResourceUse">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:AnnualFuelUseConsistentUnits)">element "auc:AnnualFuelUseConsistentUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualFuelUseNativeUnits)">element "auc:AnnualFuelUseNativeUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualPeakConsistentUnits)">element "auc:AnnualPeakConsistentUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualPeakNativeUnits)">element "auc:AnnualPeakNativeUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Emissions)">element "auc:Emissions" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:EndUse)">element "auc:EndUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EnergyResource) &gt;= 0">element "auc:EnergyResource" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:FuelUseIntensity)">element "auc:FuelUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PeakResourceUnits)">element "auc:PeakResourceUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PercentEndUse)">element "auc:PercentEndUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PercentResource)">element "auc:PercentResource" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceBoundary) &gt;= 1">element "auc:ResourceBoundary" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:ResourceUnits) &gt;= 0">element "auc:ResourceUnits" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:SharedResourceSystem) &gt;= 1">element "auc:SharedResourceSystem" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:UserDefinedFields)">element "auc:UserDefinedFields" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:UtilityIDs)">element "auc:UtilityIDs" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterResource)">element "auc:WaterResource" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:ResourceUses/auc:ResourceUse/auc:EnergyResource">
+      <sch:assert test="contains('_Biofuel B10_ _Biofuel B20_ _Biofuel B5_ _Diesel_ _District chilled water_ _District hot water_ _District steam_ _Dual fuel_ _Electricity_ _Electricity-Exported_ _Electricity-Onsite generated_ _Fuel oil_ _Fuel oil no 1_ _Fuel oil no 2_ _Fuel oil no 4_ _Fuel oil no 5 (heavy)_ _Fuel oil no 5 (light)_ _Fuel oil no 6_ _Gasoline_ _Kerosene_ _Liquid propane_ _Natural gas_ _Other_ _Other delivered-Exported_ _Other delivered-Onsite generated_ _Other metered-Exported_ _Other metered-Onsite generated_ _Propane_ _Thermal-Exported_ _Thermal-Onsite generated_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Biofuel B10", "Biofuel B20", "Biofuel B5", "Diesel", "District chilled water", "District hot water", "District steam", "Dual fuel", "Electricity", "Electricity-Exported", "Electricity-Onsite generated", "Fuel oil", "Fuel oil no 1", "Fuel oil no 2", "Fuel oil no 4", "Fuel oil no 5 (heavy)", "Fuel oil no 5 (light)", "Fuel oil no 6", "Gasoline", "Kerosene", "Liquid propane", "Natural gas", "Other", "Other delivered-Exported", "Other delivered-Onsite generated", "Other metered-Exported", "Other metered-Onsite generated", "Propane", "Thermal-Exported", or "Thermal-Onsite generated"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:ResourceUses/auc:ResourceUse/auc:ResourceBoundary">
+      <sch:assert test="contains('_Site_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Site"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:ResourceUses/auc:ResourceUse/auc:ResourceUnits">
+      <sch:assert test="contains('_Gallons_ _Mlbs_ _Ton-hour_ _kBtu_ _kWh_ _kcf_ _therms_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Gallons", "Mlbs", "Ton-hour", "kBtu", "kWh", "kcf", or "therms"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:ResourceUses/auc:ResourceUse/auc:SharedResourceSystem">
+      <sch:assert test="contains('_Other_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Other"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:ScenarioType">
+      <sch:assert test="not(auc:Benchmark)">element "auc:Benchmark" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CurrentBuilding)">element "auc:CurrentBuilding" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:Other) &gt;= 1">element "auc:Other" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:PackageOfMeasures)">element "auc:PackageOfMeasures" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Target)">element "auc:Target" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:ScenarioType/auc:Other">
+      <sch:assert test="not(auc:AnnualPeakElectricityReduction)">element "auc:AnnualPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsCost)">element "auc:AnnualSavingsCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSiteEnergy)">element "auc:AnnualSavingsSiteEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSourceEnergy)">element "auc:AnnualSavingsSourceEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterCostSavings)">element "auc:AnnualWaterCostSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterSavings)">element "auc:AnnualWaterSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:InternalRateOfReturn)">element "auc:InternalRateOfReturn" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:NetPresentValue)">element "auc:NetPresentValue" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SimplePayback)">element "auc:SimplePayback" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SummerPeakElectricityReduction)">element "auc:SummerPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WinterPeakElectricityReduction)">element "auc:WinterPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:TemporalStatus">
+      <sch:assert test="contains('_Current_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Current"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:TimeSeriesData">
+      <sch:assert test="count(auc:TimeSeries) &gt;= 0">element "auc:TimeSeries" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:TimeSeriesData/auc:TimeSeries">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:CDDBaseTemperature)">element "auc:CDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CoolingDegreeDays)">element "auc:CoolingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EndTimestamp) &gt;= 0">element "auc:EndTimestamp" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:EnergyFlowDirection)">element "auc:EnergyFlowDirection" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:HeatingDegreeDays)">element "auc:HeatingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:IntervalFrequency) &gt;= 1">element "auc:IntervalFrequency" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:IntervalReading) &gt;= 0">element "auc:IntervalReading" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:Phase)">element "auc:Phase" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ReadingType) &gt;= 1">element "auc:ReadingType" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:ResourceUseID) &gt;= 0">element "auc:ResourceUseID" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:StartTimestamp) &gt;= 0">element "auc:StartTimestamp" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:TimeSeriesReadingQuantity) &gt;= 1">element "auc:TimeSeriesReadingQuantity" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:UserDefinedFields)">element "auc:UserDefinedFields" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:hDDBaseTemperature)">element "auc:hDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:TimeSeriesData/auc:TimeSeries/auc:IntervalFrequency">
+      <sch:assert test="contains('_Annual_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Annual"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:TimeSeriesData/auc:TimeSeries/auc:IntervalReading">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:TimeSeriesData/auc:TimeSeries/auc:ReadingType">
+      <sch:assert test="contains('_Average_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Average"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:TimeSeriesData/auc:TimeSeries/auc:ResourceUseID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:TimeSeriesData/auc:TimeSeries/auc:TimeSeriesReadingQuantity">
+      <sch:assert test="contains('_Energy_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Energy"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue) &gt;= 1">element "auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Other Scenario Type_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Other Scenario Type"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Annual Summary')]/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue">
+      <sch:assert test="contains('_Audit Template Shared Resource System Annual Summary_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Audit Template Shared Resource System Annual Summary"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]">
+      <sch:assert test="not(auc:AllResourceTotals)">element "auc:AllResourceTotals" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualCoolingDegreeDays)">element "auc:AnnualCoolingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualHeatingDegreeDays)">element "auc:AnnualHeatingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CDDBaseTemperature)">element "auc:CDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:HDDBaseTemperature)">element "auc:HDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:LinkedPremises) &gt;= 1">element "auc:LinkedPremises" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Normalization)">element "auc:Normalization" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceUses) &gt;= 0">element "auc:ResourceUses" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:ScenarioName)">element "auc:ScenarioName" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ScenarioNotes)">element "auc:ScenarioNotes" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ScenarioType) &gt;= 1">element "auc:ScenarioType" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:TemporalStatus) &gt;= 1">element "auc:TemporalStatus" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:TimeSeriesData)">element "auc:TimeSeriesData" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 1">element "auc:UserDefinedFields" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:WeatherType)">element "auc:WeatherType" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:LinkedPremises">
+      <sch:assert test="count(auc:Building) &gt;= 1">element "auc:Building" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Facility)">element "auc:Facility" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Section)">element "auc:Section" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Site)">element "auc:Site" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Space)">element "auc:Space" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ThermalZone)">element "auc:ThermalZone" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:LinkedPremises/auc:Building">
+      <sch:assert test="count(auc:LinkedBuildingID) &gt;= 1">element "auc:LinkedBuildingID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:ResourceUses">
+      <sch:assert test="count(auc:ResourceUse) &gt;= 0">element "auc:ResourceUse" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:ResourceUses/auc:ResourceUse">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:AnnualFuelUseConsistentUnits)">element "auc:AnnualFuelUseConsistentUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:AnnualFuelUseNativeUnits) &gt;= 0">element "auc:AnnualFuelUseNativeUnits" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:AnnualPeakConsistentUnits)">element "auc:AnnualPeakConsistentUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualPeakNativeUnits)">element "auc:AnnualPeakNativeUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Emissions)">element "auc:Emissions" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EndUse) &gt;= 0">element "auc:EndUse" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:EnergyResource) &gt;= 0">element "auc:EnergyResource" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:FuelUseIntensity)">element "auc:FuelUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PeakResourceUnits)">element "auc:PeakResourceUnits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PercentEndUse)">element "auc:PercentEndUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PercentResource)">element "auc:PercentResource" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceBoundary) &gt;= 1">element "auc:ResourceBoundary" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:ResourceUnits) &gt;= 0">element "auc:ResourceUnits" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:SharedResourceSystem) &gt;= 1">element "auc:SharedResourceSystem" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 0">element "auc:UserDefinedFields" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:UtilityIDs)">element "auc:UtilityIDs" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterResource)">element "auc:WaterResource" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:ResourceUses/auc:ResourceUse/auc:AnnualFuelUseNativeUnits">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:ResourceUses/auc:ResourceUse/auc:EndUse">
+      <sch:assert test="contains('_All end uses_ _Conveyance_ _Cooking_ _Cooling_ _Domestic hot water_ _Heating_ _IT equipment_ _Laundry_ _Plug load_ _Process load_ _Pump_ _Refrigeration_ _Total lighting_ _Ventilation_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "All end uses", "Conveyance", "Cooking", "Cooling", "Domestic hot water", "Heating", "IT equipment", "Laundry", "Plug load", "Process load", "Pump", "Refrigeration", "Total lighting", or "Ventilation"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:ResourceUses/auc:ResourceUse/auc:EnergyResource">
+      <sch:assert test="contains('_Biofuel B10_ _Biofuel B20_ _Biofuel B5_ _Diesel_ _District chilled water_ _District hot water_ _District steam_ _Dual fuel_ _Electricity_ _Electricity-Exported_ _Electricity-Onsite generated_ _Fuel oil_ _Fuel oil no 1_ _Fuel oil no 2_ _Fuel oil no 4_ _Fuel oil no 5 (heavy)_ _Fuel oil no 5 (light)_ _Fuel oil no 6_ _Gasoline_ _Kerosene_ _Liquid propane_ _Natural gas_ _Other_ _Other delivered-Exported_ _Other delivered-Onsite generated_ _Other metered-Exported_ _Other metered-Onsite generated_ _Propane_ _Thermal-Exported_ _Thermal-Onsite generated_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Biofuel B10", "Biofuel B20", "Biofuel B5", "Diesel", "District chilled water", "District hot water", "District steam", "Dual fuel", "Electricity", "Electricity-Exported", "Electricity-Onsite generated", "Fuel oil", "Fuel oil no 1", "Fuel oil no 2", "Fuel oil no 4", "Fuel oil no 5 (heavy)", "Fuel oil no 5 (light)", "Fuel oil no 6", "Gasoline", "Kerosene", "Liquid propane", "Natural gas", "Other", "Other delivered-Exported", "Other delivered-Onsite generated", "Other metered-Exported", "Other metered-Onsite generated", "Propane", "Thermal-Exported", or "Thermal-Onsite generated"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:ResourceUses/auc:ResourceUse/auc:ResourceBoundary">
+      <sch:assert test="contains('_Site_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Site"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:ResourceUses/auc:ResourceUse/auc:ResourceUnits">
+      <sch:assert test="contains('_Gallons_ _Mlbs_ _Ton-hour_ _kBtu_ _kWh_ _kcf_ _therms_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Gallons", "Mlbs", "Ton-hour", "kBtu", "kWh", "kcf", or "therms"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:ResourceUses/auc:ResourceUse/auc:SharedResourceSystem">
+      <sch:assert test="contains('_Other_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Other"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:ResourceUses/auc:ResourceUse/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Other End Use']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Other End Use']/auc:FieldValue" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:ResourceUses/auc:ResourceUse/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:ResourceUses/auc:ResourceUse/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Other End Use_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Other End Use"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:ScenarioType">
+      <sch:assert test="not(auc:Benchmark)">element "auc:Benchmark" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CurrentBuilding)">element "auc:CurrentBuilding" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:Other) &gt;= 1">element "auc:Other" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:PackageOfMeasures)">element "auc:PackageOfMeasures" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Target)">element "auc:Target" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:ScenarioType/auc:Other">
+      <sch:assert test="not(auc:AnnualPeakElectricityReduction)">element "auc:AnnualPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsCost)">element "auc:AnnualSavingsCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSiteEnergy)">element "auc:AnnualSavingsSiteEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSourceEnergy)">element "auc:AnnualSavingsSourceEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterCostSavings)">element "auc:AnnualWaterCostSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterSavings)">element "auc:AnnualWaterSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:InternalRateOfReturn)">element "auc:InternalRateOfReturn" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:NetPresentValue)">element "auc:NetPresentValue" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SimplePayback)">element "auc:SimplePayback" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SummerPeakElectricityReduction)">element "auc:SummerPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WinterPeakElectricityReduction)">element "auc:WinterPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:TemporalStatus">
+      <sch:assert test="contains('_Current_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Current"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue) &gt;= 1">element "auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Other Scenario Type_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Other Scenario Type"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0) and (auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue/text() = 'Audit Template Shared Resource System Energy Uses')]/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue">
+      <sch:assert test="contains('_Audit Template Shared Resource System Energy Uses_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Audit Template Shared Resource System Energy Uses"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0)]">
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 1">element "auc:UserDefinedFields" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0)]/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue) &gt;= 1">element "auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Other) &gt; 0)]/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Other Scenario Type']/auc:FieldValue">
+      <sch:assert test="contains('_Audit Template Annual Summary_ _Audit Template Available Energy_ _Audit Template Energy Deliveries_ _Audit Template Energy Meter Readings_ _Audit Template Energy Supply Sources_ _Audit Template Energy Uses_ _Audit Template Shared Resource System Annual Summary_ _Audit Template Shared Resource System Energy Uses_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Audit Template Annual Summary", "Audit Template Available Energy", "Audit Template Energy Deliveries", "Audit Template Energy Meter Readings", "Audit Template Energy Supply Sources", "Audit Template Energy Uses", "Audit Template Shared Resource System Annual Summary", or "Audit Template Shared Resource System Energy Uses"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]">
+      <sch:assert test="not(auc:AllResourceTotals)">element "auc:AllResourceTotals" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualCoolingDegreeDays)">element "auc:AnnualCoolingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualHeatingDegreeDays)">element "auc:AnnualHeatingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CDDBaseTemperature)">element "auc:CDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:HDDBaseTemperature)">element "auc:HDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:LinkedPremises) &gt;= 1">element "auc:LinkedPremises" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Normalization)">element "auc:Normalization" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ResourceUses)">element "auc:ResourceUses" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ScenarioName) &gt;= 0">element "auc:ScenarioName" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:ScenarioNotes)">element "auc:ScenarioNotes" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ScenarioType) &gt;= 1">element "auc:ScenarioType" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:TemporalStatus) &gt;= 1">element "auc:TemporalStatus" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:TimeSeriesData)">element "auc:TimeSeriesData" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:UserDefinedFields) &gt;= 0">element "auc:UserDefinedFields" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:WeatherType)">element "auc:WeatherType" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:LinkedPremises">
+      <sch:assert test="count(auc:Building) &gt;= 0">element "auc:Building" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:Facility)">element "auc:Facility" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Section)">element "auc:Section" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:Site) &gt;= 0">element "auc:Site" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:Space)">element "auc:Space" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ThermalZone)">element "auc:ThermalZone" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:LinkedPremises/auc:Building">
+      <sch:assert test="count(auc:LinkedBuildingID) &gt;= 1">element "auc:LinkedBuildingID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:LinkedPremises/auc:Site">
+      <sch:assert test="count(auc:LinkedSiteID) &gt;= 1">element "auc:LinkedSiteID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:LinkedPremises/auc:Site/auc:LinkedSiteID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:ScenarioType">
+      <sch:assert test="not(auc:Benchmark)">element "auc:Benchmark" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CurrentBuilding)">element "auc:CurrentBuilding" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Other)">element "auc:Other" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:PackageOfMeasures) &gt;= 1">element "auc:PackageOfMeasures" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Target)">element "auc:Target" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:ScenarioType/auc:PackageOfMeasures">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:AnnualDemandSavingsCost)">element "auc:AnnualDemandSavingsCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:AnnualPeakElectricityReduction) &gt;= 0">element "auc:AnnualPeakElectricityReduction" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:AnnualSavingsByFuels) &gt;= 0">element "auc:AnnualSavingsByFuels" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:AnnualSavingsCost) &gt;= 0">element "auc:AnnualSavingsCost" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSiteEnergy)">element "auc:AnnualSavingsSiteEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSourceEnergy)">element "auc:AnnualSavingsSourceEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterCostSavings)">element "auc:AnnualWaterCostSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterSavings)">element "auc:AnnualWaterSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AssetScore)">element "auc:AssetScore" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CalculationMethodType)">element "auc:CalculationMethodType" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CostEffectivenessScreeningMethod)">element "auc:CostEffectivenessScreeningMethod" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ENERGYSTARScore)">element "auc:ENERGYSTARScore" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:EquipmentDisposalAndSalvageCosts)">element "auc:EquipmentDisposalAndSalvageCosts" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:FundingFromIncentives)">element "auc:FundingFromIncentives" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:FundingFromTaxCredits)">element "auc:FundingFromTaxCredits" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ImplementationPeriod)">element "auc:ImplementationPeriod" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ImplementationPeriodCostSavings)">element "auc:ImplementationPeriodCostSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:InternalRateOfReturn)">element "auc:InternalRateOfReturn" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:MVCost)">element "auc:MVCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:MeasureIDs) &gt;= 0">element "auc:MeasureIDs" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:NPVofTaxImplications)">element "auc:NPVofTaxImplications" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:NetPresentValue) &gt;= 0">element "auc:NetPresentValue" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:OMCostAnnualSavings)">element "auc:OMCostAnnualSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:OtherFinancialIncentives)">element "auc:OtherFinancialIncentives" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PackageFirstCost)">element "auc:PackageFirstCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PercentGuaranteedSavings)">element "auc:PercentGuaranteedSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ProjectMarkup)">element "auc:ProjectMarkup" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:RecurringIncentives)">element "auc:RecurringIncentives" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ReferenceCase)">element "auc:ReferenceCase" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SimplePayback)">element "auc:SimplePayback" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SummerPeakElectricityReduction)">element "auc:SummerPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:UserDefinedFields)">element "auc:UserDefinedFields" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WinterPeakElectricityReduction)">element "auc:WinterPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:ScenarioType/auc:PackageOfMeasures/auc:AnnualPeakElectricityReduction">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:ScenarioType/auc:PackageOfMeasures/auc:AnnualSavingsByFuels">
+      <sch:assert test="count(auc:AnnualSavingsNativeUnits) &gt;= 0">element "auc:AnnualSavingsNativeUnits" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:EnergyResource) &gt;= 0">element "auc:EnergyResource" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:ResourceUnits) &gt;= 0">element "auc:ResourceUnits" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:ScenarioType/auc:PackageOfMeasures/auc:AnnualSavingsByFuels/auc:AnnualSavingsNativeUnits">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:ScenarioType/auc:PackageOfMeasures/auc:AnnualSavingsByFuels/auc:EnergyResource">
+      <sch:assert test="contains('_Biofuel B10_ _Biofuel B20_ _Biofuel B5_ _Diesel_ _District chilled water_ _District hot water_ _District steam_ _Dual fuel_ _Electricity_ _Electricity-Exported_ _Electricity-Onsite generated_ _Fuel oil_ _Fuel oil no 1_ _Fuel oil no 2_ _Fuel oil no 4_ _Fuel oil no 5 (heavy)_ _Fuel oil no 5 (light)_ _Fuel oil no 6_ _Gasoline_ _Kerosene_ _Liquid propane_ _Natural gas_ _Other_ _Other delivered-Exported_ _Other delivered-Onsite generated_ _Other metered-Exported_ _Other metered-Onsite generated_ _Propane_ _Thermal-Exported_ _Thermal-Onsite generated_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Biofuel B10", "Biofuel B20", "Biofuel B5", "Diesel", "District chilled water", "District hot water", "District steam", "Dual fuel", "Electricity", "Electricity-Exported", "Electricity-Onsite generated", "Fuel oil", "Fuel oil no 1", "Fuel oil no 2", "Fuel oil no 4", "Fuel oil no 5 (heavy)", "Fuel oil no 5 (light)", "Fuel oil no 6", "Gasoline", "Kerosene", "Liquid propane", "Natural gas", "Other", "Other delivered-Exported", "Other delivered-Onsite generated", "Other metered-Exported", "Other metered-Onsite generated", "Propane", "Thermal-Exported", or "Thermal-Onsite generated"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:ScenarioType/auc:PackageOfMeasures/auc:AnnualSavingsByFuels/auc:ResourceUnits">
+      <sch:assert test="contains('_Gallons_ _Mlbs_ _Ton-hour_ _kBtu_ _kWh_ _kcf_ _therms_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Gallons", "Mlbs", "Ton-hour", "kBtu", "kWh", "kcf", or "therms"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:ScenarioType/auc:PackageOfMeasures/auc:AnnualSavingsCost">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:ScenarioType/auc:PackageOfMeasures/auc:MeasureIDs">
+      <sch:assert test="count(auc:MeasureID) &gt;= 0">element "auc:MeasureID" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:ScenarioType/auc:PackageOfMeasures/auc:MeasureIDs/auc:MeasureID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:ScenarioType/auc:PackageOfMeasures/auc:NetPresentValue">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:TemporalStatus">
+      <sch:assert test="contains('_Current_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Current"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:UserDefinedFields">
+      <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Application Scale']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Application Scale']/auc:FieldValue" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Recommended Resource Savings Category']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Recommended Resource Savings Category']/auc:FieldValue" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Shared Resource System ID']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Shared Resource System ID']/auc:FieldValue" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:UserDefinedFields/auc:UserDefinedField">
+      <sch:assert test="count(auc:FieldName) &gt;= 1">element "auc:FieldName" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
+      <sch:assert test="contains('_Application Scale_ _Recommended Resource Savings Category_ _Shared Resource System ID_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Application Scale", "Recommended Resource Savings Category", or "Shared Resource System ID"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Application Scale']/auc:FieldValue">
+      <sch:assert test="contains('_Entire facility_ _Entire site_ _Individual premise_ _Individual system_ _Multiple premises_ _Multiple systems_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Entire facility", "Entire site", "Individual premise", "Individual system", "Multiple premises", or "Multiple systems"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:PackageOfMeasures) &gt; 0)]/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Recommended Resource Savings Category']/auc:FieldValue">
+      <sch:assert test="contains('_Low Cost and No Cost Recommendations_ _Potential Capital Recommendations_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Low Cost and No Cost Recommendations" or "Potential Capital Recommendations"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Target) &gt; 0)]">
+      <sch:assert test="count(auc:AllResourceTotals) &gt;= 0">element "auc:AllResourceTotals" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:AnnualCoolingDegreeDays)">element "auc:AnnualCoolingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualHeatingDegreeDays)">element "auc:AnnualHeatingDegreeDays" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CDDBaseTemperature)">element "auc:CDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:HDDBaseTemperature)">element "auc:HDDBaseTemperature" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:LinkedPremises) &gt;= 1">element "auc:LinkedPremises" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Normalization)">element "auc:Normalization" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ResourceUses)">element "auc:ResourceUses" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ScenarioName)">element "auc:ScenarioName" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ScenarioNotes)">element "auc:ScenarioNotes" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ScenarioType) &gt;= 1">element "auc:ScenarioType" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:TemporalStatus) &gt;= 1">element "auc:TemporalStatus" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:TimeSeriesData)">element "auc:TimeSeriesData" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:UserDefinedFields)">element "auc:UserDefinedFields" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WeatherType)">element "auc:WeatherType" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Target) &gt; 0)]/auc:AllResourceTotals">
+      <sch:assert test="count(auc:AllResourceTotal) &gt;= 0">element "auc:AllResourceTotal" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Target) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal">
+      <sch:assert test="count(@ID) &gt;= 1">element "@ID" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:ElectricitySourcedFromOnsiteRenewableSystems)">element "auc:ElectricitySourcedFromOnsiteRenewableSystems" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:EndUse) &gt;= 1">element "auc:EndUse" is REQUIRED</sch:assert>
+      <sch:assert test="count(auc:EnergyCost) &gt;= 0">element "auc:EnergyCost" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:OnsiteRenewableSystemElectricityExported)">element "auc:OnsiteRenewableSystemElectricityExported" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:ResourceBoundary) &gt;= 1">element "auc:ResourceBoundary" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:SiteEnergyUse)">element "auc:SiteEnergyUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:SiteEnergyUseIntensity) &gt;= 0">element "auc:SiteEnergyUseIntensity" is OPTIONAL</sch:assert>
+      <sch:assert test="not(auc:SourceEnergyUse)">element "auc:SourceEnergyUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SourceEnergyUseIntensity)">element "auc:SourceEnergyUseIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SummerPeak)">element "auc:SummerPeak" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:TemporalStatus)">element "auc:TemporalStatus" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:UserDefinedFields)">element "auc:UserDefinedFields" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WasteWaterVolume)">element "auc:WasteWaterVolume" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterCost)">element "auc:WaterCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterIntensity)">element "auc:WaterIntensity" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterResource)">element "auc:WaterResource" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WaterUse)">element "auc:WaterUse" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WinterPeak)">element "auc:WinterPeak" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Target) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:EndUse">
+      <sch:assert test="contains('_All end uses_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "All end uses"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Target) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:EnergyCost">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Target) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:ResourceBoundary">
+      <sch:assert test="contains('_Site_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Site"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Target) &gt; 0)]/auc:AllResourceTotals/auc:AllResourceTotal/auc:SiteEnergyUseIntensity">
+      <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Target) &gt; 0)]/auc:LinkedPremises">
+      <sch:assert test="count(auc:Building) &gt;= 1">element "auc:Building" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:Facility)">element "auc:Facility" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Section)">element "auc:Section" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Site)">element "auc:Site" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Space)">element "auc:Space" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ThermalZone)">element "auc:ThermalZone" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Target) &gt; 0)]/auc:LinkedPremises/auc:Building">
+      <sch:assert test="count(auc:LinkedBuildingID) &gt;= 1">element "auc:LinkedBuildingID" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Target) &gt; 0)]/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID">
+      <sch:assert test="count(@IDref) &gt;= 1">element "@IDref" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:FloorAreas)">element "auc:FloorAreas" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:LinkedScheduleIDs)">element "auc:LinkedScheduleIDs" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Target) &gt; 0)]/auc:ScenarioType">
+      <sch:assert test="not(auc:Benchmark)">element "auc:Benchmark" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:CurrentBuilding)">element "auc:CurrentBuilding" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:Other)">element "auc:Other" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:PackageOfMeasures)">element "auc:PackageOfMeasures" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:Target) &gt;= 1">element "auc:Target" is REQUIRED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Target) &gt; 0)]/auc:ScenarioType/auc:Target">
+      <sch:assert test="not(auc:AnnualPeakElectricityReduction)">element "auc:AnnualPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsCost)">element "auc:AnnualSavingsCost" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSiteEnergy)">element "auc:AnnualSavingsSiteEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualSavingsSourceEnergy)">element "auc:AnnualSavingsSourceEnergy" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterCostSavings)">element "auc:AnnualWaterCostSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AnnualWaterSavings)">element "auc:AnnualWaterSavings" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:AssetScore)">element "auc:AssetScore" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ENERGYSTARScore)">element "auc:ENERGYSTARScore" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:InternalRateOfReturn)">element "auc:InternalRateOfReturn" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:NetPresentValue)">element "auc:NetPresentValue" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ReferenceCase)">element "auc:ReferenceCase" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SimplePayback)">element "auc:SimplePayback" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:SummerPeakElectricityReduction)">element "auc:SummerPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:WinterPeakElectricityReduction)">element "auc:WinterPeakElectricityReduction" is NOT RECOMMENDED</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report/auc:Scenarios/auc:Scenario[(count(auc:ScenarioType/auc:Target) &gt; 0)]/auc:TemporalStatus">
+      <sch:assert test="contains('_Target_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Target"</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Reports/auc:Report[auc:LinkedPremisesOrSystem/auc:Building/auc:LinkedBuildingID]">
       <sch:assert test="count(auc:ASHRAEAuditLevel) &gt;= 0">element "auc:ASHRAEAuditLevel" is OPTIONAL</sch:assert>
@@ -907,6 +2845,7 @@
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Sites/auc:Site/auc:Buildings/auc:Building/auc:OverallWindowToWallRatio">
       <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="(number(text()) = text()) and (number() &gt;= 0) and (number() &lt;= 1)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number, MUST be greater than or equal to 0, and MUST be less than or equal to 1</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Sites/auc:Site/auc:Buildings/auc:Building/auc:Ownership">
       <sch:assert test="contains('_Corporation/partnership/LLC_ _Individual_ _Non-profit organization_ _Other_ _Privately owned_ _Property management company_ _Religious organization_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Corporation/partnership/LLC", "Individual", "Non-profit organization", "Other", "Privately owned", "Property management company", or "Religious organization"</sch:assert>
@@ -1104,7 +3043,7 @@
       <sch:assert test="(number(text()) = text()) and (number() &gt;= 0) and (number() &lt;= 100)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number, MUST be greater than or equal to 0, and MUST be less than or equal to 100</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Sites/auc:Site/auc:Buildings/auc:Building/auc:Sections/auc:Section[auc:SectionType = 'Space function']/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Principal HVAC System Type']/auc:FieldValue">
-      <sch:assert test="contains('_Dedicated Outdoor Air System_ _Four Pipe Fan Coil Unit_ _Ground Source Heat Pump_ _Packaged Rooftop Air Conditioner_ _Packaged Rooftop Heat Pump_ _Packaged Rooftop VAV with Electric Reheat_ _Packaged Rooftop VAV with Hot Water Reheat_ _Packaged Terminal Air Conditioner_ _Packaged Terminal Heat Pump_ _VAV with Electric Reheat_ _VAV with Hot Water Reheat_ _Ventilation Only_ _Warm Air Furnace_ _Water Loop Heat Pump_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Dedicated Outdoor Air System", "Four Pipe Fan Coil Unit", "Ground Source Heat Pump", "Packaged Rooftop Air Conditioner", "Packaged Rooftop Heat Pump", "Packaged Rooftop VAV with Electric Reheat", "Packaged Rooftop VAV with Hot Water Reheat", "Packaged Terminal Air Conditioner", "Packaged Terminal Heat Pump", "VAV with Electric Reheat", "VAV with Hot Water Reheat", "Ventilation Only", "Warm Air Furnace", or "Water Loop Heat Pump"</sch:assert>
+      <sch:assert test="contains('_Chilled Beam_ _Dedicated Outdoor Air System_ _Four Pipe Fan Coil Unit_ _Ground Source Heat Pump_ _Other_ _Packaged Rooftop Air Conditioner_ _Packaged Rooftop Heat Pump_ _Packaged Rooftop VAV with Electric Reheat_ _Packaged Rooftop VAV with Hot Water Reheat_ _Packaged Terminal Air Conditioner_ _Packaged Terminal Heat Pump_ _VAV with Electric Reheat_ _VAV with Hot Water Reheat_ _VRF Terminal Unit_ _Ventilation Only_ _Warm Air Furnace_ _Water Loop Heat Pump_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Chilled Beam", "Dedicated Outdoor Air System", "Four Pipe Fan Coil Unit", "Ground Source Heat Pump", "Other", "Packaged Rooftop Air Conditioner", "Packaged Rooftop Heat Pump", "Packaged Rooftop VAV with Electric Reheat", "Packaged Rooftop VAV with Hot Water Reheat", "Packaged Terminal Air Conditioner", "Packaged Terminal Heat Pump", "VAV with Electric Reheat", "VAV with Hot Water Reheat", "VRF Terminal Unit", "Ventilation Only", "Warm Air Furnace", or "Water Loop Heat Pump"</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Sites/auc:Site/auc:Buildings/auc:Building/auc:Sections/auc:Section[auc:SectionType = 'Space function']/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Principal Lighting System Type']/auc:FieldValue">
       <sch:assert test="contains('_Compact Fluorescent_ _T5_ _T5HO_ _T8_ _Super T8_ _T12_ _T12HO_ _Halogen_ _Sodium Vapor High Pressure_ _Incandescent_ _LED_ _Mercury Vapor_ _Metal Halide_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Compact Fluorescent", "T5", "T5HO", "T8", "Super T8", "T12", "T12HO", "Halogen", "Sodium Vapor High Pressure", "Incandescent", "LED", "Mercury Vapor", or "Metal Halide"</sch:assert>
@@ -1322,7 +3261,7 @@
       <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Sites/auc:Site/auc:Buildings/auc:Building/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
-      <sch:assert test="contains('_Alternative Roof Surface Construction Method_ _Alternative Roof Surface Construction Method Is Not Applicable_ _Building Status Type_ _Calculate Annual Energy Use Summary_ _Commercial Tenant Metering Configuration For Electricity Is Direct metering_ _Commercial Tenant Metering Configuration For Electricity Is Direct metering Is Not Applicable_ _Commercial Tenant Metering Configuration For Electricity Is Master meter with sub metering_ _Commercial Tenant Metering Configuration For Electricity Is Master meter with sub metering Is Not Applicable_ _Commercial Tenant Metering Configuration For Electricity Is Master meter without sub metering_ _Commercial Tenant Metering Configuration For Electricity Is Master meter without sub metering Is Not Applicable_ _Commercial Tenant Metering Configuration For Natural gas Is Direct metering_ _Commercial Tenant Metering Configuration For Natural gas Is Direct metering Is Not Applicable_ _Commercial Tenant Metering Configuration For Natural gas Is Master meter with sub metering_ _Commercial Tenant Metering Configuration For Natural gas Is Master meter with sub metering Is Not Applicable_ _Commercial Tenant Metering Configuration For Natural gas Is Master meter without sub metering_ _Commercial Tenant Metering Configuration For Natural gas Is Master meter without sub metering Is Not Applicable_ _Conditioned Floors Above Grade Is Not Applicable_ _Conditioned Floors Below Grade Is Not Applicable_ _Floor Area For Cooled only Is Not Applicable_ _Floor Area For Gross Is Not Applicable_ _Floor Area For Heated only Is Not Applicable_ _Floor Area For Heated and Cooled Is Not Applicable_ _Demising Above Grade Wall Area_ _Metering Year Start Dates_ _Multi Tenant_ _Multi Tenant Is Not Applicable_ _Number Of Facilities On Site Is Not Applicable_ _Onsite Generation Operation Average Annual Hours_ _Onsite Generation Operation Average Annual Hours Is Not Applicable_ _Onsite Generation System_ _Onsite Generation System Capacity_ _Onsite Generation System For Fuel cell Is Not Applicable_ _Onsite Generation System For Microturbine Is Not Applicable_ _Onsite Generation System For PV Is Not Applicable_ _Onsite Generation System For Reciprocating engine Is Not Applicable_ _Onsite Generation System For Turbine Is Not Applicable_ _Onsite Generation System For Wind Is Not Applicable_ _Onsite Generation System Is Not Applicable_ _Onsite Renewable Peak Generating Capacity_ _Onsite Renewable Peak Generating Capacity Is Not Applicable_ _Onsite Renewable System_ _Onsite Renewable System For Solar Is Not Applicable_ _Onsite Renewable System Is Not Applicable_ _Other Energy Generation Technology Is Not Applicable_ _Percentage Onsite Generation Peak Generating Capacity_ _Percentage Onsite Generation Peak Generating Capacity Is Not Applicable_ _Percentage Skylight Area_ _Percentage Terrace Area_ _Premises Identifier For Atlanta Building ID Is Not Applicable_ _Premises Identifier For City Custom Building ID Is Not Applicable_ _Premises Identifier For Portfolio Manager Building ID Is Not Applicable_ _Premises Notes For Not Applicable_ _Premises Notes For Shared Metering Not Applicable_ _Premises Notes For Space Functions For Not Applicable_ _Premises Notes For Tenant Metering Configuration For Not Applicable_ _Premises Notes Is Not Applicable_ _Residential Tenant Metering Configuration For Electricity Is Direct metering_ _Residential Tenant Metering Configuration For Electricity Is Direct metering Is Not Applicable_ _Residential Tenant Metering Configuration For Electricity Is Master meter with sub metering_ _Residential Tenant Metering Configuration For Electricity Is Master meter with sub metering Is Not Applicable_ _Residential Tenant Metering Configuration For Electricity Is Master meter without sub metering_ _Residential Tenant Metering Configuration For Electricity Is Master meter without sub metering Is Not Applicable_ _Residential Tenant Metering Configuration For Natural gas Is Direct metering_ _Residential Tenant Metering Configuration For Natural gas Is Direct metering Is Not Applicable_ _Residential Tenant Metering Configuration For Natural gas Is Master meter with sub metering_ _Residential Tenant Metering Configuration For Natural gas Is Master meter with sub metering Is Not Applicable_ _Residential Tenant Metering Configuration For Natural gas Is Master meter without sub metering_ _Residential Tenant Metering Configuration For Natural gas Is Master meter without sub metering Is Not Applicable_ _Retrocommissioning Date Is Not Applicable_ _Roof Area_ _Shared Chilled water_ _Shared Chilled water Is Not Applicable_ _Shared Fuel oil_ _Shared Fuel oil Is Not Applicable_ _Shared Heating_ _Shared Heating Is Not Applicable_ _Shared Meter For District steam_ _Shared Meter For District steam Is Not Applicable_ _Shared Meter For Electricity_ _Shared Meter For Electricity Is Not Applicable_ _Shared Meters For Multiple buildings on a single lot_ _Shared Meters For Multiple buildings on a single lot Is Not Applicable_ _Shared Meters For Multiple buildings on multiple lots_ _Shared Meters For Multiple buildings on multiple lots Is Not Applicable_ _Shared Meter For Natural gas_ _Shared Meter For Natural gas Is Not Applicable_ _Spaces Excluded From Gross Floor Area_ _Spaces Excluded From Gross Floor Area Is Not Applicable_ _Terrace R Value_ _Terrace R Value Is Not Applicable_ _Validate 100% Lighting Status_ _Validate 100% Lighting Status Is Not Applicable_ _Year Of Last Energy Audit Is Not Applicable_ _Year Of Last Major Remodel Is Not Applicable_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Alternative Roof Surface Construction Method", "Alternative Roof Surface Construction Method Is Not Applicable", "Building Status Type", "Calculate Annual Energy Use Summary", "Commercial Tenant Metering Configuration For Electricity Is Direct metering", "Commercial Tenant Metering Configuration For Electricity Is Direct metering Is Not Applicable", "Commercial Tenant Metering Configuration For Electricity Is Master meter with sub metering", "Commercial Tenant Metering Configuration For Electricity Is Master meter with sub metering Is Not Applicable", "Commercial Tenant Metering Configuration For Electricity Is Master meter without sub metering", "Commercial Tenant Metering Configuration For Electricity Is Master meter without sub metering Is Not Applicable", "Commercial Tenant Metering Configuration For Natural gas Is Direct metering", "Commercial Tenant Metering Configuration For Natural gas Is Direct metering Is Not Applicable", "Commercial Tenant Metering Configuration For Natural gas Is Master meter with sub metering", "Commercial Tenant Metering Configuration For Natural gas Is Master meter with sub metering Is Not Applicable", "Commercial Tenant Metering Configuration For Natural gas Is Master meter without sub metering", "Commercial Tenant Metering Configuration For Natural gas Is Master meter without sub metering Is Not Applicable", "Conditioned Floors Above Grade Is Not Applicable", "Conditioned Floors Below Grade Is Not Applicable", "Floor Area For Cooled only Is Not Applicable", "Floor Area For Gross Is Not Applicable", "Floor Area For Heated only Is Not Applicable", "Floor Area For Heated and Cooled Is Not Applicable", "Demising Above Grade Wall Area", "Metering Year Start Dates", "Multi Tenant", "Multi Tenant Is Not Applicable", "Number Of Facilities On Site Is Not Applicable", "Onsite Generation Operation Average Annual Hours", "Onsite Generation Operation Average Annual Hours Is Not Applicable", "Onsite Generation System", "Onsite Generation System Capacity", "Onsite Generation System For Fuel cell Is Not Applicable", "Onsite Generation System For Microturbine Is Not Applicable", "Onsite Generation System For PV Is Not Applicable", "Onsite Generation System For Reciprocating engine Is Not Applicable", "Onsite Generation System For Turbine Is Not Applicable", "Onsite Generation System For Wind Is Not Applicable", "Onsite Generation System Is Not Applicable", "Onsite Renewable Peak Generating Capacity", "Onsite Renewable Peak Generating Capacity Is Not Applicable", "Onsite Renewable System", "Onsite Renewable System For Solar Is Not Applicable", "Onsite Renewable System Is Not Applicable", "Other Energy Generation Technology Is Not Applicable", "Percentage Onsite Generation Peak Generating Capacity", "Percentage Onsite Generation Peak Generating Capacity Is Not Applicable", "Percentage Skylight Area", "Percentage Terrace Area", "Premises Identifier For Atlanta Building ID Is Not Applicable", "Premises Identifier For City Custom Building ID Is Not Applicable", "Premises Identifier For Portfolio Manager Building ID Is Not Applicable", "Premises Notes For Not Applicable", "Premises Notes For Shared Metering Not Applicable", "Premises Notes For Space Functions For Not Applicable", "Premises Notes For Tenant Metering Configuration For Not Applicable", "Premises Notes Is Not Applicable", "Residential Tenant Metering Configuration For Electricity Is Direct metering", "Residential Tenant Metering Configuration For Electricity Is Direct metering Is Not Applicable", "Residential Tenant Metering Configuration For Electricity Is Master meter with sub metering", "Residential Tenant Metering Configuration For Electricity Is Master meter with sub metering Is Not Applicable", "Residential Tenant Metering Configuration For Electricity Is Master meter without sub metering", "Residential Tenant Metering Configuration For Electricity Is Master meter without sub metering Is Not Applicable", "Residential Tenant Metering Configuration For Natural gas Is Direct metering", "Residential Tenant Metering Configuration For Natural gas Is Direct metering Is Not Applicable", "Residential Tenant Metering Configuration For Natural gas Is Master meter with sub metering", "Residential Tenant Metering Configuration For Natural gas Is Master meter with sub metering Is Not Applicable", "Residential Tenant Metering Configuration For Natural gas Is Master meter without sub metering", "Residential Tenant Metering Configuration For Natural gas Is Master meter without sub metering Is Not Applicable", "Retrocommissioning Date Is Not Applicable", "Roof Area", "Shared Chilled water", "Shared Chilled water Is Not Applicable", "Shared Fuel oil", "Shared Fuel oil Is Not Applicable", "Shared Heating", "Shared Heating Is Not Applicable", "Shared Meter For District steam", "Shared Meter For District steam Is Not Applicable", "Shared Meter For Electricity", "Shared Meter For Electricity Is Not Applicable", "Shared Meters For Multiple buildings on a single lot", "Shared Meters For Multiple buildings on a single lot Is Not Applicable", "Shared Meters For Multiple buildings on multiple lots", "Shared Meters For Multiple buildings on multiple lots Is Not Applicable", "Shared Meter For Natural gas", "Shared Meter For Natural gas Is Not Applicable", "Spaces Excluded From Gross Floor Area", "Spaces Excluded From Gross Floor Area Is Not Applicable", "Terrace R Value", "Terrace R Value Is Not Applicable", "Validate 100% Lighting Status", "Validate 100% Lighting Status Is Not Applicable", "Year Of Last Energy Audit Is Not Applicable", or "Year Of Last Major Remodel Is Not Applicable"</sch:assert>
+      <sch:assert test="contains('_Alternative Roof Surface Construction Method_ _Alternative Roof Surface Construction Method Is Not Applicable_ _Building Status Type_ _Calculate Annual Energy Use Summary_ _Commercial Tenant Metering Configuration For Electricity Is Direct metering_ _Commercial Tenant Metering Configuration For Electricity Is Direct metering Is Not Applicable_ _Commercial Tenant Metering Configuration For Electricity Is Master meter with sub metering_ _Commercial Tenant Metering Configuration For Electricity Is Master meter with sub metering Is Not Applicable_ _Commercial Tenant Metering Configuration For Electricity Is Master meter without sub metering_ _Commercial Tenant Metering Configuration For Electricity Is Master meter without sub metering Is Not Applicable_ _Commercial Tenant Metering Configuration For Natural gas Is Direct metering_ _Commercial Tenant Metering Configuration For Natural gas Is Direct metering Is Not Applicable_ _Commercial Tenant Metering Configuration For Natural gas Is Master meter with sub metering_ _Commercial Tenant Metering Configuration For Natural gas Is Master meter with sub metering Is Not Applicable_ _Commercial Tenant Metering Configuration For Natural gas Is Master meter without sub metering_ _Commercial Tenant Metering Configuration For Natural gas Is Master meter without sub metering Is Not Applicable_ _Conditioned Floors Above Grade Is Not Applicable_ _Conditioned Floors Below Grade Is Not Applicable_ _Floor Area For Cooled only Is Not Applicable_ _Floor Area For Gross Is Not Applicable_ _Floor Area For Heated only Is Not Applicable_ _Floor Area For Heated and Cooled Is Not Applicable_ _Demising Above Grade Wall Area_ _Metering Year Start Dates_ _Multi Tenant_ _Multi Tenant Is Not Applicable_ _Number Of Facilities On Site Is Not Applicable_ _Onsite Generation Operation Average Annual Hours_ _Onsite Generation Operation Average Annual Hours Is Not Applicable_ _Onsite Generation System_ _Onsite Generation System Capacity_ _Onsite Generation System For Fuel cell Is Not Applicable_ _Onsite Generation System For Microturbine Is Not Applicable_ _Onsite Generation System For PV Is Not Applicable_ _Onsite Generation System For Reciprocating engine Is Not Applicable_ _Onsite Generation System For Turbine Is Not Applicable_ _Onsite Generation System For Wind Is Not Applicable_ _Onsite Generation System Is Not Applicable_ _Onsite Renewable Peak Generating Capacity_ _Onsite Renewable Peak Generating Capacity Is Not Applicable_ _Onsite Renewable System_ _Onsite Renewable System For Solar Is Not Applicable_ _Onsite Renewable System Is Not Applicable_ _Other Energy Generation Technology Is Not Applicable_ _Percentage Onsite Generation Peak Generating Capacity_ _Percentage Onsite Generation Peak Generating Capacity Is Not Applicable_ _Percentage Skylight Area_ _Percentage Terrace Area_ _Premises Identifier For Atlanta Building ID Is Not Applicable_ _Premises Identifier For City Custom Building ID Is Not Applicable_ _Premises Identifier For Portfolio Manager Building ID Is Not Applicable_ _Premises Notes For Not Applicable_ _Premises Notes For Shared Metering Not Applicable_ _Premises Notes For Space functions For Not Applicable_ _Premises Notes For Tenant Metering Configuration For Not Applicable_ _Premises Notes Is Not Applicable_ _Residential Tenant Metering Configuration For Electricity Is Direct metering_ _Residential Tenant Metering Configuration For Electricity Is Direct metering Is Not Applicable_ _Residential Tenant Metering Configuration For Electricity Is Master meter with sub metering_ _Residential Tenant Metering Configuration For Electricity Is Master meter with sub metering Is Not Applicable_ _Residential Tenant Metering Configuration For Electricity Is Master meter without sub metering_ _Residential Tenant Metering Configuration For Electricity Is Master meter without sub metering Is Not Applicable_ _Residential Tenant Metering Configuration For Natural gas Is Direct metering_ _Residential Tenant Metering Configuration For Natural gas Is Direct metering Is Not Applicable_ _Residential Tenant Metering Configuration For Natural gas Is Master meter with sub metering_ _Residential Tenant Metering Configuration For Natural gas Is Master meter with sub metering Is Not Applicable_ _Residential Tenant Metering Configuration For Natural gas Is Master meter without sub metering_ _Residential Tenant Metering Configuration For Natural gas Is Master meter without sub metering Is Not Applicable_ _Retrocommissioning Date Is Not Applicable_ _Roof Area_ _Shared Chilled water_ _Shared Chilled water Is Not Applicable_ _Shared Fuel oil_ _Shared Fuel oil Is Not Applicable_ _Shared Heating_ _Shared Heating Is Not Applicable_ _Shared Meter For District steam_ _Shared Meter For District steam Is Not Applicable_ _Shared Meter For Electricity_ _Shared Meter For Electricity Is Not Applicable_ _Shared Meters For Multiple buildings on a single lot_ _Shared Meters For Multiple buildings on a single lot Is Not Applicable_ _Shared Meters For Multiple buildings on multiple lots_ _Shared Meters For Multiple buildings on multiple lots Is Not Applicable_ _Shared Meter For Natural gas_ _Shared Meter For Natural gas Is Not Applicable_ _Spaces Excluded From Gross Floor Area_ _Spaces Excluded From Gross Floor Area Is Not Applicable_ _Terrace R Value_ _Terrace R Value Is Not Applicable_ _Validate 100% Lighting Status_ _Validate 100% Lighting Status Is Not Applicable_ _Year Of Last Energy Audit Is Not Applicable_ _Year Of Last Major Remodel Is Not Applicable_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Alternative Roof Surface Construction Method", "Alternative Roof Surface Construction Method Is Not Applicable", "Building Status Type", "Calculate Annual Energy Use Summary", "Commercial Tenant Metering Configuration For Electricity Is Direct metering", "Commercial Tenant Metering Configuration For Electricity Is Direct metering Is Not Applicable", "Commercial Tenant Metering Configuration For Electricity Is Master meter with sub metering", "Commercial Tenant Metering Configuration For Electricity Is Master meter with sub metering Is Not Applicable", "Commercial Tenant Metering Configuration For Electricity Is Master meter without sub metering", "Commercial Tenant Metering Configuration For Electricity Is Master meter without sub metering Is Not Applicable", "Commercial Tenant Metering Configuration For Natural gas Is Direct metering", "Commercial Tenant Metering Configuration For Natural gas Is Direct metering Is Not Applicable", "Commercial Tenant Metering Configuration For Natural gas Is Master meter with sub metering", "Commercial Tenant Metering Configuration For Natural gas Is Master meter with sub metering Is Not Applicable", "Commercial Tenant Metering Configuration For Natural gas Is Master meter without sub metering", "Commercial Tenant Metering Configuration For Natural gas Is Master meter without sub metering Is Not Applicable", "Conditioned Floors Above Grade Is Not Applicable", "Conditioned Floors Below Grade Is Not Applicable", "Floor Area For Cooled only Is Not Applicable", "Floor Area For Gross Is Not Applicable", "Floor Area For Heated only Is Not Applicable", "Floor Area For Heated and Cooled Is Not Applicable", "Demising Above Grade Wall Area", "Metering Year Start Dates", "Multi Tenant", "Multi Tenant Is Not Applicable", "Number Of Facilities On Site Is Not Applicable", "Onsite Generation Operation Average Annual Hours", "Onsite Generation Operation Average Annual Hours Is Not Applicable", "Onsite Generation System", "Onsite Generation System Capacity", "Onsite Generation System For Fuel cell Is Not Applicable", "Onsite Generation System For Microturbine Is Not Applicable", "Onsite Generation System For PV Is Not Applicable", "Onsite Generation System For Reciprocating engine Is Not Applicable", "Onsite Generation System For Turbine Is Not Applicable", "Onsite Generation System For Wind Is Not Applicable", "Onsite Generation System Is Not Applicable", "Onsite Renewable Peak Generating Capacity", "Onsite Renewable Peak Generating Capacity Is Not Applicable", "Onsite Renewable System", "Onsite Renewable System For Solar Is Not Applicable", "Onsite Renewable System Is Not Applicable", "Other Energy Generation Technology Is Not Applicable", "Percentage Onsite Generation Peak Generating Capacity", "Percentage Onsite Generation Peak Generating Capacity Is Not Applicable", "Percentage Skylight Area", "Percentage Terrace Area", "Premises Identifier For Atlanta Building ID Is Not Applicable", "Premises Identifier For City Custom Building ID Is Not Applicable", "Premises Identifier For Portfolio Manager Building ID Is Not Applicable", "Premises Notes For Not Applicable", "Premises Notes For Shared Metering Not Applicable", "Premises Notes For Space functions For Not Applicable", "Premises Notes For Tenant Metering Configuration For Not Applicable", "Premises Notes Is Not Applicable", "Residential Tenant Metering Configuration For Electricity Is Direct metering", "Residential Tenant Metering Configuration For Electricity Is Direct metering Is Not Applicable", "Residential Tenant Metering Configuration For Electricity Is Master meter with sub metering", "Residential Tenant Metering Configuration For Electricity Is Master meter with sub metering Is Not Applicable", "Residential Tenant Metering Configuration For Electricity Is Master meter without sub metering", "Residential Tenant Metering Configuration For Electricity Is Master meter without sub metering Is Not Applicable", "Residential Tenant Metering Configuration For Natural gas Is Direct metering", "Residential Tenant Metering Configuration For Natural gas Is Direct metering Is Not Applicable", "Residential Tenant Metering Configuration For Natural gas Is Master meter with sub metering", "Residential Tenant Metering Configuration For Natural gas Is Master meter with sub metering Is Not Applicable", "Residential Tenant Metering Configuration For Natural gas Is Master meter without sub metering", "Residential Tenant Metering Configuration For Natural gas Is Master meter without sub metering Is Not Applicable", "Retrocommissioning Date Is Not Applicable", "Roof Area", "Shared Chilled water", "Shared Chilled water Is Not Applicable", "Shared Fuel oil", "Shared Fuel oil Is Not Applicable", "Shared Heating", "Shared Heating Is Not Applicable", "Shared Meter For District steam", "Shared Meter For District steam Is Not Applicable", "Shared Meter For Electricity", "Shared Meter For Electricity Is Not Applicable", "Shared Meters For Multiple buildings on a single lot", "Shared Meters For Multiple buildings on a single lot Is Not Applicable", "Shared Meters For Multiple buildings on multiple lots", "Shared Meters For Multiple buildings on multiple lots Is Not Applicable", "Shared Meter For Natural gas", "Shared Meter For Natural gas Is Not Applicable", "Spaces Excluded From Gross Floor Area", "Spaces Excluded From Gross Floor Area Is Not Applicable", "Terrace R Value", "Terrace R Value Is Not Applicable", "Validate 100% Lighting Status", "Validate 100% Lighting Status Is Not Applicable", "Year Of Last Energy Audit Is Not Applicable", or "Year Of Last Major Remodel Is Not Applicable"</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Sites/auc:Site/auc:Buildings/auc:Building/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Alternative Roof Surface Construction Method Is Not Applicable']/auc:FieldValue">
       <sch:assert test="contains('_false_ _true_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "false" or "true"</sch:assert>
@@ -2700,7 +4639,7 @@
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[auc:Plants]">
       <sch:assert test="not(auc:HVACControlSystemTypes)">element "auc:HVACControlSystemTypes" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="not(auc:HeatingAndCoolingSystems)">element "auc:HeatingAndCoolingSystems" is NOT RECOMMENDED</sch:assert>
-      <sch:assert test="count(auc:LinkedPremises) &gt;= 0">element "auc:LinkedPremises" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:LinkedPremises) &gt;= 1">element "auc:LinkedPremises" is REQUIRED</sch:assert>
       <sch:assert test="not(auc:OtherHVACSystems)">element "auc:OtherHVACSystems" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="count(auc:Plants) &gt;= 0">element "auc:Plants" is OPTIONAL</sch:assert>
       <sch:assert test="not(auc:PrimaryHVACSystemType)">element "auc:PrimaryHVACSystemType" is NOT RECOMMENDED</sch:assert>
@@ -2743,7 +4682,7 @@
       <sch:assert test="not(auc:AirCooled)">element "auc:AirCooled" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="not(auc:BuildingAutomationSystem)">element "auc:BuildingAutomationSystem" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="not(auc:CondenserPlantCondition)">element "auc:CondenserPlantCondition" is NOT RECOMMENDED</sch:assert>
-      <sch:assert test="not(auc:ControlSystemType)">element "auc:ControlSystemType" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="not(auc:ControlSystemTypes)">element "auc:ControlSystemTypes" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="not(auc:GlycolCooledDryCooler)">element "auc:GlycolCooledDryCooler" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="count(auc:GroundSource) &gt;= 0">element "auc:GroundSource" is OPTIONAL</sch:assert>
       <sch:assert test="not(auc:Location)">element "auc:Location" is NOT RECOMMENDED</sch:assert>
@@ -2758,12 +4697,15 @@
       <sch:assert test="not(auc:CondenserWaterTemperature)">element "auc:CondenserWaterTemperature" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="not(auc:CondensingTemperature)">element "auc:CondensingTemperature" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="count(auc:GroundSourceType) &gt;= 0">element "auc:GroundSourceType" is OPTIONAL</sch:assert>
-      <sch:assert test="not(auc:WaterCooledCondenserFlowControl)">element "auc:WaterCooledCondenserFlowControl" is NOT RECOMMENDED</sch:assert>
+      <sch:assert test="count(auc:WaterCooledCondenserFlowControl) &gt;= 0">element "auc:WaterCooledCondenserFlowControl" is OPTIONAL</sch:assert>
       <sch:assert test="not(auc:WaterSideEconomizer)">element "auc:WaterSideEconomizer" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="not(auc:WellCount)">element "auc:WellCount" is NOT RECOMMENDED</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[auc:Plants]/auc:Plants/auc:CondenserPlants/auc:CondenserPlant/auc:GroundSource/auc:GroundSourceType">
       <sch:assert test="contains('_Other_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Other"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[auc:Plants]/auc:Plants/auc:CondenserPlants/auc:CondenserPlant/auc:GroundSource/auc:WaterCooledCondenserFlowControl">
+      <sch:assert test="contains('_Fixed Flow_ _Variable Flow_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Fixed Flow" or "Variable Flow"</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[auc:Plants]/auc:Plants/auc:CondenserPlants/auc:CondenserPlant/auc:UserDefinedFields">
       <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
@@ -2813,7 +4755,7 @@
       <sch:assert test="not(@Status)">element "@Status" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="count(auc:BuildingAutomationSystem) &gt;= 0">element "auc:BuildingAutomationSystem" is OPTIONAL</sch:assert>
       <sch:assert test="count(auc:Chiller) &gt;= 0">element "auc:Chiller" is OPTIONAL</sch:assert>
-      <sch:assert test="count(auc:ControlSystemType) &gt;= 0">element "auc:ControlSystemType" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:ControlSystemTypes) &gt;= 0">element "auc:ControlSystemTypes" is OPTIONAL</sch:assert>
       <sch:assert test="count(auc:CoolingPlantCondition) &gt;= 0">element "auc:CoolingPlantCondition" is OPTIONAL</sch:assert>
       <sch:assert test="count(auc:DistrictChilledWater) &gt;= 0">element "auc:DistrictChilledWater" is OPTIONAL</sch:assert>
       <sch:assert test="count(auc:Location) &gt;= 0">element "auc:Location" is OPTIONAL</sch:assert>
@@ -2892,13 +4834,16 @@
       <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
     </sch:rule>
-    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[auc:Plants]/auc:Plants/auc:CoolingPlants/auc:CoolingPlant/auc:ControlSystemType">
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[auc:Plants]/auc:Plants/auc:CoolingPlants/auc:CoolingPlant/auc:ControlSystemTypes">
+      <sch:assert test="count(auc:ControlSystemType) &gt;= 0">element "auc:ControlSystemType" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[auc:Plants]/auc:Plants/auc:CoolingPlants/auc:CoolingPlant/auc:ControlSystemTypes/auc:ControlSystemType">
       <sch:assert test="not(auc:Analog)">element "auc:Analog" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="count(auc:Digital) &gt;= 0">element "auc:Digital" is OPTIONAL</sch:assert>
       <sch:assert test="not(auc:Other)">element "auc:Other" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="count(auc:Pneumatic) &gt;= 0">element "auc:Pneumatic" is OPTIONAL</sch:assert>
     </sch:rule>
-    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[auc:Plants]/auc:Plants/auc:CoolingPlants/auc:CoolingPlant/auc:ControlSystemType/auc:Digital">
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[auc:Plants]/auc:Plants/auc:CoolingPlants/auc:CoolingPlant/auc:ControlSystemTypes/auc:ControlSystemType/auc:Digital">
       <sch:assert test="not(auc:CommunicationProtocol)">element "auc:CommunicationProtocol" is NOT RECOMMENDED</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[auc:Plants]/auc:Plants/auc:CoolingPlants/auc:CoolingPlant/auc:CoolingPlantCondition">
@@ -3021,7 +4966,7 @@
       <sch:assert test="not(@Status)">element "@Status" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="count(auc:Boiler) &gt;= 0">element "auc:Boiler" is OPTIONAL</sch:assert>
       <sch:assert test="count(auc:BuildingAutomationSystem) &gt;= 0">element "auc:BuildingAutomationSystem" is OPTIONAL</sch:assert>
-      <sch:assert test="count(auc:ControlSystemType) &gt;= 0">element "auc:ControlSystemType" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:ControlSystemTypes) &gt;= 0">element "auc:ControlSystemTypes" is OPTIONAL</sch:assert>
       <sch:assert test="count(auc:DistrictHeating) &gt;= 0">element "auc:DistrictHeating" is OPTIONAL</sch:assert>
       <sch:assert test="count(auc:HeatingPlantCondition) &gt;= 0">element "auc:HeatingPlantCondition" is OPTIONAL</sch:assert>
       <sch:assert test="count(auc:Location) &gt;= 0">element "auc:Location" is OPTIONAL</sch:assert>
@@ -3110,13 +5055,16 @@
       <sch:assert test="not(@Source)">element "@Source" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>
     </sch:rule>
-    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[auc:Plants]/auc:Plants/auc:HeatingPlants/auc:HeatingPlant/auc:ControlSystemType">
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[auc:Plants]/auc:Plants/auc:HeatingPlants/auc:HeatingPlant/auc:ControlSystemTypes">
+      <sch:assert test="count(auc:ControlSystemType) &gt;= 0">element "auc:ControlSystemType" is OPTIONAL</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[auc:Plants]/auc:Plants/auc:HeatingPlants/auc:HeatingPlant/auc:ControlSystemTypes/auc:ControlSystemType">
       <sch:assert test="not(auc:Analog)">element "auc:Analog" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="count(auc:Digital) &gt;= 0">element "auc:Digital" is OPTIONAL</sch:assert>
       <sch:assert test="not(auc:Other)">element "auc:Other" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="count(auc:Pneumatic) &gt;= 0">element "auc:Pneumatic" is OPTIONAL</sch:assert>
     </sch:rule>
-    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[auc:Plants]/auc:Plants/auc:HeatingPlants/auc:HeatingPlant/auc:ControlSystemType/auc:Digital">
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[auc:Plants]/auc:Plants/auc:HeatingPlants/auc:HeatingPlant/auc:ControlSystemTypes/auc:ControlSystemType/auc:Digital">
       <sch:assert test="not(auc:CommunicationProtocol)">element "auc:CommunicationProtocol" is NOT RECOMMENDED</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[auc:Plants]/auc:Plants/auc:HeatingPlants/auc:HeatingPlant/auc:DistrictHeating">
@@ -3244,7 +5192,7 @@
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[not(auc:Plants)]">
       <sch:assert test="count(auc:HVACControlSystemTypes) &gt;= 0">element "auc:HVACControlSystemTypes" is OPTIONAL</sch:assert>
       <sch:assert test="count(auc:HeatingAndCoolingSystems) &gt;= 0">element "auc:HeatingAndCoolingSystems" is OPTIONAL</sch:assert>
-      <sch:assert test="count(auc:LinkedPremises) &gt;= 0">element "auc:LinkedPremises" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:LinkedPremises) &gt;= 1">element "auc:LinkedPremises" is REQUIRED</sch:assert>
       <sch:assert test="count(auc:OtherHVACSystems) &gt;= 0">element "auc:OtherHVACSystems" is OPTIONAL</sch:assert>
       <sch:assert test="not(auc:Plants)">element "auc:Plants" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="count(auc:PrimaryHVACSystemType) &gt;= 0">element "auc:PrimaryHVACSystemType" is OPTIONAL</sch:assert>
@@ -3348,12 +5296,9 @@
       <sch:assert test="not(auc:CompressorStaging)">element "auc:CompressorStaging" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="not(auc:CompressorType)">element "auc:CompressorType" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="not(auc:CondenserPlantIDs)">element "auc:CondenserPlantIDs" is NOT RECOMMENDED</sch:assert>
-      <sch:assert test="count(auc:DXSystemType) &gt;= 1">element "auc:DXSystemType" is REQUIRED</sch:assert>
+      <sch:assert test="not(auc:DXSystemType)">element "auc:DXSystemType" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="not(auc:Refrigerant)">element "auc:Refrigerant" is NOT RECOMMENDED</sch:assert>
       <sch:assert test="not(auc:RefrigerantChargeFactor)">element "auc:RefrigerantChargeFactor" is NOT RECOMMENDED</sch:assert>
-    </sch:rule>
-    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[not(auc:Plants)]/auc:HeatingAndCoolingSystems/auc:CoolingSources/auc:CoolingSourceType/auc:DX/auc:DXSystemType">
-      <sch:assert test="contains('_Packaged terminal heat pump (PTHP)_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Packaged terminal heat pump (PTHP)"</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[not(auc:Plants)]/auc:HeatingAndCoolingSystems/auc:CoolingSources/auc:Location">
       <sch:assert test="contains('_Attic_ _Closet_ _Exterior_ _Garage_ _Interior_ _Mechanical Floor_ _Mechanical Room_ _Other_ _Penthouse_ _Roof_ _Unknown_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Attic", "Closet", "Exterior", "Garage", "Interior", "Mechanical Floor", "Mechanical Room", "Other", "Penthouse", "Roof", or "Unknown"</sch:assert>
@@ -3875,7 +5820,7 @@
       <sch:assert test="not(auc:VentilationControlMethods)">element "auc:VentilationControlMethods" is NOT RECOMMENDED</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[not(auc:Plants)]/auc:PrimaryHVACSystemType">
-      <sch:assert test="contains('_Dedicated Outdoor Air System_ _Four Pipe Fan Coil Unit_ _Ground Source Heat Pump_ _Packaged Rooftop Air Conditioner_ _Packaged Rooftop Heat Pump_ _Packaged Rooftop VAV with Electric Reheat_ _Packaged Rooftop VAV with Hot Water Reheat_ _Packaged Terminal Air Conditioner_ _Packaged Terminal Heat Pump_ _VAV with Electric Reheat_ _VAV with Hot Water Reheat_ _Ventilation Only_ _Warm Air Furnace_ _Water Loop Heat Pump_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Dedicated Outdoor Air System", "Four Pipe Fan Coil Unit", "Ground Source Heat Pump", "Packaged Rooftop Air Conditioner", "Packaged Rooftop Heat Pump", "Packaged Rooftop VAV with Electric Reheat", "Packaged Rooftop VAV with Hot Water Reheat", "Packaged Terminal Air Conditioner", "Packaged Terminal Heat Pump", "VAV with Electric Reheat", "VAV with Hot Water Reheat", "Ventilation Only", "Warm Air Furnace", or "Water Loop Heat Pump"</sch:assert>
+      <sch:assert test="contains('_Chilled Beam_ _Dedicated Outdoor Air System_ _Four Pipe Fan Coil Unit_ _Ground Source Heat Pump_ _Other_ _Packaged Rooftop Air Conditioner_ _Packaged Rooftop Heat Pump_ _Packaged Rooftop VAV with Electric Reheat_ _Packaged Rooftop VAV with Hot Water Reheat_ _Packaged Terminal Air Conditioner_ _Packaged Terminal Heat Pump_ _VAV with Electric Reheat_ _VAV with Hot Water Reheat_ _VRF Terminal Unit_ _Ventilation Only_ _Warm Air Furnace_ _Water Loop Heat Pump_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Chilled Beam", "Dedicated Outdoor Air System", "Four Pipe Fan Coil Unit", "Ground Source Heat Pump", "Other", "Packaged Rooftop Air Conditioner", "Packaged Rooftop Heat Pump", "Packaged Rooftop VAV with Electric Reheat", "Packaged Rooftop VAV with Hot Water Reheat", "Packaged Terminal Air Conditioner", "Packaged Terminal Heat Pump", "VAV with Electric Reheat", "VAV with Hot Water Reheat", "VRF Terminal Unit", "Ventilation Only", "Warm Air Furnace", or "Water Loop Heat Pump"</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:HVACSystems/auc:HVACSystem[not(auc:Plants)]/auc:UserDefinedFields">
       <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
@@ -4652,6 +6597,7 @@
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:PlugLoads/auc:PlugLoad[auc:PlugLoadType/text() = 'Kitchen Equipment']/auc:UserDefinedFields">
       <sch:assert test="count(auc:UserDefinedField) &gt;= 0">element "auc:UserDefinedField" is OPTIONAL</sch:assert>
+      <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Gross Floor Area Is Not Applicable']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Gross Floor Area Is Not Applicable']/auc:FieldValue" is OPTIONAL</sch:assert>
       <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Gross Floor Area']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Gross Floor Area']/auc:FieldValue" is OPTIONAL</sch:assert>
       <sch:assert test="count(auc:UserDefinedField[auc:FieldName/text() = 'Plug Load Peak Power Is Not Applicable']/auc:FieldValue) &gt;= 0">element "auc:UserDefinedField[auc:FieldName/text() = 'Plug Load Peak Power Is Not Applicable']/auc:FieldValue" is OPTIONAL</sch:assert>
     </sch:rule>
@@ -4660,7 +6606,10 @@
       <sch:assert test="count(auc:FieldValue) &gt;= 1">element "auc:FieldValue" is REQUIRED</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:PlugLoads/auc:PlugLoad[auc:PlugLoadType/text() = 'Kitchen Equipment']/auc:UserDefinedFields/auc:UserDefinedField/auc:FieldName">
-      <sch:assert test="contains('_Gross Floor Area_ _Plug Load Peak Power Is Not Applicable_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Gross Floor Area" or "Plug Load Peak Power Is Not Applicable"</sch:assert>
+      <sch:assert test="contains('_Gross Floor Area_ _Gross Floor Area Is Not Applicable_ _Plug Load Peak Power Is Not Applicable_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "Gross Floor Area", "Gross Floor Area Is Not Applicable", or "Plug Load Peak Power Is Not Applicable"</sch:assert>
+    </sch:rule>
+    <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:PlugLoads/auc:PlugLoad[auc:PlugLoadType/text() = 'Kitchen Equipment']/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Gross Floor Area Is Not Applicable']/auc:FieldValue">
+      <sch:assert test="contains('_false_ _true_', concat('_', text(), '_'))">text "<sch:value-of select="text()"/>": element "text()" MUST be "false" or "true"</sch:assert>
     </sch:rule>
     <sch:rule context="/auc:BuildingSync/auc:Facilities/auc:Facility/auc:Systems/auc:PlugLoads/auc:PlugLoad[auc:PlugLoadType/text() = 'Kitchen Equipment']/auc:UserDefinedFields/auc:UserDefinedField[auc:FieldName/text() = 'Gross Floor Area']/auc:FieldValue">
       <sch:assert test="(number(text()) = text()) and (number() &gt;= 0)">text "<sch:value-of select="text()"/>": element "text()" MUST be a number and MUST be greater than or equal to 0</sch:assert>

@@ -17,13 +17,15 @@
 	  					<tr>
 	  						<th>Name</th>
 	  						<th>Schema Version</th>
-                <th>Description</th>
+	  						<th>Schematron File</th>
+                			<th>Description</th>
 	  					</tr>
 						{% for case in public_usecases %}
 						<tr>
 							<td>{{ case.name }}</td>
 							<td>{{ case.schema }}</td>
-              <td>{{ case.description }}</td>
+							<td><a href="{% url 'download_usecase_file' case.id %}">Download File</a>
+              				<td>{{ case.description }}</td>
 						</tr>
 						{% endfor %}
 					</table>
@@ -45,8 +47,9 @@
 								<td>{{ case.make_public }}</td>
 								<td>
 									<a href="{% url 'use_case_update' case.id %}">Edit</a> |
-									<a href="{% url 'use_case_delete' case.id %}">Delete</a>
-                                    {% if case.parsing_errors %}  <span class="red pad-lr-10"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Parsing Errors</span> {% endif %}
+									<a href="{% url 'use_case_delete' case.id %}">Delete</a> |
+									<a href="{% url 'download_usecase_file' case.id %}">Download File</a>
+                                    
 								</td>
 
 							</tr>
