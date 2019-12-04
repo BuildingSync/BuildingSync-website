@@ -37,10 +37,11 @@
             <form role="form" method="post">
               {% csrf_token %}
               {% bootstrap_form load_xml_example_form %}
-              {% buttons submit='OK' reset="Cancel" %}
-              {% endbuttons %}
-              <div class="pull-right"><a href="{% url 'download_examples' %}">Download Example Files</a></div><br/>
-              <div class="pull-right"><a href="https://github.com/BuildingSync/schema/tree/develop/examples">View More XML Examples <i class="fa fa-external-link" aria-hidden="true"></i></a></div>
+
+              <button class="btn btn-default" type="submit">Validate</button>
+              <button class="btn btn-default" type="submit" name="download">Download Examples</button>
+
+              <div class="pull-right pad-top-20"><a href="https://github.com/BuildingSync/schema/tree/develop/examples">View More XML Examples <i class="fa fa-external-link" aria-hidden="true"></i></a></div>
             </form>
           </div>
         </div>

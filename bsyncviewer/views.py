@@ -215,27 +215,45 @@ def validator(request):
             tmp_file.close()
 
         else:
-            f = open(request.POST['file_name'], 'r')
-            filename = os.path.basename(request.POST['file_name'])
-            filepath = request.POST['file_name']
+            if 'download' not in request.POST:
+                # validate file
+                filename = os.path.basename(request.POST['file_name'])
+                # get file in the correct folder (by schema version)
+                filepath = os.path.join(
+                os.path.abspath(os.path.dirname(__file__)), 'lib', 'validator', 'examples', 'schema' + request.POST['schema_version'], filename
+                )
 
-        # print("FILENAME: {}".format(filename))
-        # print("FORM TYPE: {}".format(form_type))
+                f = open(filepath, 'r')
 
-        workflow = ValidationWorkflow(f, filepath, version)
-        validation_results = workflow.validate_all()
+        if 'download' in request.POST:
+            file_path = os.path.join(
+                os.path.abspath(os.path.dirname(__file__)), 'lib', 'validator', 'examples', 'schema' + request.POST['schema_version'], 'example_files.zip'
+            )
 
-        # print(validation_results)
+            if os.path.exists(file_path):
+                with open(file_path, 'rb') as fh:
+                    response = HttpResponse(fh.read(), content_type='application/force-download')
+                    response['Content-Disposition'] = 'attachment; filename="%s"' % os.path.basename(
+                        file_path)
+                    return response
+            raise Http404
 
-        # cleanup file after validation
-        if form_type == 'file':
-            os.unlink(tmp_file.name)
+        else:
 
-        return render(request, 'validator_results.html', {
-            'validation_results': validation_results,
-            'filename': filename,
-            'schema_version': version
-        })
+            workflow = ValidationWorkflow(f, filepath, version)
+            validation_results = workflow.validate_all()
+
+            # print(validation_results)
+
+            # cleanup file after validation
+            if form_type == 'file':
+                os.unlink(tmp_file.name)
+
+            return render(request, 'validator_results.html', {
+                'validation_results': validation_results,
+                'filename': filename,
+                'schema_version': version
+            })
 
     else:
         context['load_xml_{}_form'.format(form_type)] = form

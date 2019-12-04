@@ -1,15 +1,14 @@
 import os
 
 from django import forms
+from django.conf import settings
 
 from .models.schema import Schema
-
-SCHEMA_DEFAULT_VERSION = 0.3
-
+DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
 class LoadXMLFile(forms.Form):
     schema_version = forms.ModelChoiceField(queryset=Schema.objects.all(), empty_label=None,
-                                            to_field_name='version', initial=SCHEMA_DEFAULT_VERSION, required=True)
+                                            to_field_name='version', initial=DEFAULT_SCHEMA_VERSION, required=True)
     file = forms.FileField(label='XML File', required=True)
     form_type = forms.CharField(widget=forms.HiddenInput(), initial='file')
 
@@ -18,10 +17,10 @@ class LoadXMLExample(forms.Form):
     schema_version = forms.ModelChoiceField(queryset=Schema.objects.all(),
                                             empty_label=None,
                                             to_field_name='version',
-                                            initial=SCHEMA_DEFAULT_VERSION)
+                                            initial=DEFAULT_SCHEMA_VERSION)
     file_name = forms.FilePathField(
         path=os.path.join(
-            os.path.abspath(os.path.dirname(__file__)), 'lib', 'validator', 'examples'
+            os.path.abspath(os.path.dirname(__file__)), 'lib', 'validator', 'examples', 'schema' + str(DEFAULT_SCHEMA_VERSION)
         ),
         recursive=False,
         match=r'\.xml$',
