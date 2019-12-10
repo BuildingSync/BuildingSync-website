@@ -27,22 +27,28 @@
       <div class="container">
           <div class="collapse navbar-collapse" id="myNavbar">
               <ul class="nav navbar-nav">
+                  <li class="{% active_page request 'datadictionaryelement'%}">
+                      <a href="{% url 'dictionary' %}">
+                          <i class="fa fa-search" aria-hidden="true"></i>
+                          Schema Viewer
+                      </a>
+                  </li>
                   <li class="{% active_page request 'cases'%}">
                       <a href="{% url 'cases' %}">
-                          <i class="fa fa-search" aria-hidden="true"></i>
+                          <i class="fa fa-clone" aria-hidden="true"></i>
                           Use Cases
                       </a>
                   </li>
-                    <li class="{% active_page request 'datadictionaryelement'%}">
-                        <a href="{% url 'dictionary' %}">
-                            <i class="fa fa-book" aria-hidden="true"></i>
-                            Schema Viewer
-                        </a>
-                    </li>
                   <li class="{% active_page request 'validator'%}">
                       <a href="{% url 'validator' %}">
                           <i class="fa fa-file-code-o" aria-hidden="true"></i>
                           Validator
+                      </a>
+                  </li>
+                  <li class="{% active_page request 'bsync'%}">
+                      <a href="https://buildingsync.net/index.html">
+                        <i class="fa fa-building" aria-hidden="true"></i>
+                        BuildingSync Website
                       </a>
                   </li>
               </ul>

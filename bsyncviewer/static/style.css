@@ -360,3 +360,8 @@ form a, form a:hover {
 ul.errorlist li{
   color: red;
 }
+.big-icon {
+    padding: 5px 30px;
+    font-size:100px;
+    color: #2db1a6;
+}
