@@ -220,7 +220,7 @@ def validator(request):
                 filename = os.path.basename(request.POST['file_name'])
                 # get file in the correct folder (by schema version)
                 filepath = os.path.join(
-                os.path.abspath(os.path.dirname(__file__)), 'lib', 'validator', 'examples', 'schema' + request.POST['schema_version'], filename
+                    os.path.abspath(os.path.dirname(__file__)), 'lib', 'validator', 'examples', 'schema' + request.POST['schema_version'], filename
                 )
 
                 f = open(filepath, 'r')
@@ -287,18 +287,18 @@ def download_usecase_example(request):
             return response
     raise Http404
 
+
 def download_usecase_file(request, pk):
     use_case = UseCase.objects.get(pk=pk)
     the_file = use_case.import_file
-    filename = use_case.name.replace(' ', '_')
-   
+
     if os.path.exists(the_file.path):
         with open(the_file.path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type='application/force-download')
             response['Content-Disposition'] = 'attachment; filename="%s"' % os.path.basename(
                 the_file.path)
             return response
-    raise Http404    
+    raise Http404
 
 
 @login_required

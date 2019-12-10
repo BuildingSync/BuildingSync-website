@@ -599,9 +599,9 @@ class Command(BaseCommand):
                     term=term['bedes_term']
                 )
                 # print("THE TERM: {}".format(the_term))
-                the_term.category=term['bedes_category']
-                the_term.definition=term['bedes_definition']
-                the_term.url=term['bedes_url']
+                the_term.category = term['bedes_category']
+                the_term.definition = term['bedes_definition']
+                the_term.url = term['bedes_url']
                 the_term.save()
             # if mapping Words, find and save all word mappings
             if term['matched_term_URL'] != "":
@@ -623,9 +623,9 @@ class Command(BaseCommand):
                             content_uuid=match['Content-UUID'],
                             term=match['Term']
                         )
-                        the_term.category=match['Category']
-                        the_term.definition=definition
-                        the_term.url=item
+                        the_term.category = match['Category']
+                        the_term.definition = definition
+                        the_term.url = item
                         the_term.save()
 
             # same with matched word
@@ -646,9 +646,9 @@ class Command(BaseCommand):
                             content_uuid=match['Content-UUID'],
                             term=match['Term']
                         )
-                        the_term.category=match['Category']
-                        the_term.definition=definition
-                        the_term.url=item
+                        the_term.category = match['Category']
+                        the_term.definition = definition
+                        the_term.url = item
                         the_term.save()
 
         # rewind

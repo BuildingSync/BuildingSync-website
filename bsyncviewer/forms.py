@@ -6,6 +6,7 @@ from django.conf import settings
 from .models.schema import Schema
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
+
 class LoadXMLFile(forms.Form):
     schema_version = forms.ModelChoiceField(queryset=Schema.objects.all(), empty_label=None,
                                             to_field_name='version', initial=DEFAULT_SCHEMA_VERSION, required=True)

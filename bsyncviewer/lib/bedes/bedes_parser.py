@@ -1,6 +1,5 @@
 import json
 import os
-import re
 from collections import defaultdict, OrderedDict, Mapping
 
 import xmltodict
