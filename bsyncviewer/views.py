@@ -1,5 +1,6 @@
 import json
 import os
+import subprocess
 import tempfile
 
 from django.conf import settings
@@ -78,9 +79,14 @@ class ValidatorApi(views.APIView):
 
 
 def index(request):
-    context = {
-    'app_version': settings.APP_VERSION
-    }
+
+    FILE_DIR = os.path.dirname(os.path.abspath(__file__))
+    try:
+        version = subprocess.check_output(['git', 'describe', '--tags'], cwd=FILE_DIR).decode('utf-8').strip()
+    except Exception:
+        version = '?'
+
+    context = {'app_version': version}
     return render(request, 'index.html', context)
 
 

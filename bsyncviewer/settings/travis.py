@@ -48,7 +48,7 @@ LOGGING = {
     },
 }
 
-DEFAULT_SCHEMA_VERSION = '1.0.0'
+DEFAULT_SCHEMA_VERSION = '2.0.0-pr2'
 
 with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), '../app_version.txt')) as v_file:
     APP_VERSION = v_file.read()
