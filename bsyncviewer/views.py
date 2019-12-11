@@ -78,7 +78,9 @@ class ValidatorApi(views.APIView):
 
 
 def index(request):
-    context = {}
+    context = {
+    'app_version': settings.APP_VERSION
+    }
     return render(request, 'index.html', context)
 
 

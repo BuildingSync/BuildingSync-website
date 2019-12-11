@@ -365,3 +365,11 @@ ul.errorlist li{
     font-size:100px;
     color: #2db1a6;
 }
+#app-version {
+  font-size:10px;
+  text-align: right;
+  color: #333;
+  padding-top:20px;
+  padding-right:10px;
+  padding-left: 80%;
+}
