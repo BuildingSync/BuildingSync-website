@@ -10,6 +10,7 @@ from django.urls import reverse
 from bsyncviewer.models.attribute import Attribute
 from bsyncviewer.models.bedes_models import BedesEnumeration, BedesTerm, BedesMapping
 from bsyncviewer.models.schema import Schema
+from django.conf import settings
 
 # Use a custom version that is not an actual version to prevent overwriting saved BEDES mappings
 TEST_SCHEMA_VERSION = '0.0.1'
@@ -42,10 +43,11 @@ class BsyncviewerViewTests(TestCase):
     #     # clean-up files on disk
     #     self.schema.delete()
 
+    # this should redirect to the default schema version
     def test_dictionary_404_when_no_schema(self):
         response = self.client.get(reverse('dictionary'))
         print('Testing Dictionary page redirect')
-        redirect_url = '/dictionary/{}/'.format('1.0.0')
+        redirect_url = '/dictionary/{}/'.format(settings.DEFAULT_SCHEMA_VERSION)
         self.assertRedirects(response, redirect_url, target_status_code=404)
 
     def test_bedes_ajax_call(self):
