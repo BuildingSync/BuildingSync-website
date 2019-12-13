@@ -95,6 +95,11 @@ def use_case_mappings(request):
     return render(request, 'use_case_mappings.html', context)
 
 
+def examples(request):
+    context = {}
+    return render(request, 'examples.html', context)
+
+
 def use_cases(request):
     user_usecases = {}
     if request.user.is_authenticated:

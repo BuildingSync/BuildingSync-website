@@ -35,6 +35,7 @@ urlpatterns = [
     re_path('download_usecase_file/(?P<pk>[0-9]+)/$', views.download_usecase_file, name='download_usecase_file'),
     path('validator', views.validator, name='validator'),
     path('dictionary', views.redirect_data_dictionary, name='dictionary'),
+    path('examples', views.examples, name='examples'),
     re_path(r'^dictionary/(?P<version>[0-9a-zA-Z_\.-]+)/$', views.dictionary, name='dictionaryversion'),
     re_path(r'^ajax/enum/$', views.retrieve_additional_dictionary_data, name='get_additional_data'),
     re_path(r'^api/', include(router.urls)),
