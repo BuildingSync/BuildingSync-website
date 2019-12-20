@@ -5,6 +5,7 @@
 Date Range: 11/19/19 - 12/20/19
 
 Closed Issues and Features:
+- Feature [#38]( https://github.com/BuildingSync/selection-tool/issues/38 ), New Test Suite Page (<url>/examples)
 - Feature [#22]( https://github.com/BuildingSync/selection-tool/issues/22 ), Add selection-tool version to the webpage
 - Fixed [#23]( https://github.com/BuildingSync/selection-tool/issues/23 ), Support unusual characters in use case names
 - Fixed [#25]( https://github.com/BuildingSync/selection-tool/issues/25 ), test out script to generate permission schematron document
