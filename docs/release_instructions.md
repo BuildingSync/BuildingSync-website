@@ -2,7 +2,7 @@
 
 Follow the list below for a new release:
 
-1. Update version file (./app_version.txt). Update version to next appropriate version. Always use MAJOR.MINOR.RELEASE.
+1. Update version file (/app_version.txt). Update version to next appropriate version. Always use MAJOR.MINOR.RELEASE.
 2. Run the ``docs/scripts/change_log.py`` script and add the changes to the CHANGELOG.md file for the range of time between last release and this release. Only add the *Closed Issues*. Also make sure that all the pull requests have a related Issue in order to be included in the change log.
 
 ```
