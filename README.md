@@ -181,3 +181,13 @@ Follow these steps to add a new schema version to the selection tool:
 1. Create XML example files and place them in the `lib/validator/examples/schema<VERSION>` directory. 
 1. Test the validator with the new XML example files.
 1. Reparse bedes terms to map them to the new schema following the steps in the BEDES section above.
+
+### Adding Examples from the TestSuite
+
+Follow these steps to add new example tables from the TestSuite
+
+1. Clone the [TestSuite](https://github.com/BuildingSync/TestSuite) repo
+2. Install [pandoc](https://pandoc.org/installing.html)
+3. Convert the TestSuite README to html:
+    ``` pandoc README.md -s -o README.html ```
+4. Copy the tables part of the README.html and paste to replace the old content in ```bsyncviewer/templates/examples.html```.
