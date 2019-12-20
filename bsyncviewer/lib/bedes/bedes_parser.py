@@ -1,6 +1,6 @@
 import json
 import os
-from collections import defaultdict, OrderedDict
+from collections import defaultdict, OrderedDict, Mapping
 
 import xmltodict
 
@@ -108,7 +108,21 @@ class BedesParser(object):
                 assembled['Term-Definition'] = None
                 if t['Definition']:
                     if t['Definition'].get('p'):
-                        assembled['Term-Definition'] = t['Definition']['p']
+                        # remove html tags if they happen to be in the definition (ex: email address)
+                        the_def = t['Definition']['p']
+                        # check for ordered dict (when html elements are found in the definition)
+                        if isinstance(the_def, Mapping):
+                            # print("EDGE CASE: definition is a dict: {}".format(the_def))
+                            if 'a' in the_def.keys():
+                                # edge case: <a>.  grab text element
+                                assembled['Term-Definition'] = the_def['#text'] + ' ' + the_def['a']['#text']
+                                # print("DEF: {}".format(the_def['#text'] + ' ' + the_def['a']['#text']))
+                            elif 'span' in the_def.keys():
+                                # edge case: <span>. grab span.text element
+                                assembled['Term-Definition'] = the_def['span']['#text']
+                                # print("DEF: {}".format(the_def['span']['#text']))
+                        else:
+                            assembled['Term-Definition'] = the_def
                 self.terms.append(assembled)
 
     def _cache_enumerations(self):

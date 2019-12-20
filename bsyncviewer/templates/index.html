@@ -12,45 +12,51 @@
 
         <header class="major">
         	<div class="row">
-	            <div class="col-md-4">
-	            	<h2>Use Cases</h2>
-	            	<p>Browse the BuildingSync<sup>&reg;</sup> schema and existing use cases of the schema.</p>
-	            	<p>Create new use cases that include specific parts of the BuildingSync schema.</p>
-	            	<a class="btn btn-accent" href="{% url 'cases' %}" role="button">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                        Use Cases
-                    </a>
+        		<div class="col-md-4">
+        			<div class="pad-lr-20">
+		            	<h2>Schema</h2>
+		            	<div class="big-icon"><i class="fa fa-list-alt"></i></div>
+		            	<p>Browse the BuildingSync<sup>&reg;</sup> schema elements.</p>
+	                </div>
 	            </div>
 	            <div class="col-md-4">
-	            	<h2>Validator</h2>
-	            	<p>Validate an xml against the BuildingSync schema or existing use cases of the schema.</p>
-	            		<a class="btn btn-accent" href="{% url 'validator' %}" role="button">
+	            	<div class="pad-lr-20">
+		            	<h2>Use Cases</h2>
+		            	<div class="big-icon"><i class="fa fa-copy"></i></div>
+		            	<p>Browse the BuildingSync<sup>&reg;</sup> schema and existing use cases of the schema.</p>
+		            	<p>Create new use cases that include specific parts of the BuildingSync schema.</p>
+	                </div>
+	            </div>
+	            <div class="col-md-4">
+	            	<div class="pad-lr-20">
+		            	<h2>Validator</h2>
+		            	<div class="big-icon"><i class="fa fa-check-circle"></i></div>
+		            	<p>Validate an XML against the BuildingSync schema or existing use cases of the schema.</p>
+	                </div>
+	            </div>
+        	</div>
+        	<div class="row">
+        		<div class="col-md-4">
+        			<a class="btn btn-accent pad-lr-50" href="{% url 'dictionary' %}" role="button">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                        Schema Viewer
+                    </a>
+        		</div>
+        		<div class="col-md-4">
+        			<a class="btn btn-accent pad-lr-50" href="{% url 'cases' %}" role="button">
+                        <i class="fa fa-copy" aria-hidden="true"></i>
+                        Use Cases
+                    </a>
+        		</div>
+        		<div class="col-md-4">
+        			<a class="btn btn-accent pad-lr-50" href="{% url 'validator' %}" role="button">
                         <i class="fa fa-file-code-o" aria-hidden="true"></i>
                         Validate XML
                     </a>
-	            </div>
-	            <div class="col-md-4">
-	            	<h2>Resources</h2>
-                	<ul class="list-group">
-					 	<li class="list-group-item list-group-item-accent">
-					   		<a href="https://buildingsync.net/index.html">
-	                        <i class="fa fa-globe" aria-hidden="true"></i> BuildingSync
-	                    	</a>
-	                  	</li>
-	                  	<li class="list-group-item list-group-item-accent">
-	                  		<a href="{% url 'dictionary' %}">
-	                        <i class="fa fa-book" aria-hidden="true"></i> Data Dictionary
-	                    	</a>
-						</li>
-						<li class="list-group-item list-group-item-accent">
-	                  		<a href="{% url 'use_case_mappings' %}">
-	                        <i class="fa fa-book" aria-hidden="true"></i> Adding and Validating Use Cases
-	                    	</a>
-						</li>
-					</ul>
-	            </div>
+        		</div>
         	</div>
         </header>
     </div>
+    <div id="app-version">App Version: {{ app_version }}</div>
 
 {% endblock content_notitle %}

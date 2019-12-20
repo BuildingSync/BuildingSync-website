@@ -592,14 +592,17 @@ class Command(BaseCommand):
         for term in bedes_mappings:
             # get_or_create here b/c CSV structure maps schema attributes to bedes terms
             # there could be multiple listings of the same bedes term
+            # print("TERM: {}".format(term))
             if term['distance'] != "":
-                BedesTerm.objects.get_or_create(
+                the_term, _ = BedesTerm.objects.get_or_create(
                     content_uuid=term['bedes_content_uuid'],
-                    term=term['bedes_term'],
-                    category=term['bedes_category'],
-                    definition=term['bedes_definition'],
-                    url=term['bedes_url']
+                    term=term['bedes_term']
                 )
+                # print("THE TERM: {}".format(the_term))
+                the_term.category = term['bedes_category']
+                the_term.definition = term['bedes_definition']
+                the_term.url = term['bedes_url']
+                the_term.save()
             # if mapping Words, find and save all word mappings
             if term['matched_term_URL'] != "":
                 items = term['matched_term_URL'].split(',')
@@ -616,13 +619,14 @@ class Command(BaseCommand):
                             definition = match['Definition']['p']
                         else:
                             definition = match['Definition']
-                        BedesTerm.objects.get_or_create(
+                        the_term, _ = BedesTerm.objects.get_or_create(
                             content_uuid=match['Content-UUID'],
-                            term=match['Term'],
-                            category=match['Category'],
-                            definition=definition,
-                            url=item
+                            term=match['Term']
                         )
+                        the_term.category = match['Category']
+                        the_term.definition = definition
+                        the_term.url = item
+                        the_term.save()
 
             # same with matched word
             if term['matched_word_example_URL'] != "":
@@ -638,13 +642,14 @@ class Command(BaseCommand):
                             definition = match['Definition']['p']
                         else:
                             definition = match['Definition']
-                        BedesTerm.objects.get_or_create(
+                        the_term, _ = BedesTerm.objects.get_or_create(
                             content_uuid=match['Content-UUID'],
-                            term=match['Term'],
-                            category=match['Category'],
-                            definition=definition,
-                            url=item
+                            term=match['Term']
                         )
+                        the_term.category = match['Category']
+                        the_term.definition = definition
+                        the_term.url = item
+                        the_term.save()
 
         # rewind
         csv_file.seek(0)
@@ -683,7 +688,7 @@ class Command(BaseCommand):
                     # then add new mappings
                     for i in terms:
                         bedes_term = i
-                        bmap = BedesMapping(
+                        bmap, _ = BedesMapping.objects.get_or_create(
                             bedesTerm=bedes_term,
                             attribute=attr,
                             match_type=term['match_type']

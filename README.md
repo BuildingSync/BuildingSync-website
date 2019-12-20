@@ -171,3 +171,13 @@ To parse and map a new BEDES version:
     ```
     Note that you must run this command without the --save_to_db flag first, in order to create the CSV files.
 
+### Adding a new BuildingSync Schema Version
+
+Follow these steps to add a new schema version to the selection tool:
+
+1. Add the schema file in the admin interface.  Must have admin privileges.  The schema will get automatically parsed.
+1. Convert existing use cases schematron files to the new schema.  Add the new use cases.
+1. When the use cases have been reviewed, make them public in the admin interface.
+1. Create XML example files and place them in the `lib/validator/examples/schema<VERSION>` directory. 
+1. Test the validator with the new XML example files.
+1. Reparse bedes terms to map them to the new schema following the steps in the BEDES section above.
