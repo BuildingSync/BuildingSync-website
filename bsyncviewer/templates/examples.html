@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}BuildingSync Schema Viewer{% endblock %}
+
+
+{% block content_notitle %}
+
+  <div class="container">
+    <header class="major">
+      <h2>Examples</h2>
+    </header>
+
+    <!--start copy from TestSuite README -->
+    <h2 id="hvac-system-examples">HVAC System Examples</h2>
+    <table>
+    <thead>
+    <tr class="header">
+    <th>System Type</th>
+    <th>Level 000</th>
+    <th>Level 100</th>
+    <th>Level 200</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>PSZ System</td>
+    <td></td>
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/master/tests/schema2.0.0-pr2/Level_100/inputs/L100_Instance1.xml">L100_Instance1.xml</a></td>
+    <td></td>
+    </tr>
+    <tr class="even">
+    <td>VAV</td>
+    <td></td>
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/master/tests/schema2.0.0-pr2/Level_100/inputs/L100_Instance2.xml">L100_Instance2.xml</a></td>
+    <td></td>
+    </tr>
+    <tr class="odd">
+    <td>Shared Boiler</td>
+    <td></td>
+    <td>TODO</td>
+    <td></td>
+    </tr>
+    <tr class="even">
+    <td>DOAS &amp; Radiant</td>
+    <td></td>
+    <td>TODO</td>
+    <td></td>
+    </tr>
+    <tr class="odd">
+    <td>Inferred from OpenStudio Standards</td>
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/master/tests/schema2.0.0-pr2/Level_000/inputs/L000_Instance1.xml">L000_Instance1.xml</a></td>
+    <td></td>
+    <td></td>
+    </tr>
+    <tr class="even">
+    <td></td>
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/master/tests/schema2.0.0-pr2/Level_000/inputs/L000_Instance1.xml">L000_Instance2.xml</a></td>
+    <td></td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="lighting-system-examples">Lighting System Examples</h2>
+    <table>
+    <thead>
+    <tr class="header">
+    <th>System Type</th>
+    <th>Level 000</th>
+    <th>Level 100</th>
+    <th>Level 200</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    </table>
+    <h2 id="premise-examples">Premise Examples</h2>
+    <table>
+    <thead>
+    <tr class="header">
+    <th>System Type</th>
+    <th>Level 000</th>
+    <th>Level 100</th>
+    <th>Level 200</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    </table>
+    <!--end copy from TestSuite README -->
+
+  </div>
+
+{% endblock content_notitle %}

@@ -53,16 +53,16 @@
         {% for name, uc in validation_results.use_cases.items %}
 
           <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="heading{{ name|cut:' '|cut:'#' }}">
+            <div class="panel-heading" role="tab" id="heading{{ name|cut:' '|cut:'#'|cut:'.' }}">
               <h4 class="panel-title">
-                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"  data-parent="#accordion" href="#collapse{{ name|cut:' '|cut:'#' }}" aria-expanded="true"
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"  data-parent="#accordion" href="#collapse{{ name|cut:' '|cut:'#'|cut:'.' }}" aria-expanded="true"
                    aria-controls="collapse">
                   {{ name }} {% if uc.valid is True %} <span class="glyphicon glyphicon-ok green"></span>
                              {% else %} <span class="glyphicon glyphicon-remove red"></span> {% endif %}
                 </a>
               </h4>
             </div>
-            <div id="collapse{{ name|cut:' '|cut:'#' }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ name|cut:' '|cut:'#' }}">
+            <div id="collapse{{ name|cut:' '|cut:'#'|cut:'.' }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ name|cut:' '|cut:'#'|cut:'.' }}">
               <div class="panel-body">
                 <div>
                   {% if uc.valid is True %}

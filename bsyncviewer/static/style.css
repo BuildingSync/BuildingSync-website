@@ -51,6 +51,12 @@ body {
   margin-left: 20px;
 }
 
+.pad-lr-50 {
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-left: 50px;
+}
+
 .pad-left-100 {
   padding-left:100px;
 }
@@ -359,4 +365,17 @@ form a, form a:hover {
 
 ul.errorlist li{
   color: red;
+}
+.big-icon {
+    padding: 5px 30px;
+    font-size:100px;
+    color: #2db1a6;
+}
+#app-version {
+  font-size:10px;
+  text-align: right;
+  color: #333;
+  padding-top:20px;
+  padding-right:10px;
+  padding-left: 80%;
 }
