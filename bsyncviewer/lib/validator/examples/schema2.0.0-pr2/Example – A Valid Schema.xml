@@ -1,6 +1,6 @@
 <auc:BuildingSync xmlns:auc="http://buildingsync.net/schemas/bedes-auc/2019" xsi:schemaLocation="http://buildingsync.net/schemas/bedes-auc/2019 https://github.com/BuildingSync/schema/releases/download/v2.0-pr1/BuildingSync.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<auc:Facilities>
-		<auc:Facility>
+		<auc:Facility ID="Facility1">
 			<auc:Sites>
 				<auc:Site ID="Site1">
 					<auc:PremisesIdentifiers>
@@ -135,16 +135,14 @@
 						<auc:Scenario ID="Baseline">
 							<auc:ScenarioName>Baseline</auc:ScenarioName>
 							<auc:ScenarioType>
-								<auc:PackageOfMeasures>
-									<auc:ReferenceCase IDref="Baseline"/>
+								<auc:PackageOfMeasures ID="PoM1">
 								</auc:PackageOfMeasures>
 							</auc:ScenarioType>
 						</auc:Scenario>
 						<auc:Scenario ID="Scenario1">
 							<auc:ScenarioName>LED Only</auc:ScenarioName>
 							<auc:ScenarioType>
-								<auc:PackageOfMeasures>
-									<auc:ReferenceCase IDref="Baseline"/>
+								<auc:PackageOfMeasures ID="PoM2">
 									<auc:MeasureIDs>
 										<auc:MeasureID IDref="Measure1"/>
 									</auc:MeasureIDs>
@@ -157,7 +155,7 @@
 							</auc:LinkedPremises>
 							<auc:UserDefinedFields>
 								<auc:UserDefinedField>
-									<auc:FieldName>Recommendation Category</auc:FieldName>
+									<auc:FieldName>Recommended Resource Savings Category</auc:FieldName>
 									<auc:FieldValue>Potential Capital Recommendations</auc:FieldValue>
 								</auc:UserDefinedField>
 							</auc:UserDefinedFields>
