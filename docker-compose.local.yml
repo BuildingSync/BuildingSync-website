@@ -42,6 +42,7 @@ services:
       - "80:80"
     volumes:
       - selectiontool_mediadata:/srv/selection-tool/bsyncviewer/media
+      - selectiontool_testsuite:/srv/selection-tool/bsyncviewer/lib/testsuite
     deploy:
       restart_policy:
         condition: on-failure
@@ -52,4 +53,6 @@ volumes:
   selectiontool_pgdata:
     external: true
   selectiontool_mediadata:
+    external: true
+  selectiontool_testsuite:
     external: true

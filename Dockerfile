@@ -14,6 +14,7 @@ RUN apk add --no-cache python3 \
         linux-headers \
         bash \
         bash-completion \
+        git \
         ruby \
         ruby-dev \
         nginx && \
@@ -50,6 +51,12 @@ COPY . /srv/selection-tool/
 
 ### Copy the wait-for-it command to /usr/local
 COPY /docker/wait-for-it.sh /usr/local/wait-for-it.sh
+
+### Copy the GitHub TestSuite repo into the testsuite volume
+WORKDIR /srv/selection-tool/bsyncviewer/lib/testsuite
+RUN cd /srv/selection-tool/bsyncviewer/lib/testsuite
+RUN git clone https://github.com/BuildingSync/TestSuite.git .
+
 
 # nginx configurations - alpine doesn't use the sites-available directory. Put the selection tool
 # configuration file into the /etc/nginx/conf.d/ folder.
