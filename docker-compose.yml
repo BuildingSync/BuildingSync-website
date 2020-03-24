@@ -28,11 +28,8 @@ services:
       - "8080:80"
     volumes:
       - selectiontool_mediadata:/srv/selection-tool/bsyncviewer/media
-      - selectiontool_testsuite:/srv/selection-tool/bsyncviewer/lib/testsuite
 volumes:
   selectiontool_pgdata:
     external: true
   selectiontool_mediadata:
-    external: true
-  selectiontool_testsuite:
     external: true

@@ -43,20 +43,17 @@ WORKDIR /srv/selection-tool
 COPY /requirements.txt /srv/selection-tool/requirements.txt
 RUN pip install -r requirements.txt
 
-#install the schematron-nokogiri gem
-RUN gem install schematron-nokogiri
+#install the schematron-nokogiri gem from BuildingSync org
+git clone https://github.com/BuildingSync/schematron
+RUN cd schematron
+RUN gem build schematron-nokogiri.gemspec
+RUN gem install schematron-nokogiri-0.0.3.gem
 
 ### Copy over the remaining part of the application and some helpers
 COPY . /srv/selection-tool/
 
 ### Copy the wait-for-it command to /usr/local
 COPY /docker/wait-for-it.sh /usr/local/wait-for-it.sh
-
-### Copy the GitHub TestSuite repo into the testsuite volume
-WORKDIR /srv/selection-tool/bsyncviewer/lib/testsuite
-RUN cd /srv/selection-tool/bsyncviewer/lib/testsuite
-RUN git clone https://github.com/BuildingSync/TestSuite.git .
-
 
 # nginx configurations - alpine doesn't use the sites-available directory. Put the selection tool
 # configuration file into the /etc/nginx/conf.d/ folder.

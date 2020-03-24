@@ -31,7 +31,7 @@ This is the repository for the BuildingSync Validator web application.
     git clone https://github.com/BuildingSync/schematron.git
     cd schematron
     gem build schematron-nokogiri.gemspec
-    gem install schematron-nokogiri-0.0.3
+    gem install schematron-nokogiri-0.0.3.gem
 
     ```
 
