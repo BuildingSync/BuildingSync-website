@@ -145,15 +145,43 @@ class ValidationWorkflow(object):
         results = OrderedDict()
         results['valid'] = True
         results['errors'] = []
+        results['infos'] = []
+        results['warnings'] = []
 
         result = subprocess.run(['stron-nokogiri', use_case.import_file.path, self.filepath], stdout=subprocess.PIPE)
         errors = result.stdout.decode('utf-8')
-        results['errors'] = errors.split('\n')
-        results['errors'] = [i for i in results['errors'] if i]
-        print("RESULTS ERROR: {}".format(results['errors']))
+        temp_results = errors.split('\n')
+        temp_results = [i for i in temp_results if i]
+
+        temp_results = self.process_errors(temp_results)
 
         # set valid to valse if errors.count > 0
-        if len(results['errors']) > 0:
+        if len(temp_results['errors']) > 0:
             results['valid'] = False
 
+        results['warnings'] = temp_results['warnings']
+        results['errors'] = temp_results['errors']
+        results['infos'] = temp_results['infos']
+
         return results
+
+    def process_errors(self, results):
+        # separate INFO, WARNING, ERROR
+
+        final_results = OrderedDict()
+        final_results['infos'] = []
+        final_results['warnings'] = []
+        final_results['errors'] = []
+
+        for res in results:
+            if '[INFO]' in res:
+                # append to info
+                final_results['infos'].append(res)
+            elif '[WARNING]' in res:
+                # append to warnings
+                final_results['warnings'].append(res)
+            else:
+                # assume error
+                final_results['errors'].append(res)
+
+        return final_results

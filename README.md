@@ -26,6 +26,15 @@ This is the repository for the BuildingSync Validator web application.
 	```bash
 	pip install -r requirements.txt
 	```
+1.  Install the schematron-nokogiri gem for schematron use case validation.  We are using a forked version to handle OpenStudio Simulation use cases which contain abstract patterns.
+    ```bash
+    git clone https://github.com/BuildingSync/schematron.git
+    cd schematron
+    gem build schematron-nokogiri.gemspec
+    gem install schematron-nokogiri-0.0.3
+
+    ```
+
 1.  Initialize the database:
 	```bash
 	python manage.py migrate
@@ -182,12 +191,35 @@ Follow these steps to add a new schema version to the selection tool:
 1. Test the validator with the new XML example files.
 1. Reparse bedes terms to map them to the new schema following the steps in the BEDES section above.
 
-### Adding Examples from the TestSuite
+### Adding Examples from the TestSuite repo
 
-Follow these steps to add new example tables from the TestSuite
+Follow these steps to add new example tables from the TestSuite repo
 
 1. Clone the [TestSuite](https://github.com/BuildingSync/TestSuite) repo
 2. Install [pandoc](https://pandoc.org/installing.html)
 3. Convert the TestSuite README to html:
     ``` pandoc README.md -s -o README.html ```
 4. Copy the tables part of the README.html and paste to replace the old content in ```bsyncviewer/templates/examples.html```.
+
+### Adding an OpenStudio Simulation Use Case from the TestSuite repo
+
+1. The relevant files are currently on the L000_Schematron branch of the [TestSuite](https://github.com/BuildingSync/TestSuite/tree/L100_Schematron) repo.  Clone the repo locally.
+1. OpenStudio Simulation use case schematron files include patterns from a [library of schematron files](https://github.com/BuildingSync/TestSuite/tree/L100_Schematron/lib).  Copy these files from the TestSuite repo into the selection-tool at the following location: ```bsyncviewer/testsuitelib```.
+1. Open the relevant use case file from the TestSuite repo.  For example: [L00_OpenStudio_Simulation.sch](https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/L000_OpenStudio_Simulation.sch).  Edit the include statements at the top of the file with relative paths to the selection-tool testsuitelib directory.  Save the file.
+    ```bash
+      <include href="../../testsuitelib/rootElements.sch#root.oneOfEachUntilBuilding"/>
+      <include href="../../testsuitelib/rootElements.sch#root.oneOfEachFacilityUntilScenario"/>
+      <include href="../../testsuitelib/siteBuildingElements.sch#sbe.cityStateOrClimateZone"/>
+      <include href="../../testsuitelib/scenarioElements.sch#sc.baseline.ID"/>
+      <include href="../../testsuitelib/scenarioElements.sch#sc.baseline.asPackageOfMeasures"/>
+      <include href="../../testsuitelib/buildingElements.sch#be.L000BuildingInfo"/>
+      <include href="../../testsuitelib/floorElements.sch#fa.oneOfType"/>
+      <include href="../../testsuitelib/floorElements.sch#fa.haveTypeAndValue"/>
+    ```
+1. Add the use case to the selection-tool by browsing to the ```/use_cases``` URL and clicking the *New Use Case* button.
+    1. Fill out the name, description, and schema version
+    1. Upload the file that was modified in the previous step
+    1. Save
+1. Make the use case public from the selection-tool admin interface.
+1. If you have any example files to add to the selection-tool (for example, for the L000 OpenStudio Simulation use case, there are [2 examples files](https://github.com/BuildingSync/TestSuite/tree/L100_Schematron/spec/use_cases/schema2.0.0/examples)), add them in the appropriate schema directory in ```bsyncviewer/lib/validator/examples```. Regenerate the ```example_files.zip``` archive.  This will make the files available as examples at the ```/validator``` URL.  
+1. You can now validate XMLs against the new use case.

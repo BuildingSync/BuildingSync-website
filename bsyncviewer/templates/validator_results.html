@@ -72,8 +72,31 @@
   {#                    <span class="label label-danger pad-10">Invalid</span>#}
                     </h3>
                   {% endif %}
+                  {% if uc.infos %}
+                    <h4>Info<span class="label label-info pad5">{{ uc.infos|length }}</span></h4> 
+                    <table style="table-layout: fixed; ">
+                      {% for item in uc.infos %}
+                        <tr class="wrap-it">
+                          <td width="5%">{{ forloop.counter }}.</td>
+                          <td class="wrap-it">{{ item }}</td>
+                        </tr>
+                      {% endfor %}
+                    </table>
+                  {% endif %}  
+                  {% if uc.warnings %}
+                    <h4>Warnings<span class="label label-warning pad5">{{ uc.warnings|length }}</span></h4> 
+                    <table style="table-layout: fixed; ">
+                      {% for item in uc.warnings %}
+                        <tr class="wrap-it">
+                          <td width="5%">{{ forloop.counter }}.</td>
+                          <td class="wrap-it">{{ item }}</td>
+                        </tr>
+                      {% endfor %}
+                    </table>
+                  {% endif %}
+
                   {%  if uc.valid is False %}
-                    <h4>Issues <span class="label label-danger pad5">{{ uc.errors|length }}</span></h4>
+                    <h4>Errors <span class="label label-danger pad5">{{ uc.errors|length }}</span></h4>
                     <table style="table-layout: fixed; ">
                       {% for err in uc.errors %}
                         <tr class="wrap-it">
