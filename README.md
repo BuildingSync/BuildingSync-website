@@ -62,6 +62,20 @@ This is the repository for the BuildingSync Validator web application.
 	python manage.py reset_schema --schema_version=1.0.0
 	```
 
+### Precommit
+
+This project used `pre-commit <https://pre-commit.com/>`_ to ensure code consistency. To enable pre-commit, run the following from the command line.
+
+```bash
+pip install pre-commit
+pre-commit install
+```
+
+To run pre-commit against the files without calling git commit, then run the following. This is useful when cleaning up the repo before committing.
+
+```bash
+pre-commit run --all-files
+```    
 
 ### Testing
 
