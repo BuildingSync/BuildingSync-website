@@ -1,9 +1,8 @@
+import copy
+import subprocess
 from collections import OrderedDict
 
 import xmlschema
-import copy
-import subprocess
-
 from bsyncviewer.models.schema import Schema
 from bsyncviewer.models.use_case import UseCase
 

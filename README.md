@@ -2,17 +2,17 @@
 
 [![Build Status](https://travis-ci.org/BuildingSync/selection-tool.svg?branch=develop)](https://travis-ci.org/BuildingSync/selection-tool)
 
-This is the repository for the BuildingSync Validator web application. 
+This is the repository for the BuildingSync Validator web application.
 
 ## Installation
 
 1. Clone the repository.
 1. Setup python 3.  You can use a virtual environment:
     ```bash
-    pyenv install 3.6.5 
+    pyenv install 3.6.5
     pyenv virtualenv 3.6.5 bsync-validator-3.6.5
     pyenv local bsync-validator-3.6.3
-    ```   
+    ```
 1. Install PostgreSQL server for local development (if desired)
 	* Once installed, create your local database and user:
 		```bash
@@ -75,7 +75,7 @@ To run pre-commit against the files without calling git commit, then run the fol
 
 ```bash
 pre-commit run --all-files
-```    
+```
 
 ### Testing
 
@@ -114,7 +114,7 @@ To modify an existing schema, click on the edit link.  If changes are made to th
 Authenticated users can add private use cases to the BuildingSync Schema Viewer.  Use cases are represented by a schematron file that defines a set of rules and patterns.
 
 To add a use case, click on the 'Use Case' link in the top navigation bar, then click on the '+ New Use Case' button.
-Select a name and a BuildingSync schema version.  Select your use case definitions schematron file and upload, then click 'Submit'.  
+Select a name and a BuildingSync schema version.  Select your use case definitions schematron file and upload, then click 'Submit'.
 
 Once ready, contact a BuildingSync admin to make the use case public. Public use cases will be available on the 'Validator' page to validate XML files submitted by users.
 
@@ -201,7 +201,7 @@ Follow these steps to add a new schema version to the selection tool:
 1. Add the schema file in the admin interface.  Must have admin privileges.  The schema will get automatically parsed.
 1. Convert existing use cases schematron files to the new schema.  Add the new use cases.
 1. When the use cases have been reviewed, make them public in the admin interface.
-1. Create XML example files and place them in the `lib/validator/examples/schema<VERSION>` directory. 
+1. Create XML example files and place them in the `lib/validator/examples/schema<VERSION>` directory.
 1. Test the validator with the new XML example files.
 1. Reparse bedes terms to map them to the new schema following the steps in the BEDES section above.
 
@@ -235,5 +235,5 @@ Follow these steps to add new example tables from the TestSuite repo
     1. Upload the file that was modified in the previous step
     1. Save
 1. Make the use case public from the selection-tool admin interface.
-1. If you have any example files to add to the selection-tool (for example, for the L000 OpenStudio Simulation use case, there are [2 examples files](https://github.com/BuildingSync/TestSuite/tree/L100_Schematron/spec/use_cases/schema2.0.0/examples)), add them in the appropriate schema directory in ```bsyncviewer/lib/validator/examples```. Regenerate the ```example_files.zip``` archive.  This will make the files available as examples at the ```/validator``` URL.  
+1. If you have any example files to add to the selection-tool (for example, for the L000 OpenStudio Simulation use case, there are [2 examples files](https://github.com/BuildingSync/TestSuite/tree/L100_Schematron/spec/use_cases/schema2.0.0/examples)), add them in the appropriate schema directory in ```bsyncviewer/lib/validator/examples```. Regenerate the ```example_files.zip``` archive.  This will make the files available as examples at the ```/validator``` URL.
 1. You can now validate XMLs against the new use case.

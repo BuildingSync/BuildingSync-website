@@ -1,8 +1,9 @@
 import xmlschema
-
 from bsyncviewer.models.attribute import Attribute
+from bsyncviewer.models.attribute_enumeration_class import (
+    AttributeEnumerationClass
+)
 from bsyncviewer.models.enumeration import Enumeration, EnumerationClass
-from bsyncviewer.models.attribute_enumeration_class import AttributeEnumerationClass
 from django.db import transaction
 
 

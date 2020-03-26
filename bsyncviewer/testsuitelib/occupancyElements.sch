@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://purl.oclc.org/dsdl/schematron">
   <ns prefix="auc" uri="http://buildingsync.net/schemas/bedes-auc/2019"/>
-  <!--  
+  <!--
     For logic that pertains to Occupancy
 -->
-  <!--  
+  <!--
     Check that both the auc:TypicalOccupantUsageValue and auc:TypicalOccupantUsageUnits are specified.
     <severity> error
     <param> parent - an auc:TypicalOccupantUsage element
@@ -18,7 +18,7 @@
   </pattern>
   <!--
     Check that, within an auc:TypicalOccupantUsages element, there is exactly one auc:TypicalOccupantUsage element
-    with the auc:TypicalOccupantUsageUnits = $typUsageUnits passed in as a parameter. 
+    with the auc:TypicalOccupantUsageUnits = $typUsageUnits passed in as a parameter.
     <severity> error
     <param> parent - an auc:TypicalOccupantUsages element
     <param> typUsageUnits - one of the standard enums for auc:TypicalOccupantUsageUnits, such as 'Hours per week'
@@ -30,7 +30,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
     Check that all auc:OccupancyLevel elements have the auc:OccupantQuantityType and auc:OccupantQuantity child elements defined.
     <severity> error
     <param> parent - an auc:OccupancyLevel element
@@ -42,8 +42,8 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
-    Check that, within an auc:OccupancyLevels element, there is exactly one auc:OccupancyLevel element 
+  <!--
+    Check that, within an auc:OccupancyLevels element, there is exactly one auc:OccupancyLevel element
     with the auc:OccupantQuantityType = $occLevelType passed in as a parameter
     <severity> error
     <param> parent - an auc:OccupancyLevels element

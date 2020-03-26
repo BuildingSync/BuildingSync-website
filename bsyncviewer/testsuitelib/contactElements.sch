@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://purl.oclc.org/dsdl/schematron">
-  <!--  
+  <!--
     For logic pertaining to Contact elements.  Parent passed should be an auc:Contact.
 -->
-  <!--  
+  <!--
     Check that the name, email, and phone number are specified for contacts.
     <severity> error
     <param> parent - an auc:Contact element
@@ -21,7 +21,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
     Check that there are atleast two auc:Contact elements within an auc:Facility,
     and that there is atleast one Energy Auditor and one Owner.
     <severity> error
@@ -43,7 +43,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
     Check that there are atleast two auc:Contact elements within an auc:Facility,
     and that there is atleast one Energy Auditor and one Owner.
     <severity> error
