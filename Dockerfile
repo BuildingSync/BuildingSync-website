@@ -14,6 +14,7 @@ RUN apk add --no-cache python3 \
         linux-headers \
         bash \
         bash-completion \
+        git \
         ruby \
         ruby-dev \
         nginx && \
@@ -42,9 +43,15 @@ WORKDIR /srv/selection-tool
 COPY /requirements.txt /srv/selection-tool/requirements.txt
 RUN pip install -r requirements.txt
 
-#install the schematron-nokogiri gem
-RUN gem install schematron-nokogiri
+#install the schematron-nokogiri gem from BuildingSync org
+WORKDIR /srv
+RUN git clone https://github.com/BuildingSync/schematron
+WORKDIR /srv/schematron
 
+RUN gem build schematron-nokogiri.gemspec
+RUN gem install schematron-nokogiri-0.0.3.gem
+
+WORKDIR /srv/selection-tool
 ### Copy over the remaining part of the application and some helpers
 COPY . /srv/selection-tool/
 

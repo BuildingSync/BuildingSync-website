@@ -771,7 +771,7 @@
         <auc:ContactEmailAddress>bob.auditor@test.com</auc:ContactEmailAddress>
       </auc:ContactEmailAddresses>
     </auc:Contact>
-  </auc:Contacts>  
+  </auc:Contacts>
   <auc:UserDefinedFields>
     <auc:UserDefinedField>
       <auc:FieldName>BIN</auc:FieldName>

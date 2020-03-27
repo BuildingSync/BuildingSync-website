@@ -9,7 +9,7 @@ echo "Waiting for postgres to start"
 ./manage.py migrate
 ./manage.py collectstatic --noinput
 
-# Check if a schema has been imports
+# Check if a schema has been imported
 ./manage.py reset_schema --schema_version 1.0.0
 ./manage.py bedes --schema_version=1.0.0 --bedes_version=v2.2 --save_to_db
 

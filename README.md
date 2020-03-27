@@ -2,17 +2,17 @@
 
 [![Build Status](https://travis-ci.org/BuildingSync/selection-tool.svg?branch=develop)](https://travis-ci.org/BuildingSync/selection-tool)
 
-This is the repository for the BuildingSync Validator web application. 
+This is the repository for the BuildingSync Validator web application.
 
 ## Installation
 
 1. Clone the repository.
 1. Setup python 3.  You can use a virtual environment:
     ```bash
-    pyenv install 3.6.5 
+    pyenv install 3.6.5
     pyenv virtualenv 3.6.5 bsync-validator-3.6.5
     pyenv local bsync-validator-3.6.3
-    ```   
+    ```
 1. Install PostgreSQL server for local development (if desired)
 	* Once installed, create your local database and user:
 		```bash
@@ -26,6 +26,15 @@ This is the repository for the BuildingSync Validator web application.
 	```bash
 	pip install -r requirements.txt
 	```
+1.  Install the schematron-nokogiri gem for schematron use case validation.  We are using a forked version to handle OpenStudio Simulation use cases which contain abstract patterns.
+    ```bash
+    git clone https://github.com/BuildingSync/schematron.git
+    cd schematron
+    gem build schematron-nokogiri.gemspec
+    gem install schematron-nokogiri-0.0.3.gem
+
+    ```
+
 1.  Initialize the database:
 	```bash
 	python manage.py migrate
@@ -53,6 +62,20 @@ This is the repository for the BuildingSync Validator web application.
 	python manage.py reset_schema --schema_version=1.0.0
 	```
 
+### Precommit
+
+This project used `pre-commit <https://pre-commit.com/>`_ to ensure code consistency. To enable pre-commit, run the following from the command line.
+
+```bash
+pip install pre-commit
+pre-commit install
+```
+
+To run pre-commit against the files without calling git commit, then run the following. This is useful when cleaning up the repo before committing.
+
+```bash
+pre-commit run --all-files
+```
 
 ### Testing
 
@@ -91,7 +114,7 @@ To modify an existing schema, click on the edit link.  If changes are made to th
 Authenticated users can add private use cases to the BuildingSync Schema Viewer.  Use cases are represented by a schematron file that defines a set of rules and patterns.
 
 To add a use case, click on the 'Use Case' link in the top navigation bar, then click on the '+ New Use Case' button.
-Select a name and a BuildingSync schema version.  Select your use case definitions schematron file and upload, then click 'Submit'.  
+Select a name and a BuildingSync schema version.  Select your use case definitions schematron file and upload, then click 'Submit'.
 
 Once ready, contact a BuildingSync admin to make the use case public. Public use cases will be available on the 'Validator' page to validate XML files submitted by users.
 
@@ -178,16 +201,39 @@ Follow these steps to add a new schema version to the selection tool:
 1. Add the schema file in the admin interface.  Must have admin privileges.  The schema will get automatically parsed.
 1. Convert existing use cases schematron files to the new schema.  Add the new use cases.
 1. When the use cases have been reviewed, make them public in the admin interface.
-1. Create XML example files and place them in the `lib/validator/examples/schema<VERSION>` directory. 
+1. Create XML example files and place them in the `lib/validator/examples/schema<VERSION>` directory.
 1. Test the validator with the new XML example files.
 1. Reparse bedes terms to map them to the new schema following the steps in the BEDES section above.
 
-### Adding Examples from the TestSuite
+### Adding Examples from the TestSuite repo
 
-Follow these steps to add new example tables from the TestSuite
+Follow these steps to add new example tables from the TestSuite repo
 
 1. Clone the [TestSuite](https://github.com/BuildingSync/TestSuite) repo
 2. Install [pandoc](https://pandoc.org/installing.html)
 3. Convert the TestSuite README to html:
     ``` pandoc README.md -s -o README.html ```
 4. Copy the tables part of the README.html and paste to replace the old content in ```bsyncviewer/templates/examples.html```.
+
+### Adding an OpenStudio Simulation Use Case from the TestSuite repo
+
+1. The relevant files are currently on the L000_Schematron branch of the [TestSuite](https://github.com/BuildingSync/TestSuite/tree/L100_Schematron) repo.  Clone the repo locally.
+1. OpenStudio Simulation use case schematron files include patterns from a [library of schematron files](https://github.com/BuildingSync/TestSuite/tree/L100_Schematron/lib).  Copy these files from the TestSuite repo into the selection-tool at the following location: ```bsyncviewer/testsuitelib```.
+1. Open the relevant use case file from the TestSuite repo.  For example: [L00_OpenStudio_Simulation.sch](https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/L000_OpenStudio_Simulation.sch).  Edit the include statements at the top of the file with relative paths to the selection-tool testsuitelib directory.  Save the file.
+    ```bash
+      <include href="../../testsuitelib/rootElements.sch#root.oneOfEachUntilBuilding"/>
+      <include href="../../testsuitelib/rootElements.sch#root.oneOfEachFacilityUntilScenario"/>
+      <include href="../../testsuitelib/siteBuildingElements.sch#sbe.cityStateOrClimateZone"/>
+      <include href="../../testsuitelib/scenarioElements.sch#sc.baseline.ID"/>
+      <include href="../../testsuitelib/scenarioElements.sch#sc.baseline.asPackageOfMeasures"/>
+      <include href="../../testsuitelib/buildingElements.sch#be.L000BuildingInfo"/>
+      <include href="../../testsuitelib/floorElements.sch#fa.oneOfType"/>
+      <include href="../../testsuitelib/floorElements.sch#fa.haveTypeAndValue"/>
+    ```
+1. Add the use case to the selection-tool by browsing to the ```/use_cases``` URL and clicking the *New Use Case* button.
+    1. Fill out the name, description, and schema version
+    1. Upload the file that was modified in the previous step
+    1. Save
+1. Make the use case public from the selection-tool admin interface.
+1. If you have any example files to add to the selection-tool (for example, for the L000 OpenStudio Simulation use case, there are [2 examples files](https://github.com/BuildingSync/TestSuite/tree/L100_Schematron/spec/use_cases/schema2.0.0/examples)), add them in the appropriate schema directory in ```bsyncviewer/lib/validator/examples```. Regenerate the ```example_files.zip``` archive.  This will make the files available as examples at the ```/validator``` URL.
+1. You can now validate XMLs against the new use case.

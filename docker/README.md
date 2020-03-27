@@ -39,9 +39,9 @@ below on production, only for testing locally.
    cd /srv/selection-tool/
    docker-compose build
    ```
-  
+
  * Deploy
- 
+
    ```
    ./deploy.sh
    ```

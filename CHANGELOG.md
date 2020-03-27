@@ -1,5 +1,17 @@
 # BuildingSync Use Case Selection Tool
 
+## Version 1.1.1 (Unreleased)
+
+General updates:
+
+* Adding L000 OpenStudio Simulation use case and example files
+* Dockerize TestSuite repository
+
+Date Range: 12/21/20 - 03/26/20
+
+Closed Issues and Features:
+
+
 ## Version 1.1.0
 
 Date Range: 11/19/19 - 12/20/19
