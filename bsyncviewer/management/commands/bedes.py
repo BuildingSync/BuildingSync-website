@@ -1,19 +1,22 @@
 import csv
-import xmltodict
 import os
 import re
 from collections import defaultdict
 
 import jellyfish
-from django.conf import settings
-from django.core.management.base import BaseCommand
-
+import xmltodict
 from bsyncviewer.lib.bedes.bedes_parser import BedesParser
 from bsyncviewer.models.attribute import Attribute
-from bsyncviewer.models.bedes_models import BedesTerm, BedesMapping, BedesEnumeration, \
-    BedesEnumerationMapping
+from bsyncviewer.models.bedes_models import (
+    BedesEnumeration,
+    BedesEnumerationMapping,
+    BedesMapping,
+    BedesTerm
+)
 from bsyncviewer.models.enumeration import Enumeration
 from bsyncviewer.models.schema import Schema
+from django.conf import settings
+from django.core.management.base import BaseCommand
 
 # MATCH TYPES:
 # Term-to-List-Option Match -> use bedes_url col (will contain only 1 URL)

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://purl.oclc.org/dsdl/schematron">
   <ns prefix="auc" uri="http://buildingsync.net/schemas/bedes-auc/2019"/>
-  <!--    
+  <!--
     This pattern ensures there is exactly one of every element inclusive of the Building element
     It walks the path: BuildingSync/Facilities/Facility/Sites/Site/Buildings/Building
     <severity> error
@@ -29,7 +29,7 @@
       <assert test="count(auc:Building) = 1">[ERROR] element 'auc:Building' is REQUIRED EXACTLY ONCE for: '<name/>'</assert>
     </rule>
   </pattern>
-  <!--    
+  <!--
     This pattern ensures there is exactly one of every element inclusive of the Scenario element
     It starts at the Facility element and walks the path: Reports/Report/Scenarios/Scenario
     <severity> error
@@ -48,7 +48,7 @@
       <assert test="count(auc:Scenario) &gt;= 1">[ERROR] element 'auc:Scenario' is REQUIRED AT LEAST ONCE for: '<name/>'</assert>
     </rule>
   </pattern>
-  <!--    
+  <!--
     This pattern ensures there is exactly one of every element inclusive of the Contacts element
     It starts at the Facility element and walks the path: Facility/Contacts
     <severity> error
@@ -58,7 +58,7 @@
       <assert test="count(auc:Contacts) = 1">[ERROR] element 'auc:Contacts' is REQUIRED EXACTLY ONCE for: '<name/>'</assert>
     </rule>
   </pattern>
-  <!--    
+  <!--
     This pattern ensures there is at least one Report in a Facility
     <severity> error
   -->
@@ -67,7 +67,7 @@
       <assert test="auc:Reports/auc:Report">[ERROR] element 'auc:Report' is REQUIRED AT LEAST ONCE for: '<name/>'</assert>
     </rule>
   </pattern>
-  <!--    
+  <!--
     This pattern ensures there is at least one Scenario in a Report
     <severity> error
   -->

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://purl.oclc.org/dsdl/schematron">
   <ns prefix="auc" uri="http://buildingsync.net/schemas/bedes-auc/2019"/>
-  <!--  
-    For logic that pertains to either a Site OR a Building element.  
+  <!--
+    For logic that pertains to either a Site OR a Building element.
 -->
-  <!--  
-    This pattern checks that: atleast 1 city and 1 state OR 
+  <!--
+    This pattern checks that: atleast 1 city and 1 state OR
     1 climate zone are specified at the site OR building level.
     A warning is issued if more than one of each element is specified.
     <severity> error

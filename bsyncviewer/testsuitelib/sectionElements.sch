@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
   <ns prefix="auc" uri="http://buildingsync.net/schemas/bedes-auc/2019"/>
-  <!--  
+  <!--
     For logic that pertains to Section elements
 -->
   <!--
@@ -9,7 +9,7 @@
     can be run against any auc:Section element, it is typically restricted to 'Space function'
     element types, i.e. auc:Section[auc:SectionType='Space function']
     <severity> error
-    <param> parent - an auc:Section element.  
+    <param> parent - an auc:Section element.
 -->
   <pattern abstract="true" id="sec.mainDetails">
     <rule context="$parent">
@@ -22,7 +22,7 @@
     </rule>
   </pattern>
   <!--
-    Require that each auc:Section element is referenced to by exactly one of 
+    Require that each auc:Section element is referenced to by exactly one of
     each of the following elements via an @IDref:
     1. auc:Systems/auc:HVACSystems/auc:HVACSystem/auc:LinkedPremises/auc:Section/auc:LinkedSectionID
     2. auc:System/auc:LightingSystems/auc:LightingSystem/auc:LinkedPremises/auc:Section/auc:LinkedSectionID

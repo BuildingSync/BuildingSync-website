@@ -4,6 +4,7 @@ from django import forms
 from django.conf import settings
 
 from .models.schema import Schema
+
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
 

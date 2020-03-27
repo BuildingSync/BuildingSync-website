@@ -1,9 +1,8 @@
 import json
 import os
-from collections import defaultdict, OrderedDict, Mapping
+from collections import Mapping, OrderedDict, defaultdict
 
 import xmltodict
-
 
 # BEDES have a very simple two level hierarchy. The first level is the category and the
 # second category is the Term. The data are stored in this format, but it is important

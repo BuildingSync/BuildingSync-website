@@ -3,38 +3,41 @@ import os
 import subprocess
 import tempfile
 
+from bsyncviewer import forms
+from bsyncviewer.lib.tree_viewer import get_schema_jstree_data
+from bsyncviewer.lib.validator.workflow import ValidationWorkflow
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.mail import BadHeaderError, send_mail
 from django.forms.models import model_to_dict
 from django.http import (
-    HttpResponse,
-    HttpResponseServerError,
-    HttpResponseRedirect,
     Http404,
+    HttpResponse,
+    HttpResponseRedirect,
+    HttpResponseServerError,
     JsonResponse
 )
-from django.core.mail import send_mail, BadHeaderError
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy, reverse
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.shortcuts import redirect, render
+from django.urls import reverse, reverse_lazy
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from rest_framework import views
+from rest_framework.parsers import MultiPartParser
+from rest_framework.response import Response
 
-from bsyncviewer import forms
-from bsyncviewer.lib.tree_viewer import get_schema_jstree_data
-from bsyncviewer.lib.validator.workflow import ValidationWorkflow
 from .models.attribute_enumeration_class import AttributeEnumerationClass
-from .models.bedes_models import BedesMapping, BedesTerm, BedesEnumeration, BedesEnumerationMapping
+from .models.bedes_models import (
+    BedesEnumeration,
+    BedesEnumerationMapping,
+    BedesMapping,
+    BedesTerm
+)
 from .models.enumeration import Enumeration
 from .models.schema import Schema
 from .models.use_case import UseCase
-
-from rest_framework import views
-from rest_framework.response import Response
-from rest_framework.parsers import MultiPartParser
-
 
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 

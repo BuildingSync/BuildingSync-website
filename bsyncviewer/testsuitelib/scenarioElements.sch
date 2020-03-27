@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
   <ns prefix="auc" uri="http://buildingsync.net/schemas/bedes-auc/2019"/>
-  <!--  
+  <!--
     For logic that pertains to Scenario elements
 -->
   <!--
-    A baseline scenario must be defined.  Within the baseline scenario, the following 
+    A baseline scenario must be defined.  Within the baseline scenario, the following
     must be defined exactly: auc:ScenarioType/auc:PackageOfMeasures/auc:ReferenceCase IDref='Baseline'
     TODO: Need to update BuildingSync-gem to look for following and change this function to look for:
       auc:ScenarioType/auc:CurrentBuilding/auc:CalculationMethod/auc:Modeled
