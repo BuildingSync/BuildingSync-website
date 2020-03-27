@@ -1,6 +1,6 @@
 # BuildingSync Use Case Selection Tool
 
-## Version 1.1.1 (Unreleased)
+## Version 1.1.1
 
 General updates:
 
@@ -8,8 +8,6 @@ General updates:
 * Dockerize TestSuite repository
 
 Date Range: 12/21/20 - 03/26/20
-
-Closed Issues and Features:
 
 
 ## Version 1.1.0
