@@ -20,20 +20,20 @@
 
   <link crossorigin="anonymous" media="all" integrity="sha512-Z0JAar9+DkI1NjGVdZr3GivARUgJtA0o2eHlTv7Ou2gshR5awWVf8QGsq11Ns9ZxQLEs+G5/SuARmvpOLMzulw==" rel="stylesheet" href="https://assets-cdn.github.com/assets/frameworks-95aff0b550d3fe338b645a4deebdcb1b.css" />
   <link crossorigin="anonymous" media="all" integrity="sha512-wvPR+gk57u3h+UKfkh2lDrR9cgm7DU0GzYz6g6QY7XE9yDIePXtL3UcVXAXxwkpQAPOFVuAVf0slCAFB3POfbA==" rel="stylesheet" href="https://assets-cdn.github.com/assets/github-654dec7b79d64121e916eb2670d92814.css" />
-  
-  
-  
-  
+
+
+
+
 
   <meta name="viewport" content="width=device-width">
-  
+
   <title>website/arrow.svg at gh-pages · BuildingSync/website</title>
     <meta name="description" content=" BuildingSync® Website">
     <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub">
   <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
   <meta property="fb:app_id" content="1401488693436528">
 
-    
+
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/15875715?s=400&amp;v=4" /><meta property="og:site_name" content="GitHub" /><meta property="og:type" content="object" /><meta property="og:title" content="BuildingSync/website" /><meta property="og:url" content="https://github.com/BuildingSync/website" /><meta property="og:description" content="website -  BuildingSync® Website" />
 
   <link rel="assets" href="https://assets-cdn.github.com/">
@@ -43,7 +43,7 @@
   <meta name="request-id" content="F7EA:7FCE:C48609:16699C0:5B7F20A8" data-pjax-transient>
 
 
-  
+
 
   <meta name="selected-link" value="repo_source" data-pjax-transient>
 
@@ -62,7 +62,7 @@
 <meta class="js-ga-set" name="dimension1" content="Logged In">
 
 
-  
+
 
       <meta name="hostname" content="github.com">
     <meta name="user-login" content="kflemin">
@@ -75,7 +75,7 @@
   <meta name="html-safe-nonce" content="2ca4b6f305dbadf11716f7eb420a6ab52a5acedc">
 
   <meta http-equiv="x-pjax-version" content="bdac835dc1c5262a6eac2081515fe341">
-  
+
 
       <link href="https://github.com/BuildingSync/website/commits/gh-pages.atom" rel="alternate" title="Recent Commits to website:gh-pages" type="application/atom+xml">
 
@@ -104,19 +104,19 @@
   </head>
 
   <body class="logged-in env-production emoji-size-boost page-blob">
-    
+
 
   <div class="position-relative js-header-wrapper ">
     <a href="#start-of-content" tabindex="1" class="p-3 bg-blue text-white show-on-focus js-skip-to-content">Skip to content</a>
     <div id="js-pjax-loader-bar" class="pjax-loader-bar"><div class="progress"></div></div>
 
-    
-    
-    
 
 
 
-        
+
+
+
+
 <header class="Header  f5" role="banner">
   <div class="d-flex flex-justify-between px-3 container-lg">
     <div class="d-flex flex-justify-between ">
@@ -229,11 +229,11 @@
       </div>
 
       <div class="d-flex">
-        
+
 <ul class="user-nav d-flex flex-items-center list-style-none" id="user-links">
   <li class="dropdown">
     <span class="d-inline-block  px-2">
-      
+
     <a aria-label="You have unread notifications" class="notification-indicator tooltipped tooltipped-s  js-socket-channel js-notification-indicator" data-hotkey="g n" data-ga-click="Header, go to notifications, icon:unread" data-channel="notification-changed:2205659" href="/notifications">
         <span class="mail-status unread"></span>
         <svg class="octicon octicon-bell" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M13.99 11.991v1H0v-1l.73-.58c.769-.769.809-2.547 1.189-4.416.77-3.767 4.077-4.996 4.077-4.996 0-.55.45-1 .999-1 .55 0 1 .45 1 1 0 0 3.387 1.229 4.156 4.996.38 1.879.42 3.657 1.19 4.417l.659.58h-.01zM6.995 15.99c1.11 0 1.999-.89 1.999-1.999H4.996c0 1.11.89 1.999 1.999 1.999z"/></svg>
@@ -250,7 +250,7 @@
         <span class="dropdown-caret mt-1"></span>
       </summary>
       <details-menu class="dropdown-menu dropdown-menu-sw">
-        
+
 <a role="menuitem" class="dropdown-item" href="/new" data-ga-click="Header, create new repository">
   New repository
 </a>
@@ -323,7 +323,7 @@
   </div>
 </header>
 
-      
+
 
   </div>
 
@@ -339,13 +339,13 @@
   <div role="main" class="application-main ">
         <div itemscope itemtype="http://schema.org/SoftwareSourceCode" class="">
     <div id="js-repo-pjax-container" data-pjax-container >
-      
 
 
 
 
 
-  
+
+
 
 
 
@@ -432,7 +432,7 @@
   </li>
 
   <li>
-    
+
   <div class="js-toggler-container js-social-container starring-container ">
     <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="starred js-social-form" action="/BuildingSync/website/unstar" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="eAMvdGllK5t59/9l5s3MZ7NICuO3nTi7z+LDk2+ItVYDhJGZE3ANJLCbC8pLspgEDduI+Z6nxNL/YmSCGanvAA==" />
       <input type="hidden" name="context" value="repository"></input>
@@ -508,7 +508,7 @@
 </h1>
 
     </div>
-    
+
 <nav class="reponav js-repo-nav js-sidenav-container-pjax container"
      itemscope
      itemtype="http://schema.org/BreadcrumbList"
@@ -565,18 +565,18 @@
 <div class="container new-discussion-timeline experiment-repo-nav  ">
   <div class="repository-content ">
 
-    
+
   <a class="d-none js-permalink-shortcut" data-hotkey="y" href="/BuildingSync/website/blob/9b5a80ec32877206ec02e96f0fb94d1f51015532/css/images/arrow.svg">Permalink</a>
 
   <!-- blob contrib key: blob_contributors:v21:c587b9cf5e0fd0d78b7525757d8a1d37 -->
 
-  
+
 
   <div class="file-navigation">
-    
+
 <div class="select-menu branch-select-menu js-menu-container js-select-menu float-left">
   <button class=" btn btn-sm select-menu-button js-menu-target css-truncate" data-hotkey="w"
-    
+
     type="button" aria-label="Switch branches or tags" aria-expanded="false" aria-haspopup="true">
       <i>Branch:</i>
       <span class="js-select-button css-truncate-target">gh-pages</span>
@@ -747,10 +747,10 @@
   </div>
 </div>
 
-    
+
 
   <div itemprop="text" class="blob-wrapper data type-svg">
-      
+
   <div class="render-wrapper">
     <div class="render-container is-render-pending js-render-target "
       data-identity="956fc31e-2e1c-4657-aac0-6b1095b84f90"
@@ -787,7 +787,7 @@
 
   </div>
 
-        
+
 <div class="footer container-lg px-3" role="contentinfo">
   <div class="position-relative d-flex flex-justify-between pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
     <ul class="list-style-none d-flex flex-wrap ">
@@ -828,13 +828,13 @@
   </div>
 
 
-    
+
     <script crossorigin="anonymous" integrity="sha512-cGWjjJVq606iqo+ayW6FGddeon7S+c13Z0WhA8qqpDfqpcIqOXs8e2xPkkaKq8smahtoCdD17h8rBmkEGinnOg==" type="application/javascript" src="https://assets-cdn.github.com/assets/frameworks-02b5fc3130cdd668ab6d1036a2165732.js"></script>
-    
+
     <script crossorigin="anonymous" async="async" integrity="sha512-MZSqwzniHKlxCBDOtUZWtv5hD+CvC4X9aYRd51W9N7G0YESIgYWQJbX/SOTGM0FwvmmYHLV60bsNyGrmak91ug==" type="application/javascript" src="https://assets-cdn.github.com/assets/github-6afbacd4fc54b107124f98972969d64e.js"></script>
-    
-    
-    
+
+
+
   <div class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner d-none">
     <svg class="octicon octicon-alert" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"/></svg>
     <span class="signed-in-tab-flash">You signed in with another tab or window. <a href="">Reload</a> to refresh your session.</span>
@@ -874,4 +874,3 @@
 
   </body>
 </html>
-

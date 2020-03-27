@@ -1,6 +1,5 @@
-from django.db import models
-
 from bsyncviewer.models.enumeration_class import EnumerationClass
+from django.db import models
 
 
 class Enumeration(models.Model):

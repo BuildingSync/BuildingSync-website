@@ -12,4 +12,3 @@ python docs/scripts/change_log.py –k GITHUB_API_TOKEN –s 2018-02-26 –e 201
 3. Paste the results (remove unneeded Accepted Pull Requests) into the CHANGELOG.md. Make sure to cleanup the formatting if needed.
 4. Once develop passes, then create a new PR from develop to master.
 5. Draft new Release from Github (https://github.com/BuildingSync/selection-tool/releases). Include list of changes since previous release (i.e., the content in the CHANGELOG.md)
-

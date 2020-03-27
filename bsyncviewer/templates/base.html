@@ -45,6 +45,12 @@
                           Validator
                       </a>
                   </li>
+                  <li class="{% active_page request 'examples'%}">
+                      <a href="{% url 'examples' %}">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                        Documentation
+                      </a>
+                  </li>
                   <li class="{% active_page request 'bsync'%}">
                       <a href="https://buildingsync.net/index.html">
                         <i class="fa fa-building" aria-hidden="true"></i>
@@ -96,5 +102,3 @@
  {% block base_extra_script %}
   {% block extra_script %}{% endblock %}
  {%  endblock base_extra_script %}
-
-
