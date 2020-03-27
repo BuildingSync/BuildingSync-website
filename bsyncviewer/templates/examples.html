@@ -12,8 +12,156 @@
       <h2>Examples</h2>
     </header>
 
+    <h3 id="modeling-level-of-detail-definitions">Modeling Level of Detail Definitions</h2>
+    <p>The Modeling Level of Detail (MLOD) is similar in concept to the <a href="https://technical.buildingsmart.org/standards/mvd/">Model View Definitions (MVD)</a> defined by IFC. MLODs define a subset of the overall BuildingSync schema necessary for a specific use case or workflow. 
+    <p>Level definitions are in alignment with the ASHRAE Standard 211 levels as defined below:</p>
+    <table>
+    <thead>
+    <tr class="header">
+    <th>MLOD</th>
+    <th>Use Case</th>
+    <th>Alignment to Std 211</th>
+    <th>Std 211 Section</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>Level 000</td>
+    <td>Audit</td>
+    <td>Preliminary Analysis</td>
+    <td>Section 5.2.3</td>
+    </tr>
+    <tr class="even">
+    <td>Level 100</td>
+    <td>Audit</td>
+    <td>Level 1</td>
+    <td>Section 6.1</td>
+    </tr>
+    <tr class="odd">
+    <td>Level 200</td>
+    <td>Audit</td>
+    <td>Level 2</td>
+    <td>Section 6.2</td>
+    </tr>
+    <tr class="even">
+    <td>Level 300</td>
+    <td>Audit</td>
+    <td>Level 3</td>
+    <td>Section 6.3</td>
+    </tr>
+    <tr class="odd">
+    <td>Level 400</td>
+    <td>Audit</td>
+    <td>Not Applicable</td>
+    <td>Not Applicable</td>
+    </tr>
+    <tr class="even">
+    <td>Level 500</td>
+    <td>Audit</td>
+    <td>Not Applicable</td>
+    <td>Not Applicable</td>
+    </tr>
+    </tbody>
+    </table>
+
     <!--start copy from TestSuite README -->
-    <h2 id="hvac-system-examples">HVAC System Examples</h2>
+    <h3 id="hvac-system-examples">HVAC System Examples</h3>
+    <p>Where the System Type specified below does not exactly match the enumeration in the BSync XML file, check the mapping defined by <a href="https://github.com/BuildingSync/BuildingSync-gem/blob/bb52655ebb8efeca44249277d3fb67ac60b4e610/lib/buildingsync/model_articulation/hvac_system.rb#L121-L143">map_primary_hvac_system_type_to_cbecs_system_type</a>. Additionally, see the <a href="https://github.com/BuildingSync/TestSuite/tree/L100_Schematron/examples/HVACSystems">examples/HVACSystems</a> directory for a tutorial and example files.</p>
+    <table style="width:100%;">
+    <colgroup>
+    <col width="35%" />
+    <col width="3%" />
+    <col width="10%" />
+    <col width="3%" />
+    <col width="3%" />
+    <col width="1%" />
+    <col width="4%" />
+    <col width="6%" />
+    <col width="29%" />
+    </colgroup>
+    <thead>
+    <tr class="header">
+    <th>File</th>
+    <th>Specified For</th>
+    <th>System Type</th>
+    <th>Translate Tested</th>
+    <th>Simulate Tested</th>
+    <th><a href="#modeling-level-of-detail-definitions">MLOD</a></th>
+    <th>Use Case</th>
+    <th>Validates Against</th>
+    <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/examples/L000_OpenStudio_Simulation_01.xml">L000_OpenStudio_Simulation_01.xml</a></td>
+    <td>Building</td>
+    <td>VAV with reheat</td>
+    <td>TRUE</td>
+    <td>TRUE</td>
+    <td>L000</td>
+    <td>OpenStudio_Simulation</td>
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/L000_OpenStudio_Simulation.sch">L000_OpenStudio_Simulation.sch</a></td>
+    <td>No system-type actually declared. System inferred from OpenStudio Standards based on Building's OccupancyClassification and Gross floor area.</td>
+    </tr>
+    <tr class="even">
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/examples/L000_OpenStudio_Simulation_02.xml">L000_OpenStudio_Simulation_02.xml</a></td>
+    <td>Building</td>
+    <td>PSZ-AC with gas reheat</td>
+    <td>TRUE</td>
+    <td>TRUE</td>
+    <td>L000</td>
+    <td>OpenStudio_Simulation</td>
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/L000_OpenStudio_Simulation.sch">L000_OpenStudio_Simulation.sch</a></td>
+    <td>No system-type actually declared. System inferred from OpenStudio Standards based on Building's OccupancyClassification and Gross floor area.</td>
+    </tr>
+    <tr class="odd">
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/examples/L100_OpenStudio_Simulation_01.xml">L100_OpenStudio_Simulation_01.xml</a></td>
+    <td>Section-Retail</td>
+    <td>PSZ-AC with gas reheat</td>
+    <td>TRUE</td>
+    <td>TRUE</td>
+    <td>L100</td>
+    <td>OpenStudio_Simulation</td>
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/L100_OpenStudio_Simulation.sch">L100_OpenStudio_Simulation.sch</a></td>
+    <td>Packaged Rooftop Air Conditioner is mapped to PSZ-AC with gas reheat.</td>
+    </tr>
+    <tr class="even">
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/examples/L100_OpenStudio_Simulation_01.xml">L100_OpenStudio_Simulation_01.xml</a></td>
+    <td>Section-Office</td>
+    <td>PVAV with PFP boxes</td>
+    <td>TRUE</td>
+    <td>TRUE</td>
+    <td>L100</td>
+    <td>OpenStudio_Simulation</td>
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/L100_OpenStudio_Simulation.sch">L100_OpenStudio_Simulation.sch</a></td>
+    <td>Packaged Rooftop VAV with Electric Reheat is mapped as PVAV with PFP boxes</td>
+    </tr>
+    <tr class="odd">
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/examples/HVACSystems/PSZ-AC-CDM-001.xml">PSZ-AC-CDM-001.xml</a></td>
+    <td>Section</td>
+    <td>PSZ-AC</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>L200</td>
+    <td>Audit</td>
+    <td>None</td>
+    <td>Example of constructing more complex, L200 system.</td>
+    </tr>
+    <tr class="even">
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/examples/HVACSystems/PSZ-HP-CDM-001.xml">PSZ-HP-CDM-001.xml</a></td>
+    <td>Section</td>
+    <td>PSZ-HP</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>L200</td>
+    <td>Audit</td>
+    <td>None</td>
+    <td>Example of constructing more complex, L200 system.</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="lighting-system-examples">Lighting System Examples</h3>
     <table>
     <thead>
     <tr class="header">
@@ -24,58 +172,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="odd">
-    <td>PSZ System</td>
-    <td></td>
-    <td><a href="https://github.com/BuildingSync/TestSuite/blob/master/tests/schema2.0.0-pr2/Level_100/inputs/L100_Instance1.xml">L100_Instance1.xml</a></td>
-    <td></td>
-    </tr>
-    <tr class="even">
-    <td>VAV</td>
-    <td></td>
-    <td><a href="https://github.com/BuildingSync/TestSuite/blob/master/tests/schema2.0.0-pr2/Level_100/inputs/L100_Instance2.xml">L100_Instance2.xml</a></td>
-    <td></td>
-    </tr>
-    <tr class="odd">
-    <td>Shared Boiler</td>
-    <td></td>
-    <td>TODO</td>
-    <td></td>
-    </tr>
-    <tr class="even">
-    <td>DOAS &amp; Radiant</td>
-    <td></td>
-    <td>TODO</td>
-    <td></td>
-    </tr>
-    <tr class="odd">
-    <td>Inferred from OpenStudio Standards</td>
-    <td><a href="https://github.com/BuildingSync/TestSuite/blob/master/tests/schema2.0.0-pr2/Level_000/inputs/L000_Instance1.xml">L000_Instance1.xml</a></td>
-    <td></td>
-    <td></td>
-    </tr>
-    <tr class="even">
-    <td></td>
-    <td><a href="https://github.com/BuildingSync/TestSuite/blob/master/tests/schema2.0.0-pr2/Level_000/inputs/L000_Instance1.xml">L000_Instance2.xml</a></td>
-    <td></td>
-    <td></td>
-    </tr>
     </tbody>
     </table>
-    <h2 id="lighting-system-examples">Lighting System Examples</h2>
-    <table>
-    <thead>
-    <tr class="header">
-    <th>System Type</th>
-    <th>Level 000</th>
-    <th>Level 100</th>
-    <th>Level 200</th>
-    </tr>
-    </thead>
-    <tbody>
-    </tbody>
-    </table>
-    <h2 id="premise-examples">Premise Examples</h2>
+    <h3 id="premise-examples">Premise Examples</h3>
     <table>
     <thead>
     <tr class="header">
