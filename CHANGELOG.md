@@ -4,6 +4,7 @@
 
 General updates:
 
+* Parser changes to handle restriction by pattern
 * Adding L000 OpenStudio Simulation use case and example files
 * Dockerize TestSuite repository
 
