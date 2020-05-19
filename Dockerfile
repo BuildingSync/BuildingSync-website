@@ -15,8 +15,6 @@ RUN apk add --no-cache python3 \
         bash \
         bash-completion \
         git \
-        ruby \
-        ruby-dev \
         nginx && \
     ln -sf /usr/bin/python3 /usr/bin/python && \
     python -m ensurepip && \
