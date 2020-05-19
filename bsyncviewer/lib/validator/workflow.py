@@ -1,5 +1,4 @@
 import copy
-import subprocess
 from collections import OrderedDict
 
 import xmlschema
