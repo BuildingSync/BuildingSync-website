@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
+<schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt1">
   <ns prefix="auc" uri="http://buildingsync.net/schemas/bedes-auc/2019"/>
   <!--
     For logic that pertains to Scenario elements
