@@ -26,15 +26,6 @@ This is the repository for the BuildingSync Validator web application.
 	```bash
 	pip install -r requirements.txt
 	```
-1.  Install the schematron-nokogiri gem for schematron use case validation.  We are using a forked version to handle OpenStudio Simulation use cases which contain abstract patterns.
-    ```bash
-    git clone https://github.com/BuildingSync/schematron.git
-    cd schematron
-    gem build schematron-nokogiri.gemspec
-    gem install schematron-nokogiri-0.0.3.gem
-
-    ```
-
 1.  Initialize the database:
 	```bash
 	python manage.py migrate
