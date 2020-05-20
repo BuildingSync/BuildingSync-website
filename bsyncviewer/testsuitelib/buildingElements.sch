@@ -19,10 +19,38 @@
       </assert>
     </rule>
   </pattern>
+  <pattern id="be.mainDetails.L100.sim">
+    <rule context="auc:Buildings/auc:Building">
+      <assert test="auc:PremisesName">
+        [ERROR] element 'auc:PremisesName' is REQUIRED EXACTLY ONCE for: '<name/>'
+      </assert>
+      <assert test="auc:BuildingClassification">
+        [ERROR] element 'auc:BuildingClassification' is REQUIRED EXACTLY ONCE for: '<name/>'
+      </assert>
+      <assert test="auc:OccupancyClassification">
+        [ERROR] element 'auc:OccupancyClassification' is REQUIRED EXACTLY ONCE for: '<name/>'
+      </assert>
+      <assert test="auc:YearOfConstruction">
+        [ERROR] element 'auc:YearOfConstruction' is REQUIRED EXACTLY ONCE for: '<name/>'
+      </assert>
+      <assert test="auc:ConditionedFloorsAboveGrade">
+        [ERROR] element 'auc:ConditionedFloorsAboveGrade' is REQUIRED EXACTLY ONCE for: '<name/>'
+      </assert>
+      <assert test="auc:ConditionedFloorsBelowGrade">
+        [ERROR] element 'auc:ConditionedFloorsBelowGrade' is REQUIRED EXACTLY ONCE for: '<name/>'
+      </assert>
+      <assert test="auc:FloorsAboveGrade or auc:UnconditionedFloorsAboveGrade">
+        [ERROR] element 'auc:FloorsAboveGrade' or 'auc:UnconditionedFloorsAboveGrade' is REQUIRED EXACTLY ONCE for: '<name/>'
+      </assert>
+      <assert test="auc:FloorsBelowGrade or auc:UnconditionedFloorsBelowGrade">
+        [ERROR] element 'auc:FloorsBelowGrade' or 'auc:UnconditionedFloorsBelowGrade' is REQUIRED EXACTLY ONCE for: '<name/>'
+      </assert>
+    </rule>
+  </pattern>
   <!--
     Check the main details for the Building element as required by 211.
 -->
-  <pattern id="be.mainDetails">
+  <pattern id="be.mainDetails.L100.audit">
     <rule context="auc:Buildings/auc:Building">
       <assert test="auc:PremisesName">
         [ERROR] element 'auc:PremisesName' is REQUIRED EXACTLY ONCE for: '<name/>'
