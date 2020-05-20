@@ -29,4 +29,67 @@
       </assert>
     </rule>
   </pattern>
+  <!--  
+  Ensure that every Building is linked to a Benchmark Scenario
+  <severity> error
+  -->
+  <pattern id="sc.be.hasBenchmarkType">
+    <rule context="auc:Buildings/auc:Building">
+      <let name="buildingID" value="@ID"/>
+      <let name="benchmarkLinkedBuildingIDs" value="ancestor::auc:Facility/auc:Reports//auc:Scenario[auc:ScenarioType/auc:Benchmark]/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID/@IDref"/>
+      <assert test="$buildingID = $benchmarkLinkedBuildingIDs ">
+        [ERROR] '<name/>' ID = '<value-of select="$buildingID"/>' IS REQUIRED TO BE LINKED TO an 'auc:Scenario/auc:ScenarioType/auc:Benchmark'
+      </assert>
+    </rule>
+  </pattern>
+  <!--  
+  Ensure that every BenchmarkType Scenario has necessary info per Std 211 5.2.3
+  <severity> error
+  -->
+  <pattern id="sc.benchmarkType.mainDetails.L000">
+    <rule context="auc:Scenario[auc:ScenarioType/auc:Benchmark]/auc:ScenarioType/auc:Benchmark">
+<!--      <assert test="auc:BenchmarkType/*">-->
+      <assert test="count(auc:BenchmarkType/*) > 0">
+        [ERROR] child element for 'auc:BenchmarkType' is REQUIRED AT LEAST ONCE for '<name/>’
+      </assert>
+      <assert test="auc:BenchmarkTool">
+        [ERROR] element 'auc:BenchmarkTool' is REQUIRED EXACTLY ONCE for '<name/>’
+      </assert>
+      <assert test="auc:BenchmarkYear">
+        [ERROR] element 'auc:BenchmarkYear' is REQUIRED EXACTLY ONCE for '<name/>’
+      </assert>
+      <assert test="../../auc:LinkedPremises/auc:Building/auc:LinkedBuildingID">
+        [ERROR] elements 'auc:LinkedPremises/auc:Building/auc:LinkedBuildingID' is REQUIRED EXACTLY ONCE for '<name/>’
+      </assert>
+    </rule>
+  </pattern>
+  <!--  
+  Ensure that every Building is linked to a Measurement Scenario
+  <severity> error
+  -->
+  <pattern id="sc.be.hasMeasured">
+    <rule context="auc:Buildings/auc:Building">
+      <let name="buildingID" value="@ID"/>
+      <let name="benchmarkLinkedBuildingIDs" value="ancestor::auc:Facility/auc:Reports//auc:Scenario[auc:ScenarioType/auc:CurrentBuilding/auc:CalculationMethod/auc:Measured]/auc:LinkedPremises/auc:Building/auc:LinkedBuildingID/@IDref"/>
+      <assert test="$buildingID = $benchmarkLinkedBuildingIDs ">
+        [ERROR] '<name/>' ID = '<value-of select="$buildingID"/>' IS REQUIRED TO BE LINKED TO an 'auc:Scenario/auc:ScenarioType/auc:CurrentBuilding/auc:CalculationMethod/auc:Measured'
+      </assert>
+    </rule>
+  </pattern>
+  <!--  
+  Ensure that Measurement Scenario has:
+  - ResourceUses defined
+  - At least one ResourceUse/EnergyResource
+  <severity> error
+  -->
+  <pattern id="sc.measured.resourceUseReqs">
+    <rule context="auc:Scenario[auc:ScenarioType/auc:CurrentBuilding/auc:CalculationMethod/auc:Measured]">
+      <assert test="count(auc:ResourceUses) = 1">
+        [ERROR] '<name/>' ID = '<value-of select="@ID"/>' MUST HAVE EXACTLY ONE 'auc:ResourceUses' child element
+      </assert>
+      <assert test="count(auc:ResourceUses/auc:ResourceUse/auc:EnergyResource) >= 1">
+        [ERROR] '<name/>' ID = '<value-of select="@ID"/>' MUST HAVE AT LEAST ONE 'auc:ResourceUses/auc:ResourceUse/auc:EnergyResource'
+      </assert>
+    </rule>
+  </pattern>
 </schema>

@@ -247,25 +247,6 @@
     </rule>
   </pattern>
   <!--
-    Check that the Conditioned area is greater than Cooled only + Heated only + Heated and Cooled + Ventilated
-    <severity> error
-    <param> parent - an auc:FloorAreas[auc:FloorAreaType='Conditioned' and auc:FloorAreaPercentage] element
--->
-  <pattern abstract="true" id="fa.conditionedPercentChecks">
-    <rule context="$parent">
-      <let name="grossArea" value="if (parent::node()/auc:FloorArea/auc:FloorAreaType[text()='Gross']) then (number(parent::node()/auc:FloorArea/auc:FloorAreaType[text()='Gross']/parent::auc:FloorArea/auc:FloorAreaValue)) else (0.0)"/>
-      <let name="cooledOnlyArea" value="if (parent::node()/auc:FloorArea/auc:FloorAreaType[text()='Cooled only']) then (number(parent::node()/auc:FloorArea/auc:FloorAreaType[text()='Cooled only']/parent::auc:FloorArea/auc:FloorAreaValue)) else (0.0)"/>
-      <let name="heatedOnlyArea" value="if (parent::node()/auc:FloorArea/auc:FloorAreaType[text()='Heated only']) then (number(parent::node()/auc:FloorArea/auc:FloorAreaType[text()='Heated only']/parent::auc:FloorArea/auc:FloorAreaValue)) else (0.0)"/>
-      <let name="heatedCooledArea" value="if (parent::node()/auc:FloorArea/auc:FloorAreaType[text()='Heated and Cooled']) then (number(parent::node()/auc:FloorArea/auc:FloorAreaType[text()='Heated and Cooled']/parent::auc:FloorArea/auc:FloorAreaValue)) else (0.0)"/>
-      <let name="ventilatedArea" value="if (parent::node()/auc:FloorArea/auc:FloorAreaType[text()='Ventilated']) then (number(auc:FloorArea/auc:FloorAreaType[text()='Ventilated']/parent::auc:FloorArea/auc:FloorAreaValue)) else (0.0)"/>
-      <let name="conditionedAreaPercentage" value="auc:FloorAreaPercentage"/>
-      <let name="conditionedAreaValue" value="$grossArea*$conditionedAreaPercentage div 100"/>
-      <assert test="$conditionedAreaValue &gt;= $cooledOnlyArea + $heatedOnlyArea + $heatedCooledArea + $ventilatedArea">
-        Conditioned Area Percentage * Gross Area (<value-of select="$conditionedAreaValue"/>) must be greater than or equal to: Heated and Cooled (<value-of select="$heatedCooledArea"/>) + Heated only (<value-of select="$heatedOnlyArea"/>) + Cooled only (<value-of select="$cooledOnlyArea"/>) + Ventilated (<value-of select="$ventilatedArea"/>)
-      </assert>
-    </rule>
-  </pattern>
-  <!--
     Check that the Gross Area of the auc:Building is greater than or equal to the sum of the Gross Area from all auc:Section[auc:SectionType='Space function'] elements
     <severity> error
     <param> parent - an auc:Building
