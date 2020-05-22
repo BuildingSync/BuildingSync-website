@@ -2,6 +2,7 @@ import json
 import os
 import subprocess
 import tempfile
+import zipfile
 
 from bsyncviewer import forms
 from bsyncviewer.lib.tree_viewer import get_schema_jstree_data
@@ -66,17 +67,57 @@ class ValidatorApi(views.APIView):
         if f:
             tmp_file = tempfile.NamedTemporaryFile(delete=False)
             filepath = tmp_file.name
-            print('tmp file at: {}'.format(filepath))
+            # print('tmp file at: {}'.format(filepath))
             for chunk in f.chunks():
                 tmp_file.write(chunk)
             tmp_file.close()
 
-            workflow = ValidationWorkflow(f, filepath, version)
-            validation_results = workflow.validate_all()
-            # cleanup file after validation
-            os.unlink(tmp_file.name)
+            # check if zipfile or single XML
+            if zipfile.is_zipfile(filepath):
 
-            return Response({"schema_version": version, "validation_results": validation_results, "success": True})
+                with zipfile.ZipFile(filepath, 'r') as zip_file:
+
+                    try:
+                        tmp_dir = tempfile.TemporaryDirectory()
+                        dirname = tmp_dir.name
+
+                        # make clean filenames for response (weird encoding assumptions by zipfile module)
+                        filenames = []
+                        for member in zip_file.infolist():
+                            filenames.append({"new": member.filename.encode('cp437').decode('utf-8'), "old": member.filename})
+
+                        zip_file.extractall(dirname)
+
+                        results = []
+                        all_valid = True
+
+                        for the_file in filenames:
+                            fp = dirname + '/' + the_file['old']
+                            wf = ValidationWorkflow(the_file['old'], fp, version)
+                            val_res = wf.validate_all()
+
+                            if val_res['schema']['valid'] is False:
+                                all_valid = False
+
+                            results.append({"file": the_file['new'], "results": val_res})
+
+                        return Response({"schema_version": version, "all_files_valid": all_valid, "validation_results": results, "success": True})
+                    except BaseException as err:
+                        print(err)
+                        return Response({"success": False, "error": "error processing Zip file"})
+
+            else:
+
+                try:
+                    workflow = ValidationWorkflow(f, filepath, version)
+                    validation_results = workflow.validate_all()
+                    # cleanup file after validation
+                    os.unlink(tmp_file.name)
+
+                    return Response({"schema_version": version, "validation_results": validation_results, "success": True})
+                except BaseException:
+                    return Response({"success": False, "error": "error processing XML file"})
+
         else:
             return Response({"success": False, "error": "No schema_version or file parameters sent"})
 
