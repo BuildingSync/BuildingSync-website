@@ -79,7 +79,7 @@ class ValidatorApi(views.APIView):
 
                     try:
                         tmp_dir = tempfile.TemporaryDirectory()
-                        dirname = tmp_dir.name 
+                        dirname = tmp_dir.name
 
                         # make clean filenames for response (weird encoding assumptions by zipfile module)
                         filenames = []
@@ -96,7 +96,7 @@ class ValidatorApi(views.APIView):
                             wf = ValidationWorkflow(the_file['old'], fp, version)
                             val_res = wf.validate_all()
 
-                            if val_res['schema']['valid'] == False:
+                            if val_res['schema']['valid'] is False:
                                 all_valid = False
 
                             results.append({"file": the_file['new'], "results": val_res})
