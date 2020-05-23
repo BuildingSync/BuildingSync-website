@@ -1,10 +1,41 @@
 import copy
-import subprocess
 from collections import OrderedDict
 
 import xmlschema
+from lxml import etree, isoschematron
 from bsyncviewer.models.schema import Schema
 from bsyncviewer.models.use_case import UseCase
+
+
+def validate_schematron(schematron_path, document_path):
+    schematron_tree = etree.parse(schematron_path)
+    schematron = isoschematron.Schematron(schematron_tree, store_report=True)
+    document_tree = etree.parse(document_path)
+
+    schematron.validate(document_tree)
+
+    failed_assert_xpath = '/svrl:schematron-output/svrl:failed-assert'
+    failed_asserts = schematron.validation_report.xpath(
+        failed_assert_xpath,
+        namespaces={
+            'svrl': 'http://purl.oclc.org/dsdl/svrl'
+        })
+
+    errors = []
+    for failed_assert in failed_asserts:
+        # location stores an xpath to the element which failed validation
+        location = failed_assert.get('location')
+        failed_element = document_tree.xpath(location)[0]
+        # use namespace to make it pretty
+        tag = failed_element.tag.replace("{http://buildingsync.net/schemas/bedes-auc/2019}", "auc:")
+        # grab the message from failed_assert's first child
+        error_message = failed_assert[0].text
+        errors.append({
+            'line': failed_element.sourceline,
+            'element': tag,
+            'message': error_message
+        })
+    return errors
 
 
 class ValidationWorkflow(object):
@@ -85,7 +116,6 @@ class ValidationWorkflow(object):
     def validate_use_cases(self):
         resp = OrderedDict()
         resp['use_cases'] = OrderedDict()
-
         for use_case in self.use_cases:
             print("Validating use case: {}".format(use_case.name))
             resp['use_cases'][use_case.name] = self.process_use_case(use_case)
@@ -147,12 +177,8 @@ class ValidationWorkflow(object):
         results['infos'] = []
         results['warnings'] = []
 
-        result = subprocess.run(['stron-nokogiri', use_case.import_file.path, self.filepath], stdout=subprocess.PIPE)
-        errors = result.stdout.decode('utf-8')
-        temp_results = errors.split('\n')
-        temp_results = [i for i in temp_results if i]
-
-        temp_results = self.process_errors(temp_results)
+        errors = validate_schematron(use_case.import_file.path, self.filepath)
+        temp_results = self.process_errors(errors)
 
         # set valid to valse if errors.count > 0
         if len(temp_results['errors']) > 0:
@@ -165,6 +191,9 @@ class ValidationWorkflow(object):
         return results
 
     def process_errors(self, results):
+        def format_error(error):
+            return f'line {error["line"]}: element {error["element"]}: {error["message"]}'
+
         # separate INFO, WARNING, ERROR
 
         final_results = OrderedDict()
@@ -173,14 +202,14 @@ class ValidationWorkflow(object):
         final_results['errors'] = []
 
         for res in results:
-            if '[INFO]' in res:
+            if '[INFO]' in res['message']:
                 # append to info
-                final_results['infos'].append(res)
-            elif '[WARNING]' in res:
+                final_results['infos'].append(format_error(res))
+            elif '[WARNING]' in res['message']:
                 # append to warnings
-                final_results['warnings'].append(res)
+                final_results['warnings'].append(format_error(res))
             else:
                 # assume error
-                final_results['errors'].append(res)
+                final_results['errors'].append(format_error(res))
 
         return final_results
