@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <auc:BuildingSync xmlns:auc="http://buildingsync.net/schemas/bedes-auc/2019" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://buildingsync.net/schemas/bedes-auc/2019 https://raw.githubusercontent.com/BuildingSync/schema/v2.0/BuildingSync.xsd">
   <auc:Facilities>
-    <auc:Facility>
+    <auc:Facility ID="Facility1">
       <auc:Sites>
-        <auc:Site>
+        <auc:Site ID="Site1">
           <auc:ClimateZoneType>
             <auc:ASHRAE>
               <auc:ClimateZone>6A</auc:ClimateZone>
@@ -27,10 +27,10 @@
       </auc:Sites>
       <auc:Systems/>
       <auc:Measures>
-        <auc:Measure/>
+        <auc:Measure ID="Measure1"/>
       </auc:Measures>
       <auc:Reports>
-        <auc:Report>
+        <auc:Report ID="Report1">
           <auc:Scenarios>
             <auc:Scenario ID="Baseline">
               <auc:ScenarioName>Baseline</auc:ScenarioName>
