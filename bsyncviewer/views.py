@@ -84,7 +84,8 @@ class ValidatorApi(views.APIView):
                         # make clean filenames for response (weird encoding assumptions by zipfile module)
                         filenames = []
                         for member in zip_file.infolist():
-                            filenames.append({"new": member.filename.encode('cp437').decode('utf-8'), "old": member.filename})
+                            if member.filename.endswith(".xml") and not member.filename.startswith("__MACOSX"):
+                                filenames.append({"new": member.filename.encode('cp437').decode('utf-8'), "old": member.filename})
 
                         zip_file.extractall(dirname)
 
