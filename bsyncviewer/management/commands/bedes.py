@@ -14,6 +14,7 @@ from bsyncviewer.models.bedes_models import (
     BedesTerm
 )
 from bsyncviewer.models.enumeration import Enumeration
+from bsyncviewer.models.attribute_enumeration_class import AttributeEnumerationClass
 from bsyncviewer.models.schema import Schema
 from django.conf import settings
 from django.core.management.base import BaseCommand
@@ -352,6 +353,15 @@ class Command(BaseCommand):
         results = {}
         for enumeration in Enumeration.objects.filter(schema=schema):
             results[enumeration.id] = []
+
+            # retrieve associated attribute ID for CSV
+            attrs = AttributeEnumerationClass.objects.filter(enumeration_class=enumeration.enumeration_class)
+            
+            associated_attrs = []
+            for attr in attrs: 
+                associated_attrs.append(attr.attribute_id)
+            print(associated_attrs)
+
             for be in bedes.enumerations:
                 distance = jellyfish.jaro_winkler(enumeration.name, be['List-Option'])
 
@@ -360,7 +370,8 @@ class Command(BaseCommand):
                         "enumeration_name": enumeration.name,
                         "bedes_term": be['List-Option'],
                         "bedes_object": be,
-                        "distance": distance
+                        "distance": distance,
+                        "associated_attribute_ids": ' '.join([str(item) for item in associated_attrs ])
                     })
             results[enumeration.id] = sorted(results[enumeration.id], key=lambda k: -k['distance'])
             if not results[enumeration.id]:
@@ -376,15 +387,15 @@ class Command(BaseCommand):
             # headers: enumeration name, enumeration id,
             # bedes Content-UUID, bedes term, bedes definition, bedes URL, bedes Related Term UUID, distance
             writer.writerow(
-                ['enum_name', 'enum_id', 'bedes_content_uuid', 'bedes_term', 'bedes_definition',
-                 'bedes_url', 'bedes_related_term_uuid', 'distance'])
+                ['enum_name', 'enum_id', 'bedes_content_uuid', 'bedes_term', 
+                 'bedes_definition', 'bedes_url', 'bedes_related_term_uuid', 'distance', 'associated_attribute_ids'])
             for enum, be in results.items():
                 if len(be) > 0 and 'bedes_object' in be[0]:
                     content_uuids.append(be[0]['bedes_object']['Content-UUID'])
                     out = [be[0]['enumeration_name'], enum, be[0]['bedes_object']['Content-UUID'],
                            be[0]['bedes_term'], be[0]['bedes_object']['List-Option-Definition'],
                            be[0]['bedes_object']['URL'], be[0]['bedes_object']['Related-Term-UUID'],
-                           be[0]['distance']]
+                           be[0]['distance'], be[0]['associated_attribute_ids']]
 
                 else:
                     out = [be[0]['enumeration_name'], enum, '', '', '', '', '', '']
