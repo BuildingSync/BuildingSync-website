@@ -356,9 +356,9 @@ class Command(BaseCommand):
 
             # retrieve associated attribute ID for CSV
             attrs = AttributeEnumerationClass.objects.filter(enumeration_class=enumeration.enumeration_class)
-            
+
             associated_attrs = []
-            for attr in attrs: 
+            for attr in attrs:
                 associated_attrs.append(attr.attribute_id)
             print(associated_attrs)
 
@@ -371,13 +371,14 @@ class Command(BaseCommand):
                         "bedes_term": be['List-Option'],
                         "bedes_object": be,
                         "distance": distance,
-                        "associated_attribute_ids": ' '.join([str(item) for item in associated_attrs ])
+                        "associated_attribute_ids": ' '.join([str(item) for item in associated_attrs])
                     })
             results[enumeration.id] = sorted(results[enumeration.id], key=lambda k: -k['distance'])
             if not results[enumeration.id]:
                 # didn't find anything
                 results[enumeration.id].append({
-                    "enumeration_name": enumeration.name
+                    "enumeration_name": enumeration.name,
+                    "associated_attribute_ids": ' '.join([str(item) for item in associated_attrs])
                 })
 
         # store the results to CSV
@@ -387,7 +388,7 @@ class Command(BaseCommand):
             # headers: enumeration name, enumeration id,
             # bedes Content-UUID, bedes term, bedes definition, bedes URL, bedes Related Term UUID, distance
             writer.writerow(
-                ['enum_name', 'enum_id', 'bedes_content_uuid', 'bedes_term', 
+                ['enum_name', 'enum_id', 'bedes_content_uuid', 'bedes_term',
                  'bedes_definition', 'bedes_url', 'bedes_related_term_uuid', 'distance', 'associated_attribute_ids'])
             for enum, be in results.items():
                 if len(be) > 0 and 'bedes_object' in be[0]:
@@ -398,7 +399,7 @@ class Command(BaseCommand):
                            be[0]['distance'], be[0]['associated_attribute_ids']]
 
                 else:
-                    out = [be[0]['enumeration_name'], enum, '', '', '', '', '', '']
+                    out = [be[0]['enumeration_name'], enum, '', '', '', '', '', '', be[0]['associated_attribute_ids']]
                 writer.writerow(out)
 
         list_set = set(content_uuids)
