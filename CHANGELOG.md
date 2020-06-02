@@ -1,5 +1,16 @@
 # BuildingSync Use Case Selection Tool
 
+## Version 1.1.2
+
+Date Range: 03/26/20 - 06/02/20
+
+Updates:
+
+- Replaced schematron-nokogiri (and ruby dependency) with lxml for better error message when validating XMLs
+- Updates to L000 use case and associated files
+- Validator API now accepts zip files of XMLs for validation against a schema version and associated use cases
+- Added information to bedes enumeration CSV export to link enums back to their associated attributes
+
 ## Version 1.1.1
 
 General updates:
