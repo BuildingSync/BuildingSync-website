@@ -26,15 +26,6 @@ This is the repository for the BuildingSync Validator web application.
 	```bash
 	pip install -r requirements.txt
 	```
-1.  Install the schematron-nokogiri gem for schematron use case validation.  We are using a forked version to handle OpenStudio Simulation use cases which contain abstract patterns.
-    ```bash
-    git clone https://github.com/BuildingSync/schematron.git
-    cd schematron
-    gem build schematron-nokogiri.gemspec
-    gem install schematron-nokogiri-0.0.3.gem
-
-    ```
-
 1.  Initialize the database:
 	```bash
 	python manage.py migrate
@@ -128,6 +119,8 @@ The validator page allows users to validate XMLs against the BuildingSync schema
 
 There is also a validator endpoint to validate XML files against the BuildingSync schema and its public use cases.
 
+#### SINGLE XML
+
 Request: POST to https://selectiontool.buildingsync.net/api/validate
 Use form-data to specify the following parameters for schema version and XML file:  ```schema_version``` and ```file```.
 
@@ -166,6 +159,81 @@ Example Response:
     "success": true
 }
 ```
+
+#### ZIP with multiple XMLs
+
+Request: POST to https://selectiontool.buildingsync.net/api/validate
+Use form-data to specify the following parameters for schema version and XML file:  ```schema_version``` and ```file```.
+
+Example Response:
+```json
+{
+    "schema_version": "2.0.0",
+    "all_files_valid": true,
+    "validation_results": [
+        {
+            "file": "Example – A Valid Schema.xml",
+            "results": {
+                "schema": {
+                    "valid": true,
+                    "schema_version": "2.0.0"
+                },
+                "use_cases": {
+                    "LL87": {
+                        "valid": false,
+                        "errors": [
+                            "Usage: stron [schematron] [instance doc]",
+                            "undefined local variable or method `type' for main:Object"
+                        ],
+                        "infos": [],
+                        "warnings": []
+                    },
+                    "L000 OpenStudio Simulation": {
+                        "valid": false,
+                        "errors": [
+                            "Usage: stron [schematron] [instance doc]",
+                            "undefined local variable or method `type' for main:Object"
+                        ],
+                        "infos": [],
+                        "warnings": []
+                    }
+                }
+            }
+        },
+        {
+            "file": "Example – Valid Schema Invalid UseCase.xml",
+            "results": {
+                "schema": {
+                    "valid": true,
+                    "schema_version": "2.0.0"
+                },
+                "use_cases": {
+                    "LL87": {
+                        "valid": false,
+                        "errors": [
+                            "Usage: stron [schematron] [instance doc]",
+                            "undefined local variable or method `type' for main:Object"
+                        ],
+                        "infos": [],
+                        "warnings": []
+                    },
+                    "L000 OpenStudio Simulation": {
+                        "valid": false,
+                        "errors": [
+                            "Usage: stron [schematron] [instance doc]",
+                            "undefined local variable or method `type' for main:Object"
+                        ],
+                        "infos": [],
+                        "warnings": []
+                    }
+                }
+            }
+        }
+    ],
+    "success": true
+}
+```
+
 
 ### BEDES
 

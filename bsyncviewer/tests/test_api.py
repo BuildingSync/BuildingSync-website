@@ -52,6 +52,29 @@ class TestApi(APITestCase):
         print("VALID SCHEMA? {}".format(valid_schema))
         self.assertTrue(valid_schema)
 
+    def test_validator_zip_api(self):
+        print("START OF TEST_VALIDATOR_ZIP_API")
+
+        head, tail = os.path.split(os.path.dirname(__file__))
+        filepath = os.path.join(os.path.join(os.path.dirname(__file__), 'data', 'example_files.zip'))
+        f = open(filepath, 'rb')
+        simple_uploaded_file = SimpleUploadedFile(f.name, f.read())
+
+        data = {'schema_version': TEST_SCHEMA_VERSION, 'file': simple_uploaded_file}
+
+        url = reverse('validate_api')
+        print("URL: {}".format(url))
+        response = self.client.post(url, data, format='multipart')
+
+        print("RESPONSE STATUS CODE: {}".format(response.status_code))
+        print("RESPONSE CONTENT: {}".format(response.data))
+        # assert that the call worked
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        # assert that the schema validates
+        valid_schema = response.data['all_files_valid']
+        print("VALID SCHEMA? {}".format(valid_schema))
+        self.assertTrue(valid_schema)
+
     def tearDown(self):
         # clean-up files on disk
         print("IN TEAR DOWN NOW")
