@@ -153,7 +153,7 @@ def use_cases(request):
 
     cases = {}
     schemas = Schema.objects.values_list('version', flat=True)
-    
+
     # sort according to versioning scheme
     sorted_versions = sorted(schemas, key=lambda x: semantic_version.Version(x), reverse=True)
 
