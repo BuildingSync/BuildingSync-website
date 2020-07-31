@@ -3,6 +3,7 @@ import os
 import subprocess
 import tempfile
 import zipfile
+import semantic_version
 
 from bsyncviewer import forms
 from bsyncviewer.lib.tree_viewer import get_schema_jstree_data
@@ -150,10 +151,20 @@ def use_cases(request):
     if request.user.is_authenticated:
         user_usecases = UseCase.objects.filter(owner=request.user)
 
-    public_usecases = UseCase.objects.filter(make_public=True)
+    cases = {}
+    schemas = Schema.objects.values_list('version', flat=True)
+    
+    # sort according to versioning scheme
+    sorted_versions = sorted(schemas, key=lambda x: semantic_version.Version(x), reverse=True)
+
+    for s in sorted_versions:
+        schema = Schema.objects.filter(version=s).first()
+        ucs = list(UseCase.objects.filter(make_public=True, schema=schema).order_by('name').values())
+        cases[s] = ucs
+
     context = {
         'user_usecases': user_usecases,
-        'public_usecases': public_usecases
+        'sorted_public_cases': cases
     }
     return render(request, 'use_cases.html', context)
 

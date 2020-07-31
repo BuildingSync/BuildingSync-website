@@ -294,8 +294,14 @@ label {
   color: #333;
 }
 
-table th, table td {
+table td {
   color: #333;
+}
+
+table th {
+  color: #000;
+  font-size: 1.1em;
+  font-weight: bold;
 }
 
 ul li {
