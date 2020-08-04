@@ -3,8 +3,8 @@ import os
 import subprocess
 import tempfile
 import zipfile
-import semantic_version
 
+import semantic_version
 from bsyncviewer import forms
 from bsyncviewer.lib.tree_viewer import get_schema_jstree_data
 from bsyncviewer.lib.validator.workflow import ValidationWorkflow

@@ -2,9 +2,9 @@ import copy
 from collections import OrderedDict
 
 import xmlschema
-from lxml import etree, isoschematron
 from bsyncviewer.models.schema import Schema
 from bsyncviewer.models.use_case import UseCase
+from lxml import etree, isoschematron
 
 
 def validate_schematron(schematron_path, document_path):

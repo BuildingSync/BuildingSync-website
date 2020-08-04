@@ -26,7 +26,7 @@
     can be run against any auc:Section element, it is typically restricted to 'Space function'
     element types, i.e. auc:Section[auc:SectionType='Space function']
     <severity> error
-    <param> parent - an auc:Section element.  
+    <param> parent - an auc:Section element.
 -->
   <pattern abstract="true" id="sec.mainDetails.L100.sim">
     <rule context="$parent">

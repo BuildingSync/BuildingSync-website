@@ -7,6 +7,9 @@ import jellyfish
 import xmltodict
 from bsyncviewer.lib.bedes.bedes_parser import BedesParser
 from bsyncviewer.models.attribute import Attribute
+from bsyncviewer.models.attribute_enumeration_class import (
+    AttributeEnumerationClass
+)
 from bsyncviewer.models.bedes_models import (
     BedesEnumeration,
     BedesEnumerationMapping,
@@ -14,7 +17,6 @@ from bsyncviewer.models.bedes_models import (
     BedesTerm
 )
 from bsyncviewer.models.enumeration import Enumeration
-from bsyncviewer.models.attribute_enumeration_class import AttributeEnumerationClass
 from bsyncviewer.models.schema import Schema
 from django.conf import settings
 from django.core.management.base import BaseCommand

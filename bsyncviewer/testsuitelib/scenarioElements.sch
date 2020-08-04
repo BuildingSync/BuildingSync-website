@@ -29,7 +29,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   Ensure that every Building is linked to a Benchmark Scenario
   <severity> error
   -->
@@ -42,7 +42,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   Ensure that every BenchmarkType Scenario has necessary info per Std 211 5.2.3
   <severity> error
   -->
@@ -63,7 +63,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   Ensure that every Building is linked to a Measurement Scenario
   <severity> error
   -->
@@ -76,7 +76,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   Ensure that Measurement Scenario has:
   - ResourceUses defined
   - At least one ResourceUse/EnergyResource
