@@ -14,13 +14,13 @@
             <div class="col-md-9">
             {% if sorted_public_cases %}
                 {% for name, val_arr in sorted_public_cases.items %}
-                 {% if forloop.first %} 
-                 <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true"> 
+                 {% if forloop.first %}
+                 <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
                  {% endif %}
                     <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="heading{{ name|cut:' '|cut:'#'|cut:'.' }}">
                       <h4 class="panel-title">
-                        {% if forloop.first %} 
+                        {% if forloop.first %}
                             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion1" href="#collapse{{ name|cut:' '|cut:'#'|cut:'.' }}" aria-expanded="true"
                            aria-controls="collapse">
                            Latest Version: {{ name }}
@@ -33,7 +33,7 @@
                         {% endif %}
                       </h4>
                     </div>
-                    {% if forloop.first %} 
+                    {% if forloop.first %}
                         <div id="collapse{{ name|cut:' '|cut:'#'|cut:'.' }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{ name|cut:' '|cut:'#'|cut:'.' }}">
                     {% else %}
                         <div id="collapse{{ name|cut:' '|cut:'#'|cut:'.' }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ name|cut:' '|cut:'#'|cut:'.' }}">
@@ -60,10 +60,10 @@
                       </div>
                     </div>
                   </div>
-                  {% if forloop.first and sorted_public_cases|length > 1 %} 
+                  {% if forloop.first and sorted_public_cases|length > 1 %}
                     </div>
                     <h3>Older Versions</h3>
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"> 
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                   {% endif %}
                 {% endfor %}
                 </div>
@@ -72,7 +72,7 @@
             {% if user.is_authenticated %}
                 <div class="pad-top-40">
                     <h2>My Use Cases</h2>
-                    <div class="panel-group" id="accordionMUC" role="tablist" aria-multiselectable="true"> 
+                    <div class="panel-group" id="accordionMUC" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-default">
                             <div class="panel-heading" role="tab" id="headingMUC">
                                 <h4 class="panel-title">
@@ -85,7 +85,7 @@
                             <div id="collapseMUC" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingMUC">
                                 <div class="panel-body">
                                     <div>
-                                    
+
                                         {% if user_usecases %}
                                             <table class="table">
                                                 <tr>
