@@ -19,3 +19,6 @@ tox==3.14.1
 
 # string matching
 jellyfish==0.7.1
+
+# schematron runner from TestSuite repo
+git+git://github.com/BuildingSync/TestSuite.git@d30138ae537a58e53c4ec5dc04521c1d063f4889
