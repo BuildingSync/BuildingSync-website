@@ -147,7 +147,8 @@ class BuildingSyncSchemaProcessor(object):
                 if looking_for_type_name == ne.name:
                     found = True
                     break
-            if found:
+            # if a referenced element wasn't found, and it wasn't a gbxml element, fail here
+            if found or type_ref.ref_type.startswith('gbxml'):
                 continue
             raise Exception("Couldn't find reference %s" % looking_for_type_name)
         # print("All type refs were properly accounted.")
@@ -172,6 +173,9 @@ class BuildingSyncSchemaProcessor(object):
                 full_schema.attributes.append(self._read_attribute(child))
             elif child.tag.endswith('annotation'):
                 full_schema.annotations.append(self._read_annotation(child))
+            elif child.tag.endswith('import'):
+                # import tags are ignored
+                continue
             else:
                 raise Exception("Invalid tag type in _read_schema: " + child.tag)
         return full_schema
