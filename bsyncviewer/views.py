@@ -149,7 +149,7 @@ def examples(request):
 def use_cases(request):
     user_usecases = {}
     if request.user.is_authenticated:
-        user_usecases = UseCase.objects.filter(owner=request.user)
+        user_usecases = UseCase.objects.filter(owner=request.user).order_by('schema')
 
     cases = {}
     schemas = Schema.objects.values_list('version', flat=True)
