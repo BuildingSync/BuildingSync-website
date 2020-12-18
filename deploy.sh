@@ -82,9 +82,9 @@ echo "Pushing tagged versions to local registry"
 docker push 127.0.0.1:5000/selection-tool
 docker push 127.0.0.1:5000/postgres
 
-echo "Deploying"
-# check if the stack is running, and if so then shut it down
-docker stack deploy selection-tool --compose-file=docker-compose.local.yml &
+echo "Deploying (or updating)"
+# Switch to using docker-compose to fix unknown reason with network issues. (Containers don't have access to internet.)
+docker-compose -f docker-compose.local.yml -p selection-tool up -d
 wait $!
 while ( nc -zv 127.0.0.1 80 3>&1 1>&2- 2>&3- ) | awk -F ":" '$3 != " Connection refused" {exit 1}'; do echo -n "."; sleep 5; done
 echo 'BSYNC SELECTION TOOL stack redeployed'
