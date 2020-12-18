@@ -314,7 +314,6 @@ class BuildingSyncSchemaProcessor(object):
             # todo: would probably want to do more here?
             return this_union
 
-
     def _read_simple_type(self, parent_object):
         this_simple_content = SimpleTypeElement()
         for child in parent_object.getchildren():
