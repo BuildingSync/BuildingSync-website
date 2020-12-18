@@ -6,7 +6,7 @@
 # system. Also, the location of the backups is hardcoded to ~/selection-tool-backups.
 
 # To create nightly backups, add the following to your crontab
-# 0 0 * * * /srv/www/selection-tool/backup_database.sh <db_name> <db_username> >> /home/ubuntu/selection-tool-backups/cron.log 2>&1
+# 0 0 * * * /srv/selection-tool/backup_database.sh <db_name> <db_username> >> /home/ubuntu/selection-tool-backups/cron.log 2>&1
 
 DB_NAME=$1
 DB_USERNAME=$2
