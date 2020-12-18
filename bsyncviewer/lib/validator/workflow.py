@@ -2,9 +2,9 @@ import copy
 from collections import OrderedDict
 
 import xmlschema
-from tools.validate_sch import validate_schematron
 from bsyncviewer.models.schema import Schema
 from bsyncviewer.models.use_case import UseCase
+from tools.validate_sch import validate_schematron
 
 
 class ValidationWorkflow(object):
