@@ -13,8 +13,8 @@ uWSGI==2.0.18
 
 # for development and testing. Need to move this into separate file
 autopep8==1.4.4
-coveralls==1.8.2
-coverage==4.5.4
+coveralls==2.2.0
+coverage==5.0.1
 tox==3.14.1
 
 # string matching

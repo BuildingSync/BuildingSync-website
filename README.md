@@ -1,6 +1,6 @@
 # BuildingSync Schema Viewer and Validator
 
-[![Build Status](https://travis-ci.org/BuildingSync/selection-tool.svg?branch=develop)](https://travis-ci.org/BuildingSync/selection-tool)
+[![Build Status](https://github.com/BuildingSync/selection-tool/workflows/CI/badge.svg)](https://github.com/BuildingSync/selection-tool)
 
 This is the repository for the BuildingSync Validator web application.
 
