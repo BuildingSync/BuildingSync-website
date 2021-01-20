@@ -1,5 +1,5 @@
 """
-settings for travis (travis-ci.org)
+settings for GitHub Actions
 """
 from __future__ import absolute_import
 
