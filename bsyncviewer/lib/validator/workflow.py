@@ -4,7 +4,7 @@ from collections import OrderedDict
 import xmlschema
 from bsyncviewer.models.schema import Schema
 from bsyncviewer.models.use_case import UseCase
-from tools.validate_sch import validate_schematron
+from testsuite.validate_sch import validate_schematron
 
 
 class ValidationWorkflow(object):
