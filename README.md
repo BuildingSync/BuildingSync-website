@@ -53,6 +53,8 @@ This is the repository for the BuildingSync Validator web application.
 	python manage.py reset_schema --schema_version=1.0.0
 	```
 
+**NOTE**: You will need to be off the NREL VPN to import a schema, otherwise you'll get an error related to http://www.gbxml.org/schema}Area' as the gbxml schema cannot be imported when on the NREL VPN.
+
 ### Precommit
 
 This project used `pre-commit <https://pre-commit.com/>`_ to ensure code consistency. To enable pre-commit, run the following from the command line.
@@ -96,7 +98,7 @@ tox -e flake8
 
 The BuildingSync Schema Viewer can support multiple versions of the BuildingSync schema.  Admin users can manage schemas from the Django Administration console.  Click on the 'Admin' link in the top navigation bar to access the Django Administration pages.
 
-To add a schema, specify the name, version, and schema file (XSD) to parse and save the record.  The schema file will be parsed automatically.
+To add a schema, specify the name, version, and schema file (XSD) to parse and save the record.  The schema file will be parsed automatically.  **NOTE**: You will need to be off the NREL VPN to import a schema, otherwise you'll get an error related to http://www.gbxml.org/schema}Area' as the gbxml schema cannot be imported when on the NREL VPN.
 
 To modify an existing schema, click on the edit link.  If changes are made to the uploaded XSD schema file and re-uploaded, ensure that the 'schema parsed' checkbox is unchecked before saving the record.  This will trigger the automatic schema parsing.
 
