@@ -136,6 +136,46 @@ def index(request):
     return render(request, 'index.html', context)
 
 
+def about(request):
+    context = {}
+    return render(request, 'about.html', context)
+
+
+def implementers(request):
+    context = {}
+    return render(request, 'implementers.html', context)
+
+
+def practitioners(request):
+    context = {}
+    return render(request, 'practitioners.html', context)
+
+
+def auditors(request):
+    context = {}
+    return render(request, 'auditors.html', context)
+
+
+def tools(request):
+    context = {}
+    return render(request, 'tools.html', context)
+
+
+def releases(request):
+    context = {}
+    return render(request, 'releases.html', context)
+
+
+def technical_resources(request):
+    context = {}
+    return render(request, 'technical_resources.html', context)
+
+
+def references(request):
+    context = {}
+    return render(request, 'references.html', context)
+
+
 def use_case_mappings(request):
     context = {}
     return render(request, 'use_case_mappings.html', context)
@@ -145,6 +185,9 @@ def examples(request):
     context = {}
     return render(request, 'examples.html', context)
 
+def case_study(request):
+    context = {}
+    return render(request, 'case_study.html', context)
 
 def use_cases(request):
     user_usecases = {}

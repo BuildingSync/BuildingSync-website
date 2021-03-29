@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
-
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 {% load staticfiles %}
 
 {% block extra_head %}
@@ -53,18 +52,17 @@
         <form class="form-inline" role="form" id="treesearch">
           <div class="form-group col-md-10">
             <label class="sr-only">Search</label>
-            <input type="text" class="" id="treesearchquery">
+            <input type="text" class="" id="treesearchquery" size="30">
           </div>
-          <button type="submit" class="btn btn-default" style="margin-bottom:20px;"><span
-              class="glyphicon glyphicon-search"></span></button>
+          <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
         </form>
 
 
-        <h2 id="enum_title" class="hidden">SELECTED NAME</h2>
+        <h2 id="enum_title" class="invisible">SELECTED NAME</h2>
         <!--TODO: eventually look up the bedes term and display here-->
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h2 class="panel-title">Data Dictionary Links</h2>
+                <h3 class="panel-title">Data Dictionary Links</h3>
             </div>
             <div class="panel-body" id="bedes_panel">
               <div id="bedes_none" class="visible">
@@ -78,7 +76,7 @@
 
          <div id="enum_panel" class="panel panel-default hidden">
             <div class="panel-heading">
-                <h2 class="panel-title">Enumerations</h2>
+                <h3 class="panel-title">Enumerations</h3>
             </div>
             <div class="panel-body">
                <div id="enum_results"></div>
@@ -92,7 +90,7 @@
 
 {% endblock content_notitle %}
 
-{% block extra_script %}
+{% block bootstrap_extra_script %}
   <script src="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/jstree.min.js"></script>
   <script type="application/javascript">
       $(function () {
@@ -179,4 +177,4 @@
       });
   </script>
 
-{% endblock extra_script %}
+{% endblock bootstrap_extra_script %}

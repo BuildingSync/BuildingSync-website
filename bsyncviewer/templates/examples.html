@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 
-{% load bootstrap3 %}
 
 {% block title %}BuildingSync Schema Viewer{% endblock %}
 
@@ -15,7 +14,7 @@
     <h3 id="modeling-level-of-detail-definitions">Modeling Level of Detail Definitions</h2>
     <p>The Modeling Level of Detail (MLOD) is similar in concept to the <a href="https://technical.buildingsmart.org/standards/mvd/">Model View Definitions (MVD)</a> defined by IFC. MLODs define a subset of the overall BuildingSync schema necessary for a specific use case or workflow.
     <p>Level definitions are in alignment with the ASHRAE Standard 211 levels as defined below:</p>
-    <table>
+    <table class="table table-striped">
     <thead>
     <tr class="header">
     <th>MLOD</th>
@@ -67,7 +66,7 @@
     <!--start copy from TestSuite README -->
     <h3 id="hvac-system-examples">HVAC System Examples</h3>
     <p>Where the System Type specified below does not exactly match the enumeration in the BSync XML file, check the mapping defined by <a href="https://github.com/BuildingSync/BuildingSync-gem/blob/bb52655ebb8efeca44249277d3fb67ac60b4e610/lib/buildingsync/model_articulation/hvac_system.rb#L121-L143">map_primary_hvac_system_type_to_cbecs_system_type</a>. Additionally, see the <a href="https://github.com/BuildingSync/TestSuite/tree/develop/examples/HVACSystems">examples/HVACSystems</a> directory for a tutorial and example files.</p>
-    <table>
+    <table class="table table-striped">
     <colgroup>
     <col width="35%" />
     <col width="3%" />
@@ -162,7 +161,7 @@
     </tbody>
     </table>
     <h3 id="lighting-system-examples">Lighting System Examples</h3>
-    <table>
+    <table class="table table-striped">
     <thead>
     <tr class="header">
     <th>System Type</th>
@@ -175,7 +174,7 @@
     </tbody>
     </table>
     <h3 id="premise-examples">Premise Examples</h3>
-    <table>
+    <table class="table table-striped">
     <thead>
     <tr class="header">
     <th>System Type</th>

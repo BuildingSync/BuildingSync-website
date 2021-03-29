@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 
-{% load bootstrap3 %}
 
 {% block title %}BuildingSync Schema Viewer{% endblock %}
 
@@ -17,7 +16,7 @@
                  {% if forloop.first %}
                  <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
                  {% endif %}
-                    <div class="panel panel-default">
+                    <div class="panel panel-accent">
                     <div class="panel-heading" role="tab" id="heading{{ name|cut:' '|cut:'#'|cut:'.' }}">
                       <h4 class="panel-title">
                         {% if forloop.first %}
@@ -40,7 +39,7 @@
                     {% endif %}
                       <div class="panel-body">
                         <div>
-                            <table class="table">
+                            <table class="table table-striped">
                                 <thead>
                                 <tr>
                                     <th class="bold">Name</th>
@@ -128,7 +127,7 @@
             <div class="col-md-3">
                 <div class="callout-box">
                     <p>Click the link below for more information on adding and validating use cases</p>
-                    <span class="pad-10"><a class="btn btn-accent" href="{% url 'use_case_mappings' %}" role="button">
+                    <span class="pad-10"><a class="btn btn-primary" href="{% url 'use_case_mappings' %}" role="button">
                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                         Use Case Help Page
                         </a></span>

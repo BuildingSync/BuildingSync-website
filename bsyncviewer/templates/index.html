@@ -1,62 +1,95 @@
 {% extends 'base.html' %}
-
-{% load bootstrap3 %}
-
+{% load bootstrap4 %}
 {% block title %}BuildingSync Schema Viewer{% endblock %}
 
 {% block content_notitle %}
+  <div class="home-banner"><img src="static/images/image-banner.jpg" class="home-banner"></div>
 
-    <div class="container">
-
-			 {% bootstrap_messages %}
-
-        <header class="major">
-        	<div class="row">
-        		<div class="col-md-4">
-        			<div class="pad-lr-20">
-		            	<h2>Schema</h2>
-		            	<div class="big-icon"><i class="fa fa-list-alt"></i></div>
-		            	<p>Browse the BuildingSync<sup>&reg;</sup> schema elements.</p>
-	                </div>
-	            </div>
-	            <div class="col-md-4">
-	            	<div class="pad-lr-20">
-		            	<h2>Use Cases</h2>
-		            	<div class="big-icon"><i class="fa fa-copy"></i></div>
-		            	<p>Browse the BuildingSync<sup>&reg;</sup> schema and existing use cases of the schema.</p>
-		            	<p>Create new use cases that include specific parts of the BuildingSync schema.</p>
-	                </div>
-	            </div>
-	            <div class="col-md-4">
-	            	<div class="pad-lr-20">
-		            	<h2>Validator</h2>
-		            	<div class="big-icon"><i class="fa fa-check-circle"></i></div>
-		            	<p>Validate an XML against the BuildingSync schema or existing use cases of the schema.</p>
-	                </div>
-	            </div>
-        	</div>
-        	<div class="row">
-        		<div class="col-md-4">
-        			<a class="btn btn-accent pad-lr-50" href="{% url 'dictionary' %}" role="button">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                        Schema Viewer
-                    </a>
-        		</div>
-        		<div class="col-md-4">
-        			<a class="btn btn-accent pad-lr-50" href="{% url 'cases' %}" role="button">
-                        <i class="fa fa-copy" aria-hidden="true"></i>
-                        Use Cases
-                    </a>
-        		</div>
-        		<div class="col-md-4">
-        			<a class="btn btn-accent pad-lr-50" href="{% url 'validator' %}" role="button">
-                        <i class="fa fa-file-code-o" aria-hidden="true"></i>
-                        Validate XML
-                    </a>
-        		</div>
-        	</div>
-        </header>
+  <div class="row home-row mt-3">
+    <div class="col-5 col-sm-12 col-md-5 pr-3 pl-0">
+      <div class="home-leftcol">
+        <div class="home-bigtext pb-2">
+          BuildingSync &reg; is a common schema for energy audit data that can be utilized by different software and databases involved in the energy audit process.  It allows data to be more easily aggregated, compared, and exchanged between different databases and software tools.
+        </div>
+        <p>This streamlines the energy audit process, improving the value of the data, minimizing duplication of effort for subsequent audits, and facilitating achievement of greater energy efficiency.</p>
+        <p>BuildingSync was developed to address the lack of an industry-standard collection format for energy audit data.  Standardizing energy audit data can help energy auditors, software providers, building owners, utilities, and other entities by maximizing the value that can be obtained from each set fo data &ndash; value obtained through collaboration, comparison, and reuse.</p>
+      </div>
     </div>
-    <div id="app-version">App Version: {{ app_version }}</div>
+    <div class="col-7 col-sm-12 col-md-7">
+      <div class="row">
+        <div class="col-4 col-sm-12 col-md-4 home-standard mt-sm-3 mt-md-0">
+          <div class="home-standard-text">
+            <a href="{% url 'case_study' %}">How can standardizing data help me?</a>
+          </div>
+        </div>
+        <div class="col ml-3">
+          <div class="row">
+            <div class="col mt-sm-3 mt-md-0 mb-3 card-dkblue p-3 pt-4">
+              <div class="d-flex flex-row justify-content-center align-items-stretch">
+                <div class="icon-col p-3"><i class="fa fa-clipboard-check"></i></div>
+                <div><a href="{% url 'validator' %}">Validate your XML file</a></div>
+              </div>
+            </div>
+            <div class="col mt-sm-3 mt-md-0 mb-3 card-dkblue p-3 ml-3">
+              <div class="d-flex flex-row justify-content-center">
+                <div class="icon-col p-3"><i class="fa fa-sitemap"></i></div>
+                <div><a href="{% url 'dictionary' %}">Explore the schema viewer</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col mb-3 card-ltblue px-3 py-4">
+              <div class="d-flex flex-row justify-content-center">
+                <div class="icon-col pr-3 pl-0 pt-3 pb-3">
+                  <i class="fa fa-chalkboard-teacher"></i>
+                </div>
+                <div class="">
+                  <a href="{% url 'implementers' %}">For implementers</a>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-3 ml-3 card-ltblue px-3 py-4">
+              <div class="d-flex flex-row justify-content-center">
+                <div class="icon-col pr-3 pl-1 pt-3 pb-2">
+                  <i class="fa fa-clipboard-list"></i>
+                </div>
+                <div class="pt-3">
+                  <a href="{% url 'auditors' %}">For auditors</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col card-ltblue px-3 py-4">
+              <div class="d-flex flex-row justify-content-center">
+                <div class="icon-col pr-3 pl-2 py-3">
+                  <i class="fa fa-city"></i>
+                </div>
+                <div>
+                  <a href="{% url 'practitioners' %}">For building and city practitioners</a>
+                </div>
+              </div>
+            </div>
+            <div class="col ml-3 card-dkblue px-3 py-3">
+              <div class="d-flex flex-row justify-content-center">
+                <div class="icon-col p-3">
+                  <i class="fa fa-compass"></i>
+                </div>
+                <div class="pt-2">
+                  <a href="{% url 'tools' %}">Explore available tools</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 {% endblock content_notitle %}
+
+{% block content_test %}
+
+  <div id="app-version">App Version: {{ app_version }}</div>
+{% endblock content_test %}
