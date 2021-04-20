@@ -104,3 +104,9 @@ footer .main-footer a {
 .header-1 {
   background-image: url(../img/esif2.jpg);
 }
+
+.app_version {
+	float:right;
+	color:#ccc;
+	font-size:0.8em;
+}

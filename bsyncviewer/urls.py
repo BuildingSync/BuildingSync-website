@@ -16,7 +16,6 @@ router = routers.DefaultRouter()
 urlpatterns = [
     path('', views.index, name='index'),
     path('', views.index, name='home'),
-    path('index2', views.index2, name='index2'),
     path('use_case_mappings', views.use_case_mappings, name='use_case_mappings'),
     path('email/', emailView, name='email'),
     path('success/', successView, name='success'),
