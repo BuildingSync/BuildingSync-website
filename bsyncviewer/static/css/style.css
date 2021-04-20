@@ -43,13 +43,13 @@ TABLE OF CONTENTS
 			- comment-form
 		+ Shop Page
 			- Shop Bar
-		
+
 */
 
 @import "main.css";
 
 /* -------------------------------------------------------
-                     Global 
+                     Global
 -------------------------------------------------------- */
 
 body{
@@ -251,7 +251,7 @@ p{
 }
 
 /* -------------------------------------------------------
-                     Navbar 
+                     Navbar
 -------------------------------------------------------- */
 
 .navbar-custom {
@@ -374,8 +374,8 @@ p{
 .navbar-custom .nav .open > a:hover,
 .navbar-custom .dropdown-menu > li > a:focus,
 .navbar-custom .dropdown-menu > li > a:hover,
-.navbar-custom .dropdown-menu>.active>a, 
-.navbar-custom .dropdown-menu>.active>a:focus, 
+.navbar-custom .dropdown-menu>.active>a,
+.navbar-custom .dropdown-menu>.active>a:focus,
 .navbar-custom .dropdown-menu>.active>a:hover {
     background-color: transparent;
 }
@@ -470,7 +470,7 @@ Responsive Media Querries
 	.navbar-custom .navbar-toggle .icon-bar{
 		background: #fff;
 	}
-		
+
 	.navbar-custom .navbar-collapse{
 		border: none;
 		background: #111;
@@ -1445,7 +1445,7 @@ footer .small-footer p{
 }
 
 /* -------------------------------------------------------
-                     Demo-1 
+                     Demo-1
 -------------------------------------------------------- */
 
 .demo-1{
@@ -1453,7 +1453,7 @@ footer .small-footer p{
 }
 
 /* -------------------------------------------------------
-                     Demo-2 
+                     Demo-2
 -------------------------------------------------------- */
 
 .demo-2{
@@ -1480,7 +1480,7 @@ footer .small-footer p{
 }
 
 /* -------------------------------------------------------
-                     Demo-3 
+                     Demo-3
 -------------------------------------------------------- */
 
 .demo-3{
@@ -1535,7 +1535,7 @@ footer .small-footer p{
 }
 
 /* -------------------------------------------------------
-                     Demo-4 
+                     Demo-4
 -------------------------------------------------------- */
 
 .demo-4{
@@ -1549,7 +1549,7 @@ footer .small-footer p{
 }
 
 /* -------------------------------------------------------
-                     Demo-5 
+                     Demo-5
 -------------------------------------------------------- */
 
 .demo-5{
@@ -1579,7 +1579,7 @@ footer .small-footer p{
 }
 
 /* -------------------------------------------------------
-                     Demo-6 
+                     Demo-6
 -------------------------------------------------------- */
 
 .demo-6{
@@ -1651,7 +1651,7 @@ footer .small-footer p{
 }
 
 /* -------------------------------------------------------
-                     Comming-Soon 
+                     Comming-Soon
 -------------------------------------------------------- */
 
 .comming{
@@ -1812,7 +1812,7 @@ footer .small-footer p{
 }
 
 /* -------------------------------------------------------
-                     Blog Page 
+                     Blog Page
 -------------------------------------------------------- */
 
 
@@ -2020,7 +2020,7 @@ footer .small-footer p{
 }
 
 /* -------------------------------------------------------
-                     Single-post Page 
+                     Single-post Page
 -------------------------------------------------------- */
 
 .s-post-title{
@@ -2147,7 +2147,7 @@ footer .small-footer p{
 }
 
 /* -------------------------------------------------------
-                     Shop Page 
+                     Shop Page
 -------------------------------------------------------- */
 
 .shop-bg{

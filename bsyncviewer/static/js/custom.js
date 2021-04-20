@@ -169,7 +169,7 @@ $(function (){
 
     //smooth button scroll
     $('.button-scroll').on('click', function(){
-      
+
         var scrollTo = $(this).attr('data-scrollTo');
 
         $('body, html').animate({
@@ -183,9 +183,9 @@ $(function (){
     // progress bar
     wind.on('scroll', function () {
         $(".progress-main .progress-bar").each(function () {
-            var bottom_of_object = 
+            var bottom_of_object =
             $(this).offset().top + $(this).outerHeight();
-            var bottom_of_window = 
+            var bottom_of_window =
             $(window).scrollTop() + $(window).height();
             var myVal = $(this).attr('data-value');
             if(bottom_of_window > bottom_of_object) {

@@ -185,9 +185,11 @@ def examples(request):
     context = {}
     return render(request, 'examples.html', context)
 
+
 def case_study(request):
     context = {}
     return render(request, 'case_study.html', context)
+
 
 def use_cases(request):
     user_usecases = {}
