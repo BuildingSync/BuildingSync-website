@@ -1,95 +1,393 @@
-{% extends 'base.html' %}
-{% load bootstrap4 %}
-{% block title %}BuildingSync Schema Viewer{% endblock %}
+{% extends 'base2.html' %}
 
-{% block content_notitle %}
-  <div class="home-banner"><img src="static/images/image-banner.jpg" class="home-banner"></div>
+{% load staticfiles %}
 
-  <div class="row home-row mt-3">
-    <div class="col-5 col-sm-12 col-md-5 pr-3 pl-0">
-      <div class="home-leftcol">
-        <div class="home-bigtext pb-2">
-          BuildingSync &reg; is a common schema for energy audit data that can be utilized by different software and databases involved in the energy audit process.  It allows data to be more easily aggregated, compared, and exchanged between different databases and software tools.
+
+{% block nav %}
+<!-- Navigation start -->
+<nav class="navbar navbar-custom tt-default-nav" role="navigation">
+    <div class="container">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#custom-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!-- logo -->
+        <a class="navbar-brand" href="#"><img style="margin-bottom:10px;" src="{% static 'images/buildingsync-logo-sm.svg' %}" alt="BuildingSync logo"></a>
+      </div>
+
+      {% include 'topnav.html' %}
+    </div><!-- /.container -->
+</nav>
+{% endblock nav %}
+
+{% block header %}
+  <!-- ====== Header ======  -->
+  <header id="home" class="slider-nav demo-5">
+
+    <div class="owl-carousel owl-theme">
+      <div class="item slide-1">
+        <div class="v-middle text-center caption mt-20">
+          <h6>BuildingSync</h6>
+          <h1>Why standardize my data?</h1>
+          <a href="/case_study" class="button btn-bord-light">Learn More</a>
         </div>
-        <p>This streamlines the energy audit process, improving the value of the data, minimizing duplication of effort for subsequent audits, and facilitating achievement of greater energy efficiency.</p>
-        <p>BuildingSync was developed to address the lack of an industry-standard collection format for energy audit data.  Standardizing energy audit data can help energy auditors, software providers, building owners, utilities, and other entities by maximizing the value that can be obtained from each set fo data &ndash; value obtained through collaboration, comparison, and reuse.</p>
+      </div>
+
+      <div class="item slide-2">
+        <div class="v-middle text-center caption mt-20">
+          <h6>BuildingSync</h6>
+          <h1>Explore the Schema</h1>
+          <a href="/dictionary" class="button btn-bord-light">Learn More</a>
+        </div>
+      </div>
+
+      <div class="item slide-3">
+        <div class="v-middle text-center caption mt-20">
+          <h6>BuildingSync</h6>
+          <h1>Explore Use Cases</h1>
+          <a href="use_cases" class="button btn-bord-light">Learn More</a>
+        </div>
       </div>
     </div>
-    <div class="col-7 col-sm-12 col-md-7">
-      <div class="row">
-        <div class="col-4 col-sm-12 col-md-4 home-standard mt-sm-3 mt-md-0">
-          <div class="home-standard-text">
-            <a href="{% url 'case_study' %}">How can standardizing data help me?</a>
-          </div>
-        </div>
-        <div class="col ml-3">
-          <div class="row">
-            <div class="col mt-sm-3 mt-md-0 mb-3 card-dkblue p-3 pt-4">
-              <div class="d-flex flex-row justify-content-center align-items-stretch">
-                <div class="icon-col p-3"><i class="fa fa-clipboard-check"></i></div>
-                <div><a href="{% url 'validator' %}">Validate your XML file</a></div>
-              </div>
-            </div>
-            <div class="col mt-sm-3 mt-md-0 mb-3 card-dkblue p-3 ml-3">
-              <div class="d-flex flex-row justify-content-center">
-                <div class="icon-col p-3"><i class="fa fa-sitemap"></i></div>
-                <div><a href="{% url 'dictionary' %}">Explore the schema viewer</a></div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col mb-3 card-ltblue px-3 py-4">
-              <div class="d-flex flex-row justify-content-center">
-                <div class="icon-col pr-3 pl-0 pt-3 pb-3">
-                  <i class="fa fa-chalkboard-teacher"></i>
-                </div>
-                <div class="">
-                  <a href="{% url 'implementers' %}">For implementers</a>
-                </div>
-              </div>
-            </div>
-            <div class="col mb-3 ml-3 card-ltblue px-3 py-4">
-              <div class="d-flex flex-row justify-content-center">
-                <div class="icon-col pr-3 pl-1 pt-3 pb-2">
-                  <i class="fa fa-clipboard-list"></i>
-                </div>
-                <div class="pt-3">
-                  <a href="{% url 'auditors' %}">For auditors</a>
-                </div>
-              </div>
-            </div>
+    <div class="button-scroll" data-scrollTo="about"><span></span></div>
+  </header>
+  <!-- ====== End Header ======  -->
+{% endblock header %}
 
-          </div>
-          <div class="row">
-            <div class="col card-ltblue px-3 py-4">
-              <div class="d-flex flex-row justify-content-center">
-                <div class="icon-col pr-3 pl-2 py-3">
-                  <i class="fa fa-city"></i>
-                </div>
-                <div>
-                  <a href="{% url 'practitioners' %}">For building and city practitioners</a>
-                </div>
-              </div>
-            </div>
-            <div class="col ml-3 card-dkblue px-3 py-3">
-              <div class="d-flex flex-row justify-content-center">
-                <div class="icon-col p-3">
-                  <i class="fa fa-compass"></i>
-                </div>
-                <div class="pt-2">
-                  <a href="{% url 'tools' %}">Explore available tools</a>
-                </div>
-              </div>
-            </div>
+{% block content %}
+  <!-- ====== hero ======  -->
+  <section id="about" class="hero section-padding">
+    <div class="container">
+
+      <div class="row">
+        <!-- hero-item -->
+        <div class="hero-item col-md-4 text-center">
+          <span class="icon-map"></span>
+          <div class="hero-item-content">
+            <h5><a href="/practitioners">For Building and City Practitioners</a></h5>
+            <p class="mb-2">Find out how BuildingSync can help you</p>
+            <a href="/practitioners" class="button btn-bord-dark mt-2">Learn More</a>
           </div>
         </div>
+
+        <div class="hero-item col-md-4 text-center active">
+          <span class="icon-clipboard"></span>
+          <div class="hero-item-content">
+            <h5><a href="/auditors">For Auditors</a></h5>
+            <p class="mb-2">Learn how to standardize your data</p>
+            <a href="/auditors" class="button btn-bord-dark mt-2">Learn More</a>
+          </div>
+        </div>
+
+        <div class="hero-item col-md-4 text-center">
+          <span class="icon-tools"></span>
+          <div class="hero-item-content">
+            <h5><a href="/implementers">For Implementers</a></h5>
+            <p class="mb-2">Work with the BuildingSync schema</p>
+            <a href="/implementers" class="button btn-bord-dark mt-2">Learn More</a>
+          </div>
+        </div>
+
+        <div class="clear-fix"></div>
+      </div>
+    </div>
+
+  </section>
+  <!-- ====== End hero ======  -->
+
+  <!-- ====== Video ======  -->
+  <div class="serv-us">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-sm-10 us-content">
+          <p class="bold">BuildingSync&reg; is a common schema for energy audit data that can be utilized by different software and databases involved in the energy audit process. It allows data to be more easily aggregated, compared, and exchanged between different databases and software tools.</p>
+            <p>This streamlines the energy audit process, improving the value of the data, minimizing duplication of effort for subsequent audits, and facilitating achievement of greater energy efficiency.</p>
+            <p class="mb-2">BuildingSync was developed to address the lack of an industry-standard collection format for energy audit data.  Standardizing energy audit data can help energy auditors, software providers, building owners, utilities, and other entities by maximizing the value that can be obtained from each set fo data &ndash; value obtained through collaboration, comparison, and reuse.</p>
+          <a href="/about" class="button btn-bord-light">Find out more</a>
+        </div>
+
       </div>
     </div>
   </div>
+  <!-- ====== End Video ======  -->
 
-{% endblock content_notitle %}
+  <!-- ====== services ======  -->
+  <section id="services" class="services section-padding">
+    <div class="container">
 
-{% block content_test %}
+      <!-- section head -->
+      <div class="section-head text-center">
+        <h5 class="tit">RESOURCES</h5>
+      </div>
 
-  <div id="app-version">App Version: {{ app_version }}</div>
-{% endblock content_test %}
+      <div class="row">
+
+        <!-- services items -->
+        <div class="serv-row text-center">
+          <div class="col-md-4">
+            <div class="serv-item">
+              <span class="icon-layers"></span>
+              <h6><a href="/validator">Validator</a></h6>
+              <p>Validate your XML file against different schema versions and use cases</p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="serv-item">
+              <span class="icon-gears"></span>
+              <h6><a href="/tools">Tools</a></h6>
+              <p>Explore available tools to help you author valid BuildingSync files.</p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="serv-item">
+              <span class="icon-laptop"></span>
+              <h6><a href="/dictionary">Schema Viewer</a></h6>
+              <p>View the schema structure and data dictionary</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="serv-row text-center">
+          <div class="col-md-4">
+            <div class="serv-item">
+              <span class="icon-book-open"></span>
+              <h6><a href="/references">References</a></h6>
+              <p>Explore publications and presentations</p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="serv-item">
+              <span class="icon-map"></span>
+              <h6><a href="/case_study">Case Study</a></h6>
+              <p>Read about the BRICR case study.</p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="serv-item">
+              <span class="icon-layers"></span>
+              <h6><a href="/use_cases">Use Cases</a></h6>
+              <p>Explore current BuildingSync use cases</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- ====== End services ======  -->
+
+
+  <!--====== Blocks ======-->
+
+  <!--====== End Blocks ======-->
+
+  <!--====== Clients ======-->
+  <section id="clients" class="clients">
+    <div class="container">
+      <div class="row">
+
+        <!-- clients carousel -->
+        <div class="col-md-10 col-md-offset-1">
+          <div class="client-say text-center">
+            <div class="owl-carousel owl-theme">
+
+              <!-- client item -->
+              <div class="client-item text-center">
+
+                <span class="icon-quote mb-50"></span><br>
+
+                <h5 class="mb-30">Reviews</h5>
+
+                <p>"At Audette we build roadmaps for large property portfolios to get to carbon neutral. Our analytics are trained on historic energy, equipment, and audit data. In order to get this data into a usable format we apply the BuildingSync schema. It has helped us to get insights faster, and with more accuracy."</p>
+
+                <h6>- Christopher Naismith, CEO of Audette</h6>
+              </div>
+
+              <!-- client item -->
+              <div class="client-item text-center">
+
+                <span class="icon-quote mb-50"></span><br>
+
+                <h5 class="mb-30">Reviews</h5>
+
+                <p>Another Review here...</p>
+
+                <h6>- John Doe, Google Inc.</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--====== End Clients ======-->
+
+  <!--====== Blog ======-->
+  <section id="blog" class="blog section-padding">
+    <div class="container">
+
+      <!-- section header -->
+      <div class="section-head">
+        <h5 class="tit">Latest News</h5>
+        <a href="blog.html"><p class="pull-right">For All Newsletter >></p></a>
+      </div>
+
+      <div class="row">
+
+        <!-- posts -->
+        <div class="col-md-4">
+          <div class="s-post">
+            <div class="post-img">
+              <img src="{% static 'img/news-1.jpg' %}" alt="image">
+            </div>
+            <div class="s-post-content">
+              <h6>BUILDINGSYNC NEWS 1</h6>
+              <span>Admin | 6 August</span>
+              <p>Lorem ipsum dolor sit amet, consec tetur elit. In maximus ligula semper.Lorem ipsum dolor sit amet, adipi scing conse ctetur adipi scing.</p>
+              <a href="single-post.html"><span>Read More..</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="s-post">
+            <div class="post-img">
+              <img src="{% static 'img/news-2.jpg' %}" alt="image">
+            </div>
+            <div class="s-post-content">
+              <h6>BUILDINGSYNC NEWS 2</h6>
+              <span>Admin | 6 August</span>
+              <p>Lorem ipsum dolor sit amet, consec tetur elit. In maximus ligula semper.Lorem ipsum dolor sit amet, adipi scing conse ctetur adipi scing.</p>
+              <a href="single-post.html"><span>Read More..</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="s-post">
+            <div class="post-img">
+              <img src="{% static 'img/news-3.jpg' %}" alt="image">
+            </div>
+            <div class="s-post-content">
+              <h6>BUILDINGSYNC NEWS 3</h6>
+              <span>Admin | 6 August</span>
+              <p>Lorem ipsum dolor sit amet, consec tetur elit. In maximus ligula semper.Lorem ipsum dolor sit amet, adipi scing conse ctetur adipi scing.</p>
+              <a href="single-post.html"><span>Read More..</span></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!--====== End Blog ======-->
+
+  <!--====== Numbers ======-->
+  <section class="numbers">
+    <div class="container">
+      <div class="row text-center">
+
+        <!-- number items -->
+        <div class="col-md-3 col-sm-6">
+          <div class="numb-item">
+            <span class="icon-documents"></span>
+            <h3 class="counter">7</h3>
+            <p>Releases</p>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+          <div class="numb-item">
+            <span class="icon-layers"></span>
+            <h3 class="counter">10</h3>
+            <p>Use Cases</p>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+          <div class="numb-item">
+            <span class="icon-map"></span>
+            <h3 class="counter">8</h3>
+            <p>Current Adopters</p>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+          <div class="numb-item">
+            <span class="icon-piechart"></span>
+            <h3 class="counter">45</h3>
+            <p>Another Thing</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!--====== End Numbers ======-->
+
+  <!--====== Contact ======-->
+  <section id="contact" class="contact">
+    <!-- contact icfo -->
+    <div class="cont-info muilte">
+      <div class="container">
+
+        <!-- section header -->
+        <div class="section-head text-center">
+          <h5 class="tit">Find Us</h5>
+        </div>
+
+        <div class="row">
+
+          <!-- info items -->
+          <div class="col-md-4">
+            <div class="info-item">
+              <div class="icon">
+                <span class="icon-documents"></span>
+              </div>
+              <div class="info-content">
+                <h6>GitHub</h6>
+                <h5><a href="https://github.com/BuildingSync" target="_blank">GitHub</a></h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="info-item">
+              <div class="icon">
+                <span class="icon-envelope"></span>
+              </div>
+              <div class="info-content">
+                <h6>Email</h6>
+                <h5><a href="BTODataTools@ee.doe.gov">BTODataTools@ee.doe.gov</a></h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="info-item">
+              <div class="icon">
+                <span class="icon-twitter"></span>
+              </div>
+              <div class="info-content">
+                <h6>Twitter</h6>
+                <h5></h5>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--====== End Contact ======-->
+{% endblock content %}
+
+{% block app_version %}<span class="app_version">app version: {{app_version}} </span>{% endblock app_version %}
