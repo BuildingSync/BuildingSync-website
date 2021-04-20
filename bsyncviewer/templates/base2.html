@@ -60,6 +60,7 @@
 	</head>
 	<body>
 
+		{% block nav %}
 		<!-- Navigation start -->
 	  <nav class="navbar navbar-custom tt-default-nav nav-dark" role="navigation">
 	      <div class="container">
@@ -78,6 +79,8 @@
 	        {% include 'topnav.html' %}
 	      </div><!-- /.container -->
 	  </nav>
+	  {% endblock nav %}
+	  
 	  <!-- Navigation end -->
 	  {% block header %}
 	  <header id="home" class="color-header">
