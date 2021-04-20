@@ -136,6 +136,12 @@ def index(request):
     return render(request, 'index.html', context)
 
 
+# temp
+def index2(request):
+    context = {}
+    return render(request, 'index2.html', context)
+
+
 def about(request):
     context = {}
     return render(request, 'about.html', context)

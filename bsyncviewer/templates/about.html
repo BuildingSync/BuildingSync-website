@@ -1,13 +1,99 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 
 {% load staticfiles %}
 
-{% block title %}About{% endblock %}
+{% block title %}About{% endblock title %}
 
-{% block content_notitle %}
-<div class="container">
-  <header class="major">
-    <h2>About</h2>
-  </header>
-</div>
-{% endblock content_notitle %}
+
+{% block content %}
+
+	<!-- ====== hero ======  -->
+	<section id="about" class="hero section-padding section-bord">
+		<div class="container">
+
+			<div class="row">
+				<!-- hero-item -->
+				<div class="hero-item col-md-4 text-center">
+					<span class="icon-tools"></span>
+					<div class="hero-item-content">
+						<h5>Web Design</h5>
+						<p>Custom WordPress plugins oriented to making your daily development job easier.</p>
+					</div>
+				</div>
+
+				<div class="hero-item col-md-4 text-center active">
+					<span class="icon-mobile"></span>
+					<div class="hero-item-content">
+						<h5>Responsive Design</h5>
+						<p>Custom WordPress plugins oriented to making your daily development job easier.</p>
+					</div>
+				</div>
+
+				<div class="hero-item col-md-4 text-center">
+					<span class="icon-dial"></span>
+					<div class="hero-item-content">
+						<h5>User Friendly</h5>
+						<p>Custom WordPress plugins oriented to making your daily development job easier.</p>
+					</div>
+				</div>
+
+				<div class="clear-fix"></div>
+
+				<div class="hero-block mt-100">
+
+					<!-- accordion -->
+					<div class="col-md-6">
+						<div class="accordion">
+							<div class="accordion-icon">
+								<h6>Web Design <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></h6>
+							</div>
+							<div class="accordion-info active">
+								<p>Lorem ipsum dolor sit amet, in quodsi vulputate pro. Ubique maluisset vel te, his dico vituperata ut. in quodsiUbique maluisset vel te, his dico vituperata ut in quodsiUbique. in quodsi vulputate.</p>
+							</div>
+							<div class="accordion-icon">
+								<h6>Creative Template <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></h6>
+							</div>
+							<div class="accordion-info">
+								<p>Lorem ipsum dolor sit amet, in quodsi vulputate pro. Ubique maluisset vel te, his dico vituperata in quodsiUbique ut. in quodsiUbique maluisset vel te, his vituperata ut. in quodsi vulputate.</p>
+							</div>
+							<div class="accordion-icon">
+								<h6>Unlimited Support <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></h6>
+							</div>
+							<div class="accordion-info">
+								<p>Lorem ipsum dolor sit amet, in quodsi vulputate pro. Ubique maluisset vel te, in quodsiUbique his dico vituperata ut. in quodsiUbique maluisset te, his dico vituperata ut. in quodsi vulputate.</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- progress -->
+					<div class="col-md-offset-1 col-md-5">
+						<div class="hero-blc-progress">
+							<div class="progress-item">
+								<p>DESIGN <span class="pull-right">90%</span></p>
+								<div class="progress-main"><span class="progress-bar"  data-value="90%"></span></div>
+							</div>
+
+							<div class="progress-item">
+								<p>BRANDING <span class="pull-right">80%</span></p>
+								<div class="progress-main"><span class="progress-bar"  data-value="80%"></span></div>
+							</div>
+
+							<div class="progress-item">
+								<p>DEVELOPMENT<span class="pull-right">85%</span></p>
+								<div class="progress-main"><span class="progress-bar"  data-value="85%"></span></div>
+							</div>
+
+							<div class="progress-item">
+								<p>MARKETING<span class="pull-right">70%</span></p>
+								<div class="progress-main"><span class="progress-bar"  data-value="70%"></span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<!-- ====== End hero ======  -->
+{% endblock content %}
+

@@ -1,0 +1,77 @@
+
+/* -------------------------------------------------------
+                     phone & tablet 
+-------------------------------------------------------- */
+
+@media (max-width: 767px){
+
+	.local-nav{
+		min-height: 60px;
+	}
+
+	.local-nav .nav li> a{
+		text-align: center;
+	}
+
+	#home{
+		background-position: 50% 0% !important;
+	}
+
+	.header .caption h1{
+		font-size: 38px;
+	}
+
+	.serv-us .us-content,
+	.main-footer [class*=col-]
+	{
+		margin-bottom: 50px;
+	}
+
+	.portfolio .filtering span{
+		font-size: 14px;
+		margin: 5px;
+	}
+
+	.clients .client-say{
+		padding: 100px 20px;
+	}
+}
+
+@media (max-width: 991px){
+
+	.navbar-default .navbar-nav>li{
+		margin: 25px 10px 0;
+		padding: 4px;
+	}
+
+	.header .caption{
+		margin-top: 50px;
+	}
+
+	.hero .hero-block .accordion,
+	.process [class*=col-],
+	.blocks [class*=col-],
+	.team .team-item,
+	.price .prc-item,
+	.blog .s-post,
+	.numbers [class*=col-],
+	.cont-info .info-item
+	{
+		margin-bottom: 50px;
+	}
+
+	.portfolio .gallery [class*=col-]{
+		width: 100%;
+	}
+
+	footer .small-footer,
+	footer .small-footer p,
+	footer .small-footer .social-icon
+	{
+		text-align: center!important;
+	}
+
+	.posts .list .post-content{
+		margin-top: 30px;
+	}
+}

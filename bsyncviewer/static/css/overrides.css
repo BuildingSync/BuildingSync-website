@@ -1,0 +1,106 @@
+/* BuildingSync style overrides */
+
+.light-blue {
+  color:#3ba6dd;
+}
+
+.dark-blue {
+  color: #005191;
+}
+
+.nav-dark {
+  background: #005191;
+}
+
+.color-header {
+	height: 25vh;
+	margin-top: 1rem;
+}
+
+.bg-blue {
+  background-color: #005191 !important;
+}
+
+.demo-5 .owl-carousel .slide-1{
+	background-image: url(../img/esif.jpg);
+	background-size: cover;
+}
+
+.demo-5 .owl-carousel .slide-2{
+	background-image: url(../img/23320.jpg);
+	background-size: cover;
+}
+
+.demo-5 .owl-carousel .slide-3{
+	background-image: url(../img/esif-alt.jpg);
+	background-size: cover;
+}
+
+.fixed-top-nav {
+	background: #005191;
+}
+
+.navbar-custom .dropdown-menu {
+  background: #005191;
+}
+
+.navbar-brand {
+  padding: 10px 15px;
+  padding-left:50px;
+}
+
+.serv-us {
+	background: rgba(0,81,145,.85);
+	background-image: url(../img/23320.jpg);
+	color: #fff;
+}
+
+.serv-us p {
+    color: #fff;
+}
+
+.process {
+  background-blend-mode: overlay;
+  background: rgba(59,166,221,.7);
+}
+
+.clients {
+	background-image: url(../img/40889.png);
+}
+
+.numbers {
+	background-image: url(../img/148110017-digital-data-700.jpg);
+}
+
+footer .main-footer {
+  background: #005191;
+}
+
+footer .sub-footer {
+  background: #005191;
+}
+
+footer .main-footer a {
+	color: #fff;
+}
+
+.small-logo {
+	width: 100%;
+	padding-top:20px;
+}
+
+.mb-2 {
+	margin-bottom: 2rem;
+}
+
+.mt-2 {
+	margin-top: 1rem;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.header-1 {
+  background-image: url(../img/esif2.jpg);
+}

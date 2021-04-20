@@ -1,14 +1,27 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 
 
 {% block title %}BuildingSync Schema Viewer{% endblock %}
 
-{% block content_notitle %}
+{% block header %}
+<!-- ====== Header ======  -->
+<header id="home" class="sub-header header-1" data-stellar-background-ratio="0.5">
+    <div class="header-overlay">
+        <!-- header content -->
+        <div class="caption v-middle text-center">
+            <h1>Use Cases</h1>
+        </div>
+    </div>
+</header>
+<!-- ====== End Header ======  -->
 
-    <div class="container">
-        <header class="major">
-            <h2>Use Cases</h2>
-        </header>
+{% endblock header %}
+
+
+{% block content %}
+
+    <section id="usecases" class="hero section-padding section-bord">
+        <div class="container">
         <div class="row">
             <div class="col-md-9">
             {% if sorted_public_cases %}
@@ -135,5 +148,6 @@
             </div>
         </div>
     </div>
+    </section>
 
-{% endblock content_notitle %}
+{% endblock content %}
