@@ -1,13 +1,31 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 
 {% load staticfiles %}
 
-{% block title %}Implementers {% endblock %}
+{% block title %}Implementers{% endblock title %}
 
-{% block content_notitle %}
-<div class="container">
-  <header class="major">
-    <h2>For Implementers</h2>
-  </header>
-</div>
-{% endblock content_notitle %}
+
+{% block content %}
+
+    <div class="container" style="padding-top: 2em">
+        <p>BuildingSync<sup>®</sup> is a standardized language for commercial
+            building energy audit data that software developers can use to exchange
+            data between audit tools. Taking the form of an
+            <a href="https://en.wikipedia.org/wiki/XML_Schema_(W3C)">XML schema</a>
+            BuildingSync can be implemented by building owners and audit program
+            managers to allow data analysis and aggregation across multiple
+            buildings in order to evaluate program performance and analyze trends.</p>
+    </div>
+    <!-- ====== hero ======  -->
+    <section id="about" class="hero section-bord">
+        <div class="container">
+            <h2>Schema</h2>
+            <hr>
+            <p>The BuildingSync<sup>®</sup> Schema serves as blueprint ruleset to give structure to your building data.
+            </p>
+            <h2>Creation</h2>
+            <h2>Validation</h2>
+        </div>
+    </section>
+    <!-- ====== End hero ======  -->
+{% endblock content %}
