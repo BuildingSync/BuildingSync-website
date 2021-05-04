@@ -1,6 +1,10 @@
 import os
 
 from bsyncviewer.lib.schema_parser import process_schema
+from bsyncviewer.lib.documentation_generator.generate_docs import (
+    get_docs_path,
+    generate_docs
+)
 # from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_delete, post_save, pre_save
@@ -33,6 +37,7 @@ def parse_schema(sender, instance, **kwargs):
     # set 'parsed' bool to True on Schema model and save
     if instance.schema_parsed is False and instance.schema_file:
         process_schema(instance)
+        generate_docs(instance.schema_file.path, instance.version)
         # set parsed = true so it doesn't get parsed again
         instance.schema_parsed = True
         instance.save()
@@ -48,6 +53,10 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
     if instance.schema_file:
         if os.path.isfile(instance.schema_file.path):
             os.remove(instance.schema_file.path)
+
+        generated_docs = get_docs_path(instance.version)
+        if os.path.isfile(generated_docs):
+            os.remove(generated_docs)
 
 
 @receiver(pre_save, sender=Schema)
