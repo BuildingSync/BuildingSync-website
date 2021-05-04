@@ -10,9 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-import os
-
-from bsyncviewer.settings.docker import *
+from bsyncviewer.settings.docker import *  # noqa: F401, F403
 
 DEBUG = True
 
