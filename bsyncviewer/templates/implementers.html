@@ -21,7 +21,7 @@
         <div class="container">
             <h3>Where do I start?</h3>
             <hr>
-            <p>Integrating BuildingSync<sup>®</sup> into your application generally follows a four step process
+            <p>Integrating BuildingSync into your application generally follows a four step process
                 to ensure compliance and maximize interoperability. This process will inform the life-cycle of your
                 implementation.
             </p>
@@ -89,9 +89,8 @@
                                     </div>
                                 </div>
                                 <div class="item-content">
-                                    <p>Ensure your BuildingSync<sup>®</sup> XML file is verifiable and complete while
-                                        uncovering
-                                        alternative use cases you may satisfy.</p>
+                                    <p>Ensure your BuildingSync XML file is verifiable and complete while
+                                        uncovering alternative use cases you may satisfy.</p>
                                 </div>
                             </div>
                         </div>
@@ -101,26 +100,25 @@
         <div class="container">
             <a id="use_case"><h3>Understanding Use Cases</h3></a>
             <hr>
-            <p> A BuildingSync<sup>®</sup> use case is a workflow within which BuildingSync is leveraged for data
+            <p> A BuildingSync use case is a workflow within which BuildingSync is leveraged for data
                 exchange in platform(s). Depending on the connected platform(s), various users can collect, report,
-                process and analyze audit data through BuildingSync for their specific objectives. BuildingSync
+                process, and analyze audit data through BuildingSync to meet their specific objectives. BuildingSync
                 considers the needs and interests of a wide range of users in the energy audit industry, including
-                building owners, auditors, software developers, utilities and program managers. It is import to note
-                that a single BuildingSync<sup>®</sup> file can satisfy multiple use cases if the requirements are met.
-                Typical BuildingSync use
-                cases include:
+                building owners, auditors, software developers, utilities and program managers. It is important to note
+                that a single BuildingSync file can satisfy multiple use cases if the requirements are met.
+                Typical BuildingSync use cases include:
             </p>
             <div class="row" style="padding-bottom: 2em">
                 <ul class="list-group hero-item col-md-12">
                     <li class="list-group-item"> Building energy assessment software integrating the ability to export
-                        BuildingSync-compatible files into their software;
+                        BuildingSync-compatible files into their software
                     </li>
                     <li class="list-group-item">Energy auditing services choosing to use software that can output
-                        BuildingSync-compatible files;
+                        BuildingSync-compatible files
                     </li>
                     <li class="list-group-item"> Building owners incorporating BuildingSync into their next RFP for a
                         building energy audit by requiring the auditor to provide data in a BuildingSync-compatible
-                        format;
+                        format
                     </li>
                     <li class="list-group-item">
                         Utilities choosing to recommend or require software that uses BuildingSync-compatible files for
@@ -134,10 +132,9 @@
 
             <a id="map"><h3>Understanding the Schema</h3></a>
             <hr>
-            <p>To understand what data can be expressed from your application to a BuildingSync<sup>®</sup> compliant
-                file, adopters can interface with the BuildingSync<sup>®</sup> Schema in a number of ways depending on
-                their use case. There are three main parts to the Schema that when used in tandum, produce a complete
-                model. Additionally, each release of the schema includes several supporting documents, the Schema, a
+            <p>To understand which of your application data can be expressed in a BuildingSync-compliant
+                file, adopters can interface with the BuildingSync Schema in a number of use case-specific ways. There are three main parts to the Schema that when used in tandem, produce a complete
+                model (see table below). Additionally, each release of the schema includes several supporting documents: the Schema, a
                 Data Dictionary, List of Measures, and Full Documentation.
             </p>
             <div class="row" style="padding-bottom: 2em">
@@ -157,14 +154,14 @@
                 <a class="button btn-bg-light col-md-offset-3" href="/dictionary">View the Schema</a>
                 <a class="button btn-bg-light col-md-offset-1" href="/releases">Current Schema releases</a>
             </div>
-            <a id="construct"><h3>Working with BuildingSync<sup>®</sup></h3></a>
+            <a id="construct"><h3>Working with BuildingSync</h3></a>
             <hr>
-            <p>Creating a BuildingSync<sup>®</sup> XML file can be as simple as opening your favorite text editor and
-                manually building up nested elements. However, to make this process easier we have a set of resources
-                assist in the adoption of the schema. </p>
+            <p>Creating a BuildingSync XML file can be as simple as opening your favorite text editor and
+                manually building up nested elements. However, to make this process easier, we have a set of resources
+                to assist you during the schema adoption process. </p>
             <ul class="list-group hero-item col-md-12">
                 <li class="list-group-item"><a href="https://github.com/BuildingSync/bsyncpy">bsyncpy</a> - a python
-                    package for creating BuildingSync<sup>®</sup> elements
+                    package for creating BuildingSync elements
                 </li>
                 <li class="list-group-item"><a href="https://github.com/BuildingSync/bsync-examples">Interactive
                     Tutorial</a> - An annotated Jupyter Notebook for walking through a Level 1 Audit for a small office
@@ -172,30 +169,27 @@
                 </li>
                 <li class="list-group-item"><a href="https://github.com/BuildingSync/bsync-examples">Example Files</a> -
                     Complete Files that have been validated
-                    building
                 </li>
             </ul>
-            <p>Additionally there are a number of technologies supported for the development of XML files, however if
-                you are not sure where to start we suggest the native
+            <p>There are a number of technologies supported for the development of XML files. If
+                you are unsure about where to start, we suggest the native
                 <a href="https://docs.python.org/3/library/xml.etree.elementtree.html">XML
                     python module</a> or the </a><a href="https://lxml.de/">lxml python package.</a>
             </p>
             <a id="validate"><h3>Validation</h3></a>
             <hr>
-            <p>BuildingSync<sup>®</sup> uses <a href="https://schematron.com/">Schematron</a> as the assertion engine
-                for validating against specific use cases. Each use case is paired with a Schematron file defining it's
+            <p>BuildingSync uses <a href="https://schematron.com/">Schematron</a> as the assertion engine
+                for validating against specific use cases. Each use case is paired with a Schematron file defining its
                 requirements.</p>
-            <p>There are a number of ways to validate a BuildingSync<sup>®</sup> file. If you are integrating your
+            <p>There are a number of ways to validate a BuildingSync file. If you are integrating your
                 software to an existing use case, you can validate your file via the <a href="/validator">Selection Tool
                     Validator.</a>
                 Simply upload the file you wish to validate and select the use case you would like to validate against.
-                Similarly, if you would like to programmatically validate your file, you can hit the Selection Tool API
-                endpoint documented <a href="https://github.com/BuildingSync/selection-tool#validator-api">here</a>.</p>
+                Similarly, if you would like to programmatically validate your file, you can hit the <a href="https://github.com/BuildingSync/selection-tool#validator-api">Selection Tool API</a> endpoint.</p>
             <p style="padding-bottom: 2em">If you need to validate a file that does not currently fit your use case, you
                 can use the <a
                         href="https://github.com/BuildingSync/TestSuite">TestSuite</a> to create, validate, and modify
-                your
-                Schematron files
+                your Schematron files.
 
             </p>
         </div>
