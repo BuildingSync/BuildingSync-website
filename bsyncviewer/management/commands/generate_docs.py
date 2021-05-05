@@ -3,6 +3,7 @@ from django.core.management.base import BaseCommand
 from bsyncviewer.models.schema import Schema
 from bsyncviewer.lib.documentation_generator.generate_docs import generate_docs
 
+
 class Command(BaseCommand):
     help = 'Generate html docs for schemas'
 
