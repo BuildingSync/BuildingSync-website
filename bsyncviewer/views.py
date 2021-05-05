@@ -27,7 +27,6 @@ from django.http import (
 )
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
-from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from rest_framework import views
 from rest_framework.parsers import MultiPartParser
