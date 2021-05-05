@@ -60,8 +60,7 @@
 }
 
 .process {
-  background-blend-mode: overlay;
-  background: rgba(59,166,221,.7);
+    background-image: url(../img/48963-2.jpg);
 }
 
 .clients {

@@ -25,38 +25,81 @@
                 to ensure compliance and maximize interoperability. This process will inform the life-cycle of your
                 implementation.
             </p>
-            <div class="row">
-                <!-- hero-item -->
-                <div class="hero-item col-md-3 text-center">
-                    <div class="hero-item-content">
-                        <h5>1. Use Case</h5>
-                        <p>Select or develop a use case for your specific application and data exchange needs.</p>
-                    </div>
-                </div>
-                <div class="hero-item col-md-3 text-center">
-                    <div class="hero-item-content">
-                        <h5>2. Map</h5>
-                        <p>Identify data fields in your application that are required for your use case and map them to
-                            data elements in the schema.</p>
-                    </div>
-                </div>
-
-                <div class="hero-item col-md-3 text-center">
-                    <div class="hero-item-content">
-                        <h5> 3. Construct</h5>
-                        <p>Build your XML file based on the data mappings via your application for your use case.</p>
-                    </div>
-                </div>
-
-                <div class="hero-item col-md-3 text-center">
-                    <div class="hero-item-content">
-                        <h5>4. Validate</h5>
-                        <p>Ensure your BuildingSync<sup>®</sup> XML file is verifiable and complete while uncovering
-                            alternative use cases you may satisfy</p>
-                    </div>
+        </div>
+        <section class="process section-padding">
+            <div class="container">
+                <div class="row">
+                    <!-- number items -->
+                    <a href="#use_case">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="items text-center">
+                                <div class="item-title">
+                                    <div class="item-rotate">
+                                        <h5>01</h5>
+                                        <h6>Use Case</h6>
+                                    </div>
+                                </div>
+                                <div class="item-content">
+                                    <p>Select or develop a use case for your specific application and data exchange
+                                        needs.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#map">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="items text-center">
+                                <div class="item-title">
+                                    <div class="item-rotate">
+                                        <h5>02</h5>
+                                        <h6>Map</h6>
+                                    </div>
+                                </div>
+                                <div class="item-content">
+                                    <p>Identify data fields in your application that are required for your use case and
+                                        map
+                                        them to data elements in the schema.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#construct">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="items text-center">
+                                <div class="item-title">
+                                    <div class="item-rotate">
+                                        <h5>03</h5>
+                                        <h6>Construct</h6>
+                                    </div>
+                                </div>
+                                <div class="item-content">
+                                    <p>Build your XML file based on the data mappings via your application for your use
+                                        case.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#validate">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="items text-center">
+                                <div class="item-title">
+                                    <div class="item-rotate">
+                                        <h5>04</h5>
+                                        <h6>Validate</h6>
+                                    </div>
+                                </div>
+                                <div class="item-content">
+                                    <p>Ensure your BuildingSync<sup>®</sup> XML file is verifiable and complete while
+                                        uncovering
+                                        alternative use cases you may satisfy.</p>
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </div>
-            <h3>Understanding Use Cases</h3>
+        </section>
+        <div class="container">
+            <a id="use_case"><h3>Understanding Use Cases</h3></a>
             <hr>
             <p> A BuildingSync<sup>®</sup> use case is a workflow within which BuildingSync is leveraged for data
                 exchange in platform(s). Depending on the connected platform(s), various users can collect, report,
@@ -89,7 +132,7 @@
 
             </div>
 
-            <h3>Understanding the Schema</h3>
+            <a id="map"><h3>Understanding the Schema</h3></a>
             <hr>
             <p>To understand what data can be expressed from your application to a BuildingSync<sup>®</sup> compliant
                 file, adopters can interface with the BuildingSync<sup>®</sup> Schema in a number of ways depending on
@@ -114,7 +157,7 @@
                 <a class="button btn-bg-light col-md-offset-3" href="/dictionary">View the Schema</a>
                 <a class="button btn-bg-light col-md-offset-1" href="/releases">Current Schema releases</a>
             </div>
-            <h3>Working with BuildingSync<sup>®</sup></h3>
+            <a id="construct"><h3>Working with BuildingSync<sup>®</sup></h3></a>
             <hr>
             <p>Creating a BuildingSync<sup>®</sup> XML file can be as simple as opening your favorite text editor and
                 manually building up nested elements. However, to make this process easier we have a set of resources
@@ -137,7 +180,7 @@
                 <a href="https://docs.python.org/3/library/xml.etree.elementtree.html">XML
                     python module</a> or the </a><a href="https://lxml.de/">lxml python package.</a>
             </p>
-            <h3>Validation</h3>
+            <a id="validate"><h3>Validation</h3></a>
             <hr>
             <p>BuildingSync<sup>®</sup> uses <a href="https://schematron.com/">Schematron</a> as the assertion engine
                 for validating against specific use cases. Each use case is paired with a Schematron file defining it's
@@ -148,11 +191,14 @@
                 Simply upload the file you wish to validate and select the use case you would like to validate against.
                 Similarly, if you would like to programmatically validate your file, you can hit the Selection Tool API
                 endpoint documented <a href="https://github.com/BuildingSync/selection-tool#validator-api">here</a>.</p>
-            <p style="padding-bottom: 2em">If you need to validate a file that does not currently fit your use case, you can use the <a
-                    href="https://github.com/BuildingSync/TestSuite">TestSuite</a> to create, validate, and modify your
+            <p style="padding-bottom: 2em">If you need to validate a file that does not currently fit your use case, you
+                can use the <a
+                        href="https://github.com/BuildingSync/TestSuite">TestSuite</a> to create, validate, and modify
+                your
                 Schematron files
 
             </p>
+        </div>
         </div>
     </section>
     <!-- ====== End hero ======  -->
