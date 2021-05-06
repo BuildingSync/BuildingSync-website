@@ -1,13 +1,87 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 
 {% load staticfiles %}
 
-{% block title %}Auditors {% endblock %}
+{% block title %} For Auditors{% endblock title %}
 
-{% block content_notitle %}
-<div class="container">
-  <header class="major">
-      <h2>For Auditors</h2>
-  </header>
-</div>
-{% endblock content_notitle %}
+
+{% block content %}
+
+    <div class="container" style="padding-top: 2em">
+        <p>BuildingSync<sup>®</sup> is a building data exchange schema to better enable integration between
+            software tools and building data workflows. The schema original use case was focused on commercial building
+            energy audits to improve automation and digital standardization.</p>
+
+        <div class="row" style="padding-bottom: 7em; padding-top: 5em">
+            <div class="col-lg-6">
+                <h4>Builds and reports audits in an electronic format.</h4>
+                <p style="padding-bottom: 3em">A digital and machine readable energy audit allowing for interoperability
+                    between software tools to
+                    get the most out of your data.</p>
+                <a class="button btn-bg-light col-lg-offset-3" href="/examples">View an example audit</a>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'img/digital.jpg' %}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <img src="{% static 'img/lightbulbs.jpg' %}">
+            </div>
+            <div class="col-lg-offset-6">
+                <h4>Tracks proposed, implemented, and discarded energy conservation measures.</h4>
+                <p style="padding-bottom: 3em">Well documented technical categories with enumerated measure names for
+                    any use case.</p>
+                <a class="button btn-bg-light col-lg-offset-3" href="/schema">Explore Measures</a>
+            </div>
+        </div>
+
+
+        <div class="row" style="padding-top: 7em; padding-bottom: 5em">
+            <div class="col-lg-6">
+                <h4>Stores building characteristics (at multiple levels) for audits and benchmarking.</h4>
+                <p style="padding-bottom: 3em">BuildingSync<sup>®</sup> supports ASHRAE Std 211 level 1, 2, and 3 energy
+                    Audits. </p>
+                <a class="button btn-bg-light col-lg-offset-3" href="/examples">View levels of detail</a>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'img/levels.jpg' %}">
+            </div>
+        </div>
+        <a href="https://buildingenergyscore.energy.gov/rp/buildings"><h3>Audit Template Tool integration</h3></a>
+        <hr>
+        <p style="padding-bottom: 2em"> The Audit Template is a web-based tool for entering building energy audit data,
+            performing data validation,
+            exporting data in various formats, and submitting data to cities that have local energy audit ordinances.
+            The Audit Template follows ASHRAE Standard 211 "Standard for Commercial Building Energy Audits" and supports
+            customization for local audit requirements. It is intended to maximize audit data utilization and value
+            through standard formatting, automated error checking, and integration with other DOE tools (e.g., Asset
+            Score, BuildingSync<sup>®</sup> and SEED).
+        </p>
+        <a class="button btn-bg-light col-lg-offset-3"
+           href="https://help.buildingenergyscore.com/support/solutions/articles/8000081269-importing-and-exporting-audit-report-buildings-with-buildingsync">
+            Learn how to use BuildingSync<sup>®</sup> with Audit Template Tool</a>
+
+        <h3 style="padding-top: 2em">Documents</h3>
+        <hr>
+        <section id="about" class="hero">
+            <div class="row" style="padding-bottom: 5em">
+                <a href="/practitioners"><div class="hero-item col-lg-6 text-center">
+                    <span class="icon-documents"></span>
+                    <div class="hero-item-content">
+                        <h5><a href="https://buildingsync.net/documents/BuildingSync-on-boarding.pdf">Onboarding Guide</a></h5>
+                        <p class="mb-2">Find out how to get started with BuildingSync<sup>®</sup>.</p>
+                    </div>
+                </div></a>
+                <a href="/practitioners"><div class="hero-item col-lg-6 text-center">
+                    <span class="icon-document"></span>
+                    <div class="hero-item-content">
+                        <h5>Template Request for Proposal</h5>
+                        <p class="mb-2">Integrate BuildingSync<sup>®</sup> with your application.</p>
+                    </div>
+                </div></a>
+            </div>
+        </section>
+    </div>
+{% endblock content %}
