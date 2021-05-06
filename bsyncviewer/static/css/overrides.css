@@ -60,8 +60,7 @@
 }
 
 .process {
-  background-blend-mode: overlay;
-  background: rgba(59,166,221,.7);
+  background-image: url(../img/48963-2.jpg);
 }
 
 .clients {
@@ -109,4 +108,12 @@ footer .main-footer a {
 	float:right;
 	color:#ccc;
 	font-size:0.8em;
+}
+
+.btn-bord-dark:hover{
+  background: #005191;
+}
+
+.btn-bg-light:hover {
+	background: #005191;
 }
