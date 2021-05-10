@@ -8,6 +8,7 @@ import semantic_version
 from bsyncviewer import forms
 from bsyncviewer.lib.tree_viewer import get_schema_jstree_data
 from bsyncviewer.lib.validator.workflow import ValidationWorkflow
+from bsyncviewer.lib.documentation_generator.generate_docs import get_docs_path
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
@@ -17,6 +18,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import BadHeaderError, send_mail
 from django.forms.models import model_to_dict
 from django.http import (
+    FileResponse,
     Http404,
     HttpResponse,
     HttpResponseRedirect,
@@ -162,7 +164,33 @@ def tools(request):
 
 
 def releases(request):
-    context = {}
+    # version 2.0 tags and earlier didn't follow MAJOR.MINOR.PATCH so we handle that here
+    GITHUB_VERSION_MAP = {
+        '1.0.0': 'v1.0',
+        '2.0.0-pr1': 'v2.0-pr1',
+        '2.0.0-pr2': 'v2.0-pr2',
+        '2.0.0': 'v2.0'
+    }
+    GITHUB_RELEASE_TAG_URL = 'https://github.com/BuildingSync/schema/releases/tag/{version}'
+    GITHUB_RELEASE_DOWNLOAD_URL = 'https://github.com/BuildingSync/schema/releases/download/{version}/{resource}'
+
+    releases = []
+    for schema in Schema.objects.all().order_by('-version'):
+        github_version = GITHUB_VERSION_MAP.get(schema.version, f'v{schema.version}')
+
+        releases.append({
+            'github_version': github_version,
+            'version': schema.version,
+            'docs_url': f'/documentation/{schema.version}',
+            'tag_url': GITHUB_RELEASE_TAG_URL.format(version=github_version),
+            'xsd_url': GITHUB_RELEASE_DOWNLOAD_URL.format(version=github_version, resource='BuildingSync.xsd'),
+            'data_dict_xlsx_url': GITHUB_RELEASE_DOWNLOAD_URL.format(version=github_version, resource='DataDictionary.xlsx'),
+        })
+
+    context = {
+        'releases': releases
+    }
+
     return render(request, 'releases.html', context)
 
 
@@ -488,6 +516,14 @@ def successView(request):
     # return HttpResponse('Success! Thank you for your message.')
     messages.add_message(request, messages.SUCCESS, 'Email Sent! Thank you for your message.')
     return HttpResponseRedirect(reverse_lazy('index'))
+
+
+def documentation(request, version):
+    """
+    NOTE: Only use this for local development! you should use nginx to serve
+    these files normally
+    """
+    return FileResponse(open(get_docs_path(version), 'rb'))
 
 
 class UseCaseCreate(LoginRequiredMixin, CreateView):
