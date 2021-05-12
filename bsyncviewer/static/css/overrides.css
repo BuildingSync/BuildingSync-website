@@ -54,6 +54,11 @@ p {
 .navbar-brand {
   padding: 10px 15px;
   padding-left:50px;
+  max-width: 200px;
+}
+
+.navbar-brand img {
+	width:80%;
 }
 
 .navbar-custom .nav li> a {
