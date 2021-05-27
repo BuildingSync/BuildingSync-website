@@ -18,6 +18,7 @@ def rename_schema_file(instance, path):
     else:
         pass
 
+
 def rename_enumerations_file(instance, path):
     if instance.version:
         formatted_version = instance.version.replace(".", "_")
