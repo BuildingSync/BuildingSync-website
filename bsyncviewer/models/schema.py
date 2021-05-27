@@ -18,6 +18,13 @@ def rename_schema_file(instance, path):
     else:
         pass
 
+def rename_enumerations_file(instance, path):
+    if instance.version:
+        formatted_version = instance.version.replace(".", "_")
+        return f'uploaded_schemas/buildingsync_v_{formatted_version}_enumerations.json'
+    else:
+        pass
+
 
 # BuildingSync Schema versions
 class Schema(models.Model):
@@ -26,6 +33,9 @@ class Schema(models.Model):
     schema_file = models.FileField(upload_to=rename_schema_file, null=True)
     schema_parsed = models.BooleanField(default=False,
                                         help_text="Leave blank. This will be auto-populated.")
+    enumerations_file = models.FileField(upload_to=rename_enumerations_file,
+                                         null=True,
+                                         help_text='The enumerations JSON file built in the BuildingSync/schema repository which includes terms and measures.')
 
     def __str__(self):
         return self.name
@@ -53,6 +63,9 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
     if instance.schema_file:
         if os.path.isfile(instance.schema_file.path):
             os.remove(instance.schema_file.path)
+
+        if os.path.isfile(instance.enumerations_file.path):
+            os.remove(instance.enumerations_file.path)
 
         generated_docs = get_docs_path(instance.version)
         if os.path.isfile(generated_docs):

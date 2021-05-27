@@ -117,3 +117,7 @@ footer .main-footer a {
 .btn-bg-light:hover {
 	background: #005191;
 }
+
+.table-enumerations td {
+	width: 33%;
+}
