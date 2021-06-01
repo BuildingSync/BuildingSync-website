@@ -65,12 +65,12 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
         if os.path.isfile(instance.schema_file.path):
             os.remove(instance.schema_file.path)
 
-        if os.path.isfile(instance.enumerations_file.path):
-            os.remove(instance.enumerations_file.path)
-
         generated_docs = get_docs_path(instance.version)
         if os.path.isfile(generated_docs):
             os.remove(generated_docs)
+
+    if instance.enumerations_file and os.path.isfile(instance.enumerations_file.path):
+        os.remove(instance.enumerations_file.path)
 
 
 @receiver(pre_save, sender=Schema)
