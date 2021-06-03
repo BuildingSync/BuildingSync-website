@@ -1,14 +1,49 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 
 
 {% load staticfiles %}
 
-{% block title %}All BuildingSync Releases {% endblock %}
+{% block title %}Releases{% endblock %}
 
-{% block content_notitle %}
-<div class="container">
-  <header class="major">
-    <h2>BuildingSync Releases</h2>
-  </header>
-</div>
-{% endblock content_notitle %}
+{% block content %}
+
+    <section id="releases" class="hero section-padding section-bord">
+        <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+              <p>
+                All BuildingSync releases. You can also <a href="https://github.com/BuildingSync/schema/releases">view the releases on GitHub</a>.
+                <br/>
+                For versions after 2.0, BuildingSync follows <a href="https://semver.org/">semantic versioning</a>.
+                Learn more about BuildingSync's versioning <a href="https://github.com/BuildingSync/schema/blob/develop/docs/versioning.md">here</a>.
+              </p>
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Version</th>
+                    <th>XML Schema</th>
+                    <th>Documentation</th>
+                    <th>Data Dictionary</th>
+                </tr>
+                </thead>
+                {% for release in releases %}
+                <tr>
+                    <td><a href="{{ release.tag_url }}">{{ release.github_version }} Release</a></td>
+                    <td><a href="{{ release.xsd_url }}">{{ release.github_version }} XSD</a></td>
+                    <td>
+                      <a href="{% url 'dictionaryversion' version=release.version %}">Schema Tree</a>
+                      <br/>
+                      <a href="{{ release.docs_url }}">Full Docs</a>
+                    </td>
+                    <td><a href="{{ release.data_dict_xlsx_url }}">Spreadsheet</a></td>
+                </tr>
+                {% endfor %}
+              </table>
+            </div>
+        </div>
+    </div>
+    </section>
+
+{% endblock content %}
+
+
