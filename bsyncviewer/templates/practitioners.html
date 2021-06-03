@@ -53,25 +53,21 @@
         <hr>
         <section id="about" class="hero">
             <div class="row" style="padding-bottom: 5em">
-                <a href="/practitioners">
-                    <div class="hero-item col-lg-6 text-center">
-                        <span class="icon-documents"></span>
-                        <div class="hero-item-content">
-                            <h5><a href="https://buildingsync.net/documents/BuildingSync-on-boarding.pdf">Onboarding
-                                Guide</a></h5>
-                            <p class="mb-2">Find out how to get started with BuildingSync<sup>®</sup>.</p>
-                        </div>
+                <a href="{% static 'documents/BuildingSync-on-boarding.pdf' %}"><div class="hero-item col-lg-6 text-center">
+                    <span class="icon-documents"></span>
+                    <div class="hero-item-content">
+                        <h5>Onboarding Guide</h5>
+                        <p class="mb-2">Find out how to get started with BuildingSync.</p>
+
                     </div>
-                </a>
-                <a href="/practitioners">
-                    <div class="hero-item col-lg-6 text-center">
-                        <span class="icon-document"></span>
-                        <div class="hero-item-content">
-                            <h5><a href="https://docs.google.com/document/d/1qz72VGIMDH2z4cLZGojBIzifq1WpCZAW/edit">Template Request for Proposal</a></h5>
-                            <p class="mb-2">Integrate BuildingSync<sup>®</sup> with your application.</p>
-                        </div>
+                </div></a>
+                <a href="{% static 'documents/BuildingSync-RFP-RFQ-language.pdf' %}"><div class="hero-item col-lg-6 text-center">
+                    <span class="icon-document"></span>
+                    <div class="hero-item-content">
+                        <h5>Template Request for Proposal</h5>
+                        <p class="mb-2">Integrate BuildingSync with your application.</p>
                     </div>
-                </a>
+                </div></a>
             </div>
         </section>
     </div>
