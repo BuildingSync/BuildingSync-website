@@ -1,17 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Examples{% endblock title %}
 
 
-{% block title %}BuildingSync Schema Viewer{% endblock %}
-
-
-{% block content_notitle %}
+{% block content %}
 
   <div class="container">
-    <header class="major">
-      <h2>Examples</h2>
-    </header>
 
-    <h3 id="modeling-level-of-detail-definitions">Modeling Level of Detail Definitions</h2>
+    <h3 id="modeling-level-of-detail-definitions">Modeling Level of Detail Definitions</h3>
     <p>The Modeling Level of Detail (MLOD) is similar in concept to the <a href="https://technical.buildingsmart.org/standards/mvd/">Model View Definitions (MVD)</a> defined by IFC. MLODs define a subset of the overall BuildingSync schema necessary for a specific use case or workflow.
     <p>Level definitions are in alignment with the ASHRAE Standard 211 levels as defined below:</p>
     <table class="table table-striped">
@@ -190,4 +188,4 @@
 
   </div>
 
-{% endblock content_notitle %}
+{% endblock content %}

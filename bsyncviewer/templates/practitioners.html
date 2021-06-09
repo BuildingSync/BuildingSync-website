@@ -1,13 +1,74 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 
 {% load staticfiles %}
 
-{% block title %}Building and City Practitioners {% endblock %}
+{% block title %} For Building and City Practitioners{% endblock title %}
 
-{% block content_notitle %}
-<div class="container">
-  <header class="major">
-    <h2>For Building and City Practitioners</h2>
-  </header>
-</div>
-{% endblock content_notitle %}
+
+{% block content %}
+
+    <div class="container" style="padding-top: 2em">
+        <p>BuildingSync<sup>®</sup> is a common schema for commercial building data that can
+            be utilized by different software and databases involved in maintenance, design, and energy audit
+            processes. It allows data to be more easily aggregated, compared, and exchanged between different databases and
+            software tools. The ability to exchange data easier streamlines many processes throughout the lifecycle of
+            the building including: improving the value of the data, minimizing duplication of effort, and
+            facilitating the achievement of greater energy efficiency.</p>
+
+        <div class="row" style="padding-bottom: 7em; padding-top: 5em">
+            <div class="col-lg-6">
+                <h4>Organize building data at a portfolio scale.</h4>
+                <p style="padding-bottom: 3em">Whether overseeing a single build or managing multiple properties, keep
+                    your data structured and standardized with BuildingSync<sup>®</sup></p>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'img/portfolio.jpg' %}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <img src="{% static 'img/worksite.jpg' %}">
+            </div>
+            <div class="col-lg-offset-6">
+                <h4>Improve building information flow</h4>
+                <p style="padding-bottom: 3em">Increase building data value with actionable insights by integrating with
+                    existing BuildingSync<sup>®</sup> tools.</p>
+            </div>
+        </div>
+
+
+        <div class="row" style="padding-top: 7em; padding-bottom: 5em">
+            <div class="col-lg-6">
+                <h4>Enhance project planning and execution with building information modeling (BIM)</h4>
+                <p style="padding-bottom: 3em">BuildingSync<sup>®</sup> reduces soft costs associated with configuring
+                    building information modeling with direct integration with popular modeling software packages.</p>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'img/skyscrapers.jpg' %}">
+            </div>
+        </div>
+
+        <h3 style="padding-top: 2em">Documents</h3>
+        <hr>
+        <section id="about" class="hero">
+            <div class="row" style="padding-bottom: 5em">
+                <a href="{% static 'documents/BuildingSync-on-boarding.pdf' %}"><div class="hero-item col-lg-6 text-center">
+                    <span class="icon-documents"></span>
+                    <div class="hero-item-content">
+                        <h5>Onboarding Guide</h5>
+                        <p class="mb-2">Find out how to get started with BuildingSync.</p>
+
+                    </div>
+                </div></a>
+                <a href="{% static 'documents/BuildingSync-RFP-RFQ-language.pdf' %}"><div class="hero-item col-lg-6 text-center">
+                    <span class="icon-document"></span>
+                    <div class="hero-item-content">
+                        <h5>Template Request for Proposal</h5>
+                        <p class="mb-2">Integrate BuildingSync with your application.</p>
+                    </div>
+                </div></a>
+            </div>
+        </section>
+    </div>
+{% endblock content %}

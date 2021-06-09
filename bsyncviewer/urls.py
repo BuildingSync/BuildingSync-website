@@ -47,6 +47,7 @@ urlpatterns = [
     path('technical_resources', views.technical_resources, name='technical_resources'),
     re_path(r'^dictionary/(?P<version>[0-9a-zA-Z_\.-]+)/$', views.dictionary, name='dictionaryversion'),
     re_path(r'^ajax/enum/$', views.retrieve_additional_dictionary_data, name='get_additional_data'),
+    re_path(r'^enumerations/(?P<version>[0-9a-zA-Z_\.-]+)/$', views.enumerations, name='enumerations'),
     re_path(r'^api/', include(router.urls)),
     re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     re_path(r'^api/validate', views.ValidatorApi.as_view(), name='validate_api')

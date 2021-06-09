@@ -1,4 +1,11 @@
 /* BuildingSync style overrides */
+body {
+	font-size:16px;
+}
+
+p {
+	font-size: 16px;
+}
 
 .light-blue {
   color:#3ba6dd;
@@ -47,6 +54,15 @@
 .navbar-brand {
   padding: 10px 15px;
   padding-left:50px;
+  max-width: 200px;
+}
+
+.navbar-brand img {
+	width:80%;
+}
+
+.navbar-custom .nav li> a {
+	font-size:13px;
 }
 
 .serv-us {
@@ -82,6 +98,9 @@ footer .sub-footer {
 footer .main-footer a {
 	color: #fff;
 }
+
+footer .main-footer p {
+	font-size: 14px;
 
 .small-logo {
 	width: 100%;
@@ -122,4 +141,8 @@ footer .main-footer a {
 .services .serv-row {
 	border-bottom: 1px solid #eee !important;
 	overflow: hidden !important;
+}
+
+.table-enumerations td {
+	width: 33%;
 }
