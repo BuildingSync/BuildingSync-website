@@ -6,17 +6,14 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/themes/default/style.min.css"/>
 {% endblock %}
 
-{% block title %}BuildingSync Schema Viewer {% endblock %}
+{% block title %}Schema Viewer{% endblock %}
 
 {% block content %}
 
     <div class="container" style="padding-top: 3em; padding-bottom: 18em">
         <div class="row">
-            <div class="col-md-4">
-                <h4>Schema Viewer</h4>
-            </div>
             <div class="col-md-8">
-                <div class="dropdown pull-right header-row-item">
+                <div class="dropdown header-row-item">
                     <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="versionSelector"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Version: {{ schema_version }} <span class="caret"></span>
@@ -42,7 +39,7 @@
             <div class="col-md-8">
                 <div class="panel panel-accent">
                     <div class="panel-heading" >
-                        <h3 class="panel-title">BuildingSync Schema</h3>
+                        <h3 class="panel-title">Click the arrows to expand each element included in the schema. </h3>
                     </div>
                     <div class="panel-body" style="background-color: whitesmoke" id="schematree"></div>
                 </div>
