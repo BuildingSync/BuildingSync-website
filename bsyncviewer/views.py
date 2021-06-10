@@ -211,7 +211,7 @@ def use_case_mappings(request):
 
 def examples(request):
     context = {}
-    return render(request, 'examples.html', context)
+    return render(request, 'mlod.html', context)
 
 
 def case_study(request):
