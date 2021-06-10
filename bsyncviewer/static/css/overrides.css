@@ -137,6 +137,12 @@ footer .main-footer p {
 	background: #005191;
 }
 
+/* divide each service row with a border rather than just the first row */
+.services .serv-row {
+	border-bottom: 1px solid #eee !important;
+	overflow: hidden !important;
+}
+
 .table-enumerations td {
 	width: 33%;
 }
