@@ -35,7 +35,7 @@
 
         <li class="{% active_page request 'references' %}"><a href="{% url 'references' %}">References</a></li>
         <li class="{% active_page request 'case_study' %}"><a href="{% url 'case_study' %}">Case Study</a></li>
-        <li class="{% active_page request 'examples' %}"><a href="{% url 'examples' %}">Examples temp</a></li>
+        <li class="{% active_page request 'mlod' %}"><a href="{% url 'mlod' %}">Model Level of Detail Definitions</a></li>
         <li class="{% active_page request 'technical_resources' %}"><a href="{% url 'technical_resources' %}">Technical Resources</a></li>
         <li class="{% active_page request 'validators' %}"><a %}" href="{% url 'validator' %}">Validator</a></li>
       </ul>
@@ -50,18 +50,19 @@
       </ul>
     </li>
 
-    {% if user.is_authenticated %}
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account</a>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="{% url 'admin:index' %}">Admin Site</a></li>
-          <li class="{% active_page request 'profile' %}"><a href="{% url 'profile' %}">{{ request.user.get_username }} Profile</a></li>
-          <li><a href="{% url 'logout' %}?next={% if return_to_page_on_login %}{{request.path}}{% else %}{% url 'login' %}{% endif %}">Logout</a></li>
-        </ul>
-      </li>
-    {% else %}
-      <li class="nav-card {% active_page request 'login' %}"><a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
-    {% endif %}
+{#    Hiding this login logic for now until use cases start happeneing more frequently #}
+{#    {% if user.is_authenticated %}#}
+{#      <li class="dropdown">#}
+{#        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account</a>#}
+{#        <ul class="dropdown-menu" role="menu">#}
+{#          <li><a href="{% url 'admin:index' %}">Admin Site</a></li>#}
+{#          <li class="{% active_page request 'profile' %}"><a href="{% url 'profile' %}">{{ request.user.get_username }} Profile</a></li>#}
+{#          <li><a href="{% url 'logout' %}?next={% if return_to_page_on_login %}{{request.path}}{% else %}{% url 'login' %}{% endif %}">Logout</a></li>#}
+{#        </ul>#}
+{#      </li>#}
+{#    {% else %}#}
+{#      <li class="nav-card {% active_page request 'login' %}"><a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a></li>#}
+{#    {% endif %}#}
 <!--
     <li class="dropdown nav-search">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search" aria-hidden="true"></i></a>

@@ -224,9 +224,9 @@ def use_case_mappings(request):
     return render(request, 'use_case_mappings.html', context)
 
 
-def examples(request):
+def mlod(request):
     context = {}
-    return render(request, 'examples.html', context)
+    return render(request, 'mlod.html', context)
 
 
 def case_study(request):
