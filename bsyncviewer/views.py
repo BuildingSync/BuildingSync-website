@@ -219,11 +219,6 @@ def references(request):
     return render(request, 'references.html', context)
 
 
-def use_case_mappings(request):
-    context = {}
-    return render(request, 'use_case_mappings.html', context)
-
-
 def examples(request):
     context = {}
     return render(request, 'examples.html', context)
