@@ -6,9 +6,9 @@ import zipfile
 
 import semantic_version
 from bsyncviewer import forms
+from bsyncviewer.lib.documentation_generator.generate_docs import get_docs_path
 from bsyncviewer.lib.tree_viewer import get_schema_jstree_data
 from bsyncviewer.lib.validator.workflow import ValidationWorkflow
-from bsyncviewer.lib.documentation_generator.generate_docs import get_docs_path
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
@@ -209,9 +209,9 @@ def use_case_mappings(request):
     return render(request, 'use_case_mappings.html', context)
 
 
-def examples(request):
+def mlod(request):
     context = {}
-    return render(request, 'examples.html', context)
+    return render(request, 'mlod.html', context)
 
 
 def case_study(request):
