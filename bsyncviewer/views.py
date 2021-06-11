@@ -6,9 +6,9 @@ import zipfile
 
 import semantic_version
 from bsyncviewer import forms
+from bsyncviewer.lib.documentation_generator.generate_docs import get_docs_path
 from bsyncviewer.lib.tree_viewer import get_schema_jstree_data
 from bsyncviewer.lib.validator.workflow import ValidationWorkflow
-from bsyncviewer.lib.documentation_generator.generate_docs import get_docs_path
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
@@ -141,6 +141,21 @@ def index(request):
 def about(request):
     context = {}
     return render(request, 'about.html', context)
+
+
+def collaborators(request):
+    context = {}
+    return render(request, 'collaborators.html', context)
+
+
+def adopters(request):
+    context = {}
+    return render(request, 'adopters.html', context)
+
+
+def faq(request):
+    context = {}
+    return render(request, 'faq.html', context)
 
 
 def implementers(request):
