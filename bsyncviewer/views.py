@@ -219,9 +219,9 @@ def references(request):
     return render(request, 'references.html', context)
 
 
-def examples(request):
+def mlod(request):
     context = {}
-    return render(request, 'examples.html', context)
+    return render(request, 'mlod.html', context)
 
 
 def case_study(request):
