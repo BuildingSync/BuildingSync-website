@@ -41,7 +41,15 @@
       </ul>
     </li>
 
-    <li class="nav-card {% active_page request 'about'%}"><a href="{% url 'about' %}">About</a></li>
+    <li class="dropdown">
+      <a href="{% url 'about' %}" class="dropdown-toggle {% active_page request 'about'%}" data-toggle="dropdown">About</a>
+      <ul class="dropdown-menu" role="menu">
+        <li class="{% active_page request 'collaborators' %}"><a href="{% url 'collaborators' %}">Collaborators</a></li>
+        <li class="{% active_page request 'adopters' %}"><a href="{% url 'adopters' %}">Current Adopters</a></li>
+        <li class="{% active_page request 'faq' %}"><a href="{% url 'faq' %}">FAQ</a></li>
+      </ul>
+    </li>
+
 {#    Hiding this login logic for now until use cases start happeneing more frequently #}
 {#    {% if user.is_authenticated %}#}
 {#      <li class="dropdown">#}

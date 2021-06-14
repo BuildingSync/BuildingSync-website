@@ -13,7 +13,7 @@
 	padding: 0;
 	margin: 0;
 	text-decoration: none !important;
-	list-style: none !important;
+	/*list-style: none !important;*/
 	outline: none !important;
 }
 
@@ -648,4 +648,41 @@ h1,h2,h3,h4,h5,h6{
     transform: scaleY(1.0);
     -webkit-transform: scaleY(1.0);
   }
+}
+
+/* additional buildingsync styles */
+
+.list {
+  padding-left: 2em;
+  padding-right: 1em;
+}
+
+.list ul{
+  list-style: disc;
+  margin: 0 0 2em;
+  padding-left: 1em;
+}
+
+.list li{
+  display: list-item;
+  padding-bottom: 0.25em;
+}
+
+.section-padding-sm{
+  padding: 50px 0 30px 0;
+}
+
+.bsync-main {
+  padding-top: 2em;
+  padding-bottom: 1em;
+}
+
+.serv-item-sf {
+  padding-top:0px;
+  padding-bottom:0px;
+}
+
+.collab-image-sf {
+  width:80%;
+  height:70%;
 }

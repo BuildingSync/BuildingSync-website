@@ -143,6 +143,21 @@ def about(request):
     return render(request, 'about.html', context)
 
 
+def collaborators(request):
+    context = {}
+    return render(request, 'collaborators.html', context)
+
+
+def adopters(request):
+    context = {}
+    return render(request, 'adopters.html', context)
+
+
+def faq(request):
+    context = {}
+    return render(request, 'faq.html', context)
+
+
 def implementers(request):
     context = {}
     return render(request, 'implementers.html', context)
