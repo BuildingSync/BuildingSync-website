@@ -17,7 +17,15 @@
       </ul>
     </li>
 
-    <li class="nav-card {% active_page request 'tools'%}"><a href="{% url 'tools' %}">Tools</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools</a>
+      <ul class="dropdown-menu">
+          <li class="nav-card {% active_page request 'tools'%}"><a href="{% url 'tools' %}">List</a></li>
+          <li class="{% active_page request 'validators' %}"><a %}" href="{% url 'validator' %}">Validator</a></li>
+      </ul>
+    </li>
+
+
 
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Schema</a>
@@ -37,7 +45,6 @@
         <li class="{% active_page request 'case_study' %}"><a href="{% url 'case_study' %}">Case Study</a></li>
         <li class="{% active_page request 'mlod' %}"><a href="{% url 'mlod' %}">Model Level of Detail Definitions</a></li>
         <li class="{% active_page request 'technical_resources' %}"><a href="{% url 'technical_resources' %}">Technical Resources</a></li>
-        <li class="{% active_page request 'validators' %}"><a %}" href="{% url 'validator' %}">Validator</a></li>
       </ul>
     </li>
 
