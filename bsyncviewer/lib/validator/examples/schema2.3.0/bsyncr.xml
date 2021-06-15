@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<auc:BuildingSync xmlns:auc="http://buildingsync.net/schemas/bedes-auc/2019" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://buildingsync.net/schemas/bedes-auc/2019 https://raw.githubusercontent.com/BuildingSync/schema/master/BuildingSync.xsd" version="2.2.0">
+  <auc:Facilities>
+    <auc:Facility ID="Facility-32">
+      <auc:Sites>
+        <auc:Site ID="Site-33">
+          <auc:Buildings>
+            <auc:Building ID="My-Fav-Building">
+              <auc:PremisesName>My-Fav-Building</auc:PremisesName>
+              <auc:Address>
+                <auc:City>Denver</auc:City>
+                <auc:State>CO</auc:State>
+                <auc:PostalCode>80205</auc:PostalCode>
+              </auc:Address>
+              <auc:Longitude>-104.97855661401148</auc:Longitude>
+              <auc:Latitude>39.76550841416409</auc:Latitude>
+            </auc:Building>
+          </auc:Buildings>
+        </auc:Site>
+      </auc:Sites>
+      <auc:Reports>
+        <auc:Report ID="Report-34">
+          <auc:Scenarios>
+            <auc:Scenario ID="Scenario-Measured">
+              <auc:ScenarioType>
+                <auc:CurrentBuilding>
+                  <auc:CalculationMethod>
+                    <auc:Measured/>
+                  </auc:CalculationMethod>
+                </auc:CurrentBuilding>
+              </auc:ScenarioType>
+              <auc:ResourceUses>
+                <auc:ResourceUse ID="Elec">
+                  <auc:EnergyResource>Electricity</auc:EnergyResource>
+                  <auc:ResourceUnits>kWh</auc:ResourceUnits>
+                  <auc:EndUse>All end uses</auc:EndUse>
+                </auc:ResourceUse>
+              </auc:ResourceUses>
+              <auc:TimeSeriesData>
+                <auc:TimeSeries ID="ts-1">
+                  <auc:StartTimestamp>2012-03-13T00:00:00</auc:StartTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>0.43952</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="ts-2">
+                  <auc:StartTimestamp>2012-04-13T01:00:00</auc:StartTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>0.95964</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="ts-3">
+                  <auc:StartTimestamp>2012-05-13T01:00:00</auc:StartTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>0.6796</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="ts-4">
+                  <auc:StartTimestamp>2012-06-13T01:00:00</auc:StartTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>0.83965</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="ts-5">
+                  <auc:StartTimestamp>2012-07-13T01:00:00</auc:StartTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>0.91976</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="ts-6">
+                  <auc:StartTimestamp>2012-08-13T01:00:00</auc:StartTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>0.35968</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="ts-7">
+                  <auc:StartTimestamp>2012-09-13T01:00:00</auc:StartTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>0.23969</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="ts-8">
+                  <auc:StartTimestamp>2012-10-13T01:00:00</auc:StartTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>0.31974</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="ts-9">
+                  <auc:StartTimestamp>2012-11-13T01:00:00</auc:StartTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>0.35965</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="ts-10">
+                  <auc:StartTimestamp>2012-12-13T00:00:00</auc:StartTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>0.51961</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="ts-11">
+                  <auc:StartTimestamp>2013-01-13T00:00:00</auc:StartTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>0.15953</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+                <auc:TimeSeries ID="ts-12">
+                  <auc:StartTimestamp>2013-02-13T00:00:00</auc:StartTimestamp>
+                  <auc:IntervalFrequency>Month</auc:IntervalFrequency>
+                  <auc:IntervalReading>0.43956</auc:IntervalReading>
+                  <auc:ResourceUseID IDref="Elec"/>
+                </auc:TimeSeries>
+              </auc:TimeSeriesData>
+              <auc:LinkedPremises>
+                <auc:Building>
+                  <auc:LinkedBuildingID IDref="My-Fav-Building"/>
+                </auc:Building>
+              </auc:LinkedPremises>
+            </auc:Scenario>
+          </auc:Scenarios>
+        </auc:Report>
+      </auc:Reports>
+    </auc:Facility>
+  </auc:Facilities>
+</auc:BuildingSync>

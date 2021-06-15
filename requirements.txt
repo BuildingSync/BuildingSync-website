@@ -1,8 +1,8 @@
-Django==2.2.10
+Django==2.2.13
 django-bootstrap3==10.0.1
 djangorestframework==3.9.1
 djangorestframework-xml==1.0.1
-lxml==4.3.1
+lxml==4.6.2
 psycopg2==2.7.7
 semantic-version==2.8.2
 xmlschema==1.0.15
@@ -13,9 +13,12 @@ uWSGI==2.0.18
 
 # for development and testing. Need to move this into separate file
 autopep8==1.4.4
-coveralls==1.8.2
-coverage==4.5.4
+coveralls==2.2.0
+coverage==5.0.1
 tox==3.14.1
 
 # string matching
 jellyfish==0.7.1
+
+# schematron runner from TestSuite repo
+testsuite==0.1.0

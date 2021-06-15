@@ -13,7 +13,7 @@
     </header>
 
     <h3 id="modeling-level-of-detail-definitions">Modeling Level of Detail Definitions</h2>
-    <p>The Modeling Level of Detail (MLOD) is similar in concept to the <a href="https://technical.buildingsmart.org/standards/mvd/">Model View Definitions (MVD)</a> defined by IFC. MLODs define a subset of the overall BuildingSync schema necessary for a specific use case or workflow. 
+    <p>The Modeling Level of Detail (MLOD) is similar in concept to the <a href="https://technical.buildingsmart.org/standards/mvd/">Model View Definitions (MVD)</a> defined by IFC. MLODs define a subset of the overall BuildingSync schema necessary for a specific use case or workflow.
     <p>Level definitions are in alignment with the ASHRAE Standard 211 levels as defined below:</p>
     <table>
     <thead>
@@ -66,7 +66,7 @@
 
     <!--start copy from TestSuite README -->
     <h3 id="hvac-system-examples">HVAC System Examples</h3>
-    <p>Where the System Type specified below does not exactly match the enumeration in the BSync XML file, check the mapping defined by <a href="https://github.com/BuildingSync/BuildingSync-gem/blob/bb52655ebb8efeca44249277d3fb67ac60b4e610/lib/buildingsync/model_articulation/hvac_system.rb#L121-L143">map_primary_hvac_system_type_to_cbecs_system_type</a>. Additionally, see the <a href="https://github.com/BuildingSync/TestSuite/tree/L100_Schematron/examples/HVACSystems">examples/HVACSystems</a> directory for a tutorial and example files.</p>
+    <p>Where the System Type specified below does not exactly match the enumeration in the BSync XML file, check the mapping defined by <a href="https://github.com/BuildingSync/BuildingSync-gem/blob/bb52655ebb8efeca44249277d3fb67ac60b4e610/lib/buildingsync/model_articulation/hvac_system.rb#L121-L143">map_primary_hvac_system_type_to_cbecs_system_type</a>. Additionally, see the <a href="https://github.com/BuildingSync/TestSuite/tree/develop/examples/HVACSystems">examples/HVACSystems</a> directory for a tutorial and example files.</p>
     <table>
     <colgroup>
     <col width="35%" />
@@ -94,51 +94,51 @@
     </thead>
     <tbody>
     <tr class="odd">
-    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/examples/L000_OpenStudio_Simulation_01.xml">L000_OpenStudio_Simulation_01.xml</a></td>
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/develop/schematron/v2.2.0/examples/L000_OpenStudio_Simulation_01.xml">L000_OpenStudio_Simulation_01.xml</a></td>
     <td>Building</td>
     <td>VAV with reheat</td>
     <td>TRUE</td>
     <td>TRUE</td>
     <td>L000</td>
     <td>OpenStudio Simulation</td>
-    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/L000_OpenStudio_Simulation.sch">L000 OpenStudio Simulation</a></td>
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/develop/schematron/v2.2.0/v2-2-0_L000_OpenStudio_Simulation.sch">L000 OpenStudio Simulation</a></td>
     <td>No system-type actually declared. System inferred from OpenStudio Standards based on Building's OccupancyClassification and Gross floor area.</td>
     </tr>
     <tr class="even">
-    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/examples/L000_OpenStudio_Simulation_02.xml">L000_OpenStudio_Simulation_02.xml</a></td>
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/develop/schematron/v2.2.0/examples/L000_OpenStudio_Simulation_02.xml">L000_OpenStudio_Simulation_02.xml</a></td>
     <td>Building</td>
     <td>PSZ-AC with gas reheat</td>
     <td>TRUE</td>
     <td>TRUE</td>
     <td>L000</td>
     <td>OpenStudio Simulation</td>
-    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/L000_OpenStudio_Simulation.sch">L000 OpenStudio Simulation</a></td>
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/develop/schematron/v2.2.0/v2-2-0_L000_OpenStudio_Simulation.sch">L000 OpenStudio Simulation</a></td>
     <td>No system-type actually declared. System inferred from OpenStudio Standards based on Building's OccupancyClassification and Gross floor area.</td>
     </tr>
     <tr class="odd">
-    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/examples/L100_OpenStudio_Simulation_01.xml">L100_OpenStudio_Simulation_01.xml</a></td>
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/develop/schematron/v2.2.0/examples/L100_OpenStudio_Simulation_01.xml">L100_OpenStudio_Simulation_01.xml</a></td>
     <td>Section-Retail</td>
     <td>PSZ-AC with gas reheat</td>
     <td>TRUE</td>
     <td>TRUE</td>
     <td>L100</td>
     <td>OpenStudio Simulation</td>
-    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/L100_OpenStudio_Simulation.sch">L000 OpenStudio Simulation</a></td>
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/develop/schematron/v2.2.0/v2-2-0_L100_OpenStudio_Simulation.sch">L000 OpenStudio Simulation</a></td>
     <td>Packaged Rooftop Air Conditioner is mapped to PSZ-AC with gas reheat.</td>
     </tr>
     <tr class="even">
-    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/examples/L100_OpenStudio_Simulation_01.xml">L100_OpenStudio_Simulation_01.xml</a></td>
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/develop/schematron/v2.2.0/examples/L100_OpenStudio_Simulation_01.xml">L100_OpenStudio_Simulation_01.xml</a></td>
     <td>Section-Office</td>
     <td>PVAV with PFP boxes</td>
     <td>TRUE</td>
     <td>TRUE</td>
     <td>L100</td>
     <td>OpenStudio Simulation</td>
-    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/L100_OpenStudio_Simulation.sch">L000 OpenStudio Simulation</a></td>
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/develop/schematron/v2.2.0/v2-2-0_L100_OpenStudio_Simulation.sch">L000 OpenStudio Simulation</a></td>
     <td>Packaged Rooftop VAV with Electric Reheat is mapped as PVAV with PFP boxes</td>
     </tr>
     <tr class="odd">
-    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/examples/HVACSystems/PSZ-AC-CDM-001.xml">PSZ-AC-CDM-001.xml</a></td>
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/develop/examples/HVACSystems/PSZ-AC-CDM-001.xml">PSZ-AC-CDM-001.xml</a></td>
     <td>Section</td>
     <td>PSZ-AC</td>
     <td>N/A</td>
@@ -149,7 +149,7 @@
     <td>Example of constructing more complex, L200 system.</td>
     </tr>
     <tr class="even">
-    <td><a href="https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/examples/HVACSystems/PSZ-HP-CDM-001.xml">PSZ-HP-CDM-001.xml</a></td>
+    <td><a href="https://github.com/BuildingSync/TestSuite/blob/develop/examples/HVACSystems/PSZ-HP-CDM-001.xml">PSZ-HP-CDM-001.xml</a></td>
     <td>Section</td>
     <td>PSZ-HP</td>
     <td>N/A</td>

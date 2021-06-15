@@ -45,10 +45,10 @@
      - Contact - T
     Tenants
      - Tenant
-     
+
 -->
 <!--  Premises -->
-  <!--  
+  <!--
   Facility has ID
   <severity> error
     -->
@@ -59,7 +59,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   Site has ID
   <severity> error
     -->
@@ -70,7 +70,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   Building has ID
   <severity> error
     -->
@@ -81,7 +81,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   Section has ID
   <severity> error
     -->
@@ -93,7 +93,7 @@
     </rule>
   </pattern>
 <!--  Systems -->
-  <!--  
+  <!--
   HVACSystem has ID
   <severity> error
     -->
@@ -104,7 +104,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   HeatingPlant has ID
   <severity> error
     -->
@@ -115,7 +115,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   CoolingPlant has ID
   <severity> error
     -->
@@ -126,7 +126,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   CondenserPlant has ID
   <severity> error
     -->
@@ -137,7 +137,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   HeatingSource has ID
   <severity> error
     -->
@@ -148,7 +148,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   CoolingSource has ID
   <severity> error
     -->
@@ -159,7 +159,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   Delivery has ID
   <severity> error
     -->
@@ -170,7 +170,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   OtherHVACSystem has ID
   <severity> error
     -->
@@ -181,7 +181,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   LightingSystem has ID
   <severity> error
     -->
@@ -192,7 +192,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   DomesticHotWaterSystem has ID
   <severity> error
     -->
@@ -203,7 +203,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   PumpSystem has ID
   <severity> error
     -->
@@ -214,7 +214,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   FanSystem has ID
   <severity> error
     -->
@@ -225,7 +225,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   MotorSystem has ID
   <severity> error
     -->
@@ -236,7 +236,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   WallSystem has ID
   <severity> error
     -->
@@ -247,7 +247,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   RoofSystem has ID
   <severity> error
     -->
@@ -258,7 +258,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   FenestrationSystem has ID
   <severity> error
     -->
@@ -269,7 +269,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   ExteriorFloorSystem has ID
   <severity> error
     -->
@@ -280,7 +280,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   FoundationSystem has ID
   <severity> error
     -->
@@ -291,7 +291,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   CriticalITSystem has ID
   <severity> error
     -->
@@ -302,7 +302,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   PlugLoad has ID
   <severity> error
     -->
@@ -313,7 +313,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   ProcessLoad has ID
   <severity> error
     -->
@@ -324,7 +324,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   ConveyanceSystem has ID
   <severity> error
     -->
@@ -335,7 +335,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   OnsiteStorageTransmissionGenerationSystem has ID
   <severity> error
     -->
@@ -346,7 +346,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   AirInfiltrationSystem has ID
   <severity> error
     -->
@@ -358,7 +358,7 @@
     </rule>
   </pattern>
 <!--  Schedules & Measures -->
-  <!--  
+  <!--
   Schedule has ID
   <severity> error
     -->
@@ -369,7 +369,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   Measure has ID
   <severity> error
     -->
@@ -379,9 +379,9 @@
         [ERROR] '<name/>' MUST HAVE an @ID attribute.  Refer to: 'auc:Facility' ID='<value-of select="ancestor::auc:Facility/@ID"/>'
       </assert>
     </rule>
-  </pattern>  
+  </pattern>
 <!--  Reports-->
-  <!--  
+  <!--
   Report has ID
   <severity> error
     -->
@@ -392,7 +392,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   Scenario has ID
   <severity> error
     -->
@@ -403,7 +403,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   ResourceUse has ID
   <severity> error
     -->
@@ -415,7 +415,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   Qualification has ID
   <severity> error
     -->
@@ -426,7 +426,7 @@
       </assert>
     </rule>
   </pattern>
-  <!--  
+  <!--
   Utility has ID
   <severity> error
     -->
@@ -438,7 +438,7 @@
     </rule>
   </pattern>
 <!--  Contacts -->
-  <!--  
+  <!--
   Contact has ID
   <severity> error
     -->
@@ -450,7 +450,7 @@
     </rule>
   </pattern>
   <!--  Tenants -->
-  <!--  
+  <!--
   Tenant has ID
   <severity> error
     -->

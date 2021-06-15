@@ -2,40 +2,9 @@ import copy
 from collections import OrderedDict
 
 import xmlschema
-from lxml import etree, isoschematron
 from bsyncviewer.models.schema import Schema
 from bsyncviewer.models.use_case import UseCase
-
-
-def validate_schematron(schematron_path, document_path):
-    schematron_tree = etree.parse(schematron_path)
-    schematron = isoschematron.Schematron(schematron_tree, store_report=True)
-    document_tree = etree.parse(document_path)
-
-    schematron.validate(document_tree)
-
-    failed_assert_xpath = '/svrl:schematron-output/svrl:failed-assert'
-    failed_asserts = schematron.validation_report.xpath(
-        failed_assert_xpath,
-        namespaces={
-            'svrl': 'http://purl.oclc.org/dsdl/svrl'
-        })
-
-    errors = []
-    for failed_assert in failed_asserts:
-        # location stores an xpath to the element which failed validation
-        location = failed_assert.get('location')
-        failed_element = document_tree.xpath(location)[0]
-        # use namespace to make it pretty
-        tag = failed_element.tag.replace("{http://buildingsync.net/schemas/bedes-auc/2019}", "auc:")
-        # grab the message from failed_assert's first child
-        error_message = failed_assert[0].text
-        errors.append({
-            'line': failed_element.sourceline,
-            'element': tag,
-            'message': error_message
-        })
-    return errors
+from testsuite.validate_sch import validate_schematron
 
 
 class ValidationWorkflow(object):
@@ -190,9 +159,9 @@ class ValidationWorkflow(object):
 
         return results
 
-    def process_errors(self, results):
-        def format_error(error):
-            return f'line {error["line"]}: element {error["element"]}: {error["message"]}'
+    def process_errors(self, failures):
+        def format_failure(failure):
+            return f'line {failure.line}: element {failure.element}: {failure.message}'
 
         # separate INFO, WARNING, ERROR
 
@@ -201,15 +170,15 @@ class ValidationWorkflow(object):
         final_results['warnings'] = []
         final_results['errors'] = []
 
-        for res in results:
-            if '[INFO]' in res['message']:
+        for failure in failures:
+            if failure.role == 'INFO':
                 # append to info
-                final_results['infos'].append(format_error(res))
-            elif '[WARNING]' in res['message']:
+                final_results['infos'].append(format_failure(failure))
+            elif failure.role == 'WARNING':
                 # append to warnings
-                final_results['warnings'].append(format_error(res))
+                final_results['warnings'].append(format_failure(failure))
             else:
                 # assume error
-                final_results['errors'].append(format_error(res))
+                final_results['errors'].append(format_failure(failure))
 
         return final_results

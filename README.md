@@ -1,6 +1,6 @@
 # BuildingSync Schema Viewer and Validator
 
-[![Build Status](https://travis-ci.org/BuildingSync/selection-tool.svg?branch=develop)](https://travis-ci.org/BuildingSync/selection-tool)
+[![Build Status](https://github.com/BuildingSync/selection-tool/workflows/CI/badge.svg)](https://github.com/BuildingSync/selection-tool)
 
 This is the repository for the BuildingSync Validator web application.
 
@@ -11,7 +11,7 @@ This is the repository for the BuildingSync Validator web application.
     ```bash
     pyenv install 3.6.5
     pyenv virtualenv 3.6.5 bsync-validator-3.6.5
-    pyenv local bsync-validator-3.6.3
+    pyenv local bsync-validator-3.6.5
     ```
 1. Install PostgreSQL server for local development (if desired)
 	* Once installed, create your local database and user:
@@ -52,6 +52,8 @@ This is the repository for the BuildingSync Validator web application.
 	```bash
 	python manage.py reset_schema --schema_version=1.0.0
 	```
+
+**NOTE**: You will need to be off the NREL VPN to import a schema, otherwise you'll get an error related to http://www.gbxml.org/schema}Area' as the gbxml schema cannot be imported when on the NREL VPN.
 
 ### Precommit
 
@@ -96,7 +98,7 @@ tox -e flake8
 
 The BuildingSync Schema Viewer can support multiple versions of the BuildingSync schema.  Admin users can manage schemas from the Django Administration console.  Click on the 'Admin' link in the top navigation bar to access the Django Administration pages.
 
-To add a schema, specify the name, version, and schema file (XSD) to parse and save the record.  The schema file will be parsed automatically.
+To add a schema, specify the name, version, and schema file (XSD) to parse and save the record.  The schema file will be parsed automatically.  **NOTE**: You will need to be off the NREL VPN to import a schema, otherwise you'll get an error related to http://www.gbxml.org/schema}Area' as the gbxml schema cannot be imported when on the NREL VPN.
 
 To modify an existing schema, click on the edit link.  If changes are made to the uploaded XSD schema file and re-uploaded, ensure that the 'schema parsed' checkbox is unchecked before saving the record.  This will trigger the automatic schema parsing.
 
@@ -285,9 +287,9 @@ Follow these steps to add new example tables from the TestSuite repo
 
 ### Adding an OpenStudio Simulation Use Case from the TestSuite repo
 
-1. The relevant files are currently on the L000_Schematron branch of the [TestSuite](https://github.com/BuildingSync/TestSuite/tree/L100_Schematron) repo.  Clone the repo locally.
-1. OpenStudio Simulation use case schematron files include patterns from a [library of schematron files](https://github.com/BuildingSync/TestSuite/tree/L100_Schematron/lib).  Copy these files from the TestSuite repo into the selection-tool at the following location: ```bsyncviewer/testsuitelib```.
-1. Open the relevant use case file from the TestSuite repo.  For example: [L00_OpenStudio_Simulation.sch](https://github.com/BuildingSync/TestSuite/blob/L100_Schematron/spec/use_cases/schema2.0.0/L000_OpenStudio_Simulation.sch).  Edit the include statements at the top of the file with relative paths to the selection-tool testsuitelib directory.  Save the file.
+1. The relevant files are currently on the `develop` branch of the [TestSuite](https://github.com/BuildingSync/TestSuite/tree/develop) repo.  Clone the repo locally.
+1. OpenStudio Simulation use case schematron files include patterns from a [library of schematron files](https://github.com/BuildingSync/TestSuite/tree/develop/lib).  Copy these files from the TestSuite repo into the selection-tool at the following location: ```bsyncviewer/testsuitelib```.
+1. Open the relevant use case file from the TestSuite repo.  For example: [L00_OpenStudio_Simulation.sch](https://github.com/BuildingSync/TestSuite/blob/develop/schematron/v2.2.0/v2-2-0_L000_OpenStudio_Simulation.sch).  Edit the include statements at the top of the file with relative paths to the selection-tool testsuitelib directory.  Save the file.
     ```bash
       <include href="../../testsuitelib/rootElements.sch#root.oneOfEachUntilBuilding"/>
       <include href="../../testsuitelib/rootElements.sch#root.oneOfEachFacilityUntilScenario"/>
@@ -303,5 +305,5 @@ Follow these steps to add new example tables from the TestSuite repo
     1. Upload the file that was modified in the previous step
     1. Save
 1. Make the use case public from the selection-tool admin interface.
-1. If you have any example files to add to the selection-tool (for example, for the L000 OpenStudio Simulation use case, there are [2 examples files](https://github.com/BuildingSync/TestSuite/tree/L100_Schematron/spec/use_cases/schema2.0.0/examples)), add them in the appropriate schema directory in ```bsyncviewer/lib/validator/examples```. Regenerate the ```example_files.zip``` archive.  This will make the files available as examples at the ```/validator``` URL.
+1. If you have any example files to add to the selection-tool (for example, for the L000 OpenStudio Simulation use case, there are [2 examples files](https://github.com/BuildingSync/TestSuite/tree/develop/spec/use_cases/schema2.0.0/examples)), add them in the appropriate schema directory in ```bsyncviewer/lib/validator/examples```. Regenerate the ```example_files.zip``` archive.  This will make the files available as examples at the ```/validator``` URL.
 1. You can now validate XMLs against the new use case.

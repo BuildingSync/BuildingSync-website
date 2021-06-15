@@ -18,6 +18,7 @@ services:
       - POSTGRES_PASSWORD
     volumes:
       - selectiontool_pgdata:/var/lib/postgresql/data
+      - $HOME/selection-tool-backups:/backups
     deploy:
       restart_policy:
         condition: on-failure

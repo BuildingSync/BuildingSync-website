@@ -95,11 +95,18 @@ class ExtensionElement(BuildingSyncSchemaElement):
         self.base_type = None
 
 
+class UnionElement(BuildingSyncSchemaElement):
+    def __init__(self):
+        super(UnionElement, self).__init__()
+        self.member_types = None
+
+
 class SimpleTypeElement(BuildingSyncSchemaElement):
     def __init__(self):
         super(SimpleTypeElement, self).__init__()
         self.restrictions = []
         self.annotations = []
+        self.unions = []
 
 
 class RestrictionElement(BuildingSyncSchemaElement):
@@ -117,6 +124,7 @@ class ChoiceElement(BuildingSyncSchemaElement):
         self.named_elements = []
         self.ref_elements = []
         self.sequences = []
+        self.choices = []
 
 
 class BuildingSyncSchemaProcessor(object):
@@ -147,7 +155,8 @@ class BuildingSyncSchemaProcessor(object):
                 if looking_for_type_name == ne.name:
                     found = True
                     break
-            if found:
+            # if a referenced element wasn't found, and it wasn't a gbxml element, fail here
+            if found or type_ref.ref_type.startswith('gbxml'):
                 continue
             raise Exception("Couldn't find reference %s" % looking_for_type_name)
         # print("All type refs were properly accounted.")
@@ -172,6 +181,9 @@ class BuildingSyncSchemaProcessor(object):
                 full_schema.attributes.append(self._read_attribute(child))
             elif child.tag.endswith('annotation'):
                 full_schema.annotations.append(self._read_annotation(child))
+            elif child.tag.endswith('import'):
+                # import tags are ignored
+                continue
             else:
                 raise Exception("Invalid tag type in _read_schema: " + child.tag)
         return full_schema
@@ -295,6 +307,13 @@ class BuildingSyncSchemaProcessor(object):
                 raise Exception("Invalid tag type in _read_extension: " + child.tag)
         return this_extension
 
+    def _read_union(self, parent_object):
+        this_union = UnionElement()
+        if 'memberTypes' in parent_object.attrib:
+            this_union.member_types = parent_object.attrib['memberTypes']
+            # todo: would probably want to do more here?
+            return this_union
+
     def _read_simple_type(self, parent_object):
         this_simple_content = SimpleTypeElement()
         for child in parent_object.getchildren():
@@ -302,6 +321,8 @@ class BuildingSyncSchemaProcessor(object):
                 this_simple_content.restrictions.append(self._read_restriction(child))
             elif child.tag.endswith('annotation'):
                 this_simple_content.annotations.append(self._read_annotation(child))
+            elif child.tag.endswith('union'):
+                this_simple_content.unions.append(self._read_union(child))
             else:
                 raise Exception("Invalid tag type in _read_simple_type: " + child.tag)
         return this_simple_content
