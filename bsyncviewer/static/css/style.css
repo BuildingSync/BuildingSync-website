@@ -743,6 +743,25 @@ Responsive Media Querries
 	margin: 30px auto;
 }
 
+
+/* -------------------------------------------------------
+                    bsync adopters
+-------------------------------------------------------- */
+
+.adopters .serv-row:nth-child(1){
+	overflow: hidden;
+}
+
+.adopters .serv-row .serv-item{
+	padding: 40px 20px;
+}
+
+.adopters .serv-row div:nth-child(2){
+	/*border-right: 1px solid #eee;*/
+	/*border-left: 1px solid #eee;*/
+}
+
+
 /* -------------------------------------------------------
                     process
 -------------------------------------------------------- */
@@ -2415,4 +2434,9 @@ footer .small-footer p{
 	padding: 200px 0;
 	background: #444;
 	color: #fff;
+}
+
+#audette.no-border {
+  border:0px #fff;
+  padding-left:0px;
 }
