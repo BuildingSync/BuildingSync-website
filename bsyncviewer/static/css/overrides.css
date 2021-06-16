@@ -1,0 +1,150 @@
+/* BuildingSync style overrides */
+body {
+    font-size: 16px;
+}
+
+p {
+    font-size: 16px;
+}
+
+.light-blue {
+    color: #3ba6dd;
+}
+
+.dark-blue {
+    color: #005191;
+}
+
+.nav-dark {
+    background: #005191;
+}
+
+.color-header {
+    height: 25vh;
+    margin-top: 1rem;
+}
+
+.bg-blue {
+    background-color: #005191 !important;
+}
+
+.demo-5 .owl-carousel .slide-1 {
+    background-image: url(../img/esif.jpg);
+    background-size: cover;
+}
+
+.demo-5 .owl-carousel .slide-2 {
+    background-image: url(../img/23320.jpg);
+    background-size: cover;
+}
+
+.demo-5 .owl-carousel .slide-3 {
+    background-image: url(../img/esif-alt.jpg);
+    background-size: cover;
+}
+
+.fixed-top-nav {
+    background: #005191;
+}
+
+.navbar-custom .dropdown-menu {
+    background: #005191;
+}
+
+.navbar-brand {
+    padding: 10px 15px;
+    padding-left: 50px;
+    max-width: 200px;
+}
+
+.navbar-brand img {
+    width: 80%;
+}
+
+.navbar-custom .nav li > a {
+    font-size: 13px;
+}
+
+.serv-us {
+    /*background: rgba(0, 81, 145, .85);*/
+    background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)),
+    url(../img/23320.jpg);
+
+    color: #fff;
+}
+
+.serv-us p {
+    color: #fff;
+}
+
+.process {
+    background-image: url(../img/48963-2.jpg);
+}
+
+.clients {
+    background-image: url(../img/40889.png);
+}
+
+.numbers {
+    background-image: url(../img/148110017-digital-data-700.jpg);
+}
+
+footer .main-footer {
+    background: #005191;
+}
+
+footer .sub-footer {
+    background: #005191;
+}
+
+footer .main-footer a {
+    color: #fff;
+}
+
+footer .main-footer p {
+    font-size: 14px;
+
+.small-logo {
+    width: 100%;
+    padding-top: 20px;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
+}
+
+.mt-2 {
+    margin-top: 1rem;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.header-1 {
+    background-image: url(../img/esif2.jpg);
+}
+
+.app_version {
+    float: right;
+    color: #ccc;
+    font-size: 0.8em;
+}
+
+.btn-bord-dark:hover {
+    background: #005191;
+}
+
+.btn-bg-light:hover {
+    background: #005191;
+}
+
+/* divide each service row with a border rather than just the first row */
+.services .serv-row {
+    border-bottom: 1px solid #eee !important;
+    overflow: hidden !important;
+}
+
+.table-enumerations td {
+    width: 33%;
+}
