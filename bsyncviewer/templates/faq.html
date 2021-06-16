@@ -1,0 +1,114 @@
+{% extends 'base2.html' %}
+
+{% load staticfiles %}
+
+{% block title %}FAQ{% endblock title %}
+
+{% block content %}
+
+<div class="container bsync-main">
+
+	<h3 class="mat-h3">What is BuildingSync?</h3>
+	<p>BuildingSync is a standardized language for commercial building energy audit data that software developers can use to exchange data between audit tools. Taking the form of an <a href="https://en.wikipedia.org/wiki/XML_Schema_(W3C)" target="_blank" class="color-2 bold-link">XML schema</a>, BuildingSync can be required by building owners and audit program managers to allow data analysis and aggregation across multiple buildings in order to evaluate program performance and analyze trends.</p>
+
+	<p>It was developed using the standard energy data terminology defined in the Building Energy Data Exchange Specification (BEDES). BuildingSync is one of the first implementations of BEDES Version 1.0, and it was developed in close collaboration with the BEDES working groups.</p>
+
+	<p>BuildingSync standardizes the format of the energy audit data itself. It is not intended to standardize the calculations performed on these data by engineers, analysts, software packages, or other audit tools.</p>
+
+	<h3 class="mat-h3">What are the elements of BuildingSync?</h3>
+
+	<p>BuildingSync consists of two files and a reference sheet, which are all offered as free <a href="https://github.com/BuildingSync/schema/releases" target="_blank">downloads</a>. </p>
+
+
+	<section id="about" class="hero section-padding section-bord">
+		<div class="container">
+
+			<div class="row">
+				<!-- hero-item -->
+				<div class="hero-item col-md-4 text-center">
+					<span class="icon-clipboard"></span>
+					<div class="hero-item-content">
+						<h5>Data Dictionary</h5>
+						<p>The data field “dictionary” is an Excel file that includes field names, definitions, units, and other attributes. The data dictionary is aligned with BEDES but includes only the subset of data fields relevant to energy audits. This file can be referenced to help standardize energy audit terminology, but it doesn’t provide a structure to permit data exchange across applications.</p>
+					</div>
+				</div>
+
+				<div class="hero-item col-md-4 text-center active">
+					<span class="icon-layers"></span>
+					<div class="hero-item-content">
+						<h5>XML Schema</h5>
+						<p>The XML Schema file documents the relationships among the data fields. It can be referenced as a voluntary or mandatory reporting format for audit data, and data files compliant with the schema can then be aggregated and analyzed in a database. There are several tools available for viewing a graphical version of the XML schema file; view the <a href="https://en.wikipedia.org/wiki/XML_Schema_Editor#XML_Schema_Editors" target="_blank">Wikipedia page</a> about XML schema editors for more information about XML viewers. </p>
+					</div>
+				</div>
+
+				<div class="hero-item col-md-4 text-center">
+					<span class="icon-document"></span>
+					<div class="hero-item-content">
+						<h5>Geometry Reference Sheet</h5>
+						<p>The BuildingSync Geometry Reference Sheet, which illustrates how most of the
+						simplified geometric terms (shapes, side names, vertices, orientations)
+						are defined in the context of BuildingSync.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<h3 class="mat-h3">Why was BuildingSync developed?</h3>
+	<p>Currently the energy audit industry lacks a common data collection format. Data collection differs widely between energy auditors, as do the outputs from various energy audit software tools. This makes it difficult to aggregate the data collected by different auditors, or to make comparisons between buildings that have been audited with different software applications.</p>
+
+	<p>Energy audits of commercial buildings are becoming increasingly common, and even required, in the federal sector and in cities like New York City and San Francisco. The American Society of Heating, Refrigeration and Air Conditioning Engineers (ASHRAE) is in the process of developing a national standard for commercial building energy audits; however, this process is complicated by the lack of a standard data specification for information collected and reported, as well as the lack of consistency in data formats across audit software applications. </p>
+
+	<h3 class="mat-h3">What can BuildingSync do?</h3>
+	<p>BuildingSync can facilitate a consistent history of energy audit data across the life of a building or a group of buildings, and thus enable lower costs and higher energy performance results. It can also allow easier aggregation and analysis of audits conducted by different companies using different software. BuildingSync covers the essential data collected across all ASHRAE Audit Levels as defined in Procedures for Commercial Building Energy Audits, and includes all data necessary for the calculation of a Commercial Building Energy Asset Score.</p>
+
+	<p>BuildingSync provides a common schema for energy audit data that can be utilized by a variety of software and databases. Using the schema ensures that data collected for a single building over time is consistent and comparable, that data from different buildings can be easily aggregated and compared for large-scale analysis, and that data can be transferred between a variety of software tools. This streamlines the energy audit process and lead to new opportunities for using the resulting data to achieve greater energy efficiency.</p>
+
+	<p>By delivering energy audit data in a common format, energy auditors can make it easier for their customers to use the data to make decisions. For large building owners with many properties, standardized data across their buildings can help them more easily understand their opportunities for energy efficiency. Standardized data can also make it much easier for building owners to integrate the information they receive in an energy audit into property management tools for later reference and reuse. Utilities or local governments that run energy audit programs may also find it easier to utilize the results of energy audits to spur energy efficiency improvements if those results are in a common format.</p>
+
+	<p>The schema was built using the standard terminology defined in the Building Energy Data Exchange Specification (BEDES) dictionary. Existing data formats and guidance about how to conduct energy audits were incorporated whenever possible, making it easier to reconcile and map data from existing databases to BuildingSync.</p>
+
+	<h3 class="mat-h3">Who should use BuildingSync?</h3>
+	<p>BuildingSync considers the needs and interests of all stakeholders in the energy audit industry, including building owners, auditors, software developers, and program managers. Existing data formats and datasets were leveraged whenever possible, to avoid duplication of effort and minimize the effort required to perform data reconciliation and mapping from existing databases. Using BuildingSync, audit data can be collected and reported in a format that allows many different users to analyze and process the data to answer their specific questions.</p>
+
+	<section id="users" class="hero">
+		<div class="container">
+			<div class="row mb-40">
+				<div class="hero-block">
+					<!-- accordion -->
+					<div class="col-md-6 col-md-offset-3">
+						<div class="accordion">
+							<div class="accordion-icon">
+								<h6>Providers of building energy assessment software<span><i class="fa fa-angle-down" aria-hidden="true"></i></span></h6>
+							</div>
+							<div class="accordion-info active">
+								<p>Providers of building energy assessment software can integrate the ability to export BuildingSync-compatible files into their software.</p>
+							</div>
+							<div class="accordion-icon">
+								<h6>Providers of energy auditing services <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></h6>
+							</div>
+							<div class="accordion-info">
+								<p>Providers of energy auditing services can choose to use software that can output BuildingSync-compatible files.
+								</p>
+							</div>
+							<div class="accordion-icon">
+								<h6>Building owners <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></h6>
+							</div>
+							<div class="accordion-info">
+								<p>Building owners may wish to incorporate BuildingSync into their next RFP for a building energy audit by requiring the auditor to provide data in a BuildingSync-compatible format.</p>
+							</div>
+							<div class="accordion-icon">
+								<h6>Utilities <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></h6>
+							</div>
+							<div class="accordion-info">
+								<p>Utilities can choose to recommend or require software that uses BuildingSync-compatible files for any programs involving energy audits.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+{% endblock content %}
