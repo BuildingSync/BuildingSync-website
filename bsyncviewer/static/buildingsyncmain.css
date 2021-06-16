@@ -2155,11 +2155,10 @@ body.is-menu-visible #menu {
     -webkit-transition: background-color .2s ease;
     -ms-transition: background-color .2s ease;
     transition: background-color .2s ease;
-    background: #2e3842;
-    height: 3em;
+    /*background: #2e3842;*/
+   /* height: 3em;*/
     left: 0;
     line-height: 3em;
-    position: fixed;
     top: 0;
     width: 100%;
     z-index: 10000;
@@ -2189,7 +2188,7 @@ body.is-menu-visible #menu {
 
 #header h1 a:hover, #header h1 a:hover {
     text-decoration: none;
-    color:#fff;
+    color:#000;
 }
 
 @media screen and (max-width: 736px) {
@@ -2220,7 +2219,7 @@ body.is-menu-visible #menu {
     font-size: 0.8em;
     letter-spacing: .225em;
     padding: 0 1.5em;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 }
 #header nav>ul>li>a.menuToggle {
     outline: 0;
@@ -2389,7 +2388,7 @@ body.is-menu-visible #menu {
     -ms-transition-delay: 1.25s;
     transition-delay: 1.25s;
     content: '';
-    background: #2e3842;
+    /*background: #2e3842;*/
     display: block;
     width: 100%;
     height: 100%;
@@ -2475,10 +2474,6 @@ body.is-loading #banner:after {
 }
 }#main>header {
     padding: 12em 0 10em 0 ;
-    background-image: -moz-linear-gradient(top,  rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url("/bsyncviewer/static/bsyncviewer/static/images/bg.jpg");
-    background-image: -webkit-linear-gradient(top,  rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url("/bsyncviewer/static/bsyncviewer/static/images/bg.jpg");
-    background-image: -ms-linear-gradient(top,  rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url("/bsyncviewer/static/bsyncviewer/static/images/bg.jpg");
-    background-image: linear-gradient(top,  rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url("/bsyncviewer/static/bsyncviewer/static/images/bg.jpg");
     background-attachment: fixed;
     background-position: center center;
     background-repeat: no-repeat;
@@ -2519,7 +2514,7 @@ body.is-loading #banner:after {
 }
 #footer {
     padding: 6em 2em 4em 2em ;
-    background-color: #1d242a;
+    /*background-color: #1d242a;*/
     text-align: center;
 }
 #footer .icons {
@@ -2572,10 +2567,6 @@ body.is-loading #banner:after {
     #footer {
     padding: 3em 2em 1em 2em }
 }body.landing #page-wrapper {
-    background-image: -moz-linear-gradient(top,  rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url("/bsyncviewer/static/bsyncviewer/static/images/bg.jpg");
-    background-image: -webkit-linear-gradient(top,  rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url("/bsyncviewer/static/bsyncviewer/static/images/bg.jpg");
-    background-image: -ms-linear-gradient(top,  rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url("/bsyncviewer/static/bsyncviewer/static/images/bg.jpg");
-    background-image: linear-gradient(top,  rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url("/bsyncviewer/static/bsyncviewer/static/images/bg.jpg");
     background-attachment: fixed;
     background-position: center center;
     background-repeat: no-repeat;
@@ -2583,22 +2574,11 @@ body.is-loading #banner:after {
     padding-top: 0;
 }
 body.landing #footer {
-    background-color: rgba(29, 36, 42, 0.9);
+    /*background-color: rgba(29, 36, 42, 0.9);*/
 }
-body.is-mobile.landing #page-wrapper {
-    background: none;
-}
-body.is-mobile.landing #banner, body.is-mobile.landing .wrapper.style4 {
-    background-image: -moz-linear-gradient(top,  rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url("/bsyncviewer/static/bsyncviewer/static/images/bg.jpg");
-    background-image: -webkit-linear-gradient(top,  rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url("/bsyncviewer/static/bsyncviewer/static/images/bg.jpg");
-    background-image: -ms-linear-gradient(top,  rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url("/bsyncviewer/static/bsyncviewer/static/images/bg.jpg");
-    background-image: linear-gradient(top,  rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url("/bsyncviewer/static/bsyncviewer/static/images/bg.jpg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
+
 body.is-mobile.landing #footer {
-    background-color: #1d242a;
+    /*background-color: #1d242a;*/
 }
 #translator {
     border: 0 none;

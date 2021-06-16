@@ -1,0 +1,199 @@
+{% extends 'base2.html' %}
+
+{% load staticfiles %}
+
+{% block title %} For Implementers{% endblock title %}
+
+
+{% block content %}
+
+    <div class="container" style="padding-top: 2em">
+        <p>BuildingSync<sup>®</sup> is a standardized language for commercial
+            building energy audit data that software developers can use to exchange
+            data between audit tools. Taking the form of an
+            <a href="https://en.wikipedia.org/wiki/XML_Schema_(W3C)" target="_blank">XML schema</a>
+            BuildingSync can be implemented by building owners and audit program
+            managers to allow data analysis and aggregation across multiple
+            buildings in order to evaluate program performance and analyze trends.</p>
+    </div>
+    <!-- ====== hero ======  -->
+    <section id="about" class="hero section-bord">
+        <div class="container">
+            <h3>Where do I start?</h3>
+            <hr>
+            <p>Integrating BuildingSync into your application generally follows a four step process
+                to ensure compliance and maximize interoperability. This process will inform the life-cycle of your
+                implementation.
+            </p>
+        </div>
+        <section class="process section-padding">
+            <div class="container">
+                <div class="row">
+                    <!-- number items -->
+                    <a href="#use_case">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="items text-center">
+                                <div class="item-title">
+                                    <div class="item-rotate">
+                                        <h5>01</h5>
+                                        <h6>Use Case</h6>
+                                    </div>
+                                </div>
+                                <div class="item-content">
+                                    <p>Select or develop a use case for your specific application and data exchange
+                                        needs.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#map">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="items text-center">
+                                <div class="item-title">
+                                    <div class="item-rotate">
+                                        <h5>02</h5>
+                                        <h6>Map</h6>
+                                    </div>
+                                </div>
+                                <div class="item-content">
+                                    <p>Identify data fields in your application that are required for your use case and
+                                        map
+                                        them to data elements in the schema.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#construct">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="items text-center">
+                                <div class="item-title">
+                                    <div class="item-rotate">
+                                        <h5>03</h5>
+                                        <h6>Construct</h6>
+                                    </div>
+                                </div>
+                                <div class="item-content">
+                                    <p>Build your XML file based on the data mappings via your application for your use
+                                        case.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#validate">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="items text-center">
+                                <div class="item-title">
+                                    <div class="item-rotate">
+                                        <h5>04</h5>
+                                        <h6>Validate</h6>
+                                    </div>
+                                </div>
+                                <div class="item-content">
+                                    <p>Ensure your BuildingSync XML file is verifiable and complete while
+                                        uncovering alternative use cases you may satisfy.</p>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </section>
+        <div class="container">
+            <a id="use_case"><h3>Understanding Use Cases</h3></a>
+            <hr>
+            <p> A BuildingSync use case is a workflow within which BuildingSync is leveraged for data
+                exchange in platform(s). Depending on the connected platform(s), various users can collect, report,
+                process, and analyze audit data through BuildingSync to meet their specific objectives. BuildingSync
+                considers the needs and interests of a wide range of users in the energy audit industry, including
+                building owners, auditors, software developers, utilities and program managers. It is important to note
+                that a single BuildingSync file can satisfy multiple use cases if the requirements are met.
+                Typical BuildingSync use cases include:
+            </p>
+            <div class="row" style="padding-bottom: 2em">
+                <ul class="list-group hero-item col-md-12">
+                    <li class="list-group-item"> Building energy assessment software integrating the ability to export
+                        BuildingSync-compatible files into their software
+                    </li>
+                    <li class="list-group-item">Energy auditing services choosing to use software that can output
+                        BuildingSync-compatible files
+                    </li>
+                    <li class="list-group-item"> Building owners incorporating BuildingSync into their next RFP for a
+                        building energy audit by requiring the auditor to provide data in a BuildingSync-compatible
+                        format
+                    </li>
+                    <li class="list-group-item">
+                        Utilities choosing to recommend or require software that uses BuildingSync-compatible files for
+                        any programs involving energy audits.
+                    </li>
+                </ul>
+                <a class="button btn-bg-light col-md-offset-3" href="use_cases">Explore Use Cases</a>
+                <a class="button btn-bg-light col-md-offset-1" href="https://github.com/BuildingSync/use-cases" target="_blank">Submit a Use Case</a>
+
+            </div>
+
+            <a id="map"><h3>Understanding the Schema</h3></a>
+            <hr>
+            <p>To understand which of your application data can be expressed in a BuildingSync-compliant
+                file, adopters can interface with the BuildingSync Schema in a number of use case-specific ways. There are three main parts to the Schema that when used in tandem, produce a complete
+                model (see table below). Additionally, each release of the schema includes several supporting documents: the Schema, a
+                Data Dictionary, List of Measures, and Full Documentation.
+            </p>
+            <div class="row" style="padding-bottom: 2em">
+                <ul class="list-group hero-item col-md-12">
+                    <li class="list-group-item"><strong>Schema</strong> - defines the structure of elements and their
+                        polymorphic ontologies.
+                    </li>
+                    <li class="list-group-item"><strong>Data Dictionary</strong> - The data field “dictionary” includes
+                        field names, definitions, units, and other attributes for the enumerated fields. The data
+                        dictionary is aligned with BEDES, but includes only the subset of data fields that are relevant
+                        for energy audits.
+                    </li>
+                    <li class="list-group-item"><strong>Measures</strong> - contain a TechnologyCategory and a list of
+                        valid enumerations.
+                    </li>
+                </ul>
+                <a class="button btn-bg-light col-md-offset-3" href="/dictionary">View the Schema</a>
+                <a class="button btn-bg-light col-md-offset-1" href="/releases">Current Schema releases</a>
+            </div>
+            <a id="construct"><h3>Working with BuildingSync</h3></a>
+            <hr>
+            <p>Creating a BuildingSync XML file can be as simple as opening your favorite text editor and
+                manually building up nested elements. However, to make this process easier, we have a set of resources
+                to assist you during the schema adoption process. </p>
+            <ul class="list-group hero-item col-md-12">
+                <li class="list-group-item"><a href="https://github.com/BuildingSync/bsyncpy">bsyncpy</a> - a python
+                    package for creating BuildingSync elements
+                </li>
+                <li class="list-group-item"><a href="https://github.com/BuildingSync/bsync-examples">Interactive
+                    Tutorial</a> - An annotated Jupyter Notebook for walking through a Level 1 Audit for a small office
+                    building
+                </li>
+                <li class="list-group-item"><a href="https://github.com/BuildingSync/bsync-examples">Example Files</a> -
+                    Complete Files that have been validated
+                </li>
+            </ul>
+            <p>There are a number of technologies supported for the development of XML files. If
+                you are unsure about where to start, we suggest the native
+                <a href="https://docs.python.org/3/library/xml.etree.elementtree.html" target="_blank">XML
+                    python module</a> or the </a><a href="https://lxml.de/">lxml python package.</a>
+            </p>
+            <a id="validate"><h3>Validation</h3></a>
+            <hr>
+            <p>BuildingSync uses <a href="https://schematron.com/" target="_blank">Schematron</a> as the assertion engine
+                for validating against specific use cases. Each use case is paired with a Schematron file defining its
+                requirements.</p>
+            <p>There are a number of ways to validate a BuildingSync file. If you are integrating your
+                software to an existing use case, you can validate your file via the <a href="/validator">Selection Tool
+                    Validator.</a>
+                Simply upload the file you wish to validate and select the use case you would like to validate against.
+                Similarly, if you would like to programmatically validate your file, you can hit the <a href="https://github.com/BuildingSync/selection-tool#validator-api" target="_blank">Selection Tool API</a> endpoint.</p>
+            <p style="padding-bottom: 2em">If you need to validate a file that does not currently fit your use case, you
+                can use the <a
+                        href="https://github.com/BuildingSync/TestSuite" target="_blank">TestSuite</a> to create, validate, and modify
+                your Schematron files.
+
+            </p>
+        </div>
+        </div>
+    </section>
+    <!-- ====== End hero ======  -->
+{% endblock content %}

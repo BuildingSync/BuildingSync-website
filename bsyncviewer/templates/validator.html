@@ -1,20 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
+{% load bootstrap4 %}
+{% load staticfiles %}
 
-{% load bootstrap3 %}
-
-{% block title %}BuildingSync Schema Viewer{% endblock %}
+{% block title %}Use Case Validator{% endblock title %}
 
 
-{% block content_notitle %}
+{% block content %}
 
-  <div class="container">
-    <header class="major">
-      <h2>Validator</h2>
-    </header>
-    <p>Validate your XML against the BuildingSync schema and its use cases</p>
+
+  <div class="container"style="padding-top: 5em; padding-bottom: 15em">
+    <p style="text-align: center; padding-bottom: 3em">Validate your XML against the BuildingSync schema and its use cases</p>
 
     <div class="row">
-      <div class="col-md-5 col-md-offset-1">
+      <div class="col-md-6 ml-6">
         <div class="panel panel-accent">
           <div class="panel-heading">
             <h3 class="panel-title">Upload XML</h3>
@@ -28,7 +26,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-5 col-md-offset-1">
+      <div class="col-md-6 ml-6">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Explore Examples</h3>
@@ -38,10 +36,10 @@
               {% csrf_token %}
               {% bootstrap_form load_xml_example_form %}
 
-              <button class="btn btn-default" type="submit">Validate</button>
-              <button class="btn btn-default" type="submit" name="download">Download Examples</button>
+              <button class="btn btn-accent2" type="submit">Validate</button>
+              <button class="btn btn-accent2" type="submit" name="download">Download Examples</button>
 
-              <div class="pull-right pad-top-20"><a href="https://github.com/BuildingSync/schema/tree/develop/examples">View More XML Examples <i class="fa fa-external-link" aria-hidden="true"></i></a></div>
+              <div class="pull-right pt-2"><a href="https://github.com/BuildingSync/schema/tree/develop/examples">View More XML Examples <i class="fa fa-external-link" aria-hidden="true"></i></a></div>
             </form>
           </div>
         </div>
@@ -49,4 +47,4 @@
     </div>
   </div>
 
-{% endblock content_notitle %}
+{% endblock content %}
