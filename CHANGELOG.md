@@ -1,5 +1,20 @@
 # BuildingSync Use Case Selection Tool
 
+## Version 1.1.3
+
+Date Range: 06/03/20 - 06/15/21
+
+Updates:
+
+- Renamed master to main
+- Install testsuite from PyPi
+- Bump lxml to 4.6.2
+- BSync version 2.3.0 with updated example files
+- Django 2.2.20
+- Backup Script
+- Add L200 audit example file
+- Accept Zip of BuildingSync files for validation
+
 ## Version 1.1.2
 
 Date Range: 03/26/20 - 06/02/20

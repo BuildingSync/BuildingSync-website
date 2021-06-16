@@ -1,0 +1,12 @@
+# Docker Compose creates multiple containers on a single machine.
+# Usage:
+#   docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+version: '3'
+services:
+  web:
+    command: python3 manage.py runserver 0.0.0.0:80
+    environment:
+      - DJANGO_SETTINGS_MODULE=bsyncviewer.settings.docker_dev
+    volumes:
+      - ./bsyncviewer:/srv/selection-tool/bsyncviewer
+      - selectiontool_mediadata:/srv/selection-tool/bsyncviewer/media
