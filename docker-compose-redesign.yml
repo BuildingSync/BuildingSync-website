@@ -44,7 +44,7 @@ services:
     depends_on:
       - db-postgres
     ports:
-      - "8081:80"
+      - "8082:80"
     volumes:
       - selectiontool_mediadata_redesign:/srv/selection-tool/bsyncviewer/media
     deploy:
