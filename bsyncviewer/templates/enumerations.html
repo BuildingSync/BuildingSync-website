@@ -4,13 +4,33 @@
 {% load staticfiles %}
 
 
-{% block title %}Enumerations - v{{ version }} {% endblock %}
+{% block title %}
+  {% if enumerations_type == 'data_dictionary' %}
+    Enumerations - v{{ version }}
+  {% else %}
+    Measures - v{{ version }}
+  {% endif %}
+{% endblock %}
 
 {% block content %}
 <section id="enumerations" class="hero section-padding section-bord">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
+        <div style="padding: 1em;">
+          {% if enumerations_type == 'data_dictionary' %}
+            <a href="{% url 'measures' version %}" class="btn btn-primary">
+              View measures for {{ version }}
+            </a>
+          {% else %}
+            <a href="{% url 'enumerations' version %}" class="btn btn-primary">
+              View enumerations for {{ version }}
+            </a>
+          {% endif %}
+          <a href="{% url 'dictionaryversion' version %}" class="btn btn-primary">
+            View full schema for {{ version }}
+          </a>
+        </div>
         <form class="form-inline">
           <div class="form-group mb-2">
             <label for="search-input">Search:</label>
@@ -22,7 +42,11 @@
             <tr>
               <th>Term</th>
               <th>Description</th>
-              <th>Enumerations</th>
+              {% if enumerations_type == 'data_dictionary' %}
+                <th>Enumerations</th>
+              {% else %}
+                <th>Measure Names</th>
+              {% endif %}
             </tr>
           </thead>
           <!-- rows are inserted with javascript -->
@@ -47,7 +71,12 @@
   const termRows = []
   enumerationsData.forEach(term => {
     const name = document.createElement('td')
-    name.textContent = term.sub_name ? `${term.name} - ${term.sub_name}` : term.name
+    if (term.name === 'MeasureName') {
+      debugger;
+      name.textContent = term.sub_display_name
+    } else {
+      name.textContent = term.sub_name ? `${term.name} - ${term.sub_name}` : term.name
+    }
 
     const documentation = document.createElement('td')
     documentation.textContent = term.documentation

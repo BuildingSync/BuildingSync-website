@@ -103,6 +103,7 @@ footer .main-footer a {
 
 footer .main-footer p {
     font-size: 14px;
+}
 
 .small-logo {
     width: 100%;
@@ -147,4 +148,5 @@ footer .main-footer p {
 
 .table-enumerations td {
     width: 33%;
+    padding: 0 1em;
 }
