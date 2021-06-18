@@ -1,6 +1,6 @@
 Django==2.2.24
 django-bootstrap4==2.3.1
-djangorestframework==3.9.1
+djangorestframework==3.11.2
 djangorestframework-xml==1.0.1
 lxml==4.6.2
 psycopg2==2.7.7
