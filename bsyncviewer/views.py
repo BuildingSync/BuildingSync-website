@@ -143,6 +143,11 @@ def about(request):
     return render(request, 'about.html', context)
 
 
+def contact(request):
+    context = {}
+    return render(request, 'contact.html', context)
+
+
 def collaborators(request):
     context = {}
     return render(request, 'collaborators.html', context)

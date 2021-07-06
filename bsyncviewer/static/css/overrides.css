@@ -150,3 +150,8 @@ footer .main-footer p {
     width: 33%;
     padding: 0 1em;
 }
+
+.big-margins {
+  margin-top: 50px !important;
+  margin-bottom: 50px !important;
+}
