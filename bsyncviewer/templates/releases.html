@@ -35,7 +35,11 @@
                       <br/>
                       <a href="{{ release.docs_url }}">Full Docs</a>
                     </td>
-                    <td><a href="{{ release.data_dict_xlsx_url }}">Spreadsheet</a></td>
+                    <td>
+                      <a href="{% url 'measures' version=release.version %}">Measures</a><br/>
+                      <a href="{% url 'enumerations' version=release.version %}">Enumerations</a><br/>
+                      <a href="{{ release.data_dict_xlsx_url }}">Excel Spreadsheet</a>
+                    </td>
                 </tr>
                 {% endfor %}
               </table>
