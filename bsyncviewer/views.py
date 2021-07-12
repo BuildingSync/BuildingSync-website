@@ -143,6 +143,11 @@ def about(request):
     return render(request, 'about.html', context)
 
 
+def contact(request):
+    context = {}
+    return render(request, 'contact.html', context)
+
+
 def collaborators(request):
     context = {}
     return render(request, 'collaborators.html', context)
@@ -357,7 +362,40 @@ def enumerations(request, version):
     context = {
         'version': version,
         'enumerations_data': enumerations_data,
-        'versions': versions
+        'versions': versions,
+        'enumerations_type': 'data_dictionary'
+    }
+
+    return render(request, 'enumerations.html', context)
+
+
+def measures(request, version):
+    try:
+        schema = Schema.objects.get(version=version)
+    except BaseException:
+        raise Http404('Schema version provided does not exist.')
+
+    if not schema.enumerations_file:
+        return HttpResponseRedirect(reverse_lazy('measures', args=[DEFAULT_SCHEMA_VERSION]))
+
+    enumerations_data = json.load(schema.enumerations_file)
+    enumerations_data[0]['name']
+    # find measures
+    enumerations_data = [term for term in enumerations_data if term['name'] == 'MeasureName']
+
+    versions = []
+    for version_obj in Schema.objects.all():
+        versions.append({
+            'name': version_obj.version,
+            'is_current': version_obj.version == version,
+            'link': reverse('dictionaryversion', args=[version_obj.version])
+        })
+
+    context = {
+        'version': version,
+        'enumerations_data': enumerations_data,
+        'versions': versions,
+        'enumerations_type': 'measures'
     }
 
     return render(request, 'enumerations.html', context)
