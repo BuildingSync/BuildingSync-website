@@ -123,7 +123,7 @@ There is also a validator endpoint to validate XML files against the BuildingSyn
 
 #### SINGLE XML
 
-Request: POST to https://selectiontool.buildingsync.net/api/validate
+Request: POST to https://buildingsync.net/api/validate
 Use form-data to specify the following parameters for schema version and XML file:  ```schema_version``` and ```file```.
 
 Example Response:
@@ -164,7 +164,7 @@ Example Response:
 
 #### ZIP with multiple XMLs
 
-Request: POST to https://selectiontool.buildingsync.net/api/validate
+Request: POST to https://buildingsync.net/api/validate
 Use form-data to specify the following parameters for schema version and XML file:  ```schema_version``` and ```file```.
 
 Example Response:

@@ -16,7 +16,6 @@ router = routers.DefaultRouter()
 urlpatterns = [
     path('', views.index, name='index'),
     path('', views.index, name='home'),
-    path('use_case_mappings', views.use_case_mappings, name='use_case_mappings'),
     path('email/', emailView, name='email'),
     path('success/', successView, name='success'),
     path('admin/', admin_site.urls, name='admin'),
@@ -35,9 +34,26 @@ urlpatterns = [
     re_path('download_usecase_file/(?P<pk>[0-9]+)/$', views.download_usecase_file, name='download_usecase_file'),
     path('validator', views.validator, name='validator'),
     path('dictionary', views.redirect_data_dictionary, name='dictionary'),
-    path('examples', views.examples, name='examples'),
+    path('mlod', views.mlod, name='mlod'),
+    path('case_study', views.case_study, name="case_study"),
+    path('about', views.about, name='about'),
+    path('about/current_adopters', views.adopters, name='adopters'),
+    path('about/collaborators', views.collaborators, name='collaborators'),
+    path('faq', views.faq, name='faq'),
+    path('implementers', views.implementers, name='implementers'),
+    path('auditors', views.auditors, name='auditors'),
+    path('practitioners', views.practitioners, name='practitioners'),
+    path('tools', views.tools, name='tools'),
+    path('schema', views.releases, name='releases'),
+    path('releases', views.releases, name='releases'),
+    path('documents', views.references, name='references'),
+    path('references', views.references, name='references'),
+    path('contact', views.contact, name='contact'),
+    path('technical_resources', views.technical_resources, name='technical_resources'),
     re_path(r'^dictionary/(?P<version>[0-9a-zA-Z_\.-]+)/$', views.dictionary, name='dictionaryversion'),
     re_path(r'^ajax/enum/$', views.retrieve_additional_dictionary_data, name='get_additional_data'),
+    re_path(r'^enumerations/(?P<version>[0-9a-zA-Z_\.-]+)/$', views.enumerations, name='enumerations'),
+    re_path(r'^measures/(?P<version>[0-9a-zA-Z_\.-]+)/$', views.measures, name='measures'),
     re_path(r'^api/', include(router.urls)),
     re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     re_path(r'^api/validate', views.ValidatorApi.as_view(), name='validate_api')
@@ -45,3 +61,9 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # documentation files are technically in media, but we provide this url
+    # for a prettier path. Would normally be handled by nginx alias in production
+    urlpatterns += [re_path(
+        r'^documentation/(?P<version>[0-9a-zA-Z_\.-]+)/$',
+        views.documentation
+    )]

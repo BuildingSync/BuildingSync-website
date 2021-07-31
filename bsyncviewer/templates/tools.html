@@ -1,0 +1,90 @@
+{% extends 'base2.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Tools{% endblock %}
+
+{% block content %}
+
+<section id="services" class="services">
+  <div class="container">
+    <div class="row">
+      <div class="serv-row">
+        <div class="col-md-7">
+          <div class="serv-item">
+            <h5>Selection Tool Validator</h5>
+            <p>
+              The BuildingSync Use Case Selection Tool is a web application allowing users to browse and validate
+              instances of BuildingSync for various use cases.
+            </p>
+            <div>
+              <a class="button btn-sm btn-bord-dark mb-10" href="/validator">Website</a> <a
+                class="button btn-sm btn-bord-dark mb-10" href="/about">Documentation</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="serv-row">
+        <div class="col-md-7">
+          <div class="serv-item">
+            <h5>TestSuite</h5>
+            <p>
+              <code>testsuite</code> is a Python package for writing and validating BuildingSync use cases as Schematron
+              files.
+            </p>
+            <div>
+              <a class="button btn-sm btn-bord-dark mb-10" href="https://pypi.org/project/testsuite/">PyPi</a> <a
+                class="button btn-sm btn-bord-dark mb-10" href="https://github.com/BuildingSync/TestSuite">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="serv-row">
+        <div class="col-md-7">
+          <div class="serv-item">
+            <h5>BuildingSync Gem</h5>
+            <p>
+              The BuildingSync-Gem is a repository of helpers for reading and writing BuildingSync XML files, and for
+              using that data to drive energy simulations of the subject building. This tool allows you to convert
+              BuildingSync XML file into an OpenStudio Baseline model or workflow, simulate the model or workflow, and
+              insert simulation results into the original BuildingSync file.
+            </p>
+            <div>
+              <a class="button btn-sm btn-bord-dark mb-10" href="https://rubygems.org/gems/buildingsync">RubyGem</a> <a
+                class="button btn-sm btn-bord-dark mb-10" href="https://github.com/BuildingSync/TestSuite">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="serv-row">
+        <div class="col-md-7">
+          <div class="serv-item">
+            <h5>BSyncpy</h5>
+            <p>
+              <code>bsyncpy</code> is a tool for parsing and building BuildingSync files in Python.
+            </p>
+            <div>
+              <a class="button btn-sm btn-bord-dark mb-10" href="https://github.com/BuildingSync/bsyncpy">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="serv-row">
+        <div class="col-md-7">
+          <div class="serv-item">
+            <h5>BSyncr</h5>
+            <p>
+              <code>bsyncr</code> is a an R library for running <a href="https://github.com/kW-Labs/nmecr">NMECR</a>
+              analyses on BuildingSync files.
+            </p>
+            <div>
+              <a class="button btn-sm btn-bord-dark mb-10" href="https://github.com/BuildingSync/bsyncr">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}
