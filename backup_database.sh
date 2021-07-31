@@ -30,14 +30,14 @@ mkdir -p ${BACKUP_DIR}
 
 # db_password is set from the environment variables in docker-compose. The docker stack must
 # be running for this command to work.
-echo "docker exec $(docker ps -f "name=db-postgres" --format "{{.ID}}") pg_dump -U ${DB_USERNAME} -Fc ${DB_NAME} > $(file_name)"
-docker exec $(docker ps -f "name=db-postgres" --format "{{.ID}}") pg_dump -U ${DB_USERNAME} -Fc ${DB_NAME} > $(file_name)
+echo "docker exec $(docker ps -f "name=buildingsyncwebsite_db-postgres" --format "{{.ID}}") pg_dump -U ${DB_USERNAME} -Fc ${DB_NAME} > $(file_name)"
+docker exec $(docker ps -f "name=buildingsyncwebsite_db-postgres" --format "{{.ID}}") pg_dump -U ${DB_USERNAME} -Fc ${DB_NAME} > $(file_name)
 
 
 # Backup the media directory (uploads, especially buildingsync). In docker-land this is
 # just a container volume, so create a new container with the volume attached and tar it up.
-echo "docker run --rm -it -v selectiontool_mediadata:/backup/media -v $BACKUP_DIR:/backup/dir/ alpine:3.8 tar zcvf $(media_file_name) /backup/media"
-docker run --rm -v selectiontool_mediadata:/backup/media -v $BACKUP_DIR:/backup/dir/ alpine:3.8 tar zcvf $(media_file_name) /backup/media
+echo "docker run --rm -it -v selectiontool_mediadata_redesign:/backup/media -v $BACKUP_DIR:/backup/dir/ alpine:3.8 tar zcvf $(media_file_name) /backup/media"
+docker run --rm -v selectiontool_mediadata_redesign:/backup/media -v $BACKUP_DIR:/backup/dir/ alpine:3.8 tar zcvf $(media_file_name) /backup/media
 
 # Delete files older than 30 days.
 find ${BACKUP_DIR} -mtime +30 -type f -name '*.dump' -delete
