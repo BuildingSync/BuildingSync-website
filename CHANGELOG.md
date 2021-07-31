@@ -1,5 +1,15 @@
 # BuildingSync Use Case Selection Tool
 
+## Version 1.1.4
+
+Date Range: 06/15/2021 - 07/31/2021
+
+- Update on-boarding document to Version 1.1
+- Remove old method of deployment. Use docker-compose instead of Docker swarm now. `docker-compose -f docker-compose.prod.yml up --build`
+- Update Python dependencies
+- Replace old selection tool URLs
+- Add contact page
+
 ## Version 1.1.3
 
 Date Range: 06/03/20 - 06/15/21

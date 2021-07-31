@@ -1,5 +1,5 @@
 # Docker Compose creates multiple containers on a single machine.
-# run `docker-compose -f docker-compose-redesign.yml up` to create and run/link the containers
+# run `docker-compose -f docker-compose.prod.yml up --build` to create and run/link the containers
 
 # This file can be deleted once the old selection site is migrated officially.
 # The docker volumes should also be deleted and pointed back to the originals.
