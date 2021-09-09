@@ -264,6 +264,11 @@ To parse and map a new BEDES version:
     ```
     Note that you must run this command without the --save_to_db flag first, in order to create the CSV files.
 
+### Admin Interface
+
+Login to the admin interface at `/user/login`
+Admin interface is available at `/admin`
+
 ### Adding a new BuildingSync Schema Version
 
 Follow these steps to add a new schema version to the selection tool:
