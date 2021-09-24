@@ -21,7 +21,7 @@ class TestCommand(TestCase):
     def test_reset_schema_command(self):
         print('TESTING RESET SCHEMA COMMAND')
         out = StringIO()
-        call_command('reset_schema', schema_version=TEST_SCHEMA_VERSION, stdout=out)
+        call_command('reset_schema', schema_version=DEFAULT_SCHEMA_VERSION, stdout=out)
 
         # was a schema created?
         schemas = Schema.objects.all()
