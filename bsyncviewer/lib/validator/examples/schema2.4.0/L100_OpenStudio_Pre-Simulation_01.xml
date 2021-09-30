@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<auc:BuildingSync xmlns:auc="http://buildingsync.net/schemas/bedes-auc/2019" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://buildingsync.net/schemas/bedes-auc/2019 https://raw.githubusercontent.com/BuildingSync/schema/v2.2.0/BuildingSync.xsd" version="2.2.0">
+  <auc:Facilities>
+    <auc:Facility ID="Facility-69916113180740">
+      <auc:Sites>
+        <auc:Site ID="SiteType-69916113179080">
+          <auc:Buildings>
+            <auc:Building ID="BuildingType-69916112909060">
+              <auc:PremisesName>L100_Instance1</auc:PremisesName>
+              <!-- Specify either City/State, Climate Zone, or Lat/Long -->
+              <auc:Address>
+                <auc:StreetAddressDetail>
+                  <auc:Simplified>
+                    <auc:StreetAddress>233 S Wacker Dr</auc:StreetAddress>
+                  </auc:Simplified>
+                </auc:StreetAddressDetail>
+                <auc:City>Chicago</auc:City>
+                <auc:State>IL</auc:State>
+                <auc:PostalCode>60606</auc:PostalCode>
+              </auc:Address>
+              <auc:BuildingClassification>Mixed use commercial</auc:BuildingClassification>
+              <auc:OccupancyClassification>Retail</auc:OccupancyClassification>
+              <auc:FloorsAboveGrade>2</auc:FloorsAboveGrade>
+              <auc:FloorsBelowGrade>0</auc:FloorsBelowGrade>
+              <auc:ConditionedFloorsAboveGrade>2</auc:ConditionedFloorsAboveGrade>
+              <auc:ConditionedFloorsBelowGrade>0</auc:ConditionedFloorsBelowGrade>
+              <!--
+                Although multiple FloorAreaTypes can be declared, the BuildingSync-gem
+                does not change how the HVAC systems are modeled.  Two scenarios:
+                1. If 'Gross' is declared, that is used and all of that space is considered conditioned
+                2. If 'Gross' is not declared, the other conditioned types are summed up to get a computed Gross.
+              -->
+              <auc:FloorAreas>
+                <auc:FloorArea>
+                  <auc:FloorAreaType>Cooled only</auc:FloorAreaType>
+                  <auc:FloorAreaValue>0.0</auc:FloorAreaValue>
+                </auc:FloorArea>
+                <auc:FloorArea>
+                  <auc:FloorAreaType>Gross</auc:FloorAreaType>
+                  <auc:FloorAreaValue>49390</auc:FloorAreaValue>
+                </auc:FloorArea>
+                <auc:FloorArea>
+                  <auc:FloorAreaType>Heated and Cooled</auc:FloorAreaType>
+                  <auc:FloorAreaValue>49261</auc:FloorAreaValue>
+                </auc:FloorArea>
+                <auc:FloorArea>
+                  <auc:FloorAreaType>Heated only</auc:FloorAreaType>
+                  <auc:FloorAreaValue>129</auc:FloorAreaValue>
+                </auc:FloorArea>
+              </auc:FloorAreas>
+              <auc:YearOfConstruction>2016</auc:YearOfConstruction>
+              <auc:Sections>
+                <!--
+                  Sections of SectionType 'Space function' are used to indicate portions
+                  of a building with a specific OccupancyClassification
+                -->
+                <auc:Section ID="Section-Retail">
+                  <auc:SectionType>Space function</auc:SectionType>
+                  <auc:OccupancyClassification>Retail</auc:OccupancyClassification>
+                  <auc:OccupancyLevels>
+                    <auc:OccupancyLevel>
+                      <!--
+                        Defining an OccupancyLevel with 'Peak total occupants' indicates, for this
+                        specific section of the building, the design peak occupancy.  This is used
+                        by the BuildingSync-gem to scale the number of occupants
+                      -->
+                      <auc:OccupantQuantityType>Peak total occupants</auc:OccupantQuantityType>
+                      <auc:OccupantQuantity>371</auc:OccupantQuantity>
+                    </auc:OccupancyLevel>
+                  </auc:OccupancyLevels>
+                  <!--
+                      The following two fields (Hours per week and Weeks per year) are used to
+                      modify the schedules in the OSM for the Section.
+                    -->
+                  <auc:TypicalOccupantUsages>
+                    <auc:TypicalOccupantUsage>
+                      <auc:TypicalOccupantUsageValue>91.0</auc:TypicalOccupantUsageValue>
+                      <auc:TypicalOccupantUsageUnits>Hours per week</auc:TypicalOccupantUsageUnits>
+                    </auc:TypicalOccupantUsage>
+                    <auc:TypicalOccupantUsage>
+                      <auc:TypicalOccupantUsageValue>52.0</auc:TypicalOccupantUsageValue>
+                      <auc:TypicalOccupantUsageUnits>Weeks per year</auc:TypicalOccupantUsageUnits>
+                    </auc:TypicalOccupantUsage>
+                  </auc:TypicalOccupantUsages>
+                  <auc:FloorAreas>
+                    <auc:FloorArea>
+                      <auc:FloorAreaType>Gross</auc:FloorAreaType>
+                      <auc:FloorAreaValue>24695.0</auc:FloorAreaValue>
+                    </auc:FloorArea>
+                    <auc:FloorArea>
+                      <auc:FloorAreaType>Conditioned</auc:FloorAreaType>
+                      <auc:FloorAreaValue>24695.0</auc:FloorAreaValue>
+                    </auc:FloorArea>
+                  </auc:FloorAreas>
+                </auc:Section>
+                <auc:Section ID="Section-Office">
+                  <auc:SectionType>Space function</auc:SectionType>
+                  <auc:OccupancyClassification>Office</auc:OccupancyClassification>
+                  <auc:OccupancyLevels>
+                    <auc:OccupancyLevel>
+                      <auc:OccupantQuantityType>Peak total occupants</auc:OccupantQuantityType>
+                      <auc:OccupantQuantity>123</auc:OccupantQuantity>
+                    </auc:OccupancyLevel>
+                  </auc:OccupancyLevels>
+                  <auc:TypicalOccupantUsages>
+                    <auc:TypicalOccupantUsage>
+                      <auc:TypicalOccupantUsageValue>86</auc:TypicalOccupantUsageValue>
+                      <auc:TypicalOccupantUsageUnits>Hours per week</auc:TypicalOccupantUsageUnits>
+                    </auc:TypicalOccupantUsage>
+                    <auc:TypicalOccupantUsage>
+                      <auc:TypicalOccupantUsageValue>52</auc:TypicalOccupantUsageValue>
+                      <auc:TypicalOccupantUsageUnits>Weeks per year</auc:TypicalOccupantUsageUnits>
+                    </auc:TypicalOccupantUsage>
+                  </auc:TypicalOccupantUsages>
+                  <auc:FloorAreas>
+                    <auc:FloorArea>
+                      <auc:FloorAreaType>Gross</auc:FloorAreaType>
+                      <auc:FloorAreaValue>24695</auc:FloorAreaValue>
+                    </auc:FloorArea>
+                    <auc:FloorArea>
+                      <auc:FloorAreaType>Conditioned</auc:FloorAreaType>
+                      <auc:FloorAreaValue>24695</auc:FloorAreaValue>
+                    </auc:FloorArea>
+                  </auc:FloorAreas>
+                </auc:Section>
+              </auc:Sections>
+            </auc:Building>
+          </auc:Buildings>
+        </auc:Site>
+      </auc:Sites>
+      <auc:Systems>
+        <!--
+          The BuildingSync-gem maps a PrincipalHVACSystemType to a CBECS Standard type via:
+           BuildingSync.HVACSystem.map_primary_hvac_system_type_to_cbecs_system_type
+        -->
+        <auc:HVACSystems>
+          <auc:HVACSystem ID="HVAC-Retail">
+            <auc:PrincipalHVACSystemType>Packaged Rooftop Air Conditioner</auc:PrincipalHVACSystemType>
+            <auc:LinkedPremises>
+              <auc:Section>
+                <auc:LinkedSectionID IDref="Section-Retail"/>
+              </auc:Section>
+            </auc:LinkedPremises>
+          </auc:HVACSystem>
+          <auc:HVACSystem ID="HVAC-Office">
+            <auc:PrincipalHVACSystemType>Packaged Rooftop VAV with Electric Reheat</auc:PrincipalHVACSystemType>
+            <auc:LinkedPremises>
+              <auc:Section>
+                <auc:LinkedSectionID IDref="Section-Office"/>
+              </auc:Section>
+            </auc:LinkedPremises>
+          </auc:HVACSystem>
+        </auc:HVACSystems>
+        <!--
+          The BuildingSync-gem will read in a LampType and LampLabel, and will associate
+           them to a Section, but does not use them to change any of the underlying
+           characteristics of the OSM.
+        -->
+        <auc:LightingSystems>
+          <auc:LightingSystem ID="LightingSystemType-Retail">
+            <auc:LampType>
+              <auc:CompactFluorescent>
+                <auc:LampLabel>2D</auc:LampLabel>
+              </auc:CompactFluorescent>
+            </auc:LampType>
+            <auc:LinkedPremises>
+              <auc:Section>
+                <auc:LinkedSectionID IDref="Section-Retail"/>
+              </auc:Section>
+            </auc:LinkedPremises>
+          </auc:LightingSystem>
+          <auc:LightingSystem ID="LightingSystemType-Office">
+            <auc:LampType>
+              <auc:SolidStateLighting>
+                <auc:LampLabel>LED</auc:LampLabel>
+              </auc:SolidStateLighting>
+            </auc:LampType>
+            <auc:LinkedPremises>
+              <auc:Section>
+                <auc:LinkedSectionID IDref="Section-Office"/>
+              </auc:Section>
+            </auc:LinkedPremises>
+          </auc:LightingSystem>
+        </auc:LightingSystems>
+        <auc:PlugLoads>
+          <!--
+            The BuildingSync-gem uses the PlugLoad definition to modify the EPD of the Section
+          -->
+          <auc:PlugLoad ID="PlugLoad-Retail">
+            <auc:PlugLoadType>Miscellaneous Electric Load</auc:PlugLoadType>
+            <auc:WeightedAverageLoad>0.5</auc:WeightedAverageLoad>
+            <auc:LinkedPremises>
+              <auc:Section>
+                <auc:LinkedSectionID IDref="Section-Retail"/>
+              </auc:Section>
+            </auc:LinkedPremises>
+          </auc:PlugLoad>
+          <auc:PlugLoad ID="PlugLoad-Office">
+            <auc:PlugLoadType>Miscellaneous Electric Load</auc:PlugLoadType>
+            <auc:WeightedAverageLoad>0.75</auc:WeightedAverageLoad>
+            <auc:LinkedPremises>
+              <auc:Section>
+                <auc:LinkedSectionID IDref="Section-Office"/>
+              </auc:Section>
+            </auc:LinkedPremises>
+          </auc:PlugLoad>
+        </auc:PlugLoads>
+      </auc:Systems>
+      <auc:Measures>
+        <auc:Measure ID="Measure-1">
+          <!--
+            The BuildingSync-gem uses the SystemCategoryAffected in the worfklow_maker.json file
+          -->
+          <auc:SystemCategoryAffected>Lighting</auc:SystemCategoryAffected>
+          <auc:TechnologyCategories>
+            <auc:TechnologyCategory>
+              <auc:LightingImprovements>
+                <!--
+                  The BuildingSync-gem uses the MeasureName in the worfklow_maker.json file
+                -->
+                <auc:MeasureName>Retrofit with light emitting diode technologies</auc:MeasureName>
+              </auc:LightingImprovements>
+            </auc:TechnologyCategory>
+          </auc:TechnologyCategories>
+        </auc:Measure>
+      </auc:Measures>
+      <auc:Reports>
+        <auc:Report ID="ReportType-69916110806500">
+          <auc:Scenarios>
+            <auc:Scenario ID="Baseline-Modeled">
+              <auc:ScenarioName>Baseline</auc:ScenarioName>
+              <!--
+                Declaring the ScenarioType in this way is used by the BuildingSync-gem to create
+                the 'Baseline' model of the building.  It is intended to be interpreted as: 'Create
+                a model for the building as it currently exists'
+              -->
+              <auc:ScenarioType>
+                <auc:CurrentBuilding>
+                  <auc:CalculationMethod>
+                    <auc:Modeled>
+                      <auc:SimulationCompletionStatus>Not Started</auc:SimulationCompletionStatus>
+                    </auc:Modeled>
+                  </auc:CalculationMethod>
+                </auc:CurrentBuilding>
+              </auc:ScenarioType>
+              <!--
+                Link the Scenario back to the Building so as to specify for which building
+                the model is being created.
+              -->
+              <auc:LinkedPremises>
+                <auc:Building>
+                  <auc:LinkedBuildingID IDref="BuildingType-69916112909060"/>
+                </auc:Building>
+              </auc:LinkedPremises>
+            </auc:Scenario>
+            <auc:Scenario ID="Package-1">
+              <auc:ScenarioType>
+                <!--
+                Declaring the ScenarioType in this way is used by the BuildingSync-gem to create
+                a derivative model of the building based.  It uses the 'ReferenceCase' as the 'seed'
+                model.  Depending on the Measures declared, it then applies these measures on top of
+                the baseline model.
+              -->
+                <auc:PackageOfMeasures ID="Package-1-POM">
+                  <auc:ReferenceCase IDref="Baseline-Modeled"/>
+                  <auc:MeasureIDs>
+                    <auc:MeasureID IDref="Measure-1"/>
+                  </auc:MeasureIDs>
+                  <auc:CalculationMethod>
+                    <auc:Modeled>
+                      <auc:SimulationCompletionStatus>Not Started</auc:SimulationCompletionStatus>
+                    </auc:Modeled>
+                  </auc:CalculationMethod>
+                </auc:PackageOfMeasures>
+              </auc:ScenarioType>
+              <!--
+                Link the Scenario back to the Building so as to specify for which building
+                the model is being created.
+              -->
+              <auc:LinkedPremises>
+                <auc:Building>
+                  <auc:LinkedBuildingID IDref="BuildingType-69916112909060"/>
+                </auc:Building>
+              </auc:LinkedPremises>
+            </auc:Scenario>
+          </auc:Scenarios>
+        </auc:Report>
+      </auc:Reports>
+    </auc:Facility>
+  </auc:Facilities>
+</auc:BuildingSync>
