@@ -3,13 +3,11 @@
 For testing docker locally run the following. It is not recommended using the environment variables
 below on production, only for testing locally.
 
-* Check out the source code to `/srv/selection-tool`
+* Check out the source code to `/srv/BuildingSync-website`
 * To test locally use:
 
    ```bash
    docker-compose build
-   docker volume create --name=selectiontool_pgdata
-   docker volume create --name=selectiontool_mediadata
    docker-compose up
    ```
 
@@ -20,7 +18,7 @@ below on production, only for testing locally.
 
 # Deploying with Docker and Docker Compose on Remote Server
 
-* Check out the source code to `/srv/selection-tool`
+* Check out the source code to `/srv/BuildingSync-website`
 * Create new secret key from [here](http://www.miniwebtool.com/django-secret-key-generator/).
 * Set environment variables that will be passed to docker in /etc/profile.d/selectiontool.sh
 
@@ -33,29 +31,22 @@ below on production, only for testing locally.
    export SECRET_KEY=Super-Long-Secret-Key-From-Step-Above
    ```
 
-* Build the containers
+* Build the containers and Deploy
 
-   ```
-   cd /srv/selection-tool/
-   docker-compose build
+   ```bash
+   cd /srv/BuildingSync-website/
+   docker-compose -f docker-compose.prod.yml up -d --build
    ```
 
- * Deploy
-
-   ```
-   ./deploy.sh
-   ```
 
 # Redeploying
 
 * Log into the server
 
 ```bash
-cd /srv/selection-tool
+cd /srv/BuildingSync-website
 git pull
-docker-compose build
-
-./deploy.sh
+docker-compose -f docker-compose.prod.yml up -d --build
 ```
 
 # Debugging
