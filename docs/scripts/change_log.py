@@ -31,7 +31,7 @@ args = parser.parse_args()
 
 # Connect to github
 gh = github3.login(token=args.github_key)
-repo = gh.repository('BuildingSync', 'selection-tool')
+repo = gh.repository('BuildingSync', 'BuildingSync-website')
 internal_users = ['nllong', 'kflemin']
 
 print(github3.octocat())
