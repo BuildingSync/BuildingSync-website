@@ -1,6 +1,6 @@
 # BuildingSync Schema Viewer and Validator
 
-[![Build Status](https://github.com/BuildingSync/selection-tool/workflows/CI/badge.svg)](https://github.com/BuildingSync/selection-tool)
+[![Build Status](https://github.com/BuildingSync/BuildingSync-website/workflows/CI/badge.svg)](https://github.com/BuildingSync/BuildingSync-website)
 
 This is the repository for the BuildingSync Validator web application.
 
@@ -294,7 +294,7 @@ Follow these steps to add new example tables from the TestSuite repo
 
 1. The relevant files are currently on the `develop` branch of the [TestSuite](https://github.com/BuildingSync/TestSuite/tree/develop) repo.  Clone the repo locally.
 1. OpenStudio Simulation use case schematron files include patterns from a [library of schematron files](https://github.com/BuildingSync/TestSuite/tree/develop/lib).  Copy these files from the TestSuite repo into the selection-tool at the following location: ```bsyncviewer/testsuitelib```.
-1. Open the relevant use case file from the TestSuite repo.  For example: [L00_OpenStudio_Simulation.sch](https://github.com/BuildingSync/TestSuite/blob/develop/schematron/v2.2.0/v2-2-0_L000_OpenStudio_Simulation.sch).  Edit the include statements at the top of the file with relative paths to the selection-tool testsuitelib directory.  Save the file.
+1. Open the relevant use case file from the TestSuite repo.  For example: [L00_OpenStudio_Simulation.sch](https://github.com/BuildingSync/TestSuite/blob/develop/schematron/v2.2.0/v2-2-0_L000_OpenStudio_Simulation.sch).  Edit the include statements at the top of the file with relative paths to the buildingsync-website testsuitelib directory.  Save the file.
     ```bash
       <include href="../../testsuitelib/rootElements.sch#root.oneOfEachUntilBuilding"/>
       <include href="../../testsuitelib/rootElements.sch#root.oneOfEachFacilityUntilScenario"/>

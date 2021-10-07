@@ -1,5 +1,10 @@
 # BuildingSync Use Case Selection Tool
 
+## Version 1.1.X (Unreleased)
+
+- Updated selection-tool github references to BuildingSync-website
+- Point interactive website to `develop-v2` version.
+
 ## Version 1.1.4
 
 Date Range: 06/15/2021 - 07/31/2021
