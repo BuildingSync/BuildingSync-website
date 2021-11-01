@@ -192,3 +192,22 @@ footer .main-footer p {
 .pb-20 {
     padding-bottom: 20px;
 }
+
+.sticky-nav {
+    position: sticky;
+    align-self: start;
+    overflow-x: unset;
+}
+
+.copy-link {
+    padding: 25px 0px;
+}
+
+a#current-path {
+    color:#337ab7;
+    text-decoration: underline;
+}
+
+#enum_results ul {
+    padding-left: 20px;
+}
