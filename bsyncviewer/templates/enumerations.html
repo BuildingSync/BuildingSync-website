@@ -37,7 +37,7 @@
             <input type="text" class="form-control" id="search-input" oninput="updateSearch()" placeholder="Keywords">
           </div>
         </form>
-        <table id="enumerations-table" class="table table-striped table-enumerations">
+        <table class="table table-striped table-enumerations" id="enumerations-table">
           <thead>
             <tr>
               <th>Term</th>
@@ -69,6 +69,7 @@
 
   // build the table, one row per term
   const termRows = []
+  const tbody = document.createElement('tbody')
   enumerationsData.forEach(term => {
     const name = document.createElement('td')
     if (term.name === 'MeasureName') {
@@ -87,13 +88,14 @@
     const tableRow = document.createElement('tr')
     termRows.push(tableRow)
 
-    tableRow.classList.add('term-row')
+    // tableRow.classList.add('term-row')
     tableRow.appendChild(name)
     tableRow.appendChild(documentation)
     tableRow.appendChild(enums)
 
-    enumerationsTable.appendChild(tableRow)
+    tbody.appendChild(tableRow)
   })
+  enumerationsTable.appendChild(tbody)
 
   const searchInput = document.getElementById('search-input')
 
