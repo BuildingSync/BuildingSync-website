@@ -136,7 +136,7 @@
                 if (data.action === 'select_node' && data.selected.length > 0) {
                     var node = data.instance.get_node(data.selected[0]);
                     current_node_id = node.id;
-                    
+
                     // configure current node to be able to get back to this state
                     let link = '#' + current_node_id;
                     $('#current-path').attr("href", link);
@@ -161,7 +161,7 @@
                             }
 
                             // set bedes section and display
-                            if (jsondata.bedes_terms.length > 0) { 
+                            if (jsondata.bedes_terms.length > 0) {
                                 $('#bedes_none').removeClass("visible").addClass("hidden");
                                 $('#bedes_found').removeClass("hidden").addClass("visible");
                                 $('#term_results').html('');
@@ -217,7 +217,7 @@
                         // $('#schematree').jstree(true)._open_to(the_id).focus();
                         $('#schematree').jstree(true).select_node(the_id);
                     }
-                  
+
             });
 
         });

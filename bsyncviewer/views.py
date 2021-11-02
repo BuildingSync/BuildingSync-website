@@ -55,8 +55,6 @@ GITHUB_RELEASE_TAG_URL = 'https://github.com/BuildingSync/schema/releases/tag/{v
 GITHUB_RELEASE_DOWNLOAD_URL = 'https://github.com/BuildingSync/schema/releases/download/{version}/{resource}'
 
 
-
-
 class ValidatorApi(views.APIView):
     """
     API endpoint for validating schemas
