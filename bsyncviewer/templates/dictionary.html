@@ -44,7 +44,7 @@
                     <div class="panel-body" style="background-color: whitesmoke" id="schematree"></div>
                 </div>
             </div>
-            <div class="col-md-4 sticky-nav">
+            <div class="col-md-4">
 
                 <h4>Search</h4>
                 <form class="form-inline pb-20" role="form" id="treesearch">
@@ -60,16 +60,31 @@
                     </div>
                     <div class="panel-body text-center">
                         <p>Share a link to the <a href="#" id="current-path">current expanded path</a></p>
-                            <button class="button btn-bg-light" id="copy-btn" onclick="copyToClipboard()" data-toggle="tooltip" data-placement="top" title="Copy to clipboard">
-                           Copy Link
-                             </button>
+                        <button class="button btn-bg-light" id="copy-btn" onclick="copyToClipboard()" data-toggle="tooltip" data-placement="top" title="Copy to clipboard">
+                        Copy Link
+                        </button>
+                    </div>
+                </div>
+                <div class="panel panel-default" id="quicklinks">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Quicklinks</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                            <li><a href="{{ release.tag_url }}">{{ release.github_version }} Release</a></li>
+                            <li><a href="{{ release.xsd_url }}">{{ release.github_version }} XSD</a></li>
+                            <li><a href="{{ release.docs_url }}">Full Docs</a></li>
+                            <li><a href="{% url 'measures' version=release.version %}">Measures</a></li>
+                            <li><a href="{% url 'enumerations' version=release.version %}">Enumerations</a></li>
+                            <li><a href="{{ release.data_dict_xlsx_url }}">Excel Spreadsheet</a></li>
+                        </ul>
                     </div>
                 </div>
 
-                <h2 id="enum_title" class="invisible">SELECTED NAME</h2>
-                <div class="panel panel-default sticky-nav">
+                <h3 id="term_title" class="hidden">SELECTED NAME</h3>
+                <div id="bedes_panel" class="panel panel-default hidden">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Data Dictionary Links</h3>
+                        <h4 class="panel-title">Data Dictionary Links</h4>
                     </div>
                     <div class="panel-body" id="bedes_panel">
                         <div id="bedes_none" class="visible">
@@ -83,7 +98,7 @@
 
                 <div id="enum_panel" class="panel panel-default hidden">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Enumerations</h3>
+                        <h4 class="panel-title">Enumerations</h4>
                     </div>
                     <div class="panel-body">
                         <div id="enum_results"></div>
@@ -121,7 +136,7 @@
                 if (data.action === 'select_node' && data.selected.length > 0) {
                     var node = data.instance.get_node(data.selected[0]);
                     current_node_id = node.id;
-                    console.log('NODE: ', node);
+                    
                     // configure current node to be able to get back to this state
                     let link = '#' + current_node_id;
                     $('#current-path').attr("href", link);
@@ -135,9 +150,18 @@
                         dataType: 'json',
                         success: function (jsondata) {
 
-                            // set bedes section and display
-                            if (jsondata.bedes_terms.length > 0) {
+                            if (data.selected.length > 0) {
+                                $('#term_title').removeClass("hidden").addClass("visible");
+                                $('#bedes_panel').removeClass("hidden").addClass("visible");
+                                $('#term_title').removeClass("hidden").addClass("visible");
+                                $('#term_title').html(node.text);
+                            } else {
+                                $('#term_title').removeClass("visible").addClass("hidden");
+                                $('#bedes_panel').removeClass("visible").addClass("hidden");
+                            }
 
+                            // set bedes section and display
+                            if (jsondata.bedes_terms.length > 0) { 
                                 $('#bedes_none').removeClass("visible").addClass("hidden");
                                 $('#bedes_found').removeClass("hidden").addClass("visible");
                                 $('#term_results').html('');
@@ -158,8 +182,6 @@
                             }
                             if (jsondata.has_enum) {
                                 // set enum html section and display
-                                $('#enum_title').removeClass("hidden").addClass("visible");
-                                $('#enum_title').html(node.text);
                                 $('#enum_panel').removeClass("hidden").addClass("visible");
                                 $('#enum_results').html('');
                                 /*$('#enum_results').html(jsondata.enums );*/
@@ -191,7 +213,7 @@
                     if (document.location.hash) {
                         let the_id = document.location.hash;
 
-                        console.log("opening to id: ", document.location.hash, " ID: ", the_id);
+                        // console.log("opening to id: ", document.location.hash, " ID: ", the_id);
                         // $('#schematree').jstree(true)._open_to(the_id).focus();
                         $('#schematree').jstree(true).select_node(the_id);
                     }

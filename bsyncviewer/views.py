@@ -44,6 +44,17 @@ from .models.schema import Schema
 from .models.use_case import UseCase
 
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
+# version 2.0 tags and earlier didn't follow MAJOR.MINOR.PATCH so we handle that here
+GITHUB_VERSION_MAP = {
+    '1.0.0': 'v1.0',
+    '2.0.0-pr1': 'v2.0-pr1',
+    '2.0.0-pr2': 'v2.0-pr2',
+    '2.0.0': 'v2.0'
+}
+GITHUB_RELEASE_TAG_URL = 'https://github.com/BuildingSync/schema/releases/tag/{version}'
+GITHUB_RELEASE_DOWNLOAD_URL = 'https://github.com/BuildingSync/schema/releases/download/{version}/{resource}'
+
+
 
 
 class ValidatorApi(views.APIView):
@@ -184,15 +195,6 @@ def tools(request):
 
 
 def releases(request):
-    # version 2.0 tags and earlier didn't follow MAJOR.MINOR.PATCH so we handle that here
-    GITHUB_VERSION_MAP = {
-        '1.0.0': 'v1.0',
-        '2.0.0-pr1': 'v2.0-pr1',
-        '2.0.0-pr2': 'v2.0-pr2',
-        '2.0.0': 'v2.0'
-    }
-    GITHUB_RELEASE_TAG_URL = 'https://github.com/BuildingSync/schema/releases/tag/{version}'
-    GITHUB_RELEASE_DOWNLOAD_URL = 'https://github.com/BuildingSync/schema/releases/download/{version}/{resource}'
 
     releases = []
     for schema in Schema.objects.all().order_by('-version'):
@@ -267,7 +269,19 @@ def dictionary(request, version):
 
     # find schema matching version
     try:
-        Schema.objects.get(version=version)
+        schema = Schema.objects.get(version=version)
+
+        github_version = GITHUB_VERSION_MAP.get(schema.version, f'v{schema.version}')
+
+        release = {
+            'github_version': github_version,
+            'version': schema.version,
+            'docs_url': f'/documentation/{schema.version}',
+            'tag_url': GITHUB_RELEASE_TAG_URL.format(version=github_version),
+            'xsd_url': GITHUB_RELEASE_DOWNLOAD_URL.format(version=github_version, resource='BuildingSync.xsd'),
+            'data_dict_xlsx_url': GITHUB_RELEASE_DOWNLOAD_URL.format(version=github_version, resource='DataDictionary.xlsx'),
+        }
+
     except BaseException:
         raise Http404('Schema version provided does not exist.')
 
@@ -281,7 +295,8 @@ def dictionary(request, version):
     context = {
         'schema_version': version,
         'schema_tree_data': json.dumps(get_schema_jstree_data(version)),
-        'versions': versions
+        'versions': versions,
+        'release': release
     }
 
     return render(request, 'dictionary.html', context)

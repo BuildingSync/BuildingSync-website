@@ -211,3 +211,12 @@ a#current-path {
 #enum_results ul {
     padding-left: 20px;
 }
+
+#quicklinks ul {
+    padding-left: 20px;
+    list-style: none;
+}
+
+#term_title {
+    font-size: 0.8em;
+}
