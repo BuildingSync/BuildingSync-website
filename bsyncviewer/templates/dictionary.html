@@ -45,21 +45,46 @@
                 </div>
             </div>
             <div class="col-md-4">
+
                 <h4>Search</h4>
-                <form class="form-inline" role="form" id="treesearch">
+                <form class="form-inline pb-20" role="form" id="treesearch">
                     <div class="form-group col-md-10">
                         <label class="sr-only">Search</label>
                         <input type="text" class="" id="treesearchquery" size="30">
                     </div>
                     <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
                 </form>
-
-
-                <h2 id="enum_title" class="invisible">SELECTED NAME</h2>
-                <!--TODO: eventually look up the bedes term and display here-->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Data Dictionary Links</h3>
+                        <h3 class="panel-title">Share link</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <p>Share a link to the <a href="#" id="current-path">current expanded path</a></p>
+                        <button class="button btn-bg-light" id="copy-btn" onclick="copyToClipboard()" data-toggle="tooltip" data-placement="top" title="Copy to clipboard">
+                        Copy Link
+                        </button>
+                    </div>
+                </div>
+                <div class="panel panel-default" id="quicklinks">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Quicklinks</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                            <li><a href="{{ release.tag_url }}">{{ release.github_version }} Release</a></li>
+                            <li><a href="{{ release.xsd_url }}">{{ release.github_version }} XSD</a></li>
+                            <li><a href="{{ release.docs_url }}">Full Docs</a></li>
+                            <li><a href="{% url 'measures' version=release.version %}">Measures</a></li>
+                            <li><a href="{% url 'enumerations' version=release.version %}">Enumerations</a></li>
+                            <li><a href="{{ release.data_dict_xlsx_url }}">Excel Spreadsheet</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 id="term_title" class="hidden">SELECTED NAME</h3>
+                <div id="bedes_panel" class="panel panel-default hidden">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Data Dictionary Links</h4>
                     </div>
                     <div class="panel-body" id="bedes_panel">
                         <div id="bedes_none" class="visible">
@@ -73,7 +98,7 @@
 
                 <div id="enum_panel" class="panel panel-default hidden">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Enumerations</h3>
+                        <h4 class="panel-title">Enumerations</h4>
                     </div>
                     <div class="panel-body">
                         <div id="enum_results"></div>
@@ -91,18 +116,31 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/jstree.min.js"></script>
     <script type="application/javascript">
         $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        });
+
+        let current_node_id = 0;
+        $(function () {
             let data = {{ schema_tree_data|safe }};
+
 
             $('#schematree').jstree({
                 'core': {
                     'data': data,
-                    'multiple': false
+                    'multiple': false,
+                    'expand_selected_onload': true
                 },
                 'plugins': ["search"],
             }).on('changed.jstree', function (e, data) {
                 // display enums when present
                 if (data.action === 'select_node' && data.selected.length > 0) {
                     var node = data.instance.get_node(data.selected[0]);
+                    current_node_id = node.id;
+
+                    // configure current node to be able to get back to this state
+                    let link = '#' + current_node_id;
+                    $('#current-path').attr("href", link);
+
                     // retrieve and display bedes terms and enum (if present)
                     $.ajax({
                         url: '{% url "get_additional_data" %}',
@@ -112,18 +150,22 @@
                         dataType: 'json',
                         success: function (jsondata) {
 
+                            if (data.selected.length > 0) {
+                                $('#term_title').removeClass("hidden").addClass("visible");
+                                $('#bedes_panel').removeClass("hidden").addClass("visible");
+                                $('#term_title').removeClass("hidden").addClass("visible");
+                                $('#term_title').html(node.text);
+                            } else {
+                                $('#term_title').removeClass("visible").addClass("hidden");
+                                $('#bedes_panel').removeClass("visible").addClass("hidden");
+                            }
+
                             // set bedes section and display
                             if (jsondata.bedes_terms.length > 0) {
-
-
                                 $('#bedes_none').removeClass("visible").addClass("hidden");
                                 $('#bedes_found').removeClass("hidden").addClass("visible");
                                 $('#term_results').html('');
 
-                                // $('#bedes_term').html(jsondata.bedes_terms[0]['term']);
-                                // $('#bedes_category').html(jsondata.bedes_terms[0]['category']);
-                                // $('#bedes_definition').html(jsondata.bedes_terms[0]['definition']);
-                                // $('#bedes_url').attr('href', jsondata.bedes_terms[0]['url']);
                                 var term_ul = $('<ul>').appendTo('#term_results');
                                 $(jsondata.bedes_terms).each(function (index, item) {
                                     var text = '<strong>' + item['term'] + '</strong> &mdash;' + item['definition'] + '&nbsp;&nbsp;(<em>Category: ' + item['category'] + '</em>)&nbsp;&nbsp;<a href="' + item['url'] + '" target="_blank">' + 'BEDES <i class="fa fa-external-link" aria-hidden="true"></i></a>';
@@ -140,8 +182,6 @@
                             }
                             if (jsondata.has_enum) {
                                 // set enum html section and display
-                                $('#enum_title').removeClass("hidden").addClass("visible");
-                                $('#enum_title').html(node.text);
                                 $('#enum_panel').removeClass("hidden").addClass("visible");
                                 $('#enum_results').html('');
                                 /*$('#enum_results').html(jsondata.enums );*/
@@ -167,11 +207,33 @@
                 }
             });
 
+            // follow anchor link from the URL if it's there (for sharing links)
+            $("#schematree").on
+                ('loaded.jstree', function() {
+                    if (document.location.hash) {
+                        let the_id = document.location.hash;
+
+                        // console.log("opening to id: ", document.location.hash, " ID: ", the_id);
+                        // $('#schematree').jstree(true)._open_to(the_id).focus();
+                        $('#schematree').jstree(true).select_node(the_id);
+                    }
+
+            });
+
         });
         $("#treesearch").submit(function (e) {
             e.preventDefault();
             $('#schematree').jstree(true).search($("#treesearchquery").val());
         });
+
+        function copyToClipboard() {
+            let hash_link = document.location.href.split('#')[0] + '#' + current_node_id;
+            navigator.clipboard.writeText(hash_link);
+
+            $("#copy-btn").attr('title', 'Copied!')
+              .tooltip('fixTitle')
+              .tooltip('show');
+        }
     </script>
 
 {% endblock bootstrap_extra_script %}
