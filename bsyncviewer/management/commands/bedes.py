@@ -614,9 +614,9 @@ class Command(BaseCommand):
             if term['distance'] != "":
                 the_term, _ = BedesTerm.objects.get_or_create(
                     content_uuid=term['bedes_content_uuid'],
-                    term=term['bedes_term']
                 )
                 # print("THE TERM: {}".format(the_term))
+                the_term.term = term['bedes_term']
                 the_term.category = term['bedes_category']
                 the_term.definition = term['bedes_definition']
                 the_term.url = term['bedes_url']

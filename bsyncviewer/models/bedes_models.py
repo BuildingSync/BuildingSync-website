@@ -1,11 +1,9 @@
 from django.db import models
 
 # Bedes Term
-
-
 class BedesTerm(models.Model):
     content_uuid = models.CharField(max_length=100, unique=True)
-    term = models.CharField(max_length=100, unique=True)
+    term = models.CharField(max_length=100)
     category = models.CharField(max_length=100)
     url = models.CharField(max_length=300)
     definition = models.TextField(blank=True, null=True)
