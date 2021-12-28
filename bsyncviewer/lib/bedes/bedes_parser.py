@@ -118,7 +118,7 @@ class BedesParser(object):
                                 # print("DEF: {}".format(the_def['#text'] + ' ' + the_def['a']['#text']))
                             elif 'span' in the_def.keys():
                                 # edge case: <span>. grab span.text element
-                                assembled['Term-Definition'] = the_def['span']['#text']
+                                assembled['Term-Definition'] = the_def['span']
                                 # print("DEF: {}".format(the_def['span']['#text']))
                         else:
                             assembled['Term-Definition'] = the_def
