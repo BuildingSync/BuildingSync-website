@@ -47,7 +47,8 @@ class Command(BaseCommand):
         save_to_db = options['save_to_db']
 
         if save_to_db:
-            self.stdout.write('Reparsing BEDES data and Saving BEDES mappings to database')
+            self.stdout.write('Saving BEDES mappings to database from already generated mapping files.')
+            # if save_to_db is True, save CSV files to DB (no reparse)
             # if save_to_db is True, save CSV files to DB (always reparse just in case)
             # self.parse(bedes_version, schema_version)
             self.save_mappings_to_database(bedes_version, schema_version)
