@@ -47,8 +47,6 @@ DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 # version 2.0 tags and earlier didn't follow MAJOR.MINOR.PATCH so we handle that here
 GITHUB_VERSION_MAP = {
     '1.0.0': 'v1.0',
-    '2.0.0-pr1': 'v2.0-pr1',
-    '2.0.0-pr2': 'v2.0-pr2',
     '2.0.0': 'v2.0'
 }
 GITHUB_RELEASE_TAG_URL = 'https://github.com/BuildingSync/schema/releases/tag/{version}'
