@@ -1,0 +1,415 @@
+Unique Words Matched to Term,Unique Words Matched to Words,Unique Unmatched Words
+Building,Classification,Sync
+Assessment Program,Facilities,Landmark
+Date,Facility,Overall
+Funding Source,Multi,Leased
+Sites,Public,A1
+Buildings,Subsidized,Daylit
+Tenant,Federal,Custom
+Department,Region,Excluded
+Business,Number,User
+Above Grade,Of,Defined
+Conditioned,Historical,gbxml
+Floors,To,Planar
+Below Grade,Ratio,Geometry
+Unconditioned,Assessments,Detail
+Total,Assessment,Simplified
+Exterior,Year,Complex
+Wall,Last,Entering
+Area,Most,Leaving
+Common,Recent,Linked
+Window To Wall Ratio,By,Based
+Door,Type,Makeup
+Occupied,Sections,Spot
+Energy,Section,Integration
+Audit,Zone,Steps
+Retrocommissioning,Shaded,Providing
+Retrofit,Foundations,Between
+Major Remodel,Foundation,Edge
+Percent,HVAC,Protrusion
+Owner,Heat,Pitch
+On,AC,Vestibule
+Site,Percentage,Fit
+Operator,Levels,Exposed
+Sides,Level,Covering
+Perimeter,Usages,Transmission
+Depth,Usage,Uncovered
+Side,Typical,Intrusion
+Orientation,Shell,Damages
+Length,Boundary,Damage
+Identifier,Spatial,Details
+Window,Data,Removed
+Fenestration,Address,Shaving
+Thermal Zone,Prefix,Shifting
+Roofs,Suffix,Related
+Roof,Directional,Rank
+Insulated,Modifier,Native
+Condition,Postal,Maintanance
+Skylight,Code,NPV
+Ceilings,Country,Implications
+Ceiling,Automation,Scenarios
+Space,Plants,Scenario
+Floor,Control,Rankings
+X,Types,Ranking
+Offset,Communication,Impact
+Y,Protocol,Comfort
+Z,Fuel,ROI
+Partially Below Grade,Plant,Nonquantifiable
+Height,Cell,Derived
+Floor To Ceiling,Flow,Explanatory
+Delivery,And,Guideline14
+Schedule,Controls,Intercept
+Setpoint,DX,Beta1
+Temperature,Convection,Beta2
+Heating,Radiant,Beta3
+Setback,Method,Beta4
+Tuning,Methods,Squared
+Cooling,Linear,RMSE
+Reset Routine,Dimming,CVRMSE
+Adjusted,Capability,NDBE
+Spaces,Fraction,MBE
+Occupancy,Per,NMBE
+Daylighting,Outside,Parameters
+Illuminance,Fixture,Freedom
+Volume,Life,Aggregate
+Premises,Heater,Timestamp
+Name,Tilt,Summaries
+Notes,Draw,Comparison
+Identifiers,Meals,Uncertainty
+Value,Meal,Confidence
+Occupant,Use,Consistent
+Quantity,Category,Parent
+Typical Occupant,Line,Imported
+Occupant Usage Units,Refrigerated,Increase
+Primary,Loads,Filing
+Contact,Washer,Inflation
+Areas,Dryer,Expiration
+Fields,Load,Interruptible
+Field,Operation,
+Occupancy Classification,Configuration,
+Original,Brake,
+Units,Receiving,
+Unit,Fill,
+Density,Roughness,
+Construction,Layout,
+Weather,Shading,
+Station,Projection,
+Address Line 1,Distance,
+Street,Only,
+Lighting,From,
+System,Treatments,
+Systems,Tube,
+Heating Plant,Layers,
+Other,Couplings,
+Boiler,Coupling,
+Minimum Flow Rate,Venting,
+Hot Water,Conditioning,
+Water,Critical,
+Reset,IT,
+Burner,Peak,
+Installed,Generation,
+Draft,Technology,
+Capacity,Max,
+Annual Heating,External,
+Efficiency Value,Reduction,
+Efficiency,Uses,
+Combustion,Cycle,
+Thermal,Cycles,
+Maximum Flow Rate,Infiltration,
+Steam,Begin,
+Minimum,Replaced,
+Operating,Alternative,
+Pressure,Affected,
+Maximum,Added,
+District Heating,Improvements,
+Heating Type,Chilled,
+Combination,Distribution,
+Chiller,Electrical,
+Chilled Water,Through,
+Condenser,Rate,
+Annual Cooling,Reductions,
+Rated,Uncategorized,
+Sensible,Scale,
+Supply,Application,
+Evaporatively Cooled Condenser,Long,
+Water Cooled,Savings,
+Condenser Type,Analysis,
+Water Side Economizer,Reference,
+Dry Bulb Temperature,Fuels,
+Cooling Tower,Funding,
+Fan,of,
+Ground,Tax,
+Source,Option,
+Well,Reports,
+Count,Report,
+Heating Source,Envelope,
+Furnace,Intensity,
+Heat Pump,Tool,
+Control Strategy,Simple,
+Control Technology,Period,
+Sensor,Financial,
+Sources,Factors,
+Compressor,Model,
+Equipment,Models,
+Air Distribution,Inputs,
+Central,Response,
+Air,Coefficients,
+Reheat,Time,
+Duct,R,
+Outside Air Percentage,Summary,
+Outside Air Flow Rate,Information,
+Insulation,Degrees,
+Static Pressure,Reporting,
+Humidity,Normalized,
+Ventilation,Emissions,
+Exhaust,Emission,
+Location,All,
+Natural,Production,
+Principal,Base,
+Lamp,Early,
+Label,Compliance,
+Fluorescent,Team,
+Start,Member,
+Metal Halide,Applicable,
+Light,For,
+Power Fraction,Periods,
+Served,Tiered,
+Power,Rates,
+Lamps,Tiers,
+Luminaire,Tier,
+Ballast,Consumption,
+Ballasts,Designation,
+Luminaires,Direction,
+Efficacy,Sector,
+Spacing,Charge,
+Domestic Hot Water,Metering,
+Direct,Marginal,
+Tank,EIA,
+Pump,Numbers,
+Solar Thermal System Collector,Company,
+Loop,,
+Azimuth,,
+Solar Thermal,,
+Storage,,
+Recovery,,
+Storage Tank,,
+R Value,,
+Thickness,,
+Instantaneous,,
+Flow Rate,,
+Recirculation,,
+Recirculation Control,,
+Daily,,
+Parasitic Fuel,,
+Consumption Rate,,
+Cooking,,
+Cooking Equipment,,
+Refrigeration,,
+Heat Rejection,,
+Case,,
+Return,,
+Diameter,,
+Compressor Unloader,,
+Stages,,
+Doors,,
+Size,,
+Anti Sweat Heater,,
+Dishwasher,,
+Week,,
+Energy Factor,,
+Laundry,,
+Clothes Washer,,
+Water Factor,,
+Electric,,
+Gas,,
+Installed Flow Rate,,
+Demand,,
+Number Of Discrete Fan Speeds,,
+Motor,,
+RPM,,
+HP,,
+Drive,,
+Pole Count,,
+Motor Enclosure,,
+Heat Recovery,,
+Energy Recovery,,
+Finish,,
+Color,,
+Insulations,,
+Insulation Application,,
+Material,,
+Insulation Continuity,,
+U Factor,,
+Framing,,
+Framing Factor,,
+Concrete Masonry Unit,,
+Solar Absorptance,,
+Thermal Absorptance,,
+Visible Absorptance,,
+Interior,,
+Deck,,
+Solar Reflectance Index,,
+Sill Height,,
+Assembly,,
+Width,,
+Horizontal,,
+Overhang,,
+Above,,
+Vertical,,
+Fin,,
+Fins,,
+Light Shelf,,
+Top,,
+Solar,,
+Air Infiltration Description,,
+Glass,,
+On Grade,,
+Slab,,
+Crawlspace,,
+Foundation Wall,,
+Foundation Height,,
+Basement,,
+Standby,,
+Nominal Power,,
+Plug Load,,
+Weighted,,
+Average,,
+Process Load,,
+Heat Gain,,
+Conveyance,,
+Onsite,,
+Annual,,
+Hours,,
+Energy Conversion,,
+Energy Storage Technology,,
+Photovoltaic,,
+Modules,,
+Array,,
+Arrays,,
+Maximum Power Output,,
+Inverter,,
+Racking System,,
+Tilt Angle,,
+Min,,
+Rated Power,,
+Module,,
+Energy Generation Technology,,
+Backup,,
+Generator,,
+Pools,,
+Pool,,
+Duty Cycle,,
+Water Fixture,,
+Day,,
+Resource,,
+Locations,,
+Schedules,,
+Schedule Period,,
+End,,
+Measures,,
+Measure,,
+Existing,,
+Replacement,,
+Modified,,
+Modification,,
+Additions,,
+Removals,,
+Boiler Plant,,
+Chiller Plant,,
+Building Envelope,,
+Modifications,,
+Electric Motors And Drives,,
+Service,,
+Cost,,
+Adjustments,,
+Process,,
+Data Center,,
+Description,,
+Summer,,
+Electricity,,
+Winter,,
+Cost Savings,,
+Disposal And Salvage Costs,,
+Tax Credits,,
+MV,,
+First Cost,,
+Installation,,
+Capital,,
+Current,,
+End Use,,
+Commercial Building Energy Asset Score,,
+Commercial Building Energy Asset Score Use,,
+ENERGY STAR Portfolio Manager,,
+Score,,
+Version,,
+Standard Practice,,
+Benchmark,,
+Package,,
+Estimated,,
+Implementation,,
+Guaranteed Savings,,
+Project,,
+Markup,,
+Incentives,,
+Recurring,,
+Measured,,
+Variable,,
+Variables,,
+Performance,,
+Points,,
+Actual,,
+Modeled,,
+Series,,
+Baseline,,
+Normalization,,
+Avoided,,
+Standard,,
+Conditions,,
+Years,,
+Shared,,
+Utility,,
+GHG,,
+Meter,,
+Totals,,
+Exported,,
+Stored Energy,,
+Net,,
+In,,
+Renewable,,
+Waste Water,,
+Heating Degree Days,,
+Cooling Degree Days,,
+Cooling degree days,,
+Dates,,
+Status,,
+Escalation Rate,,
+Escalation Rates,,
+Energy Auditor,,
+Credential,,
+Credential Number,,
+Credential State,,
+Certification,,
+Certified,,
+Years Of Experience,,
+Rate Structure,,
+Rate Period,,
+Adjustment,,
+Sell,,
+Time Of Use,,
+Interval Start Date,,
+Interval End Date,,
+kWh,,
+kW,,
+Effective,,
+Fixed Monthly,,
+Average Marginal Sell,,
+Account,,
+Customer,,
+Or,,
+Contacts,,
+Telephone Numbers,,
+Telephone Number,,
+Telephone Number Label,,
+Email Address,,
+Email Address Label,,
+Tenants,,
