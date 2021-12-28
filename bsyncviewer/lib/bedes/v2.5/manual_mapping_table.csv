@@ -1,0 +1,59 @@
+BSync String,BEDES String
+Addresses,Address
+Applicable Start Time,Interval Start Date
+Applicable End Time,Interval End Date
+Asset Score,Commercial Building Energy Asset Score
+Billpayer,Customer
+Businesses,Business
+Calculation Method,Cost Effectiveness Screening Method
+Categories,Category
+CDD,Cooling degree days
+CMU,Concrete Masonry Unit
+DB,Dry Bulb
+Deliveries,Delivery
+Desuperheat,Desuperheater
+Dir,Directional
+ENERGYSTAR,ENERGY STAR Portfolio Manager
+EWT,Entering Water Temperature
+Funding From Incentives,Incentives
+Door Glazed Area Fraction,Percent Glazing
+HDD,Heating Degree Days
+HPWH,Heat Pump Water Heater
+Street Additional Info,Address Line 2
+Interruptibility,Interruptible
+Latest,Most Recent
+Clothes Washer Loader Type,Laundry Configuration
+Lowered,Tuning
+LWT,Leaving Water Temperature
+Maxk,Max
+NP,NPV
+Street Number Numeric,Address Number
+OA,Outside Air
+OM,Operation Maintanance
+Postal Code Plus4,ZIP Plus 4
+PM,ENERGY STAR Portfolio Manager
+Price Escalation Rate,Escalation Rate
+Program,Assessment Program
+Publicly,Public
+Pumping,Pump
+PV,Photovoltaic
+Qualification,Credential
+Retrocommissions,Retrocommissioning
+Role,Type
+Setup,Reset Routine
+Shelves,Shelf
+Roof Slope,Roof Shape
+Sourced,Source
+Time Stamp,Time
+Story,Floor
+Tightness,Air Infiltration Description
+TOU,Time Of Use
+Utilities,Utility
+Vof,of
+Yearof,Year Of
+Street Address,Address Line 1
+Auditor,Energy Auditor
+ID,Identifier
+Maxk Wh,Max kWh
+Maxk W,Max kW
+Energy Storage,Energy Storage Technology
