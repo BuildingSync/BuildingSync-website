@@ -47,9 +47,10 @@ class Command(BaseCommand):
         save_to_db = options['save_to_db']
 
         if save_to_db:
-            self.stdout.write('Reparsing BEDES data and Saving BEDES mappings to database')
+            self.stdout.write('Saving BEDES mappings to database from already generated mapping files.')
+            # if save_to_db is True, save CSV files to DB (no reparse)
             # if save_to_db is True, save CSV files to DB (always reparse just in case)
-            self.parse(bedes_version, schema_version)
+            # self.parse(bedes_version, schema_version)
             self.save_mappings_to_database(bedes_version, schema_version)
         else:
             # do the parsing (only)
@@ -720,13 +721,14 @@ class Command(BaseCommand):
             # get_or_create here b/c CSV structure maps schema attributes to bedes terms
             # there could be multiple listings of the same bedes term.
             if term['distance'] != "":
-                BedesEnumeration.objects.get_or_create(
-                    content_uuid=term['bedes_content_uuid'],
-                    term=term['bedes_term'],
-                    definition=term['bedes_definition'],
-                    url=term['bedes_url'],
-                    related_term_uuid=term['bedes_related_term_uuid']
+                bedes_enum, _ = BedesEnumeration.objects.get_or_create(
+                    content_uuid=term['bedes_content_uuid']
                 )
+                bedes_enum.term = term['bedes_term']
+                bedes_enum.definition = term['bedes_definition']
+                bedes_enum.url = term['bedes_url']
+                bedes_enum.related_term_uuid = term['bedes_related_term_uuid']
+                bedes_enum.save()
 
         # rewind
         csv_file.seek(0)
