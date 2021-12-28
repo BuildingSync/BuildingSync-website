@@ -93,7 +93,3 @@ schema_file_*
 use_case_file_*
 mapping_template*
 template_*
-bedes-mappings-*.csv
-bsyncviewer/lib/bedes/*/schema*/bedes-mappings-enumerations.csv
-bsyncviewer/lib/bedes/*/schema*/bedes-mappings-terms.csv
-bsyncviewer/lib/bedes/*/schema*/bsync_unique_words.csv
