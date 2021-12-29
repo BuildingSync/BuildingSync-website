@@ -1,6 +1,8 @@
 from django.db import models
 
 # Bedes Term
+
+
 class BedesTerm(models.Model):
     content_uuid = models.CharField(max_length=100, unique=True)
     term = models.CharField(max_length=100)
