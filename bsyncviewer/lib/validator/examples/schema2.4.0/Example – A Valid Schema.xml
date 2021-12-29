@@ -1,4 +1,4 @@
-<auc:BuildingSync version="2.1.0" xmlns:auc="http://buildingsync.net/schemas/bedes-auc/2019" xsi:schemaLocation="http://buildingsync.net/schemas/bedes-auc/2019 https://github.com/BuildingSync/schema/releases/download/v2.0-pr1/BuildingSync.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<auc:BuildingSync xmlns:auc="http://buildingsync.net/schemas/bedes-auc/2019" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://buildingsync.net/schemas/bedes-auc/2019 https://raw.githubusercontent.com/BuildingSync/schema/v2.4.0/BuildingSync.xsd" version="2.4.0">
 	<auc:Facilities>
 		<auc:Facility ID="Facility1">
 			<auc:Sites>
