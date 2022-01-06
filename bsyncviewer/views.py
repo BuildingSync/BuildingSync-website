@@ -1,8 +1,10 @@
 import json
 import os
+import pathlib
 import subprocess
 import tempfile
 import zipfile
+from typing import Dict, List
 
 import semantic_version
 from bsyncviewer import forms
@@ -412,10 +414,29 @@ def measures(request, version):
     return render(request, 'enumerations.html', context)
 
 
+def get_schema_to_examples() -> Dict[str, List[pathlib.Path]]:
+    """
+    Create schema examples dictionary.
+
+    Create a dictionary were the keys are the schemas versions
+    and the values are a list of example files for that schema version
+
+    :return: dict
+    """
+    validator_dir = pathlib.Path(__file__).parent / 'lib' / 'validator' / 'examples'
+
+    schema_to_examples = {}
+    for schema_dir in validator_dir.glob("*"):
+        schema_to_examples[schema_dir.name.replace("schema", "", 1)] = [(p.name, str(p)) for p in schema_dir.glob("*.xml")]
+
+    return schema_to_examples
+
+
 def validator(request):
     context = {
         'load_xml_file_form': forms.LoadXMLFile(),
         'load_xml_example_form': forms.LoadXMLExample(),
+        'schema_to_examples': get_schema_to_examples(),
         'a_var': ''
     }
 
