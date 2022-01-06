@@ -166,7 +166,7 @@
                                 $('#bedes_found').removeClass("hidden").addClass("visible");
                                 $('#term_results').html('');
 
-                                var term_ul = $('<ul>').appendTo('#term_results');
+                                var term_ul = $('<ul>').addClass("term-pad").appendTo('#term_results');
                                 $(jsondata.bedes_terms).each(function (index, item) {
                                     var text = '<strong>' + item['term'] + '</strong> &mdash;' + item['definition'] + '&nbsp;&nbsp;(<em>Category: ' + item['category'] + '</em>)&nbsp;&nbsp;<a href="' + item['url'] + '" target="_blank">' + 'BEDES <i class="fa fa-external-link" aria-hidden="true"></i></a>';
 

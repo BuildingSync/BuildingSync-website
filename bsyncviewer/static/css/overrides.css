@@ -220,3 +220,7 @@ a#current-path {
 #term_title {
     font-size: 0.8em;
 }
+
+ul.term-pad {
+    padding-left: 10px !important;
+}
