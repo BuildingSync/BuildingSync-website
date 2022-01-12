@@ -182,8 +182,8 @@ class BuildingSyncSchemaProcessor(object):
             if not found:
                 # look through named complex types
                 if looking_for_type_name in self.named_complex_types:
-                   found = True
-                   break
+                    found = True
+                    break
             if not found:
                 # look through named simple types
                 if looking_for_type_name in self.named_simple_types:
@@ -195,7 +195,6 @@ class BuildingSyncSchemaProcessor(object):
                 continue
             raise Exception("Couldn't find reference %s" % looking_for_type_name)
         # print("All type refs were properly accounted.")
-
 
     def _read_schema(self, root_element):
         full_schema = BuildingSyncSchemaRoot()
@@ -263,7 +262,7 @@ class BuildingSyncSchemaProcessor(object):
         if named_element.type:
             if named_element.type.startswith("auc:"):
                 self.type_definitions.append(named_element.type)
-           
+
         self.all_named_elements.append(named_element)
         return named_element
 
