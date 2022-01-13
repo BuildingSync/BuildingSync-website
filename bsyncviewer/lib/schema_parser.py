@@ -17,6 +17,7 @@ class BuildingSyncSchemaRoot(BuildingSyncSchemaElement):
         super(BuildingSyncSchemaRoot, self).__init__()
         self.named_elements = []
         self.ref_elements = []
+        self.type_elements = []
         self.complex_types = []
         self.simple_types = []
         self.attributes = []
@@ -43,6 +44,7 @@ class NamedElement(BuildingSyncSchemaElement):
         self.simple_types = []
         self.name = ""
         self.type = None
+        self.type_elements = []
         self.max_occurs = None
         self.min_occurs = None
 
@@ -107,6 +109,7 @@ class SimpleTypeElement(BuildingSyncSchemaElement):
         self.restrictions = []
         self.annotations = []
         self.unions = []
+        self.name = ""
 
 
 class RestrictionElement(BuildingSyncSchemaElement):
@@ -140,8 +143,10 @@ class BuildingSyncSchemaProcessor(object):
         self.all_complex_elements = []
         self.type_references = []
         self.named_complex_types = {}
+        self.named_simple_types = {}
         self.full_schema = self._read_schema(self.xml_schema_structure.root)
         self.check_all_type_references()
+        self.check_all_type_definitions()
 
     def check_all_type_references(self):
         for type_ref in self.type_references:
@@ -161,9 +166,40 @@ class BuildingSyncSchemaProcessor(object):
             raise Exception("Couldn't find reference %s" % looking_for_type_name)
         # print("All type refs were properly accounted.")
 
+    def check_all_type_definitions(self):
+        for type_ref in self.type_definitions:
+            # it starts with the namespace 'auc:'
+            if type_ref.startswith('auc:'):
+                looking_for_type_name = type_ref.split(':')[1]
+            else:
+                looking_for_type_name = type_ref
+            found = False
+            for ne in self.all_named_elements:
+                if looking_for_type_name == ne.name:
+                    found = True
+                    break
+
+            if not found:
+                # look through named complex types
+                if looking_for_type_name in self.named_complex_types:
+                    found = True
+                    break
+            if not found:
+                # look through named simple types
+                if looking_for_type_name in self.named_simple_types:
+                    found = True
+                    break
+
+            # if a referenced element wasn't found, and it wasn't a gbxml element, fail here
+            if found or type_ref.startswith('gbxml'):
+                continue
+            raise Exception("Couldn't find reference %s" % looking_for_type_name)
+        # print("All type refs were properly accounted.")
+
     def _read_schema(self, root_element):
         full_schema = BuildingSyncSchemaRoot()
         for child in root_element.getchildren():
+
             if child.tag.endswith('element'):
                 if 'name' in child.attrib:
                     full_schema.named_elements.append(self._read_named_element(child))
@@ -192,6 +228,7 @@ class BuildingSyncSchemaProcessor(object):
         ref_element = ReferenceElement()
 
         ref_element.ref_type = parent_object.attrib['ref']
+
         for child in parent_object.getchildren():
             if child.tag.endswith('attribute'):
                 ref_element.attributes.append(self._read_attribute(child))
@@ -200,11 +237,13 @@ class BuildingSyncSchemaProcessor(object):
             else:
                 raise Exception("Invalid tag type in _read_ref_element: " + child.tag)
         self.type_references.append(ref_element)
+
         return ref_element
 
     def _read_named_element(self, parent_object):
         named_element = NamedElement()
         named_element.name = parent_object.attrib['name']
+
         if 'type' in parent_object.attrib:
             named_element.type = parent_object.attrib['type']
         if 'minOccurs' in parent_object.attrib:
@@ -221,9 +260,9 @@ class BuildingSyncSchemaProcessor(object):
             else:
                 raise Exception("Invalid tag type in _read_named_element: " + child.tag)
         if named_element.type:
-            self.type_definitions.append(named_element)
-            # testing if this resolves the issue
-            # self.type_references.append(named_element)
+            if named_element.type.startswith("auc:"):
+                self.type_definitions.append(named_element.type)
+
         self.all_named_elements.append(named_element)
         return named_element
 
@@ -310,12 +349,17 @@ class BuildingSyncSchemaProcessor(object):
     def _read_union(self, parent_object):
         this_union = UnionElement()
         if 'memberTypes' in parent_object.attrib:
-            this_union.member_types = parent_object.attrib['memberTypes']
-            # todo: would probably want to do more here?
-            return this_union
+            this_union.member_types = parent_object.attrib['memberTypes'].split(' ')
+
+        return this_union
 
     def _read_simple_type(self, parent_object):
         this_simple_content = SimpleTypeElement()
+
+        # save name (if there is one, for type retrieval later)
+        if parent_object.attrib and parent_object.attrib['name']:
+            this_simple_content.name = parent_object.attrib['name']
+
         for child in parent_object.getchildren():
             if child.tag.endswith('restriction'):
                 this_simple_content.restrictions.append(self._read_restriction(child))
@@ -325,6 +369,9 @@ class BuildingSyncSchemaProcessor(object):
                 this_simple_content.unions.append(self._read_union(child))
             else:
                 raise Exception("Invalid tag type in _read_simple_type: " + child.tag)
+        # if it has a name, store it in named hash
+        if parent_object.attrib and 'name' in parent_object.attrib:
+            self.named_simple_types[parent_object.attrib['name']] = this_simple_content
         return this_simple_content
 
     @staticmethod
@@ -341,6 +388,7 @@ class BuildingSyncSchemaProcessor(object):
                 this_restriction.pattern = child.attrib['value']
             else:
                 raise Exception("Invalid tag type in _read_restriction: " + child.tag)
+
         return this_restriction
 
     def _read_choice(self, parent_object):
@@ -372,6 +420,42 @@ class BuildingSyncSchemaProcessor(object):
         num_added = 0
         potential_doc_string = None
 
+        if parent_element.type and parent_element.type.startswith('auc:'):
+
+            # special handling for simple types (enums)
+            ref_type_clean = parent_element.type.split(':')[1]
+
+            instance = self._find_referenced_element(ref_type_clean)
+            if instance:
+
+                # special case for simpleType enums linked to "type"
+                if isinstance(instance, SimpleTypeElement):
+
+                    # custom walk simpleType/Restriction
+                    for elem in instance.restrictions:
+                        this_num_added, new_rows = self._walk_restriction_element(
+                            elem,
+                            root_path,
+                            current_tree_level,
+                            current_index
+                        )
+                        current_index += this_num_added
+                        num_added += this_num_added
+                        return_rows.extend(new_rows)
+
+                    # also walk the union element (for Units mostly)
+
+                    for elem in instance.unions:
+                        this_num_added, new_rows = self._walk_union_element(
+                            elem,
+                            root_path,
+                            current_tree_level,
+                            current_index
+                        )
+                        current_index += this_num_added
+                        num_added += this_num_added
+                        return_rows.extend(new_rows)
+
         for elem in parent_element.annotations:
             potential_doc_string = self._walk_annotation_element(elem)
 
@@ -400,6 +484,45 @@ class BuildingSyncSchemaProcessor(object):
         for elem in parent_element.annotations:
             potential_doc_string = self._walk_annotation_element(elem)
         return num_added, return_rows, potential_doc_string
+
+    def _walk_union_element(self, parent_element, root_path, current_tree_level, current_index):
+        return_rows = []
+        num_added = 0
+
+        # look up instance
+        for elem in parent_element.member_types:
+            ref_type_clean = elem.split(':')[1]
+            instance = self._find_referenced_element(ref_type_clean)
+            if instance:
+
+                # special case for simpleType enums linked to "type"
+                if isinstance(instance, SimpleTypeElement):
+
+                    # custom walk simpleType/Restriction
+                    for elem in instance.restrictions:
+                        this_num_added, new_rows = self._walk_restriction_element(
+                            elem,
+                            root_path,
+                            current_tree_level,
+                            current_index
+                        )
+                        current_index += this_num_added
+                        num_added += this_num_added
+                        return_rows.extend(new_rows)
+
+                    # also walk the union element (for Units mostly)
+                    for elem in instance.unions:
+                        this_num_added, new_rows = self._walk_union_element(
+                            elem,
+                            root_path,
+                            current_tree_level,
+                            current_index
+                        )
+                        current_index += this_num_added
+                        num_added += this_num_added
+                        return_rows.extend(new_rows)
+
+        return num_added, return_rows
 
     def _walk_complex_element(self, parent_element, root_path, current_tree_level, current_index):
         return_rows = []
@@ -430,6 +553,9 @@ class BuildingSyncSchemaProcessor(object):
         for ne in self.all_named_elements:
             if original_ref_name == ne.name:
                 return ne
+        if original_ref_name in self.named_simple_types:
+            # added for simple type enums (like EndUse)
+            return self.named_simple_types[original_ref_name]
         return None
 
     def _walk_sequence_or_choice_element(self, parent_element, root_path, current_tree_level,
@@ -448,10 +574,18 @@ class BuildingSyncSchemaProcessor(object):
                     '$$treeLevel': current_tree_level,
                     'index': current_index
                 })
-                instance = self._find_referenced_element(elem.type)
 
+                instance = self._find_referenced_element(elem.type)
                 if instance:
-                    if isinstance(instance, NamedElement):
+                    if isinstance(instance, SimpleTypeElement):
+                        this_num_added, new_rows = self._walk_simple_type_element(
+                            instance,
+                            root_path + '.' + elem.name,
+                            current_tree_level + 1,
+                            current_index
+                        )
+
+                    elif isinstance(instance, NamedElement):
                         this_num_added, new_rows, potential_doc_string = self._walk_named_element(
                             instance,
                             root_path + '.' + elem.name,
@@ -560,45 +694,58 @@ class BuildingSyncSchemaProcessor(object):
                                   current_index):
         return_rows = []
         num_added = 0
+
         for elem in parent_element.restrictions:
             this_num_added, new_rows = self._walk_restriction_element(
                 elem,
-                root_path + '.' + 'Restriction',
+                root_path,
                 current_tree_level,
                 current_index
             )
             current_index += this_num_added
             num_added += this_num_added
             return_rows.extend(new_rows)
+
+        # walk unions
+        for elem in parent_element.unions:
+            this_num_added, new_rows = self._walk_union_element(
+                elem,
+                root_path,
+                current_tree_level,
+                current_index
+            )
+            current_index += this_num_added
+            num_added += this_num_added
+            return_rows.extend(new_rows)
+
         return num_added, return_rows
 
     @staticmethod
     def _walk_restriction_element(parent_element, root_path, current_tree_level, current_index):
         return_rows = []
         num_added = 0
+
         for elem in parent_element.enumerations:
+
             # TODO: Verify that the minInclusive, maxInclusive work here
             current_index += 1
             num_added += 1
+
+            # make sure there is no 'union' or 'restriction' in the path
+            the_path = root_path.replace('.union', '').replace('.restriction', '').replace('.Union', '').replace('Restriction', '')
+
             return_rows.append({
                 'name': elem,
                 'full_path': root_path,
-                'path': '.'.join(root_path.split('.')[0:-1]),
+                'path': the_path,
                 'type': 'Enumeration',
                 'parent_path': root_path,
                 '$$treeLevel': current_tree_level,
                 'index': current_index
             })
+
         return num_added, return_rows
 
-
-# def get_parent_from_path(root_path):
-#     parts = root_path.split('.')
-#     if len(parts) == 1:
-#         # root element, no parent
-#         return None
-#     else:
-#         return parts[-1]
 
 def get_parent_from_path(root_path, schema):
     parents = Attribute.objects.filter(path=root_path, schema=schema)
