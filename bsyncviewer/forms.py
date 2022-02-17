@@ -2,6 +2,7 @@ import os
 
 from django import forms
 from django.conf import settings
+from django.core.exceptions import ValidationError
 
 from .models.schema import Schema
 
@@ -35,6 +36,20 @@ class LoadXMLExample(forms.Form):
     )
 
     form_type = forms.CharField(widget=forms.HiddenInput(), initial='example')
+
+
+    def clean(self):
+
+        super(LoadXMLExample, self).clean()
+
+        # remove file_name error
+        if 'file_name' in self._errors:
+            for idx, i in enumerate(self._errors['file_name']):
+                if 'Select a valid choice. bsyncviewer/lib/validator/examples/' in i:
+                    del self._errors['file_name'][idx]
+            print("file_name errors now: {}".format(self._errors['file_name']))
+
+        return self.cleaned_data
 
 
 class UpdateUserForm(forms.Form):
