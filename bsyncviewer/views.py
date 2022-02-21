@@ -454,7 +454,19 @@ def validator(request):
     else:
         return render(request, 'validator.html', context)
 
-    if form.is_valid():
+    validated = False
+    if form_type == 'example':
+        # workaround for files list by schema_version
+        errors = form.errors
+        file_errs = errors['file_name']
+        if len(file_errs) == 0:
+            # no errors - validated
+            validated = True
+
+    elif form.is_valid():
+        validated = True
+
+    if validated:
         if form_type == 'file':
             f = request.FILES['file']
             filename = f.name
