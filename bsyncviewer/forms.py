@@ -2,7 +2,6 @@ import os
 
 from django import forms
 from django.conf import settings
-from django.core.exceptions import ValidationError
 
 from .models.schema import Schema
 
@@ -36,7 +35,6 @@ class LoadXMLExample(forms.Form):
     )
 
     form_type = forms.CharField(widget=forms.HiddenInput(), initial='example')
-
 
     def clean(self):
 
