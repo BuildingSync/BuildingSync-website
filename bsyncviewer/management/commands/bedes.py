@@ -479,7 +479,7 @@ class Command(BaseCommand):
             # checking for plural bsync terms that are in the manual mapping table as singular
             elif bsync_term[-1] == 's' and (bsync_term[:-1] in manual_mappings.keys()):
                 bsync_term = manual_mappings[bsync_term[:-1]]
-            return(bsync_term)
+            return bsync_term
 
         # go through entire list, converting to an array that assigns an availability flag to each individual word
         for i in range(len(bsync_words)):
@@ -540,7 +540,7 @@ class Command(BaseCommand):
             bsync_term += reconstruction_dict[i] + ' '
         bsync_term = bsync_term.strip(' ')
 
-        return(bsync_term)
+        return bsync_term
 
     # function to take in a word list that has been separated at Uppercase letters, and rejoin any acronyms that
     # have been separated
