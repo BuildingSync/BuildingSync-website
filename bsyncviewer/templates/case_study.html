@@ -7,79 +7,78 @@
 
 {% block content %}
 
-    <div class="container bsync-main">
-        <h4>Overview</h4>
-        <p> BuildingSync as
-            a means of data exchange allows interoperability between existing software platforms. BuildingSync and
-            BETTER
-            have collaborated to support seamless integration between current adopters and
-            running BETTER analyses to maximize the usability of your organized building and usage data. </p>
+  <div class="container bsync-main">
+    <h4>Overview</h4>
+    <p> BuildingSync as
+      a means of data exchange allows interoperability between existing software platforms. BuildingSync and
+      BETTER
+      have collaborated to support seamless integration between current adopters and
+      running BETTER analyses to maximize the usability of your organized building and usage data. </p>
 
-        <div class="row" style="padding-bottom: 3em">
-            <div class="col-lg-4">
-                <h4 style="padding-top: 2em">What is BETTER?</h4>
-                <p style="padding-bottom: 3em">BETTER is a web-based analysis application for identifying cost-saving
-                    energy and emissions reductions in buildings and portfolios. The tool identifies immediate, cost-
-                    saving operational measures and technology upgrades to reduce energy and emissions while
-                    prioritizing facilities for more in-depth audits and analysis.</p>
-                </p>
-                <a class="button btn-bg-light col-lg-offset-3"
-                   href="{% static 'documents/BETTER_handout.pdf' %}"
-                   target="_blank">
-                    Read More</a>
-            </div>
-            <div class="col-lg-8">
-                <img src="{% static 'img/BETTER_BLUE.png' %}">
-            </div>
-        </div>
-        <h4>How does it work?</h4>
-        <p>BuildingSync supports all of the requirements needed to run BETTER analyses. An eligible file will contain
-            high level information about a building or buildings as well as at least 12 months of meter usage data.
-            Users can then upload their file to BETTER, run an analysis, and view the intuitive report outputs based on
-            the BuildingSync input. </p>
-        <h4 style="padding-top: 3em">Where can I get started?</h4>
-        <p>This integration allows the user to submit valid BuldingSync files to BETTER in a number of different
-            ways:</p>
+    <div class="row" style="padding-bottom: 3em">
+      <div class="col-lg-4">
+        <h4 style="padding-top: 2em">What is BETTER?</h4>
+        <p style="padding-bottom: 3em">BETTER is a web-based analysis application for identifying cost-saving
+          energy and emissions reductions in buildings and portfolios. The tool identifies immediate,
+          cost-saving operational measures and technology upgrades to reduce energy and emissions while
+          prioritizing facilities for more in-depth audits and analysis.</p>
+        </p>
+        <a class="button btn-bg-light col-lg-offset-3"
+           href="{% static 'documents/BETTER_handout.pdf' %}"
+           target="_blank">
+          Read More</a>
+      </div>
+      <div class="col-lg-8">
+        <img src="{% static 'img/better-logo.svg' %}">
+      </div>
     </div>
-    <!-- ====== hero ======  -->
-    <section id="about" class="hero" style="padding-bottom: 5em">
-        <div class="container">
+    <h4>How does it work?</h4>
+    <p>BuildingSync supports all of the requirements needed to run BETTER analyses. An eligible file will contain
+      high level information about a building or buildings as well as at least 12 months of meter usage data.
+      Users can then upload their file to BETTER, run an analysis, and view the intuitive report outputs based on
+      the BuildingSync input. </p>
+    <h4 style="padding-top: 3em">Where can I get started?</h4>
+    <p>This integration allows the user to submit valid BuildingSync files to BETTER in a number of different
+      ways:</p>
+  </div>
+  <!-- ====== hero ======  -->
+  <section id="about" class="hero" style="padding-bottom: 5em">
+    <div class="container">
 
-            <div class="row">
-                <!-- hero-item -->
-                <div class="hero-item col-md-4 text-center">
-                    <span class="icon-tools"></span>
-                    <div class="hero-item-content">
-                        <h5><a href="https://better-lbnl-development.herokuapp.com/">Web Application</a></h5>
-                        <p class="mb-2">Create an account with BETTER and upload BuildingSync files</p>
-                        <a href="https://better-lbnl-development.herokuapp.com/" class="button btn-bord-dark mt-2">Learn
-                            More</a>
-                    </div>
-                </div>
-
-                <div class="hero-item col-md-4 text-center active">
-                    <span class="icon-tools-2"></span>
-                    <div class="hero-item-content">
-                        <h5><a href="https://better-lbnl-development.herokuapp.com/docs/api/">Web API</a></h5>
-                        <p class="mb-2">Send BuildingSync files to BETTER via their RESTful API endpoints.</p>
-                        <a href="https://better-lbnl-development.herokuapp.com/docs/api/"
-                           class="button btn-bord-dark mt-2">Learn More</a>
-                    </div>
-                </div>
-
-                <div class="hero-item col-md-4 text-center">
-                    <span class="icon-laptop"></span>
-                    <div class="hero-item-content">
-                        <h5><a href="https://demo.seed-platform.org/">The SEED platform</a></h5>
-                        <p class="mb-2">Create and account with the SEED platform and run analysis on properties</p>
-                        <a href="https://demo.seed-platform.org/" class="button btn-bord-dark mt-2">Learn More</a>
-                    </div>
-                </div>
-
-                <div class="clear-fix"></div>
-            </div>
+      <div class="row">
+        <!-- hero-item -->
+        <div class="hero-item col-md-4 text-center">
+          <span class="icon-tools"></span>
+          <div class="hero-item-content">
+            <h5><a href="https://better-lbnl-development.herokuapp.com/" target="_blank" rel="noopener">Web Application</a></h5>
+            <p class="mb-2">Create an account with BETTER and upload BuildingSync files</p>
+            <a href="https://better-lbnl-development.herokuapp.com/" class="button btn-bord-dark mt-2" target="_blank" rel="noopener">Learn More</a>
+          </div>
         </div>
 
-    </section>
-    <!-- ====== End hero ======  -->
+        <div class="hero-item col-md-4 text-center active">
+          <span class="icon-tools-2"></span>
+          <div class="hero-item-content">
+            <h5><a href="https://better-lbnl-development.herokuapp.com/docs/api/" target="_blank" rel="noopener">Web API</a></h5>
+            <p class="mb-2">Send BuildingSync files to BETTER via their RESTful API endpoints.</p>
+            <a href="https://better-lbnl-development.herokuapp.com/docs/api/"
+               class="button btn-bord-dark mt-2" target="_blank" rel="noopener">Learn More</a>
+          </div>
+        </div>
+
+        <div class="hero-item col-md-4 text-center">
+          <span class="icon-laptop"></span>
+          <div class="hero-item-content">
+            <h5><a href="https://demo.seed-platform.org/" target="_blank" rel="noopener">The SEED platform</a></h5>
+            <p class="mb-2">Create and account with the SEED platform and run analysis on properties</p>
+            <a href="https://demo.seed-platform.org/" class="button btn-bord-dark mt-2" target="_blank" rel="noopener">Learn More</a>
+          </div>
+        </div>
+
+        <div class="clear-fix"></div>
+      </div>
+    </div>
+
+  </section>
+  <!-- ====== End hero ======  -->
 {% endblock content %}

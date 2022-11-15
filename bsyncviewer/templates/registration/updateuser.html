@@ -4,16 +4,16 @@
 {% block title %}User Account{% endblock %}
 
 {% block content %}
-    <div class="row">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4">
-        <form method="post" action="{% url 'updateuser' %}">
-            {% csrf_token %}
-            {% bootstrap_form update_user_form %}
-            {% buttons submit='Update' cancel='Cancel' %}{% endbuttons %}
-        </form>
-    </div>
-    <div class="col-sm-4"></div>
-    </div>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <form method="post" action="{% url 'updateuser' %}">
+      {% csrf_token %}
+      {% bootstrap_form update_user_form %}
+      {% buttons submit='Update' cancel='Cancel' %}{% endbuttons %}
+    </form>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
 
 {% endblock content %}

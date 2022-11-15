@@ -7,19 +7,19 @@
 
 {% block content_notitle %}
 
-    <div class="container">
-        <header class="major">
-        	  <div class="row">
-                <h2>Contact Us</h2>
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <div class="form-actions">
-                        <button type="submit">Send</button>
-                    </div>
-                </form>
-        	</div>
-        </header>
-    </div>
+  <div class="container">
+    <header class="major">
+      <div class="row">
+        <h2>Contact Us</h2>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <div class="form-actions">
+            <button type="submit">Send</button>
+          </div>
+        </form>
+      </div>
+    </header>
+  </div>
 
 {% endblock content_notitle %}

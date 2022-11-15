@@ -6,114 +6,130 @@
 
 {% block content %}
 
-<div class="container bsync-main">
+  <div class="container bsync-main">
 
-	<h3>Guides</h3>
-	<div class="list">
-		<ul>
-			<li><a href="https://github.com/BuildingSync/schema/blob/develop-v2/docs/notebooks/bsync_examples/Small-Office-Level-1.md"><b>Energy Auditing with BuildingSync</b></a>: an interactive introduction to what BuildingSync is and how it relates to buildings, building systems, and energy audit reporting.</li>
-			<li><a href="{% static 'documents/BuildingSync-on-boarding.pdf' %}"><b>BuildingSync On-boarding Guide</b></a>: a PDF documenting BuildingSync Use Cases, their implementation and publication.</li>
-		</ul>
-	</div>
+    <h3>Guides</h3>
+    <div class="list">
+      <ul>
+        <li><a href="https://github.com/BuildingSync/schema/blob/develop-v2/docs/notebooks/bsync_examples/Small-Office-Level-1.md" target="_blank" rel="noopener"><b>Energy Auditing with
+          BuildingSync</b></a>: an interactive introduction to what BuildingSync is and how it relates to buildings, building systems, and energy audit reporting.
+        </li>
+        <li><a href="{% static 'documents/BuildingSync-on-boarding.pdf' %}" target="_blank"><b>BuildingSync On-boarding Guide</b></a>: a PDF documenting BuildingSync Use Cases, their implementation
+          and publication.
+        </li>
+      </ul>
+    </div>
 
-	<h3>File Validation</h3>
+    <h3>File Validation</h3>
 
-	<p class="larger">For validation of BuildingSync XML files, the XML file undergoes a two step validation process (see <a href="#validation-using-oxygenxml">Validation Using OxygenXML</a> for an example).</p>
-	<div class="list">
-	<ol>
-		<li><h4>Validation against an XML XSD document</h4>
-			<ul>
-				<li>Download the most recent version of the <a href="{% url 'releases' %}">schema</a> and use an XML authoring tool to validate the XML instances.</li>
-				<li>XSD's are used to <a href="https://www.youtube.com/watch?v=PpvX3izvRWU&list=PL73qvSDlAVViXEuAWaRFKul4gmYX9D-qL" target="_blank">validate</a>:
-				<ul style="margin-bottom:0px">
-					<li>Elements and attributes that may appear in an XML document</li>
-					<li>Whether elements are required and how many are allowed</li>
-					<li>Whether attributes are required</li>
-					<li>Number and order of children</li>
-					<li>Data types for elements and attributes</li>
-					<li>Defaults and fixed values for elements and attributes</li>
-			  </ul>
-				</li>
-  		</ul>
-		</li>
-		<li><h4>Validation using <a href="http://schematron.com/" target="_blank">Schematron</a></h4>
-			<ul>
-				<li>Example BuildingSync schematron documents can be found in the <a href="https://github.com/BuildingSync/use-cases" target="_blank">BuildingSync Use Cases GitHub repository</a>. XML authoring tools can be used to validate against Schematron docs.</li>
-				<li>As opposed to an XSD, a Schematron document can be used to validate:
-					<ul style="margin-bottom:0px">
-						<li>Elemental requirements on a use case basis. For example, requirements for ASHRAE Levels 1, 2, and 3 are different. Using the same base XSD, with three different Schematron documents (one for each ASHRAE level), validates whether the document expresses all of the requirements to achieve each of the ASHRAE Level 1, 2, and 3 use cases.</li>
-						<li>Constraints and requirements based on conditionals. For example, if an element is specified with a particular value, the applicable enumerations of another element may change.</li>
-						<li>other logical statements.</li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-	</ol>
-	</div>
+    <p class="larger">For validation of BuildingSync XML files, the XML file undergoes a two step validation process (see <a href="#validation-using-oxygenxml">Validation Using OxygenXML</a> for an
+      example).</p>
+    <div class="list">
+      <ol>
+        <li><h4>Validation against an XML XSD document</h4>
+          <ul>
+            <li>Download the most recent version of the <a href="{% url 'releases' %}">schema</a> and use an XML authoring tool to validate the XML instances.</li>
+            <li>XSDs are used to <a href="https://www.youtube.com/watch?v=PpvX3izvRWU&list=PL73qvSDlAVViXEuAWaRFKul4gmYX9D-qL" target="_blank" rel="noopener">validate</a>:
+              <ul style="margin-bottom:0">
+                <li>Elements and attributes that may appear in an XML document</li>
+                <li>Whether elements are required and how many are allowed</li>
+                <li>Whether attributes are required</li>
+                <li>Number and order of children</li>
+                <li>Data types for elements and attributes</li>
+                <li>Defaults and fixed values for elements and attributes</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><h4>Validation using <a href="https://schematron.com/" target="_blank" rel="noopener">Schematron</a></h4>
+          <ul>
+            <li>Example BuildingSync schematron documents can be found in the <a href="https://github.com/BuildingSync/use-cases" target="_blank" rel="noopener">BuildingSync Use Cases GitHub
+              repository</a>. XML authoring tools can be used to validate against Schematron docs.
+            </li>
+            <li>As opposed to an XSD, a Schematron document can be used to validate:
+              <ul style="margin-bottom:0">
+                <li>Elemental requirements on a use case basis. For example, requirements for ASHRAE Levels 1, 2, and 3 are different. Using the same base XSD, with three different Schematron
+                  documents (one for each ASHRAE level), validates whether the document expresses all of the requirements to achieve each of the ASHRAE Level 1, 2, and 3 use cases.
+                </li>
+                <li>Constraints and requirements based on conditionals. For example, if an element is specified with a particular value, the applicable enumerations of another element may change.</li>
+                <li>other logical statements.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </div>
 
-	<p class="larger">Usage of both validation approaches (XSD and Schematron) is recommended for developers actively working on creating BuildingSync files.</p>
+    <p class="larger">Usage of both validation approaches (XSD and Schematron) is recommended for developers actively working on creating BuildingSync files.</p>
 
-	<div class="list">
-		<ul>
-			<li>Validation against XSD for general correctness and usage of BuildingSync</li>
-			<li>Validation against Schematron for understanding XML document requirements for different use cases</li>
-		</ul>
-	</div>
+    <div class="list">
+      <ul>
+        <li>Validation against XSD for general correctness and usage of BuildingSync</li>
+        <li>Validation against Schematron for understanding XML document requirements for different use cases</li>
+      </ul>
+    </div>
 
-	<p class="larger">Additionally, there is an option to add a valid BuildingSync XML to the schema's continuous integration (CI) system. This will allow for the file to be tested during schema change/pull requests to ensure backward compatibility and validity. To add a BuildingSync instance to the CI, follow these steps:</p>
+    <p class="larger">Additionally, there is an option to add a valid BuildingSync XML to the schema's continuous integration (CI) system. This will allow for the file to be tested during schema
+      change/pull requests to ensure backward compatibility and validity. To add a BuildingSync instance to the CI, follow these steps:</p>
 
-	<div class="list">
-		<ol>
-			<li>If you do not have a GitHub account, then sign up for one on <a href="https://github.com" target="_blank">GitHub</a></li>
-			<li>Sign into GitHub and navigate to <a href="https://github.com/buildingsync/schema" target="_blank">BuildingSync Schema's GitHub page</a></li>
-			<li>Fork the repository and add new files to the <a href="https://github.com/BuildingSync/schema/tree/develop-v2/examples" target="_blank">examples folder</a></li>
-			<li>Create a pull request which will trigger the validation workflow. If it passes, then the BuildingSync team will accept the pull request after reviewing the changes. If it does not pass, the BuildingSync team will work with you to understand the issues. Note: The new file will be validated on every commit/change to the BuildingSync schema ensuring that all provided user's files pass successfully and are backward compatible.</li>
-		</ol>
-	</div>
+    <div class="list">
+      <ol>
+        <li>If you do not have a GitHub account, then sign up for one on <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li>
+        <li>Sign into GitHub and navigate to <a href="https://github.com/buildingsync/schema" target="_blank" rel="noopener">BuildingSync Schema's GitHub page</a></li>
+        <li>Fork the repository and add new files to the <a href="https://github.com/BuildingSync/schema/tree/develop-v2/examples" target="_blank" rel="noopener">examples folder</a></li>
+        <li>Create a pull request which will trigger the validation workflow. If it passes, then the BuildingSync team will accept the pull request after reviewing the changes. If it does not pass,
+          the BuildingSync team will work with you to understand the issues. Note: The new file will be validated on every commit/change to the BuildingSync schema ensuring that all provided user's
+          files pass successfully and are backward compatible.
+        </li>
+      </ol>
+    </div>
 
-	<h3 id="validation-using-oxygenxml">Validation Using OxygenXML</h3>
-	<p class="larger">Clone the <a href="https://github.com/BuildingSync/schema" target="_blank">BuildingSync/schema</a> repository locally, and open the following files:</p>
-	<div class="list">
-		<ul>
-			<li>'BuildingSync.xsd'</li>
-			<li>'examples/BuildingSync Website Invalid Schema.xml'</li>
-			<li>'examples/BuildingSync Website Valid Schema.xml'</li>
-		</ul>
-	</div>
+    <h3 id="validation-using-oxygenxml">Validation Using OxygenXML</h3>
+    <p class="larger">Clone the <a href="https://github.com/BuildingSync/schema" target="_blank" rel="noopener">BuildingSync/schema</a> repository locally, and open the following files:</p>
+    <div class="list">
+      <ul>
+        <li>'BuildingSync.xsd'</li>
+        <li>'examples/BuildingSync Website Invalid Schema.xml'</li>
+        <li>'examples/BuildingSync Website Valid Schema.xml'</li>
+      </ul>
+    </div>
 
-	<div class="screenshot">
-		<img src="{% static 'images/open_files.png' %}" alt="open files"/>
-	</div>
+    <div class="screenshot">
+      <img src="{% static 'images/open_files.png' %}" alt="open files"/>
+    </div>
 
-	<h3 id="validation-against-xsd">Validation Against XSD</h3>
+    <h3 id="validation-against-xsd">Validation Against XSD</h3>
 
-	<p class="larger">Using the OxygenXML Validate button, the Valid Schema shows a valid result against the XSD:</p>
-	<div class="screenshot">
-		<img src="{% static 'images/valid_xsd.png' %}" alt="valid schema"/>
-	</div>
+    <p class="larger">Using the OxygenXML Validate button, the Valid Schema shows a valid result against the XSD:</p>
+    <div class="screenshot">
+      <img src="{% static 'images/valid_xsd.png' %}" alt="valid schema"/>
+    </div>
 
-	<p class="larger">For the invalid schema, we can see all of the errors found, with descriptions:</p>
+    <p class="larger">For the invalid schema, we can see all of the errors found, with descriptions:</p>
 
-	<div class="screenshot">
-		<img src="{% static 'images/invalid_xsd1.png' %}" alt="invalid schema example 1"/>
-	</div>
-	<div class="screenshot">
-		<img src="{% static 'images/invalid_xsd2.png' %}" alt="invalid schema example 2"/>
-	</div>
+    <div class="screenshot">
+      <img src="{% static 'images/invalid_xsd1.png' %}" alt="invalid schema example 1"/>
+    </div>
+    <div class="screenshot">
+      <img src="{% static 'images/invalid_xsd2.png' %}" alt="invalid schema example 2"/>
+    </div>
 
-	<h3 id="validation-against-schematron">Validation Against Schematron</h3>
-	<p class="larger">Download the Schematron document <a href="https://raw.githubusercontent.com/BuildingSync/assetscore-schematron-docs/master/docs/Audit_Template/New_York_City_Energy_Efficiency_Report.xml" target="_blank">Audit Template Example</a> and save to a known local path.</p>
+    <h3 id="validation-against-schematron">Validation Against Schematron</h3>
+    <p class="larger">Download the Schematron document <a
+      href="https://raw.githubusercontent.com/BuildingSync/assetscore-schematron-docs/master/docs/Audit_Template/New_York_City_Energy_Efficiency_Report.xml" target="_blank" rel="noopener">Audit
+      Template Example</a> and save to a known local path.</p>
 
-	<p class="larger">In OxygenXML, choose the validate drop down, and select validate with:</p>
-	<div class="screenshot">
-		<img src="{% static 'images/sch1.png' %}" alt="schematron validation 1"/>
-	</div>
-	<div class="screenshot">
-		<img src="{% static 'images/sch2.png' %}" alt="schematron validation 2"/>
-	</div>
-	<p class="larger">The Schematron validator will provide very verbose errors specific to the use case.  Note that schematron will generate errors on both the 'BuildingSync Website Valid Schema.xml' and 'BuildingSync Website Invalid Schema.xml' documents, because while these are valid according to the XSD, they do not conform to the use case requirements:</p>
-	<div class="screenshot">
-		<img src="{% static 'images/sch3.png' %}" alt="schematron validation 3"/>
-	</div>
-</div>
+    <p class="larger">In OxygenXML, choose the validate drop down, and select validate with:</p>
+    <div class="screenshot">
+      <img src="{% static 'images/sch1.png' %}" alt="schematron validation 1"/>
+    </div>
+    <div class="screenshot">
+      <img src="{% static 'images/sch2.png' %}" alt="schematron validation 2"/>
+    </div>
+    <p class="larger">The Schematron validator will provide very verbose errors specific to the use case. Note that schematron will generate errors on both the 'BuildingSync Website Valid Schema.xml'
+      and 'BuildingSync Website Invalid Schema.xml' documents, because while these are valid according to the XSD, they do not conform to the use case requirements:</p>
+    <div class="screenshot">
+      <img src="{% static 'images/sch3.png' %}" alt="schematron validation 3"/>
+    </div>
+  </div>
 {% endblock content %}

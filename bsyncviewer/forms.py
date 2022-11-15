@@ -9,7 +9,7 @@ DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
 
 class LoadXMLFile(forms.Form):
-    schema_version = forms.ModelChoiceField(queryset=Schema.objects.all(), empty_label=None,
+    schema_version = forms.ModelChoiceField(queryset=Schema.objects.all().order_by('-version'), empty_label=None,
                                             to_field_name='version', initial=DEFAULT_SCHEMA_VERSION, required=True)
     file = forms.FileField(label='XML File', required=True)
     form_type = forms.CharField(widget=forms.HiddenInput(), initial='file')
@@ -17,7 +17,7 @@ class LoadXMLFile(forms.Form):
 
 class LoadXMLExample(forms.Form):
     schema_version = forms.ModelChoiceField(
-        queryset=Schema.objects.all(),
+        queryset=Schema.objects.all().order_by('-version'),
         empty_label=None,
         to_field_name='version',
         initial=DEFAULT_SCHEMA_VERSION,

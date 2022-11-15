@@ -4,12 +4,11 @@
 
 {% block title %}Use Case Validator{% endblock title %}
 
-
 {% block content %}
 
-
-  <div class="container"style="padding-top: 5em; padding-bottom: 15em">
-    <p style="text-align: left; padding-bottom: 3em">Validate your XML against the BuildingSync schema and its use cases. View the <a href="https://github.com/buildingsync/BuildingSync-website#validator">Use Case Validator API docs</a> on GitHub.</p>
+  <div class="container" style="padding-top: 5em; padding-bottom: 15em">
+    <p style="text-align: left; padding-bottom: 3em">Validate your XML against the BuildingSync schema and its use cases. View the <a
+      href="https://github.com/buildingsync/BuildingSync-website#validator" target="_blank" rel="noopener">Use Case Validator API docs</a> on GitHub.</p>
 
     <div class="row">
       <div class="col-md-6 ml-6">
@@ -39,7 +38,11 @@
               <button class="btn btn-accent2" type="submit">Validate</button>
               <button class="btn btn-accent2" type="submit" name="download">Download Examples</button>
 
-              <div class="pull-right pt-2"><a href="https://github.com/BuildingSync/schema/tree/develop-v2/examples">View More XML Examples<i class="fa fa-external-link" aria-hidden="true"></i></a></div>
+              <div class="pull-right pt-2">
+                <a href="https://github.com/BuildingSync/schema/tree/develop-v2/examples" target="_blank" rel="noopener">View More XML Examples
+                  <i class="fa fa-external-link" aria-hidden="true"></i>
+                </a>
+              </div>
             </form>
           </div>
         </div>
@@ -50,28 +53,28 @@
 {% endblock content %}
 
 {% block base_extra_script %}
-{{ schema_to_examples|json_script:"schema_to_examples" }}
+  {{ schema_to_examples|json_script:"schema_to_examples" }}
   <script>
     /*
-    Set the file options in load_xml_example_form to the right files for the selected schema verisons.
+    Set the file options in load_xml_example_form to the right files for the selected schema versions.
     Do so on page load and every change of the schema version drop down.
     */
-    function setFileOptions(){
-      fileDropdown = document.getElementById("file_dropdown")
-      schemaToExampleScript = document.getElementById('schema_to_examples')
-      schemaToExample = JSON.parse(schemaToExampleScript.textContent)
+    function setFileOptions() {
+      const fileDropdown = document.getElementById('file_dropdown');
+      const schemaToExampleScript = document.getElementById('schema_to_examples');
+      const schemaToExample = JSON.parse(schemaToExampleScript.textContent);
 
       while (fileDropdown.options.length > 0) {
         fileDropdown.remove(0);
       }
 
-      schemaToExample[schema_dropdown.value].forEach(([abs_path, name]) => {
-        fileDropdown.add(new Option(abs_path, name))
-      })
+      schemaToExample[schemaDropdown.value].forEach(([abs_path, name]) => {
+        fileDropdown.add(new Option(abs_path, name));
+      });
     }
 
-    schemaDropdown = document.getElementById("schema_dropdown")
-    schema_dropdown.addEventListener("change", setFileOptions)
+    schemaDropdown = document.getElementById('schema_dropdown');
+    schemaDropdown.addEventListener('change', setFileOptions);
     setFileOptions();
   </script>
 {% endblock base_extra_script %}
