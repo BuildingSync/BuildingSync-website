@@ -110,10 +110,16 @@ class ValidationWorkflow(object):
 
     def validate_use_cases(self):
         resp = OrderedDict()
-        resp['use_cases'] = OrderedDict()
+        processed_use_cases = {}
         for use_case in self.use_cases:
             print("Validating use case: {}".format(use_case.name))
-            resp['use_cases'][use_case.name] = self.process_use_case(use_case)
+            processed_use_cases[use_case.name] = self.process_use_case(use_case)
+
+        # sort by valid then alphabetical
+        resp['use_cases'] = OrderedDict(sorted(
+            processed_use_cases.items(),
+            key=lambda t: f"{not t[1]['valid']} {t[0]}"
+        ))
 
         return resp
 

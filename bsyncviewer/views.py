@@ -456,8 +456,9 @@ def validator(request):
     if form_type == 'example':
         # workaround for files list by schema_version
         errors = form.errors
-        file_errs = errors['file_name']
-        if len(file_errs) == 0:
+
+        file_errs = errors.get('file_name')
+        if file_errs is None or len(file_errs) == 0:
             # no errors - validated
             validated = True
 
