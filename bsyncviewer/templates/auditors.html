@@ -7,79 +7,84 @@
 
 {% block content %}
 
-    <div class="container" style="padding-top: 2em">
-        <p>BuildingSync<sup>®</sup> is a building data exchange schema to better enable integration between
-            software tools and building data workflows. The schema original use case was focused on commercial building
-            energy audits to improve automation and digital standardization.</p>
+  <div class="container" style="padding-top: 2em">
+    <p>BuildingSync<sup>®</sup> is a building data exchange schema to better enable integration between
+      software tools and building data workflows. The schema original use case was focused on commercial building
+      energy audits to improve automation and digital standardization.</p>
 
-        <div class="row" style="padding-bottom: 7em; padding-top: 5em">
-            <div class="col-lg-6">
-                <h4>Direct integration with Audit Template (AT).</h4>
-                <p style="padding-bottom: 3em">A web-based application for entering building energy audit data,
-                    performing data validation,
-                    exporting data in various formats, and submitting data to cities that have local energy audit
-                    ordinances.</p>
-                 </p>
+    <div class="row" style="padding-bottom: 7em; padding-top: 5em">
+      <div class="col-lg-6">
+        <h4>Direct integration with Audit Template (AT).</h4>
+        <p style="padding-bottom: 3em">A web-based application for entering building energy audit data,
+          performing data validation,
+          exporting data in various formats, and submitting data to cities that have local energy audit
+          ordinances.</p>
         <a class="button btn-bg-light col-lg-offset-1"
-           href="https://help.buildingenergyscore.com/support/solutions/articles/8000081269-importing-and-exporting-audit-report-buildings-with-buildingsync" target="_blank">
-            Learn how to use BuildingSync with AT</a>
-            </div>
-            <div class="col-lg-6">
-                <img src="{% static 'img/digital.jpg' %}">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-6">
-                <img src="{% static 'img/lightbulbs.jpg' %}">
-            </div>
-            <div class="col-lg-offset-6">
-                <h4>Track proposed, implemented, and discarded energy conservation measures.</h4>
-                <p style="padding-bottom: 3em">Well-documented technical categories with enumerated measure names for
-                    any use case.</p>
-                <a class="button btn-bg-light col-lg-offset-3" href="/releases">Explore measures</a>
-            </div>
-        </div>
-
-
-        <div class="row" style="padding-top: 7em; padding-bottom: 5em">
-            <div class="col-lg-6">
-                <h4>Store building characteristics (at multiple levels) for audits and benchmarking.</h4>
-                <p style="padding-bottom: 3em">BuildingSync supports ASHRAE Std 211 level 1, 2, and 3 energy
-                    Audits.</p>
-                <a class="button btn-bg-light col-lg-offset-3" href="/mlod">View levels of detail</a>
-            </div>
-            <div class="col-lg-6">
-                <img src="{% static 'img/levels.jpg' %}">
-            </div>
-        </div>
-
-        <h3 style="padding-top: 2em">Documents</h3>
-        <hr>
-        <section id="about" class="hero">
-            <div class="row" style="padding-bottom: 5em">
-                <a href="{% static 'documents/BuildingSync-on-boarding.pdf' %}">
-                    <div class="hero-item col-lg-6 text-center">
-                        <span class="icon-documents"></span>
-                        <div class="hero-item-content">
-                            <h5>Onboarding Guide</h5>
-                            <p class="mb-2">Find out how to get started with BuildingSync.</p>
-
-                        </div>
-                    </div>
-                </a>
-                <a href="{% static 'documents/BuildingSync-RFP-RFQ-language.pdf' %}">
-                    <div class="hero-item col-lg-6 text-center">
-                        <span class="icon-document"></span>
-                        <div class="hero-item-content">
-                            <h5>Template documents for Request for Proposal (RFP) and Request for Qualifications
-                                (RFQs)</h5>
-                            <p class="mb-2">Integrate BuildingSync with your construction project, auditing requests, or
-                                application.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </section>
+           href="https://help.buildingenergyscore.com/support/solutions/articles/8000081269-importing-and-exporting-audit-report-buildings-with-buildingsync" target="_blank" rel="noopener">
+          Learn how to use BuildingSync with AT</a>
+      </div>
+      <div class="col-lg-6">
+        <picture>
+          <source type="image/webp" srcset="{% static 'img/digital.webp' %}">
+          <img src="{% static 'img/digital.jpg' %}">
+        </picture>
+      </div>
     </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <picture>
+          <source type="image/webp" srcset="{% static 'img/lightbulbs.webp' %}">
+          <img src="{% static 'img/lightbulbs.jpg' %}">
+        </picture>
+      </div>
+      <div class="col-lg-offset-6">
+        <h4>Track proposed, implemented, and discarded energy conservation measures.</h4>
+        <p style="padding-bottom: 3em">Well-documented technical categories with enumerated measure names for
+          any use case.</p>
+        <a class="button btn-bg-light col-lg-offset-3" href="{% url 'releases' %}">Explore measures</a>
+      </div>
+    </div>
+
+
+    <div class="row" style="padding-top: 7em; padding-bottom: 5em">
+      <div class="col-lg-6">
+        <h4>Store building characteristics (at multiple levels) for audits and benchmarking.</h4>
+        <p style="padding-bottom: 3em">BuildingSync supports ASHRAE Std 211 level 1, 2, and 3 energy Audits.</p>
+        <a class="button btn-bg-light col-lg-offset-3" href="{% url 'mlod' %}">View levels of detail</a>
+      </div>
+      <div class="col-lg-6">
+        <picture>
+          <source type="image/webp" srcset="{% static 'img/levels.webp' %}">
+          <img src="{% static 'img/levels.jpg' %}">
+        </picture>
+      </div>
+    </div>
+
+    <h3 style="padding-top: 2em">Documents</h3>
+    <hr>
+    <section id="about" class="hero">
+      <div class="row" style="padding-bottom: 5em">
+        <a href="{% static 'documents/BuildingSync-on-boarding.pdf' %}" target="_blank">
+          <div class="hero-item col-lg-6 text-center">
+            <span class="icon-documents"></span>
+            <div class="hero-item-content">
+              <h5>Onboarding Guide</h5>
+              <p class="mb-2">Find out how to get started with BuildingSync.</p>
+            </div>
+          </div>
+        </a>
+        <a href="{% static 'documents/BuildingSync-RFP-RFQ-language.pdf' %}" target="_blank">
+          <div class="hero-item col-lg-6 text-center">
+            <span class="icon-document"></span>
+            <div class="hero-item-content">
+              <h5>Template documents for Request for Proposal (RFP) and Request for Qualifications (RFQs)</h5>
+              <p class="mb-2">Integrate BuildingSync with your construction project, auditing requests, or
+                application.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+  </div>
 {% endblock content %}

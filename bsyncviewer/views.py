@@ -283,7 +283,7 @@ def dictionary(request, version):
     except BaseException:
         raise Http404('Schema version provided does not exist.')
 
-    for version_obj in Schema.objects.all():
+    for version_obj in Schema.objects.all().order_by('-version'):
         versions.append({
             'name': version_obj.version,
             'is_current': version_obj.version == version,
@@ -360,12 +360,11 @@ def enumerations(request, version):
         return HttpResponseRedirect(reverse_lazy('enumerations', args=[DEFAULT_SCHEMA_VERSION]))
 
     enumerations_data = json.load(schema.enumerations_file)
-    enumerations_data[0]['name']
     # remove measures
     enumerations_data = [term for term in enumerations_data if term['name'] != 'MeasureName']
 
     versions = []
-    for version_obj in Schema.objects.all():
+    for version_obj in Schema.objects.all().order_by('-version'):
         versions.append({
             'name': version_obj.version,
             'is_current': version_obj.version == version,
@@ -392,12 +391,11 @@ def measures(request, version):
         return HttpResponseRedirect(reverse_lazy('measures', args=[DEFAULT_SCHEMA_VERSION]))
 
     enumerations_data = json.load(schema.enumerations_file)
-    enumerations_data[0]['name']
     # find measures
     enumerations_data = [term for term in enumerations_data if term['name'] == 'MeasureName']
 
     versions = []
-    for version_obj in Schema.objects.all():
+    for version_obj in Schema.objects.all().order_by('-version'):
         versions.append({
             'name': version_obj.version,
             'is_current': version_obj.version == version,

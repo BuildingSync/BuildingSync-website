@@ -21,7 +21,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         schemas = []
         if options['all']:
-            schemas = Schema.objects.all()
+            schemas = Schema.objects.all().order_by('-version')
         else:
             try:
                 schemas = [Schema.objects.get(version=options['schema_version'])]

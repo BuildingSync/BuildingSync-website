@@ -10,7 +10,7 @@
 
     <div>
       <a href="{% url 'validator' %}" class="btn btn-sm btn-link"><span
-          class="glyphicon glyphicon-chevron-left"></span> Validate Another XML File</a>
+        class="glyphicon glyphicon-chevron-left"></span> Validate Another XML File</a>
     </div>
 
     <div class="row">
@@ -18,10 +18,10 @@
         <h3>File: {{ filename }}</h3>
         <p><strong>Schema version:</strong> {{ schema_version }}
           {% if validation_results.schema.valid is True %}
-          <span class="label label-success pad-10">Valid</span> {% else %}
-          <span class="label label-danger pad-10">Invalid</span> {% endif %}
+            <span class="label label-success pad-10">Valid</span> {% else %}
+            <span class="label label-danger pad-10">Invalid</span> {% endif %}
         </p>
-        {# <div>Valid? {{ validation_results.valid }}</div>#}
+        {# <div>Valid? {{ validation_results.valid }}</div> #}
         {% if validation_results.schema.valid is False %}
           <div>
             <h4>Issues <span class="label label-danger pad5">{{ validation_results.schema.errors|length }}</span></h4>
@@ -29,8 +29,9 @@
               {% for err in validation_results.schema.errors %}
                 <tr class="wrap-it">
                   <td class="ptb-10">{{ forloop.counter }}.</td>
-                  <td class="ptb-10">{{ err.path }} <br/>
-                    {{ err.message }}</td>
+                  <td class="ptb-10">{{ err.path }} <br>
+                    {{ err.message }}
+                  </td>
                 </tr>
               {% endfor %}
             </table>
@@ -50,10 +51,10 @@
           <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="heading{{ name|cut:' '|cut:'#'|cut:'.' }}">
               <h4 class="panel-title">
-                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"  data-parent="#accordion" href="#collapse{{ name|cut:' '|cut:'#'|cut:'.' }}" aria-expanded="true"
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" data-parent="#accordion" href="#collapse{{ name|cut:' '|cut:'#'|cut:'.' }}" aria-expanded="true"
                    aria-controls="collapse">
                   {{ name }} {% if uc.valid is True %} <span class="glyphicon glyphicon-ok green"></span>
-                             {% else %} <span class="glyphicon glyphicon-remove red"></span> {% endif %}
+                {% else %} <span class="glyphicon glyphicon-remove red"></span> {% endif %}
                 </a>
               </h4>
             </div>
@@ -91,7 +92,7 @@
                     </table>
                   {% endif %}
 
-                  {%  if uc.valid is False %}
+                  {% if uc.valid is False %}
                     <h4 class="pb-20">Errors <span class="label label-danger pad5">{{ uc.errors|length }}</span></h4>
                     <table class="val-res">
                       {% for err in uc.errors %}
@@ -106,7 +107,7 @@
               </div>
             </div>
           </div>
-        {%  endfor %}
+        {% endfor %}
       </div>
 
     {% endif %}

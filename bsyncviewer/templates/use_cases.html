@@ -7,136 +7,137 @@
 
 {% block content %}
 
-    <section id="usecases" class="hero section-padding section-bord">
-        <div class="container">
-        <div class="row">
-            <div class="col-md-9">
-            {% if sorted_public_cases %}
-                {% for name, val_arr in sorted_public_cases.items %}
-                 {% if forloop.first %}
-                 <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
-                 {% endif %}
-                    <div class="panel panel-accent">
-                    <div class="panel-heading" role="tab" id="heading{{ name|cut:' '|cut:'#'|cut:'.' }}">
-                      <h4 class="panel-title">
-                        {% if forloop.first %}
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion1" href="#collapse{{ name|cut:' '|cut:'#'|cut:'.' }}" aria-expanded="true"
-                           aria-controls="collapse">
-                           Latest Version: {{ name }}
-                           </a>
-                        {% else %}
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ name|cut:' '|cut:'#'|cut:'.' }}" aria-expanded="true"
-                           aria-controls="collapse">
-                           Version: {{ name }}
-                            </a>
-                        {% endif %}
-                      </h4>
-                    </div>
+  <section id="usecases" class="hero section-padding section-bord">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          {% if sorted_public_cases %}
+            {% for name, val_arr in sorted_public_cases.items %}
+              {% if forloop.first %}
+                <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
+              {% endif %}
+              <div class="panel panel-accent">
+                <div class="panel-heading" role="tab" id="heading{{ name|cut:' '|cut:'#'|cut:'.' }}">
+                  <h4 class="panel-title">
                     {% if forloop.first %}
-                        <div id="collapse{{ name|cut:' '|cut:'#'|cut:'.' }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{ name|cut:' '|cut:'#'|cut:'.' }}">
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion1" href="#collapse{{ name|cut:' '|cut:'#'|cut:'.' }}" aria-expanded="true"
+                         aria-controls="collapse">
+                        Latest Version: {{ name }}
+                      </a>
                     {% else %}
-                        <div id="collapse{{ name|cut:' '|cut:'#'|cut:'.' }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ name|cut:' '|cut:'#'|cut:'.' }}">
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ name|cut:' '|cut:'#'|cut:'.' }}" aria-expanded="true"
+                         aria-controls="collapse">
+                        Version: {{ name }}
+                      </a>
                     {% endif %}
-                      <div class="panel-body">
-                        <div>
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th class="bold">Name</th>
-                                    <th>Schematron File</th>
-                                    <th>Description</th>
-                                </tr>
-                                </thead>
-                                {% for item in val_arr %}
-                                <tr>
-                                    <td>{{ item.name }}</td>
-                                    <td><a href="{% url 'download_usecase_file' item.id %}">Download File</a>
-                                    <td>{{ item.description }}</td>
-                                </tr>
-                                {% endfor %}
-                            </table>
+                  </h4>
+                </div>
+                {% if forloop.first %}
+                  <div id="collapse{{ name|cut:' '|cut:'#'|cut:'.' }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{ name|cut:' '|cut:'#'|cut:'.' }}">
+                {% else %}
+                  <div id="collapse{{ name|cut:' '|cut:'#'|cut:'.' }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ name|cut:' '|cut:'#'|cut:'.' }}">
+                {% endif %}
+                <div class="panel-body">
+                  <div>
+                    <table class="table table-striped">
+                      <thead>
+                      <tr>
+                        <th class="bold">Name</th>
+                        <th>Schematron File</th>
+                        <th>Description</th>
+                      </tr>
+                      </thead>
+                      {% for item in val_arr %}
+                        <tr>
+                          <td>{{ item.name }}</td>
+                          <td><a href="{% url 'download_usecase_file' item.id %}">Download File</a>
+                          <td>{{ item.description }}</td>
+                        </tr>
+                      {% endfor %}
+                    </table>
+                  </div>
+                </div>
+                </div>
+                </div>
+                {% if forloop.first and sorted_public_cases|length > 1 %}
+                  </div>
+                  <h3>Older Versions</h3>
+                  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                {% endif %}
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          {% if user.is_authenticated %}
+            <div class="pad-top-40">
+              <h2>My Use Cases</h2>
+              <div class="panel-group" id="accordionMUC" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="headingMUC">
+                    <h4 class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordionMUC" href="#collapseMUC" aria-expanded="true"
+                         aria-controls="collapse">
+                        Manage Use Cases
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseMUC" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingMUC">
+                    <div class="panel-body">
+                      <div>
+
+                        {% if user_usecases %}
+                          <table class="table">
+                            <tr>
+                              <th>Name</th>
+                              <th>Schema Version</th>
+                              <th>Public ?</th>
+                              <th>Actions</th>
+                            </tr>
+                            {% for case in user_usecases %}
+                              <tr>
+                                <td>{{ case.name }}</td>
+                                <td>{{ case.schema }}</td>
+                                <td>{{ case.make_public }}</td>
+                                <td>
+                                  <a href="{% url 'use_case_update' case.id %}">Edit</a> |
+                                  <a href="{% url 'use_case_delete' case.id %}">Delete</a> |
+                                  <a href="{% url 'download_usecase_file' case.id %}">Download File</a>
+
+                                </td>
+
+                              </tr>
+                            {% endfor %}
+                          </table>
+                        {% endif %}
+                        <a class="btn btn-accent" href="{% url 'use_case_create' %}" role="button">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                          New Use Case
+                        </a>
+                        <div class="pad-bot-20">
+                          &nbsp;
                         </div>
                       </div>
                     </div>
                   </div>
-                  {% if forloop.first and sorted_public_cases|length > 1 %}
-                    </div>
-                    <h3>Older Versions</h3>
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                  {% endif %}
-                {% endfor %}
                 </div>
-            {% endif %}
-
-            {% if user.is_authenticated %}
-                <div class="pad-top-40">
-                    <h2>My Use Cases</h2>
-                    <div class="panel-group" id="accordionMUC" role="tablist" aria-multiselectable="true">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingMUC">
-                                <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordionMUC" href="#collapseMUC" aria-expanded="true"
-                                   aria-controls="collapse">
-                                   Manage Use Cases
-                                </a>
-                                </h4>
-                            </div>
-                            <div id="collapseMUC" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingMUC">
-                                <div class="panel-body">
-                                    <div>
-
-                                        {% if user_usecases %}
-                                            <table class="table">
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Schema Version</th>
-                                                    <th>Public ?</th>
-                                                    <th>Actions </th>
-                                                </tr>
-                                                {% for case in user_usecases %}
-                                                <tr>
-                                                    <td>{{ case.name }} </td>
-                                                    <td>{{ case.schema }}</td>
-                                                    <td>{{ case.make_public }}</td>
-                                                    <td>
-                                                        <a href="{% url 'use_case_update' case.id %}">Edit</a> |
-                                                        <a href="{% url 'use_case_delete' case.id %}">Delete</a> |
-                                                        <a href="{% url 'download_usecase_file' case.id %}">Download File</a>
-
-                                                    </td>
-
-                                                </tr>
-                                                {% endfor %}
-                                            </table>
-                                        {% endif %}
-                                        <a class="btn btn-accent" href="{% url 'use_case_create' %}" role="button">
-                                            <i class="fa fa-plus" aria-hidden="true"></i>
-                                            New Use Case
-                                        </a>
-                                        <div class="pad-bot-20">
-                                            &nbsp;
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endif %}
+              </div>
             </div>
-            <div class="col-md-3">
-                <div class="callout-box">
-                    <p>Click the link below for more information on adding and validating use cases</p>
-                    <span class="pad-10 pb-20"><a class="btn btn-primary" href="{% static 'images/selectiontool-usecases_v3.jpg' %}" target="_blank" role="button">
-                        Adding and Validating BuildingSync Use Cases
-                        </a></span>
-                    <span class="pad-10"><a class="btn btn-primary" href="https://github.com/BuildingSync/use-cases" target="_blank" role="button">
-                        Use Case GitHub Repository
-                        </a></span>
-                </div>
+          {% endif %}
+          </div>
+          <div class="col-md-3">
+            <div class="callout-box">
+              <p>Click the link below for more information on adding and validating use cases</p>
+              <span class="pad-10 pb-20"><a class="btn btn-primary" href="{% static 'images/selectiontool-usecases_v3.jpg' %}" target="_blank" rel="noopener" role="button">
+              Adding and Validating BuildingSync Use Cases
+            </a></span>
+              <span class="pad-10"><a class="btn btn-primary" href="https://github.com/BuildingSync/use-cases" target="_blank" rel="noopener" role="button">
+              Use Case GitHub Repository
+            </a></span>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    </section>
+  </section>
 
 {% endblock content %}

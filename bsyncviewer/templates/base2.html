@@ -12,192 +12,197 @@
 <!--[if gt IE 8]><!-->
 <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- Mobile Specific Meta -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Mobile Specific Meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Always force latest IE rendering engine -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Always force latest IE rendering engine -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <meta name="description"
-          content="BuildingSync is a common schema for energy audit data that can be utilized by different software and databases involved in the energy audit process.">
-    <meta name="keywords" content="data format, energy audit data schema">
+  <meta name="description"
+        content="BuildingSync is a common schema for energy audit data that can be utilized by different software and databases involved in the energy audit process.">
+  <meta name="keywords" content="data format, energy audit data schema">
 
-    <!-- Title -->
-    <title>BuildingSync</title>
+  <!-- Title -->
+  <title>BuildingSync</title>
 
-    <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Dosis:100,400,600,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 
-    <!-- Font awesome Core CSS -->
-    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/et-line.css' %}">
+  <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Dosis:100,400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 
-    <!-- bootstrap css -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Font awesome Core CSS -->
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/et-line.css' %}">
 
-    <!-- magnific-popup CSS -->
-    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <!-- owl carousel CSS -->
-    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+  <!-- magnific-popup CSS -->
+  <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
 
-    <!-- Custom style CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <!-- owl carousel CSS -->
+  <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
 
-    <!-- responsive CSS -->
-    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+  <!-- Custom style CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-    <!-- bsync style overrides -->
-    <link rel="stylesheet" href="{% static 'css/overrides.css' %}">
+  <!-- responsive CSS -->
+  <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 
-    <!--[if lt IE 9]-->
-    <script src="{% static 'js/html5shiv.min.js' %}"></script>
-    <!--[endif]-->
+  <!-- bsync style overrides -->
+  <link rel="stylesheet" href="{% static 'css/overrides.css' %}">
 
-    {% block bootstrap_extra_head %}
-        {% block extra_head %}{% endblock %}
-    {% endblock bootstrap_extra_head %}
+  <!--[if lt IE 9]-->
+  <script src="{% static 'js/html5shiv.min.js' %}"></script>
+  <!--[endif]-->
+
+  {% block bootstrap_extra_head %}
+    {% block extra_head %}{% endblock %}
+  {% endblock bootstrap_extra_head %}
 
 </head>
 <body>
 
 {% block nav %}
-    <!-- Navigation start -->
-    <nav class="navbar navbar-custom tt-default-nav nav-dark" role="navigation">
-        <div class="container">
+  <!-- Navigation start -->
+  <nav class="navbar navbar-custom tt-default-nav nav-dark" role="navigation">
+    <div class="container">
 
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#custom-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <!-- logo -->
-                <a class="navbar-brand" href="/"><img style="margin-bottom:10px;"
-                                                      src="{% static 'images/buildingsync-logo-white.svg' %}"
-                                                      alt="BuildingSync logo"></a>
-            </div>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#custom-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!-- logo -->
+        <a class="navbar-brand" href="{% url 'index' %}"><img style="margin-bottom:10px;"
+                                              src="{% static 'images/buildingsync-logo-white.svg' %}"
+                                              alt="BuildingSync logo"></a>
+      </div>
 
-            {% include 'topnav.html' %}
-        </div><!-- /.container -->
-    </nav>
+      {% include 'topnav.html' %}
+    </div><!-- /.container -->
+  </nav>
 {% endblock nav %}
 
 <!-- Navigation end -->
 {% block header %}
-    <header id="home" class="color-header">
-        <!-- header content -->
-        <div class="caption v-middle text-center">
-            <h1>{% block title %}(no title){% endblock title %}</h1>
-        </div>
-    </header>
+  <header id="home" class="color-header">
+    <!-- header content -->
+    <div class="caption v-middle text-center">
+      <h1>{% block title %}(no title){% endblock title %}</h1>
+    </div>
+  </header>
 {% endblock header %}
 <!-- ====== End Header ======  -->
 
 {% block content %}
 
-    {% bootstrap_messages %}
+  {% bootstrap_messages %}
 
 {% endblock content %}
 
 <!--====== Footer ======-->
 <footer>
 
-    <!-- main footer -->
-    <div class="main-footer">
-        <div class="container">
-            <div class="row">
+  <!-- main footer -->
+  <div class="main-footer">
+    <div class="container">
+      <div class="row">
 
-                <!-- item about -->
-                <div class="col-sm-3">
-                    <div class="item-about">
-                        <a href="{% url 'index' %}"><img class="small-logo"
-                                                         src="{% static 'images/buildingsync-logo-white.svg' %}"></a>
+        <!-- item about -->
+        <div class="col-sm-3">
+          <div class="item-about">
+            <a href="{% url 'index' %}"><img class="small-logo"
+                                             src="{% static 'images/buildingsync-logo-white.svg' %}"></a>
 
-                    </div>
-                </div>
-
-                <!-- twity -->
-                <div class="col-sm-9">
-                    <div class="item-about">
-                        <p>BuildingSync® is a registered trademark of the Alliance for Sustainable Energy, LLC.</p>
-                        <p><a href="https://www.nrel.gov" target="_blank">NREL</a> is a National Laboratory of the U.S.
-                            Department of Energy, Office of Energy Efficiency and Renewable Energy, operated by the
-                            Alliance for Sustainable Energy, LLC.</p>
-                        <!-- 	<div class="social-icon">
-                                <span><i class="fa fa-facebook" aria-hidden="true"></i></span>
-                                <span><i class="fa fa-twitter" aria-hidden="true"></i></span>
-                                <span><i class="fa fa-linkedin" aria-hidden="true"></i></span>
-                                <span><i class="fa fa-github" aria-hidden="true"></i></span>
-                            </div> -->
-                        {% block app_version %}{% endblock app_version %}
-                    </div>
-                </div>
-
-            </div>
+          </div>
         </div>
+
+        <!-- twity -->
+        <div class="col-sm-9">
+          <div class="item-about">
+            <p>BuildingSync® is a registered trademark of the Alliance for Sustainable Energy, LLC.</p>
+            <p><a href="https://www.nrel.gov/" target="_blank" rel="noopener">NREL</a> is a National Laboratory of the U.S.
+              Department of Energy, Office of Energy Efficiency and Renewable Energy, operated by the
+              Alliance for Sustainable Energy, LLC.</p>
+            <!-- 	<div class="social-icon">
+                    <span><i class="fa fa-facebook" aria-hidden="true"></i></span>
+                    <span><i class="fa fa-twitter" aria-hidden="true"></i></span>
+                    <span><i class="fa fa-linkedin" aria-hidden="true"></i></span>
+                    <span><i class="fa fa-github" aria-hidden="true"></i></span>
+                </div> -->
+            {% block app_version %}{% endblock app_version %}
+          </div>
+        </div>
+
+      </div>
     </div>
+  </div>
 
-    <!-- sub footer -->
+  <!-- sub footer -->
 
-    <!--====== End Footer ======-->
-
-
-    <!--====== js ======-->
+  <!--====== End Footer ======-->
 
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-    <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+  <!--====== js ======-->
 
-    <!-- bootstrap -->
-    <script src="https://unpkg.com/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
 
-    <!-- singlePageNav -->
-    <script src="{% static 'js/jquery.singlePageNav.min.js' %}"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
 
-    <!-- magnific-popup -->
-    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <!-- bootstrap -->
+  <script src="https://unpkg.com/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+          crossorigin="anonymous"></script>
 
-    <!-- owl carousel -->
-    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <!-- singlePageNav -->
+  <script src="{% static 'js/jquery.singlePageNav.min.js' %}"></script>
 
-    <!-- stellar js -->
-    <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <!-- magnific-popup -->
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
 
-    <!-- jquery.waypoints.min js -->
-    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <!-- owl carousel -->
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
 
-    <!-- jquery.counterup.min js -->
-    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+  <!-- stellar js -->
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
 
-    <!-- typed js -->
-    <!-- <script src="{% static 'js/typed.js' %}"></script> -->
+  <!-- jquery.waypoints.min js -->
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
 
-    <!-- isotope.pkgd.min js -->
-    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+  <!-- jquery.counterup.min js -->
+  <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
 
-    <!-- animated.headline js -->
-    <script src="{% static 'js/animated.headline.js' %}"></script>
+  <!-- typed js -->
+  <!-- <script src="{% static 'js/typed.js' %}"></script> -->
 
-    <!-- validator js -->
-    <script src="{% static 'js/validator.js' %}"></script>
+  <!-- isotope.pkgd.min js -->
+  <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
 
-    <!-- custom js -->
-    <script src="{% static 'js/custom.js' %}"></script>
-    {% block bootstrap_extra_script %}
-        {% block base_extra_script %}{% endblock %}
-    {% endblock bootstrap_extra_script %}
+  <!-- animated.headline js -->
+  <script src="{% static 'js/animated.headline.js' %}"></script>
+
+  <!-- validator js -->
+  <script src="{% static 'js/validator.js' %}"></script>
+
+  <!-- custom js -->
+  <script src="{% static 'js/custom.js' %}"></script>
+  {% block bootstrap_extra_script %}
+    {% block base_extra_script %}{% endblock %}
+  {% endblock bootstrap_extra_script %}
+</footer>
+
 </body>
 </html>

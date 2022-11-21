@@ -1,162 +1,175 @@
 /* BuildingSync style overrides */
 body {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 p {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .light-blue {
-    color: #3ba6dd;
+  color: #3ba6dd;
 }
 
 .dark-blue {
-    color: #005191;
+  color: #005191;
 }
 
 .nav-dark {
-    background: #005191;
+  background: #005191;
 }
 
 .color-header {
-    height: 25vh;
-    margin-top: 1rem;
+  height: 25vh;
+  margin-top: 1rem;
 }
 
 .red {
-    color: #d9534f;
+  color: #d9534f;
 }
 
 .green {
-    color: #5cb85c;
+  color: #5cb85c;
 }
 
 .bg-blue {
-    background-color: #005191 !important;
+  background-color: #005191 !important;
 }
 
 .demo-5 .owl-carousel .slide-1 {
-    background-image: url(../img/esif.jpg);
-    background-size: cover;
+  background-image: url(../img/esif.jpg);
+  background-image: image-set(url("../img/esif.webp") 1x);
+  background-image: -webkit-image-set(url("../img/esif.webp") 1x);
+  background-size: cover;
 }
 
 .demo-5 .owl-carousel .slide-2 {
-    background-image: url(../img/23320.jpg);
-    background-size: cover;
+  background-image: url(../img/23320.jpg);
+  background-image: image-set(url("../img/23320.webp") 1x);
+  background-image: -webkit-image-set(url("../img/23320.webp") 1x);
+  background-size: cover;
 }
 
 .demo-5 .owl-carousel .slide-3 {
-    background-image: url(../img/esif-alt.jpg);
-    background-size: cover;
+  background-image: url(../img/esif-alt.jpg);
+  background-image: image-set(url("../img/esif-alt.webp") 1x);
+  background-image: -webkit-image-set(url("../img/esif-alt.webp") 1x);
+  background-size: cover;
 }
 
 .fixed-top-nav {
-    background: #005191;
+  background: #005191;
 }
 
 .navbar-custom .dropdown-menu {
-    background: #005191;
+  background: #005191;
 }
 
 .navbar-brand {
-    padding: 10px 15px;
-    padding-left: 50px;
-    max-width: 200px;
+  padding: 10px 15px;
+  padding-left: 50px;
+  max-width: 200px;
 }
 
 .navbar-brand img {
-    width: 80%;
+  width: 80%;
 }
 
 .navbar-custom .nav li > a {
-    font-size: 13px;
+  font-size: 13px;
 }
 
 .serv-us {
-    /*background: rgba(0, 81, 145, .85);*/
-    background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)),
-    url(../img/23320.jpg);
+  /*background: rgba(0, 81, 145, .85);*/
+  background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url(../img/23320.jpg);
+  background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), image-set(url("../img/23320.webp") 1x);
+  background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), -webkit-image-set(url("../img/23320.webp") 1x);
 
-    color: #fff;
+  color: #fff;
 }
 
 .serv-us p {
-    color: #fff;
+  color: #fff;
 }
 
 .process {
-    background-image: url(../img/48963-2.jpg);
+  background-image: url(../img/48963-2.jpg);
+  background-image: image-set(url("../img/48963-2.webp") 1x);
+  background-image: -webkit-image-set(url("../img/48963-2.webp") 1x);
 }
 
 .clients {
-    background-image: url(../img/40889.png);
+  background-image: url(../img/40889.jpg);
+  background-image: image-set(url("../img/40889.webp") 1x);
+  background-image: -webkit-image-set(url("../img/40889.webp") 1x);
 }
 
 .numbers {
-    background-image: url(../img/148110017-digital-data-700.jpg);
+  background-image: url(../img/148110017-digital-data-700.jpg);
+  background-image: image-set(url("../img/148110017-digital-data-700.webp") 1x);
+  background-image: -webkit-image-set(url("../img/148110017-digital-data-700.webp") 1x);
 }
 
 footer .main-footer {
-    background: #005191;
+  background: #005191;
 }
 
 footer .sub-footer {
-    background: #005191;
+  background: #005191;
 }
 
 footer .main-footer a {
-    color: #fff;
+  color: #fff;
 }
 
 footer .main-footer p {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .small-logo {
-    width: 100%;
-    padding-top: 20px;
+  width: 100%;
+  padding-top: 20px;
 }
 
 .mb-2 {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .mt-2 {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .header-1 {
-    background-image: url(../img/esif2.jpg);
+  background-image: url(../img/esif2.jpg);
 }
 
 .app_version {
-    float: right;
-    color: #ccc;
-    font-size: 0.8em;
+  float: right;
+  color: #ccc;
+  font-size: 0.8em;
 }
 
 .btn-bord-dark:hover {
-    background: #005191;
+  background: #005191;
 }
 
 .btn-bg-light:hover {
-    background: #005191;
+  background: #005191;
 }
 
 /* divide each service row with a border rather than just the first row */
 .services .serv-row {
-    border-bottom: 1px solid #eee !important;
-    overflow: hidden !important;
+  border-bottom: 1px solid #eee !important;
+  overflow: hidden !important;
 }
 
 .table-enumerations td {
-    width: 33%;
-    padding: 0 1em;
+  width: 33%;
+  padding: 0 1em;
 }
 
 .big-margins {
@@ -165,62 +178,62 @@ footer .main-footer p {
 }
 
 .pad-bottom-med {
-    padding-bottom: 30px;
+  padding-bottom: 30px;
 }
 
 .wrap-it {
-    word-wrap: break-word;
-    border-bottom: 1px solid #ccc;
-    padding: 5px;
+  word-wrap: break-word;
+  border-bottom: 1px solid #ccc;
+  padding: 5px;
 }
 
 .val-res {
-    table-layout: fixed;
-    width:100%;
-    border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .pb-10 {
-    padding-bottom: 10px;
+  padding-bottom: 10px;
 }
 
 .ptb-10 {
-    padding-top: 10px;
-    padding-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .pb-20 {
-    padding-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 .sticky-nav {
-    position: sticky;
-    align-self: start;
-    overflow-x: unset;
+  position: sticky;
+  align-self: start;
+  overflow-x: unset;
 }
 
 .copy-link {
-    padding: 25px 0px;
+  padding: 25px 0px;
 }
 
 a#current-path {
-    color:#337ab7;
-    text-decoration: underline;
+  color: #337ab7;
+  text-decoration: underline;
 }
 
 #enum_results ul {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 #quicklinks ul {
-    padding-left: 20px;
-    list-style: none;
+  padding-left: 20px;
+  list-style: none;
 }
 
 #term_title {
-    font-size: 0.8em;
+  font-size: 0.8em;
 }
 
 ul.term-pad {
-    padding-left: 10px !important;
+  padding-left: 10px !important;
 }
