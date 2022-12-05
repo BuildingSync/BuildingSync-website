@@ -2,7 +2,7 @@
 # AUTHOR:           Nicholas Long <nicholas.long@nrel.gov>
 # DESCRIPTION:      Dockerfile for running BuildingSync Data Selection Tool
 # TO_BUILD_AND_RUN: docker-compose build && docker-compose up
-FROM alpine:3.8
+FROM alpine:3.10
 
 RUN apk add --no-cache python3 \
         python3-dev \
