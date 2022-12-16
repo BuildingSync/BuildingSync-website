@@ -214,6 +214,11 @@ def releases(request):
     return render(request, 'releases.html', context)
 
 
+def onboarding(request):
+    context = {}
+    return render(request, 'onboarding.html', context)
+
+
 def technical_resources(request):
     context = {}
     return render(request, 'technical_resources.html', context)

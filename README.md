@@ -14,43 +14,43 @@ This is the repository for the BuildingSync Validator web application.
     pyenv local bsync-validator-3.6.5
     ```
 1. Install PostgreSQL server for local development (if desired)
-	* Once installed, create your local database and user:
-		```bash
-		psql -c 'DROP DATABASE bsync_validator;'
-		psql -c 'CREATE DATABASE bsync_validator;'
-		psql -c "CREATE USER bsync_validator WITH ENCRYPTED PASSWORD 'bsync_validator';"
-		psql -c 'GRANT ALL PRIVILEGES ON DATABASE bsync_validator TO bsync_validator;'
-		psql -c 'ALTER USER bsync_validator CREATEDB;'
-		```
+    * Once installed, create your local database and user:
+        ```bash
+        psql -c 'DROP DATABASE bsync_validator;'
+        psql -c 'CREATE DATABASE bsync_validator;'
+        psql -c "CREATE USER bsync_validator WITH ENCRYPTED PASSWORD 'bsync_validator';"
+        psql -c 'GRANT ALL PRIVILEGES ON DATABASE bsync_validator TO bsync_validator;'
+        psql -c 'ALTER USER bsync_validator CREATEDB;'
+        ```
 1. Install Django and associated requirements:
-	```bash
-	pip install -r requirements.txt
-	```
+    ```bash
+    pip install -r requirements.txt
+    ```
 1. Initialize the database:
-	```bash
-	python manage.py migrate
-	```
+    ```bash
+    python manage.py migrate
+    ```
 1. Create a superuser:
-	```bash
-	python manage.py createsuperuser
-	```
+    ```bash
+    python manage.py createsuperuser
+    ```
 1. Start the app:
-	```bash
-	python manage.py runserver
-	```
+    ```bash
+    python manage.py runserver
+    ```
 
 ## Local Development
 
 * When making changes to models, run the following command to make migrations:
-	```bash
-	python manage.py makemigrations
-	python manage.py migrate
-	```
+    ```bash
+    python manage.py makemigrations
+    python manage.py migrate
+    ```
 
 * To test schema import, you can run this command:
-	```bash
-	python manage.py reset_schema --schema_version=1.0.0
-	```
+    ```bash
+    python manage.py reset_schema --schema_version=1.0.0
+    ```
 
 **NOTE**: You will need to be _off_ the NREL VPN to import a schema, otherwise you'll get an error related to http://www.gbxml.org/schema}Area' as the gbXML schema cannot be imported when on the NREL VPN.
 
