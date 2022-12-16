@@ -1,0 +1,32 @@
+{% extends 'base2.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Onboarding{% endblock title %}
+
+{% block content %}
+
+  <style>
+    .container {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+    ul {
+      font-size: 18px;
+      list-style: disc;
+      margin: 0 0 1em;
+      padding-left: 3em;
+    }
+    ul ul {
+      padding-left: 1em;
+    }
+    table + p, p:has(img) + p {
+      text-align: center;
+    }
+  </style>
+
+  <div class="container">
+    {% include "onboarding_content.html" %}
+  </div>
+
+{% endblock content %}

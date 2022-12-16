@@ -1,0 +1,152 @@
+<p><img src="../static/images/buildingsync-logo.png" /></p>
+<h1 id="buildingsync-onboarding-guide">BuildingSync Onboarding Guide</h1>
+<p><strong>National Renewable Energy Laboratory</strong></p>
+<p>Jie Xiong, Lauren Adams, Alex Swindler, Katherine Fleming, Cory Mosiman, Nicholas Long</p>
+<p>Last Updated: December 8, 2022</p>
+<p>Version 1.3</p>
+<h2 id="overview">Overview</h2>
+<p>BuildingSync is a building data exchange schema to better enable integration between software tools and building data workflows. The schema’s original use case was focused on commercial building energy audits; however, several additional use cases have been realized including building energy modeling and generic building data exchange.</p>
+<p>BuildingSync helps streamline the data exchange process, improving the value of the data, minimizing duplication of effort for subsequent building data collection efforts (including audits), and facilitating the achievement of greater energy efficiency.</p>
+<h2 id="buildingsync-use-cases">BuildingSync Use Cases</h2>
+<p>A BuildingSync use case is an (auditing) workflow within which BuildingSync is leveraged for data exchange in platform(s). Depending on the connected platform(s), various users can collect, report, process, and analyze audit data through BuildingSync for their specific objectives. BuildingSync considers the needs and interests of a wide range of users in the energy audit industry, including building owners, auditors, software developers, utilities, and program managers. Typical BuildingSync use cases include:</p>
+<ul>
+<li>Building energy assessment software integrating the ability to export BuildingSync-compatible files into their software;</li>
+<li>Energy auditing services choosing to use software that can output BuildingSync-compatible files;</li>
+<li>Building owners incorporating BuildingSync into their next RFP for a building energy audit by requiring the auditor to provide data in a BuildingSync-compatible format;</li>
+<li>Utilities choosing to recommend or require software that uses BuildingSync-compatible files for any programs involving energy audits.</li>
+</ul>
+<p>BuildingSync has traditionally been focused on exchanging data from auditing workflows in a linear fashion: typically an auditing tool would write a BuildingSync file which would then be read by a portfolio type tool to store the results. Note, though, that this is simply a single use case for BuildingSync and plenty more use cases exist, both real as well as aspirational.</p>
+<p>Table 1 below shows the <a href="https://buildingsync.net/use_cases">existing BuildingSync use cases</a> approved and validated:</p>
+<table>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 72%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BETTER</td>
+<td>Use case for BETTER analysis</td>
+</tr>
+<tr class="even">
+<td>BRICR SEED</td>
+<td>Use case for BRICR files on SEED Platform</td>
+</tr>
+<tr class="odd">
+<td>Bsyncr</td>
+<td>Use case for the R package bsyncr</td>
+</tr>
+<tr class="even">
+<td>L000 OpenStudio Pre-Simulation</td>
+<td>Level 000 OpenStudio Pre-Simulation Use Case. In alignment with ASHRAE Standard 211</td>
+</tr>
+<tr class="odd">
+<td>L100 Audit</td>
+<td>Use case for the ASHRAE Standard 211 level 1 audits</td>
+</tr>
+<tr class="even">
+<td>L100 OpenStudio Pre-Simulation</td>
+<td>Level 100 OpenStudio Pre-Simulation Use Case. In alignment with ASHRAE Standard 211</td>
+</tr>
+<tr class="odd">
+<td>L200 Audit</td>
+<td>Use case for the ASHRAE Standard 211 level 2 audits</td>
+</tr>
+<tr class="even">
+<td>New York City Audit Use Case</td>
+<td>NY LL87 use case for schema version 2.4.0</td>
+</tr>
+<tr class="odd">
+<td>San Francisco</td>
+<td>Use case for the city of San Francisco</td>
+</tr>
+<tr class="even">
+<td>SEED</td>
+<td>General use case for files on SEED Platform</td>
+</tr>
+</tbody>
+</table>
+<p>Table 1. List of currently supported use cases</p>
+<p>This document will describe the necessary steps to create a new BuildingSync use case to enable interoperability with software, tools, or databases.</p>
+<h2 id="use-case-definition">Use Case Definition</h2>
+<p>The first step is to define and design the use case framework. The following questions are to be answered and determined:</p>
+<ul>
+<li>What is the workflow of the use case?</li>
+<li>What tool is adopting/connecting to the BuildingSync schema?</li>
+<li>Will the tool read from or write to BuildingSync files?</li>
+<li>Is there an existing schema the tool is using?
+<ul>
+<li>Does the schema interact with BuildingSync already?</li>
+<li>Are two schemas merging together or do translations need to be developed?</li>
+</ul></li>
+<li>What <a href="https://buildingsync.net/mlod">Modeling Level of Detail (MLOD)</a> will be considered in this use case?</li>
+</ul>
+<h2 id="use-case-implementation">Use Case Implementation</h2>
+<p>The use case implementation is a set of rules applied to the BuildingSync schema and is defined in the language <a href="https://schematron.com/">Schematron</a>. Schematron allows us to define special requirements for XML documents by writing rules. The rules are used to define stricter or more specific documents that can be used in the workflow enabled by the use case. These rules are generally written using XPaths and assertions about element counts, contents, properties, etc. Schematron also allows you to specify the “severity” of an assertion (e.g., INFO, WARNING, or ERROR) along with a custom message for the user running the validation.</p>
+<p>Documents that are valid with respect to the use case are also valid with respect to the more general BuildingSync schema. For example, while the BuildingSync schema has multiple optional fields that can represent a building’s location (latitude, longitude, street address, city, state, zip code, country, etc.), a use case may require that all documents contain the building’s zip code.</p>
+<p>The use case Schematron should define:</p>
+<ul>
+<li>Required and optional data.</li>
+<li>Valid options for enumeration fields</li>
+<li>Required data format</li>
+<li>Data quality and quantity</li>
+<li>Dependencies between data fields</li>
+</ul>
+<p>To begin writing a Schematron use case, you can refer to existing use cases published on the <a href="https://buildingsync.net/">BuildingSync website</a> and check out these general resources on Schematron:</p>
+<ul>
+<li><a href="https://drive.google.com/file/d/1hvwEWCA03dHQez3QRBdwi9I1rUBWgfy3/view?usp=sharing">BuildingSync and Schematron Presentation</a></li>
+<li><a href="https://www.xfront.com/schematron/index.html">Tutorials on Schematron</a></li>
+<li><a href="https://upg-dh.newtfire.org/explainSchematron.html#:~:text=The%20skeleton%20of%20a%20Schematron%20rule">Explain Schematron</a></li>
+<li><a href="https://standards.iso.org/ittf/PubliclyAvailableStandards/c055982_ISO_IEC_19757-3_2016.zip">Schematron 2016 ISO</a></li>
+</ul>
+<p>We have also created a tool which eases the process of writing Schematron. It allows you to write Schematron in a CSV format and then generate a Schematron document from that CSV. Refer to the docs in the <a href="https://github.com/BuildingSync/TestSuite#generate-schematron">BuildingSync TestSuite repo</a> for more information.</p>
+<h2 id="gotchas">Gotchas</h2>
+<p>There are some common gotchas that can occur when writing Schematron which we outline below:</p>
+<ul>
+<li>Rule contexts that don’t match an XML node will be ignored. If you want to test in the context <code>/a/b/c</code>, but <code>b</code> does not exist, the tests within the rule will not be run. Thus if you want to make sure it always runs, you need to first assert the path to your context exists (recursively…)</li>
+<li>If two rule contexts match the same XML node, only the first is fired/used. For example, if you had two rules, the first with the context <code>/a/b</code> and the second with the context <code>/a/b[@id = 1]</code>, the first rule matches <em>all</em> <code>b</code> elements, so there are none “left” to match the second rule context. To get around this you need to move the tests into separate patterns <code>b/c</code> starting a new pattern resets this condition.</li>
+<li>It’s really easy to make semantic typos when writing long/complex XPaths. This is obviously a problem because, due to the first gotcha mentioned, your rule may never be run because of your typo and you’d have no idea. For example, if you wanted to test <code>/animals/dogs</code> but misspelled it as <code>/aminals/dogs</code> the rule would get skipped. The only workaround for this is to write meta-tests for your use case. This means using another test framework, like python’s unittest, to run the schematron against many different documents to make sure everything is as it should be.</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<ol type="1">
+<li><p>Problem: I need to check some element that’s conditionally selected by an ancestor or sibling element</p>
+<p>Example: For the Standard 211 Level 2 Schematron, we wanted to make sure the gross floor area was provided for a building, but we don’t care if the other floor area types (e.g. Heated, Cooled, Open, etc) have the floor area provided. Using <a href="https://www.tutorialspoint.com/xpath/xpath_predicate.htm">XPath predicates</a> we can select the floor area we want to test like so:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">sch:rule</span><span class="ot"> context=</span><span class="st">&quot;//auc:Buildings/auc:Building/auc:FloorAreas/auc:FloorArea[auc:FloorAreaType/text() = &#39;Gross&#39;]&quot;</span>&gt;</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">sch:assert</span><span class="ot"> test=</span><span class="st">&quot;count(auc:FloorAreaValue) &gt; 0&quot;</span>&gt;FloorAreaValue must be provided for Gross floor area&lt;/<span class="kw">sch:assert</span>&gt;</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">sch:rule</span>&gt;</span></code></pre></div>
+<p>XPath predicates are very powerful and can allow you to even reach across the entire XML tree (see the example below for checking linked elements).</p></li>
+<li><p>Problem: I need to check that an element is properly linked to another element somewhere else in the XML tree</p>
+<p>Example: BuildingSync uses <code>IDref</code> attributes to link one element to another. For the Standard 211 Level 2 Schematron, we needed to make sure that the building included <code>auc:PrimaryContactID</code> with the attribute <code>IDref</code> which pointed to the ID attribute of an <code>auc:Contact</code>. We use XPath predicates again to make this happen:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">sch:rule</span><span class="ot"> context=</span><span class="st">&quot;//auc:Buildings/auc:Building&quot;</span>&gt;</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">sch:assert</span><span class="ot"> test=</span><span class="st">&quot;auc:PrimaryContactID[@IDref=//auc:Contacts/auc:Contact/@ID]&quot;</span>&gt;auc:PrimaryContactID must exist and link to a valid auc:Contact&lt;/<span class="kw">sch:assert</span>&gt;</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">sch:rule</span>&gt;</span></code></pre></div></li>
+<li><p>Problem: I need to do a simple summation of multiple elements to check a value</p>
+<p>Example: You might want to assert that the sum of all electricity meter usage reports are equal to the reported annual fuel use (<code>auc:AnnualFuelUseNativeUnits</code> or <code>auc:AnnualFuelUseConsistentUnits</code>). This can be accomplished using the XPath <code>sum()</code> function. See the example below which also demonstrates how to use variables to make the tests more easily readable:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">sch:rule</span><span class="ot"> context=</span><span class="st">&quot;//auc:Buildings/auc:Building&quot;</span>&gt;</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">sch:let</span><span class="ot"> name=</span><span class="st">&quot;summedMeters&quot;</span><span class="ot"> value=</span><span class="st">&quot;sum(//auc:TimeSeriesData/auc:TimeSeries/auc:IntervalReading)&quot;</span>/&gt;</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">sch:assert</span><span class="ot"> test=</span><span class="st">&quot;$summedMeters //auc:ResourceUses/auc:ResourceUse/auc:AnnualFuelUseNativeUnits&quot;</span>&gt;auc:AnnualFuelUseNativeUnits must equal the sum of auc:TimeSeries readings&lt;/<span class="kw">sch:assert</span>&gt;</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">sch:rule</span>&gt;</span></code></pre></div>
+<p>This test makes a few assumptions (that there’s only one resource use type, the reported interval reading is in the native units) but it gets the point across.</p></li>
+</ol>
+<h2 id="use-case-publication">Use Case Publication</h2>
+<p>Use cases are published in the <a href="https://github.com/BuildingSync/use-cases">BuildingSync/use-case repository</a>. These use cases are also included on the BuildingSync website’s <a href="https://buildingsync.net/validator">Use Case Validator tool</a>, allowing users to check if their BuildingSync document passes your use case’s requirements.</p>
+<p>To publish a use case, please refer to the <a href="https://github.com/BuildingSync/use-cases#contributing">repository’s documentation</a>; in summary you need a Schematron which meets the specification as well as at least one example BuildingSync file which should be valid according to your Schematron. Once your Schematron has been approved and added to the repository, the BuildingSync team will add it to the BuildingSync website. Figure 1 below illustrates the publication workflow.</p>
+<p><img src="../static/img/adding-use-cases.jpg" /></p>
+<p>Figure 1. Adding and validating BuildingSync use case</p>
+<h2 id="validation">Validation</h2>
+<p>Users can use the <a href="https://buildingsync.net/validator">BuildingSync Use Case Selection Tool / Validator</a> to validate XML documents against both the general BuildingSync schema in different versions and public use cases. The validator can be used directly on the BuildingSync Selection Tool, and example files are also provided. Other customizable validation methods and examples can be found on the <a href="https://buildingsync.net/technical_resources">BuildingSync Technical Resources website</a>.</p>
+<p>Additionally, a Validator API has been developed to programmatically validate XML files within a third-party web tool or software package. More information on the API can be seen on the <a href="https://github.com/BuildingSync/BuildingSync-website#validator">Validator on GitHub</a>.</p>
+<h2 id="resources">Resources</h2>
+<p>The following resources may be useful for use case development.</p>
+<ul>
+<li><a href="https://github.com/BuildingSync/TestSuite">BuildingSync TestSuite</a> - example BuildingSync files and tools for writing and validating BuildingSync use cases as Schematron files</li>
+<li><a href="https://github.com/BuildingSync/use-cases">BuildingSync use cases repo</a> - BuildingSync use case files defined in Schematron. And within the BuildingSync TestSuite, there are several XML examples that are validated for published use cases</li>
+<li><a href="https://github.com/BuildingSync/schema/tree/develop-v2/examples">More example XML files</a> - there are more XML examples for specific use cases</li>
+<li><a href="https://nbviewer.jupyter.org/github/BuildingSync/schema/blob/develop/docs/notebooks/bsync_examples/Small-Office-Level-1.ipynb">Interactive Tutorial</a> - an annotated Jupyter Notebook for walking through a Level 1 Audit for a small office building</li>
+<li><a href="http://schematron.com/">Schematron Website</a> - for general information about the Schematron format</li>
+</ul>

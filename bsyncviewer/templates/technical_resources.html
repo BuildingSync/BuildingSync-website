@@ -11,10 +11,14 @@
     <h3>Guides</h3>
     <div class="list">
       <ul>
-        <li><a href="https://github.com/BuildingSync/schema/blob/develop-v2/docs/notebooks/bsync_examples/Small-Office-Level-1.md" target="_blank" rel="noopener"><b>Energy Auditing with
-          BuildingSync</b></a>: an interactive introduction to what BuildingSync is and how it relates to buildings, building systems, and energy audit reporting.
+        <li><strong>Energy Auditing with BuildingSync</strong>: an interactive introduction to what BuildingSync is and how it relates to buildings, building systems, and energy audit reporting.
+          <ul>
+            <li><strong><a href="https://github.com/BuildingSync/schema/blob/develop-v2/docs/notebooks/bsync_examples/Small-Office-Level-1.md" target="_blank" rel="noopener">Small Office Level 1</a></strong></li>
+            <li><strong><a href="https://github.com/BuildingSync/schema/blob/develop-v2/docs/notebooks/bsync_examples/Small-Office-Level-2.md" target="_blank" rel="noopener">Small Office Level 2</a></strong></li>
+            <li><strong><a href="https://github.com/BuildingSync/schema/blob/develop-v2/docs/notebooks/bsync_examples/Primary-School-Levels1-2.md" target="_blank" rel="noopener">Primary School Levels 1-2</a></strong></li>
+          </ul>
         </li>
-        <li><a href="{% static 'documents/BuildingSync-on-boarding.pdf' %}" target="_blank"><b>BuildingSync On-boarding Guide</b></a>: a PDF documenting BuildingSync Use Cases, their implementation
+        <li><a href="{% static 'documents/BuildingSync-on-boarding.pdf' %}" target="_blank"><strong>BuildingSync On-boarding Guide</strong></a>: a PDF documenting BuildingSync Use Cases, their implementation
           and publication.
         </li>
       </ul>
@@ -22,8 +26,7 @@
 
     <h3>File Validation</h3>
 
-    <p class="larger">For validation of BuildingSync XML files, the XML file undergoes a two step validation process (see <a href="#validation-using-oxygenxml">Validation Using OxygenXML</a> for an
-      example).</p>
+    <p class="larger">For validation of BuildingSync XML files, the XML file undergoes a two-step validation process.</p>
     <div class="list">
       <ol>
         <li><h4>Validation against an XML XSD document</h4>
@@ -82,57 +85,6 @@
           files pass successfully and are backward compatible.
         </li>
       </ol>
-    </div>
-
-    <h3 id="validation-using-oxygenxml">Validation Using OxygenXML</h3>
-    <p class="larger">Clone the <a href="https://github.com/BuildingSync/schema" target="_blank" rel="noopener">BuildingSync/schema</a> repository locally, and open the following files:</p>
-    <div class="list">
-      <ul>
-        <li>'BuildingSync.xsd'</li>
-        <li>'examples/BuildingSync Website Invalid Schema.xml'</li>
-        <li>'examples/BuildingSync Website Valid Schema.xml'</li>
-      </ul>
-    </div>
-
-    <div class="screenshot">
-      <img src="{% static 'images/open_files.png' %}" alt="open files"/>
-    </div>
-
-    <h3 id="validation-against-xsd">Validation Against XSD</h3>
-
-    <p class="larger">Using the OxygenXML Validate button, the Valid Schema shows a valid result against the XSD:</p>
-    <div class="screenshot">
-      <img src="{% static 'images/valid_xsd.png' %}" alt="valid schema"/>
-    </div>
-
-    <p class="larger">For the invalid schema, we can see all of the errors found, with descriptions:</p>
-
-    <div class="screenshot">
-      <img src="{% static 'images/invalid_xsd1.png' %}" alt="invalid schema example 1"/>
-    </div>
-    <div class="screenshot">
-      <img src="{% static 'images/invalid_xsd2.png' %}" alt="invalid schema example 2"/>
-    </div>
-
-
-    <div class="screenshot">
-      <img src="{% static 'images/open_files.png' %}" alt="open files"/>
-    </div>
-
-    <h3 id="validation-against-xsd">Validation Against XSD</h3>
-
-    <p class="larger">Using the OxygenXML Validate button, the Valid Schema shows a valid result against the XSD:</p>
-    <div class="screenshot">
-      <img src="{% static 'images/valid_xsd.png' %}" alt="valid schema"/>
-    </div>
-
-    <p class="larger">For the invalid schema, we can see all of the errors found, with descriptions:</p>
-
-    <div class="screenshot">
-      <img src="{% static 'images/invalid_xsd1.png' %}" alt="invalid schema example 1"/>
-    </div>
-    <div class="screenshot">
-      <img src="{% static 'images/invalid_xsd2.png' %}" alt="invalid schema example 2"/>
     </div>
 
     <h3 id="validation-against-schematron">Validation Against Schematron</h3>
