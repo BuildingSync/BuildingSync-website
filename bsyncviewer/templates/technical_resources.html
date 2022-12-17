@@ -8,23 +8,21 @@
 
   <div class="container bsync-main">
 
-    <h3>Guides</h3>
+    <h3>Getting Started / Helpful Guides</h3>
     <div class="list">
       <ul>
-        <li><strong>Energy Auditing with BuildingSync</strong>: an interactive introduction to what BuildingSync is and how it relates to buildings, building systems, and energy audit reporting.
+        <li><strong><a href="https://github.com/BuildingSync/schema/tree/develop-v2/docs/notebooks/bsync_examples" target="_blank" rel="noopener">Energy Auditing with BuildingSync</a></strong>: an interactive introduction to what BuildingSync is and how it relates to buildings, building systems, and energy audit reporting.
           <ul>
-            <li><strong><a href="https://github.com/BuildingSync/schema/blob/develop-v2/docs/notebooks/bsync_examples/Small-Office-Level-1.md" target="_blank" rel="noopener">Small Office Level 1</a></strong></li>
-            <li><strong><a href="https://github.com/BuildingSync/schema/blob/develop-v2/docs/notebooks/bsync_examples/Small-Office-Level-2.md" target="_blank" rel="noopener">Small Office Level 2</a></strong></li>
-            <li><strong><a href="https://github.com/BuildingSync/schema/blob/develop-v2/docs/notebooks/bsync_examples/Primary-School-Levels1-2.md" target="_blank" rel="noopener">Primary School Levels 1-2</a></strong></li>
+            <li><strong><a href="https://github.com/BuildingSync/schema/blob/develop-v2/docs/notebooks/bsync_examples/Small-Office-Level-1.md" target="_blank" rel="noopener">Example Level 1 Energy Audit on a Prototype Small Office building</a></strong></li>
+            <li><strong><a href="https://github.com/BuildingSync/schema/blob/develop-v2/docs/notebooks/bsync_examples/Small-Office-Level-2.md" target="_blank" rel="noopener">Example Level 2 Energy Audit on a Prototype Small Office building</a></strong></li>
+            <li><strong><a href="https://github.com/BuildingSync/schema/blob/develop-v2/docs/notebooks/bsync_examples/Primary-School-Levels1-2.md" target="_blank" rel="noopener">Example Level 1 & 2 Energy Audit on a Prototype Primary School</a></strong></li>
           </ul>
         </li>
-        <li><a href="{% static 'documents/BuildingSync-on-boarding.pdf' %}" target="_blank"><strong>BuildingSync On-boarding Guide</strong></a>: a PDF documenting BuildingSync Use Cases, their implementation
-          and publication.
-        </li>
+        <li><a href="{% url 'onboarding' %}"><strong>BuildingSync Onboarding Guide</strong></a>: documents BuildingSync use cases, their implementation, and publication.</li>
       </ul>
     </div>
 
-    <h3>File Validation</h3>
+    <h3>Validation Methods and Tools</h3>
 
     <p class="larger">For validation of BuildingSync XML files, the XML file undergoes a two-step validation process.</p>
     <div class="list">
@@ -87,29 +85,32 @@
       </ol>
     </div>
 
-    <h3 id="validation-against-schematron">Validation Against Schematron</h3>
-    <p class="larger">Download the Schematron document
-      <a
-        onclick="saveAs('https://raw.githubusercontent.com/BuildingSync/assetscore-schematron-docs/master/docs/Audit_Template/New_York_City_Energy_Efficiency_Report.xml', 'New_York_City_Energy_Efficiency_Report.xml')"
-        style="cursor:pointer;">
-        Audit Template Example
-      </a>
-      and save to a known local path.
-    </p>
+    <h4>New Users</h4>
+    <p><em>"I have a BuildingSync file, but I do not know if it is valid and/or will work for my use case."</em> - Use the <a href="{% url 'validator' %}">Validator Tool</a> to validate the file against the BuildingSync schema and all published use cases</p>
 
-    <p class="larger">In an XML editor, choose the <em>validate</em> drop down, and select <em>validate with</em>:</p>
-    <div class="screenshot">
-      <img src="{% static 'images/sch1.png' %}" alt="schematron validation 1"/>
+    <h4>Application Developer</h4>
+    <p><em>"I have an application that I want to build and I would like to validate the incoming BuildingSync schema automatically."</em> - Set up an automated validation workflow through the Validator API and/or a Python package</p>
+
+    <div class="list">
+      <ul>
+        <li>Use the <a href="https://github.com/BuildingSync/BuildingSync-website#validator" target="_blank" rel="noopener">Validator API</a> for validation against schema and use cases
+          <ul style="margin-bottom:0">
+            <li style="padding-bottom:0">Example: the <a href="https://seed-platform.org/" target="_blank" rel="noopener">SEED Platform</a> makes requests to the <a href="https://github.com/SEED-platform/seed/blob/v2.17.0/seed/building_sync/validation_client.py">Validator API</a> for validating BuildingSync inputs and outputs</li>
+          </ul>
+        </li>
+        <li>Use the functions in the <em><a href="https://github.com/BuildingSync/TestSuite" target="_blank" rel="noopener">testsuite</a></em> <a href="https://pypi.org/project/testsuite/" target="_blank" rel="noopener">Python package</a> to create use case schematrons and validate against them</li>
+      </ul>
     </div>
-    <div class="screenshot">
-      <img src="{% static 'images/sch2.png' %}" alt="schematron validation 2"/>
-    </div>
-    <p class="larger">The Schematron validator will provide very verbose errors specific to the use case. Note that schematron will generate errors on both the 'BuildingSync Website Valid Schema.xml'
-      and 'BuildingSync Website Invalid Schema.xml' documents, because while these are valid according to the XSD, they do not conform to the use case requirements:</p>
-    <div class="screenshot">
-      <img src="{% static 'images/sch3.png' %}" alt="schematron validation 3"/>
+
+    <h4>BuildingSync Developer</h4>
+    <p><em>"I want to update BuildingSync and I need to test examples"</em> - Use any XML&XSD editor to modify the BuildingSync schema; create and edit the BuildingSync XML instance and validate the XML files against the schema</p>
+
+    <p>Available third-party tools:</p>
+    <div class="list">
+      <ul>
+        <li><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS Code</a> with <a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml" target="_blank" rel="noopener">XML extension</a></li>
+        <li><a href="https://www.oxygenxml.com/" target="_blank" rel="noopener">Oxygen XML Editor</a> (need a purchased license), and other various web-based XML editors</li>
+      </ul>
     </div>
   </div>
-  <!-- filesaver -->
-  <script src="{% static 'js/filesaver.js' %}"></script>
 {% endblock content %}
