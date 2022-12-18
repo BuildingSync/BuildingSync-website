@@ -4,6 +4,8 @@
 
 - Updated selection-tool github references to BuildingSync-website
 - Point interactive website to `develop-v2` version.
+- Various website cleanup
+- Upgrade docker image to alpine:3.10 to use Python 3.7.x series.
 
 ## Version 1.1.4
 
