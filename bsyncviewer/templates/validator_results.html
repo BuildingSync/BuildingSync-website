@@ -29,7 +29,9 @@
               {% for err in validation_results.schema.errors %}
                 <tr class="wrap-it">
                   <td class="ptb-10">{{ forloop.counter }}.</td>
-                  <td class="ptb-10">{{ err.path }} <br>
+                  <td class="ptb-10">
+                    <div class="label label-warning pad5">{{err.warning}}</div>
+                    {{ err.path }} <br>
                     {{ err.message }}
                   </td>
                 </tr>

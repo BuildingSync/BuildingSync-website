@@ -59,14 +59,8 @@ class ValidationWorkflow(object):
                         # valid
                         resp['valid'] = True
                     else:
-                        print("v5")
                         resp['valid'] = False
-                        print(" {} schema validation ERRORS found.".format(len(errors)))
-                        resp['errors'] = []
-                        for err in errors:
-                            print("hi")
-                            tmp_err = {'path': err.path.replace('auc:', ''), 'message': err.reason}
-                            resp['errors'].append(tmp_err)
+                        resp['errors'] = self._format_erorr(errors)
 
                 except xmlschema.validators.exceptions.XMLSchemaValidationError as ex:
                     print("XMLSCHEMA VALIDATION ERROR EXCEPTION")
@@ -108,6 +102,22 @@ class ValidationWorkflow(object):
 
         return resp
 
+    def _format_erorr(self, errors):
+        res = []
+        for err in errors:
+            path = err.path.replace('auc:', '')
+            reason = err.reason
+            warning = None
+
+            if path.split("/")[-1] == "UsefulLife" and \
+                reason.startswith("invalid literal for int() with base 10:"):
+                warning = "This error is a result of a breaking change between BuildingSync Schema 2.4 and 2.5."
+                reason = "Remove the decimal point. (" + reason + ")"
+
+            res.append({'path': path, 'message': reason, "warning": warning})
+
+        return res
+    
     def validate_use_cases(self):
         resp = OrderedDict()
         processed_use_cases = {}
