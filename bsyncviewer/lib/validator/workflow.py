@@ -110,14 +110,14 @@ class ValidationWorkflow(object):
             warning = None
 
             if path.split("/")[-1] == "UsefulLife" and \
-                reason.startswith("invalid literal for int() with base 10:"):
+            reason.startswith("invalid literal for int() with base 10:"):
                 warning = "This error is a result of a breaking change between BuildingSync Schema 2.4 and 2.5."
                 reason = "Remove the decimal point. (" + reason + ")"
 
             res.append({'path': path, 'message': reason, "warning": warning})
 
         return res
-    
+
     def validate_use_cases(self):
         resp = OrderedDict()
         processed_use_cases = {}
