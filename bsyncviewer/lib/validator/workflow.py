@@ -60,7 +60,7 @@ class ValidationWorkflow(object):
                         resp['valid'] = True
                     else:
                         resp['valid'] = False
-                        resp['errors'] = self._format_erorr(errors)
+                        resp['errors'] = self._format_error(errors)
 
                 except xmlschema.validators.exceptions.XMLSchemaValidationError as ex:
                     print("XMLSCHEMA VALIDATION ERROR EXCEPTION")
@@ -102,7 +102,7 @@ class ValidationWorkflow(object):
 
         return resp
 
-    def _format_erorr(self, errors):
+    def _format_error(self, errors):
         res = []
         for err in errors:
             path = err.path.replace('auc:', '')
