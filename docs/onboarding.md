@@ -48,7 +48,7 @@ Table 1 below shows the [existing BuildingSync use cases](https://buildingsync.n
 | L100 Audit                     | Use case for the ASHRAE Standard 211 level 1 audits                                 |
 | L100 OpenStudio Pre-Simulation | Level 100 OpenStudio Pre-Simulation Use Case. In alignment with ASHRAE Standard 211 |
 | L200 Audit                     | Use case for the ASHRAE Standard 211 level 2 audits                                 |
-| New York City Audit Use Case   | NY LL87 use case for schema version 2.4.0                                           |
+| New York City Audit Use Case   | NY LL87 use case for schema version 2.5.0                                           |
 | San Francisco                  | Use case for the city of San Francisco                                              |
 | SEED                           | General use case for files on SEED Platform                                         |
 

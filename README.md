@@ -271,12 +271,13 @@ Admin interface is available at `/admin`
 
 Follow these steps to add a new schema version to the selection tool:
 
-1. Add the schema file in the admin interface. Must have admin privileges. The schema will get automatically parsed.
-1. Convert existing use cases schematron files to the new schema. Add the new use cases.
-1. When the use cases have been reviewed, make them public in the admin interface.
-1. Create XML example files and place them in the `lib/validator/examples/schema<VERSION>` directory.
-1. Test the validator with the new XML example files.
-1. Reparse bedes terms to map them to the new schema following the steps in the BEDES section above.
+1. Add the schema file in the admin interface. Must have admin privileges. The schema will get automatically parsed. Add the enumeration.json file created from the release. Hit the "Save" button once and wait patiently.
+2. Update the versions in the DEFAULT_SCHEMA_VERSION in the dev.py, gh_actions.py, and docker.py with the latest release.
+3. Convert existing use cases schematron files to the new schema. Add the new use cases.
+4. When the use cases have been reviewed, make them public in the admin interface. Add the schematron file and hit "Save" once and wait for each use case.
+5. Create XML example files and place them in the `bsyncviewer/lib/validator/examples/schema<VERSION>` directory. Add the compressed folder of all the updated examples in the directory.
+6. Test the validator with a local new XML example file.
+7. Reparse BEDES terms to map them to the new schema following the steps in the BEDES section above.
 
 ### Adding Examples from the TestSuite repo
 
