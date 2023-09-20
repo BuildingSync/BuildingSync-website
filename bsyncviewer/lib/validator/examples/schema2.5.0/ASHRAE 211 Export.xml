@@ -1,0 +1,2706 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BuildingSync xmlns="http://buildingsync.net/schemas/bedes-auc/2019" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://buildingsync.net/schemas/bedes-auc/2019 ../BuildingSync.xsd" version="2.5.0">
+  <Facilities>
+    <Facility ID="Facility-9dd5d819-4587-4702-95dc-bf2775840cb6">
+      <Sites>
+        <Site ID="Site-8e26a9ff-0220-44bd-a811-787f44102c0c">
+          <Address>
+            <StreetAddressDetail>
+              <Simplified>
+                <StreetAddress>9999 Tulie Circle</StreetAddress>
+              </Simplified>
+            </StreetAddressDetail>
+            <City>Atlanta</City>
+            <State>GA</State>
+            <PostalCode>99999</PostalCode>
+            <PostalCodePlus4>9999</PostalCodePlus4>
+          </Address>
+          <Buildings>
+            <Building ID="Building1">
+              <PremisesName>ASHRAE 211 Export: Test Building Input Data</PremisesName>
+              <PremisesNotes>Historic landmark status. Spaces excluded from gross floor area: Parking</PremisesNotes>
+              <OccupancyClassification>Agricultural estate</OccupancyClassification>
+              <OccupancyLevels>
+                <OccupancyLevel>
+                  <OccupantQuantityType>Adults</OccupantQuantityType>
+                  <OccupantQuantity>99999</OccupantQuantity>
+                </OccupancyLevel>
+              </OccupancyLevels>
+              <OwnershipStatus>Leased</OwnershipStatus>
+              <FloorAreas>
+                <FloorArea>
+                  <FloorAreaType>Gross</FloorAreaType>
+                  <FloorAreaValue>198000</FloorAreaValue>
+                </FloorArea>
+                <FloorArea>
+                  <FloorAreaType>Conditioned</FloorAreaType>
+                  <FloorAreaValue>100000</FloorAreaValue>
+                </FloorArea>
+                <FloorArea>
+                  <FloorAreaType>Heated only</FloorAreaType>
+                  <FloorAreaValue>50000</FloorAreaValue>
+                </FloorArea>
+                <FloorArea>
+                  <FloorAreaType>Cooled only</FloorAreaType>
+                  <FloorAreaValue>80000</FloorAreaValue>
+                </FloorArea>
+              </FloorAreas>
+              <YearOfConstruction>1888</YearOfConstruction>
+              <YearOfLastEnergyAudit>2001</YearOfLastEnergyAudit>
+              <RetrocommissioningDate>2010-07-01</RetrocommissioningDate>
+              <YearOfLastMajorRemodel>2001</YearOfLastMajorRemodel>
+              <Sections>
+                <Section ID="Wholebuilding">
+                  <PremisesName>Wholebuilding</PremisesName>
+                  <YearOfConstruction>1888</YearOfConstruction>
+                  <FootprintShape>U-Shape</FootprintShape>
+                  <Sides>
+                    <Side>
+                      <WallID IDref="AllWall1">
+                        <WallArea>5000</WallArea>
+                      </WallID>
+                      <WindowID IDref="Window1">
+                        <WindowToWallRatio>0.5</WindowToWallRatio>
+                      </WindowID>
+                    </Side>
+                  </Sides>
+                  <Roofs>
+                    <Roof>
+                      <RoofID IDref="Roof1">
+                        <RoofArea>2000</RoofArea>
+                      </RoofID>
+                    </Roof>
+                  </Roofs>
+                  <Foundations>
+                    <Foundation>
+                      <FoundationID IDref="Foundation1">
+                        <FoundationArea>1000</FoundationArea>
+                      </FoundationID>
+                    </Foundation>
+                  </Foundations>
+                  <FloorsAboveGrade>3</FloorsAboveGrade>
+                  <FloorsBelowGrade>1</FloorsBelowGrade>
+                  <ThermalZones>
+                    <ThermalZone ID="ThermalZone-d114964d-c4a7-4234-aa74-e984acfd1dd0">
+                      <Spaces>
+                        <Space ID="Space-43f80c99-304c-40bf-aa5d-f22aeb152a12">
+                          <PremisesName>A</PremisesName>
+                          <OccupancyClassification>Office</OccupancyClassification>
+                          <OccupancyLevels>
+                            <OccupancyLevel>
+                              <OccupantQuantityType>Adults</OccupantQuantityType>
+                              <OccupantQuantity>9999</OccupantQuantity>
+                            </OccupancyLevel>
+                          </OccupancyLevels>
+                          <FloorAreas>
+                            <FloorArea>
+                              <FloorAreaType>Gross</FloorAreaType>
+                              <FloorAreaValue>1000000</FloorAreaValue>
+                            </FloorArea>
+                            <FloorArea>
+                              <FloorAreaType>Conditioned</FloorAreaType>
+                              <FloorAreaValue>500000</FloorAreaValue>
+                            </FloorArea>
+                          </FloorAreas>
+                          <UserDefinedFields>
+                            <UserDefinedField>
+                              <FieldName>Original intented use</FieldName>
+                              <FieldValue>Courthouse</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Number of PC's and/or Laptops</FieldName>
+                              <FieldValue>9999</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Use (hours/week)</FieldName>
+                              <FieldValue>60</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Use (weeks/year)</FieldName>
+                              <FieldValue>52</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Principle HVAC Type </FieldName>
+                              <FieldValue>VAV RH</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Principle Lighting Type </FieldName>
+                              <FieldValue>3-Lamp T8</FieldValue>
+                            </UserDefinedField>
+                          </UserDefinedFields>
+                        </Space>
+                        <Space ID="Space-dc16a7e6-e52f-4ba2-90ce-b816675ccba3">
+                          <PremisesName>B</PremisesName>
+                          <OccupancyClassification>Other</OccupancyClassification>
+                          <OccupancyLevels>
+                            <OccupancyLevel>
+                              <OccupantQuantityType>Adults</OccupantQuantityType>
+                              <OccupantQuantity>9999</OccupantQuantity>
+                            </OccupancyLevel>
+                          </OccupancyLevels>
+                          <FloorAreas>
+                            <FloorArea>
+                              <FloorAreaType>Gross</FloorAreaType>
+                              <FloorAreaValue>1000000</FloorAreaValue>
+                            </FloorArea>
+                            <FloorArea>
+                              <FloorAreaType>Conditioned</FloorAreaType>
+                              <FloorAreaValue>1000000</FloorAreaValue>
+                            </FloorArea>
+                          </FloorAreas>
+                          <UserDefinedFields>
+                            <UserDefinedField>
+                              <FieldName>Original intented use</FieldName>
+                              <FieldValue>Office</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Number of PC's and/or Laptops</FieldName>
+                              <FieldValue>9999</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Use (hours/week)</FieldName>
+                              <FieldValue>60</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Use (weeks/year)</FieldName>
+                              <FieldValue>52</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Principle HVAC Type </FieldName>
+                              <FieldValue>VAV RH</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Principle Lighting Type </FieldName>
+                              <FieldValue>3-Lamp T8</FieldValue>
+                            </UserDefinedField>
+                          </UserDefinedFields>
+                        </Space>
+                        <Space ID="Space-e92c3133-564b-4246-acdc-d3386fcef802">
+                          <PremisesName>C</PremisesName>
+                          <OccupancyClassification>Education</OccupancyClassification>
+                          <OccupancyLevels>
+                            <OccupancyLevel>
+                              <OccupantQuantityType>Adults</OccupantQuantityType>
+                              <OccupantQuantity>9999</OccupantQuantity>
+                            </OccupancyLevel>
+                          </OccupancyLevels>
+                          <FloorAreas>
+                            <FloorArea>
+                              <FloorAreaType>Gross</FloorAreaType>
+                              <FloorAreaValue>1000000</FloorAreaValue>
+                            </FloorArea>
+                            <FloorArea>
+                              <FloorAreaType>Conditioned</FloorAreaType>
+                              <FloorAreaValue>1000000</FloorAreaValue>
+                            </FloorArea>
+                          </FloorAreas>
+                          <UserDefinedFields>
+                            <UserDefinedField>
+                              <FieldName>Original intented use</FieldName>
+                              <FieldValue>Office</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Number of PC's and/or Laptops</FieldName>
+                              <FieldValue>9999</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Use (hours/week)</FieldName>
+                              <FieldValue>60</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Use (weeks/year)</FieldName>
+                              <FieldValue>52</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Principle HVAC Type </FieldName>
+                              <FieldValue>VAV RH</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Principle Lighting Type </FieldName>
+                              <FieldValue>3-Lamp T8</FieldValue>
+                            </UserDefinedField>
+                          </UserDefinedFields>
+                        </Space>
+                        <Space ID="Space-9ad5d016-23c4-4dc0-b287-3729688a8933">
+                          <PremisesName>D</PremisesName>
+                          <OccupancyClassification>Retail</OccupancyClassification>
+                          <OccupancyLevels>
+                            <OccupancyLevel>
+                              <OccupantQuantityType>Adults</OccupantQuantityType>
+                              <OccupantQuantity>9999</OccupantQuantity>
+                            </OccupancyLevel>
+                          </OccupancyLevels>
+                          <FloorAreas>
+                            <FloorArea>
+                              <FloorAreaType>Gross</FloorAreaType>
+                              <FloorAreaValue>1000000</FloorAreaValue>
+                            </FloorArea>
+                            <FloorArea>
+                              <FloorAreaType>Conditioned</FloorAreaType>
+                              <FloorAreaValue>1000000</FloorAreaValue>
+                            </FloorArea>
+                          </FloorAreas>
+                          <UserDefinedFields>
+                            <UserDefinedField>
+                              <FieldName>Original intented use</FieldName>
+                              <FieldValue>Bank</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Number of PC's and/or Laptops</FieldName>
+                              <FieldValue>9999</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Use (hours/week)</FieldName>
+                              <FieldValue>60</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Use (weeks/year)</FieldName>
+                              <FieldValue>52</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Principle HVAC Type </FieldName>
+                              <FieldValue>VAV RH</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Principle Lighting Type </FieldName>
+                              <FieldValue>3-Lamp T8</FieldValue>
+                            </UserDefinedField>
+                          </UserDefinedFields>
+                        </Space>
+                        <Space ID="Space-ea759352-1515-462f-b4ee-a054fa749a77">
+                          <PremisesName>E</PremisesName>
+                          <OccupancyClassification>Parking</OccupancyClassification>
+                          <OccupancyLevels>
+                            <OccupancyLevel>
+                              <OccupantQuantityType>Adults</OccupantQuantityType>
+                              <OccupantQuantity>9999</OccupantQuantity>
+                            </OccupancyLevel>
+                          </OccupancyLevels>
+                          <FloorAreas>
+                            <FloorArea>
+                              <FloorAreaType>Gross</FloorAreaType>
+                              <FloorAreaValue>1000000</FloorAreaValue>
+                            </FloorArea>
+                            <FloorArea>
+                              <FloorAreaType>Conditioned</FloorAreaType>
+                              <FloorAreaValue>1000000</FloorAreaValue>
+                            </FloorArea>
+                          </FloorAreas>
+                          <UserDefinedFields>
+                            <UserDefinedField>
+                              <FieldName>Original intented use</FieldName>
+                              <FieldValue>Office</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Number of PC's and/or Laptops</FieldName>
+                              <FieldValue>9999</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Use (hours/week)</FieldName>
+                              <FieldValue>60</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Use (weeks/year)</FieldName>
+                              <FieldValue>52</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Principle HVAC Type </FieldName>
+                              <FieldValue>VAV RH</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Principle Lighting Type </FieldName>
+                              <FieldValue>3-Lamp T8</FieldValue>
+                            </UserDefinedField>
+                          </UserDefinedFields>
+                        </Space>
+                        <Space ID="Space-3eff24af-1d6d-4caf-9b65-a18a38789a2e">
+                          <PremisesName>Unaccounted</PremisesName>
+                          <OccupancyClassification>Other</OccupancyClassification>
+                          <OccupancyLevels>
+                            <OccupancyLevel>
+                              <OccupantQuantityType>Adults</OccupantQuantityType>
+                              <OccupantQuantity>9999</OccupantQuantity>
+                            </OccupancyLevel>
+                          </OccupancyLevels>
+                          <FloorAreas>
+                            <FloorArea>
+                              <FloorAreaType>Gross</FloorAreaType>
+                              <FloorAreaValue>1000000</FloorAreaValue>
+                            </FloorArea>
+                            <FloorArea>
+                              <FloorAreaType>Conditioned</FloorAreaType>
+                              <FloorAreaValue>1000000</FloorAreaValue>
+                            </FloorArea>
+                          </FloorAreas>
+                          <UserDefinedFields>
+                            <UserDefinedField>
+                              <FieldName>Original intented use</FieldName>
+                              <FieldValue>Office</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Number of PC's and/or Laptops</FieldName>
+                              <FieldValue>9999</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Use (hours/week)</FieldName>
+                              <FieldValue>60</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Use (weeks/year)</FieldName>
+                              <FieldValue>52</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Principle HVAC Type </FieldName>
+                              <FieldValue>VAV RH</FieldValue>
+                            </UserDefinedField>
+                            <UserDefinedField>
+                              <FieldName>Principle Lighting Type </FieldName>
+                              <FieldValue>3-Lamp T8</FieldValue>
+                            </UserDefinedField>
+                          </UserDefinedFields>
+                        </Space>
+                      </Spaces>
+                    </ThermalZone>
+                  </ThermalZones>
+                </Section>
+              </Sections>
+              <UserDefinedFields>
+                <UserDefinedField>
+                  <FieldName>Above grade wall common area with other conditioned buildings (ft2)</FieldName>
+                  <FieldValue>3000</FieldValue>
+                </UserDefinedField>
+                <UserDefinedField>
+                  <FieldName>Percent owned (%)</FieldName>
+                  <FieldValue>0.2</FieldValue>
+                </UserDefinedField>
+                <UserDefinedField>
+                  <FieldName>Percent leased (%)</FieldName>
+                  <FieldValue>0.8</FieldValue>
+                </UserDefinedField>
+                <UserDefinedField>
+                  <FieldName>Typical occupancy (hrs/wk)</FieldName>
+                  <FieldValue>60</FieldValue>
+                </UserDefinedField>
+                <UserDefinedField>
+                  <FieldName>Typical occupancy (wks/yr)</FieldName>
+                  <FieldValue>52.14</FieldValue>
+                </UserDefinedField>
+              </UserDefinedFields>
+            </Building>
+          </Buildings>
+        </Site>
+      </Sites>
+      <Systems>
+        <HVACSystems>
+          <HVACSystem ID="HVACSystem-8b23e2fa-4da2-4b0e-beaf-e81b643a456d">
+            <Plants>
+              <HeatingPlants>
+                <HeatingPlant ID="HeatiingPlant1">
+                  <Boiler>
+                    <BoilerType>Hot water</BoilerType>
+                    <DraftType>Mechanical forced</DraftType>
+                  </Boiler>
+                </HeatingPlant>
+              </HeatingPlants>
+              <CoolingPlants>
+                <CoolingPlant ID="CoolingPlant1">
+                  <Chiller>
+                    <ChillerType>Vapor compression</ChillerType>
+                    <CondenserPlantIDs>
+                      <CondenserPlantID IDref="CondenserPlant1"/>
+                    </CondenserPlantIDs>
+                  </Chiller>
+                </CoolingPlant>
+              </CoolingPlants>
+              <CondenserPlants>
+                <CondenserPlant ID="CondenserPlant1">
+                  <AirCooled>
+                    <EvaporativelyCooledCondenser ID="EvaporativelyCooledCondenser-70f6562b-1a68-45d6-815f-a13e59e71423"/>
+                  </AirCooled>
+                </CondenserPlant>
+              </CondenserPlants>
+            </Plants>
+            <HeatingAndCoolingSystems>
+              <HeatingSources>
+                <HeatingSource ID="HeatingSource-a46904f7-c076-421a-beb1-e909a3d81aa4">
+                  <HeatingSourceType>
+                    <SourceHeatingPlantID IDref="HeatiingPlant1"/>
+                  </HeatingSourceType>
+                  <HeatingMedium>Hot water</HeatingMedium>
+                  <PrimaryFuel>Fuel oil no 5 and no 6</PrimaryFuel>
+                </HeatingSource>
+              </HeatingSources>
+              <CoolingSources>
+                <CoolingSource ID="CoolingSource-cfcd44e7-1b11-4279-9c71-19a0171f9c10">
+                  <CoolingSourceType>
+                    <CoolingPlantID IDref="CoolingPlant1"/>
+                  </CoolingSourceType>
+                  <CoolingMedium>Chilled water</CoolingMedium>
+                  <PrimaryFuel>Fuel oil no 2</PrimaryFuel>
+                </CoolingSource>
+              </CoolingSources>
+            </HeatingAndCoolingSystems>
+          </HVACSystem>
+        </HVACSystems>
+        <LightingSystems>
+          <LightingSystem ID="LightingSystem-94043c77-83fc-4b25-95b1-393b9d91cd91">
+            <LampType>
+              <CompactFluorescent/>
+            </LampType>
+            <BallastType>Electromagnetic</BallastType>
+            <PercentPremisesServed>0.05</PercentPremisesServed>
+            <Controls>
+              <Control>
+                <Manual>
+                  <ControlStrategy>Always On</ControlStrategy>
+                </Manual>
+              </Control>
+            </Controls>
+            <Location>Interior</Location>
+          </LightingSystem>
+          <LightingSystem ID="LightingSystem-4ca072af-3e4c-4bc4-8e38-23827a750bc4">
+            <LampType>
+              <CompactFluorescent/>
+            </LampType>
+            <BallastType>Standard Electronic</BallastType>
+            <PercentPremisesServed>0.1</PercentPremisesServed>
+            <Controls>
+              <Control>
+                <Manual>
+                  <ControlStrategy>Manual On/Off</ControlStrategy>
+                </Manual>
+              </Control>
+            </Controls>
+            <Location>Interior</Location>
+          </LightingSystem>
+          <LightingSystem ID="LightingSystem-d3f14203-266c-45a0-a567-2d66cebadfc0">
+            <LampType>
+              <LinearFluorescent/>
+            </LampType>
+            <BallastType>No Ballast</BallastType>
+            <PercentPremisesServed>0.25</PercentPremisesServed>
+            <OutsideLighting>true</OutsideLighting>
+            <Controls>
+              <Control>
+                <Occupancy>
+                  <ControlSensor>Passive infrared</ControlSensor>
+                  <ControlStrategy>Occupancy Sensors</ControlStrategy>
+                </Occupancy>
+              </Control>
+            </Controls>
+            <Location>Exterior</Location>
+          </LightingSystem>
+          <LightingSystem ID="LightingSystem-fed514ff-a37d-4e6c-8d22-d74491047769">
+            <LampType>
+              <LinearFluorescent/>
+            </LampType>
+            <BallastType>Other</BallastType>
+            <PercentPremisesServed>0.5</PercentPremisesServed>
+            <Controls>
+              <Control>
+                <Daylighting>
+                  <ControlSensor>Photocell</ControlSensor>
+                  <ControlStrategy>Continuous</ControlStrategy>
+                </Daylighting>
+              </Control>
+            </Controls>
+            <Location>Interior</Location>
+          </LightingSystem>
+          <LightingSystem ID="LightingSystem-f6980fb5-8ad3-485c-b175-ae5b9e25d4b3">
+            <LampType>
+              <LinearFluorescent/>
+            </LampType>
+            <BallastType>Electromagnetic</BallastType>
+            <PercentPremisesServed>0.75</PercentPremisesServed>
+            <Controls>
+              <Control>
+                <Timer>
+                  <ControlStrategy>Timer</ControlStrategy>
+                </Timer>
+              </Control>
+            </Controls>
+            <Location>Other</Location>
+          </LightingSystem>
+          <LightingSystem ID="LightingSystem-035fecff-93b3-486a-9115-4852863a9e0c">
+            <LampType>
+              <HighIntensityDischarge/>
+            </LampType>
+            <BallastType>Standard Electronic</BallastType>
+            <PercentPremisesServed>0.9</PercentPremisesServed>
+            <Controls>
+              <Control>
+                <OtherControlTechnology>
+                  <ControlStrategy>EMCS</ControlStrategy>
+                </OtherControlTechnology>
+              </Control>
+            </Controls>
+            <Location>Interior</Location>
+          </LightingSystem>
+          <LightingSystem ID="LightingSystem-a140127a-9a88-4f3f-bc52-9ac1c53b712b">
+            <LampType>
+              <Incandescent/>
+            </LampType>
+            <BallastType>Electromagnetic</BallastType>
+            <PercentPremisesServed>1</PercentPremisesServed>
+            <Controls>
+              <Control>
+                <OtherControlTechnology>
+                  <ControlStrategy>Other</ControlStrategy>
+                </OtherControlTechnology>
+              </Control>
+            </Controls>
+            <Location>Interior</Location>
+          </LightingSystem>
+          <LightingSystem ID="LightingSystem-325a7a02-efe9-48a2-851a-ae01d372ca3b">
+            <LampType>
+              <SolidStateLighting/>
+            </LampType>
+            <BallastType>Standard Electronic</BallastType>
+            <PercentPremisesServed>1</PercentPremisesServed>
+            <Controls>
+              <Control>
+                <OtherControlTechnology>
+                  <ControlStrategy>Other</ControlStrategy>
+                </OtherControlTechnology>
+              </Control>
+            </Controls>
+            <Location>Interior</Location>
+          </LightingSystem>
+          <LightingSystem ID="LightingSystem-e6f6274f-e430-454a-8991-a0396b51ec91">
+            <LampType>
+              <HighIntensityDischarge/>
+            </LampType>
+            <BallastType>Other</BallastType>
+            <PercentPremisesServed>1</PercentPremisesServed>
+            <Controls>
+              <Control>
+                <Manual>
+                  <ControlStrategy>Always On</ControlStrategy>
+                </Manual>
+              </Control>
+            </Controls>
+            <Location>Interior</Location>
+          </LightingSystem>
+          <LightingSystem ID="LightingSystem-528e4ca3-8577-4108-9577-ec8dda9a02a0">
+            <LampType>
+              <HighIntensityDischarge/>
+            </LampType>
+            <BallastType>Other</BallastType>
+            <PercentPremisesServed>1</PercentPremisesServed>
+            <Controls>
+              <Control>
+                <Manual>
+                  <ControlStrategy>Always On</ControlStrategy>
+                </Manual>
+              </Control>
+            </Controls>
+            <Location>Interior</Location>
+          </LightingSystem>
+        </LightingSystems>
+        <DomesticHotWaterSystems>
+          <DomesticHotWaterSystem ID="DomesticHotWaterSystem-d33f12af-f3db-4c12-a9e6-c2ce9663762a">
+            <DomesticHotWaterType>
+              <StorageTank>
+                <TankHeatingType>
+                  <Direct/>
+                </TankHeatingType>
+              </StorageTank>
+            </DomesticHotWaterType>
+            <PrimaryFuel>Natural gas</PrimaryFuel>
+          </DomesticHotWaterSystem>
+        </DomesticHotWaterSystems>
+        <DishwasherSystems>
+          <DishwasherSystem ID="Dishwasher19">
+            <YearInstalled>1988</YearInstalled>
+            <Location>Interior</Location>
+            <UserDefinedFields>
+              <UserDefinedField>
+                <FieldName>Description</FieldName>
+                <FieldValue>Information</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Type</FieldName>
+                <FieldValue>J</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Area Served</FieldName>
+                <FieldValue>Restrooms</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Condition</FieldName>
+                <FieldValue>Good</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Output Capacity</FieldName>
+                <FieldValue>50</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Capacity Units</FieldName>
+                <FieldValue>lbs/h</FieldValue>
+              </UserDefinedField>
+            </UserDefinedFields>
+            <Quantity>20</Quantity>
+          </DishwasherSystem>
+        </DishwasherSystems>
+        <MotorSystems>
+          <MotorSystem ID="Motor10">
+            <Quantity>11</Quantity>
+            <YearInstalled>1988</YearInstalled>
+            <Location>Interior</Location>
+            <UserDefinedFields>
+              <UserDefinedField>
+                <FieldName>Description</FieldName>
+                <FieldValue>Information</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Type</FieldName>
+                <FieldValue>A</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Office areas</FieldName>
+                <FieldValue>Office areas</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Condition</FieldName>
+                <FieldValue>Good</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Output Capacity</FieldName>
+                <FieldValue>50</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Capacity Units</FieldName>
+                <FieldValue>lbs/h</FieldValue>
+              </UserDefinedField>
+            </UserDefinedFields>
+          </MotorSystem>
+        </MotorSystems>
+        <HeatRecoverySystems>
+          <HeatRecoverySystem ID="HeatRecovery11">
+            <Quantity>12</Quantity>
+            <YearInstalled>1983</YearInstalled>
+            <Location>Unknown</Location>
+            <UserDefinedFields>
+              <UserDefinedField>
+                <FieldName>Description</FieldName>
+                <FieldValue>Information</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Type</FieldName>
+                <FieldValue>B</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Area Served</FieldName>
+                <FieldValue>Hallways</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Condition</FieldName>
+                <FieldValue>Excellent</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Output Capacity</FieldName>
+                <FieldValue>50</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Capacity Units</FieldName>
+                <FieldValue>lbs/h</FieldValue>
+              </UserDefinedField>
+            </UserDefinedFields>
+          </HeatRecoverySystem>
+          <HeatRecoverySystem ID="HeatRecovery12">
+            <Quantity>13</Quantity>
+            <YearInstalled>1973</YearInstalled>
+            <Location>Closet</Location>
+            <UserDefinedFields>
+              <UserDefinedField>
+                <FieldName>Description</FieldName>
+                <FieldValue>Information</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Type</FieldName>
+                <FieldValue>C</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Area Served</FieldName>
+                <FieldValue>Restrooms</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Condition</FieldName>
+                <FieldValue>Good</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Output Capacity</FieldName>
+                <FieldValue>50</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Capacity Units</FieldName>
+                <FieldValue>lbs/h</FieldValue>
+              </UserDefinedField>
+            </UserDefinedFields>
+          </HeatRecoverySystem>
+          <HeatRecoverySystem ID="HeatRecovery18">
+            <Quantity>19</Quantity>
+            <YearInstalled>1988</YearInstalled>
+            <Location>Interior</Location>
+            <UserDefinedFields>
+              <UserDefinedField>
+                <FieldName>Description</FieldName>
+                <FieldValue>Information</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Type</FieldName>
+                <FieldValue>I</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Area Served</FieldName>
+                <FieldValue>Restrooms</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Condition</FieldName>
+                <FieldValue>Good</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Output Capacity</FieldName>
+                <FieldValue>50</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Capacity Units</FieldName>
+                <FieldValue>lbs/h</FieldValue>
+              </UserDefinedField>
+            </UserDefinedFields>
+          </HeatRecoverySystem>
+        </HeatRecoverySystems>
+        <WallSystems>
+          <WallSystem ID="AllWall1">
+            <ExteriorWallConstruction>Other</ExteriorWallConstruction>
+            <ExteriorWallFinish>Metal panel</ExteriorWallFinish>
+            <WallRValue>13</WallRValue>
+          </WallSystem>
+        </WallSystems>
+        <RoofSystems>
+          <RoofSystem ID="Roof1">
+            <RoofConstruction>Unknown</RoofConstruction>
+            <RoofFinish>Metal</RoofFinish>
+            <DeckType>Unknown</DeckType>
+            <RoofRValue>22</RoofRValue>
+            <RoofExteriorSolarAbsorptance>0.7</RoofExteriorSolarAbsorptance>
+          </RoofSystem>
+        </RoofSystems>
+        <FenestrationSystems>
+          <FenestrationSystem ID="Window1">
+            <FenestrationType>
+              <Window/>
+            </FenestrationType>
+            <FenestrationFrameMaterial>Aluminum thermal break</FenestrationFrameMaterial>
+            <GlassType>Low e</GlassType>
+            <FenestrationGlassLayers>Double pane</FenestrationGlassLayers>
+          </FenestrationSystem>
+        </FenestrationSystems>
+        <FoundationSystems>
+          <FoundationSystem ID="Foundation1">
+            <GroundCouplings>
+              <GroundCoupling>
+                <Crawlspace/>
+              </GroundCoupling>
+            </GroundCouplings>
+            <FloorConstructionType>Wood frame</FloorConstructionType>
+          </FoundationSystem>
+        </FoundationSystems>
+        <CriticalITSystems>
+          <CriticalITSystem ID="CriticalITSystem-725e26b9-ace8-4c2a-b210-bec23f5f78ae">
+            <ITSystemType>Building Automation System</ITSystemType>
+          </CriticalITSystem>
+          <CriticalITSystem ID="ITSystem13">
+            <YearInstalled>1588</YearInstalled>
+            <Location>Attic</Location>
+            <UserDefinedFields>
+              <UserDefinedField>
+                <FieldName>Description</FieldName>
+                <FieldValue>Information</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Type</FieldName>
+                <FieldValue>D</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Area Served</FieldName>
+                <FieldValue>Office areas</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Condition</FieldName>
+                <FieldValue>Average</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Output Capacity</FieldName>
+                <FieldValue>50</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Capacity Units</FieldName>
+                <FieldValue>lbs/h</FieldValue>
+              </UserDefinedField>
+            </UserDefinedFields>
+            <Quantity>14</Quantity>
+          </CriticalITSystem>
+        </CriticalITSystems>
+        <PlugLoads>
+          <PlugLoad ID="PlugLoad14">
+            <YearInstalled>1933</YearInstalled>
+            <Location>Interior</Location>
+            <UserDefinedFields>
+              <UserDefinedField>
+                <FieldName>Description</FieldName>
+                <FieldValue>Information</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Type</FieldName>
+                <FieldValue>E</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Area Served</FieldName>
+                <FieldValue>Hallways</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Condition</FieldName>
+                <FieldValue>Good</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Output Capacity</FieldName>
+                <FieldValue>50</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Capacity Units</FieldName>
+                <FieldValue>lbs/h</FieldValue>
+              </UserDefinedField>
+            </UserDefinedFields>
+            <Quantity>15</Quantity>
+          </PlugLoad>
+        </PlugLoads>
+        <ProcessLoads>
+          <ProcessLoad ID="ProcessLoad15">
+            <YearInstalled>2012</YearInstalled>
+            <Location>Interior</Location>
+            <UserDefinedFields>
+              <UserDefinedField>
+                <FieldName>Description</FieldName>
+                <FieldValue>Information</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Type</FieldName>
+                <FieldValue>F</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Area Served</FieldName>
+                <FieldValue>Restrooms</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Condition</FieldName>
+                <FieldValue>Good</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Output Capacity</FieldName>
+                <FieldValue>50</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Capacity Units</FieldName>
+                <FieldValue>lbs/h</FieldValue>
+              </UserDefinedField>
+            </UserDefinedFields>
+            <Quantity>16</Quantity>
+          </ProcessLoad>
+        </ProcessLoads>
+        <ConveyanceSystems>
+          <ConveyanceSystem ID="Conveyance16">
+            <Quantity>17</Quantity>
+            <YearInstalled>1988</YearInstalled>
+            <Location>Interior</Location>
+            <UserDefinedFields>
+              <UserDefinedField>
+                <FieldName>Description</FieldName>
+                <FieldValue>Information</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Type</FieldName>
+                <FieldValue>G</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Area Served</FieldName>
+                <FieldValue>Office areas</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Condition</FieldName>
+                <FieldValue>Good</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Output Capacity</FieldName>
+                <FieldValue>50</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Capacity Units</FieldName>
+                <FieldValue>lbs/h</FieldValue>
+              </UserDefinedField>
+            </UserDefinedFields>
+          </ConveyanceSystem>
+        </ConveyanceSystems>
+        <OnsiteStorageTransmissionGenerationSystems>
+          <OnsiteStorageTransmissionGenerationSystem ID="OnsiteStorageTransmissionGenerationSystem-96d6e062-f467-40a4-a6d5-33ef0aade880">
+            <EnergyConversionType>
+              <Generation>
+                <OnsiteGenerationType>
+                  <Other>
+                    <OtherEnergyGenerationTechnology>Fuel cell</OtherEnergyGenerationTechnology>
+                  </Other>
+                </OnsiteGenerationType>
+              </Generation>
+            </EnergyConversionType>
+          </OnsiteStorageTransmissionGenerationSystem>
+        </OnsiteStorageTransmissionGenerationSystems>
+        <Pools>
+          <Pool ID="Pool17">
+            <Quantity>18</Quantity>
+            <YearInstalled>1988</YearInstalled>
+            <Location>Interior</Location>
+            <UserDefinedFields>
+              <UserDefinedField>
+                <FieldName>Description</FieldName>
+                <FieldValue>Information</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Type</FieldName>
+                <FieldValue>H</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Area Served</FieldName>
+                <FieldValue>Hallways</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Condition</FieldName>
+                <FieldValue>Good</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Output Capacity</FieldName>
+                <FieldValue>50</FieldValue>
+              </UserDefinedField>
+              <UserDefinedField>
+                <FieldName>Capacity Units</FieldName>
+                <FieldValue>lbs/h</FieldValue>
+              </UserDefinedField>
+            </UserDefinedFields>
+          </Pool>
+        </Pools>
+      </Systems>
+      <Measures>
+        <Measure ID="Measure-691181f7-3456-48b7-8e21-8d3a42506902">
+          <SystemCategoryAffected>Refrigeration</SystemCategoryAffected>
+          <LongDescription>Replace/Modify AHU</LongDescription>
+          <MeasureSavingsAnalysis>
+            <AnnualSavingsCost>500</AnnualSavingsCost>
+            <AnnualSavingsByFuels>
+              <AnnualSavingsByFuel>
+                <EnergyResource>Electricity</EnergyResource>
+                <ResourceUnits>kWh</ResourceUnits>
+                <AnnualSavingsNativeUnits>888</AnnualSavingsNativeUnits>
+              </AnnualSavingsByFuel>
+              <AnnualSavingsByFuel>
+                <EnergyResource>Natural gas</EnergyResource>
+                <ResourceUnits>therms</ResourceUnits>
+                <AnnualSavingsNativeUnits>1654</AnnualSavingsNativeUnits>
+              </AnnualSavingsByFuel>
+            </AnnualSavingsByFuels>
+            <SummerPeakElectricityReduction>10</SummerPeakElectricityReduction>
+            <FundingFromIncentives>500</FundingFromIncentives>
+            <SimplePayback>9</SimplePayback>
+          </MeasureSavingsAnalysis>
+          <UsefulLife>15</UsefulLife>
+          <MeasureTotalFirstCost>5000</MeasureTotalFirstCost>
+          <UserDefinedFields>
+            <UserDefinedField>
+              <FieldName>Net Measure Cost</FieldName>
+              <FieldValue>4500</FieldValue>
+            </UserDefinedField>
+            <UserDefinedField>
+              <FieldName>Simple ROI</FieldName>
+              <FieldValue>0.111111111111111</FieldValue>
+            </UserDefinedField>
+          </UserDefinedFields>
+        </Measure>
+        <Measure ID="Measure-3b0781b3-7a36-48e3-a900-894d1e306031">
+          <SystemCategoryAffected>Pump</SystemCategoryAffected>
+          <LongDescription>Improve Fans</LongDescription>
+          <MeasureSavingsAnalysis>
+            <AnnualSavingsCost>1000</AnnualSavingsCost>
+            <AnnualSavingsByFuels>
+              <AnnualSavingsByFuel>
+                <EnergyResource>Electricity</EnergyResource>
+                <ResourceUnits>kWh</ResourceUnits>
+                <AnnualSavingsNativeUnits>476</AnnualSavingsNativeUnits>
+              </AnnualSavingsByFuel>
+              <AnnualSavingsByFuel>
+                <EnergyResource>Natural gas</EnergyResource>
+                <ResourceUnits>therms</ResourceUnits>
+                <AnnualSavingsNativeUnits>52</AnnualSavingsNativeUnits>
+              </AnnualSavingsByFuel>
+            </AnnualSavingsByFuels>
+            <SummerPeakElectricityReduction>5</SummerPeakElectricityReduction>
+            <FundingFromIncentives>800</FundingFromIncentives>
+            <SimplePayback>4.854</SimplePayback>
+          </MeasureSavingsAnalysis>
+          <UsefulLife>20</UsefulLife>
+          <MeasureTotalFirstCost>5654</MeasureTotalFirstCost>
+          <UserDefinedFields>
+            <UserDefinedField>
+              <FieldName>Net Measure Cost</FieldName>
+              <FieldValue>4854</FieldValue>
+            </UserDefinedField>
+            <UserDefinedField>
+              <FieldName>Simple ROI</FieldName>
+              <FieldValue>0.206015657189946</FieldValue>
+            </UserDefinedField>
+          </UserDefinedFields>
+        </Measure>
+        <Measure ID="Measure-7eb18937-a352-4b8c-bbf5-97607c2f4177">
+          <SystemCategoryAffected>Other</SystemCategoryAffected>
+          <LongDescription>Convert CV System to VAV System</LongDescription>
+          <MeasureSavingsAnalysis>
+            <AnnualSavingsCost>333</AnnualSavingsCost>
+            <AnnualSavingsByFuels>
+              <AnnualSavingsByFuel>
+                <EnergyResource>Electricity</EnergyResource>
+                <ResourceUnits>kWh</ResourceUnits>
+                <AnnualSavingsNativeUnits>3311</AnnualSavingsNativeUnits>
+              </AnnualSavingsByFuel>
+              <AnnualSavingsByFuel>
+                <EnergyResource>Natural gas</EnergyResource>
+                <ResourceUnits>therms</ResourceUnits>
+                <AnnualSavingsNativeUnits>881</AnnualSavingsNativeUnits>
+              </AnnualSavingsByFuel>
+            </AnnualSavingsByFuels>
+            <SummerPeakElectricityReduction>8</SummerPeakElectricityReduction>
+            <FundingFromIncentives>336</FundingFromIncentives>
+            <SimplePayback>5.43843843843844</SimplePayback>
+          </MeasureSavingsAnalysis>
+          <UsefulLife>5</UsefulLife>
+          <MeasureTotalFirstCost>2147</MeasureTotalFirstCost>
+          <UserDefinedFields>
+            <UserDefinedField>
+              <FieldName>Net Measure Cost</FieldName>
+              <FieldValue>1811</FieldValue>
+            </UserDefinedField>
+            <UserDefinedField>
+              <FieldName>Simple ROI</FieldName>
+              <FieldValue>0.183876311430149</FieldValue>
+            </UserDefinedField>
+          </UserDefinedFields>
+        </Measure>
+        <Measure ID="Measure-77d4550a-12da-4ad5-a995-5cf60072ed65">
+          <SystemCategoryAffected>Heating System</SystemCategoryAffected>
+          <LongDescription>Operating Protocols, Calibration, and/or Sequencing</LongDescription>
+          <MeasureSavingsAnalysis>
+            <AnnualSavingsCost>3866</AnnualSavingsCost>
+            <AnnualSavingsByFuels>
+              <AnnualSavingsByFuel>
+                <EnergyResource>Electricity</EnergyResource>
+                <ResourceUnits>kWh</ResourceUnits>
+                <AnnualSavingsNativeUnits>530</AnnualSavingsNativeUnits>
+              </AnnualSavingsByFuel>
+              <AnnualSavingsByFuel>
+                <EnergyResource>Natural gas</EnergyResource>
+                <ResourceUnits>therms</ResourceUnits>
+                <AnnualSavingsNativeUnits>212</AnnualSavingsNativeUnits>
+              </AnnualSavingsByFuel>
+            </AnnualSavingsByFuels>
+            <SummerPeakElectricityReduction>8</SummerPeakElectricityReduction>
+            <FundingFromIncentives>336</FundingFromIncentives>
+            <SimplePayback>0.468442834971547</SimplePayback>
+          </MeasureSavingsAnalysis>
+          <UsefulLife>10</UsefulLife>
+          <MeasureTotalFirstCost>2147</MeasureTotalFirstCost>
+          <UserDefinedFields>
+            <UserDefinedField>
+              <FieldName>Net Measure Cost</FieldName>
+              <FieldValue>1811</FieldValue>
+            </UserDefinedField>
+            <UserDefinedField>
+              <FieldName>Simple ROI</FieldName>
+              <FieldValue>2.13473219215903</FieldValue>
+            </UserDefinedField>
+          </UserDefinedFields>
+        </Measure>
+        <Measure ID="Measure-31016bd8-3712-4697-a4a0-f0062b560945">
+          <SystemCategoryAffected>Dishwasher</SystemCategoryAffected>
+          <LongDescription>Repair Leaks / Seal Ducts</LongDescription>
+          <MeasureSavingsAnalysis>
+            <AnnualSavingsCost>33</AnnualSavingsCost>
+            <AnnualSavingsByFuels>
+              <AnnualSavingsByFuel>
+                <EnergyResource>Electricity</EnergyResource>
+                <ResourceUnits>kWh</ResourceUnits>
+                <AnnualSavingsNativeUnits>530</AnnualSavingsNativeUnits>
+              </AnnualSavingsByFuel>
+              <AnnualSavingsByFuel>
+                <EnergyResource>Natural gas</EnergyResource>
+                <ResourceUnits>therms</ResourceUnits>
+                <AnnualSavingsNativeUnits>212</AnnualSavingsNativeUnits>
+              </AnnualSavingsByFuel>
+            </AnnualSavingsByFuels>
+            <SummerPeakElectricityReduction>8</SummerPeakElectricityReduction>
+            <FundingFromIncentives>336</FundingFromIncentives>
+            <SimplePayback>54.8787878787879</SimplePayback>
+          </MeasureSavingsAnalysis>
+          <UsefulLife>10</UsefulLife>
+          <MeasureTotalFirstCost>2147</MeasureTotalFirstCost>
+          <UserDefinedFields>
+            <UserDefinedField>
+              <FieldName>Net Measure Cost</FieldName>
+              <FieldValue>1811</FieldValue>
+            </UserDefinedField>
+            <UserDefinedField>
+              <FieldName>Simple ROI</FieldName>
+              <FieldValue>0.0182219768083932</FieldValue>
+            </UserDefinedField>
+          </UserDefinedFields>
+        </Measure>
+        <Measure ID="Measure-3dbe2df9-3812-40df-b57d-0d70e708ddb6">
+          <SystemCategoryAffected>Air Distribution</SystemCategoryAffected>
+          <LongDescription>Add Duct Insulation</LongDescription>
+          <MeasureSavingsAnalysis>
+            <AnnualSavingsCost>987</AnnualSavingsCost>
+            <AnnualSavingsByFuels>
+              <AnnualSavingsByFuel>
+                <EnergyResource>Electricity</EnergyResource>
+                <ResourceUnits>kWh</ResourceUnits>
+                <AnnualSavingsNativeUnits>530</AnnualSavingsNativeUnits>
+              </AnnualSavingsByFuel>
+              <AnnualSavingsByFuel>
+                <EnergyResource>Natural gas</EnergyResource>
+                <ResourceUnits>therms</ResourceUnits>
+                <AnnualSavingsNativeUnits>212</AnnualSavingsNativeUnits>
+              </AnnualSavingsByFuel>
+            </AnnualSavingsByFuels>
+            <SummerPeakElectricityReduction>8</SummerPeakElectricityReduction>
+            <FundingFromIncentives>336</FundingFromIncentives>
+            <SimplePayback>1.83485309017224</SimplePayback>
+          </MeasureSavingsAnalysis>
+          <UsefulLife>10</UsefulLife>
+          <MeasureTotalFirstCost>2147</MeasureTotalFirstCost>
+          <UserDefinedFields>
+            <UserDefinedField>
+              <FieldName>Net Measure Cost</FieldName>
+              <FieldValue>1811</FieldValue>
+            </UserDefinedField>
+            <UserDefinedField>
+              <FieldName>Simple ROI</FieldName>
+              <FieldValue>0.545002760905577</FieldValue>
+            </UserDefinedField>
+          </UserDefinedFields>
+        </Measure>
+        <Measure ID="Measure-6e08d968-b632-469d-bdc0-b6e914a0a755">
+          <SystemCategoryAffected>Refrigeration</SystemCategoryAffected>
+          <LongDescription>Balancing</LongDescription>
+          <MeasureSavingsAnalysis>
+            <AnnualSavingsCost>5584</AnnualSavingsCost>
+            <AnnualSavingsByFuels>
+              <AnnualSavingsByFuel>
+                <EnergyResource>Electricity</EnergyResource>
+                <ResourceUnits>kWh</ResourceUnits>
+                <AnnualSavingsNativeUnits>530</AnnualSavingsNativeUnits>
+              </AnnualSavingsByFuel>
+              <AnnualSavingsByFuel>
+                <EnergyResource>Natural gas</EnergyResource>
+                <ResourceUnits>therms</ResourceUnits>
+                <AnnualSavingsNativeUnits>212</AnnualSavingsNativeUnits>
+              </AnnualSavingsByFuel>
+            </AnnualSavingsByFuels>
+            <SummerPeakElectricityReduction>8</SummerPeakElectricityReduction>
+            <FundingFromIncentives>336</FundingFromIncentives>
+            <SimplePayback>0.324319484240688</SimplePayback>
+          </MeasureSavingsAnalysis>
+          <UsefulLife>10</UsefulLife>
+          <MeasureTotalFirstCost>2147</MeasureTotalFirstCost>
+          <UserDefinedFields>
+            <UserDefinedField>
+              <FieldName>Net Measure Cost</FieldName>
+              <FieldValue>1811</FieldValue>
+            </UserDefinedField>
+            <UserDefinedField>
+              <FieldName>Simple ROI</FieldName>
+              <FieldValue>3.08337934842628</FieldValue>
+            </UserDefinedField>
+          </UserDefinedFields>
+        </Measure>
+        <Measure ID="Measure-37f75f0b-2878-4e83-9cdc-c8d25fb42390">
+          <SystemCategoryAffected>Refrigeration</SystemCategoryAffected>
+          <LongDescription>HVAC damper and controller repair or replacement</LongDescription>
+          <MeasureSavingsAnalysis>
+            <AnnualSavingsCost>388</AnnualSavingsCost>
+            <AnnualSavingsByFuels>
+              <AnnualSavingsByFuel>
+                <EnergyResource>Electricity</EnergyResource>
+                <ResourceUnits>kWh</ResourceUnits>
+                <AnnualSavingsNativeUnits>530</AnnualSavingsNativeUnits>
+              </AnnualSavingsByFuel>
+              <AnnualSavingsByFuel>
+                <EnergyResource>Natural gas</EnergyResource>
+                <ResourceUnits>therms</ResourceUnits>
+                <AnnualSavingsNativeUnits>212</AnnualSavingsNativeUnits>
+              </AnnualSavingsByFuel>
+            </AnnualSavingsByFuels>
+            <SummerPeakElectricityReduction>8</SummerPeakElectricityReduction>
+            <FundingFromIncentives>336</FundingFromIncentives>
+            <SimplePayback>4.66752577319588</SimplePayback>
+          </MeasureSavingsAnalysis>
+          <UsefulLife>10</UsefulLife>
+          <MeasureTotalFirstCost>2147</MeasureTotalFirstCost>
+          <UserDefinedFields>
+            <UserDefinedField>
+              <FieldName>Net Measure Cost</FieldName>
+              <FieldValue>1811</FieldValue>
+            </UserDefinedField>
+            <UserDefinedField>
+              <FieldName>Simple ROI</FieldName>
+              <FieldValue>0.214246272777471</FieldValue>
+            </UserDefinedField>
+          </UserDefinedFields>
+        </Measure>
+        <Measure ID="Measure-3f2975fa-29b4-41a0-b215-879ff20cd358">
+          <SystemCategoryAffected>Refrigeration</SystemCategoryAffected>
+          <LongDescription>Replace Burner</LongDescription>
+          <MeasureSavingsAnalysis>
+            <AnnualSavingsCost>3118</AnnualSavingsCost>
+            <AnnualSavingsByFuels>
+              <AnnualSavingsByFuel>
+                <EnergyResource>Electricity</EnergyResource>
+                <ResourceUnits>kWh</ResourceUnits>
+                <AnnualSavingsNativeUnits>530</AnnualSavingsNativeUnits>
+              </AnnualSavingsByFuel>
+              <AnnualSavingsByFuel>
+                <EnergyResource>Natural gas</EnergyResource>
+                <ResourceUnits>therms</ResourceUnits>
+                <AnnualSavingsNativeUnits>212</AnnualSavingsNativeUnits>
+              </AnnualSavingsByFuel>
+            </AnnualSavingsByFuels>
+            <SummerPeakElectricityReduction>8</SummerPeakElectricityReduction>
+            <FundingFromIncentives>336</FundingFromIncentives>
+            <SimplePayback>0.580821039127646</SimplePayback>
+          </MeasureSavingsAnalysis>
+          <UsefulLife>10</UsefulLife>
+          <MeasureTotalFirstCost>2147</MeasureTotalFirstCost>
+          <UserDefinedFields>
+            <UserDefinedField>
+              <FieldName>Net Measure Cost</FieldName>
+              <FieldValue>1811</FieldValue>
+            </UserDefinedField>
+            <UserDefinedField>
+              <FieldName>Simple ROI</FieldName>
+              <FieldValue>1.72170071783545</FieldValue>
+            </UserDefinedField>
+          </UserDefinedFields>
+        </Measure>
+      </Measures>
+      <Reports>
+        <Report ID="Report-91c52b5b-836c-4558-96eb-0289141674f1">
+          <Scenarios>
+            <Scenario ID="Scenario-2b4d9d0f-12ee-4683-8a4a-5b6f22bdb7e9">
+              <TemporalStatus>Pre retrofit</TemporalStatus>
+              <WeatherType>
+                <Actual>
+                  <WeatherDataSource>On Site Measurement</WeatherDataSource>
+                </Actual>
+              </WeatherType>
+              <ResourceUses>
+                <ResourceUse ID="Resource1">
+                  <EnergyResource>Electricity</EnergyResource>
+                  <ResourceBoundary>Site</ResourceBoundary>
+                  <ResourceUnits>kWh</ResourceUnits>
+                  <PercentResource>1</PercentResource>
+                  <EndUse>All end uses</EndUse>
+                  <PercentEndUse>1</PercentEndUse>
+                  <AnnualFuelUseNativeUnits>1000000</AnnualFuelUseNativeUnits>
+                  <AnnualFuelUseConsistentUnits>3412.0000000000005</AnnualFuelUseConsistentUnits>
+                </ResourceUse>
+                <ResourceUse ID="Resource2">
+                  <EnergyResource>Natural gas</EnergyResource>
+                  <ResourceBoundary>Site</ResourceBoundary>
+                  <ResourceUnits>therms</ResourceUnits>
+                  <PercentResource>1</PercentResource>
+                  <EndUse>All end uses</EndUse>
+                  <PercentEndUse>1</PercentEndUse>
+                  <AnnualFuelUseNativeUnits>25740</AnnualFuelUseNativeUnits>
+                  <AnnualFuelUseConsistentUnits>2574</AnnualFuelUseConsistentUnits>
+                  <UtilityIDs>
+                    <UtilityID IDref="Utility1"/>
+                  </UtilityIDs>
+                </ResourceUse>
+                <ResourceUse ID="Resource3">
+                  <EnergyResource>Fuel oil</EnergyResource>
+                  <ResourceBoundary>Site</ResourceBoundary>
+                  <ResourceUnits>Gallons</ResourceUnits>
+                  <PercentResource>1</PercentResource>
+                  <EndUse>All end uses</EndUse>
+                  <PercentEndUse>1</PercentEndUse>
+                  <AnnualFuelUseNativeUnits>148500</AnnualFuelUseNativeUnits>
+                  <AnnualFuelUseConsistentUnits>1782</AnnualFuelUseConsistentUnits>
+                  <UtilityIDs>
+                    <UtilityID IDref="Utility2"/>
+                    <UtilityID IDref="Utility3"/>
+                    <UtilityID IDref="Utility4"/>
+                  </UtilityIDs>
+                </ResourceUse>
+                <ResourceUse ID="Resource4">
+                  <EnergyResource>Fuel oil no 5 and no 6</EnergyResource>
+                  <ResourceBoundary>Site</ResourceBoundary>
+                  <ResourceUnits>Gallons</ResourceUnits>
+                  <PercentResource>1</PercentResource>
+                  <EndUse>All end uses</EndUse>
+                  <PercentEndUse>1</PercentEndUse>
+                  <AnnualFuelUseNativeUnits>450</AnnualFuelUseNativeUnits>
+                  <AnnualFuelUseConsistentUnits>4.95</AnnualFuelUseConsistentUnits>
+                  <UtilityIDs>
+                    <UtilityID IDref="Utility5"/>
+                    <UtilityID IDref="Utility6"/>
+                    <UtilityID IDref="Utility7"/>
+                  </UtilityIDs>
+                </ResourceUse>
+                <ResourceUse ID="Resource5">
+                  <EnergyResource>Fuel oil</EnergyResource>
+                  <ResourceBoundary>Site</ResourceBoundary>
+                  <ResourceUnits>Gallons</ResourceUnits>
+                  <PercentResource>1</PercentResource>
+                  <EndUse>All end uses</EndUse>
+                  <PercentEndUse>1</PercentEndUse>
+                  <AnnualFuelUseNativeUnits>390</AnnualFuelUseNativeUnits>
+                  <AnnualFuelUseConsistentUnits>31.2</AnnualFuelUseConsistentUnits>
+                  <UtilityIDs>
+                    <UtilityID IDref="Utility8"/>
+                    <UtilityID IDref="Utility9"/>
+                    <UtilityID IDref="Utility10"/>
+                  </UtilityIDs>
+                </ResourceUse>
+              </ResourceUses>
+              <TimeSeriesData>
+                <TimeSeries ID="TimeSeries-f840ecc0-99b7-47ee-b9d6-7514c9f2823b">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-01-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-02-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>83333.3333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-c8bd32ce-2d3c-47bc-9319-d845f2d0d0ed">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-02-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-03-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>83333.3333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-6701d184-a286-4680-b940-3e00578dec83">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-03-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-04-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>83333.3333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-c98ca262-ce14-4601-bdef-65b7b829ab83">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-04-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-05-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>83333.3333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-be1e53ed-ebe9-4e67-919d-23fb9685c73b">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-05-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-06-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>83333.3333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-a60d7aa5-495c-424b-a13c-5fcdabbd7fa0">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-06-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-07-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>83333.3333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-c2bff83a-f1d6-4ee8-8ec8-a39b8a210eb6">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-07-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-08-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>83333.3333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-4f33913d-3478-49a6-817d-7a1809b38836">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-08-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-09-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>83333.3333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-d5988f81-ad84-4699-b15a-f5aca197ecdc">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-09-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-10-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>83333.3333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-18c48975-b8cd-4743-b4b7-494b73720b00">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-10-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-11-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>83333.3333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-69f3f722-faa6-4066-a5fd-d52e7468878d">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-11-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-12-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>83333.3333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-11404e7d-65c9-47dd-802d-f1bb84bde0a3">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-12-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2011-01-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>83333.3333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-34f36d70-6ed0-4903-b7e8-f61f1db947b1">
+                  <ReadingType>Peak</ReadingType>
+                  <TimeSeriesReadingQuantity>Power</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-01-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-02-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>200</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-a56bada5-361f-4794-ad09-eca1611c417e">
+                  <ReadingType>Peak</ReadingType>
+                  <TimeSeriesReadingQuantity>Power</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-02-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-03-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>225</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-c1bbeb05-cd3e-4b83-b3fa-8a30daadaa75">
+                  <ReadingType>Peak</ReadingType>
+                  <TimeSeriesReadingQuantity>Power</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-03-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-04-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>240</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-7b86e9b3-f9b5-4699-9974-7027428ced50">
+                  <ReadingType>Peak</ReadingType>
+                  <TimeSeriesReadingQuantity>Power</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-04-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-05-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>280</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-1609be70-afb3-42b1-8e4f-fc6bfce8caeb">
+                  <ReadingType>Peak</ReadingType>
+                  <TimeSeriesReadingQuantity>Power</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-05-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-06-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>300</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-5755363e-6e6b-4cb0-9b3c-0cbee43ed8c9">
+                  <ReadingType>Peak</ReadingType>
+                  <TimeSeriesReadingQuantity>Power</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-06-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-07-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>350</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-bb0aec99-8bcf-4670-9d8e-b40233cf55be">
+                  <ReadingType>Peak</ReadingType>
+                  <TimeSeriesReadingQuantity>Power</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-07-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-08-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>325</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-33f05020-1d1d-4e69-b1ce-0f958fabb65c">
+                  <ReadingType>Peak</ReadingType>
+                  <TimeSeriesReadingQuantity>Power</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-08-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-09-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>400</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-b000821a-3ea7-4a8c-8bae-579880b7cac4">
+                  <ReadingType>Peak</ReadingType>
+                  <TimeSeriesReadingQuantity>Power</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-09-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-10-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>375</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-1fbf116b-7d74-47ef-b88d-2f3affb34c89">
+                  <ReadingType>Peak</ReadingType>
+                  <TimeSeriesReadingQuantity>Power</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-10-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-11-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>300</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-81fd0b82-2610-4114-ac16-93d8dc9a0ffb">
+                  <ReadingType>Peak</ReadingType>
+                  <TimeSeriesReadingQuantity>Power</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-11-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-12-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>325</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-a8ce18b9-decb-4f91-bdf9-e7002055e94f">
+                  <ReadingType>Peak</ReadingType>
+                  <TimeSeriesReadingQuantity>Power</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-12-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2011-01-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>250</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-f40ffa1d-abe6-4c1b-b0db-6a6f67908e22">
+                  <ReadingType>Average</ReadingType>
+                  <TimeSeriesReadingQuantity>Power Factor</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-01-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-02-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>0.560035842293907</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-223d1595-52ef-448f-a898-9194618c91bd">
+                  <ReadingType>Average</ReadingType>
+                  <TimeSeriesReadingQuantity>Power Factor</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-02-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-03-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>0.551146384479718</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-066fa422-4d71-46e0-b1b6-b35e4e2380e4">
+                  <ReadingType>Average</ReadingType>
+                  <TimeSeriesReadingQuantity>Power Factor</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-03-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-04-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>0.466696535244922</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-2a07f968-ed23-41aa-ae27-718a149e9755">
+                  <ReadingType>Average</ReadingType>
+                  <TimeSeriesReadingQuantity>Power Factor</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-04-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-05-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>0.413359788359788</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-6a949605-569b-4233-ad24-27236f32dd0b">
+                  <ReadingType>Average</ReadingType>
+                  <TimeSeriesReadingQuantity>Power Factor</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-05-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-06-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>0.373357228195938</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-29674f2e-b4b4-4bc1-a7b2-719f875347f8">
+                  <ReadingType>Average</ReadingType>
+                  <TimeSeriesReadingQuantity>Power Factor</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-06-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-07-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>0.330687830687831</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-0eb8c3ca-3d53-4005-806b-10f0dc276a1b">
+                  <ReadingType>Average</ReadingType>
+                  <TimeSeriesReadingQuantity>Power Factor</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-07-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-08-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>0.344637441411635</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-d49606f7-e5fb-403a-b500-cbaf37448961">
+                  <ReadingType>Average</ReadingType>
+                  <TimeSeriesReadingQuantity>Power Factor</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-08-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-09-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>0.280017921146953</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-504a5306-60dd-4e83-b1b2-9f4eefb1d612">
+                  <ReadingType>Average</ReadingType>
+                  <TimeSeriesReadingQuantity>Power Factor</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-09-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-10-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>0.308641975308642</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-ace087ec-ca59-466c-8f6a-e03d52237962">
+                  <ReadingType>Average</ReadingType>
+                  <TimeSeriesReadingQuantity>Power Factor</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-10-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-11-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>0.373357228195938</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-533b0082-eacf-4c0e-b79d-53200739be87">
+                  <ReadingType>Average</ReadingType>
+                  <TimeSeriesReadingQuantity>Power Factor</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-11-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-12-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>0.356125356125356</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-6a0a974d-fde2-4349-b1a1-38062dfa521f">
+                  <ReadingType>Average</ReadingType>
+                  <TimeSeriesReadingQuantity>Power Factor</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-12-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2011-01-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>0.448028673835125</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-b2b25519-b828-49c8-bca6-4d51dc072428">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-01-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-02-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>8333.33333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-764f9d47-fd9f-4cf4-8bca-ba273b343c35">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-02-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-03-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>8333.33333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-402fa488-478f-45cb-9561-e38bcad0037e">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-03-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-04-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>8333.33333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-c4c6cdf2-d107-4452-a8a0-e4d725d4cbbe">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-04-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-05-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>8333.33333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-45284725-5e31-4044-8d3b-c1f63e0594b6">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-05-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-06-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>8333.33333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-db8361d9-6bb1-4e61-b2a8-7a61ac3b202e">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-06-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-07-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>8333.33333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-da747891-072e-4e56-9061-e0716536cf8f">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-07-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-08-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>8333.33333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-af8dbd5c-6965-45c4-bb08-50422b0c61f9">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-08-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-09-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>8333.33333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-2a2c921c-93c9-4e6f-a3a8-e7cfb5b3519b">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-09-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-10-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>8333.33333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-eab9c1d1-0e61-42a0-b422-d5e3a4a6c6f3">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-10-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-11-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>8333.33333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-869645d8-4bfb-45b9-b077-f0a0d96e9280">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-11-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-12-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>8333.33333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-4861a811-4c23-4451-9676-78005adb10a7">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-12-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2011-01-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>8333.33333333333</IntervalReading>
+                  <ResourceUseID IDref="Resource1"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-6dc61cef-4a32-4e07-8875-cc8f5f124fe9">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-01-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-02-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2145</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-23265f11-4f23-4446-9af5-0b9cf199af10">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-02-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-03-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2145</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-23d08d2a-f74c-4218-9af1-ad3e68606210">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-03-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-04-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2145</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-17a9791c-f3e4-4c40-adb0-c0a4429f5603">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-04-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-05-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2145</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-6a47d9f7-def2-47b0-a904-83a4573407ce">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-05-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-06-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2145</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-84d463c8-3d50-4134-b186-998d21f5dfd1">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-06-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-07-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2145</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-d4f3a195-1632-4f8b-bbb8-149d14b65875">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-07-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-08-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2145</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-bcc1da68-b3a8-48f7-a6ec-4f44da5700c0">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-08-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-09-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2145</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-3c77cba2-72a4-4d0d-9c3b-413463e1953f">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-09-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-10-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2145</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-2e077499-37eb-41e2-880d-c50141fddae8">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-10-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-11-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2145</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-a750bdeb-12e0-4ed8-9e40-f091cb456c2f">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-11-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-12-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2145</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-cf4cda58-aec4-42b4-9a7e-9390fc74d35e">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-12-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2011-01-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2145</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-5e0d9630-977a-42be-95e3-17bd96a37aca">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-01-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-02-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>1608.75</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-db6ee074-f69e-42f4-87a1-1dae468cb986">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-02-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-03-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>1608.75</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-02755afc-4a82-46fc-906a-c7bb59d95d83">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-03-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-04-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>1608.75</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-8aaa738e-d825-4e5f-97b7-0033508b1aeb">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-04-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-05-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>1608.75</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-18f67336-da42-43dd-996f-e3993dda10a7">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-05-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-06-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>1608.75</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-1e3bf9ec-153d-4a6e-a219-2d3ec79f8698">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-06-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-07-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>1608.75</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-e600aa84-0533-4589-b347-9bccc24e0b7d">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-07-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-08-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>1608.75</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-d610c9df-a5ab-45d8-badc-2cee19984fce">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-08-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-09-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>1608.75</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-22743832-86fc-4787-b587-a1f35da0d2be">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-09-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-10-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>1608.75</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-1b0e3ab1-0c12-4ee7-9682-bce3f04cda5f">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-10-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-11-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>1608.75</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-e3d3eb43-58fc-44aa-bcfe-88a8e210e8fb">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-11-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-12-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>1608.75</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-35c4a24c-bbb4-4b3a-991d-b9ad91a2a6c1">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-12-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2011-01-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>1608.75</IntervalReading>
+                  <ResourceUseID IDref="Resource2"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-23b8871f-bac2-48df-82cf-1c1bbbbfda5f">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-01-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-02-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12375</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-c2d3b831-1b20-463c-9e20-e28613ba7ac3">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-02-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-03-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12375</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-95dda259-c02b-4b83-9bac-20506a676b9c">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-03-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-04-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12375</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-0c4a42a4-e70d-4926-ba44-30e7261ab575">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-04-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-05-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12375</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-eaa20a88-51f7-498d-ad3f-8ebc01b692d3">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-05-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-06-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12375</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-065147e4-79ed-4595-94b6-32c664bae4a7">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-06-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-07-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12375</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-73935d42-c040-483b-be81-9c33d3ef420c">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-07-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-08-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12375</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-db953a74-5e5b-44d6-a01c-6297828e5eaa">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-08-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-09-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12375</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-11abe7a3-e5f5-4bf1-869d-330dadc4eec7">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-09-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-10-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12375</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-f83bc3a8-b0af-4f25-afdc-f9a2c3a2f4d6">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-10-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-11-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12375</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-a91e0bdf-f882-4268-bea6-63a2addab4b9">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-11-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-12-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12375</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-b8f83db1-510f-4733-af9a-409080c26924">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-12-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2011-01-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12375</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-991bdf2d-be32-4d50-aa81-41e00e334382">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-01-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-02-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2970</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-fc11bb8a-57fd-45ea-8ef7-cc931a437dd0">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-02-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-03-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2970</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-5a253839-e634-4c3a-a5db-a2d7823cfece">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-03-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-04-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2970</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-6907e3a1-d853-4eee-b342-b70785e25e1a">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-04-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-05-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2970</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-67ebc056-6183-496d-a0f0-7a5ce2b78de8">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-05-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-06-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2970</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-e39389ad-2f3a-4731-878f-3f2876427781">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-06-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-07-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2970</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-88c9a3c7-7d2c-4284-b96d-1fc067aea11c">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-07-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-08-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2970</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-3ec2b560-1876-4365-844e-9746a3c27300">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-08-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-09-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2970</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-bb8a7aa8-23ae-4f4b-8261-17b39014df66">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-09-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-10-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2970</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-27a92a1c-68ed-44ec-8743-a295c3c37ea0">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-10-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-11-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2970</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-1e917b7c-a3c5-4530-bf9f-93396f103ac2">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-11-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-12-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2970</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-4ffd11e1-15bc-4fa8-85b0-8e2e54b3f0af">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-12-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2011-01-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>2970</IntervalReading>
+                  <ResourceUseID IDref="Resource3"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-1fbe38d5-9cf7-4cdc-a659-0db2505c7395">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-01-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-02-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12912.0833333333</IntervalReading>
+                  <UserDefinedFields>
+                    <UserDefinedField>
+                      <FieldName>Time Series Description</FieldName>
+                      <FieldValue>Total Metered Energy Cost</FieldValue>
+                    </UserDefinedField>
+                  </UserDefinedFields>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-8b77faf5-5a25-49e2-9095-5f46a92dc7c7">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-02-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-03-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12912.0833333333</IntervalReading>
+                  <UserDefinedFields>
+                    <UserDefinedField>
+                      <FieldName>Time Series Description</FieldName>
+                      <FieldValue>Total Metered Energy Cost</FieldValue>
+                    </UserDefinedField>
+                  </UserDefinedFields>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-79519f62-0ade-4d51-85a4-9b32600b5839">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-03-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-04-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12912.0833333333</IntervalReading>
+                  <UserDefinedFields>
+                    <UserDefinedField>
+                      <FieldName>Time Series Description</FieldName>
+                      <FieldValue>Total Metered Energy Cost</FieldValue>
+                    </UserDefinedField>
+                  </UserDefinedFields>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-e97b45f4-2991-412b-b3da-f86d6a1f1ad3">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-04-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-05-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12912.0833333333</IntervalReading>
+                  <UserDefinedFields>
+                    <UserDefinedField>
+                      <FieldName>Time Series Description</FieldName>
+                      <FieldValue>Total Metered Energy Cost</FieldValue>
+                    </UserDefinedField>
+                  </UserDefinedFields>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-700bfe18-4d36-4b7e-a1fb-54b51884dd63">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-05-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-06-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12912.0833333333</IntervalReading>
+                  <UserDefinedFields>
+                    <UserDefinedField>
+                      <FieldName>Time Series Description</FieldName>
+                      <FieldValue>Total Metered Energy Cost</FieldValue>
+                    </UserDefinedField>
+                  </UserDefinedFields>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-4065e0da-690a-4849-bf2e-86e65b53652e">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-06-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-07-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12912.0833333333</IntervalReading>
+                  <UserDefinedFields>
+                    <UserDefinedField>
+                      <FieldName>Time Series Description</FieldName>
+                      <FieldValue>Total Metered Energy Cost</FieldValue>
+                    </UserDefinedField>
+                  </UserDefinedFields>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-69ef0ce8-d3bb-4bf7-8d24-2a7bcc3e1295">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-07-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-08-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12912.0833333333</IntervalReading>
+                  <UserDefinedFields>
+                    <UserDefinedField>
+                      <FieldName>Time Series Description</FieldName>
+                      <FieldValue>Total Metered Energy Cost</FieldValue>
+                    </UserDefinedField>
+                  </UserDefinedFields>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-c658ff55-3dec-48c4-a6b8-0398251a8ced">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-08-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-09-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12912.0833333333</IntervalReading>
+                  <UserDefinedFields>
+                    <UserDefinedField>
+                      <FieldName>Time Series Description</FieldName>
+                      <FieldValue>Total Metered Energy Cost</FieldValue>
+                    </UserDefinedField>
+                  </UserDefinedFields>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-f3f86a42-fcea-4852-9846-a85aa7f6d505">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-09-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-10-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12912.0833333333</IntervalReading>
+                  <UserDefinedFields>
+                    <UserDefinedField>
+                      <FieldName>Time Series Description</FieldName>
+                      <FieldValue>Total Metered Energy Cost</FieldValue>
+                    </UserDefinedField>
+                  </UserDefinedFields>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-696690ab-1afc-4c50-9866-5074d6415d9c">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-10-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-11-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12912.0833333333</IntervalReading>
+                  <UserDefinedFields>
+                    <UserDefinedField>
+                      <FieldName>Time Series Description</FieldName>
+                      <FieldValue>Total Metered Energy Cost</FieldValue>
+                    </UserDefinedField>
+                  </UserDefinedFields>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-ad1bcb91-53b8-424b-8f13-1d2cae6ce23f">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-11-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2010-12-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12912.0833333333</IntervalReading>
+                  <UserDefinedFields>
+                    <UserDefinedField>
+                      <FieldName>Time Series Description</FieldName>
+                      <FieldValue>Total Metered Energy Cost</FieldValue>
+                    </UserDefinedField>
+                  </UserDefinedFields>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-e84d9d15-3d1c-45f3-be35-98726719b126">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-12-02T00:00:00</StartTimestamp>
+                  <EndTimestamp>2011-01-01T00:00:00</EndTimestamp>
+                  <IntervalFrequency>Month</IntervalFrequency>
+                  <IntervalReading>12912.0833333333</IntervalReading>
+                  <UserDefinedFields>
+                    <UserDefinedField>
+                      <FieldName>Time Series Description</FieldName>
+                      <FieldValue>Total Metered Energy Cost</FieldValue>
+                    </UserDefinedField>
+                  </UserDefinedFields>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-9ac2556d-8105-451a-83c3-9fc7470cb842">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-01-10T00:00:00</StartTimestamp>
+                  <IntervalFrequency>Unknown</IntervalFrequency>
+                  <IntervalReading>100</IntervalReading>
+                  <ResourceUseID IDref="Resource4"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-ba2c39ff-5d75-43f7-8223-4fd78b2b950f">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-07-12T00:00:00</StartTimestamp>
+                  <IntervalFrequency>Unknown</IntervalFrequency>
+                  <IntervalReading>200</IntervalReading>
+                  <ResourceUseID IDref="Resource4"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-9a8498f8-2974-4461-8fd7-0e48e20fff0b">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-12-25T00:00:00</StartTimestamp>
+                  <IntervalFrequency>Unknown</IntervalFrequency>
+                  <IntervalReading>150</IntervalReading>
+                  <ResourceUseID IDref="Resource4"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-aaad0f08-0b19-48e7-926c-99856303ad8a">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-01-10T00:00:00</StartTimestamp>
+                  <IntervalFrequency>Unknown</IntervalFrequency>
+                  <IntervalReading>20</IntervalReading>
+                  <ResourceUseID IDref="Resource4"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-6166d221-c4e2-48ac-a69d-3569fd62c82d">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-07-12T00:00:00</StartTimestamp>
+                  <IntervalFrequency>Unknown</IntervalFrequency>
+                  <IntervalReading>40</IntervalReading>
+                  <ResourceUseID IDref="Resource4"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-4b8eb9c6-b726-4aa3-92a8-544e6692ca87">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-12-25T00:00:00</StartTimestamp>
+                  <IntervalFrequency>Unknown</IntervalFrequency>
+                  <IntervalReading>30</IntervalReading>
+                  <ResourceUseID IDref="Resource4"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-9b7809d9-653f-41ae-92ea-fcb39840314d">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-01-15T00:00:00</StartTimestamp>
+                  <IntervalFrequency>Unknown</IntervalFrequency>
+                  <IntervalReading>90</IntervalReading>
+                  <ResourceUseID IDref="Resource5"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-fe1c4b7b-e751-4563-a6fa-4b37c0df0c1a">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-04-15T00:00:00</StartTimestamp>
+                  <IntervalFrequency>Unknown</IntervalFrequency>
+                  <IntervalReading>100</IntervalReading>
+                  <ResourceUseID IDref="Resource5"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-5ffd24e9-6637-47e2-aa12-45d30e65d64a">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-09-15T00:00:00</StartTimestamp>
+                  <IntervalFrequency>Unknown</IntervalFrequency>
+                  <IntervalReading>120</IntervalReading>
+                  <ResourceUseID IDref="Resource5"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-9e86c671-55ba-43b2-ab3f-b2ccc80e8352">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Energy</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-12-30T00:00:00</StartTimestamp>
+                  <IntervalFrequency>Unknown</IntervalFrequency>
+                  <IntervalReading>80</IntervalReading>
+                  <ResourceUseID IDref="Resource5"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-57bf7ae0-7681-4835-837b-e59fccf8a2af">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-01-15T00:00:00</StartTimestamp>
+                  <IntervalFrequency>Unknown</IntervalFrequency>
+                  <IntervalReading>10</IntervalReading>
+                  <ResourceUseID IDref="Resource5"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-078867bf-7d7f-4aec-ba9f-2b194b26faa7">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-04-15T00:00:00</StartTimestamp>
+                  <IntervalFrequency>Unknown</IntervalFrequency>
+                  <IntervalReading>20</IntervalReading>
+                  <ResourceUseID IDref="Resource5"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-717ed316-7440-4dc0-8cae-b5e894589427">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-09-15T00:00:00</StartTimestamp>
+                  <IntervalFrequency>Unknown</IntervalFrequency>
+                  <IntervalReading>5</IntervalReading>
+                  <ResourceUseID IDref="Resource5"/>
+                </TimeSeries>
+                <TimeSeries ID="TimeSeries-165ba645-666d-4148-a012-a49755be1379">
+                  <ReadingType>Total</ReadingType>
+                  <TimeSeriesReadingQuantity>Currency</TimeSeriesReadingQuantity>
+                  <StartTimestamp>2010-12-30T00:00:00</StartTimestamp>
+                  <IntervalFrequency>Unknown</IntervalFrequency>
+                  <IntervalReading>66</IntervalReading>
+                  <ResourceUseID IDref="Resource5"/>
+                </TimeSeries>
+              </TimeSeriesData>
+              <AllResourceTotals>
+                <AllResourceTotal ID="AllResourceTotal-2da90705-7030-44a8-a52a-2ff05ca41b8a">
+                  <EndUse>All end uses</EndUse>
+                  <TemporalStatus>Pre retrofit</TemporalStatus>
+                  <ResourceBoundary>Gross</ResourceBoundary>
+                  <SiteEnergyUse>7804.15</SiteEnergyUse>
+                  <SiteEnergyUseIntensity>39.414898989898987</SiteEnergyUseIntensity>
+                  <EnergyCost>154945</EnergyCost>
+                  <ElectricitySourcedFromOnsiteRenewableSystems>234.4665885111</ElectricitySourcedFromOnsiteRenewableSystems>
+                </AllResourceTotal>
+                <AllResourceTotal ID="AllResourceTotal-64fdf870-adb5-4a54-ae20-a64091b67333">
+                  <EndUse>All end uses</EndUse>
+                  <TemporalStatus>Pre retrofit</TemporalStatus>
+                  <ResourceBoundary>Net</ResourceBoundary>
+                  <SiteEnergyUse>7803.35</SiteEnergyUse>
+                  <SiteEnergyUseIntensity>39.410858585858584</SiteEnergyUseIntensity>
+                  <EnergyCost>154136</EnergyCost>
+                </AllResourceTotal>
+              </AllResourceTotals>
+              <AnnualHeatingDegreeDays>4000</AnnualHeatingDegreeDays>
+              <AnnualCoolingDegreeDays>3000</AnnualCoolingDegreeDays>
+              <HDDBaseTemperature>0</HDDBaseTemperature>
+              <CDDBaseTemperature>0</CDDBaseTemperature>
+              <LinkedPremises>
+                <Building>
+                  <LinkedBuildingID IDref="Building1"/>
+                </Building>
+              </LinkedPremises>
+            </Scenario>
+            <Scenario ID="Scenario-6fbcecbc-39bc-4a6e-b200-b18e9119c494">
+              <ScenarioName>RecommendedPackage1</ScenarioName>
+              <TemporalStatus>Post retrofit</TemporalStatus>
+              <ScenarioType>
+                <PackageOfMeasures ID="PackageOfMeasures-996be444-5850-4555-93ba-7ef58058de85">
+                  <AnnualSavingsCost>15809</AnnualSavingsCost>
+                  <AnnualSavingsByFuels>
+                    <AnnualSavingsByFuel>
+                      <EnergyResource>Electricity</EnergyResource>
+                      <ResourceUnits>kWh</ResourceUnits>
+                      <AnnualSavingsNativeUnits>7855</AnnualSavingsNativeUnits>
+                    </AnnualSavingsByFuel>
+                    <AnnualSavingsByFuel>
+                      <EnergyResource>Natural gas</EnergyResource>
+                      <ResourceUnits>therms</ResourceUnits>
+                      <AnnualSavingsNativeUnits>3859</AnnualSavingsNativeUnits>
+                    </AnnualSavingsByFuel>
+                  </AnnualSavingsByFuels>
+                  <SummerPeakElectricityReduction>71</SummerPeakElectricityReduction>
+                  <PackageFirstCost>25683</PackageFirstCost>
+                  <FundingFromIncentives>3652</FundingFromIncentives>
+                  <SimplePayback>1.3935732810424442</SimplePayback>
+                </PackageOfMeasures>
+              </ScenarioType>
+              <LinkedPremises>
+                <Building>
+                  <LinkedBuildingID IDref="Building1"/>
+                </Building>
+              </LinkedPremises>
+              <UserDefinedFields>
+                <UserDefinedField>
+                  <FieldName>Net Measure Cost</FieldName>
+                  <FieldValue>22031</FieldValue>
+                </UserDefinedField>
+                <UserDefinedField>
+                  <FieldName>Simple ROI</FieldName>
+                  <FieldValue>0.71757977395488171</FieldValue>
+                </UserDefinedField>
+              </UserDefinedFields>
+            </Scenario>
+          </Scenarios>
+          <AuditDates>
+            <AuditDate>
+              <Date>2015-02-05</Date>
+              <DateType>Completion</DateType>
+            </AuditDate>
+          </AuditDates>
+          <Utilities>
+            <Utility ID="Utility1">
+              <RateSchedules>
+                <RateSchedule ID="RateSchedule-9c3a9356-a55b-41e6-9b44-ef57f26275f0">
+                  <RateStructureName>WSE 999-999</RateStructureName>
+                </RateSchedule>
+              </RateSchedules>
+              <MeteringConfiguration>Master meter with sub metering</MeteringConfiguration>
+              <UtilityAccountNumber>999-9921</UtilityAccountNumber>
+            </Utility>
+            <Utility ID="Utility2">
+              <RateSchedules>
+                <RateSchedule ID="RateSchedule-5da3b5d4-321e-4b56-b6c5-ff16ad6c54b6">
+                  <RateStructureName>WSE 999-999</RateStructureName>
+                </RateSchedule>
+              </RateSchedules>
+              <MeteringConfiguration>Master meter without sub metering</MeteringConfiguration>
+              <UtilityAccountNumber>999-9998</UtilityAccountNumber>
+            </Utility>
+            <Utility ID="Utility3">
+              <RateSchedules>
+                <RateSchedule ID="RateSchedule-3a565dec-7c5a-4ac5-a204-c613c516cc6c">
+                  <RateStructureName>WSE 999-999</RateStructureName>
+                </RateSchedule>
+              </RateSchedules>
+              <MeteringConfiguration>Master meter with sub metering</MeteringConfiguration>
+              <UtilityAccountNumber>999-9224</UtilityAccountNumber>
+            </Utility>
+            <Utility ID="Utility4">
+              <RateSchedules>
+                <RateSchedule ID="RateSchedule-ee383d8f-352c-49e6-a0fe-5824e4f84dab">
+                  <RateStructureName>WSE 999-999</RateStructureName>
+                </RateSchedule>
+              </RateSchedules>
+              <MeteringConfiguration>Master meter with sub metering</MeteringConfiguration>
+              <UtilityAccountNumber>999-9994</UtilityAccountNumber>
+            </Utility>
+            <Utility ID="Utility5">
+              <RateSchedules>
+                <RateSchedule ID="RateSchedule-8ae2099f-2219-4a55-ae7d-ed659847aff5">
+                  <RateStructureName>WSE 999-999</RateStructureName>
+                </RateSchedule>
+              </RateSchedules>
+              <MeteringConfiguration>Master meter without sub metering</MeteringConfiguration>
+              <UtilityAccountNumber>999-9998</UtilityAccountNumber>
+            </Utility>
+            <Utility ID="Utility6">
+              <RateSchedules>
+                <RateSchedule ID="RateSchedule-e2c619a4-42ae-4000-838a-b2e7f19e65b6">
+                  <RateStructureName>WSE 999-999</RateStructureName>
+                </RateSchedule>
+              </RateSchedules>
+              <MeteringConfiguration>Master meter with sub metering</MeteringConfiguration>
+              <UtilityAccountNumber>999-9224</UtilityAccountNumber>
+            </Utility>
+            <Utility ID="Utility7">
+              <RateSchedules>
+                <RateSchedule ID="RateSchedule-e4b963f9-98a8-4c05-8637-266913c5ba35">
+                  <RateStructureName>WSE 999-999</RateStructureName>
+                </RateSchedule>
+              </RateSchedules>
+              <MeteringConfiguration>Master meter with sub metering</MeteringConfiguration>
+              <UtilityAccountNumber>999-9994</UtilityAccountNumber>
+            </Utility>
+            <Utility ID="Utility8">
+              <RateSchedules>
+                <RateSchedule ID="RateSchedule-7fa34299-130f-4425-8823-826e62036f79">
+                  <RateStructureName>WSE 999-999</RateStructureName>
+                </RateSchedule>
+              </RateSchedules>
+              <MeteringConfiguration>Master meter without sub metering</MeteringConfiguration>
+              <UtilityAccountNumber>999-9998</UtilityAccountNumber>
+            </Utility>
+            <Utility ID="Utility9">
+              <RateSchedules>
+                <RateSchedule ID="RateSchedule-819dced0-493a-4507-b8c3-0e0da983e729">
+                  <RateStructureName>WSE 999-999</RateStructureName>
+                </RateSchedule>
+              </RateSchedules>
+              <MeteringConfiguration>Master meter with sub metering</MeteringConfiguration>
+              <UtilityAccountNumber>999-9224</UtilityAccountNumber>
+            </Utility>
+            <Utility ID="Utility10">
+              <RateSchedules>
+                <RateSchedule ID="RateSchedule-c8093a73-d1aa-4226-955b-e56531c1faa5">
+                  <RateStructureName>WSE 999-999</RateStructureName>
+                </RateSchedule>
+              </RateSchedules>
+              <MeteringConfiguration>Master meter with sub metering</MeteringConfiguration>
+              <UtilityAccountNumber>999-9994</UtilityAccountNumber>
+            </Utility>
+          </Utilities>
+          <AuditorContactID IDref="Auditor1"/>
+        </Report>
+      </Reports>
+      <Contacts>
+        <Contact ID="Auditor1">
+          <ContactRoles>
+            <ContactRole>Energy Auditor</ContactRole>
+          </ContactRoles>
+          <ContactName>John Doe</ContactName>
+        </Contact>
+      </Contacts>
+    </Facility>
+  </Facilities>
+</BuildingSync>

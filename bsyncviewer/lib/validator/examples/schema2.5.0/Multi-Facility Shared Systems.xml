@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BuildingSync xmlns="http://buildingsync.net/schemas/bedes-auc/2019" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://buildingsync.net/schemas/bedes-auc/2019 ../BuildingSync.xsd" version="2.5.0">
+  <Facilities>
+    <Facility ID="Facility-08f45ff8-3c5b-4169-8f27-678102e85e6b">
+      <Sites>
+        <Site ID="Site-286f2dd9-bce7-46fe-a80b-5cab58c1d50b">
+          <Address>
+            <StreetAddressDetail>
+              <Simplified>
+                <StreetAddress>15013 Denver West Parkway</StreetAddress>
+              </Simplified>
+            </StreetAddressDetail>
+            <City>Golden</City>
+            <State>CO</State>
+            <PostalCode>80401</PostalCode>
+          </Address>
+          <Buildings>
+            <Building ID="Building1">
+              <PremisesName>RSF</PremisesName>
+              <OccupancyClassification>Office</OccupancyClassification>
+              <OccupancyLevels>
+                <OccupancyLevel>
+                  <OccupantQuantityType>Adults</OccupantQuantityType>
+                  <OccupantQuantity>1325</OccupantQuantity>
+                </OccupancyLevel>
+              </OccupancyLevels>
+              <OwnershipStatus>Owned</OwnershipStatus>
+              <FloorAreas>
+                <FloorArea>
+                  <FloorAreaType>Conditioned</FloorAreaType>
+                  <FloorAreaValue>360000</FloorAreaValue>
+                </FloorArea>
+              </FloorAreas>
+              <YearOfConstruction>2011</YearOfConstruction>
+            </Building>
+            <Building ID="Building2">
+              <PremisesName>ESIF</PremisesName>
+              <OccupancyClassification>Laboratory-Testing</OccupancyClassification>
+              <OccupancyLevels>
+                <OccupancyLevel>
+                  <OccupantQuantityType>Adults</OccupantQuantityType>
+                  <OccupantQuantity>200</OccupantQuantity>
+                </OccupancyLevel>
+              </OccupancyLevels>
+              <OwnershipStatus>Owned</OwnershipStatus>
+              <FloorAreas>
+                <FloorArea>
+                  <FloorAreaType>Gross</FloorAreaType>
+                  <FloorAreaValue>185000</FloorAreaValue>
+                </FloorArea>
+              </FloorAreas>
+              <YearOfConstruction>2013</YearOfConstruction>
+              <Sections>
+                <Section ID="Wholebuilding2">
+                  <PremisesName>Wholebuilding2</PremisesName>
+                  <SectionType>Whole building</SectionType>
+                  <FloorsAboveGrade>3</FloorsAboveGrade>
+                  <FloorsBelowGrade>1</FloorsBelowGrade>
+                </Section>
+              </Sections>
+            </Building>
+          </Buildings>
+        </Site>
+      </Sites>
+      <Systems>
+        <HVACSystems>
+          <HVACSystem ID="HVACSystem-b6e54165-1c54-4dd4-94d7-09869f283e75">
+            <Plants>
+              <HeatingPlants>
+                <HeatingPlant ID="HeatingPlant1">
+                  <Boiler>
+                    <BoilerType>Hot water</BoilerType>
+                    <DraftType>Mechanical forced</DraftType>
+                  </Boiler>
+                </HeatingPlant>
+              </HeatingPlants>
+            </Plants>
+            <HeatingAndCoolingSystems>
+              <HeatingSources>
+                <HeatingSource ID="HeatingSource-ea766cb7-eb38-4fd4-bbaf-eb94106fc0d7">
+                  <HeatingSourceType>
+                    <SourceHeatingPlantID IDref="HeatingPlant1"/>
+                  </HeatingSourceType>
+                  <HeatingMedium>Hot water</HeatingMedium>
+                  <PrimaryFuel>Fuel oil no 5 and no 6</PrimaryFuel>
+                </HeatingSource>
+              </HeatingSources>
+            </HeatingAndCoolingSystems>
+            <LinkedPremises>
+              <Building>
+                <LinkedBuildingID IDref="Building2"/>
+              </Building>
+            </LinkedPremises>
+          </HVACSystem>
+          <HVACSystem ID="HVACSystem-c0874219-f8aa-4189-b45f-e8c845f2740c">
+            <Plants>
+              <CoolingPlants>
+                <CoolingPlant ID="CoolingPlant1">
+                  <Chiller>
+                    <ChillerType>Vapor compression</ChillerType>
+                    <CondenserPlantIDs>
+                      <CondenserPlantID IDref="CondenserPlant1"/>
+                    </CondenserPlantIDs>
+                  </Chiller>
+                </CoolingPlant>
+              </CoolingPlants>
+              <CondenserPlants>
+                <CondenserPlant ID="CondenserPlant1">
+                  <AirCooled>
+                    <EvaporativelyCooledCondenser ID="EvaporativelyCooledCondenser-f944f3b8-0cc4-46ae-b1a6-43df46a53916"/>
+                  </AirCooled>
+                </CondenserPlant>
+              </CondenserPlants>
+            </Plants>
+            <HeatingAndCoolingSystems>
+              <CoolingSources>
+                <CoolingSource ID="CoolingSource-2375d399-4af7-4893-8de7-d145c6027fde">
+                  <CoolingSourceType>
+                    <CoolingPlantID IDref="CoolingPlant1"/>
+                  </CoolingSourceType>
+                  <CoolingMedium>Chilled water</CoolingMedium>
+                  <PrimaryFuel>Fuel oil no 2</PrimaryFuel>
+                </CoolingSource>
+              </CoolingSources>
+            </HeatingAndCoolingSystems>
+            <LinkedPremises>
+              <Building>
+                <LinkedBuildingID IDref="Building1"/>
+                <LinkedBuildingID IDref="Building2"/>
+              </Building>
+            </LinkedPremises>
+          </HVACSystem>
+        </HVACSystems>
+        <OnsiteStorageTransmissionGenerationSystems>
+          <OnsiteStorageTransmissionGenerationSystem ID="OnsiteStorageTransmissionGenerationSystem-b6938623-eb10-4911-b8b4-117958ce3711">
+            <EnergyConversionType>
+              <Generation>
+                <OnsiteGenerationType>
+                  <PV/>
+                </OnsiteGenerationType>
+              </Generation>
+            </EnergyConversionType>
+            <LinkedPremises>
+              <Building>
+                <LinkedBuildingID IDref="Building1">
+                  <FloorAreas>
+                    <FloorArea>
+                      <FloorAreaType>Conditioned</FloorAreaType>
+                      <FloorAreaPercentage>100</FloorAreaPercentage>
+                    </FloorArea>
+                  </FloorAreas>
+                </LinkedBuildingID>
+                <LinkedBuildingID IDref="Building2">
+                  <FloorAreas>
+                    <FloorArea>
+                      <FloorAreaType>Gross</FloorAreaType>
+                      <FloorAreaPercentage>25</FloorAreaPercentage>
+                      <Story>1</Story>
+                    </FloorArea>
+                    <FloorArea>
+                      <FloorAreaType>Gross</FloorAreaType>
+                      <FloorAreaPercentage>50</FloorAreaPercentage>
+                      <Story>2</Story>
+                    </FloorArea>
+                    <FloorArea>
+                      <FloorAreaType>Gross</FloorAreaType>
+                      <FloorAreaPercentage>50</FloorAreaPercentage>
+                      <Story>3</Story>
+                    </FloorArea>
+                  </FloorAreas>
+                </LinkedBuildingID>
+              </Building>
+            </LinkedPremises>
+          </OnsiteStorageTransmissionGenerationSystem>
+        </OnsiteStorageTransmissionGenerationSystems>
+      </Systems>
+    </Facility>
+  </Facilities>
+</BuildingSync>
