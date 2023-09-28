@@ -14,7 +14,7 @@ urlcolor: blue
 
 Jie Xiong, Lauren Adams, Alex Swindler, Katherine Fleming, Cory Mosiman, Nicholas Long
 
-Last Updated: December 8, 2022
+Last Updated: September 28, 2023
 
 Version 1.3
 
@@ -42,13 +42,15 @@ Table 1 below shows the [existing BuildingSync use cases](https://buildingsync.n
 | Name                           | Description                                                                         |
 |--------------------------------|-------------------------------------------------------------------------------------|
 | BETTER                         | Use case for BETTER analysis                                                        |
-| BRICR SEED                     | Use case for BRICR files on SEED Platform                                           |
 | Bsyncr                         | Use case for the R package bsyncr                                                   |
+| Building EQ                    | Use cases for the ASHRAE's Building EQ Portal                                       |
+| GHG Emissions                  | Use cases for emissions audits                                                      |
 | L000 OpenStudio Pre-Simulation | Level 000 OpenStudio Pre-Simulation Use Case. In alignment with ASHRAE Standard 211 |
+| L000 Preliminary Analysis      | Level 000 Preliminary Analysis for ASHRAE Standard 211 audits                       |
 | L100 Audit                     | Use case for the ASHRAE Standard 211 level 1 audits                                 |
 | L100 OpenStudio Pre-Simulation | Level 100 OpenStudio Pre-Simulation Use Case. In alignment with ASHRAE Standard 211 |
 | L200 Audit                     | Use case for the ASHRAE Standard 211 level 2 audits                                 |
-| New York City Audit Use Case   | NY LL87 use case for schema version 2.5.0                                           |
+| New York City Audit Use Case   | NY LL87 use case                                                                    |
 | San Francisco                  | Use case for the city of San Francisco                                              |
 | SEED                           | General use case for files on SEED Platform                                         |
 
