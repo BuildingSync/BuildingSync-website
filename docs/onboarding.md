@@ -1,8 +1,8 @@
 ---
 geometry: margin=1in
 header-includes:
- - \usepackage{fvextra}
- - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\}}
+  - \usepackage{fvextra}
+  - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\}}
 urlcolor: blue
 ---
 
@@ -40,7 +40,7 @@ BuildingSync has traditionally been focused on exchanging data from auditing wor
 Table 1 below shows the [existing BuildingSync use cases](https://buildingsync.net/use_cases) approved and validated:
 
 | Name                           | Description                                                                         |
-|--------------------------------|-------------------------------------------------------------------------------------|
+| ------------------------------ | ----------------------------------------------------------------------------------- |
 | BETTER                         | Use case for BETTER analysis                                                        |
 | Bsyncr                         | Use case for the R package bsyncr                                                   |
 | Building EQ                    | Use cases for the ASHRAE's Building EQ Portal                                       |
@@ -105,38 +105,38 @@ There are some common gotchas that can occur when writing Schematron which we ou
 
 1. Problem: I need to check some element that's conditionally selected by an ancestor or sibling element
 
-    Example: For the Standard 211 Level 2 Schematron, we wanted to make sure the gross floor area was provided for a building, but we don't care if the other floor area types (e.g. Heated, Cooled, Open, etc) have the floor area provided. Using [XPath predicates](https://www.tutorialspoint.com/xpath/xpath_predicate.htm) we can select the floor area we want to test like so:
+   Example: For the Standard 211 Level 2 Schematron, we wanted to make sure the gross floor area was provided for a building, but we don't care if the other floor area types (e.g. Heated, Cooled, Open, etc) have the floor area provided. Using [XPath predicates](https://www.tutorialspoint.com/xpath/xpath_predicate.htm) we can select the floor area we want to test like so:
 
-    ```xml
-    <sch:rule context="//auc:Buildings/auc:Building/auc:FloorAreas/auc:FloorArea[auc:FloorAreaType/text() = 'Gross']">
-        <sch:assert test="count(auc:FloorAreaValue) > 0">FloorAreaValue must be provided for Gross floor area</sch:assert>
-    <sch:rule>
-    ```
+   ```xml
+   <sch:rule context="//auc:Buildings/auc:Building/auc:FloorAreas/auc:FloorArea[auc:FloorAreaType/text() = 'Gross']">
+       <sch:assert test="count(auc:FloorAreaValue) > 0">FloorAreaValue must be provided for Gross floor area</sch:assert>
+   <sch:rule>
+   ```
 
-    XPath predicates are very powerful and can allow you to even reach across the entire XML tree (see the example below for checking linked elements).
+   XPath predicates are very powerful and can allow you to even reach across the entire XML tree (see the example below for checking linked elements).
 
 2. Problem: I need to check that an element is properly linked to another element somewhere else in the XML tree
 
-    Example: BuildingSync uses `IDref` attributes to link one element to another. For the Standard 211 Level 2 Schematron, we needed to make sure that the building included `auc:PrimaryContactID` with the attribute `IDref` which pointed to the ID attribute of an `auc:Contact`. We use XPath predicates again to make this happen:
+   Example: BuildingSync uses `IDref` attributes to link one element to another. For the Standard 211 Level 2 Schematron, we needed to make sure that the building included `auc:PrimaryContactID` with the attribute `IDref` which pointed to the ID attribute of an `auc:Contact`. We use XPath predicates again to make this happen:
 
-    ```xml
-    <sch:rule context="//auc:Buildings/auc:Building">
-        <sch:assert test="auc:PrimaryContactID[@IDref=//auc:Contacts/auc:Contact/@ID]">auc:PrimaryContactID must exist and link to a valid auc:Contact</sch:assert>
-    <sch:rule>
-    ```
+   ```xml
+   <sch:rule context="//auc:Buildings/auc:Building">
+       <sch:assert test="auc:PrimaryContactID[@IDref=//auc:Contacts/auc:Contact/@ID]">auc:PrimaryContactID must exist and link to a valid auc:Contact</sch:assert>
+   <sch:rule>
+   ```
 
 3. Problem: I need to do a simple summation of multiple elements to check a value
 
-    Example: You might want to assert that the sum of all electricity meter usage reports are equal to the reported annual fuel use (`auc:AnnualFuelUseNativeUnits` or `auc:AnnualFuelUseConsistentUnits`). This can be accomplished using the XPath `sum()` function. See the example below which also demonstrates how to use variables to make the tests more easily readable:
+   Example: You might want to assert that the sum of all electricity meter usage reports are equal to the reported annual fuel use (`auc:AnnualFuelUseNativeUnits` or `auc:AnnualFuelUseConsistentUnits`). This can be accomplished using the XPath `sum()` function. See the example below which also demonstrates how to use variables to make the tests more easily readable:
 
-    ```xml
-    <sch:rule context="//auc:Buildings/auc:Building">
-        <sch:let name="summedMeters" value="sum(//auc:TimeSeriesData/auc:TimeSeries/auc:IntervalReading)"/>
-        <sch:assert test="$summedMeters //auc:ResourceUses/auc:ResourceUse/auc:AnnualFuelUseNativeUnits">auc:AnnualFuelUseNativeUnits must equal the sum of auc:TimeSeries readings</sch:assert>
-    <sch:rule>
-    ```
+   ```xml
+   <sch:rule context="//auc:Buildings/auc:Building">
+       <sch:let name="summedMeters" value="sum(//auc:TimeSeriesData/auc:TimeSeries/auc:IntervalReading)"/>
+       <sch:assert test="$summedMeters //auc:ResourceUses/auc:ResourceUse/auc:AnnualFuelUseNativeUnits">auc:AnnualFuelUseNativeUnits must equal the sum of auc:TimeSeries readings</sch:assert>
+   <sch:rule>
+   ```
 
-    This test makes a few assumptions (that there's only one resource use type, the reported interval reading is in the native units) but it gets the point across.
+   This test makes a few assumptions (that there's only one resource use type, the reported interval reading is in the native units) but it gets the point across.
 
 ## Use Case Publication
 

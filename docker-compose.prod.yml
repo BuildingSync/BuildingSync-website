@@ -12,7 +12,7 @@
 #   SELECTION_TOOL_ADMIN_ORG
 #   SECRET_KEY
 
-version: '3'
+version: "3"
 services:
   db-postgres:
     image: postgres:11.1

@@ -1,6 +1,7 @@
+from django.core.management.base import BaseCommand
+
 from bsyncviewer.lib.documentation_generator.generate_docs import generate_docs
 from bsyncviewer.models.schema import Schema
-from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):

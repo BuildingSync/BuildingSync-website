@@ -81,9 +81,19 @@ p {
 
 .serv-us {
   /*background: rgba(0, 81, 145, .85);*/
-  background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url(../img/23320.jpg);
-  background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), image-set(url("../img/23320.webp") 1x);
-  background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), -webkit-image-set(url("../img/23320.webp") 1x);
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 1)
+    ),
+    url(../img/23320.jpg);
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 1)
+    ),
+    image-set(url("../img/23320.webp") 1x);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)),
+    -webkit-image-set(url("../img/23320.webp") 1x);
 
   color: #fff;
 }
@@ -107,7 +117,9 @@ p {
 .numbers {
   background-image: url(../img/148110017-digital-data-700.jpg);
   background-image: image-set(url("../img/148110017-digital-data-700.webp") 1x);
-  background-image: -webkit-image-set(url("../img/148110017-digital-data-700.webp") 1x);
+  background-image: -webkit-image-set(
+    url("../img/148110017-digital-data-700.webp") 1x
+  );
 }
 
 footer .main-footer {

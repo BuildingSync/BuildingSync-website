@@ -5,6 +5,9 @@ from collections import defaultdict
 
 import jellyfish
 import xmltodict
+from django.conf import settings
+from django.core.management.base import BaseCommand
+
 from bsyncviewer.lib.bedes.bedes_parser import BedesParser
 from bsyncviewer.models.attribute import Attribute
 from bsyncviewer.models.attribute_enumeration_class import (
@@ -18,8 +21,6 @@ from bsyncviewer.models.bedes_models import (
 )
 from bsyncviewer.models.enumeration import Enumeration
 from bsyncviewer.models.schema import Schema
-from django.conf import settings
-from django.core.management.base import BaseCommand
 
 # MATCH TYPES:
 # Term-to-List-Option Match -> use bedes_url col (will contain only 1 URL)

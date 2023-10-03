@@ -1,10 +1,11 @@
 import os
 
-from bsyncviewer.models.schema import Schema
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
+
+from bsyncviewer.models.schema import Schema
 
 # Use a custom version that is not an actual version to prevent overwriting saved BEDES mappings
 TEST_SCHEMA_VERSION = '0.0.1'
