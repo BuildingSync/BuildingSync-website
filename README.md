@@ -24,7 +24,7 @@ This is the repository for the BuildingSync Validator web application.
      ```
 1. Install Django and associated requirements:
    ```bash
-   pip install -r requirements.txt
+   pip install -r requirements-test.txt
    ```
 1. Initialize the database:
    ```bash
