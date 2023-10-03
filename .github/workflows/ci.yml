@@ -3,6 +3,9 @@ name: CI
 on:
   pull_request:
   push:
+    branches:
+      - "develop"
+      - "main"
 
 jobs:
   test:
@@ -25,8 +28,8 @@ jobs:
         ports:
           - 5432:5432
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
         with:
           python-version: "3.9"
       - name: Display system info
