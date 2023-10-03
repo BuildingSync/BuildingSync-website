@@ -1,10 +1,11 @@
-from bsyncviewer import views
-from bsyncviewer.admin import admin_site
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django.urls import include, path, re_path
 from rest_framework import routers
+
+from bsyncviewer import views
+from bsyncviewer.admin import admin_site
 
 from .views import emailView, successView
 

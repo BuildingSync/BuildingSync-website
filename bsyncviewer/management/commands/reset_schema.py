@@ -1,9 +1,10 @@
 import os
 from shutil import copyfile
 
-from bsyncviewer.models.schema import Schema
 from django.conf import settings
 from django.core.management.base import BaseCommand
+
+from bsyncviewer.models.schema import Schema
 
 
 class Command(BaseCommand):

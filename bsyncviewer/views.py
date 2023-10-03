@@ -7,10 +7,6 @@ import zipfile
 from typing import Dict, List
 
 import semantic_version
-from bsyncviewer import forms
-from bsyncviewer.lib.documentation_generator.generate_docs import get_docs_path
-from bsyncviewer.lib.tree_viewer import get_schema_jstree_data
-from bsyncviewer.lib.validator.workflow import ValidationWorkflow
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
@@ -33,6 +29,11 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from rest_framework import views
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
+
+from bsyncviewer import forms
+from bsyncviewer.lib.documentation_generator.generate_docs import get_docs_path
+from bsyncviewer.lib.tree_viewer import get_schema_jstree_data
+from bsyncviewer.lib.validator.workflow import ValidationWorkflow
 
 from .models.attribute_enumeration_class import AttributeEnumerationClass
 from .models.bedes_models import (

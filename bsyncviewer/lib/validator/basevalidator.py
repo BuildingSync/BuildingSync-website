@@ -39,7 +39,6 @@ class BaseValidator(object):
         stub method: replace in subclass with method that throws a ValidationError if the file isn't valid.
         :return: None
         """
-        pass
 
     def validate(self):
         """

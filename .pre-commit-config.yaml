@@ -1,3 +1,14 @@
+exclude: |
+  (?x)(
+    ^bsyncviewer/static/css/owl.carousel.min.css|
+    ^bsyncviewer/static/css/font-awesome.min.css|
+    ^bsyncviewer/static/css/owl.theme.default.min.css|
+    ^bsyncviewer/static/css/magnific-popup.css|
+    ^bsyncviewer/static/css/responsive.css|
+    ^bsyncviewer/static/css/et-line.css|
+    ^bsyncviewer/static/img/better-logo.svg
+  )
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
@@ -16,9 +27,11 @@ repos:
         exclude: seed/static/seed/locales/
       - id: mixed-line-ending
         exclude: seed/static/seed/locales/
-      - id: pretty-format-json
-        args: ["--autofix", "--no-sort-keys", "--no-ensure-ascii"]
-        exclude: seed/static/seed/locales/
+      # - id: pretty-format-json
+      #   args: ["--autofix", "--no-sort-keys", "--no-ensure-ascii"]
+      #   exclude:
+      #     seed/static/seed/locales/
+
   - repo: https://github.com/pre-commit/mirrors-isort
     rev: v5.10.1
     hooks:

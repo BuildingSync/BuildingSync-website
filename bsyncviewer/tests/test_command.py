@@ -1,13 +1,14 @@
 import os
 from io import StringIO
 
-from bsyncviewer.models.bedes_models import BedesEnumeration, BedesTerm
-from bsyncviewer.models.schema import Schema
-from bsyncviewer.models.use_case import UseCase
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management import call_command
 from django.test import TestCase
+
+from bsyncviewer.models.bedes_models import BedesEnumeration, BedesTerm
+from bsyncviewer.models.schema import Schema
+from bsyncviewer.models.use_case import UseCase
 
 # For reset test only
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
