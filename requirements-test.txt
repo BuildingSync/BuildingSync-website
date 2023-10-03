@@ -1,7 +1,6 @@
 -r requirements.txt
 
-autopep8==2.0.4
-coveralls==3.3.1
-coverage==7.3.2
-tox==4.11.3
-pre-commit==2.21.0
+autopep8==1.4.4
+coveralls==2.2.0
+coverage==5.0.1
+tox==3.14.1
