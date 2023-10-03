@@ -27,11 +27,8 @@ repos:
         exclude: seed/static/seed/locales/
       - id: mixed-line-ending
         exclude: seed/static/seed/locales/
-      # - id: pretty-format-json
-      #   args: ["--autofix", "--no-sort-keys", "--no-ensure-ascii"]
-      #   exclude:
-      #     seed/static/seed/locales/
-
+      - id: pretty-format-json
+        args: ["--autofix", "--no-sort-keys"]
   - repo: https://github.com/pre-commit/mirrors-isort
     rev: v5.10.1
     hooks:
