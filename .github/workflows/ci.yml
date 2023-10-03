@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tox_env: [python, flake8]
+        tox_env: [python, precommit]
     services:
       postgres:
         image: postgres:9.6

@@ -84,14 +84,12 @@ pre-commit run --all-files
   coverage report
   ```
 
-### Pep
+### Precommit
 
 - Run the following command to clean up your code before committing:
 
 ```bash
-autopep8 --in-place --aggressive --aggressive --recursive --max-line-length 100 --ignore E501,E402,W503,E731 --exclude=conf.py,structure.py .
-
-tox -e flake8
+pre-commit run --all-files
 ```
 
 ## Usage
