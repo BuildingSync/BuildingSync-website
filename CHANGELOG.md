@@ -1,12 +1,51 @@
 # BuildingSync Use Case Selection Tool
 
-## Version 1.1.5
+## Version 1.2.0
 
-- Updated selection-tool github references to BuildingSync-website
-- Point interactive website to `develop-v2` version.
-- Various website cleanup
-- Upgrade docker image to alpine:3.10 to use Python 3.7.x series.
-- Release for BuildingSync schema version 2.5.0
+## What's Changed
+* updating validation workflow for large # errors and other small tweaks by @kflemin in https://github.com/BuildingSync/BuildingSync-website/pull/130
+* updating use case process diagram and adding link to it from use case by @kflemin in https://github.com/BuildingSync/BuildingSync-website/pull/131
+* Update onboarding doc to v1.2 by @JieXiong9119 in https://github.com/BuildingSync/BuildingSync-website/pull/133
+* adding example files by @kflemin in https://github.com/BuildingSync/BuildingSync-website/pull/135
+* set 2.4.0 as default version by @kflemin in https://github.com/BuildingSync/BuildingSync-website/pull/137
+* update references to website repo and ipynb by @nllong in https://github.com/BuildingSync/BuildingSync-website/pull/138
+* share a link to a particular spot in the schema tree by @kflemin in https://github.com/BuildingSync/BuildingSync-website/pull/141
+* Fix BuildingSync links by @nllong in https://github.com/BuildingSync/BuildingSync-website/pull/143
+* Paths to Example Files and Jupyter Notebook by @nllong in https://github.com/BuildingSync/BuildingSync-website/pull/144
+* Update BEDES Mapping by @haneslinger in https://github.com/BuildingSync/BuildingSync-website/pull/146
+* Add BEDES v2.5 mapping file by @haneslinger in https://github.com/BuildingSync/BuildingSync-website/pull/150
+* example zip must be names example_files.zip by @nllong in https://github.com/BuildingSync/BuildingSync-website/pull/148
+* fix link to BuildingSync versioning by @nllong in https://github.com/BuildingSync/BuildingSync-website/pull/147
+* Fix versions of examples by @nllong in https://github.com/BuildingSync/BuildingSync-website/pull/151
+* Remove old prereleases by @nllong in https://github.com/BuildingSync/BuildingSync-website/pull/149
+* remove constraint on bedes constraint by @nllong in https://github.com/BuildingSync/BuildingSync-website/pull/152
+* Bedes fix by @kflemin in https://github.com/BuildingSync/BuildingSync-website/pull/157
+* BEDES validator file options by @haneslinger in https://github.com/BuildingSync/BuildingSync-website/pull/158
+* Fix mistakes in enum mapping by @JieXiong9119 in https://github.com/BuildingSync/BuildingSync-website/pull/159
+* edge case fix for type references enums and unions enums by @kflemin in https://github.com/BuildingSync/BuildingSync-website/pull/162
+* workaround for example files dropdown by version by @kflemin in https://github.com/BuildingSync/BuildingSync-website/pull/164
+* Bump django from 2.2.24 to 2.2.27 by @dependabot in https://github.com/BuildingSync/BuildingSync-website/pull/163
+* link to python notebook as a markdown file by @nllong in https://github.com/BuildingSync/BuildingSync-website/pull/167
+* increase BEDES field sizes migration and update mapping by @kflemin in https://github.com/BuildingSync/BuildingSync-website/pull/166
+* Bump django from 2.2.27 to 2.2.28 by @dependabot in https://github.com/BuildingSync/BuildingSync-website/pull/168
+* move reference to correct year by @kflemin in https://github.com/BuildingSync/BuildingSync-website/pull/169
+* Update website by @haneslinger in https://github.com/BuildingSync/BuildingSync-website/pull/171
+* Major Improvements by @axelstudios in https://github.com/BuildingSync/BuildingSync-website/pull/172
+* Updated Publications and lxml by @axelstudios in https://github.com/BuildingSync/BuildingSync-website/pull/173
+* Upgrade to Python 3.7.10 by bumping alpine to 3.10 by @nllong in https://github.com/BuildingSync/BuildingSync-website/pull/175
+* Update Python CI by @axelstudios in https://github.com/BuildingSync/BuildingSync-website/pull/174
+* Updated Onboarding & Collaborators by @axelstudios in https://github.com/BuildingSync/BuildingSync-website/pull/176
+* Fix onboarding header height by @axelstudios in https://github.com/BuildingSync/BuildingSync-website/pull/177
+* Add BAE to tools by @haneslinger in https://github.com/BuildingSync/BuildingSync-website/pull/178
+* Add warnings by @haneslinger in https://github.com/BuildingSync/BuildingSync-website/pull/180
+* Release BuildingSync 2.5 by @JieXiong9119 in https://github.com/BuildingSync/BuildingSync-website/pull/181
+* Update documentation for BuildingSync 2.5 by @JieXiong9119 in https://github.com/BuildingSync/BuildingSync-website/pull/182
+
+## New Contributors
+* @haneslinger made their first contribution in https://github.com/BuildingSync/BuildingSync-website/pull/146
+* @axelstudios made their first contribution in https://github.com/BuildingSync/BuildingSync-website/pull/172
+
+**Full Changelog**: https://github.com/BuildingSync/BuildingSync-website/compare/v1.1.4...v1.2.0
 
 ## Version 1.1.4
 
