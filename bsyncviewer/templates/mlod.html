@@ -9,59 +9,65 @@
 
   <div class="container" style="padding-top: 2em">
 
-    <p>The Modeling Level of Detail (MLOD) is similar in concept to the <a href="https://technical.buildingsmart.org/standards/mvd/" target="_blank">Model View Definitions (MVD)</a> defined by IFC. MLODs define a subset of the overall BuildingSync schema necessary for a specific use case or workflow.
+    <p>The Modeling Level of Detail (MLOD) is similar in concept to the <a href="https://technical.buildingsmart.org/standards/ifc/mvd/" target="_blank" rel="noopener">Model View Definitions (MVD)</a>
+      defined by IFC. MLODs define a subset of the overall BuildingSync schema necessary for a specific use case or workflow.
     <p>Level definitions are in alignment with the ASHRAE Standard 211 levels as defined below:</p>
     <table class="table table-striped">
-    <thead>
-    <tr class="header">
-    <th>MLOD</th>
-    <th>Use Case</th>
-    <th>Alignment to Std 211</th>
-    <th>Std 211 Section</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>Level 000</td>
-    <td>Audit</td>
-    <td>Preliminary Analysis</td>
-    <td>Section 5.2.3</td>
-    </tr>
-    <tr class="even">
-    <td>Level 100</td>
-    <td>Audit</td>
-    <td>Level 1</td>
-    <td>Section 6.1</td>
-    </tr>
-    <tr class="odd">
-    <td>Level 200</td>
-    <td>Audit</td>
-    <td>Level 2</td>
-    <td>Section 6.2</td>
-    </tr>
-    <tr class="even">
-    <td>Level 300</td>
-    <td>Audit</td>
-    <td>Level 3</td>
-    <td>Section 6.3</td>
-    </tr>
-    <tr class="odd">
-    <td>Level 400</td>
-    <td>Audit</td>
-    <td>Not Applicable</td>
-    <td>Not Applicable</td>
-    </tr>
-    <tr class="even">
-    <td>Level 500</td>
-    <td>Audit</td>
-    <td>Not Applicable</td>
-    <td>Not Applicable</td>
-    </tr>
-    </tbody>
+      <thead>
+      <tr class="header">
+        <th>MLOD</th>
+        <th>Use Case</th>
+        <th>Alignment to Std 211</th>
+        <th>Std 211 Section</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+        <td>Level 000</td>
+        <td>Audit</td>
+        <td>Preliminary Analysis</td>
+        <td>Section 5.2.3</td>
+      </tr>
+      <tr class="even">
+        <td>Level 100</td>
+        <td>Audit</td>
+        <td>Level 1</td>
+        <td>Section 6.1</td>
+      </tr>
+      <tr class="odd">
+        <td>Level 200</td>
+        <td>Audit</td>
+        <td>Level 2</td>
+        <td>Section 6.2</td>
+      </tr>
+      <tr class="even">
+        <td>Level 300</td>
+        <td>Audit</td>
+        <td>Level 3</td>
+        <td>Section 6.3</td>
+      </tr>
+      <tr class="odd">
+        <td>Level 400</td>
+        <td>Audit</td>
+        <td>Not Applicable</td>
+        <td>Not Applicable</td>
+      </tr>
+      <tr class="even">
+        <td>Level 500</td>
+        <td>Audit</td>
+        <td>Not Applicable</td>
+        <td>Not Applicable</td>
+      </tr>
+      </tbody>
     </table>
 
-  <img src="{% static 'img/levels-of-complexity-bldg-sync-larger-text-01.jpg' %}" style="padding-top: 3em; padding-bottom: 3em" alt="image">
-
+    <div style="padding-top: 3em; padding-bottom: 3em">
+      <picture>
+        <source type="image/webp" srcset="{% static 'img/levels-of-complexity-bldg-sync-larger-text-01.webp' %}">
+        <img src="{% static 'img/levels-of-complexity-bldg-sync-larger-text-01.jpg' %}">
+      </picture>
+      <div style="float: right">Visual by Marjorie Schott</div>
+    </div>
 
   </div>
 

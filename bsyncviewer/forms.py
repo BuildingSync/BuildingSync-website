@@ -9,26 +9,45 @@ DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
 
 class LoadXMLFile(forms.Form):
-    schema_version = forms.ModelChoiceField(queryset=Schema.objects.all(), empty_label=None,
+    schema_version = forms.ModelChoiceField(queryset=Schema.objects.all().order_by('-version'), empty_label=None,
                                             to_field_name='version', initial=DEFAULT_SCHEMA_VERSION, required=True)
     file = forms.FileField(label='XML File', required=True)
     form_type = forms.CharField(widget=forms.HiddenInput(), initial='file')
 
 
 class LoadXMLExample(forms.Form):
-    schema_version = forms.ModelChoiceField(queryset=Schema.objects.all(),
-                                            empty_label=None,
-                                            to_field_name='version',
-                                            initial=DEFAULT_SCHEMA_VERSION)
+    schema_version = forms.ModelChoiceField(
+        queryset=Schema.objects.all().order_by('-version'),
+        empty_label=None,
+        to_field_name='version',
+        initial=DEFAULT_SCHEMA_VERSION,
+        widget=forms.Select(attrs={'id': 'schema_dropdown'})
+    )
+
     file_name = forms.FilePathField(
         path=os.path.join(
-            os.path.abspath(os.path.dirname(__file__)), 'lib', 'validator', 'examples', 'schema' + str(DEFAULT_SCHEMA_VERSION)
+            os.path.abspath(os.path.dirname(__file__)), 'lib', 'validator', 'examples'
         ),
-        recursive=False,
+        recursive=True,
         match=r'\.xml$',
-        allow_files=True
+        allow_files=True,
+        widget=forms.Select(attrs={'id': 'file_dropdown'})
     )
+
     form_type = forms.CharField(widget=forms.HiddenInput(), initial='example')
+
+    def clean(self):
+
+        super(LoadXMLExample, self).clean()
+
+        # remove file_name error
+        if 'file_name' in self._errors:
+            for idx, i in enumerate(self._errors['file_name']):
+                if 'Select a valid choice. bsyncviewer/lib/validator/examples/' in i:
+                    del self._errors['file_name'][idx]
+            print("file_name errors now: {}".format(self._errors['file_name']))
+
+        return self.cleaned_data
 
 
 class UpdateUserForm(forms.Form):

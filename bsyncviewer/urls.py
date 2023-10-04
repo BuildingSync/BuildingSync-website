@@ -1,10 +1,11 @@
-from bsyncviewer import views
-from bsyncviewer.admin import admin_site
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django.urls import include, path, re_path
 from rest_framework import routers
+
+from bsyncviewer import views
+from bsyncviewer.admin import admin_site
 
 from .views import emailView, successView
 
@@ -49,6 +50,7 @@ urlpatterns = [
     path('documents', views.references, name='references'),
     path('references', views.references, name='references'),
     path('contact', views.contact, name='contact'),
+    path('onboarding', views.onboarding, name='onboarding'),
     path('technical_resources', views.technical_resources, name='technical_resources'),
     re_path(r'^dictionary/(?P<version>[0-9a-zA-Z_\.-]+)/$', views.dictionary, name='dictionaryversion'),
     re_path(r'^ajax/enum/$', views.retrieve_additional_dictionary_data, name='get_additional_data'),

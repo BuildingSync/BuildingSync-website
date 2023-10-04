@@ -1,6 +1,12 @@
 import os
 from io import StringIO
 
+from django.conf import settings
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.management import call_command
+from django.test import Client, TestCase
+from django.urls import reverse
+
 from bsyncviewer.models.attribute import Attribute
 from bsyncviewer.models.bedes_models import (
     BedesEnumeration,
@@ -8,11 +14,6 @@ from bsyncviewer.models.bedes_models import (
     BedesTerm
 )
 from bsyncviewer.models.schema import Schema
-from django.conf import settings
-from django.core.files.uploadedfile import SimpleUploadedFile
-from django.core.management import call_command
-from django.test import Client, TestCase
-from django.urls import reverse
 
 # Use a custom version that is not an actual version to prevent overwriting saved BEDES mappings
 TEST_SCHEMA_VERSION = '0.0.1'

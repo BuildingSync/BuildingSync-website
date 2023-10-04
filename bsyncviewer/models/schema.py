@@ -1,14 +1,15 @@
 import os
 
-from bsyncviewer.lib.schema_parser import process_schema
-from bsyncviewer.lib.documentation_generator.generate_docs import (
-    get_docs_path,
-    generate_docs
-)
 # from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_delete, post_save, pre_save
 from django.dispatch import receiver
+
+from bsyncviewer.lib.documentation_generator.generate_docs import (
+    generate_docs,
+    get_docs_path
+)
+from bsyncviewer.lib.schema_parser import process_schema
 
 
 def rename_schema_file(instance, path):

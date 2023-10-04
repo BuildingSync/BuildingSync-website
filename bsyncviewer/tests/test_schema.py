@@ -1,10 +1,11 @@
 import json
 import os
 
-from bsyncviewer.lib.tree_viewer import get_schema_jstree_data
-from bsyncviewer.models.schema import Schema
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
+
+from bsyncviewer.lib.tree_viewer import get_schema_jstree_data
+from bsyncviewer.models.schema import Schema
 
 # Use a custom version that is not an actual version to prevent overwriting saved BEDES mappings
 TEST_SCHEMA_VERSION = '0.0.1'

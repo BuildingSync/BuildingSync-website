@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 
-from bsyncviewer.models.schema import Schema
 from bsyncviewer.lib.documentation_generator.generate_docs import generate_docs
+from bsyncviewer.models.schema import Schema
 
 
 class Command(BaseCommand):
@@ -22,7 +22,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         schemas = []
         if options['all']:
-            schemas = Schema.objects.all()
+            schemas = Schema.objects.all().order_by('-version')
         else:
             try:
                 schemas = [Schema.objects.get(version=options['schema_version'])]

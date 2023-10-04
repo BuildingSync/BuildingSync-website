@@ -4,8 +4,8 @@
 
 
 {% block nav %}
-<!-- Navigation start -->
-<nav class="navbar navbar-custom tt-default-nav" role="navigation">
+  <!-- Navigation start -->
+  <nav class="navbar navbar-custom tt-default-nav" role="navigation">
     <div class="container">
 
       <div class="navbar-header">
@@ -21,7 +21,7 @@
 
       {% include 'topnav.html' %}
     </div><!-- /.container -->
-</nav>
+  </nav>
 {% endblock nav %}
 
 {% block header %}
@@ -33,7 +33,7 @@
         <div class="v-middle text-center caption mt-20">
           <h6>BuildingSync</h6>
           <h1>Why standardize my data?</h1>
-          <a href="/case_study" class="button btn-bord-light">Learn More</a>
+          <a href="{% url 'about' %}" class="button btn-bord-light">Learn More</a>
         </div>
       </div>
 
@@ -41,7 +41,7 @@
         <div class="v-middle text-center caption mt-20">
           <h6>BuildingSync</h6>
           <h1>Explore the Schema</h1>
-          <a href="/dictionary" class="button btn-bord-light">Learn More</a>
+          <a href="{% url 'dictionary' %}" class="button btn-bord-light">Learn More</a>
         </div>
       </div>
 
@@ -49,7 +49,7 @@
         <div class="v-middle text-center caption mt-20">
           <h6>BuildingSync</h6>
           <h1>Explore Use Cases</h1>
-          <a href="use_cases" class="button btn-bord-light">Learn More</a>
+          <a href="{% url 'cases' %}" class="button btn-bord-light">Learn More</a>
         </div>
       </div>
     </div>
@@ -68,27 +68,27 @@
         <div class="hero-item col-md-4 text-center">
           <span class="icon-map"></span>
           <div class="hero-item-content">
-            <h5><a href="/practitioners">For Building and City Practitioners</a></h5>
+            <h5><a href="{% url 'practitioners' %}">For Building and City Practitioners</a></h5>
             <p class="mb-2">Find out how BuildingSync can help you</p>
-            <a href="/practitioners" class="button btn-bord-dark mt-2">Learn More</a>
+            <a href="{% url 'practitioners' %}" class="button btn-bord-dark mt-2">Learn More</a>
           </div>
         </div>
 
         <div class="hero-item col-md-4 text-center active">
           <span class="icon-clipboard"></span>
           <div class="hero-item-content">
-            <h5><a href="/auditors">For Auditors</a></h5>
+            <h5><a href="{% url 'auditors' %}">For Auditors</a></h5>
             <p class="mb-2">Learn how to standardize your data</p>
-            <a href="/auditors" class="button btn-bord-dark mt-2">Learn More</a>
+            <a href="{% url 'auditors' %}" class="button btn-bord-dark mt-2">Learn More</a>
           </div>
         </div>
 
         <div class="hero-item col-md-4 text-center">
           <span class="icon-tools"></span>
           <div class="hero-item-content">
-            <h5><a href="/implementers">For Implementers</a></h5>
+            <h5><a href="{% url 'implementers' %}">For Implementers</a></h5>
             <p class="mb-2">Work with the BuildingSync schema</p>
-            <a href="/implementers" class="button btn-bord-dark mt-2">Learn More</a>
+            <a href="{% url 'implementers' %}" class="button btn-bord-dark mt-2">Learn More</a>
           </div>
         </div>
 
@@ -104,10 +104,14 @@
     <div class="container">
       <div class="row">
         <div class="col-md-10 col-sm-10 us-content">
-          <p class="bold">BuildingSync&reg; is a common schema for energy audit data that can be utilized by different software and databases involved in the energy audit process. It allows data to be more easily aggregated, compared, and exchanged between different databases and software tools.</p>
-            <p>This streamlines the energy audit process, improving the value of the data, minimizing duplication of effort for subsequent audits, and facilitating achievement of greater energy efficiency.</p>
-            <p class="mb-2">BuildingSync was developed to address the lack of an industry-standard collection format for energy audit data.  Standardizing energy audit data can help energy auditors, software providers, building owners, utilities, and other entities by maximizing the value that can be obtained from each set fo data &ndash; value obtained through collaboration, comparison, and reuse.</p>
-          <a href="/about" class="button btn-bord-light">Find out more</a>
+          <p class="bold">BuildingSync&reg; is a common schema for energy audit data that can be utilized by different software and databases involved in the energy audit process. It allows data to be
+            more easily aggregated, compared, and exchanged between different databases and software tools.</p>
+          <p>This streamlines the energy audit process, improving the value of the data, minimizing duplication of effort for subsequent audits, and facilitating achievement of greater energy
+            efficiency.</p>
+          <p class="mb-2">BuildingSync was developed to address the lack of an industry-standard collection format for energy audit data. Standardizing energy audit data can help energy auditors,
+            software providers, building owners, utilities, and other entities by maximizing the value that can be obtained from each set of data &ndash; value obtained through collaboration,
+            comparison, and reuse.</p>
+          <a href="{% url 'about' %}" class="button btn-bord-light">Find out more</a>
         </div>
 
       </div>
@@ -131,7 +135,7 @@
           <div class="col-md-4">
             <div class="serv-item">
               <span class="icon-layers"></span>
-              <h6><a href="/validator">Validator</a></h6>
+              <h6><a href="{% url 'validator' %}">Validator</a></h6>
               <p>Validate your XML file against different schema versions and use cases</p>
             </div>
           </div>
@@ -139,7 +143,7 @@
           <div class="col-md-4">
             <div class="serv-item">
               <span class="icon-gears"></span>
-              <h6><a href="/tools">Tools</a></h6>
+              <h6><a href="{% url 'tools' %}">Tools</a></h6>
               <p>Explore available tools to help you author valid BuildingSync files.</p>
             </div>
           </div>
@@ -147,7 +151,7 @@
           <div class="col-md-4">
             <div class="serv-item">
               <span class="icon-laptop"></span>
-              <h6><a href="/dictionary">Schema Viewer</a></h6>
+              <h6><a href="{% url 'dictionary' %}">Schema Viewer</a></h6>
               <p>View the schema structure and data dictionary</p>
             </div>
           </div>
@@ -157,7 +161,7 @@
           <div class="col-md-4">
             <div class="serv-item">
               <span class="icon-book-open"></span>
-              <h6><a href="/references">References</a></h6>
+              <h6><a href="{% url 'references' %}">References</a></h6>
               <p>Explore publications and presentations</p>
             </div>
           </div>
@@ -165,28 +169,19 @@
           <div class="col-md-4">
             <div class="serv-item">
               <span class="icon-map"></span>
-              <h6><a href="/case_study">Case Study</a></h6>
-              <p>Read about the BRICR case study.</p>
+              <h6><a href="{% url 'case_study' %}">Case Study</a></h6>
+              <p>Read about the BETTER case study.</p>
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="serv-item">
               <span class="icon-layers"></span>
-              <h6><a href="/use_cases">Use Cases</a></h6>
+              <h6><a href="{% url 'cases' %}">Use Cases</a></h6>
               <p>Explore current BuildingSync use cases</p>
             </div>
           </div>
-
-         <!--  <div class="col-md-4">
-            <div class="serv-item">
-              <span class="icon-bargraph"></span>
-              <h6><a href="https://nbviewer.jupyter.org/github/BuildingSync/schema/blob/develop/docs/notebooks/bsync_examples/Small-Office-Level-1.ipynb">Energy Auditing Introduction</a></h6>
-              <p>An introduction into what BuildingSync is and how it relates to energy audit reporting.</p>
-            </div>
-          </div> -->
         </div>
-
       </div>
     </div>
   </section>
@@ -214,9 +209,11 @@
 
                 <h5 class="mb-30">Reviews</h5>
 
-                <p>"At <a href="https://www.audette.io/" target="_blank">Audette</a> we build roadmaps for large property portfolios to get to carbon neutral. Our analytics are trained on historic energy, equipment, and audit data. In order to get this data into a usable format we apply the BuildingSync schema. It has helped us to get insights faster, and with more accuracy."</p>
+                <p>"At <a href="https://audette.io/" target="_blank" rel="noopener">Audette</a> we build roadmaps for large property portfolios to get to carbon neutral. Our analytics are trained
+                  on historic energy, equipment, and audit data. In order to get this data into a usable format we apply the BuildingSync schema. It has helped us to get insights faster, and with more
+                  accuracy."</p>
 
-                  <h6>- Christopher Naismith, CEO of <a href="https://www.audette.io/" target="_blank">Audette</a></h6>
+                <h6>- Christopher Naismith, CEO of <a href="https://audette.io/" target="_blank" rel="noopener">Audette</a></h6>
               </div>
 
             </div>
@@ -242,11 +239,14 @@
         <div class="col-md-4">
           <div class="s-post">
             <div class="post-img">
-              <img src="{% static 'img/website.jpg' %}" alt="image">
+              <picture>
+                <source type="image/webp" srcset="{% static 'img/website.webp' %}">
+                <img src="{% static 'img/website.jpg' %}" loading="lazy">
+              </picture>
             </div>
             <div class="s-post-content">
               <h6>BuildingSync Website</h6>
-              <span>June  30, 2021</span>
+              <span>June 30, 2021</span>
               <p>BuildingSync launches its new website to help socialize the schema and organize resources for developers, auditors, and practitioners to get started with BuildingSync</p>
             </div>
           </div>
@@ -255,12 +255,15 @@
         <div class="col-md-4">
           <div class="s-post">
             <div class="post-img">
-              <img src="{% static 'img/news-1.jpg' %}" alt="image">
+              <picture>
+                <source type="image/webp" srcset="{% static 'img/news-1.webp' %}">
+                <img src="{% static 'img/news-1.jpg' %}" loading="lazy">
+              </picture>
             </div>
             <div class="s-post-content">
-              <h6>Schema Release 2.3.0</h6>
-              <span>March 8th, 2021</span>
-              <p>BuildingSync releases the 2.3.0 version of the schema which includes adding the weather station element, updating measures to include installment of electrical storage, and more!</p>
+              <h6>Schema Release 2.5.0</h6>
+              <span>September 20, 2023</span>
+              <p>BuildingSync releases the 2.5.0 version of the schema which includes several enhancements. There is one breaking change associated with this release.</p>
             </div>
           </div>
         </div>
@@ -268,12 +271,17 @@
         <div class="col-md-4">
           <div class="s-post">
             <div class="post-img">
-              <img src="{% static 'img/news-3.jpg' %}" alt="image">
+              <picture>
+                <source type="image/webp" srcset="{% static 'img/48963-2.webp' %}">
+                <img src="{% static 'img/48963-2.jpg' %}" loading="lazy">
+              </picture>
             </div>
             <div class="s-post-content">
               <h6>Use Cases</h6>
               <span>March, 1st 2021</span>
-              <p>New Use Cases have been added to the selection tool.  Included in that is a use case for running a BuildingSync file through an <a href="https://www.kw-engineering.com/nmecr-nmec-r-package-tool-energy-efficiency-project-savings-measurement-verification-analysis-amv/" target="_blank">NMECR analysis</a> via the Bsyncr R package.</p>
+              <p>New Use Cases have been added to the selection tool. Included in that is a use case for running a BuildingSync file through an <a
+                href="https://www.kw-engineering.com/nmecr-nmec-r-package-tool-energy-efficiency-project-savings-measurement-verification-analysis-amv/" target="_blank" rel="noopener">NMECR
+                analysis</a> via the Bsyncr R package.</p>
             </div>
           </div>
         </div>
@@ -332,14 +340,14 @@
         <div class="row">
 
           <!-- info items -->
-          <div class="col-md-4">
+          <div class="col-md-4 col-md-offset-2">
             <div class="info-item">
               <div class="icon">
                 <span class="icon-documents"></span>
               </div>
               <div class="info-content">
                 <h6>GitHub</h6>
-                <h5><a href="https://github.com/BuildingSync" target="_blank">GitHub</a></h5>
+                <h5><a href="https://github.com/BuildingSync" target="_blank" rel="noopener">GitHub</a></h5>
               </div>
             </div>
           </div>
@@ -351,11 +359,23 @@
               </div>
               <div class="info-content">
                 <h6>Email</h6>
-                <h5><a href="BTODataTools@ee.doe.gov">BTODataTools@ee.doe.gov</a></h5>
+                <h5><a href="mailto:BuildingSync@lists.buildingenergytools.org">BuildingSync@lists.buildingenergytools.org</a></h5>
               </div>
             </div>
           </div>
-
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-md-offset-2">
+            <div class="info-item">
+              <div class="icon">
+                <span class="icon-documents"></span>
+              </div>
+              <div class="info-content">
+                <h6>Subscribe</h6>
+                <h5><a href="https://lists.buildingenergytools.org/g/BuildingSync" target="_blank" rel="noopener">BuildingSync Groups.io group</a></h5>
+              </div>
+            </div>
+          </div>
           <div class="col-md-4">
             <div class="info-item">
               <div class="icon">
@@ -363,11 +383,10 @@
               </div>
               <div class="info-content">
                 <h6>Energy Efficiency & Renewable Energy</h6>
-                <h5><a href="https://www.energy.gov/eere/buildings/buildingsync" target="_blank">BuildingSync Project Details</a></h5>
+                <h5><a href="https://www.energy.gov/eere/buildings/buildingsync" target="_blank" rel="noopener">BuildingSync Project Details</a></h5>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -375,4 +394,4 @@
   <!--====== End Contact ======-->
 {% endblock content %}
 
-{% block app_version %}<span class="app_version">app version: {{app_version}} </span>{% endblock app_version %}
+{% block app_version %}<span class="app_version">app version: {{ app_version }} </span>{% endblock app_version %}

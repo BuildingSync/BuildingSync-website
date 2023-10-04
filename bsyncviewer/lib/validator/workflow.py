@@ -1,10 +1,12 @@
 import copy
 from collections import OrderedDict
 
+import stopit
 import xmlschema
+from testsuite.validate_sch import validate_schematron
+
 from bsyncviewer.models.schema import Schema
 from bsyncviewer.models.use_case import UseCase
-from testsuite.validate_sch import validate_schematron
 
 
 class ValidationWorkflow(object):
@@ -36,45 +38,64 @@ class ValidationWorkflow(object):
             self.use_cases.append(ucase)
 
     def validate_schema(self):
+
         resp = OrderedDict()
+        print("validating schema")
         # load selected schema and validate
         if self.schema.schema_file:
             my_schema = xmlschema.XMLSchema(self.schema.schema_file.path, validation='lax')
             # print("SCHEMA PATH: {}".format(self.schema.schema_file.path))
             resp['valid'] = my_schema.is_valid(self.filepath)
-            # print("FILE PATH: {}".format(self.filepath))
-            # print("VALID?: {}".format(resp['valid']))
             resp['schema_version'] = self.schema.version
-            try:
-                # this only returns the first error
-                # resp['errors'] = my_schema.validate(self.filepath)
 
-                # this returns all errors
-                self.xml_dict, errors = my_schema.to_dict(self.filepath, validation='lax')
-                if len(errors) == 0:
-                    # valid
-                    resp['valid'] = True
-                else:
+            # timeout "to_dict()" after 5 mins and use the less good method of getting errors
+            with stopit.ThreadingTimeout(300):
+
+                try:
+
+                    # this returns all errors
+                    self.xml_dict, errors = my_schema.to_dict(self.filepath, validation='lax')
+                    print("num errors: {}".format(len(errors)))
+                    if len(errors) == 0:
+                        # valid
+                        resp['valid'] = True
+                    else:
+                        resp['valid'] = False
+                        resp['errors'] = self._format_error(errors)
+
+                except xmlschema.validators.exceptions.XMLSchemaValidationError as ex:
+                    print("XMLSCHEMA VALIDATION ERROR EXCEPTION")
                     resp['valid'] = False
-                    print(" {} schema validation ERRORS found.".format(len(errors)))
+                    print("EX: {}".format(ex))
                     resp['errors'] = []
-                    for err in errors:
-                        tmp_err = {'path': err.path.replace('auc:', ''), 'message': err.reason}
+                    tmp_err = {'path': ex.path.replace('auc:', ''), 'message': ex.reason}
+                    resp['errors'].append(tmp_err)
+
+                except stopit.utils.TimeoutException:
+                    print("TIMEOUT EXCEPTION OCCURRED, trying shorter validation method...")
+                    try:
+                        # this only returns the first error, but it's better than nothing
+                        resp['errors'] = my_schema.validate(self.filepath)
+
+                    except xmlschema.validators.exceptions.XMLSchemaValidationError as ex:
+                        print("2nd XMLSCHEMA VALIDATION ERROR EXCEPTION")
+                        resp['valid'] = False
+                        print("EX: {}".format(ex))
+                        resp['errors'] = []
+                        tmp_err = {'path': ex.path.replace('auc:', ''), 'message': ex.reason}
                         resp['errors'].append(tmp_err)
 
-            except xmlschema.validators.exceptions.XMLSchemaValidationError as ex:
-                print("XMLSCHEMA VALIDATION ERROR EXCEPTION")
-                resp['valid'] = False
-                print("EX: {}".format(ex))
-                resp['errors'] = []
-                # TODO: this is probably not needed anymore due to the use of 'to_dict' in try block instead of 'validate'
-                tmp_err = {'path': ex.path.replace('auc:', ''), 'message': ex.reason}
-                resp['errors'].append(tmp_err)
-            except Exception as e:
-                print("GENERIC EXCEPTION DURING XMLSCHEMA VALIDATION")
-                print("EXCEPTION TYPE: {}, e: {}".format(type(e), e))
-                resp['errors'] = []
-                resp['errors'].append({'path': '', 'message': e})
+                    except Exception as e:
+                        print("2nd GENERIC EXCEPTION DURING XMLSCHEMA VALIDATION")
+                        print("EXCEPTION TYPE: {}, e: {}".format(type(e), e))
+                        resp['errors'] = []
+                        resp['errors'].append({'path': '', 'message': e})
+
+                except Exception as e:
+                    print("GENERIC EXCEPTION DURING XMLSCHEMA VALIDATION")
+                    print("EXCEPTION TYPE: {}, e: {}".format(type(e), e))
+                    resp['errors'] = []
+                    resp['errors'].append({'path': '', 'message': e})
 
         else:
             resp['valid'] = False
@@ -82,12 +103,33 @@ class ValidationWorkflow(object):
 
         return resp
 
+    def _format_error(self, errors):
+        res = []
+        for err in errors:
+            path = err.path.replace('auc:', '')
+            reason = err.reason
+            warning = None
+
+            if path.split("/")[-1] == "UsefulLife" and reason.startswith("invalid literal for int() with base 10:"):
+                warning = "This error is a result of a breaking change between BuildingSync Schema 2.4 and 2.5."
+                reason = "Remove the decimal point. (" + reason + ")"
+
+            res.append({'path': path, 'message': reason, "warning": warning})
+
+        return res
+
     def validate_use_cases(self):
         resp = OrderedDict()
-        resp['use_cases'] = OrderedDict()
+        processed_use_cases = {}
         for use_case in self.use_cases:
             print("Validating use case: {}".format(use_case.name))
-            resp['use_cases'][use_case.name] = self.process_use_case(use_case)
+            processed_use_cases[use_case.name] = self.process_use_case(use_case)
+
+        # sort by valid then alphabetical
+        resp['use_cases'] = OrderedDict(sorted(
+            processed_use_cases.items(),
+            key=lambda t: f"{not t[1]['valid']} {t[0]}"
+        ))
 
         return resp
 

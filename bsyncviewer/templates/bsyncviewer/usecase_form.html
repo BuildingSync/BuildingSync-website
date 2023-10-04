@@ -1,45 +1,47 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
+{% load bootstrap4 %}
+{% load staticfiles %}
 
 {% block title %}Add Use Case{% endblock %}
 
 {% block content %}
-	<div class="container">
-    	<div class="row">
-    		<div class="col-md-5">
-				<form action="" method="post" enctype="multipart/form-data">
-				    {% csrf_token %}
-				    {{ form.as_table }}
-				    <div class="pad-20">
-				    	<button type="submit">Submit</button>
-				    </div>
-				</form>
-			</div>
-		</div>
-        <div class="row">
-            <div class="col-md-12">
-                {% if object.parsing_errors %}
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingOne">
-                          <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <span class="red"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;Parsing Errors</span>
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                          <div class="panel-body">
-                            <ul>
-                                {% for e in object.parsing_errors %}
-                                    <li>{{  e }}</li>
-                                {%  endfor %}
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                {%  endif %}
-            </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_table }}
+        <div class="pad-20">
+          <button type="submit">Submit</button>
         </div>
-	</div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      {% if object.parsing_errors %}
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <span class="red"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;Parsing Errors</span>
+              </a>
+            </h4>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+              <ul>
+                {% for e in object.parsing_errors %}
+                <li>{{ e }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
 {% endblock content %}

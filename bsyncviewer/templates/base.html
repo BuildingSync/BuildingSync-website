@@ -7,118 +7,120 @@
   {# Load CSS and JavaScript #}
   {% bootstrap_css %}
   {% bootstrap_javascript jquery='full' %}
-  <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
   <script src="https://kit.fontawesome.com/32f532493a.js" crossorigin="anonymous"></script>
   <!--  <link rel="stylesheet" type="text/css" href="{% static 'buildingsyncmain.css' %}"> -->
   <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-{% block extra_head %}{% endblock %}
+  {% block extra_head %}{% endblock %}
 {% endblock bootstrap_extra_head %}
 
 
 {% block bootstrap_content %}
-<div class="container">
- 	<header id="header">
-    <div class="header-logo">
-      <a href="{% url 'index' %}"><img src="{% static 'images/buildingsync-logo-sm.svg' %}"></a>
-    </div>
-    <div class="header-links">
-       <ul class="nav">
+  <div class="container">
+    <header id="header">
+      <div class="header-logo">
+        <a href="{% url 'index' %}"><img src="{% static 'images/buildingsync-logo-sm.svg' %}"></a>
+      </div>
+      <div class="header-links">
+        <ul class="nav">
           {% if user.is_authenticated %}
-              {% if request.user.is_staff %}
-                  <li><a href="{% url 'admin:index' %}"><i class="fas fa-lock"></i> Admin Site</a></li>
-              {% endif %}
+            {% if request.user.is_staff %}
+              <li><a href="{% url 'admin:index' %}"><i class="fas fa-lock"></i> Admin Site</a></li>
+            {% endif %}
 
-              <li class="{% active_page request 'profile' %}"><a href="{% url 'profile' %}"><i class="fas fa-user"></i> {{ request.user.get_username }}</a></li>
-              <li><a href="{% url 'logout' %}?next={% if return_to_page_on_login %}{{request.path}}{% else %}{% url 'login' %}{% endif %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li class="{% active_page request 'profile' %}"><a href="{% url 'profile' %}"><i class="fas fa-user"></i> {{ request.user.get_username }}</a></li>
+            <li><a href="{% url 'logout' %}?next={% if return_to_page_on_login %}{{ request.path }}{% else %}{% url 'login' %}{% endif %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
           {% else %}
-              <li class="{% active_page request 'login' %}"><a href="{% url 'login' %}{% if return_to_page_on_login %}?next={{request.path}}{% endif %}"><i class="fas fa-sign-in-alt"></i>
-               Login</a></li>
+            <li class="{% active_page request 'login' %}"><a href="{% url 'login' %}{% if return_to_page_on_login %}?next={{ request.path }}{% endif %}"><i class="fas fa-sign-in-alt"></i>
+              Login</a></li>
           {% endif %}
-      </ul>
-    </div>
-  </header>
+        </ul>
+      </div>
+    </header>
 
-  <nav class="navbar navbar-expand-lg navbar-blue bg-blue" role="navigation">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <nav class="navbar navbar-expand-lg navbar-blue bg-blue" role="navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown {% active_page request 'implementers' 'auditors' 'practitioners' %} ">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Getting Started
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item {% active_page request 'implementers' %}" href="{% url 'implementers' %}">Implementers</a>
-            <a class="dropdown-item {% active_page request 'practitioners' %}" href="{% url 'practitioners' %}">Building and City Practitioners</a>
-            <a class="dropdown-item {% active_page request 'auditors' %}" href="{% url 'auditors' %}">Auditors</a>
-          </div>
-        </li>
-        <li class="nav-item {% active_page request 'tools'%}">
-          <a class="nav-link" href="{% url 'tools' %}">Tools</a>
-        </li>
-        <li class="nav-item dropdown {% active_page request 'dictionary' 'releases' ">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Schema
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item {% active_page request 'dictionary' %}" href="{% url 'dictionary' %}">Current Schema Release</a>
-            <a class="dropdown-item {% active_page request 'releases' %}" href="{% url 'releases' %}">Previous Releases</a>
-          </div>
-        </li>
-        <li class="nav-item {% active_page request 'cases'%}">
-          <a class="nav-link" href="{% url 'cases' %}">Use Cases</a>
-        </li>
-        <li class="nav-item dropdown {% active_page request 'references' 'examples' 'technical_resources' 'validator' %}">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Resources
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item {% active_page request 'references' %}" href="{% url 'references' %}">References</a>
-            <a class="dropdown-item {% active_page request 'case_study' %}" href="{% url 'case_study' %}">Case Study</a>
-            <a class="dropdown-item {% active_page request 'mlod' %}" href="{% url 'mlod' %}">Model Levels of Detail</a>
-            <a class="dropdown-item {% active_page request 'technical_resources' %}" href="{% url 'technical_resources' %}">Technical Resources</a>
-            <a class="dropdown-item {% active_page request 'validators' %}" href="{% url 'validator' %}">Validator</a>
-          </div>
-        </li>
-        <li class="nav-item {% active_page request 'about'%}">
-          <a class="nav-link" href="{% url 'about' %}">About</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown {% active_page request 'implementers' 'auditors' 'practitioners' %} ">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Getting Started
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item {% active_page request 'implementers' %}" href="{% url 'implementers' %}">Implementers</a>
+              <a class="dropdown-item {% active_page request 'practitioners' %}" href="{% url 'practitioners' %}">Building and City Practitioners</a>
+              <a class="dropdown-item {% active_page request 'auditors' %}" href="{% url 'auditors' %}">Auditors</a>
+            </div>
+          </li>
+          <li class="nav-item {% active_page request 'tools' %}">
+            <a class="nav-link" href="{% url 'tools' %}">Tools</a>
+          </li>
+          <li class="nav-item dropdown {% active_page request 'dictionary' 'releases' %}">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Schema
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item {% active_page request 'dictionary' %}" href="{% url 'dictionary' %}">Current Schema Release</a>
+              <a class="dropdown-item {% active_page request 'releases' %}" href="{% url 'releases' %}">Previous Releases</a>
+            </div>
+          </li>
+          <li class="nav-item {% active_page request 'cases' %}">
+            <a class="nav-link" href="{% url 'cases' %}">Use Cases</a>
+          </li>
+          <li class="nav-item dropdown {% active_page request 'references' 'examples' 'technical_resources' 'validator' %}">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Resources
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item {% active_page request 'references' %}" href="{% url 'references' %}">References</a>
+              <a class="dropdown-item {% active_page request 'case_study' %}" href="{% url 'case_study' %}">Case Study</a>
+              <a class="dropdown-item {% active_page request 'mlod' %}" href="{% url 'mlod' %}">Model Levels of Detail</a>
+              <a class="dropdown-item {% active_page request 'technical_resources' %}" href="{% url 'technical_resources' %}">Technical Resources</a>
+              <a class="dropdown-item {% active_page request 'validators' %}" href="{% url 'validator' %}">Validator</a>
+            </div>
+          </li>
+          <li class="nav-item {% active_page request 'about' %}">
+            <a class="nav-link" href="{% url 'about' %}">About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-  {% block content_notitle %}
-    <div class="container">
-      <div class="pad-10">
+    {% block content_notitle %}
+      <div class="container">
+        <div class="pad-10">
 
           {% bootstrap_messages %}
 
           <h1>{% block title %}(no title){% endblock %}</h1>
 
           {% block content %}(no content){% endblock %}
+        </div>
       </div>
-    </div>
-  {% endblock content_notitle %}
+    {% endblock content_notitle %}
 
-  <footer id="footer">
-    <div class="footer-logo">
-      <a href="{% url 'index' %}"><img src="{% static 'images/buildingsync-logo-sm.svg' %}"></a>
-    </div>
-    <div>
-      <ul class="copyright">
-        <p>BuildingSync<sup>®</sup> is a registered trademark of the Alliance for Sustainable Energy, LLC.</p>
-        <p><a href="http://www.nrel.gov">NREL</a> is a National Laboratory of the U.S. Department of Energy, Office of Energy Efficiency and Renewable Energy, operated by the Alliance for Sustainable Energy, LLC.</p>
-      </ul>
-    </div>
-  </footer>
+    <footer id="footer">
+      <div class="footer-logo">
+        <a href="{% url 'index' %}"><img src="{% static 'images/buildingsync-logo-sm.svg' %}"></a>
+      </div>
+      <div>
+        <ul class="copyright">
+          <p>BuildingSync<sup>®</sup> is a registered trademark of the Alliance for Sustainable Energy, LLC.</p>
+          <p><a href="https://www.nrel.gov/" target="_blank" rel="noopener">NREL</a> is a National Laboratory of the U.S. Department of Energy, Office of Energy Efficiency and Renewable Energy,
+            operated by the Alliance for Sustainable Energy, LLC.</p>
+        </ul>
+      </div>
+    </footer>
 
-</div>
+  </div>
 {% endblock bootstrap_content %}
 
-{%  block content_test %}
-{%  endblock content_test %}
+{% block content_test %}
+{% endblock content_test %}
 
 {% block bootstrap_extra_script %}
   {% block base_extra_script %}{% endblock %}

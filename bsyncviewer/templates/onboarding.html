@@ -1,0 +1,52 @@
+{% extends 'base2.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Onboarding{% endblock title %}
+
+{% block content %}
+
+  <style>
+    .container.bsync-main {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+    button.pdf {
+      padding: 0 5px;
+    }
+    ul {
+      font-size: 18px;
+      list-style: disc;
+      margin: 0 0 1em;
+      padding-left: 3em;
+    }
+    ul ul {
+      padding-left: 1em;
+    }
+    table + p, p:has(img) + p {
+      text-align: center;
+    }
+  </style>
+
+  <div class="container bsync-main">
+    <div style="text-align: right">
+      <button class="pdf"><a href="{% static 'documents/BuildingSync-on-boarding.pdf' %}" target="_blank">PDF version</a></button>
+    </div>
+    {% include "onboarding_content.html" %}
+  </div>
+
+  <script>
+    const addTableClass = () => {
+      $('table').addClass('table');
+    }
+    const defer = (fn) => {
+      if (window.jQuery) {
+        fn();
+      } else {
+        setTimeout(() => { defer(fn) }, 50);
+      }
+    };
+    defer(addTableClass);
+  </script>
+
+{% endblock content %}

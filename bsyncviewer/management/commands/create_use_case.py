@@ -1,10 +1,11 @@
 import os
 
-from bsyncviewer.models.schema import Schema
-from bsyncviewer.models.use_case import UseCase
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management.base import BaseCommand
+
+from bsyncviewer.models.schema import Schema
+from bsyncviewer.models.use_case import UseCase
 
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
 
@@ -15,7 +16,6 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('--schema_version', type=str, default=settings.DEFAULT_SCHEMA_VERSION)
         # parser.add_argument('--filename', type=str)
-        pass
 
     def handle(self, *args, **options):
         schema_version = options['schema_version']

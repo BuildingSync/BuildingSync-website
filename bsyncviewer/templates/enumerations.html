@@ -1,8 +1,6 @@
 {% extends 'base2.html' %}
 
-
 {% load staticfiles %}
-
 
 {% block title %}
   {% if enumerations_type == 'data_dictionary' %}
@@ -13,32 +11,32 @@
 {% endblock %}
 
 {% block content %}
-<section id="enumerations" class="hero section-padding section-bord">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div style="padding: 1em;">
-          {% if enumerations_type == 'data_dictionary' %}
-            <a href="{% url 'measures' version %}" class="btn btn-primary">
-              View measures for {{ version }}
+  <section id="enumerations" class="hero section-padding section-bord">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div style="padding: 1em;">
+            {% if enumerations_type == 'data_dictionary' %}
+              <a href="{% url 'measures' version %}" class="btn btn-primary">
+                View measures for {{ version }}
+              </a>
+            {% else %}
+              <a href="{% url 'enumerations' version %}" class="btn btn-primary">
+                View enumerations for {{ version }}
+              </a>
+            {% endif %}
+            <a href="{% url 'dictionaryversion' version %}" class="btn btn-primary">
+              View full schema for {{ version }}
             </a>
-          {% else %}
-            <a href="{% url 'enumerations' version %}" class="btn btn-primary">
-              View enumerations for {{ version }}
-            </a>
-          {% endif %}
-          <a href="{% url 'dictionaryversion' version %}" class="btn btn-primary">
-            View full schema for {{ version }}
-          </a>
-        </div>
-        <form class="form-inline">
-          <div class="form-group mb-2">
-            <label for="search-input">Search:</label>
-            <input type="text" class="form-control" id="search-input" oninput="updateSearch()" placeholder="Keywords">
           </div>
-        </form>
-        <table id="enumerations-table" class="table table-striped table-enumerations">
-          <thead>
+          <form class="form-inline">
+            <div class="form-group mb-2">
+              <label for="search-input">Search:</label>
+              <input type="text" class="form-control" id="search-input" oninput="updateSearch()" placeholder="Keywords"> (type to search, press Enter to clear)
+            </div>
+          </form>
+          <table class="table table-striped table-enumerations" id="enumerations-table">
+            <thead>
             <tr>
               <th>Term</th>
               <th>Description</th>
@@ -48,76 +46,78 @@
                 <th>Measure Names</th>
               {% endif %}
             </tr>
-          </thead>
-          <!-- rows are inserted with javascript -->
-        </table>
+            </thead>
+            <!-- rows are inserted with javascript -->
+          </table>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 {% endblock content %}
 
 {% block base_extra_script %}
 
-{{ enumerations_data|json_script:"enumerations-data" }}
+  {{ enumerations_data|json_script:"enumerations-data" }}
 
-<script>
-  const enumerationsDataScript = document.getElementById('enumerations-data')
-  const enumerationsData = JSON.parse(enumerationsDataScript.textContent)
-  const enumerationsTable = document.getElementById('enumerations-table')
+  <script>
+    const enumerationsDataScript = document.getElementById('enumerations-data')
+    const enumerationsData = JSON.parse(enumerationsDataScript.textContent)
+    const enumerationsTable = document.getElementById('enumerations-table')
 
-  // build the table, one row per term
-  const termRows = []
-  enumerationsData.forEach(term => {
-    const name = document.createElement('td')
-    if (term.name === 'MeasureName') {
-      debugger;
-      name.textContent = term.sub_display_name
-    } else {
-      name.textContent = term.sub_name ? `${term.name} - ${term.sub_name}` : term.name
-    }
-
-    const documentation = document.createElement('td')
-    documentation.textContent = term.documentation
-
-    const enums = document.createElement('td')
-    enums.innerHTML = term.enumerations_html
-
-    const tableRow = document.createElement('tr')
-    termRows.push(tableRow)
-
-    tableRow.classList.add('term-row')
-    tableRow.appendChild(name)
-    tableRow.appendChild(documentation)
-    tableRow.appendChild(enums)
-
-    enumerationsTable.appendChild(tableRow)
-  })
-
-  const searchInput = document.getElementById('search-input')
-
-  // a debouncer which avoids calling a function too frequently
-  const debounce = (func) => {
-    let timer
-    return () => {
-      clearTimeout(timer)
-      timer = setTimeout(() => func(), 300)
-    }
-  }
-
-  // hide term rows if its text does not contain matches the keywords
-  const updateSearch = debounce(() => {
-    const keywords = searchInput.value.split(/\s+/).map(kw => kw.toLowerCase())
-    const regex = RegExp(keywords.join('\\s*'))
-    termRows.forEach(termRow => {
-      const includesKeyword = keywords.some(keyword => regex.test(termRow.innerText.toLowerCase()))
-      if (!includesKeyword) {
-        termRow.classList.add('hidden')
+    // build the table, one row per term
+    const termRows = []
+    const tbody = document.createElement('tbody')
+    enumerationsData.forEach(term => {
+      const name = document.createElement('td')
+      if (term.name === 'MeasureName') {
+        debugger;
+        name.textContent = term.sub_display_name
       } else {
-        termRow.classList.remove('hidden')
+        name.textContent = term.sub_name ? `${term.name} - ${term.sub_name}` : term.name
       }
+
+      const documentation = document.createElement('td')
+      documentation.textContent = term.documentation
+
+      const enums = document.createElement('td')
+      enums.innerHTML = term.enumerations_html
+
+      const tableRow = document.createElement('tr')
+      termRows.push(tableRow)
+
+      // tableRow.classList.add('term-row')
+      tableRow.appendChild(name)
+      tableRow.appendChild(documentation)
+      tableRow.appendChild(enums)
+
+      tbody.appendChild(tableRow)
     })
-  })
-</script>
+    enumerationsTable.appendChild(tbody)
+
+    const searchInput = document.getElementById('search-input')
+
+    // a debouncer which avoids calling a function too frequently
+    const debounce = (func) => {
+      let timer
+      return () => {
+        clearTimeout(timer)
+        timer = setTimeout(() => func(), 300)
+      }
+    }
+
+    // hide term rows if its text does not contain matches the keywords
+    const updateSearch = debounce(() => {
+      const keywords = searchInput.value.split(/\s+/).map(kw => kw.toLowerCase())
+      const regex = RegExp(keywords.join('\\s*'))
+      termRows.forEach(termRow => {
+        const includesKeyword = keywords.some(keyword => regex.test(termRow.innerText.toLowerCase()))
+        if (!includesKeyword) {
+          termRow.classList.add('hidden')
+        } else {
+          termRow.classList.remove('hidden')
+        }
+      })
+    })
+  </script>
 {% endblock base_extra_script %}

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Work in progress
+
+  This file is intended to document all of the required elements and attributes
+  for preliminary analysis.
+-->
+<auc:BuildingSync xmlns:auc="http://buildingsync.net/schemas/bedes-auc/2019" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://buildingsync.net/schemas/bedes-auc/2019 https://raw.githubusercontent.com/BuildingSync/schema/v2.5.0/BuildingSync.xsd" version="2.5.0">
+  <auc:Facilities>
+    <auc:Facility ID="FacilityA">
+      <auc:Sites>
+        <auc:Site ID="SiteA">
+          <auc:Buildings>
+            <auc:Building ID="BuildingA">
+              <auc:PremisesName>Building Name</auc:PremisesName>
+              <!-- note that either Address OR ClimateZoneType is recommended, not necessarily both -->
+              <auc:Address>
+                <auc:City>Rome</auc:City>
+                <auc:State>GA</auc:State>
+              </auc:Address>
+              <auc:ClimateZoneType>
+                <auc:ASHRAE>
+                  <auc:ClimateZone>1A</auc:ClimateZone>
+                </auc:ASHRAE>
+              </auc:ClimateZoneType>
+              <auc:BuildingClassification>Commercial</auc:BuildingClassification>
+              <auc:OccupancyClassification>Office</auc:OccupancyClassification>
+              <auc:YearOfConstruction>2020</auc:YearOfConstruction>
+            </auc:Building>
+          </auc:Buildings>
+        </auc:Site>
+      </auc:Sites>
+      <auc:Reports>
+        <auc:Report ID="ReportA">
+          <auc:Scenarios>
+            <auc:Scenario ID="ScenarioA">
+              <!-- 5.2.3.1 -->
+              <auc:ScenarioType>
+                <auc:CurrentBuilding>
+                  <auc:CalculationMethod>
+                    <auc:Measured/>
+                  </auc:CalculationMethod>
+                </auc:CurrentBuilding>
+              </auc:ScenarioType>
+              <auc:ResourceUses>
+                <auc:ResourceUse ID="ElectricityA">
+                  <auc:EnergyResource>Electricity</auc:EnergyResource>
+                </auc:ResourceUse>
+              </auc:ResourceUses>
+              <auc:AllResourceTotals>
+                <auc:AllResourceTotal ID="AllResourceTotalA">
+                  <!-- 5.2.3.1 -->
+                  <auc:SiteEnergyUseIntensity>123</auc:SiteEnergyUseIntensity>
+                  <!-- 5.2.3.2 -->
+                  <auc:EnergyCostIndex>123</auc:EnergyCostIndex>
+                </auc:AllResourceTotal>
+              </auc:AllResourceTotals>
+              <auc:LinkedPremises>
+                <auc:Building>
+                  <auc:LinkedBuildingID IDref="BuildingA"/>
+                </auc:Building>
+              </auc:LinkedPremises>
+            </auc:Scenario>
+            <auc:Scenario ID="ScenarioB">
+              <!-- 5.2.3.3 -->
+              <auc:ScenarioType>
+                <auc:Benchmark>
+                  <auc:BenchmarkType>
+                    <auc:PortfolioManager>
+                      <auc:PMBenchmarkDate>2020-01-01</auc:PMBenchmarkDate>
+                    </auc:PortfolioManager>
+                  </auc:BenchmarkType>
+                  <auc:BenchmarkTool>Portfolio Manager</auc:BenchmarkTool>
+                  <auc:BenchmarkYear>2020</auc:BenchmarkYear>
+                  <auc:BenchmarkValue>75</auc:BenchmarkValue>
+                </auc:Benchmark>
+              </auc:ScenarioType>
+              <auc:LinkedPremises>
+                <auc:Building>
+                  <auc:LinkedBuildingID IDref="BuildingA"/>
+                </auc:Building>
+              </auc:LinkedPremises>
+            </auc:Scenario>
+          </auc:Scenarios>
+          <auc:ASHRAEAuditLevel>Preliminary Energy-Use Analysis</auc:ASHRAEAuditLevel>
+        </auc:Report>
+      </auc:Reports>
+    </auc:Facility>
+  </auc:Facilities>
+</auc:BuildingSync>

@@ -4,10 +4,10 @@ from django.db import models
 
 
 class BedesTerm(models.Model):
-    content_uuid = models.CharField(max_length=100, unique=True)
-    term = models.CharField(max_length=100, unique=True)
-    category = models.CharField(max_length=100)
-    url = models.CharField(max_length=300)
+    content_uuid = models.CharField(max_length=200, unique=True)
+    term = models.CharField(max_length=200)
+    category = models.CharField(max_length=200)
+    url = models.CharField(max_length=400)
     definition = models.TextField(blank=True, null=True)
 
     def __str__(self):
@@ -23,9 +23,9 @@ class BedesMapping(models.Model):
 
 # Bedes Enumeration
 class BedesEnumeration(models.Model):
-    content_uuid = models.CharField(max_length=100, unique=True)
-    term = models.CharField(max_length=100, unique=True)
-    url = models.CharField(max_length=300)
+    content_uuid = models.CharField(max_length=200, unique=True)
+    term = models.CharField(max_length=200)
+    url = models.CharField(max_length=400)
     definition = models.TextField(blank=True, null=True)
     related_term_uuid = models.CharField(max_length=100, unique=False)
 

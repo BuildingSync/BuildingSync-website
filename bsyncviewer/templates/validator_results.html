@@ -1,45 +1,45 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
+{% load bootstrap4 %}
+{% load staticfiles %}
 
+{% block title %}Validation Results{% endblock %}
 
-{% block title %}BuildingSync Schema Viewer{% endblock %}
+{% block content %}
 
-{% block content_notitle %}
-
-  <div class="container">
-    <header class="major">
-      <h2>Validator Results</h2>
-    </header>
+  <div class="container pad-bottom-med">
 
     <div>
       <a href="{% url 'validator' %}" class="btn btn-sm btn-link"><span
-          class="glyphicon glyphicon-chevron-left"></span> Validate Another XML File</a>
+        class="glyphicon glyphicon-chevron-left"></span> Validate Another XML File</a>
     </div>
 
     <div class="row">
       <div class="col-md-11 pad-left-50 pad-top-20">
-        <h3>FILE: {{ filename }}</h3>
+        <h3>File: {{ filename }}</h3>
         <p><strong>Schema version:</strong> {{ schema_version }}
           {% if validation_results.schema.valid is True %}
-          <span class="label label-success pad-10">Valid</span> {% else %}
-          <span class="label label-danger pad-10">Invalid</span> {% endif %}
+            <span class="label label-success pad-10">Valid</span> {% else %}
+            <span class="label label-danger pad-10">Invalid</span> {% endif %}
         </p>
-        {# <div>Valid? {{ validation_results.valid }}</div>#}
+        {# <div>Valid? {{ validation_results.valid }}</div> #}
         {% if validation_results.schema.valid is False %}
           <div>
-            <h3>Issues <span class="label label-danger pad5">{{ validation_results.schema.errors|length }}</span></h3>
-            <table>
+            <h4>Issues <span class="label label-danger pad5">{{ validation_results.schema.errors|length }}</span></h4>
+            <table class="val-res">
               {% for err in validation_results.schema.errors %}
-                <tr>
-                  <td>{{ forloop.counter }}.</td>
-                  <td>{{ err.path }} <br/>
-                    {{ err.message }}</td>
+                <tr class="wrap-it">
+                  <td class="ptb-10">{{ forloop.counter }}.</td>
+                  <td class="ptb-10">
+                    <div class="label label-warning pad5">{{err.warning}}</div>
+                    {{ err.path }} <br>
+                    {{ err.message }}
+                  </td>
                 </tr>
               {% endfor %}
             </table>
           </div>
         {% endif %}
       </div>
-
     </div>
 
     {% if validation_results.schema.valid is True and validation_results.use_cases %}
@@ -50,57 +50,57 @@
       </div>
       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         {% for name, uc in validation_results.use_cases.items %}
-
           <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="heading{{ name|cut:' '|cut:'#'|cut:'.' }}">
               <h4 class="panel-title">
-                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"  data-parent="#accordion" href="#collapse{{ name|cut:' '|cut:'#'|cut:'.' }}" aria-expanded="true"
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" data-parent="#accordion" href="#collapse{{ name|cut:' '|cut:'#'|cut:'.' }}" aria-expanded="true"
                    aria-controls="collapse">
                   {{ name }} {% if uc.valid is True %} <span class="glyphicon glyphicon-ok green"></span>
-                             {% else %} <span class="glyphicon glyphicon-remove red"></span> {% endif %}
+                {% else %} <span class="glyphicon glyphicon-remove red"></span> {% endif %}
                 </a>
               </h4>
             </div>
             <div id="collapse{{ name|cut:' '|cut:'#'|cut:'.' }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ name|cut:' '|cut:'#'|cut:'.' }}">
               <div class="panel-body">
                 <div>
-                  {% if uc.valid is True %}
-                    <h3>{# {{ name }} #}
+                  <h3 class="pb-20">{{ name }}
+                    {% if uc.valid is True %}
                       <span class="label label-success pad-10">Valid</span>
-  {#                  {% else %}#}
-  {#                    <span class="label label-danger pad-10">Invalid</span>#}
-                    </h3>
-                  {% endif %}
+                    {% else %}
+                      <span class="label label-danger pad-10">Invalid</span>
+                    {% endif %}
+                  </h3>
+
                   {% if uc.infos %}
-                    <h4>Info<span class="label label-info pad5">{{ uc.infos|length }}</span></h4>
-                    <table style="table-layout: fixed; ">
+                    <h4 class="pb-20">Info<span class="label label-info pad5">{{ uc.infos|length }}</span></h4>
+                    <table class="val-res">
                       {% for item in uc.infos %}
                         <tr class="wrap-it">
-                          <td width="5%">{{ forloop.counter }}.</td>
-                          <td class="wrap-it">{{ item }}</td>
+                          <td width="5%" class="ptb-10">{{ forloop.counter }}.</td>
+                          <td class="ptb-10">{{ item }}</td>
                         </tr>
                       {% endfor %}
                     </table>
                   {% endif %}
                   {% if uc.warnings %}
-                    <h4>Warnings<span class="label label-warning pad5">{{ uc.warnings|length }}</span></h4>
-                    <table style="table-layout: fixed; ">
+                    <h4 class="pb-20">Warnings<span class="label label-warning pad5">{{ uc.warnings|length }}</span></h4>
+                    <table class="val-res">
                       {% for item in uc.warnings %}
                         <tr class="wrap-it">
-                          <td width="5%">{{ forloop.counter }}.</td>
-                          <td class="wrap-it">{{ item }}</td>
+                          <td width="5%" class="ptb-10">{{ forloop.counter }}.</td>
+                          <td class="ptb-10">{{ item }}</td>
                         </tr>
                       {% endfor %}
                     </table>
                   {% endif %}
 
-                  {%  if uc.valid is False %}
-                    <h4>Errors <span class="label label-danger pad5">{{ uc.errors|length }}</span></h4>
-                    <table style="table-layout: fixed; ">
+                  {% if uc.valid is False %}
+                    <h4 class="pb-20">Errors <span class="label label-danger pad5">{{ uc.errors|length }}</span></h4>
+                    <table class="val-res">
                       {% for err in uc.errors %}
                         <tr class="wrap-it">
-                          <td width="5%">{{ forloop.counter }}.</td>
-                          <td class="wrap-it">{{ err }}</td>
+                          <td width="5%" class="ptb-10">{{ forloop.counter }}.</td>
+                          <td class="ptb-10">{{ err }}</td>
                         </tr>
                       {% endfor %}
                     </table>
@@ -109,12 +109,11 @@
               </div>
             </div>
           </div>
-        {%  endfor %}
-      </div>
+        {% endfor %}
       </div>
 
     {% endif %}
 
   </div>
 
-{% endblock content_notitle %}
+{% endblock content %}

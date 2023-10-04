@@ -5,6 +5,9 @@ from collections import defaultdict
 
 import jellyfish
 import xmltodict
+from django.conf import settings
+from django.core.management.base import BaseCommand
+
 from bsyncviewer.lib.bedes.bedes_parser import BedesParser
 from bsyncviewer.models.attribute import Attribute
 from bsyncviewer.models.attribute_enumeration_class import (
@@ -18,8 +21,6 @@ from bsyncviewer.models.bedes_models import (
 )
 from bsyncviewer.models.enumeration import Enumeration
 from bsyncviewer.models.schema import Schema
-from django.conf import settings
-from django.core.management.base import BaseCommand
 
 # MATCH TYPES:
 # Term-to-List-Option Match -> use bedes_url col (will contain only 1 URL)
@@ -47,9 +48,10 @@ class Command(BaseCommand):
         save_to_db = options['save_to_db']
 
         if save_to_db:
-            self.stdout.write('Reparsing BEDES data and Saving BEDES mappings to database')
+            self.stdout.write('Saving BEDES mappings to database from already generated mapping files.')
+            # if save_to_db is True, save CSV files to DB (no reparse)
             # if save_to_db is True, save CSV files to DB (always reparse just in case)
-            self.parse(bedes_version, schema_version)
+            # self.parse(bedes_version, schema_version)
             self.save_mappings_to_database(bedes_version, schema_version)
         else:
             # do the parsing (only)
@@ -478,7 +480,7 @@ class Command(BaseCommand):
             # checking for plural bsync terms that are in the manual mapping table as singular
             elif bsync_term[-1] == 's' and (bsync_term[:-1] in manual_mappings.keys()):
                 bsync_term = manual_mappings[bsync_term[:-1]]
-            return(bsync_term)
+            return bsync_term
 
         # go through entire list, converting to an array that assigns an availability flag to each individual word
         for i in range(len(bsync_words)):
@@ -539,7 +541,7 @@ class Command(BaseCommand):
             bsync_term += reconstruction_dict[i] + ' '
         bsync_term = bsync_term.strip(' ')
 
-        return(bsync_term)
+        return bsync_term
 
     # function to take in a word list that has been separated at Uppercase letters, and rejoin any acronyms that
     # have been separated
@@ -613,9 +615,9 @@ class Command(BaseCommand):
             if term['distance'] != "":
                 the_term, _ = BedesTerm.objects.get_or_create(
                     content_uuid=term['bedes_content_uuid'],
-                    term=term['bedes_term']
                 )
                 # print("THE TERM: {}".format(the_term))
+                the_term.term = term['bedes_term']
                 the_term.category = term['bedes_category']
                 the_term.definition = term['bedes_definition']
                 the_term.url = term['bedes_url']
@@ -720,13 +722,14 @@ class Command(BaseCommand):
             # get_or_create here b/c CSV structure maps schema attributes to bedes terms
             # there could be multiple listings of the same bedes term.
             if term['distance'] != "":
-                BedesEnumeration.objects.get_or_create(
-                    content_uuid=term['bedes_content_uuid'],
-                    term=term['bedes_term'],
-                    definition=term['bedes_definition'],
-                    url=term['bedes_url'],
-                    related_term_uuid=term['bedes_related_term_uuid']
+                bedes_enum, _ = BedesEnumeration.objects.get_or_create(
+                    content_uuid=term['bedes_content_uuid']
                 )
+                bedes_enum.term = term['bedes_term']
+                bedes_enum.definition = term['bedes_definition']
+                bedes_enum.url = term['bedes_url']
+                bedes_enum.related_term_uuid = term['bedes_related_term_uuid']
+                bedes_enum.save()
 
         # rewind
         csv_file.seek(0)

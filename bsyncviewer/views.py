@@ -1,14 +1,12 @@
 import json
 import os
+import pathlib
 import subprocess
 import tempfile
 import zipfile
+from typing import Dict, List
 
 import semantic_version
-from bsyncviewer import forms
-from bsyncviewer.lib.documentation_generator.generate_docs import get_docs_path
-from bsyncviewer.lib.tree_viewer import get_schema_jstree_data
-from bsyncviewer.lib.validator.workflow import ValidationWorkflow
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
@@ -32,6 +30,11 @@ from rest_framework import views
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 
+from bsyncviewer import forms
+from bsyncviewer.lib.documentation_generator.generate_docs import get_docs_path
+from bsyncviewer.lib.tree_viewer import get_schema_jstree_data
+from bsyncviewer.lib.validator.workflow import ValidationWorkflow
+
 from .models.attribute_enumeration_class import AttributeEnumerationClass
 from .models.bedes_models import (
     BedesEnumeration,
@@ -44,6 +47,13 @@ from .models.schema import Schema
 from .models.use_case import UseCase
 
 DEFAULT_SCHEMA_VERSION = settings.DEFAULT_SCHEMA_VERSION
+# version 2.0 tags and earlier didn't follow MAJOR.MINOR.PATCH so we handle that here
+GITHUB_VERSION_MAP = {
+    '1.0.0': 'v1.0',
+    '2.0.0': 'v2.0'
+}
+GITHUB_RELEASE_TAG_URL = 'https://github.com/BuildingSync/schema/releases/tag/{version}'
+GITHUB_RELEASE_DOWNLOAD_URL = 'https://github.com/BuildingSync/schema/releases/download/{version}/{resource}'
 
 
 class ValidatorApi(views.APIView):
@@ -184,15 +194,6 @@ def tools(request):
 
 
 def releases(request):
-    # version 2.0 tags and earlier didn't follow MAJOR.MINOR.PATCH so we handle that here
-    GITHUB_VERSION_MAP = {
-        '1.0.0': 'v1.0',
-        '2.0.0-pr1': 'v2.0-pr1',
-        '2.0.0-pr2': 'v2.0-pr2',
-        '2.0.0': 'v2.0'
-    }
-    GITHUB_RELEASE_TAG_URL = 'https://github.com/BuildingSync/schema/releases/tag/{version}'
-    GITHUB_RELEASE_DOWNLOAD_URL = 'https://github.com/BuildingSync/schema/releases/download/{version}/{resource}'
 
     releases = []
     for schema in Schema.objects.all().order_by('-version'):
@@ -212,6 +213,11 @@ def releases(request):
     }
 
     return render(request, 'releases.html', context)
+
+
+def onboarding(request):
+    context = {}
+    return render(request, 'onboarding.html', context)
 
 
 def technical_resources(request):
@@ -267,11 +273,23 @@ def dictionary(request, version):
 
     # find schema matching version
     try:
-        Schema.objects.get(version=version)
+        schema = Schema.objects.get(version=version)
+
+        github_version = GITHUB_VERSION_MAP.get(schema.version, f'v{schema.version}')
+
+        release = {
+            'github_version': github_version,
+            'version': schema.version,
+            'docs_url': f'/documentation/{schema.version}',
+            'tag_url': GITHUB_RELEASE_TAG_URL.format(version=github_version),
+            'xsd_url': GITHUB_RELEASE_DOWNLOAD_URL.format(version=github_version, resource='BuildingSync.xsd'),
+            'data_dict_xlsx_url': GITHUB_RELEASE_DOWNLOAD_URL.format(version=github_version, resource='DataDictionary.xlsx'),
+        }
+
     except BaseException:
         raise Http404('Schema version provided does not exist.')
 
-    for version_obj in Schema.objects.all():
+    for version_obj in Schema.objects.all().order_by('-version'):
         versions.append({
             'name': version_obj.version,
             'is_current': version_obj.version == version,
@@ -281,7 +299,8 @@ def dictionary(request, version):
     context = {
         'schema_version': version,
         'schema_tree_data': json.dumps(get_schema_jstree_data(version)),
-        'versions': versions
+        'versions': versions,
+        'release': release
     }
 
     return render(request, 'dictionary.html', context)
@@ -347,12 +366,11 @@ def enumerations(request, version):
         return HttpResponseRedirect(reverse_lazy('enumerations', args=[DEFAULT_SCHEMA_VERSION]))
 
     enumerations_data = json.load(schema.enumerations_file)
-    enumerations_data[0]['name']
     # remove measures
     enumerations_data = [term for term in enumerations_data if term['name'] != 'MeasureName']
 
     versions = []
-    for version_obj in Schema.objects.all():
+    for version_obj in Schema.objects.all().order_by('-version'):
         versions.append({
             'name': version_obj.version,
             'is_current': version_obj.version == version,
@@ -379,12 +397,11 @@ def measures(request, version):
         return HttpResponseRedirect(reverse_lazy('measures', args=[DEFAULT_SCHEMA_VERSION]))
 
     enumerations_data = json.load(schema.enumerations_file)
-    enumerations_data[0]['name']
     # find measures
     enumerations_data = [term for term in enumerations_data if term['name'] == 'MeasureName']
 
     versions = []
-    for version_obj in Schema.objects.all():
+    for version_obj in Schema.objects.all().order_by('-version'):
         versions.append({
             'name': version_obj.version,
             'is_current': version_obj.version == version,
@@ -401,10 +418,29 @@ def measures(request, version):
     return render(request, 'enumerations.html', context)
 
 
+def get_schema_to_examples() -> Dict[str, List[pathlib.Path]]:
+    """
+    Create schema examples dictionary.
+
+    Create a dictionary were the keys are the schemas versions
+    and the values are a list of example files for that schema version
+
+    :return: dict
+    """
+    validator_dir = pathlib.Path(__file__).parent / 'lib' / 'validator' / 'examples'
+
+    schema_to_examples = {}
+    for schema_dir in validator_dir.glob("*"):
+        schema_to_examples[schema_dir.name.replace("schema", "", 1)] = [(p.name, str(p)) for p in schema_dir.glob("*.xml")]
+
+    return schema_to_examples
+
+
 def validator(request):
     context = {
         'load_xml_file_form': forms.LoadXMLFile(),
         'load_xml_example_form': forms.LoadXMLExample(),
+        'schema_to_examples': get_schema_to_examples(),
         'a_var': ''
     }
 
@@ -422,7 +458,20 @@ def validator(request):
     else:
         return render(request, 'validator.html', context)
 
-    if form.is_valid():
+    validated = False
+    if form_type == 'example':
+        # workaround for files list by schema_version
+        errors = form.errors
+
+        file_errs = errors.get('file_name')
+        if file_errs is None or len(file_errs) == 0:
+            # no errors - validated
+            validated = True
+
+    elif form.is_valid():
+        validated = True
+
+    if validated:
         if form_type == 'file':
             f = request.FILES['file']
             filename = f.name

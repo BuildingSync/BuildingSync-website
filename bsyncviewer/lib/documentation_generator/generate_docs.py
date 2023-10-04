@@ -1,8 +1,7 @@
 from pathlib import Path
 
-from lxml import etree
-
 from django.conf import settings
+from lxml import etree
 
 XSL_PATH = Path(__file__).parent / 'xs3p.xsl'
 DEFAULT_DOCS_PATH = Path(settings.MEDIA_ROOT) / 'generated_docs'

@@ -3,13 +3,16 @@ name: CI
 on:
   pull_request:
   push:
+    branches:
+      - "develop"
+      - "main"
 
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tox_env: [python, flake8]
+        tox_env: [python] #, precommit]
     services:
       postgres:
         image: postgres:9.6
@@ -25,28 +28,23 @@ jobs:
         ports:
           - 5432:5432
     steps:
-      - uses: actions/checkout@v2
-      -
-        uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
         with:
-          python-version: '3.6'
-      -
-        name: Display system info
+          python-version: "3.7"
+      - name: Display system info
         run: python -c "import sys; print(sys.version)"
-      -
-        name: Setup Python
+      - name: Setup Python
         run: |
           apt-get update && apt-get install python-enchant -y
           pip install tox
           pip install --upgrade pip
           pip install tox coveralls
-      -
-        name: Run tox
+      - name: Run tox
         env:
           DJANGO_SETTINGS_MODULE: bsyncviewer.settings.gh_actions
         run: tox -e ${{ matrix.tox_env }}
-      -
-        name: Coveralls
+      - name: Coveralls
         if: ${{ success() && matrix.tox_env == 'python' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
