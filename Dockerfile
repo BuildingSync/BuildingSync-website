@@ -1,6 +1,6 @@
 # VERSION 0.1
 # AUTHOR:           Nicholas Long <nicholas.long@nrel.gov>
-# DESCRIPTION:      Dockerfile for running BuildingSync Data Selection Tool
+# DESCRIPTION:      Dockerfile for running BuildingSync Website
 # TO_BUILD_AND_RUN: docker-compose build && docker-compose up
 FROM alpine:3.10
 
@@ -37,27 +37,27 @@ RUN apk add --no-cache python3 \
 ##   - pip install --upgrade pip overwrites the pip so it is no longer a symlink
 ##   - install supervisor that works with Python3.
 
-WORKDIR /srv/selection-tool
-COPY /requirements.txt /srv/selection-tool/requirements.txt
+WORKDIR /srv/buildingsync-website
+COPY /requirements.txt /srv/buildingsync-website/requirements.txt
 RUN pip install -r requirements.txt
 
-WORKDIR /srv/selection-tool
+WORKDIR /srv/buildingsync-website
 ### Copy over the remaining part of the application and some helpers
-COPY . /srv/selection-tool/
+COPY . /srv/buildingsync-website/
 
 ### Copy the wait-for-it command to /usr/local
 COPY /docker/wait-for-it.sh /usr/local/wait-for-it.sh
 
-# nginx configurations - alpine doesn't use the sites-available directory. Put the selection tool
-# configuration file into the /etc/nginx/conf.d/ folder.
-COPY /docker/nginx.conf /etc/nginx/conf.d/selection_tool.conf
+# nginx configurations - alpine doesn't use the sites-available directory. Put the buildingsync
+# website configuration file into the /etc/nginx/conf.d/ folder.
+COPY /docker/nginx.conf /etc/nginx/conf.d/buildingsync-website.conf
 # Supervisor looks in /etc/supervisor for the configuration file.
 COPY /docker/supervisord.conf /etc/supervisor/supervisord.conf
 
 # entrypoint sets some permissions on directories that may be shared volumes
-COPY /docker/selection-tool-entrypoint.sh /usr/local/bin/selection-tool-entrypoint
-RUN chmod 775 /usr/local/bin/selection-tool-entrypoint
-ENTRYPOINT ["selection-tool-entrypoint"]
+COPY /docker/buildingsync-website-entrypoint.sh /usr/local/bin/buildingsync-website-entrypoint
+RUN chmod 775 /usr/local/bin/buildingsync-website-entrypoint
+ENTRYPOINT ["buildingsync-website-entrypoint"]
 
 CMD ["supervisord"]
 

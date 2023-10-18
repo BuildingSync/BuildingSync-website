@@ -150,7 +150,7 @@ Figure 1. Adding and validating BuildingSync use case
 
 ## Validation
 
-Users can use the [BuildingSync Use Case Selection Tool / Validator](https://buildingsync.net/validator) to validate XML documents against both the general BuildingSync schema in different versions and public use cases. The validator can be used directly on the BuildingSync Selection Tool, and example files are also provided. Other customizable validation methods and examples can be found on the [BuildingSync Technical Resources website](https://buildingsync.net/technical_resources).
+Users can use the [BuildingSync Use Case Validator Tool](https://buildingsync.net/validator) to validate XML documents against both the general BuildingSync schema in different versions and public use cases. The validator can be used directly on the BuildingSync Website, and example files are also provided. Other customizable validation methods and examples can be found on the [BuildingSync Technical Resources website](https://buildingsync.net/technical_resources).
 
 Additionally, a Validator API has been developed to programmatically validate XML files within a third-party web tool or software package. More information on the API can be seen on the [Validator on GitHub](https://github.com/BuildingSync/BuildingSync-website#validator).
 

@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# This backup script creates nightly database and media file backups of the Selection Tool when running
+# This backup script creates nightly database and media file backups of the BuildingSync website when running
 # in a docker container. The name of the container running the database is hardcoded to look for
 # *db-postgres*. This may cause an issue if several docker applications are running on the same
-# system. Also, the location of the backups is hardcoded to ~/selection-tool-backups.
+# system. Also, the location of the backups is hardcoded to ~/buildingsync-website-backups.
 
 # To create nightly backups, add the following to your crontab
-# 0 0 * * * /srv/selection-tool/backup_database.sh <db_name> <db_username> >> /home/ubuntu/selection-tool-backups/cron.log 2>&1
+# 0 0 * * * /srv/buildingsync-website/backup_database.sh <db_name> <db_username> >> /home/ubuntu/buildingsync-website-backups/cron.log 2>&1
 
 DB_NAME=$1
 DB_USERNAME=$2
@@ -25,7 +25,7 @@ if [[ (-z ${DB_NAME}) || (-z ${DB_USERNAME}) ]] ; then
 fi
 
 # currently the backup directory is hard coded
-BACKUP_DIR=/home/ubuntu/selection-tool-backups
+BACKUP_DIR=/home/ubuntu/buildingsync-website-backups
 mkdir -p ${BACKUP_DIR}
 
 # db_password is set from the environment variables in docker-compose. The docker stack must
@@ -33,11 +33,10 @@ mkdir -p ${BACKUP_DIR}
 echo "docker exec $(docker ps -f "name=buildingsyncwebsite_db-postgres" --format "{{.ID}}") pg_dump -U ${DB_USERNAME} -Fc ${DB_NAME} > $(file_name)"
 docker exec $(docker ps -f "name=buildingsyncwebsite_db-postgres" --format "{{.ID}}") pg_dump -U ${DB_USERNAME} -Fc ${DB_NAME} > $(file_name)
 
-
 # Backup the media directory (uploads, especially buildingsync). In docker-land this is
 # just a container volume, so create a new container with the volume attached and tar it up.
-echo "docker run --rm -it -v selectiontool_mediadata_redesign:/backup/media -v $BACKUP_DIR:/backup/dir/ alpine:3.8 tar zcvf $(media_file_name) /backup/media"
-docker run --rm -v selectiontool_mediadata_redesign:/backup/media -v $BACKUP_DIR:/backup/dir/ alpine:3.8 tar zcvf $(media_file_name) /backup/media
+echo "docker run --rm -it -v buildingsync_media:/backup/media -v $BACKUP_DIR:/backup/dir/ alpine:3.8 tar zcvf $(media_file_name) /backup/media"
+docker run --rm -v buildingsync_media:/backup/media -v $BACKUP_DIR:/backup/dir/ alpine:3.8 tar zcvf $(media_file_name) /backup/media
 
 # Delete files older than 30 days.
 find ${BACKUP_DIR} -mtime +30 -type f -name '*.dump' -delete

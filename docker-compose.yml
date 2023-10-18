@@ -5,31 +5,31 @@ services:
   db-postgres:
     image: postgres:11.1
     environment:
-      - POSTGRES_DB=selection-tool
-      - POSTGRES_USER=selection-tool
+      - POSTGRES_DB=buildingsync-website
+      - POSTGRES_USER=buildingsync-website
       - POSTGRES_PASSWORD=super-secret-password
     volumes:
-      - selectiontool_pgdata:/var/lib/postgresql/data
+      - buildingsync_pgdata:/var/lib/postgresql/data
   web:
     build: .
     environment:
-      - POSTGRES_DB=selection-tool
-      - POSTGRES_USER=selection-tool
+      - POSTGRES_DB=buildingsync-website
+      - POSTGRES_USER=buildingsync-website
       - POSTGRES_PASSWORD=super-secret-password
       - SECRET_KEY=super-secret-key
       - DJANGO_SETTINGS_MODULE=bsyncviewer.settings.docker
       - DJANGO_DEBUG=False
-      - SELECTION_TOOL_ADMIN_USER=admin
-      - SELECTION_TOOL_ADMIN_EMAIL=admin@buildingsync.net
-      - SELECTION_TOOL_ADMIN_PASSWORD=super-secure-password
+      - BUILDINGSYNC_WEBSITE_ADMIN_USER=admin
+      - BUILDINGSYNC_WEBSITE_ADMIN_EMAIL=admin@buildingsync.net
+      - BUILDINGSYNC_WEBSITE_ADMIN_PASSWORD=super-secure-password
     depends_on:
       - db-postgres
     ports:
       - "8080:80"
     volumes:
-      - selectiontool_mediadata:/srv/selection-tool/bsyncviewer/media
+      - buildingsync_media:/srv/buildingsync-website/bsyncviewer/media
 volumes:
-  selectiontool_pgdata:
+  buildingsync_pgdata:
     external: true
-  selectiontool_mediadata:
+  buildingsync_media:
     external: true

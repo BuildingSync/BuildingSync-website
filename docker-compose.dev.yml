@@ -8,5 +8,5 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=bsyncviewer.settings.docker_dev
     volumes:
-      - ./bsyncviewer:/srv/selection-tool/bsyncviewer
-      - selectiontool_mediadata:/srv/selection-tool/bsyncviewer/media
+      - ./bsyncviewer:/srv/buildingsync-website/bsyncviewer
+      - buildingsync_media:/srv/buildingsync-website/bsyncviewer/media
