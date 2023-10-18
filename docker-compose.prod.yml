@@ -23,6 +23,7 @@ services:
     volumes:
       - buildingsync_pgdata:/var/lib/postgresql/data
       - $HOME/buildingsync-website-backups:/backups
+    restart: unless-stopped
     deploy:
       restart_policy:
         condition: on-failure
@@ -47,6 +48,7 @@ services:
       - "8082:80"
     volumes:
       - buildingsync_media:/srv/buildingsync-website/bsyncviewer/media
+    restart: unless-stopped
     deploy:
       restart_policy:
         condition: on-failure

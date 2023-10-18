@@ -27,7 +27,7 @@ below on production, only for testing locally.
   export BUILDINGSYNC_WEBSITE_ADMIN_USER=admin
   export BUILDINGSYNC_WEBSITE_ADMIN_PASSWORD=super-secret-password
   export BUILDINGSYNC_WEBSITE_ADMIN_EMAIL=admin@buildingsync.net
-  export SECRET_KEY=Super-Long-Secret-Key-From-Step-Above
+  export SECRET_KEY="Super-Long-Secret-Key-From-Step-Above"
   ```
 
 - Build the containers and Deploy
