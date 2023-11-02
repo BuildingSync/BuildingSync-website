@@ -13,27 +13,27 @@ below on production, only for testing locally.
 
 - Starting over - one line
 
-  `docker-compose stop && docker-compose rm -f && docker-compose build && docker volume rm pgdata && docker volume rm mediadata && docker volume create --name=selectiontool_pgdata && docker volume create --name=selectiontool_mediadata && docker-compose up`
+  `docker-compose stop && docker-compose rm -f && docker-compose build && docker volume rm pgdata && docker volume rm mediadata && docker volume create --name=buildingsync_pgdata && docker volume create --name=buildingsync_media && docker-compose up`
 
 # Deploying with Docker and Docker Compose on Remote Server
 
 - Check out the source code to `/srv/BuildingSync-website`
 - Create new secret key from [here](http://www.miniwebtool.com/django-secret-key-generator/).
-- Set environment variables that will be passed to docker in /etc/profile.d/selectiontool.sh
+- Set environment variables that will be passed to docker in /etc/profile.d/buildingsync.sh
 
   ```bash
-  export POSTGRES_USER=selection-tool
+  export POSTGRES_USER=buildingsync-website
   export POSTGRES_PASSWORD=super-secret-password
-  export SELECTION_TOOL_ADMIN_USER=admin
-  export SELECTION_TOOL_ADMIN_PASSWORD=super-secret-password
-  export SELECTION_TOOL_ADMIN_EMAIL=admin@buildingsync.net
-  export SECRET_KEY=Super-Long-Secret-Key-From-Step-Above
+  export BUILDINGSYNC_WEBSITE_ADMIN_USER=admin
+  export BUILDINGSYNC_WEBSITE_ADMIN_PASSWORD=super-secret-password
+  export BUILDINGSYNC_WEBSITE_ADMIN_EMAIL=admin@buildingsync.net
+  export SECRET_KEY="Super-Long-Secret-Key-From-Step-Above"
   ```
 
 - Build the containers and Deploy
 
   ```bash
-  cd /srv/BuildingSync-website/
+  cd /srv/buildingsync-website/
   docker-compose -f docker-compose.prod.yml up -d --build
   ```
 
@@ -42,7 +42,7 @@ below on production, only for testing locally.
 - Log into the server
 
 ```bash
-cd /srv/BuildingSync-website
+cd /srv/buildingsync-website/
 git pull
 docker-compose -f docker-compose.prod.yml up -d --build
 ```

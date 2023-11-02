@@ -1,5 +1,9 @@
 # BuildingSync Use Case Selection Tool
 
+## Version 1.3.0
+
+This version replaces the old `selection-tool` names with `buildingsync-website`.
+
 ## Version 1.2.0
 
 ## What's Changed

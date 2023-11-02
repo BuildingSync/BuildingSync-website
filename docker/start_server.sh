@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /srv/selection-tool
+cd /srv/buildingsync-website
 
 echo "Waiting for postgres to start"
 /usr/local/wait-for-it.sh --strict db-postgres:5432
@@ -14,9 +14,9 @@ echo "Waiting for postgres to start"
 ./manage.py bedes --schema_version=1.0.0 --bedes_version=v2.2 --save_to_db
 
 # Create the default user based on the env vars
-echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('${SELECTION_TOOL_ADMIN_USER}', '${SELECTION_TOOL_ADMIN_EMAIL}', '${SELECTION_TOOL_ADMIN_PASSWORD}')" | python manage.py shell
+echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('${BUILDINGSYNC_WEBSITE_ADMIN_USER}', '${BUILDINGSYNC_WEBSITE_ADMIN_EMAIL}', '${BUILDINGSYNC_WEBSITE_ADMIN_PASSWORD}')" | python manage.py shell
 
 WORKERS=$(($(nproc) / 2))
 WORKERS=$(($WORKERS>1?$WORKERS:1))
 
-/usr/bin/uwsgi --ini /srv/selection-tool/docker/uwsgi.ini
+/usr/bin/uwsgi --ini /srv/buildingsync-website/docker/uwsgi.ini
