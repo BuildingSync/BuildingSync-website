@@ -34,7 +34,7 @@ gh = github3.login(token=args.github_key)
 repo = gh.repository('BuildingSync', 'BuildingSync-website')
 internal_users = ['nllong', 'kflemin']
 
-print(github3.octocat())
+# print(github3.octocat())
 print("Connecting to GitHub repository: %s" % repo)
 
 
