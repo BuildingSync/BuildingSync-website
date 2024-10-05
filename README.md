@@ -251,7 +251,7 @@ To parse and map a new BEDES version:
 1. Parse the BEDES XMLs into a JSON file and map the BEDES terms to the BuildingSync attributes:
 
    ```bash
-   docker exec -it buildingsyncwebsite_web_1 bash
+   docker exec -it buildingsync-website-web-1 bash
    python manage.py bedes --schema_version=X.X.X --bedes_version=X.X
    ```
 
@@ -263,7 +263,7 @@ To parse and map a new BEDES version:
 1. Copy the generated bedes files to the git repo on the production server. The command will be something like:
 
    ```
-   docker cp buildingsyncwebsite_web_1:/srv/selection-tool/bsyncviewer/lib/bedes/v2.5/schema2.5.0 .
+   docker cp buildingsync-website-web-1:/srv/buildingsync-website/bsyncviewer/lib/bedes/v2.5/schema2.5.0 .
    ```
 
 1. Review these mapping files and make changes as needed. Commit and push the files to the BuildingSync-website repository (ideally a branch).
@@ -283,14 +283,15 @@ Admin interface is available at `/admin`
 
 Follow these steps to add a new schema version to the selection tool:
 
-1. Add the schema file in the admin interface. Must have admin privileges. The schema will get automatically parsed. Manually add the enumeration.json file created from the release, hit the "Save" button once and wait patiently until it shows success.
-2. Update the versions in the DEFAULT_SCHEMA_VERSION in the dev.py, gh_actions.py, and docker.py with the latest release.
-3. Convert existing use cases schematron files to the new schema. Add the new use cases.
-4. When the use cases have been reviewed, make them public in the admin interface. Add the schematron file and hit "Save" once and wait for each use case.
+1. Add the schema file in the admin interface (may test it locally first). Must have admin privileges. The schema will get automatically parsed. Manually add the enumeration.json file created from the [release](https://github.com/BuildingSync/schema/releases), hit the "Save" button once and wait patiently until it shows success.
+2. Convert existing use cases schematron files to the new schema. Add the new use cases.
+3. When the use cases have been reviewed, make them public in the admin interface. Add the schematron file and hit "Save" once and wait for each use case.
+4. Update the versions in the DEFAULT_SCHEMA_VERSION in the dev.py, gh_actions.py, and docker.py with the latest release.
 5. Create XML example files and place them in the `bsyncviewer/lib/validator/examples/schema<VERSION>` directory. Make sure that the example_files.zip file is updated if any of the example files have changed (This is likely since the new example files will be pointing to the new schema).
 6. Test the validator with a local new XML example file.
-7. Reparse BEDES terms to map them to the new schema following the steps in the BEDES section above.
-8. Deploy website on production
+7. Create PR and merge with the changes.
+8. Reparse BEDES terms to map them to the new schema following the steps in the BEDES section above.
+9. Deploy website on production.
 
 ### Adding Examples from the TestSuite repo
 
