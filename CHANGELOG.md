@@ -2,8 +2,6 @@
 
 ## Version 1.3.0
 
-Date Range: 10/04/23 -
-
 - Replaces the old `selection-tool` names with `buildingsync-website`.
 - Release BuildingSync 2.6
 - Update documentation for BuildingSync 2.6
