@@ -2,7 +2,10 @@
 
 ## Version 1.3.0
 
-This version replaces the old `selection-tool` names with `buildingsync-website`.
+- Replaces the old `selection-tool` names with `buildingsync-website`.
+- Release BuildingSync 2.6
+- Update documentation for BuildingSync 2.6
+- Prep for BEDES v2.6 mapping
 
 ## Version 1.2.0
 
