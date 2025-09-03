@@ -3,6 +3,7 @@ from django.db import models
 
 class Attribute(models.Model):
     name = models.CharField(max_length=250, db_index=True)
+    description = models.CharField(max_length=15000, null=True, default=None)
     type = models.CharField(max_length=100, default="<unknown_type>")
     schema = models.ForeignKey(
         'Schema', on_delete=models.CASCADE, related_name="attributes", db_index=True

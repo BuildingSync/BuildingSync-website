@@ -27,6 +27,7 @@ def get_jstree_node(el):
     node = {
         'id': u'{}'.format(el.pk),
         'text': u'{}'.format(node_name),
+        "description": u'{}'.format(el.description),
         'parent': u'{}'.format(parent_node),
         'icon': False
     }
