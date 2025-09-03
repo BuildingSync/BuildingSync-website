@@ -246,6 +246,10 @@ a#current-path {
   font-size: 0.8em;
 }
 
+#term_description {
+  font-size: 0.8em;
+}
+
 ul.term-pad {
   padding-left: 10px !important;
 }

@@ -82,6 +82,7 @@
         </div>
 
         <h3 id="term_title" class="hidden">SELECTED NAME</h3>
+        <h3 id="term_description" class="hidden">SELECTED DESCRIPTION</h3>
         <div id="bedes_panel" class="panel panel-default hidden">
           <div class="panel-heading">
             <h4 class="panel-title">Data Dictionary Links</h4>
@@ -123,7 +124,6 @@
     $(function () {
       let data = {{ schema_tree_data|safe }};
 
-
       $('#schematree').jstree({
         'core': {
           'data': data,
@@ -155,6 +155,9 @@
                 $('#bedes_panel').removeClass('hidden').addClass('visible');
                 $('#term_title').removeClass('hidden').addClass('visible');
                 $('#term_title').html(node.text);
+
+                $('#term_description').removeClass('hidden').addClass('visible');
+                $('#term_description').html(node.original.description);
               } else {
                 $('#term_title').removeClass('visible').addClass('hidden');
                 $('#bedes_panel').removeClass('visible').addClass('hidden');
