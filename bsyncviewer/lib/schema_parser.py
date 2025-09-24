@@ -569,7 +569,7 @@ class BuildingSyncSchemaProcessor(object):
                 num_added += 1
                 return_rows.append({
                     'name': elem.name,
-                    'description': "; ".join([anno.documentation for  anno in elem.annotations]),
+                    'description': "; ".join([anno.documentation for anno in elem.annotations]),
                     'type': elem.name,
                     'parent_path': root_path,
                     'path': root_path + '.' + elem.name,
@@ -613,7 +613,7 @@ class BuildingSyncSchemaProcessor(object):
                 num_added += 1
                 return_rows.append({
                     'name': elem.name,
-                    'description': "; ".join([anno.documentation for  anno in elem.annotations]),
+                    'description': "; ".join([anno.documentation for anno in elem.annotations]),
                     'path': root_path + '.' + elem.name,
                     'type': NamedElement.my_string(),
                     'parent_path': root_path,
@@ -648,7 +648,7 @@ class BuildingSyncSchemaProcessor(object):
                 ref_type_clean = elem.ref_type
             return_rows.append({
                 'name': ref_type_clean,
-                'description': "; ".join([anno.documentation for  anno in elem.annotations]),
+                'description': "; ".join([anno.documentation for anno in elem.annotations]),
                 'path': root_path + '.' + ref_type_clean,
                 'type': ReferenceElement.my_string(),
                 'parent_path': root_path,

@@ -1,11 +1,22 @@
 # BuildingSync Use Case Selection Tool
 
-## Version 1.3.0
+## Version 1.2.1
 
-- Replaces the old `selection-tool` names with `buildingsync-website`.
-- Release BuildingSync 2.6
-- Update documentation for BuildingSync 2.6
+Date Range: 10/05/23 - 09/30/25
+
+- Release BuildingSync 2.6, 2.7
+- Update documentation for BuildingSync 2.6, 2.7
 - Prep for BEDES v2.6 mapping
+- Replaces the old `selection-tool` names with `buildingsync-website`.
+
+New Issues:
+
+- New Issue [#191](https://github.com/BuildingSync/BuildingSync-website/issues/191), BEDES v2.6 mapping
+
+Closed Issues and Features:
+
+- Fixed [#189](https://github.com/BuildingSync/BuildingSync-website/issues/189), Download Examples button broken
+- Fixed [#192](https://github.com/BuildingSync/BuildingSync-website/issues/192), BEDES v2.5 mapping
 
 ## Version 1.2.0
 
