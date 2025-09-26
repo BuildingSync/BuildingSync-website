@@ -45,7 +45,7 @@ jobs:
           DJANGO_SETTINGS_MODULE: bsyncviewer.settings.gh_actions
         run: tox -e ${{ matrix.tox_env }}
       - name: Coveralls
-        if: ${{ success() && matrix.tox_env == 'python' }}
+        if: ${{ success() && matrix.tox_env == 'python' && matrix.python-version == '3.9' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: coveralls --service=github
