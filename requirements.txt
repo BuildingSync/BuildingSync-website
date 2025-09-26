@@ -11,7 +11,7 @@ xmlschema==1.0.15
 xmltodict==0.12.0
 
 # string matching
-jellyfish==0.7.1
+jellyfish==1.2.0
 
 # schematron runner from TestSuite repo
 # This also sets the version of lxml to use
