@@ -2,9 +2,11 @@ Django==2.2.28
 django-bootstrap4==2.3.1
 djangorestframework==3.11.2
 djangorestframework-xml==1.0.1
-# Version of lxml has to match what is in testsuite
-lxml==4.9.1
-psycopg2==2.8.6
+
+# This won't install anymore, but not 
+# sure it needed?
+# psycopg2==2.8.6
+
 semantic-version==2.10.0
 stopit==1.1.2
 xmlschema==1.0.15
@@ -14,7 +16,8 @@ xmltodict==0.12.0
 jellyfish==0.7.1
 
 # schematron runner from TestSuite repo
-testsuite==0.1.3
+# This also sets the version of lxml to use
+testsuite==0.1.5
 
 # production deployment
-uWSGI==2.0.22
+uWSGI==2.0.26
