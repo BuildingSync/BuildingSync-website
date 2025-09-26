@@ -3,9 +3,7 @@ django-bootstrap4==2.3.1
 djangorestframework==3.11.2
 djangorestframework-xml==1.0.1
 
-# This won't install anymore, but not 
-# sure it needed?
-# psycopg2==2.8.6
+psycopg2-binary==2.9.7
 
 semantic-version==2.10.0
 stopit==1.1.2
