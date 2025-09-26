@@ -8,6 +8,8 @@ Date Range: 10/05/23 - 09/30/25
 - Update documentation for BuildingSync 2.6, 2.7
 - Prep for BEDES v2.6 mapping
 - Replaces the old `selection-tool` names with `buildingsync-website`.
+- Updates to support Python 3.9 (older versions have been deprecated)
+- Support latest version of jellyfish
 
 New Issues:
 
