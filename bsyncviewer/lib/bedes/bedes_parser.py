@@ -1,6 +1,7 @@
 import json
 import os
-from collections import Mapping, OrderedDict, defaultdict
+from collections import OrderedDict, defaultdict
+from collections.abc import Mapping
 
 import xmltodict
 

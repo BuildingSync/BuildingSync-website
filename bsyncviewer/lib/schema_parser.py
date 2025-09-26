@@ -199,7 +199,7 @@ class BuildingSyncSchemaProcessor(object):
 
     def _read_schema(self, root_element):
         full_schema = BuildingSyncSchemaRoot()
-        for child in root_element.getchildren():
+        for child in root_element:
 
             if child.tag.endswith('element'):
                 if 'name' in child.attrib:
@@ -230,7 +230,7 @@ class BuildingSyncSchemaProcessor(object):
 
         ref_element.ref_type = parent_object.attrib['ref']
 
-        for child in parent_object.getchildren():
+        for child in parent_object:
             if child.tag.endswith('attribute'):
                 ref_element.attributes.append(self._read_attribute(child))
             elif child.tag.endswith('annotation'):
@@ -251,7 +251,7 @@ class BuildingSyncSchemaProcessor(object):
             named_element.min_occurs = parent_object.attrib['minOccurs']
         if 'maxOccurs' in parent_object.attrib:
             named_element.max_occurs = parent_object.attrib['maxOccurs']
-        for child in parent_object.getchildren():
+        for child in parent_object:
             if child.tag.endswith('annotation'):
                 named_element.annotations.append(self._read_annotation(child))
             elif child.tag.endswith('complexType'):
@@ -270,7 +270,7 @@ class BuildingSyncSchemaProcessor(object):
     @staticmethod
     def _read_annotation(parent_object):
         annotation = AnnotationElement()
-        for child in parent_object.getchildren():
+        for child in parent_object:
             if child.tag.endswith('documentation'):
                 annotation.documentation = child.text
             else:
@@ -279,7 +279,7 @@ class BuildingSyncSchemaProcessor(object):
 
     def _read_attribute(self, parent_object):
         attribute = AttributeElement()
-        for child in parent_object.getchildren():
+        for child in parent_object:
             if child.tag.endswith('simpleType'):
                 attribute.simple_types.append(self._read_simple_type(child))
             elif child.tag.endswith('annotation'):
@@ -290,7 +290,7 @@ class BuildingSyncSchemaProcessor(object):
 
     def _read_complex_type(self, parent_object):
         this_complex_type = ComplexTypeElement()
-        for child in parent_object.getchildren():
+        for child in parent_object:
             if child.tag.endswith('sequence'):
                 this_complex_type.sequences.append(self._read_sequence(child))
             elif child.tag.endswith('simpleContent'):
@@ -312,7 +312,7 @@ class BuildingSyncSchemaProcessor(object):
 
     def _read_sequence(self, parent_object):
         this_sequence = SequenceElement()
-        for child in parent_object.getchildren():
+        for child in parent_object:
             if child.tag.endswith('element'):
                 if 'name' in child.attrib:
                     this_sequence.named_elements.append(self._read_named_element(child))
@@ -329,7 +329,7 @@ class BuildingSyncSchemaProcessor(object):
 
     def _read_simple_content(self, parent_object):
         this_simple_content = SimpleContentElement()
-        for child in parent_object.getchildren():
+        for child in parent_object:
             if child.tag.endswith('extension'):
                 this_simple_content.extensions.append(self._read_extension(child))
             else:
@@ -340,7 +340,7 @@ class BuildingSyncSchemaProcessor(object):
         this_extension = ExtensionElement()
         if 'base' in parent_object.attrib:
             this_extension.base_type = parent_object.attrib['base']
-        for child in parent_object.getchildren():
+        for child in parent_object:
             if child.tag.endswith('attribute'):
                 this_extension.attributes.append(self._read_attribute(child))
             else:
@@ -361,7 +361,7 @@ class BuildingSyncSchemaProcessor(object):
         if parent_object.attrib and parent_object.attrib['name']:
             this_simple_content.name = parent_object.attrib['name']
 
-        for child in parent_object.getchildren():
+        for child in parent_object:
             if child.tag.endswith('restriction'):
                 this_simple_content.restrictions.append(self._read_restriction(child))
             elif child.tag.endswith('annotation'):
@@ -378,7 +378,7 @@ class BuildingSyncSchemaProcessor(object):
     @staticmethod
     def _read_restriction(parent_object):
         this_restriction = RestrictionElement()
-        for child in parent_object.getchildren():
+        for child in parent_object:
             if child.tag.endswith('enumeration'):
                 this_restriction.enumerations.append(child.attrib['value'])
             elif child.tag.endswith('minInclusive'):
@@ -394,7 +394,7 @@ class BuildingSyncSchemaProcessor(object):
 
     def _read_choice(self, parent_object):
         this_choice = ChoiceElement()
-        for child in parent_object.getchildren():
+        for child in parent_object:
             if child.tag.endswith('element'):
                 if 'name' in child.attrib:
                     this_choice.named_elements.append(self._read_named_element(child))

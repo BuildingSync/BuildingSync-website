@@ -89,7 +89,10 @@ class Command(BaseCommand):
             bsync_term = self.manual_mapping(attribute.name, manual_mappings)
 
             for bt in bedes.terms:
-                distance = jellyfish.jaro_winkler(bsync_term.lower(), bt['Term'].lower())
+                # Skip if bt['Term'] is None or not a string
+                if not bt.get('Term') or not isinstance(bt['Term'], str):
+                    continue
+                distance = jellyfish.jaro_winkler_similarity(bsync_term.lower(), bt['Term'].lower())
 
                 if distance >= 0.98:
                     results[attribute.id].append({
@@ -106,7 +109,7 @@ class Command(BaseCommand):
             if not results[attribute.id]:
                 for be in bedes.enumerations:
                     # .lower() function used to neutralize upper/lower case discrepancies (there are many in enumerations/list options)
-                    distance = jellyfish.jaro_winkler(bsync_term.lower(), be['List-Option'].lower())
+                    distance = jellyfish.jaro_winkler_similarity(bsync_term.lower(), be['List-Option'].lower())
 
                     if distance >= 0.98:
                         results[attribute.id].append({
@@ -162,7 +165,7 @@ class Command(BaseCommand):
                             for word_group in word_groups.keys():
 
                                 for bt in bedes.terms:
-                                    distance = jellyfish.jaro_winkler(word_group.lower(), bt['Term'].lower())
+                                    distance = jellyfish.jaro_winkler_similarity(word_group.lower(), bt['Term'].lower())
 
                                     if distance >= 0.98:
 
@@ -183,7 +186,7 @@ class Command(BaseCommand):
                                     # if no matches found in BEDES terms, check list options
                                     for be in bedes.enumerations:
 
-                                        distance = jellyfish.jaro_winkler(word_group.lower(), be['List-Option'].lower())
+                                        distance = jellyfish.jaro_winkler_similarity(word_group.lower(), be['List-Option'].lower())
 
                                         if distance >= 0.98:
                                             for i in range(word_groups[word_group], word_groups[word_group] + number_of_words):
@@ -367,7 +370,10 @@ class Command(BaseCommand):
             print(associated_attrs)
 
             for be in bedes.enumerations:
-                distance = jellyfish.jaro_winkler(enumeration.name, be['List-Option'])
+                # Skip if be['List-Option'] is None or not a string
+                if not be.get('List-Option') or not isinstance(be['List-Option'], str):
+                    continue
+                distance = jellyfish.jaro_winkler_similarity(enumeration.name, be['List-Option'])
 
                 if distance >= 0.95:
                     results[enumeration.id].append({
