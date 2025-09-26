@@ -1,6 +1,6 @@
 # BuildingSync Use Case Selection Tool
 
-## Version 1.2.1
+## Version 1.4.0
 
 Date Range: 10/05/23 - 09/30/25
 
