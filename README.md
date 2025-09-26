@@ -287,11 +287,12 @@ Follow these steps to add a new schema version to the selection tool:
 2. Convert existing use cases schematron files to the new schema. Add the new use cases.
 3. When the use cases have been reviewed, make them public in the admin interface. Add the schematron file and hit "Save" once and wait for each use case.
 4. Update the versions in the DEFAULT_SCHEMA_VERSION in the dev.py, gh_actions.py, and docker.py with the latest release.
-5. Create XML example files and place them in the `bsyncviewer/lib/validator/examples/schema<VERSION>` directory. Make sure that the example_files.zip file is updated if any of the example files have changed (This is likely since the new example files will be pointing to the new schema).
+5. Add the schema file into `bsyncviewer/lib/buildingsync_schemas`. Create XML example files and place them in the `bsyncviewer/lib/validator/examples/schema<VERSION>` directory. Make sure that the example_files.zip file is updated if any of the example files have changed (This is likely since the new example files will be pointing to the new schema).
 6. Test the validator with a local new XML example file.
 7. Create PR and merge with the changes.
 8. Reparse BEDES terms to map them to the new schema following the steps in the BEDES section above.
 9. Deploy website on production.
+10. If needed, update CHANGELOG and create PR from develop to main for new release of this site (see [release_instructions.md](docs/release_instructions.md)).
 
 ### Adding Examples from the TestSuite repo
 

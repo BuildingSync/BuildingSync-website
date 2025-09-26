@@ -10,6 +10,14 @@ Follow the list below for a new release:
 python docs/scripts/change_log.py –k GITHUB_API_TOKEN –s 2018-02-26 –e 2018-05-30
 ```
 
-3. Paste the results (remove unneeded Accepted Pull Requests) into the CHANGELOG.md. Make sure to cleanup the formatting if needed.
-4. Once develop passes, then create a new PR from develop to main.
-5. Draft new Release from Github (https://github.com/BuildingSync/BuildingSync-website/releases). Include list of changes since previous release (i.e., the content in the CHANGELOG.md)
+4. Paste the results (remove unneeded Accepted Pull Requests) into the CHANGELOG.md. Make sure to cleanup the formatting if needed.
+5. Once develop passes, create a new PR from develop to main.
+6. Draft new Release from Github (https://github.com/BuildingSync/BuildingSync-website/releases).
+
+```bash
+git checkout main && git pull
+git tag -a v<version> -m "<message>" [SHA]
+git push --tags origin
+```
+
+Include list of changes since previous release in `<message>` (i.e., the content in the CHANGELOG.md). [SHA] is used for specific commit (when the tag does not correspond to the latest commit).
