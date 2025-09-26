@@ -15,6 +15,7 @@ repos:
     hooks:
       - id: check-ast
       - id: check-added-large-files
+        # Reduced max file size from 5000KB to 2000KB to prevent large files from being added.
         args: ["--maxkb=2000"]
       - id: end-of-file-fixer
       - id: trailing-whitespace
