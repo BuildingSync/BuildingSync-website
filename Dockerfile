@@ -27,7 +27,6 @@ RUN apk add --no-cache python3 \
     addgroup -g 1000 uwsgi && \
     adduser -G uwsgi -H -u 1000 -S uwsgi && \
     mkdir -p /run/nginx && \
-    echo "daemon off;" >> /etc/nginx/nginx.conf && \
     rm -f /etc/nginx/conf.d/default.conf && \
     echo "gem: --no-rdoc --no-ri" > /etc/gemrc
 
@@ -48,9 +47,8 @@ COPY . /srv/buildingsync-website/
 ### Copy the wait-for-it command to /usr/local
 COPY /docker/wait-for-it.sh /usr/local/wait-for-it.sh
 
-# nginx configurations - alpine doesn't use the sites-available directory. Put the buildingsync
-# website configuration file into the /etc/nginx/conf.d/ folder.
-COPY /docker/nginx.conf /etc/nginx/conf.d/buildingsync-website.conf
+# nginx configurations - replace the main nginx.conf with our custom configuration
+COPY /docker/nginx.conf /etc/nginx/nginx.conf
 # Supervisor looks in /etc/supervisor for the configuration file.
 COPY /docker/supervisord.conf /etc/supervisor/supervisord.conf
 
