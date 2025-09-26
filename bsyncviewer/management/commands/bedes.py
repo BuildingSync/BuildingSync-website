@@ -89,6 +89,9 @@ class Command(BaseCommand):
             bsync_term = self.manual_mapping(attribute.name, manual_mappings)
 
             for bt in bedes.terms:
+                # Skip if bt['Term'] is None or not a string
+                if not bt.get('Term') or not isinstance(bt['Term'], str):
+                    continue
                 distance = jellyfish.jaro_winkler(bsync_term.lower(), bt['Term'].lower())
 
                 if distance >= 0.98:
