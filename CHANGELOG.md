@@ -1,6 +1,6 @@
 # BuildingSync Use Case Selection Tool
 
-## Version 1.4.0
+## Version 1.3.0
 
 Date Range: 10/05/23 - 09/30/25
 
@@ -10,6 +10,7 @@ Date Range: 10/05/23 - 09/30/25
 - Replaces the old `selection-tool` names with `buildingsync-website`.
 - Updates to support Python 3.9 (older versions have been deprecated)
 - Support latest version of jellyfish
+- Update base docker image
 
 New Issues:
 
