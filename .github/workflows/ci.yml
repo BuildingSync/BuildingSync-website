@@ -16,7 +16,7 @@ jobs:
         tox_env: [python] #, precommit]
     services:
       postgres:
-        image: postgres:9.6
+        image: postgres:11.1
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: bsync_validator
