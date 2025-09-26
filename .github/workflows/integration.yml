@@ -1,0 +1,62 @@
+name: Integration Tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "develop"
+      - "main"
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+    services:
+      postgres:
+        image: postgres:11.1
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: bsync_validator
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Setup Python dependencies
+        run: |
+          sudo apt-get update
+          pip install --upgrade pip
+          pip install -r requirements-test.txt
+      - name: Setup Django
+        env:
+          DJANGO_SETTINGS_MODULE: bsyncviewer.settings.gh_actions
+        run: |
+          python manage.py collectstatic --noinput
+          python manage.py migrate
+      - name: Start Django server
+        env:
+          DJANGO_SETTINGS_MODULE: bsyncviewer.settings.gh_actions
+        run: |
+          python manage.py runserver 8000 &
+          echo $! > server.pid
+          sleep 10  # Give server time to start
+      - name: Test home page loads
+        run: |
+          curl -f -s -o /dev/null http://localhost:8000/ || (echo "Home page failed to load" && exit 1)
+          echo "✅ Home page loaded successfully"
+      - name: Stop Django server
+        if: always()
+        run: |
+          if [ -f server.pid ]; then
+            kill $(cat server.pid) || true
+            rm server.pid
+          fi
