@@ -21,6 +21,21 @@ Closed Issues and Features:
 - Fixed [#189](https://github.com/BuildingSync/BuildingSync-website/issues/189), Download Examples button broken
 - Fixed [#192](https://github.com/BuildingSync/BuildingSync-website/issues/192), BEDES v2.5 mapping
 
+## What's Changed
+
+- Update changelog by @nllong in https://github.com/BuildingSync/BuildingSync-website/pull/185
+- Release 1.2.0 (#183) by @nllong in https://github.com/BuildingSync/BuildingSync-website/pull/186
+- Remove remnants of selection tool naming by @nllong in https://github.com/BuildingSync/BuildingSync-website/pull/187
+- Release BuildingSync 2.6.0 by @JieXiong9119 in https://github.com/BuildingSync/BuildingSync-website/pull/190
+- BEDES v2.5 - BuildingSync 2.6 mapping by @JieXiong9119 in https://github.com/BuildingSync/BuildingSync-website/pull/193
+- Add descriptions by @haneslinger in https://github.com/BuildingSync/BuildingSync-website/pull/194
+- Update versions of dependencies by @nllong in https://github.com/BuildingSync/BuildingSync-website/pull/196
+- Add integration test by @nllong in https://github.com/BuildingSync/BuildingSync-website/pull/199
+- Release BuildingSync 2.7.0 by @JieXiong9119 in https://github.com/BuildingSync/BuildingSync-website/pull/195
+- ci: bump the actions-deps group with 2 updates by @dependabot[bot] in https://github.com/BuildingSync/BuildingSync-website/pull/197
+
+**Full Changelog**: https://github.com/BuildingSync/BuildingSync-website/compare/v1.2.0...v1.3.0
+
 ## Version 1.2.0
 
 ## What's Changed
