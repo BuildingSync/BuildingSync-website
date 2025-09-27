@@ -1,8 +1,8 @@
-# VERSION 0.1
+# VERSION 0.2
 # AUTHOR:           Nicholas Long <nicholas.long@nrel.gov>
-# DESCRIPTION:      Dockerfile for running BuildingSync Website
+# DESCRIPTION:      Dockerfile for running BuildingSync Website with Python 3.9+
 # TO_BUILD_AND_RUN: docker-compose build && docker-compose up
-FROM alpine:3.10
+FROM alpine:3.18
 
 RUN apk add --no-cache python3 \
         python3-dev \
@@ -21,13 +21,12 @@ RUN apk add --no-cache python3 \
     rm -r /usr/lib/python*/ensurepip && \
     ln -sf /usr/bin/pip3 /usr/bin/pip && \
     pip install --upgrade pip setuptools && \
-    pip install git+https://github.com/Supervisor/supervisor@837c159ae51f3 && \
+    pip install supervisor==4.2.5 && \
     mkdir -p /var/log/supervisord/ && \
     rm -r /root/.cache && \
     addgroup -g 1000 uwsgi && \
     adduser -G uwsgi -H -u 1000 -S uwsgi && \
     mkdir -p /run/nginx && \
-    echo "daemon off;" >> /etc/nginx/nginx.conf && \
     rm -f /etc/nginx/conf.d/default.conf && \
     echo "gem: --no-rdoc --no-ri" > /etc/gemrc
 
@@ -48,9 +47,8 @@ COPY . /srv/buildingsync-website/
 ### Copy the wait-for-it command to /usr/local
 COPY /docker/wait-for-it.sh /usr/local/wait-for-it.sh
 
-# nginx configurations - alpine doesn't use the sites-available directory. Put the buildingsync
-# website configuration file into the /etc/nginx/conf.d/ folder.
-COPY /docker/nginx.conf /etc/nginx/conf.d/buildingsync-website.conf
+# nginx configurations - replace the main nginx.conf with our custom configuration
+COPY /docker/nginx.conf /etc/nginx/nginx.conf
 # Supervisor looks in /etc/supervisor for the configuration file.
 COPY /docker/supervisord.conf /etc/supervisor/supervisord.conf
 

@@ -12,7 +12,6 @@
 #   BUILDINGSYNC_WEBSITE_ADMIN_PASSWORD
 #   SECRET_KEY
 
-version: "3"
 services:
   db-postgres:
     image: postgres:11.1
