@@ -13,7 +13,10 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.9", "3.11"]
-        tox_env: [python] #, precommit]
+        tox_env: [python, precommit]
+        exclude:
+          - python-version: "3.9"
+            tox_env: precommit
     services:
       postgres:
         image: postgres:11.1
