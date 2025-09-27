@@ -53,11 +53,11 @@ This is the repository for the BuildingSync Validator web application.
   python manage.py reset_schema --schema_version=2.6.0
   ```
 
-**NOTE**: You will need to be _off_ the NREL VPN to import a schema, otherwise you'll get an error related to http://www.gbxml.org/schema}Area' as the gbXML schema cannot be imported when on the NREL VPN.
+**NOTE**: You will need to be _off_ the NREL VPN to import a schema, otherwise you'll get an error related to `http://www.gbxml.org/schema}Area'` as the gbXML schema cannot be imported when on the NREL VPN.
 
 ### Pre-commit
 
-This project used `pre-commit <https://pre-commit.com/>`\_ to ensure code consistency. To enable pre-commit, run the following from the command line.
+This project uses [pre-commit](https://pre-commit.com/) to ensure code consistency. To enable pre-commit, run the following from the command line:
 
 ```bash
 pip install pre-commit
@@ -72,17 +72,18 @@ pre-commit run --all-files
 
 ### Testing
 
-- To run test:
+To run tests:
 
-  ```bash
-  ./manage.py test
-  ```
+```bash
+./manage.py test
+```
 
-- To calculate coverage:
-  ```bash
-  coverage run --source='.' manage.py test
-  coverage report
-  ```
+To calculate coverage:
+
+```bash
+coverage run --source='.' manage.py test
+coverage report
+```
 
 ## Usage
 
@@ -113,9 +114,10 @@ The validator page allows users to validate XMLs against the BuildingSync schema
 
 There is also a validator endpoint to validate XML files against the BuildingSync schema and its public use cases.
 
-#### SINGLE XML
+#### Single XML
 
-Request: POST to https://buildingsync.net/api/validate
+**Request**: POST to `https://buildingsync.net/api/validate`
+
 Use form-data to specify the following parameters for schema version and XML file: `schema_version` and `file`.
 
 Example Response:
@@ -155,9 +157,10 @@ Example Response:
 }
 ```
 
-#### ZIP with multiple XMLs
+#### ZIP with Multiple XMLs
 
-Request: POST to https://buildingsync.net/api/validate
+**Request**: POST to `https://buildingsync.net/api/validate`
+
 Use form-data to specify the following parameters for schema version and XML file: `schema_version` and `file`.
 
 Example Response:
@@ -238,33 +241,35 @@ To parse and map a new BEDES version:
 
 1. Download the `bedes_online_dictionary_uuid-lo.xml` and the `bedes_online_dictionary_uuid-terms.xml` files from the BEDES website.
 
-1. Place these new BEDES XMLs in the lib/bedes/vX.X directory. vX.X refers to the BEDES version here.
+2. Place these new BEDES XMLs in the `lib/bedes/vX.X` directory. `vX.X` refers to the BEDES version here.
 
-1. Parse the BEDES XMLs into a JSON file and map the BEDES terms to the BuildingSync attributes:
+3. Parse the BEDES XMLs into a JSON file and map the BEDES terms to the BuildingSync attributes:
 
    ```bash
    docker exec -it buildingsync-website-web-1 bash
    python manage.py bedes --schema_version=X.X.X --bedes_version=X.X
    ```
 
-   Note that the bedes_version contains a `v`, ex: v2.2.
-   This will create a bedes_vX.X.json`file in the lib/bedes/vX.X directory. It will also create 2 CSV files:`bedes-mappings-enumerations.csv`and`bedes-mappings-terms.csv` in the lib/bedes/vX.X/schemaX.X directory.
+   Note that the `bedes_version` contains a `v`, ex: `v2.2`.
+   This will create a `bedes_vX.X.json` file in the `lib/bedes/vX.X` directory. It will also create 2 CSV files: `bedes-mappings-enumerations.csv` and `bedes-mappings-terms.csv` in the `lib/bedes/vX.X/schemaX.X` directory.
 
-   _Note_ &mdash; The BEDES terms must be mapped for each version of the BuildingSync schema by calling the python manage.py bedes` command above.
+   **Note**: The BEDES terms must be mapped for each version of the BuildingSync schema by calling the `python manage.py bedes` command above.
 
-1. Copy the generated bedes files to the git repo on the production server. The command will be something like:
+4. Copy the generated bedes files to the git repo on the production server. The command will be something like:
 
-   ```
+   ```bash
    docker cp buildingsync-website-web-1:/srv/buildingsync-website/bsyncviewer/lib/bedes/v2.5/schema2.5.0 .
    ```
 
-1. Review these mapping files and make changes as needed. Commit and push the files to the BuildingSync-website repository (ideally a branch).
+5. Review these mapping files and make changes as needed. Commit and push the files to the BuildingSync-website repository (ideally a branch).
 
-1. Once satisfied with the mappings, run the same command with the --save_to_db flag:
+6. Once satisfied with the mappings, run the same command with the `--save_to_db` flag:
+
    ```bash
    python manage.py bedes --schema_version=X.X.X --bedes_version=X.X --save_to_db
    ```
-   Note that you must run this command without the --save_to_db flag first, in order to create the CSV files.
+
+   Note that you must run this command without the `--save_to_db` flag first, in order to create the CSV files.
 
 ### Admin Interface
 
@@ -284,7 +289,7 @@ Follow these steps to add a new schema version to the selection tool:
 7. Create PR and merge with the changes.
 8. Reparse BEDES terms to map them to the new schema following the steps in the BEDES section above.
 9. Deploy website on production.
-10. If needed, update CHANGELOG and create PR from develop to main for new release of this site (see [release_instructions.md](docs/release_instructions.md)).
+10. If needed, update CHANGELOG and create PR from develop to main for new release of this site (see [Release Instructions](docs/release_instructions.md)).
 
 ### Adding Examples from the TestSuite repo
 
@@ -299,24 +304,29 @@ Follow these steps to add new example tables from the TestSuite repo
 ### Adding an OpenStudio Simulation Use Case from the TestSuite repo
 
 1. The relevant files are currently on the `develop` branch of the [TestSuite](https://github.com/BuildingSync/TestSuite/tree/develop) repo. Clone the repo locally.
-1. OpenStudio Simulation use case schematron files include patterns from a [library of schematron files](https://github.com/BuildingSync/TestSuite/tree/develop/lib). Copy these files from the TestSuite repo into the selection-tool at the following location: `bsyncviewer/testsuitelib`.
-1. Open the relevant use case file from the TestSuite repo. For example: [L00_OpenStudio_Simulation.sch](https://github.com/BuildingSync/TestSuite/blob/develop/schematron/v2.2.0/v2-2-0_L000_OpenStudio_Simulation.sch). Edit the include statements at the top of the file with relative paths to the buildingsync-website testsuitelib directory. Save the file.
-  
-   ```bash
-     <include href="../../testsuitelib/rootElements.sch#root.oneOfEachUntilBuilding"/>
-     <include href="../../testsuitelib/rootElements.sch#root.oneOfEachFacilityUntilScenario"/>
-     <include href="../../testsuitelib/siteBuildingElements.sch#sbe.cityStateOrClimateZone"/>
-     <include href="../../testsuitelib/scenarioElements.sch#sc.baseline.ID"/>
-     <include href="../../testsuitelib/scenarioElements.sch#sc.baseline.asPackageOfMeasures"/>
-     <include href="../../testsuitelib/buildingElements.sch#be.L000BuildingInfo"/>
-     <include href="../../testsuitelib/floorElements.sch#fa.oneOfType"/>
-     <include href="../../testsuitelib/floorElements.sch#fa.haveTypeAndValue"/>
+
+2. OpenStudio Simulation use case schematron files include patterns from a [library of schematron files](https://github.com/BuildingSync/TestSuite/tree/develop/lib). Copy these files from the TestSuite repo into the selection-tool at the following location: `bsyncviewer/testsuitelib`.
+
+3. Open the relevant use case file from the TestSuite repo. For example: [L00_OpenStudio_Simulation.sch](https://github.com/BuildingSync/TestSuite/blob/develop/schematron/v2.2.0/v2-2-0_L000_OpenStudio_Simulation.sch). Edit the include statements at the top of the file with relative paths to the buildingsync-website testsuitelib directory. Save the file.
+
+   ```xml
+   <include href="../../testsuitelib/rootElements.sch#root.oneOfEachUntilBuilding"/>
+   <include href="../../testsuitelib/rootElements.sch#root.oneOfEachFacilityUntilScenario"/>
+   <include href="../../testsuitelib/siteBuildingElements.sch#sbe.cityStateOrClimateZone"/>
+   <include href="../../testsuitelib/scenarioElements.sch#sc.baseline.ID"/>
+   <include href="../../testsuitelib/scenarioElements.sch#sc.baseline.asPackageOfMeasures"/>
+   <include href="../../testsuitelib/buildingElements.sch#be.L000BuildingInfo"/>
+   <include href="../../testsuitelib/floorElements.sch#fa.oneOfType"/>
+   <include href="../../testsuitelib/floorElements.sch#fa.haveTypeAndValue"/>
    ```
-   
-2. Add the use case to the selection-tool by browsing to the `/use_cases` URL and clicking the _New Use Case_ button.
+
+4. Add the use case to the selection-tool by browsing to the `/use_cases` URL and clicking the _New Use Case_ button.
    1. Fill out the name, description, and schema version
    2. Upload the file that was modified in the previous step
    3. Save
-3. Make the use case public from the selection-tool admin interface.
-4. If you have any example files to add to the selection-tool (for example, for the L000 OpenStudio Simulation use case, there are [2 examples files](https://github.com/BuildingSync/TestSuite/tree/develop/spec/use_cases/schema2.0.0/examples)), add them in the appropriate schema directory in `bsyncviewer/lib/validator/examples`. Regenerate the `example_files.zip` archive. This will make the files available as examples at the `/validator` URL.
-5. You can now validate XMLs against the new use case.
+
+5. Make the use case public from the selection-tool admin interface.
+
+6. If you have any example files to add to the selection-tool (for example, for the L000 OpenStudio Simulation use case, there are [2 examples files](https://github.com/BuildingSync/TestSuite/tree/develop/spec/use_cases/schema2.0.0/examples)), add them in the appropriate schema directory in `bsyncviewer/lib/validator/examples`. Regenerate the `example_files.zip` archive. This will make the files available as examples at the `/validator` URL.
+
+7. You can now validate XMLs against the new use case.
