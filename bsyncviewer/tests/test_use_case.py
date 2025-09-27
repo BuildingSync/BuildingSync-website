@@ -7,7 +7,7 @@ from bsyncviewer.models.schema import Schema
 from bsyncviewer.models.use_case import UseCase
 
 # Use a custom version that is not an actual version to prevent overwriting saved BEDES mappings
-TEST_SCHEMA_VERSION = '0.0.1'
+TEST_SCHEMA_VERSION = "0.0.1"
 
 
 class TestUseCase(TestCase):
@@ -16,28 +16,25 @@ class TestUseCase(TestCase):
         if not self.schema:
             # add schema file - make sure to create a copy since the version will be deleted if
             # the schema is deleted
-            sf = os.path.join(os.path.dirname(__file__), 'data', 'test_schema.xsd')
-            file = open(sf, 'rb')
+            sf = os.path.join(os.path.dirname(__file__), "data", "test_schema.xsd")
+            file = open(sf, "rb")
             simple_uploaded_file = SimpleUploadedFile(file.name, file.read())
 
             self.schema = Schema(
-                name='Version {}'.format(TEST_SCHEMA_VERSION),
+                name="Version {}".format(TEST_SCHEMA_VERSION),
                 version=TEST_SCHEMA_VERSION,
-                schema_file=simple_uploaded_file
+                schema_file=simple_uploaded_file,
             )
             self.schema.save()  # Calling save also processes the schema and generates the template
 
         # create 1 use case without a use case file
-        self.usecase = UseCase(
-            name='Test Use Case',
-            schema=self.schema
-        )
+        self.usecase = UseCase(name="Test Use Case", schema=self.schema)
         self.usecase.save()  # Calling save also processes the schema and generates the template
 
     def add_usecase(self):
         # add file and save
-        usf = os.path.join(os.path.dirname(__file__), 'data', 'test_use_case.sch')
-        file = open(usf, 'rb')
+        usf = os.path.join(os.path.dirname(__file__), "data", "test_use_case.sch")
+        file = open(usf, "rb")
         simple_uploaded_file = SimpleUploadedFile(file.name, file.read())
 
         # save to model
@@ -51,9 +48,9 @@ class TestUseCase(TestCase):
     def test_add_usecase_file_then_delete(self):
         self.add_usecase()
         # then check that file has a path
-        self.assertTrue(self.usecase.import_file.path != '')
+        self.assertTrue(self.usecase.import_file.path != "")
 
-        print('usecase saved filename: {}'.format(self.usecase.import_file.path))
+        print("usecase saved filename: {}".format(self.usecase.import_file.path))
 
         self.delete_usecase()
         self.assertFalse(os.path.exists(self.saved_file_path))

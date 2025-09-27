@@ -301,7 +301,7 @@ Follow these steps to add new example tables from the TestSuite repo
 1. The relevant files are currently on the `develop` branch of the [TestSuite](https://github.com/BuildingSync/TestSuite/tree/develop) repo. Clone the repo locally.
 1. OpenStudio Simulation use case schematron files include patterns from a [library of schematron files](https://github.com/BuildingSync/TestSuite/tree/develop/lib). Copy these files from the TestSuite repo into the selection-tool at the following location: `bsyncviewer/testsuitelib`.
 1. Open the relevant use case file from the TestSuite repo. For example: [L00_OpenStudio_Simulation.sch](https://github.com/BuildingSync/TestSuite/blob/develop/schematron/v2.2.0/v2-2-0_L000_OpenStudio_Simulation.sch). Edit the include statements at the top of the file with relative paths to the buildingsync-website testsuitelib directory. Save the file.
-  
+
    ```bash
      <include href="../../testsuitelib/rootElements.sch#root.oneOfEachUntilBuilding"/>
      <include href="../../testsuitelib/rootElements.sch#root.oneOfEachFacilityUntilScenario"/>
@@ -312,11 +312,11 @@ Follow these steps to add new example tables from the TestSuite repo
      <include href="../../testsuitelib/floorElements.sch#fa.oneOfType"/>
      <include href="../../testsuitelib/floorElements.sch#fa.haveTypeAndValue"/>
    ```
-   
-2. Add the use case to the selection-tool by browsing to the `/use_cases` URL and clicking the _New Use Case_ button.
+
+1. Add the use case to the selection-tool by browsing to the `/use_cases` URL and clicking the _New Use Case_ button.
    1. Fill out the name, description, and schema version
    2. Upload the file that was modified in the previous step
    3. Save
-3. Make the use case public from the selection-tool admin interface.
-4. If you have any example files to add to the selection-tool (for example, for the L000 OpenStudio Simulation use case, there are [2 examples files](https://github.com/BuildingSync/TestSuite/tree/develop/spec/use_cases/schema2.0.0/examples)), add them in the appropriate schema directory in `bsyncviewer/lib/validator/examples`. Regenerate the `example_files.zip` archive. This will make the files available as examples at the `/validator` URL.
-5. You can now validate XMLs against the new use case.
+1. Make the use case public from the selection-tool admin interface.
+1. If you have any example files to add to the selection-tool (for example, for the L000 OpenStudio Simulation use case, there are [2 examples files](https://github.com/BuildingSync/TestSuite/tree/develop/spec/use_cases/schema2.0.0/examples)), add them in the appropriate schema directory in `bsyncviewer/lib/validator/examples`. Regenerate the `example_files.zip` archive. This will make the files available as examples at the `/validator` URL.
+1. You can now validate XMLs against the new use case.

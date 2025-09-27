@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('bsyncviewer', '0010_schema_enumerations_file'),
+        ("bsyncviewer", "0010_schema_enumerations_file"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='bedesenumeration',
-            name='term',
+            model_name="bedesenumeration",
+            name="term",
             field=models.CharField(max_length=100),
         ),
     ]

@@ -16,8 +16,8 @@ class BedesTerm(models.Model):
 
 # Bedes Term Mapping to Attribute
 class BedesMapping(models.Model):
-    attribute = models.ForeignKey('Attribute', on_delete=models.CASCADE, db_index=True)
-    bedesTerm = models.ForeignKey('BedesTerm', on_delete=models.CASCADE, db_index=True)
+    attribute = models.ForeignKey("Attribute", on_delete=models.CASCADE, db_index=True)
+    bedesTerm = models.ForeignKey("BedesTerm", on_delete=models.CASCADE, db_index=True)
     match_type = models.CharField(max_length=255, null=True)
 
 
@@ -32,5 +32,9 @@ class BedesEnumeration(models.Model):
 
 # Bedes Enumeration Mapping to Attribute Enumeration
 class BedesEnumerationMapping(models.Model):
-    enumeration = models.ForeignKey('Enumeration', on_delete=models.CASCADE, db_index=True)
-    bedesEnumeration = models.ForeignKey('BedesEnumeration', on_delete=models.CASCADE, db_index=True)
+    enumeration = models.ForeignKey(
+        "Enumeration", on_delete=models.CASCADE, db_index=True
+    )
+    bedesEnumeration = models.ForeignKey(
+        "BedesEnumeration", on_delete=models.CASCADE, db_index=True
+    )

@@ -11,9 +11,15 @@ class UseCase(models.Model):
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=100, default="Use Case Name")
     description = models.TextField()
-    schema = models.ForeignKey('Schema', on_delete=models.CASCADE, db_index=True)
+    schema = models.ForeignKey("Schema", on_delete=models.CASCADE, db_index=True)
     make_public = models.BooleanField(default=False)
-    import_file = models.FileField(upload_to='usecase_mappings/', null=True, blank=True, validators=[FileExtensionValidator(allowed_extensions=['sch'])], help_text="This should be a Schematron file defining the use case")
+    import_file = models.FileField(
+        upload_to="usecase_mappings/",
+        null=True,
+        blank=True,
+        validators=[FileExtensionValidator(allowed_extensions=["sch"])],
+        help_text="This should be a Schematron file defining the use case",
+    )
 
     def __str__(self):
         return self.name
