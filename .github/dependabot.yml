@@ -12,6 +12,11 @@ updates:
     open-pull-requests-limit: 5
     commit-message:
       prefix: "deps"
+    ignore:
+      - dependency-name: "django"
+      - dependency-name: "djangorestframework"
+      - dependency-name: "djangorestframework-xml"
+      - dependency-name: "django-bootstrap4"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -23,4 +28,3 @@ updates:
     open-pull-requests-limit: 5
     commit-message:
       prefix: "ci"
-
