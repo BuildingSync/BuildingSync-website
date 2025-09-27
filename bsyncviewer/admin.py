@@ -13,11 +13,11 @@ from .models.use_case import UseCase
 class SchemaForm(forms.ModelForm):
     class Meta:
         model = Schema
-        fields = '__all__'
+        fields = "__all__"
 
     # validate that schema version is valid semantic version
     def clean(self):
-        version = self.cleaned_data.get('version')
+        version = self.cleaned_data.get("version")
 
         if not semantic_version.validate(version):
             raise forms.ValidationError("Version must be a valid semantic version")
@@ -30,15 +30,22 @@ class SchemaAdmin(admin.ModelAdmin):
 
 
 class UseCaseAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'owner', 'schema', 'import_file', 'make_public')
+    list_display = (
+        "name",
+        "description",
+        "owner",
+        "schema",
+        "import_file",
+        "make_public",
+    )
 
 
 class MyAdminSite(AdminSite):
     site_header = "BuildingSync Schema Viewer"
-    site_title = 'BuildingSync Schema Viewer'
+    site_title = "BuildingSync Schema Viewer"
 
 
-admin_site = MyAdminSite(name='admin')
+admin_site = MyAdminSite(name="admin")
 admin_site.register(Schema, SchemaAdmin)
 admin_site.register(Attribute)
 admin_site.register(UseCase, UseCaseAdmin)

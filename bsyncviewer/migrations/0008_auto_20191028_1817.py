@@ -4,74 +4,73 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('bsyncviewer', '0007_auto_20190507_0310'),
+        ("bsyncviewer", "0007_auto_20190507_0310"),
     ]
 
     operations = [
         migrations.AlterUniqueTogether(
-            name='usecaseattribute',
+            name="usecaseattribute",
             unique_together=set(),
         ),
         migrations.RemoveField(
-            model_name='usecaseattribute',
-            name='attribute',
+            model_name="usecaseattribute",
+            name="attribute",
         ),
         migrations.RemoveField(
-            model_name='usecaseattribute',
-            name='use_case',
+            model_name="usecaseattribute",
+            name="use_case",
         ),
         migrations.AlterUniqueTogether(
-            name='usecaseattributeenumeration',
+            name="usecaseattributeenumeration",
             unique_together=set(),
         ),
         migrations.RemoveField(
-            model_name='usecaseattributeenumeration',
-            name='use_case_attribute',
+            model_name="usecaseattributeenumeration",
+            name="use_case_attribute",
         ),
         migrations.RemoveField(
-            model_name='usecaserequiredpairedelement',
-            name='paired_attribute',
+            model_name="usecaserequiredpairedelement",
+            name="paired_attribute",
         ),
         migrations.RemoveField(
-            model_name='usecaserequiredpairedelement',
-            name='use_case_attribute',
+            model_name="usecaserequiredpairedelement",
+            name="use_case_attribute",
         ),
         migrations.RemoveField(
-            model_name='usecaseudf',
-            name='associated_field',
+            model_name="usecaseudf",
+            name="associated_field",
         ),
         migrations.RemoveField(
-            model_name='usecaseudf',
-            name='use_case_attribute',
+            model_name="usecaseudf",
+            name="use_case_attribute",
         ),
         migrations.RemoveField(
-            model_name='schema',
-            name='usecase_template_file',
+            model_name="schema",
+            name="usecase_template_file",
         ),
         migrations.RemoveField(
-            model_name='usecase',
-            name='attributes',
+            model_name="usecase",
+            name="attributes",
         ),
         migrations.RemoveField(
-            model_name='usecase',
-            name='parsing_errors',
+            model_name="usecase",
+            name="parsing_errors",
         ),
         migrations.RemoveField(
-            model_name='usecase',
-            name='usecase_parsed',
+            model_name="usecase",
+            name="usecase_parsed",
         ),
         migrations.DeleteModel(
-            name='UseCaseAttribute',
+            name="UseCaseAttribute",
         ),
         migrations.DeleteModel(
-            name='UseCaseAttributeEnumeration',
+            name="UseCaseAttributeEnumeration",
         ),
         migrations.DeleteModel(
-            name='UseCaseRequiredPairedElement',
+            name="UseCaseRequiredPairedElement",
         ),
         migrations.DeleteModel(
-            name='UseCaseUDF',
+            name="UseCaseUDF",
         ),
     ]

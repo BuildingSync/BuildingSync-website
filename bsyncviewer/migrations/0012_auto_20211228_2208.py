@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('bsyncviewer', '0011_auto_20211228_1904'),
+        ("bsyncviewer", "0011_auto_20211228_1904"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='bedesterm',
-            name='term',
+            model_name="bedesterm",
+            name="term",
             field=models.CharField(max_length=100),
         ),
     ]

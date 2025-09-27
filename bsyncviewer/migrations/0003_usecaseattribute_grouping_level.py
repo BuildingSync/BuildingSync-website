@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('bsyncviewer', '0002_auto_20190501_2038'),
+        ("bsyncviewer", "0002_auto_20190501_2038"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='usecaseattribute',
-            name='grouping_level',
-            field=models.CharField(default='', max_length=500),
+            model_name="usecaseattribute",
+            name="grouping_level",
+            field=models.CharField(default="", max_length=500),
         ),
     ]

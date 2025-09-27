@@ -6,7 +6,7 @@ class Attribute(models.Model):
     description = models.CharField(max_length=15000, null=True, default=None)
     type = models.CharField(max_length=100, default="<unknown_type>")
     schema = models.ForeignKey(
-        'Schema', on_delete=models.CASCADE, related_name="attributes", db_index=True
+        "Schema", on_delete=models.CASCADE, related_name="attributes", db_index=True
     )
     parent = models.CharField(max_length=250, null=True)
     tree_level = models.IntegerField()
@@ -14,8 +14,10 @@ class Attribute(models.Model):
     #     verbose_name="For a given schema, this is the linear index in the tree list", default=0
     # )
     # There should only ever be one enumeration_class on an attribute
-    enumeration_classes = models.ManyToManyField('EnumerationClass', through='AttributeEnumerationClass')
+    enumeration_classes = models.ManyToManyField(
+        "EnumerationClass", through="AttributeEnumerationClass"
+    )
     path = models.CharField(max_length=500, default="")
 
     def __str__(self):
-        return '- ' * self.tree_level + self.name
+        return "- " * self.tree_level + self.name
