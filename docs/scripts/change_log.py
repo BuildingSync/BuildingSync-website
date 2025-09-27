@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Instructions:
 #   Get a token from github's settings (https://github.com/settings/tokens)
 #   Install github3 using pip (pip install --pre github3.py)
