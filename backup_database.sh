@@ -11,14 +11,6 @@
 DB_NAME=$1
 DB_USERNAME=$2
 
-function file_name(){
-    echo ${BACKUP_DIR}/${DB_NAME}_$(date '+%Y%m%d_%H%M%S').dump
-}
-
-function media_file_name(){
-    echo /backup/dir/${DB_NAME}_media_$(date '+%Y%m%d_%H%M%S').tgz
-}
-
 if [[ (-z ${DB_NAME}) || (-z ${DB_USERNAME}) ]] ; then
     echo "Expecting command to be of form ./backup_database.sh <db_name> <db_username>"
     exit 1
