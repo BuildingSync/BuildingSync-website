@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+
 # This backup script creates nightly database and media file backups of the BuildingSync website when running
 # in a docker container. The name of the container running the database is hardcoded to look for
 # *db-postgres*. This may cause an issue if several docker applications are running on the same
@@ -8,8 +10,17 @@
 # To create nightly backups, add the following to your crontab
 # 0 0 * * * /srv/buildingsync-website/backup_database.sh <db_name> <db_username> >> /home/ubuntu/buildingsync-website-backups/cron.log 2>&1
 
+# Test with the crontab entry -- should run every minute
+# * * * * * /srv/buildingsync-website/backup_database.sh  buildingsync-website buildingsync-website >> /home/ubuntu/buildingsync-website-backups/cron.log 2>&1
+
+# Source environment variables if the file exists, will read in s3_bucket and PWs as needed
+if [ -f /etc/profile.d/buildingsync.sh ]; then
+    source /etc/profile.d/buildingsync.sh
+fi
+
 DB_NAME=$1
 DB_USERNAME=$2
+S3_BUCKET=${S3_BUCKET:-"nrel-aws-buildings-backups"}
 
 if [[ (-z ${DB_NAME}) || (-z ${DB_USERNAME}) ]] ; then
     echo "Expecting command to be of form ./backup_database.sh <db_name> <db_username>"
