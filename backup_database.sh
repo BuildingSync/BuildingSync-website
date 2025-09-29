@@ -60,8 +60,8 @@ MEDIA_BACKUP_BASENAME=$(basename "$MEDIA_BACKUP_FILE")
 # Run as the current user to avoid ownership issues, ubuntu:ubuntu
 CURRENT_UID=$(id -u)
 CURRENT_GID=$(id -g)
-echo "docker run --rm --user $CURRENT_UID:$CURRENT_GID -v buildingsync_media:/backup/media -v $BACKUP_DIR:/backup/dir/ alpine:3.8 tar zcvf /backup/dir/$MEDIA_BACKUP_BASENAME /backup/media"
-docker run --rm --user $CURRENT_UID:$CURRENT_GID -v buildingsync_media:/backup/media -v $BACKUP_DIR:/backup/dir/ alpine:3.8 tar zcvf /backup/dir/$MEDIA_BACKUP_BASENAME /backup/media
+echo "docker run --rm --user $CURRENT_UID:$CURRENT_GID -v buildingsync_media:/backup/media -v $BACKUP_DIR:/backup/dir/ alpine:3.19 tar zcvf /backup/dir/$MEDIA_BACKUP_BASENAME /backup/media"
+docker run --rm --user $CURRENT_UID:$CURRENT_GID -v buildingsync_media:/backup/media -v $BACKUP_DIR:/backup/dir/ alpine:3.19 tar zcvf /backup/dir/$MEDIA_BACKUP_BASENAME /backup/media
 
 # Delete files older than 30 days.
 find ${BACKUP_DIR} -mtime +30 -type f -name '*.dump' -delete
