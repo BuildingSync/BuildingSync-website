@@ -24,14 +24,20 @@ if [[ (-z ${DB_NAME}) || (-z ${DB_USERNAME}) ]] ; then
     exit 1
 fi
 
+if [ -z ${S3_BUCKET} ]; then
+    echo "S3_BUCKET is not set"
+    echo "[ERROR]-S3_BUCKET-not-configured"
+    exit 1
+fi
+
 # currently the backup directory is hard coded
 BACKUP_DIR=/home/ubuntu/buildingsync-website-backups
 mkdir -p ${BACKUP_DIR}
 
 # db_password is set from the environment variables in docker-compose. The docker stack must
 # be running for this command to work.
-echo "docker exec $(docker ps -f "name=buildingsyncwebsite_db-postgres" --format "{{.ID}}") pg_dump -U ${DB_USERNAME} -Fc ${DB_NAME} > $(file_name)"
-docker exec $(docker ps -f "name=buildingsyncwebsite_db-postgres" --format "{{.ID}}") pg_dump -U ${DB_USERNAME} -Fc ${DB_NAME} > $(file_name)
+echo "docker exec $(docker ps -f "name=buildingsync-website-db-postgres-1" --format "{{.ID}}") pg_dump -U ${DB_USERNAME} -Fc ${DB_NAME} > $(file_name)"
+docker exec $(docker ps -f "name=buildingsync-website-db-postgres-1" --format "{{.ID}}") pg_dump -U ${DB_USERNAME} -Fc ${DB_NAME} > $(file_name)
 
 # Backup the media directory (uploads, especially buildingsync). In docker-land this is
 # just a container volume, so create a new container with the volume attached and tar it up.
@@ -41,3 +47,32 @@ docker run --rm -v buildingsync_media:/backup/media -v $BACKUP_DIR:/backup/dir/ 
 # Delete files older than 30 days.
 find ${BACKUP_DIR} -mtime +30 -type f -name '*.dump' -delete
 find ${BACKUP_DIR} -mtime +30 -type f -name '*.tgz' -delete
+
+# upload to s3
+
+for file in $BACKUP_DIR/*.dump
+do
+  echo "Backing up $file to $S3_BUCKET/$RUN_DATE/"
+  if [ ! -s $file ]; then
+    # the file is empty, send an error
+    echo "[ERROR]-PostgreSQL-backup-file-was-empty-or-missing"
+  else
+    # can't pass spaces to slack notifications, for now
+    aws s3 cp $file $S3_BUCKET/$RUN_DATE/
+    echo "[SUCCESS]-PostgreSQL-uploaded-to-$S3_BUCKET/$RUN_DATE/$(basename $file)"
+  fi
+done
+
+for file in $BACKUP_DIR/*.tgz
+do
+  echo "Backing up $file $S3_BUCKET/$RUN_DATE/"
+
+  if [ ! -s $file ]; then
+    # the file is empty, send an error
+    echo "[ERROR]-Mediadata-backup-file-was-empty-or-missing"
+  else
+    # can't pass spaces to slack notifications, for now
+    aws s3 cp $file $S3_BUCKET/$RUN_DATE/
+    echo "[SUCCESSs]-Mediadata-uploaded-to-$S3_BUCKET/$RUN_DATE/$(basename $file)"
+  fi
+done
