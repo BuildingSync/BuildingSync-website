@@ -30,12 +30,20 @@ if [ -z ${S3_BUCKET} ]; then
     exit 1
 fi
 
-# get the run date to save as the s3 folder name
-RUN_DATE=$(date +%Y-%m-%d)
-
 # currently the backup directory is hard coded
 BACKUP_DIR=/home/ubuntu/buildingsync-website-backups
 mkdir -p ${BACKUP_DIR}
+
+# get the run date to save as the s3 folder name
+RUN_DATE=$(date +%Y-%m-%d)
+
+function file_name(){
+    echo ${BACKUP_DIR}/${DB_NAME}_$(date '+%Y%m%d_%H%M%S').dump
+}
+
+function media_file_name(){
+    echo ${BACKUP_DIR}/${DB_NAME}_media_$(date '+%Y%m%d_%H%M%S').tgz
+}
 
 # db_password is set from the environment variables in docker-compose. The docker stack must
 # be running for this command to work.
