@@ -30,6 +30,9 @@ if [ -z ${S3_BUCKET} ]; then
     exit 1
 fi
 
+# get the run date to save as the s3 folder name
+RUN_DATE=$(date +%Y-%m-%d)
+
 # currently the backup directory is hard coded
 BACKUP_DIR=/home/ubuntu/buildingsync-website-backups
 mkdir -p ${BACKUP_DIR}
@@ -52,20 +55,20 @@ find ${BACKUP_DIR} -mtime +30 -type f -name '*.tgz' -delete
 
 for file in $BACKUP_DIR/*.dump
 do
-  echo "Backing up $file to $S3_BUCKET/$RUN_DATE/"
+  echo "Backing up $file to $S3_BUCKET/buildingsync-website/$RUN_DATE/"
   if [ ! -s $file ]; then
     # the file is empty, send an error
     echo "[ERROR]-PostgreSQL-backup-file-was-empty-or-missing"
   else
     # can't pass spaces to slack notifications, for now
     aws s3 cp $file $S3_BUCKET/$RUN_DATE/
-    echo "[SUCCESS]-PostgreSQL-uploaded-to-$S3_BUCKET/$RUN_DATE/$(basename $file)"
+    echo "[SUCCESS]-PostgreSQL-uploaded-to-$S3_BUCKET/buildingsync-website/$RUN_DATE/$(basename $file)"
   fi
 done
 
 for file in $BACKUP_DIR/*.tgz
 do
-  echo "Backing up $file $S3_BUCKET/$RUN_DATE/"
+  echo "Backing up $file to $S3_BUCKET/buildingsync-website/$RUN_DATE/"
 
   if [ ! -s $file ]; then
     # the file is empty, send an error
@@ -73,6 +76,6 @@ do
   else
     # can't pass spaces to slack notifications, for now
     aws s3 cp $file $S3_BUCKET/$RUN_DATE/
-    echo "[SUCCESSs]-Mediadata-uploaded-to-$S3_BUCKET/$RUN_DATE/$(basename $file)"
+    echo "[SUCCESSs]-Mediadata-uploaded-to-$S3_BUCKET/buildingsync-website/$RUN_DATE/$(basename $file)"
   fi
 done
