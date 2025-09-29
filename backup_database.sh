@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Set PATH for cron compatibility - cron has a very limited PATH
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
+# Set PATH for cron compatibility - cron has a very limited PATH, .local contains AWS CLI
+export PATH="/usr/local/bin:/home/ubuntu/.local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
 
 # This backup script creates nightly database and media file backups of the BuildingSync website when running
 # in a docker container. The name of the container running the database is hardcoded to look for
