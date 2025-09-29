@@ -80,29 +80,29 @@ find ${BACKUP_DIR} -mtime +30 -type f -name '*.dump' -delete
 find ${BACKUP_DIR} -mtime +30 -type f -name '*.tgz' -delete
 
 # upload to s3
-for file in $BACKUP_DIR/*.dump
+for file in "$BACKUP_DIR"/*.dump
 do
   echo "Backing up $file to $S3_BUCKET/buildingsync-website/$RUN_DATE/"
-  if [ ! -s $file ]; then
+  if [ ! -s "$file" ]; then
     # the file is empty, send an error
     echo "[ERROR]-PostgreSQL-backup-file-was-empty-or-missing"
   else
     # can't pass spaces to slack notifications, for now
-    aws s3 cp $file s3://$S3_BUCKET/buildingsync-website/$RUN_DATE/
-    echo "[SUCCESS]-PostgreSQL-uploaded-to-s3://$S3_BUCKET/buildingsync-website/$RUN_DATE/$(basename $file)"
+    aws s3 cp "$file" "s3://$S3_BUCKET/buildingsync-website/$RUN_DATE/"
+    echo "[SUCCESS]-PostgreSQL-uploaded-to-s3://$S3_BUCKET/buildingsync-website/$RUN_DATE/$(basename "$file")"
   fi
 done
 
-for file in $BACKUP_DIR/*.tgz
+for file in "$BACKUP_DIR"/*.tgz
 do
   echo "Backing up $file to $S3_BUCKET/buildingsync-website/$RUN_DATE/"
 
-  if [ ! -s $file ]; then
+  if [ ! -s "$file" ]; then
     # the file is empty, send an error
     echo "[ERROR]-Mediadata-backup-file-was-empty-or-missing"
   else
     # can't pass spaces to slack notifications, for now
-    aws s3 cp $file s3://$S3_BUCKET/buildingsync-website/$RUN_DATE/
-    echo "[SUCCESS]-Mediadata-uploaded-to-s3://$S3_BUCKET/buildingsync-website/$RUN_DATE/$(basename $file)"
+    aws s3 cp "$file" "s3://$S3_BUCKET/buildingsync-website/$RUN_DATE/"
+    echo "[SUCCESS]-Mediadata-uploaded-to-s3://$S3_BUCKET/buildingsync-website/$RUN_DATE/$(basename "$file")"
   fi
 done
