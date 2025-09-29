@@ -1,6 +1,7 @@
 #!/bin/bash
 
-
+# Set PATH for cron compatibility - cron has a very limited PATH
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
 
 # This backup script creates nightly database and media file backups of the BuildingSync website when running
 # in a docker container. The name of the container running the database is hardcoded to look for
@@ -30,6 +31,17 @@ fi
 if [ -z ${S3_BUCKET} ]; then
     echo "S3_BUCKET is not set"
     echo "[ERROR]-S3_BUCKET-not-configured"
+    exit 1
+fi
+
+# Check if AWS CLI is installed
+if ! command -v aws &> /dev/null; then
+    echo "AWS CLI is not installed or not in PATH"
+    echo "[ERROR]-AWS-CLI-not-found"
+    echo "To install AWS CLI:"
+    echo "  curl 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip' -o 'awscliv2.zip'"
+    echo "  unzip awscliv2.zip"
+    echo "  sudo ./aws/install"
     exit 1
 fi
 
