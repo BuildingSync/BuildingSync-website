@@ -57,8 +57,11 @@ docker exec $(docker ps -f "name=buildingsync-website-db-postgres-1" --format "{
 # just a container volume, so create a new container with the volume attached and tar it up.
 MEDIA_BACKUP_FILE=$(media_file_name)
 MEDIA_BACKUP_BASENAME=$(basename "$MEDIA_BACKUP_FILE")
-echo "docker run --rm -v buildingsync_media:/backup/media -v $BACKUP_DIR:/backup/dir/ alpine:3.8 tar zcvf /backup/dir/$MEDIA_BACKUP_BASENAME /backup/media"
-docker run --rm -v buildingsync_media:/backup/media -v $BACKUP_DIR:/backup/dir/ alpine:3.8 tar zcvf /backup/dir/$MEDIA_BACKUP_BASENAME /backup/media
+# Run as the current user to avoid ownership issues, ubuntu:ubuntu
+CURRENT_UID=$(id -u)
+CURRENT_GID=$(id -g)
+echo "docker run --rm --user $CURRENT_UID:$CURRENT_GID -v buildingsync_media:/backup/media -v $BACKUP_DIR:/backup/dir/ alpine:3.8 tar zcvf /backup/dir/$MEDIA_BACKUP_BASENAME /backup/media"
+docker run --rm --user $CURRENT_UID:$CURRENT_GID -v buildingsync_media:/backup/media -v $BACKUP_DIR:/backup/dir/ alpine:3.8 tar zcvf /backup/dir/$MEDIA_BACKUP_BASENAME /backup/media
 
 # Delete files older than 30 days.
 find ${BACKUP_DIR} -mtime +30 -type f -name '*.dump' -delete
