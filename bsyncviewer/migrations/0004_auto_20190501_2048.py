@@ -4,18 +4,17 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('bsyncviewer', '0003_usecaseattribute_grouping_level'),
+        ("bsyncviewer", "0003_usecaseattribute_grouping_level"),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='UseCaseRequiredPairedElements',
-            new_name='UseCaseRequiredPairedElement',
+            old_name="UseCaseRequiredPairedElements",
+            new_name="UseCaseRequiredPairedElement",
         ),
         migrations.RemoveField(
-            model_name='usecaseattribute',
-            name='level',
+            model_name="usecaseattribute",
+            name="level",
         ),
     ]

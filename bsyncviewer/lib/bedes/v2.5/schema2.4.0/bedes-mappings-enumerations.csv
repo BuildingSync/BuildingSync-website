@@ -1,4 +1,4 @@
-﻿enum_name,enum_id,bedes_content_uuid,bedes_term,bedes_definition,bedes_url,bedes_related_term_uuid,distance,associated_attribute_ids,,,,,,,,,,,,,,,,,
+enum_name,enum_id,bedes_content_uuid,bedes_term,bedes_definition,bedes_url,bedes_related_term_uuid,distance,associated_attribute_ids,,,,,,,,,,,,,,,,,
 Audit,42694,4a211e82-1d09-4bfe-9673-17daa35e7a0e,Audit,,https://bedes.lbl.gov/node/4a211e82-1d09-4bfe-9673-17daa35e7a0e,34eba948-b418-4f29-85b0-8f73380c7994,1,54484,,,,,,,,,,,,,,,,,
 Performance,42695,932eed34-90aa-4cda-8b7e-994e9aa2a56e,Performance,,https://bedes.lbl.gov/node/932eed34-90aa-4cda-8b7e-994e9aa2a56e,34eba948-b418-4f29-85b0-8f73380c7994,1,54484,,,,,,,,,,,,,,,,,
 Deemed,42696,f4df0f78-d72b-403f-8ff4-1edd6c0be678,Deemed,,https://bedes.lbl.gov/node/f4df0f78-d72b-403f-8ff4-1edd6c0be678,34eba948-b418-4f29-85b0-8f73380c7994,1,54484,,,,,,,,,,,,,,,,,

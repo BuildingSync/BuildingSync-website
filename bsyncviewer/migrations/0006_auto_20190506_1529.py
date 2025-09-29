@@ -4,23 +4,22 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('bsyncviewer', '0005_auto_20190501_2111'),
+        ("bsyncviewer", "0005_auto_20190501_2111"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='usecaseattributeenumeration',
-            name='enumerationClass',
+            model_name="usecaseattributeenumeration",
+            name="enumerationClass",
         ),
         migrations.RemoveField(
-            model_name='usecaserequiredpairedelement',
-            name='state',
+            model_name="usecaserequiredpairedelement",
+            name="state",
         ),
         migrations.AlterField(
-            model_name='usecaseattributeenumeration',
-            name='enumeration',
-            field=models.CharField(default='', max_length=250),
+            model_name="usecaseattributeenumeration",
+            name="enumeration",
+            field=models.CharField(default="", max_length=250),
         ),
     ]

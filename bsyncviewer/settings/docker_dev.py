@@ -14,4 +14,4 @@ from bsyncviewer.settings.docker import *  # noqa: F401, F403
 
 DEBUG = True
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

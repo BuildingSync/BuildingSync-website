@@ -7,15 +7,16 @@ from django.dispatch import receiver
 
 from bsyncviewer.lib.documentation_generator.generate_docs import (
     generate_docs,
-    get_docs_path
+    get_docs_path,
 )
 from bsyncviewer.lib.schema_parser import process_schema
 
 
 def rename_schema_file(instance, path):
     if instance.version:
-        return '{}buildingsync_v_{}.xsd'.format('uploaded_schemas/',
-                                                instance.version.replace('.', '_'))
+        return "{}buildingsync_v_{}.xsd".format(
+            "uploaded_schemas/", instance.version.replace(".", "_")
+        )
     else:
         pass
 
@@ -23,7 +24,7 @@ def rename_schema_file(instance, path):
 def rename_enumerations_file(instance, path):
     if instance.version:
         formatted_version = instance.version.replace(".", "_")
-        return f'uploaded_schemas/buildingsync_v_{formatted_version}_enumerations.json'
+        return f"uploaded_schemas/buildingsync_v_{formatted_version}_enumerations.json"
     else:
         pass
 
@@ -33,11 +34,14 @@ class Schema(models.Model):
     name = models.CharField(max_length=100, default="1.0.0", unique=True)
     version = models.CharField(max_length=100, default="1.0.0", unique=True, null=False)
     schema_file = models.FileField(upload_to=rename_schema_file, null=True)
-    schema_parsed = models.BooleanField(default=False,
-                                        help_text="Leave blank. This will be auto-populated.")
-    enumerations_file = models.FileField(upload_to=rename_enumerations_file,
-                                         null=True,
-                                         help_text='The enumerations JSON file built in the BuildingSync/schema repository which includes terms and measures.')
+    schema_parsed = models.BooleanField(
+        default=False, help_text="Leave blank. This will be auto-populated."
+    )
+    enumerations_file = models.FileField(
+        upload_to=rename_enumerations_file,
+        null=True,
+        help_text="The enumerations JSON file built in the BuildingSync/schema repository which includes terms and measures.",
+    )
 
     def __str__(self):
         return self.name

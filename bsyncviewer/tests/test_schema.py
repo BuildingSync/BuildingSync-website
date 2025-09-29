@@ -8,19 +8,19 @@ from bsyncviewer.lib.tree_viewer import get_schema_jstree_data
 from bsyncviewer.models.schema import Schema
 
 # Use a custom version that is not an actual version to prevent overwriting saved BEDES mappings
-TEST_SCHEMA_VERSION = '0.0.1'
+TEST_SCHEMA_VERSION = "0.0.1"
 
 
 class TestSchema(TestCase):
     def setUp(self):
-        sf = os.path.join(os.path.dirname(__file__), 'data', 'test_schema.xsd')
-        file = open(sf, 'rb')
+        sf = os.path.join(os.path.dirname(__file__), "data", "test_schema.xsd")
+        file = open(sf, "rb")
         simple_uploaded_file = SimpleUploadedFile(file.name, file.read())
 
         self.schema = Schema(
-            name='Version {}'.format(TEST_SCHEMA_VERSION),
+            name="Version {}".format(TEST_SCHEMA_VERSION),
             version=TEST_SCHEMA_VERSION,
-            schema_file=simple_uploaded_file
+            schema_file=simple_uploaded_file,
         )
         self.schema.save()  # Calling save also processes the schema and generates the template
 
@@ -32,14 +32,14 @@ class TestSchema(TestCase):
 
     def test_enumerations(self):
         # check a couple of the attributes to make sure have enumerations
-        test_path = 'BuildingSync.Facilities.Facility.Sites.Site.ClimateZoneType.ASHRAE.ClimateZone'
+        test_path = "BuildingSync.Facilities.Facility.Sites.Site.ClimateZoneType.ASHRAE.ClimateZone"
 
         attribute = self.schema.attributes.filter(path=test_path).first()
         self.assertIsNotNone(attribute)
         self.assertEqual(attribute.enumeration_classes.count(), 1)
         self.assertEqual(attribute.enumeration_classes.first().enumerations.count(), 17)
         self.assertEqual(
-            attribute.enumeration_classes.first().enumerations.first().name, '1A'
+            attribute.enumeration_classes.first().enumerations.first().name, "1A"
         )
 
     def test_schema_js_tree(self):
@@ -61,7 +61,7 @@ class TestSchema(TestCase):
         # delete schema
         self.schema.delete()
 
-        print('schema filepath: {}'.format(schema_file_path))
+        print("schema filepath: {}".format(schema_file_path))
 
         # assert that physical files were also deleted
         self.assertFalse(os.path.isfile(schema_file_path))

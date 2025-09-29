@@ -3,8 +3,8 @@ from pathlib import Path
 from django.conf import settings
 from lxml import etree
 
-XSL_PATH = Path(__file__).parent / 'xs3p.xsl'
-DEFAULT_DOCS_PATH = Path(settings.MEDIA_ROOT) / 'generated_docs'
+XSL_PATH = Path(__file__).parent / "xs3p.xsl"
+DEFAULT_DOCS_PATH = Path(settings.MEDIA_ROOT) / "generated_docs"
 
 
 def get_docs_path(schema_version):
@@ -14,7 +14,7 @@ def get_docs_path(schema_version):
     :param schema_version: str
     :return: str
     """
-    return str(DEFAULT_DOCS_PATH / f'{schema_version}.html')
+    return str(DEFAULT_DOCS_PATH / f"{schema_version}.html")
 
 
 def generate_docs(schema_path, schema_version, output_path=None):
@@ -35,5 +35,5 @@ def generate_docs(schema_path, schema_version, output_path=None):
     schema_tree = etree.parse(schema_path)
 
     result = xsl_transform(schema_tree)
-    with open(output_path, 'w') as f:
+    with open(output_path, "w") as f:
         f.write(str(result))

@@ -2,7 +2,6 @@ from lxml import etree
 
 
 class ValidationError(Exception):
-
     def __init__(self, msgs=[]):
         if isinstance(msgs, list) or isinstance(msgs, set) or isinstance(msgs, tuple):
             self.messages = list(msgs)
@@ -10,11 +9,10 @@ class ValidationError(Exception):
             self.messages = [msgs]
 
     def __str__(self):
-        return '\n'.join(self.messages)
+        return "\n".join(self.messages)
 
 
 class BaseValidator(object):
-
     def __init__(self):
         self.xml_root = None
 

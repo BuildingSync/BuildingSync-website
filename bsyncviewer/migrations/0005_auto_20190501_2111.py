@@ -5,42 +5,67 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('bsyncviewer', '0004_auto_20190501_2048'),
+        ("bsyncviewer", "0004_auto_20190501_2048"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='UseCaseAttributeEnumeration',
+            name="UseCaseAttributeEnumeration",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('enumeration', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='bsyncviewer.Enumeration')),
-                ('enumerationClass', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='bsyncviewer.EnumerationClass')),
-                ('use_case_attribute', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='bsyncviewer.UseCaseAttribute')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "enumeration",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="bsyncviewer.Enumeration",
+                    ),
+                ),
+                (
+                    "enumerationClass",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="bsyncviewer.EnumerationClass",
+                    ),
+                ),
+                (
+                    "use_case_attribute",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="bsyncviewer.UseCaseAttribute",
+                    ),
+                ),
             ],
         ),
         migrations.AlterUniqueTogether(
-            name='usecaseenumeration',
+            name="usecaseenumeration",
             unique_together=set(),
         ),
         migrations.RemoveField(
-            model_name='usecaseenumeration',
-            name='enumeration',
+            model_name="usecaseenumeration",
+            name="enumeration",
         ),
         migrations.RemoveField(
-            model_name='usecaseenumeration',
-            name='use_case',
+            model_name="usecaseenumeration",
+            name="use_case",
         ),
         migrations.RemoveField(
-            model_name='usecase',
-            name='enumerations',
+            model_name="usecase",
+            name="enumerations",
         ),
         migrations.DeleteModel(
-            name='UseCaseEnumeration',
+            name="UseCaseEnumeration",
         ),
         migrations.AlterUniqueTogether(
-            name='usecaseattributeenumeration',
-            unique_together={('enumeration', 'use_case_attribute')},
+            name="usecaseattributeenumeration",
+            unique_together={("enumeration", "use_case_attribute")},
         ),
     ]
