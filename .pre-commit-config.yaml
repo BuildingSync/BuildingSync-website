@@ -15,7 +15,7 @@ repos:
     hooks:
       - id: check-ast
       - id: check-added-large-files
-        # Increased max file size from 2000KB to 5000KB to accommodate large files from being added.
+        # Increased max file size from 2000KB to 75000KB to accommodate large files from being added (matching nginx config).
         args: ["--maxkb=5000"]
       - id: end-of-file-fixer
       - id: trailing-whitespace
