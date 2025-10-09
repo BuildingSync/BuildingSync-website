@@ -42,6 +42,9 @@ LOGGING = {
 
 DEFAULT_SCHEMA_VERSION = "2.7.0"
 
+# Default primary key field type for Django 3.2+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 with open(
     os.path.join(os.path.dirname(os.path.dirname(__file__)), "../app_version.txt")
 ) as v_file:
