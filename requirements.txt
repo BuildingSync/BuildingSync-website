@@ -3,7 +3,9 @@ django-bootstrap4==3.0.1
 djangorestframework==3.12.4
 djangorestframework-xml==2.0.0
 
-psycopg2-binary==2.9.10
+# Do not upgrade to 2.9.10, which has a build issue with
+# newer setup tools. BUT versions > 2.9.10 might work?
+psycopg2-binary==2.9.7
 
 semantic-version==2.10.0
 stopit==1.1.2
