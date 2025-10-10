@@ -46,11 +46,13 @@ if ! command -v aws &> /dev/null; then
 fi
 
 # currently the backup directory is hard coded
-BACKUP_DIR=/home/ubuntu/buildingsync-website-backups
-mkdir -p ${BACKUP_DIR}
+BACKUP_BASE_DIR=/home/ubuntu/buildingsync-website-backups
+mkdir -p ${BACKUP_BASE_DIR}
 
-# get the run date to save as the s3 folder name
+# get the run date to save as the s3 folder name and create date-specific backup directory
 RUN_DATE=$(date +%Y-%m-%d)
+BACKUP_DIR=${BACKUP_BASE_DIR}/${RUN_DATE}
+mkdir -p ${BACKUP_DIR}
 
 function file_name(){
     echo ${BACKUP_DIR}/${DB_NAME}_$(date '+%Y%m%d_%H%M%S').dump
@@ -75,34 +77,25 @@ CURRENT_GID=$(id -g)
 echo "docker run --rm --user $CURRENT_UID:$CURRENT_GID -v buildingsync_media:/backup/media -v $BACKUP_DIR:/backup/dir/ alpine:3.19 tar zcvf /backup/dir/$MEDIA_BACKUP_BASENAME /backup/media"
 docker run --rm --user $CURRENT_UID:$CURRENT_GID -v buildingsync_media:/backup/media -v $BACKUP_DIR:/backup/dir/ alpine:3.19 tar zcvf /backup/dir/$MEDIA_BACKUP_BASENAME /backup/media
 
-# Delete files older than 30 days.
-find ${BACKUP_DIR} -mtime +30 -type f -name '*.dump' -delete
-find ${BACKUP_DIR} -mtime +30 -type f -name '*.tgz' -delete
+# Delete backup directories older than 30 days
+find ${BACKUP_BASE_DIR} -maxdepth 1 -type d -mtime +30 -name "20*" -exec rm -rf {} \;
 
-# upload to s3
-for file in "$BACKUP_DIR"/*.dump
-do
-  echo "Backing up $file to $S3_BUCKET/buildingsync-website/$RUN_DATE/"
-  if [ ! -s "$file" ]; then
-    # the file is empty, send an error
-    echo "[ERROR]-PostgreSQL-backup-file-was-empty-or-missing"
-  else
-    # can't pass spaces to slack notifications, for now
-    aws s3 cp "$file" "s3://$S3_BUCKET/buildingsync-website/$RUN_DATE/"
-    echo "[SUCCESS]-PostgreSQL-uploaded-to-s3://$S3_BUCKET/buildingsync-website/$RUN_DATE/$(basename "$file")"
-  fi
-done
+# Upload the current date's backup folder to S3 using sync
+echo "Syncing backup folder $BACKUP_DIR to s3://$S3_BUCKET/buildingsync-website/$RUN_DATE/"
 
-for file in "$BACKUP_DIR"/*.tgz
-do
-  echo "Backing up $file to $S3_BUCKET/buildingsync-website/$RUN_DATE/"
+# Check if backup files exist
+if [ ! "$(ls -A $BACKUP_DIR)" ]; then
+    echo "[ERROR]-No backup files were created"
+    exit 1
+fi
 
-  if [ ! -s "$file" ]; then
-    # the file is empty, send an error
-    echo "[ERROR]-Mediadata-backup-file-was-empty-or-missing"
-  else
-    # can't pass spaces to slack notifications, for now
-    aws s3 cp "$file" "s3://$S3_BUCKET/buildingsync-website/$RUN_DATE/"
-    echo "[SUCCESS]-Mediadata-uploaded-to-s3://$S3_BUCKET/buildingsync-website/$RUN_DATE/$(basename "$file")"
-  fi
-done
+# Sync the entire date folder to S3
+aws s3 sync "$BACKUP_DIR" "s3://$S3_BUCKET/buildingsync-website/$RUN_DATE/" --delete
+
+if [ $? -eq 0 ]; then
+    echo "[SUCCESS]-Backup folder synced to s3://$S3_BUCKET/buildingsync-website/$RUN_DATE/"
+    echo "[SUCCESS]-Files uploaded: $(ls -la "$BACKUP_DIR")"
+else
+    echo "[ERROR]-Failed to sync backup folder to S3"
+    exit 1
+fi

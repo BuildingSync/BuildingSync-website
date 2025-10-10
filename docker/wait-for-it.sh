@@ -142,16 +142,9 @@ STRICT=${STRICT:-0}
 CHILD=${CHILD:-0}
 QUIET=${QUIET:-0}
 
-# check to see if timeout is from busybox?
-# check to see if timeout is from busybox?
-TIMEOUT_PATH=$(realpath $(which timeout))
-if [[ $TIMEOUT_PATH =~ "busybox" ]]; then
-        ISBUSY=1
-        BUSYTIMEFLAG="-t"
-else
-        ISBUSY=0
-        BUSYTIMEFLAG=""
-fi
+# Both BusyBox and GNU timeout use the same syntax: timeout SECONDS COMMAND
+BUSYTIMEFLAG=""
+ISBUSY=1
 
 if [[ $CHILD -gt 0 ]]; then
     wait_for
