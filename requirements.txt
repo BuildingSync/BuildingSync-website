@@ -5,7 +5,7 @@ djangorestframework-xml==2.0.0
 
 # Do not upgrade to 2.9.10, which has a build issue with
 # newer setup tools. BUT versions > 2.9.10 might work?
-psycopg2-binary==2.9.7
+psycopg2-binary==2.9.11
 
 semantic-version==2.10.0
 stopit==1.1.2
@@ -13,11 +13,11 @@ xmlschema==4.1.0
 xmltodict==1.0.2
 
 # string matching
-jellyfish==1.2.0
+jellyfish==1.2.1
 
 # schematron runner from TestSuite repo
 # This also sets the version of lxml to use
 testsuite==0.1.5
 
 # production deployment
-uWSGI==2.0.30; sys_platform != "win32"
+uWSGI==2.0.31; sys_platform != "win32"
