@@ -58,7 +58,7 @@ class BuildingSyncSchemaProcessor:
                 path=parent_path + ("." if parent_path else "") + name,
                 type="Named Element",
                 parent_path=parent_path,
-                tree_level=parent_path.count('.') + 1,
+                tree_level=parent_path.count('.'),
             )
         ## if Enumeration
         elif current_element.tag.endswith("enumeration"):
@@ -68,7 +68,7 @@ class BuildingSyncSchemaProcessor:
                 path=parent_path,
                 type="Enumeration",
                 parent_path=parent_path,
-                tree_level=parent_path.count('.') + 1,
+                tree_level=parent_path.count('.'),
             )
         # if Annotation/documentation
         elif current_element.tag.endswith("annotation") or current_element.tag.endswith("documentation"):
@@ -76,7 +76,7 @@ class BuildingSyncSchemaProcessor:
         else:
             # all the other tags dont require an entry, but may have children, types, or references
             # that do, which are handled below. Other tags are: ref, complexType, simpleType,
-            # attribute, annotation, import, sequence, schema, restriction, simpleContent,
+            # attribute, import, sequence, schema, restriction, simpleContent,
             # extension, choice, minInclusive, maxInclusive, pattern, union.
             pass
 
@@ -86,7 +86,7 @@ class BuildingSyncSchemaProcessor:
 
         #  if current_element_entry, add annoatations, add it to entries, and update the path, else, keep trucking 
         if current_element_entry is not None:
-            if current_element_entry and annotation_children:
+            if annotation_children:
                 current_element_entry.description = "\n".join([
                     "\n".join([d.text for d in anno.getchildren()])
                     for anno in annotation_children
@@ -140,9 +140,6 @@ def process_schema(schema_object):
             # skip all the enumerations until after all the types have been added
             if se["type"] == "Enumeration":
                 continue
-
-            # print('----')
-            # print(se)
 
             # add 1 to tree level to account for root
             b = Attribute(
