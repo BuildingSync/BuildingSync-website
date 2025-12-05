@@ -10,7 +10,7 @@ urlcolor: blue
 
 # BuildingSync Onboarding Guide
 
-**National Renewable Energy Laboratory**
+**National Laboratory of the Rockies**
 
 Jie Xiong, Lauren Adams, Alex Swindler, Katherine Fleming, Cory Mosiman, Nicholas Long
 
