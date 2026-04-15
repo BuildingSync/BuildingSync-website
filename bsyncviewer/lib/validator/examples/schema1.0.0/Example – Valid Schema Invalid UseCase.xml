@@ -1,4 +1,4 @@
-<auc:Audits xmlns:auc="http://nrel.gov/schemas/bedes-auc/2014">
+<auc:Audits xmlns:auc="http://nlr.gov/schemas/bedes-auc/2014">
   <auc:Audit ID="Audit-70234559076380">
     <auc:Sites>
       <auc:Site ID="Site-70234398332900">

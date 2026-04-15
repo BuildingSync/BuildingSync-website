@@ -1,5 +1,5 @@
 # VERSION 0.2
-# AUTHOR:           Nicholas Long <nicholas.long@nrel.gov>
+# AUTHOR:           Nicholas Long <nicholas.long@nlr.gov>
 # DESCRIPTION:      Dockerfile for running BuildingSync Website with Python 3.9+
 # TO_BUILD_AND_RUN: docker-compose build && docker-compose up
 FROM alpine:3.18
