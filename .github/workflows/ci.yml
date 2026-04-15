@@ -47,7 +47,7 @@ jobs:
       - name: Run tox
         env:
           DJANGO_SETTINGS_MODULE: bsyncviewer.settings.gh_actions
-        run: tox -e ${{ matrix.tox_env }}
+        run: tox -r -e ${{ matrix.tox_env }}
       - name: Coveralls
         if: ${{ success() && matrix.tox_env == 'python' && matrix.python-version == '3.9' }}
         env:
