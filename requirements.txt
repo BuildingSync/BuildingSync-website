@@ -8,7 +8,6 @@ djangorestframework-xml==2.0.0
 psycopg2-binary==2.9.7
 
 semantic-version==2.10.0
-stopit==1.1.2
 xmlschema==4.1.0
 xmltodict==1.0.2
 

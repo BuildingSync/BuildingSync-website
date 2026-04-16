@@ -1,10 +1,10 @@
 import copy
 from collections import OrderedDict
 
-import stopit
 import xmlschema
 from testsuite.validate_sch import validate_schematron
 
+from bsyncviewer.lib.timeout import ThreadingTimeout, TimeoutException
 from bsyncviewer.models.schema import Schema
 from bsyncviewer.models.use_case import UseCase
 
@@ -49,7 +49,7 @@ class ValidationWorkflow(object):
             resp["schema_version"] = self.schema.version
 
             # timeout "to_dict()" after 5 mins and use the less good method of getting errors
-            with stopit.ThreadingTimeout(300):
+            with ThreadingTimeout(300):
                 try:
                     # this returns all errors
                     self.xml_dict, errors = my_schema.to_dict(
@@ -74,7 +74,7 @@ class ValidationWorkflow(object):
                     }
                     resp["errors"].append(tmp_err)
 
-                except stopit.utils.TimeoutException:
+                except TimeoutException:
                     print(
                         "TIMEOUT EXCEPTION OCCURRED, trying shorter validation method..."
                     )
