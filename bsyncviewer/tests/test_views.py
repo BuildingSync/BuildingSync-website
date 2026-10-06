@@ -4,7 +4,8 @@ from io import StringIO
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management import call_command
-from django.test import Client, TestCase
+from django.template.loader import render_to_string
+from django.test import Client, SimpleTestCase, TestCase, override_settings
 from django.urls import reverse
 
 from bsyncviewer.models.attribute import Attribute
@@ -13,6 +14,35 @@ from bsyncviewer.models.schema import Schema
 
 # Use a custom version that is not an actual version to prevent overwriting saved BEDES mappings
 TEST_SCHEMA_VERSION = "0.0.1"
+
+
+class GoogleAnalyticsTemplateTests(SimpleTestCase):
+    @override_settings(DEBUG=False, GOOGLE_ANALYTICS_MEASUREMENT_ID="G-P8CNFE9GY2")
+    def test_tracking_enabled_in_both_layouts(self):
+        for template_name in ("base.html", "base2.html"):
+            with self.subTest(template_name=template_name):
+                content = render_to_string(template_name)
+                self.assertEqual(
+                    content.count(
+                        "https://www.googletagmanager.com/gtag/js?id=G-P8CNFE9GY2"
+                    ),
+                    1,
+                )
+                self.assertEqual(
+                    content.count("gtag('config', 'G\\u002DP8CNFE9GY2');"), 1
+                )
+
+    @override_settings(DEBUG=True, GOOGLE_ANALYTICS_MEASUREMENT_ID="G-P8CNFE9GY2")
+    def test_tracking_disabled_in_development(self):
+        for template_name in ("base.html", "base2.html"):
+            with self.subTest(template_name=template_name):
+                self.assertNotIn("googletagmanager", render_to_string(template_name))
+
+    @override_settings(DEBUG=False, GOOGLE_ANALYTICS_MEASUREMENT_ID="")
+    def test_tracking_disabled_without_measurement_id(self):
+        for template_name in ("base.html", "base2.html"):
+            with self.subTest(template_name=template_name):
+                self.assertNotIn("googletagmanager", render_to_string(template_name))
 
 
 class BsyncviewerViewTests(TestCase):

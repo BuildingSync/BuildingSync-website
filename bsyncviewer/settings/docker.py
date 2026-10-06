@@ -26,6 +26,10 @@ if SECRET_KEY == "":
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+GOOGLE_ANALYTICS_MEASUREMENT_ID = os.environ.get(
+    "GOOGLE_ANALYTICS_MEASUREMENT_ID", "G-P8CNFE9GY2"
+)
+
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
