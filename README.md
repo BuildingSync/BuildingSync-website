@@ -13,7 +13,8 @@ This is the repository for the BuildingSync Validator web application.
    pyenv virtualenv 3.9.23 bsync-validator-3.9.23
    pyenv local bsync-validator-3.9.23
    ```
-1. Install PostgreSQL server for local development (if desired)
+1. Install PostgreSQL server for local development (if desired) or run from docker
+   `docker compose -f docker-compose.yml -f docker-compose.dev.yml up`
    - Once installed, create your local database and user:
      ```bash
      psql -c 'DROP DATABASE bsync_validator;'

@@ -49,6 +49,30 @@ docker-compose -f docker-compose.prod.yml up -d --build
 
 # Debugging
 
+## Google Analytics
+
+Production settings enable GA4 page-view tracking with Measurement ID `G-P8CNFE9GY2`.
+Tracking is disabled when Django's `DEBUG` setting is true. The shared page layouts
+include the tag; the Django admin does not.
+
+To change or disable tracking, set `GOOGLE_ANALYTICS_MEASUREMENT_ID` in the web
+container's environment. For example, add this entry under `web.environment` in
+your Compose configuration to disable it:
+
+```yaml
+- GOOGLE_ANALYTICS_MEASUREMENT_ID=
+```
+
+Rebuild and redeploy to apply the template changes. Then visit the public site
+with browser tracking blockers disabled and check GA4's Realtime report for the
+visit. Data collection cannot be verified until the updated site is deployed.
+
+The tag does not implement cookie consent. Confirm applicable consent and privacy
+notice requirements before deploying; if consent is required, gate the tag on
+consent before enabling collection.
+
+## Container Logs
+
 - Tail log
 
 ```bash
