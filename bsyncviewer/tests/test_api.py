@@ -1,4 +1,6 @@
 import os
+import tempfile
+from unittest import mock
 
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
@@ -79,6 +81,46 @@ class TestApi(APITestCase):
         valid_schema = response.data["all_files_valid"]
         print("VALID SCHEMA? {}".format(valid_schema))
         self.assertTrue(valid_schema)
+
+    def _post_and_list_leftovers(self, filename, workflow_error=False):
+        """Post a file to the validator API using a private temp dir; return leftover entries."""
+        filepath = os.path.join(os.path.dirname(__file__), "data", filename)
+        with open(filepath, "rb") as f:
+            upload = SimpleUploadedFile(filename, f.read())
+        data = {"schema_version": TEST_SCHEMA_VERSION, "file": upload}
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            with mock.patch.object(tempfile, "tempdir", tmpdir):
+                if workflow_error:
+                    with mock.patch(
+                        "bsyncviewer.views.ValidationWorkflow.validate_all",
+                        side_effect=RuntimeError("boom"),
+                    ):
+                        response = self.client.post(
+                            reverse("validate_api"), data, format="multipart"
+                        )
+                else:
+                    response = self.client.post(
+                        reverse("validate_api"), data, format="multipart"
+                    )
+            return response, os.listdir(tmpdir)
+
+    def test_uploaded_xml_is_not_retained(self):
+        response, leftovers = self._post_and_list_leftovers("test_valid_schema.xml")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(leftovers, [])
+
+    def test_uploaded_zip_is_not_retained(self):
+        response, leftovers = self._post_and_list_leftovers("example_files.zip")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(leftovers, [])
+
+    def test_uploaded_xml_is_not_retained_on_error(self):
+        response, leftovers = self._post_and_list_leftovers(
+            "test_valid_schema.xml", workflow_error=True
+        )
+        self.assertFalse(response.data["success"])
+        self.assertEqual(leftovers, [])
 
     def tearDown(self):
         # clean-up files on disk
