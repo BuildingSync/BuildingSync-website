@@ -3,6 +3,9 @@
 #   docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 
 services:
+  db-postgres:
+    ports:
+      - "127.0.0.1:5432:5432"
   web:
     command: python3 manage.py runserver 0.0.0.0:80
     environment:
