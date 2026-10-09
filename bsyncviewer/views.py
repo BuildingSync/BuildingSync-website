@@ -67,11 +67,19 @@ def saved_upload(uploaded_file):
         for chunk in uploaded_file.chunks():
             tmp_file.write(chunk)
         tmp_file.close()
+        if settings.DEBUG:
+            print(f"[validation upload] Temporary path: {tmp_file.name}", flush=True)
         yield tmp_file.name
     finally:
         tmp_file.close()
         with contextlib.suppress(FileNotFoundError):
             os.unlink(tmp_file.name)
+        if settings.DEBUG:
+            print(
+                f"[validation upload] Cleanup: {tmp_file.name}; "
+                f"exists={os.path.exists(tmp_file.name)}",
+                flush=True,
+            )
 
 
 class ValidatorApi(views.APIView):
