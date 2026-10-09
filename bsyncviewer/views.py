@@ -1,3 +1,4 @@
+import contextlib
 import json
 import os
 import pathlib
@@ -55,6 +56,32 @@ GITHUB_RELEASE_DOWNLOAD_URL = (
 )
 
 
+@contextlib.contextmanager
+def saved_upload(uploaded_file):
+    """
+    Write an uploaded file to a temporary path for validation. The file is
+    always deleted on exit, even if validation raises, so uploads are never retained.
+    """
+    tmp_file = tempfile.NamedTemporaryFile(delete=False)
+    try:
+        for chunk in uploaded_file.chunks():
+            tmp_file.write(chunk)
+        tmp_file.close()
+        if settings.DEBUG:
+            print(f"[validation upload] Temporary path: {tmp_file.name}", flush=True)
+        yield tmp_file.name
+    finally:
+        tmp_file.close()
+        with contextlib.suppress(FileNotFoundError):
+            os.unlink(tmp_file.name)
+        if settings.DEBUG:
+            print(
+                f"[validation upload] Cleanup: {tmp_file.name}; "
+                f"exists={os.path.exists(tmp_file.name)}",
+                flush=True,
+            )
+
+
 class ValidatorApi(views.APIView):
     """
     API endpoint for validating schemas
@@ -84,89 +111,79 @@ class ValidatorApi(views.APIView):
 
         f = request.data["file"]
         if f:
-            tmp_file = tempfile.NamedTemporaryFile(delete=False)
-            filepath = tmp_file.name
-            # print('tmp file at: {}'.format(filepath))
-            for chunk in f.chunks():
-                tmp_file.write(chunk)
-            tmp_file.close()
-
-            # check if zipfile or single XML
-            if zipfile.is_zipfile(filepath):
-                with zipfile.ZipFile(filepath, "r") as zip_file:
-                    try:
-                        tmp_dir = tempfile.TemporaryDirectory()
-                        dirname = tmp_dir.name
-
-                        # make clean filenames for response (weird encoding assumptions by zipfile module)
-                        filenames = []
-                        for member in zip_file.infolist():
-                            if member.filename.endswith(
-                                ".xml"
-                            ) and not member.filename.startswith("__MACOSX"):
-                                filenames.append(
-                                    {
-                                        "new": member.filename.encode("cp437").decode(
-                                            "utf-8"
-                                        ),
-                                        "old": member.filename,
-                                    }
-                                )
-
-                        zip_file.extractall(dirname)
-
-                        results = []
-                        all_valid = True
-
-                        for the_file in filenames:
-                            fp = dirname + "/" + the_file["old"]
-                            wf = ValidationWorkflow(the_file["old"], fp, version)
-                            val_res = wf.validate_all()
-
-                            if val_res["schema"]["valid"] is False:
-                                all_valid = False
-
-                            results.append(
-                                {"file": the_file["new"], "results": val_res}
-                            )
-
-                        return Response(
-                            {
-                                "schema_version": version,
-                                "all_files_valid": all_valid,
-                                "validation_results": results,
-                                "success": True,
-                            }
-                        )
-                    except BaseException as err:
-                        print(err)
-                        return Response(
-                            {"success": False, "error": "error processing Zip file"}
-                        )
-
-            else:
-                try:
-                    workflow = ValidationWorkflow(f, filepath, version)
-                    validation_results = workflow.validate_all()
-                    # cleanup file after validation
-                    os.unlink(tmp_file.name)
-
-                    return Response(
-                        {
-                            "schema_version": version,
-                            "validation_results": validation_results,
-                            "success": True,
-                        }
-                    )
-                except BaseException:
-                    return Response(
-                        {"success": False, "error": "error processing XML file"}
-                    )
+            with saved_upload(f) as filepath:
+                # check if zipfile or single XML
+                if zipfile.is_zipfile(filepath):
+                    return self._validate_zip(filepath, version)
+                return self._validate_xml(f, filepath, version)
 
         else:
             return Response(
                 {"success": False, "error": "No schema_version or file parameters sent"}
             )
+
+    def _validate_zip(self, filepath, version):
+        with zipfile.ZipFile(filepath, "r") as zip_file:
+            try:
+                with tempfile.TemporaryDirectory() as dirname:
+                    # make clean filenames for response (weird encoding assumptions by zipfile module)
+                    filenames = []
+                    for member in zip_file.infolist():
+                        if member.filename.endswith(
+                            ".xml"
+                        ) and not member.filename.startswith("__MACOSX"):
+                            filenames.append(
+                                {
+                                    "new": member.filename.encode("cp437").decode(
+                                        "utf-8"
+                                    ),
+                                    "old": member.filename,
+                                }
+                            )
+
+                    zip_file.extractall(dirname)
+
+                    results = []
+                    all_valid = True
+
+                    for the_file in filenames:
+                        fp = dirname + "/" + the_file["old"]
+                        wf = ValidationWorkflow(the_file["old"], fp, version)
+                        val_res = wf.validate_all()
+
+                        if val_res["schema"]["valid"] is False:
+                            all_valid = False
+
+                        results.append({"file": the_file["new"], "results": val_res})
+
+                    return Response(
+                        {
+                            "schema_version": version,
+                            "all_files_valid": all_valid,
+                            "validation_results": results,
+                            "success": True,
+                        }
+                    )
+            except BaseException as err:
+                print(err)
+                return Response(
+                    {"success": False, "error": "error processing Zip file"}
+                )
+
+    def _validate_xml(self, f, filepath, version):
+        try:
+            workflow = ValidationWorkflow(f, filepath, version)
+            validation_results = workflow.validate_all()
+
+            return Response(
+                {
+                    "schema_version": version,
+                    "validation_results": validation_results,
+                    "success": True,
+                }
+            )
+        except BaseException:
+            return Response({"success": False, "error": "error processing XML file"})
 
 
 def index(request):
@@ -540,17 +557,12 @@ def validator(request):
         validated = True
 
     if validated:
+        # holds the temporary upload (if any) so it is always deleted after validation
+        upload_stack = contextlib.ExitStack()
         if form_type == "file":
             f = request.FILES["file"]
             filename = f.name
-
-            # save tmp file
-            tmp_file = tempfile.NamedTemporaryFile(delete=False)
-            filepath = tmp_file.name
-            # print('tmp file at: {}'.format(filepath))
-            for chunk in f.chunks():
-                tmp_file.write(chunk)
-            tmp_file.close()
+            filepath = upload_stack.enter_context(saved_upload(f))
 
         else:
             if "download" not in request.POST:
@@ -590,14 +602,9 @@ def validator(request):
             raise Http404
 
         else:
-            workflow = ValidationWorkflow(f, filepath, version)
-            validation_results = workflow.validate_all()
-
-            # print(validation_results)
-
-            # cleanup file after validation
-            if form_type == "file":
-                os.unlink(tmp_file.name)
+            with upload_stack:
+                workflow = ValidationWorkflow(f, filepath, version)
+                validation_results = workflow.validate_all()
 
             return render(
                 request,
