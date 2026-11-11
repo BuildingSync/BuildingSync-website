@@ -1,14 +1,83 @@
 import json
 import os
 
+import xmlschema
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TestCase
+from django.test import SimpleTestCase, TestCase
 
+from bsyncviewer.lib.schema_parser import BuildingSyncSchemaProcessor
 from bsyncviewer.lib.tree_viewer import get_schema_jstree_data
 from bsyncviewer.models.schema import Schema
 
 # Use a custom version that is not an actual version to prevent overwriting saved BEDES mappings
 TEST_SCHEMA_VERSION = "0.0.1"
+
+REF_NAMED_COMPLEX_TYPE_XSD = """<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:auc="http://buildingsync.net/schemas/bedes-auc/2019"
+    targetNamespace="http://buildingsync.net/schemas/bedes-auc/2019"
+    elementFormDefault="qualified">
+  <xs:element name="BuildingSync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="auc:Widget" minOccurs="0"/>
+        <xs:element name="LocalWidget" type="auc:WidgetType" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Widget" type="auc:WidgetType"/>
+  <xs:complexType name="WidgetType">
+    <xs:sequence>
+      <xs:element name="Color" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Red"/>
+            <xs:enumeration value="Blue"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Size" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+"""
+
+
+class TestRefNamedComplexType(SimpleTestCase):
+    """Regression test for issue #229."""
+
+    def setUp(self):
+        processor = BuildingSyncSchemaProcessor(
+            xmlschema.XMLSchema(REF_NAMED_COMPLEX_TYPE_XSD)
+        )
+        self.rows = processor.walk_root_element()
+        self.elements = {
+            row["path"]: row for row in self.rows if row["type"] != "Enumeration"
+        }
+
+    def test_ref_element_children_are_walked(self):
+        for parent in ("Widget", "LocalWidget"):
+            parent_path = "BuildingSync." + parent
+            self.assertEqual(self.elements[parent_path]["$$treeLevel"], 0)
+            for child in ("Color", "Size"):
+                row = self.elements["{}.{}".format(parent_path, child)]
+                self.assertEqual(row["parent_path"], parent_path)
+                self.assertEqual(row["$$treeLevel"], 1)
+
+    def test_ref_element_child_enumerations(self):
+        enums = [
+            row["name"]
+            for row in self.rows
+            if row["type"] == "Enumeration"
+            and row["path"] == "BuildingSync.Widget.Color"
+        ]
+        self.assertEqual(enums, ["Red", "Blue"])
+
+    def test_rows_are_not_duplicated(self):
+        paths = [row["path"] for row in self.rows if row["type"] != "Enumeration"]
+        self.assertEqual(len(paths), len(set(paths)))
+        indices = [row["index"] for row in self.rows]
+        self.assertEqual(indices, list(range(1, len(self.rows) + 1)))
 
 
 class TestSchema(TestCase):
