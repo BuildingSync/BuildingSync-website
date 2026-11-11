@@ -453,6 +453,16 @@ class BuildingSyncSchemaProcessor(object):
                         num_added += this_num_added
                         return_rows.extend(new_rows)
 
+                # named complexType linked to "type", e.g. a global
+                # <xs:element name="X" type="auc:XType"/> reached via ref="auc:X"
+                elif isinstance(instance, ComplexTypeElement):
+                    this_num_added, new_rows = self._walk_complex_element(
+                        instance, root_path, current_tree_level, current_index
+                    )
+                    current_index += this_num_added
+                    num_added += this_num_added
+                    return_rows.extend(new_rows)
+
         for elem in parent_element.annotations:
             potential_doc_string = self._walk_annotation_element(elem)
 
