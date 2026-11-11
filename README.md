@@ -96,6 +96,8 @@ To add a schema, specify the name, version, and schema file (XSD) to parse and s
 
 To modify an existing schema, click on the edit link. If changes are made to the uploaded XSD schema file and re-uploaded, ensure that the 'schema parsed' checkbox is unchecked before saving the record. This will trigger the automatic schema parsing.
 
+**WARNING**: Re-parsing does not clear the schema's existing attributes, so unchecking 'schema parsed' on an already-parsed schema creates duplicate attributes. `reset_schema --overwrite` deletes the schema along with its use cases and BEDES mappings. Back up the database and media before refreshing a published schema (e.g., after a parser fix).
+
 ### Use Cases
 
 Authenticated users can add private use cases to the BuildingSync Schema Viewer. Use cases are represented by a schematron file that defines a set of rules and patterns.
