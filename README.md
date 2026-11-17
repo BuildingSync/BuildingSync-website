@@ -7,11 +7,11 @@ This is the repository for the BuildingSync Validator web application.
 ## Installation
 
 1. Clone the repository.
-1. Setup python 3. You can use a virtual environment:
+1. Setup Python 3.11 or 3.12 (production runs 3.11). You can use a virtual environment:
    ```bash
-   pyenv install 3.9.23
-   pyenv virtualenv 3.9.23 bsync-validator-3.9.23
-   pyenv local bsync-validator-3.9.23
+   pyenv install 3.11.10
+   pyenv virtualenv 3.11.10 bsync-validator-3.11.10
+   pyenv local bsync-validator-3.11.10
    ```
 1. Install PostgreSQL server for local development (if desired) or run from docker
    `docker compose -f docker-compose.yml -f docker-compose.dev.yml up`
