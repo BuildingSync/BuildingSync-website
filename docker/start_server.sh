@@ -11,9 +11,10 @@ echo "Waiting for postgres to start"
 
 # On a new database, import the default schema version (settings.DEFAULT_SCHEMA_VERSION).
 # This is a no-op when that version already exists.
-# BEDES mappings are not loaded here: the CSVs in bsyncviewer/lib/bedes reference database
-# IDs from the database they were generated in, so they only match that database. Load
-# them manually with `./manage.py bedes --schema_version=<version> --save_to_db` if needed.
+# BEDES mappings are not loaded here because mapping CSVs contain database-specific IDs.
+# To generate mappings for this database and load them, run:
+# ./manage.py bedes --schema_version=2.7.0 --bedes_version=v2.5
+# ./manage.py bedes --schema_version=2.7.0 --bedes_version=v2.5 --save_to_db
 ./manage.py reset_schema
 
 # Create the default user based on the env vars

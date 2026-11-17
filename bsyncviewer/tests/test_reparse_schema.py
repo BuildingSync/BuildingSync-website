@@ -1,5 +1,6 @@
 import os
 from io import StringIO
+from unittest.mock import patch
 
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management import call_command
@@ -145,7 +146,9 @@ class TestReparseSchemaCommand(TestCase):
             Attribute.objects.filter(schema=self.schema).values_list("id", flat=True)
         )
 
-        output = self._reparse("--dry-run")
+        with patch("bsyncviewer.models.schema.generate_docs") as generate_docs:
+            output = self._reparse("--dry-run")
+            generate_docs.assert_not_called()
 
         self.assertIn("Dry run", output)
         self.assertEqual(

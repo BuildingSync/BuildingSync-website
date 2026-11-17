@@ -4,6 +4,7 @@ from collections import defaultdict
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
+from bsyncviewer.lib.schema_parser import process_schema
 from bsyncviewer.models.attribute import Attribute
 from bsyncviewer.models.attribute_enumeration_class import AttributeEnumerationClass
 from bsyncviewer.models.bedes_models import BedesEnumerationMapping, BedesMapping
@@ -118,10 +119,10 @@ class Command(BaseCommand):
             Enumeration.objects.filter(schema=schema).delete()
             EnumerationClass.objects.filter(schema=schema).delete()
 
-            # 3. Re-parse: the Schema post_save signal parses the file when schema_parsed is False
-            schema.schema_parsed = False
-            schema.save()
-            schema.refresh_from_db()
+            # 3. Re-parse without invoking the post_save signal's documentation generation.
+            process_schema(schema)
+            schema.schema_parsed = True
+            schema.save(update_fields=["schema_parsed"])
             if not schema.schema_parsed:
                 raise CommandError(
                     "Schema %s was not re-parsed; rolled back" % schema.version

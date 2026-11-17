@@ -63,7 +63,11 @@ This is the repository for the BuildingSync Validator web application.
   python manage.py reparse_schema --schema_version 2.7.0 --schema_version 2.6.0
   python manage.py reparse_schema --all
   ```
-  Re-parsing gives every attribute and enumeration a new database ID. The BEDES CSV files in `bsyncviewer/lib/bedes/` reference those IDs, so after a re-parse they no longer match the database and `bedes --save_to_db` skips their rows. The mappings already in the database are carried over, so the CSVs only need regenerating (with `bedes --schema_version <version> --bedes_version v2.5`) to bring the files back in sync or to map attributes the re-parse added.
+  Re-parsing gives every attribute and enumeration a new database ID. BEDES CSV files reference database-specific IDs, so regenerate them against the target database before loading them. For example, for schema 2.7.0:
+  ```bash
+  python manage.py bedes --schema_version 2.7.0 --bedes_version v2.5
+  python manage.py bedes --schema_version 2.7.0 --bedes_version v2.5 --save_to_db
+  ```
 
 **NOTE**: You will need to be _off_ the VPN to import a schema, otherwise you'll get an error related to `http://www.gbxml.org/schema}Area'` as the gbXML schema cannot be imported when on the VPN.
 
