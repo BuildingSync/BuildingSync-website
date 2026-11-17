@@ -50,9 +50,20 @@ This is the repository for the BuildingSync Validator web application.
   ```
 
 - To test schema import, you can run this command:
+
   ```bash
   python manage.py reset_schema --schema_version=2.6.0
   ```
+
+  `reset_schema` deletes the schema record, which also deletes the use cases linked to that version.
+
+- To rebuild the parsed tree of a schema that is already loaded (for example after a parser fix), use `reparse_schema` instead. It keeps the schema record, its use cases and its uploaded file, and carries the existing BEDES term and enumeration mappings over to the new rows by attribute path and enumeration name. Start with `--dry-run`, which reports what would change and then rolls back:
+  ```bash
+  python manage.py reparse_schema --schema_version 2.7.0 --dry-run
+  python manage.py reparse_schema --schema_version 2.7.0 --schema_version 2.6.0
+  python manage.py reparse_schema --all
+  ```
+  Re-parsing gives every attribute and enumeration a new database ID. The BEDES CSV files in `bsyncviewer/lib/bedes/` reference those IDs, so after a re-parse they no longer match the database and `bedes --save_to_db` skips their rows. The mappings already in the database are carried over, so the CSVs only need regenerating (with `bedes --schema_version <version> --bedes_version v2.5`) to bring the files back in sync or to map attributes the re-parse added.
 
 **NOTE**: You will need to be _off_ the VPN to import a schema, otherwise you'll get an error related to `http://www.gbxml.org/schema}Area'` as the gbXML schema cannot be imported when on the VPN.
 
