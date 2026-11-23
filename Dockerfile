@@ -21,7 +21,7 @@ RUN apk add --no-cache python3 \
     rm -r /usr/lib/python*/ensurepip && \
     ln -sf /usr/bin/pip3 /usr/bin/pip && \
     pip install --upgrade pip setuptools && \
-    pip install supervisor==4.2.5 && \
+    pip install supervisor==4.3.0 && \
     mkdir -p /var/log/supervisord/ && \
     rm -r /root/.cache && \
     addgroup -g 1000 uwsgi && \
@@ -34,7 +34,9 @@ RUN apk add --no-cache python3 \
 ##   - create the uwsgi user and group to have id of 1000
 ##   - copy over python3 as python
 ##   - pip install --upgrade pip overwrites the pip so it is no longer a symlink
-##   - install supervisor that works with Python3.
+##   - install supervisor that works with Python3. Use >= 4.3.0, which loads its
+##     entry points via importlib on Python >= 3.8; 4.2.x imports pkg_resources,
+##     which setuptools (upgraded above) no longer ships.
 
 WORKDIR /srv/buildingsync-website
 COPY /requirements.txt /srv/buildingsync-website/requirements.txt
