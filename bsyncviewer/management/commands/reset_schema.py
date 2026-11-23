@@ -31,7 +31,7 @@ class Command(BaseCommand):
                     "Schema already exists in the database: %s"
                     % options["schema_version"]
                 )
-                exit(0)
+                return
 
         schema = Schema.objects.filter(version=options["schema_version"]).first()
         if schema:
