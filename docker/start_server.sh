@@ -9,9 +9,13 @@ echo "Waiting for postgres to start"
 ./manage.py migrate
 ./manage.py collectstatic --noinput
 
-# Check if a schema has been imported
-./manage.py reset_schema --schema_version 2.6.0
-./manage.py bedes --schema_version=2.6.0 --bedes_version=v2.5 --save_to_db
+# On a new database, import the default schema version (settings.DEFAULT_SCHEMA_VERSION).
+# This is a no-op when that version already exists.
+# BEDES mappings are not loaded here because mapping CSVs contain database-specific IDs.
+# To generate mappings for this database and load them, run:
+# ./manage.py bedes --schema_version=2.7.0 --bedes_version=v2.5
+# ./manage.py bedes --schema_version=2.7.0 --bedes_version=v2.5 --save_to_db
+./manage.py reset_schema
 
 # Create the default user based on the env vars
 echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('${BUILDINGSYNC_WEBSITE_ADMIN_USER}', '${BUILDINGSYNC_WEBSITE_ADMIN_EMAIL}', '${BUILDINGSYNC_WEBSITE_ADMIN_PASSWORD}')" | python manage.py shell

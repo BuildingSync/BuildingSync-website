@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Minimal schema for testing that children of a ref'd global element whose type is a named complexType are walked -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:auc="http://buildingsync.net/schemas/bedes-auc/2019" targetNamespace="http://buildingsync.net/schemas/bedes-auc/2019" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="BuildingSync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="auc:FanBased" minOccurs="0"/>
+        <xs:element name="LocalFanBased" type="auc:FanBasedType" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FanBased" type="auc:FanBasedType"/>
+  <xs:complexType name="FanBasedType">
+    <xs:sequence>
+      <xs:element name="FanBasedDistributionType" minOccurs="0">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element name="AirDistribution" minOccurs="0"/>
+            <xs:element name="FanCoil" minOccurs="0"/>
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AirSideEconomizer" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Dry bulb temperature"/>
+            <xs:enumeration value="None"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
