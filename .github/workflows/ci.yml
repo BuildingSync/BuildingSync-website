@@ -20,7 +20,7 @@ jobs:
             tox_env: precommit
     services:
       postgres:
-        image: postgres:11.1
+        image: postgres:17
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: bsync_validator
