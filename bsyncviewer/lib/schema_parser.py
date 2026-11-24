@@ -452,6 +452,13 @@ class BuildingSyncSchemaProcessor(object):
                         current_index += this_num_added
                         num_added += this_num_added
                         return_rows.extend(new_rows)
+                elif isinstance(instance, ComplexTypeElement):
+                    this_num_added, new_rows = self._walk_complex_element(
+                        instance, root_path, current_tree_level, current_index
+                    )
+                    current_index += this_num_added
+                    num_added += this_num_added
+                    return_rows.extend(new_rows)
 
                 # named complexType linked to "type", e.g. a global
                 # <xs:element name="X" type="auc:XType"/> reached via ref="auc:X"

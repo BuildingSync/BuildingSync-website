@@ -9,6 +9,10 @@ exclude: |
     ^bsyncviewer/static/img/better-logo.svg
   )
 
+# Pin node so nodeenv doesn't pick a prerelease it can't parse (e.g. 27.0.0-alpha)
+default_language_version:
+  node: 22.11.0
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
